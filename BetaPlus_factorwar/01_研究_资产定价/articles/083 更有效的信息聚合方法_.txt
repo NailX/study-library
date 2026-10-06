@@ -1,0 +1,247 @@
+# 更有效的信息聚合方法 ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/I_b3ugpMS3gFMI-zMLgSIw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+协变量的高维数时代，数不胜数的公司特征都和预期收益相关，然而它们之间存在不能忽视的相关性。在这个背景下，如何更好地聚合协变量包含的预测信息?
+
+01
+
+对于资产定价而言，相信到现在你已经接受了协变量的高维数时代（Kozak, Nagel and Santosh 2020，Giannone, Lenza and Primiceri 2021）。需要补充背景知识的小伙伴请参考《稀疏性幻觉》。然而，面对层出不穷的 factor zoo（Cochrane 2011，Harvey, Liu and Zhu 2016）背后的公司特征，一个自然的问题是：如何有效地聚合它们所包含的预测信息，从而形成关于预期收益率更好的预测？
+
+在这方面，学界和业界的尝试从未停止过。
+
+比如，最直接的方法是 Fama-MacBeth regression。当然，一旦协变量个数激增后，这个方法就会受到各种计量经济学问题的困扰。
+
+又比如 rank-based approach，即根据取值高低将股票在每个公司特征上排名，然后求均值得到综合排名。这个方法在 Stambaugh, Yu and Yuan (2015) 以及 Stambaugh and Yuan (2017) 中大放异彩，也同时出现在 Asness, Frazzini and Pedersen (2019) 的 QMJ 因子构造之中。
+
+再比如各种机器学习算法，这其中以 PCA 为代表（Kelly, Pruitt and Su 2019，Kozak, Nagel and Santosh 2020），也在聚合预测信息的时候发挥了很大的作用。另外，Lettau and Pelger (2020a, b) 的 risk premium PCA 也是这类方法的拓展。《实证资产定价理论新进展》一文的聚合因子信息一节对上述方法有更多的介绍。
+
+除此之外，Light, Maslov and Rytchkov (2017) 通过将预期收益率视为隐性变量（latent variable），利用 partial least squares（PLS）提出了一种新的方法。该方法实操起来方便，在直觉上也颇具吸引力。
+
+02
+
+令  表示  时刻所有的信息，则  时刻关于股票收益率的最佳预测为：
+
+  
+
+由已实现收益率和预期收益率之间的关系，我们进而有：
+
+  
+
+对于进行分析的计量经济学家而言，预期收益率  是无法观测的，而且他也不具备  所包含的全部信息。取而代之的是，他能够观测并收集大量的公司特征  。
+
+在此基础上，Light, Maslov and Rytchkov (2017) 方法的核心假设是隐性变量  是公司特征空间中唯一和未来收益率有关的变量，即公司特征和预期收益率满足如下关系（在扩展的模型中，他们假设预期收益率由多个隐性因子 span 而成，感兴趣的小伙伴请阅读原文）：
+
+  
+
+在上述模型中，  为  时刻预期收益率在截面上的均值，而  刻画了公司特征和 demean 之后预期收益率的关系。
+
+由于预期收益率是隐性变量，因此计量经济学家的任务就变成如何通过可观测到的已实现收益率  和公司特征  来估计  。为此，Light, Maslov and Rytchkov (2017) 使用了 PLS。从直觉上说，PLS 类似 PCA，也是从一大堆变量（公司特征）中提取公共的信息。然而，它们之间的差异是，PCA 提取的目标是最能解释这些变量共同运动的信息，而 PLS 的目标则是从这些变量之中提取出信息，使得该信息和目标（即被预测的）变量之间的协方差最大化。
+
+The main objective of PLS is the extraction of a common factor from a set of predictive variables that has the highest covariance with the predicted (target) variable. In contrast to PCA and factor analysis, which also extract one or few factors that concisely describe the variability of data and correlations between predictors, respectively, PLS identifies a factor with the best ability to predict the target variable even though this factor may not be the most important source of common variation in the predictors.
+
+按照 Light, Maslov and Rytchkov (2017) 自己的话说，PLS 的这个特点正是它相比于 PCA 的优势所在。因为有些公共信息仅仅解释了特征的共同波动但是却和预期收益率无关，这些信息对于解释资产的预期收益率来说是没有帮助的，因此会影响 PCA 的结果，而 PLS 却不会。
+
+为此，该文提出了一个两步截面回归来估计预期收益率：
+
+在第一步中，用  期已实现收益率分别对  期每个公司特征独立进行截面回归，得到每个特征各自的斜率  。在第二步中，对每个公司  ，将  时刻的公司特征  对第一部得到的  进行回归，得到斜率  。Light, Maslov and Rytchkov (2017) 证明了第二步回归所得到的斜率的统计特性，指出它就是  时刻截面上 demean 之后预期收益率的估计（up to a scaling factor）。
+
+值得一提的是，在上述两步估计中，第一步仅用到了  和  时刻的信息，而第二步仅用到了  时刻的信息。因此这不仅仅是一个事后的 in-sample test，而且还是在实际投资中可以用来构造样本外投资组合的方法。
+
+在样本外使用时，有两点需要注意。首先，上述估计值和真实 demean 预期收益率差了一个 scaling factor。第二，即便没有 scaling factor 的顾虑，上述估计也是截面上 demean 的预期收益率。所以如果基于该预期收益率的估计来进行样本外选股，那么 portfolio sort 无疑就是最自然的选择，因为它不受 scaling 或者 shift 的影响。这也正是 Light, Maslov and Rytchkov (2017) 在实证中采用的方法。
+
+此外，在实操层面，还有另外一个技巧。上述两步法的第一步类似 Fama-MacBeth 的第二步，使用单期收益率对单期公司特征回归（FM 是对 beta 回归），得到  期的  。考虑到单期数据噪声比较大，因此可以使用过去一段时间的数据，并在每一期  进行估计，并将它们的  取平均得到更准确的  。
+
+03
+
+在实证中，该文选择了文献中常见的 26 个公司特征作为被聚合的对象。下图展示的就是该文的 portfolio sort 结果，其中 Panel A 在估计  时仅使用了  和  期的信息；后面三个 Panels 则利用了上述多期平均技巧。得到预期收益率的估计之后，根据其高低将股票分成 10 组，然后检验每组以及 10 – 1 组的收益率（同时考虑等权和市值加权）。
+
+从结果中可见：（1）无论等权还是市值加权，以 PLS 得到的估计值构造的对冲组合总能获得显著的超额收益；（2）当使用多期平均来估计时，超额收益率无论在经济上还是在统计上都更加显著。
+
+除此之外，通过比较信息聚合和这 26 个单一变量，作者同样指出两点：（1）这些变量在预测收益率方面确实存在一些共性，这也支撑了该文提出的模型；（2）尽管如此，不同变量仍然包含了关于预期收益率的不同信息，只不过每个单一变量都是其所包含预测信息的噪声版本。
+
+为了说明 PLS 的过人之处，Light, Maslov and Rytchkov (2017) 将其和本文第一节提到的 Fama-MacBeth regression、rank-based approach、PCA 以及 factor analysis 进行了对比。后面这些信息聚合方法的实证结果如下表所示。
+
+以构造的对冲组合超额收益率的 t-statistics 而论，PLS 方法优于上述其他信息聚合方法，而和 PLS 最接近的要数 rank-based approach。就这个结果而言，学界和业界常用的 rank-based approach 也是很有效的方法。
+
+04
+
+本节在 A 股市场对上述 PLS 方法进行实证，看看和人们更熟悉的 rank-based approach 相比结果如何。
+
+实证中使用 BetaPlus 小组在《一个混合四因子模型》一文中介绍的十个协变量，它们包括账面市值比（BM）、短期反转、特质波动率、MAX、异常换手率、SUE、ROA、应计量、动量以及流动性冲击。计算说明见下表。数据窗口横跨 2000 年 1 月 1 日至 2022 年 5 月 31 日。
+
+对于 PLS 来说，首先每月对每个指标在截面上进行标准化（具体数据处理方法请参考《因子投资：方法与实践》的 3.1 节），然后采用前文介绍的两步回归法，估计每个月每支股票的预期收益率，并以估计值的高低作为分组排序的依据。在实证中，在两步法的第二步中，对于  ，我们同时考虑了以下几种情况：（1）仅用当期  ；（2）分别使用过去 12 个月、36 个月以及 60 个月  均值的情形。
+
+为了和 PLS 方法比较，实证中的另一种信息聚合方法采用平均 z-score 方法，即同样每月在截面上将每个变量标准化得到 z-score，并通过其和预期收益率的关系调整其方向，然后取十个变量 z-score 的均值作为该股票当月最终的 z-score，并以 z-score 的高低进行分组排序的依据。
+
+由于在 PLS 方法中使用最长 60 个月的数据计算  均值，因此为了统一比较，实证的窗口的起始时间较数据起始时间后移 60 个月，即从 2005 年 1 月 1 日开始。下面两张表分别给出了等权和市值加权的结果。
+
+观察上述结果，可以总结出两点：（1）由于估计误差，使用当期  作为第二步的输入难以取得很好的结果，而一旦采用了过去  期  均值之后，PLS 方法的结果都有明显的提升。（2）然而，无论是等权还是市值加权，即便使用了过去 60 期  均值，PLS 方法的聚合结果都不如 z-score 均值法，这体现在两种方法构造的多空对冲组合月均收益率的差异上。但是值得一提的是，如果仅看多头，那么当采用市值加权时，以过去 60 期  均值为第二步输入的 PLS 方法和 z-score 方法十分接近。
+
+和 Light, Maslov and Rytchkov (2017) 一文基于美股的结果相比，在业界更常用的 z-score 均值面前，PLS 两步法似乎并没有什么过人之处。但是，我们也不应仅仅基于以上有限的结果就那么快对 PLS 方法在 A 股的表现下定论。今后可以通过更多的稳健性分析来考察其能够发挥的作用。
+
+05
+
+在协变量的高维数时代，如何聚合不同变量涵盖的预测信息是非常重要的课题。在这方面，研究的思路应着眼于剖析并有效利用不同变量所涵盖的共有信息、每个变量所携带的独有信息，以及剔除每个变量所涵盖的巨大的噪声。Light, Maslov and Rytchkov (2017) 为此提供了有益的思路。
+
+然而，我们对信息聚合的追求并不能止步于此。
+
+信息聚合的目标是为了获得更加准确的估计，因此无论是采用前文介绍的 PLS 还是其他方法（尽管这些方法的效果有所差异），聚合后的变量较单变量来说都会获得更加显著的超额收益。然而，这后面一个巨大的但却往往被人们忽视的假设是，被用来信息聚合的单变量都是真实的。
+
+可是，如果某些或绝大部分协变量和预期收益率之间的关系是虚假的（p-hacking），那么聚合之后又会如何呢？是否会“错上加错”呢？如果是的话，又是否有什么更好的办法来降低聚合的危害吗？
+
+我们择日再议。
+
+（Hint：对于这个问题，Rytchkov and Zhong (2020) 给出了答案。）
+
+参考文献
+Asness, C. S., A. Frazzini, and L. H. Pedersen (2019). Quality minus junk. Review of Accounting Studies 24(1), 34 – 112.
+
+Cochrane, J. H. (2011). Presidential address: Discount rates. Journal of Finance 66(4), 1047 – 1108.
+
+Giannone, D., M. Lenza, and G. E. Primiceri (2021). Economic predictions with big data: The illusion of sparsity. Econometrica 89(5), 2409 – 2437.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Lettau, M. and M. Pelger (2020a). Factors that fit the time series and cross-section of stocks returns. Review of Financial Studies 33(5), 2274 – 2325.
+
+Lettau, M. and M. Pelger (2020b). Estimating latent asset-pricing factors.Journal of Econometrics 218(1), 1 – 31.
+
+Light, N., D. Maslov, and O. Rytchkov (2017). Aggregation of information about the cross section of stock returns: A latent variable approach. Review of Financial Studies 30(4), 1339 – 1381.
+
+Rytchkov, O. and X. Zhong (2020). Information aggregation and p-hacking. Management Science 66(4), 1605 – 1626.
+
+Stambaugh, R. F., J. Yu, and Y. Yuan (2015). Arbitrage asymmetry and the idiosyncratic volatility puzzle. Journal of Finance 70(5), 1903 – 1948.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing Factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Step 1. Run separate cross-sectional regressions of  $ R_{it}, i=1,...,N $, on each individual firm characteristic  $ X_{it-1}^a, i=1,...,N $, for  $ a=1,...,A $ and denote the obtained slopes as  $ \lambda_t^a $.
+Step 2. For each firm $i$, $i=1,\ldots,N$, run a regression of $X_{it}^a$ on $\lambda_t^a$, $a=1,\ldots,A$ and denote the obtained slopes as $\hat{\mu}_{it}$.
+处：Light, Maslov and Rytchkov (2017)
+--- 图3 ---
+Proposition 1. If Assumptions 1–4 hold, the described 2-step procedure asymptotically reveals the cross section of expected stock returns up to a unobservable time-varying factor  $ F_{t} $, which is the same for all stocks, that is
+$$ \operatorname*{p l i m}_{A\to\infty}\operatorname*{p l i m}_{N\to\infty}\hat{\mu}_{i t}=F_{t}(\mu_{i t}-\mu_{t}),\qquad{\mathrm{~w h e r e~}}\qquad F_{t}=\frac{\Lambda_{t-1,t}}{\Lambda_{t-1,t-1}V_{t-1}} $$
+and  $ \Lambda_{t-1,t} $,  $ \Lambda_{t,t} $, and  $ V_{t-1} $ are defined in Assumptions 1 and 2.
+处：Light, Maslov and Rytchkov (2017)
+--- 图4 ---
+Returns on decile A FER portfolios
+Panel A: no averaging of  $ \lambda_{t}^{a} $
+[表]
+ | EW portfolios | VW portfolios |  | 
+ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 
+Means | -0.10 | 0.43 | 0.70 | 1.00 | 1.06 | 1.33 | 1.38 | 1.46 | 1.57 | 1.59 | 1.69 | 0.10 | 0.62 | 0.74 | 0.78 | 0.90 | 1.06 | 0.97 | 1.10 | 1.15 | 1.31 | 1.21 | 
+Stds | 8.02 | 7.09 | 6.45 | 5.98 | 5.66 | 5.49 | 5.48 | 5.63 | 5.91 | 6.82 | 7.05 | 8.00 | 6.93 | 6.15 | 5.88 | 5.46 | 5.27 | 5.22 | 5.50 | 5.82 | 6.76 | 7.60 | 
+-stats | -0.28 | 1.38 | 2.45 | 3.79 | 4.25 | 5.48 | 5.71 | 5.89 | 6.04 | 5.30 | 5.45 | 0.28 | 2.04 | 2.72 | 3.00 | 3.73 | 4.56 | 4.23 | 4.54 | 4.49 | 4.39 | 3.61 | 
+Panel B: averaging of  $ \lambda_t^a $ over past 5 years |  |  |  |  |  |  |  |  |  |  |  |  | 
+ | EW portfolios |  | VW portfolios |  | 
+ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 
+Means | -0.30 | 0.49 | 0.82 | 1.07 | 1.15 | 1.32 | 1.39 | 1.41 | 1.48 | 1.58 | 1.88 | -0.27 | 0.34 | 0.66 | 0.74 | 0.96 | 1.05 | 1.00 | 1.16 | 1.23 | 1.14 | 1.41 | 
+Stds | 7.85 | 7.11 | 6.55 | 6.09 | 5.78 | 5.54 | 5.32 | 5.13 | 5.16 | 5.88 | 4.68 | 8.60 | 7.46 | 6.76 | 6.03 | 5.69 | 5.20 | 4.90 | 4.81 | 4.72 | 5.27 | 6.53 | 
+-stats | -0.87 | 1.55 | 2.84 | 4.00 | 4.51 | 5.41 | 5.95 | 6.24 | 6.50 | 6.10 | 9.12 | -0.72 | 1.05 | 2.21 | 2.79 | 3.83 | 4.57 | 4.65 | 5.47 | 5.93 | 4.91 | 4.91 | 
+Panel C: averaging of  $ \lambda_t^a $ over past 10 years |  |  |  |  |  |  |  |  |  |  |  |  | 
+ | EW portfolios |  | VW portfolios |  | 
+ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 
+Means | -0.35 | 0.48 | 0.84 | 1.09 | 1.18 | 1.34 | 1.35 | 1.43 | 1.46 | 1.59 | 1.94 | -0.17 | 0.24 | 0.49 | 0.79 | 0.99 | 0.94 | 1.02 | 1.03 | 1.06 | 1.20 | 1.37 | 
+Stds | 8.19 | 7.35 | 6.72 | 6.20 | 5.83 | 5.45 | 5.13 | 4.90 | 4.81 | 5.58 | 4.49 | 8.84 | 7.56 | 6.69 | 6.14 | 5.49 | 5.10 | 4.56 | 4.31 | 4.17 | 4.79 | 6.51 | 
+-stats | -0.97 | 1.47 | 2.84 | 3.99 | 4.61 | 5.58 | 5.95 | 6.62 | 6.89 | 6.49 | 9.82 | -0.44 | 0.73 | 1.66 | 2.92 | 4.08 | 4.17 | 5.09 | 5.41 | 5.77 | 5.68 | 4.78 | 
+Panel D: averaging of  $ \lambda_t^a $ over all previous months |  |  |  |  |  |  |  |  |  |  |  |  | 
+ | EW portfolios |  | VW portfolios |  | 
+ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | (10-1) | 
+Means | -0.38 | 0.43 | 0.81 | 1.04 | 1.16 | 1.33 | 1.39 | 1.42 | 1.53 | 1.68 | 2.06 | -0.28 | 0.27 | 0.55 | 0.85 | 0.95 | 1.00 | 1.06 | 1.14 | 1.10 | 1.28 | 1.56 | 
+Stds | 8.49 | 7.60 | 6.91 | 6.23 | 5.84 | 5.42 | 5.09 | 4.81 | 4.64 | 5.16 | 5.02 | 8.93 | 7.58 | 6.58 | 5.85 | 5.36 | 4.93 | 4.47 | 4.14 | 4.20 | 4.94 | 6.52 | 
+-stats | -1.02 | 1.29 | 2.65 | 3.81 | 4.50 | 5.58 | 6.21 | 6.69 | 7.48 | 7.38 | 9.31 | -0.72 | 0.80 | 1.89 | 3.29 | 4.01 | 4.62 | 5.39 | 6.25 | 5.96 | 5.89 | 5.45 |
+This table shows time-series averages, standard deviations, and t-statistics of monthly equal-weighted (EW) and value-weighted (VW) stock returns on decile portfolios formed by sorting firms on the aggregate filtered expected returns AFER. The columns (10–1) report the statistics for the difference in returns on the top and bottom portfolios. The variable AFER is constructed without time-series averaging of  $ \lambda_{t}^{a} $ (in panel A), with averaging of  $ \lambda_{t}^{a} $ over the most recent 5 years (in panel B), with averaging of  $ \lambda_{t}^{a} $ over the most recent 10 years (in panel C), and with averaging of  $ \lambda_{t}^{a} $ over all previous months (in panel D). The sample is from January 1970 to December 2012. The portfolios are rebalanced monthly. All returns and standard deviations are reported in percentage points.
+--- 图5 ---
+Aggregation using alternative techniques
+[表]
+ | Hedge returns | t-stats | 
+ | no | 5 years | 10 years | all | no | 5 years | 10 years | all | 
+EW | 0.23 | 0.83 | 0.90 | 0.91 | 0.45 | 2.22 | 2.30 | 2.42 | 
+VW | 0.56 | 0.09 | 0.17 | 0.27 | 1.10 | 0.25 | 0.41 | 0.63 | 
+Panel B: principal component analysis (PCA) | 
+ | Hedge returns | t-stats | 
+ | no | 5 years | 10 years | all | no | 5 years | 10 years | all | 
+EW | -0.07 | 0.43 | 0.88 | 1.00 | -0.17 | 1.23 | 2.94 | 3.27 | 
+VW | -0.64 | 0.04 | 0.27 | 0.36 | -1.54 | 0.11 | 0.77 | 0.98 | 
+Panel C: Fama-MacBeth regression | 
+ | Hedge returns | t-stats | 
+ | no | 5 years | 10 years | all | no | 5 years | 10 years | all | 
+EW | 1.68 | 1.64 | 1.65 | 1.79 | 3.54 | 6.01 | 6.22 | 6.89 | 
+VW | 0.78 | 0.98 | 0.97 | 1.10 | 1.57 | 3.08 | 2.84 | 3.51 |
+Panel D: average percentile rank
+[表]
+ | Hedge returns | t-stats | 
+EW | 1.36 | 7.02 | 
+VW | 0.91 | 3.69 |
+This table shows the differences in monthly equal-weighted (EW) and value-weighted (VW) returns on top- and bottom-decile portfolios formed by various alternative estimates of expected returns. In panels A and B the main factor in the characteristics and the first principal component of the characteristics are used as proxies for expected returns. In panel C the returns are predicted by fitted values from the Fama-MacBeth regression of returns on lagged characteristics. In panel D the average percentile rank in sorts with respect to multiple characteristics is used to predict returns. The columns in panels A–C indicate how  $ \lambda_{(f)t}^{a} $,  $ \lambda_{(PCA)t}^{a} $, and  $ \lambda_{(FM)t} $ are averaged over time (no averaging, over past 5 years, over past 10 years, and over all previous months). All returns are reported in percentage points. The sample is from January 1988 to December 2011 in panels A–C and from January 1970 to December 2012 in panel D.
+出外：Light Maslow and Rytchkov (2017)
+--- 图6 ---
+[表]
+变量 | 计算说明 | 
+账面市值比（BM） | 利用最新报告期净资产计算 | 
+短期反转 | 最近21个交易日累计收益 | 
+特质波动率 | 残差基于Fama-French三因子模型，窗口为21个交易日 | 
+MAX | 过去21个交易日内5个最大日收益均值 | 
+异常换手率 | 最近21个交易日日均换手率与最近252个交易日日均换手率之比 | 
+标准化预期外盈利（SUE） | 利用过去12个季度数据计算 | 
+ROA | 净利润与总资产之比（TTM） | 
+应计量（基于资产负债表） | 应计量与总资产之比（TTM） | 
+中期动量 | 过去252个交易日动量（剔除最近21个交易日） | 
+流动性冲击 | 过去252个交易日流动性冲击（剔除最近21个交易日） |
+--- 图7 ---
+调整后的 t-statistics。Panel A 至 Panel D 分别表示 PLS 第二步中，采用当期  $ \lambda $、过去 12 个月、36 个月以及 60 个月  $ \lambda $ 均值的情况。Panel E 为 z-score 均值的情况。投资组合中股票的权重是等权。实证区间为 2005/01/01 至 2022/05/31。
+[表]
+0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 9-0 | 
+Panel A: 当期  $ \lambda $ | 
+0.99 | 1.44 | 1.55 | 1.72 | 1.91 | 1.98 | 1.95 | 1.91 | 1.96 | 1.75 | 0.76 | 
+(1.32) | (1.92) | (2.08) | (2.28) | (2.45) | (2.54) | (2.44) | (2.45) | (2.51) | (2.17) | (1.84) | 
+Panel B: 12个月  $ \lambda $ 均值 | 
+0.39 | 1.10 | 1.56 | 1.70 | 1.84 | 1.97 | 2.03 | 2.11 | 2.16 | 2.27 | 1.87 | 
+(0.48) | (1.39) | (1.96) | (2.23) | (2.35) | (2.61) | (2.71) | (2.85) | (2.88) | (3.09) | (5.56) | 
+Panel C: 36个月  $ \lambda $ 均值 | 
+0.15 | 1.07 | 1.43 | 1.76 | 1.92 | 1.98 | 2.18 | 2.29 | 2.22 | 2.15 | 2.00 | 
+(0.19) | (1.37) | (1.86) | (2.25) | (2.50) | (2.62) | (2.77) | (3.01) | (2.96) | (2.94) | (6.74) | 
+Panel D: 60个月  $ \lambda $ 均值 | 
+0.10 | 1.03 | 1.43 | 1.71 | 1.91 | 1.98 | 2.17 | 2.34 | 2.25 | 2.24 | 2.14 | 
+(0.13) | (1.32) | (1.84) | (2.23) | (2.49) | (2.56) | (2.81) | (3.03) | (3.07) | (3.01) | (7.32) | 
+Panel E: z-score 均值 | 
+0.05 | 1.03 | 1.44 | 1.61 | 1.87 | 2.02 | 2.03 | 2.26 | 2.38 | 2.46 | 2.42 | 
+(0.06) | (1.32) | (1.83) | (2.10) | (2.44) | (2.62) | (2.63) | (3.01) | (3.21) | (3.37) | (8.66) | 
+外: Par-DI 均值 |
+--- 图8 ---
+PLS 方法和 z-score 均值方法比较。表中汇报了投资组合的月均收益率（%），括号内是经 Newey-West 调整后的 t-statistics。Panel A 至 Panel D 分别表示 PLS 第二步中，采用当期  $ \lambda $、过去 12 个月、36 个月以及 60 个月  $ \lambda $ 均值的情况。Panel E 为 z-score 均值的情况。投资组合中股票的权重是市值加权。实证区间为 2005/01/01 至 2022/05/31。
+[表]
+0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 9-0 | 
+Panel A: 当期  $ \lambda $ | 
+0.81(1.12) | 1.10(1.49) | 0.79(1.13) | 0.80(1.24) | 1.36(1.90) | 1.22(1.69) | 1.30(1.73) | 1.35(1.73) | 1.48(2.05) | 1.49(1.93) | 0.68(1.38) | 
+Panel B: 12个月  $ \lambda $ 均值 | 
+0.39(0.47) | 0.76(0.95) | 0.81(0.99) | 1.10(1.54) | 0.96(1.37) | 1.24(1.88) | 1.32(2.01) | 1.33(2.01) | 1.40(2.28) | 1.53(2.53) | 1.14(2.43) | 
+Panel C: 36个月  $ \lambda $ 均值 | 
+0.30(0.37) | 0.86(1.09) | 0.80(1.07) | 1.14(1.56) | 1.47(2.07) | 1.28(1.96) | 1.55(2.24) | 1.46(2.16) | 1.43(2.22) | 1.08(1.86) | 0.78(1.60) | 
+Panel D: 60个月  $ \lambda $ 均值 | 
+0.20(0.25) | 0.67(0.84) | 1.02(1.34) | 1.10(1.56) | 1.36(1.95) | 1.47(1.97) | 1.29(1.91) | 1.65(2.36) | 1.13(1.93) | 1.29(2.13) | 1.09(2.28) | 
+Panel E: z-score 均值 | 
+0.10(0.12) | 0.63(0.80) | 0.66(0.89) | 0.97(1.32) | 1.27(1.85) | 1.19(1.64) | 1.23(1.66) | 1.55(2.35) | 1.51(2.35) | 1.32(2.18) | 1.21(2.54) |
+--- 图9 ---

@@ -1,0 +1,228 @@
+# Toward a better factor model (II)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/rFfiLgV0Y95R4suE9Ji4gg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Double bootstrap 在评价多因子模型时也能发挥作用。实证结果表明，Kelly, Pruitt and Su (2019) 的 IPCA 模型可堪大用。而在 ad-hoc 模型里，Fama and French (2015) 似乎从未被超越。
+
+1
+
+还记得《Toward a better factor model》吗？这是本系列的第二篇。其实它也可以是《Farewell, ad-hoc 多因子模型》系列的第二篇，或者是《出色不如走运》系列的第九篇。但我认为把它归到《Toward a better factor model》最恰如其分。
+
+在《Toward a better factor model》一文中，我介绍了两个检验多因子模型的方法，其中之一是 Barillas and Shanken (2017) 的 right-hand-side approach，即我们只需要比较不同模型所包含的因子 span 出来的最大夏普比率平方即可，夏普比率平方更大的是更好的模型。
+
+然而，随着更多的因子被加入到多因子模型中，其 ex-post 最大夏普比率平方总能被提升。不过，这一定就会导致更好的多因子模型吗（即能够更有效地解释资产预期收益的截面差异）？为了回答这个问题，不妨来看下面这个极端的例子。
+
+以最大化 ex-post 夏普比率平方为目标，我们从 Hou, Xue and Zhang (2020) 考察的 400+ 个因子里以 t-statistic 为标准挑出以下 7 个（虽然每个因子看上去都挺合理，但毫无疑问在挑选的过程中，我们刻意引入了 data-snooping），而这七个因子 + 市场因子构造的多因子模型的 ex-post 夏普比率平方是 CAPM 的三倍。
+
+根据 Barillas and Shanken (2017) 的标准，上述模型毫无疑问要“优于”CAPM 乃至那些主流的 ad-hoc 多因子模型（FF5、q-factor model 这些）。然而，事实真的如此吗？我们能对这个经 data-snooping 挑出来的模型抱有多大的信心？
+
+信心自然不是凭空而来，而是要经过科学的检验。为了检验多因子模型，通常使用 sorted portfolios 作为 test assets，然而实证结果和理论推导均表明，检验结果在很大程度上取决于 test assets 的选择。为此，一个自然而然的问题是，如何使用 individual assets（个股）作为 test assets 来检验模型。
+
+这个问题由来已久。对 individual assets 来说，无论是 β 估计不准还是 pricing errors 太大，因此总会 over-reject 多因子模型，导致使用 individual assets 的实践难以展开。不过，这些困难从来没有阻挡人们在这条道路上不断探索前行。
+
+在刚刚进行的 2023 AFA 年会上，有很多 asset pricing 方面的 sessions，而其中我个人最喜欢的是下面这个题为 Individual Assets and the SDF 的 session。
+
+其中 Clarke and Momeni (2021) 利用从基金研究借鉴而来的 double bootstrap 方法，通过个股检验了主流的 ad-hoc 以及基于 PCA 的多因子模型，并为 Toward a better factor model 这个话题提供了非常有益的启发。本文第二节就对此进行介绍。
+
+PS，该 session 的另一篇 Stefan Nagel 的文章我个人也非常喜欢，后续也会安排。
+
+2
+
+Clarke and Momeni (2021) 一文受到了 Kosowski, et al. (2006) 以及 Fama and French (2010) 在基金研究中使用 bootstrap 方法的启发（见《出色不如走运 (VIII)》）。
+
+基金研究的目标是考察是否有获得显著超额收益的基金；而多因子模型检验的目标是考察是否有获得显著定价错误（pricing errors）的资产。上述类比告诉我们，这两项研究一个共同的前提条件是需要指定一个适当的 benchmark。换句话说，我们无法在没有基准的前提下谈论哪些基金获得了超额收益，我们也不能在没有多因子模型的前提下讨论哪些资产有定价错误。
+
+以上描述似乎将我们推向一个无尽的循环：我们想要通过 individual assets 来检验目标多因子模型，然后为了计算 pricing errors 我们又需要事先指定多因子模型。有没有办法让我们绕过这个困境呢？答案是 bootstrap，更确切地说是 double bootstrap。
+
+这里简单解释一下要用 double bootstrap 的逻辑。以下的说明中涉及了 population model 和 tested model，请格外注意。一般来说，为检验某个给定的多因子模型，在这个 double bootstrap procedure 中，population model 和 tested model 是同一个模型。当使用不同模型时，可以定量刻画该 procedure 的 size 和 power。
+
+首先，我们假设股票预期收益率数据满足某个因子模型（比如 CAPM、FF5），这个模型就是 population model。然后用真实股票和因子收益率历史数据进行时序回归，得到每个股票的 α，并把它们从股票收益率时序中减去，得到 demean 之后的历史数据。此时，上述数据满足了我们的假设，即股票收益率在 population model 下没有 pricing errors。
+
+但是请注意，到现在为止，我们还没有进行任何一轮 bootstrap，只是 demean 了一把。
+
+接下来是第一轮 bootstrap。以上述 demean 之后的历史数据作为 population，进行有放回的 bootstrap，构造一个 bootstrapped sample。在这个样本中，我们通过时序回归计算个股对 tested model 的 α。注意，这里的 tested model 可以和 population model 是同一个模型，也可以是不同的模型（后文会进一步解释差异。当 tested model 和 population model 一致时，由于 sampling error，个股依然有 pricing errors）。我们的目标是考察根据 tested model 计算的 pricing errors 是否在置信区间之内。如果 pricing errors 在置信区间之内，则可以认为个股的预期收益率满足 tested model。
+
+接下来的问题就是：如何确定置信区间。这就需要第二轮 bootstrap。对于第一轮 bootstrap 得到的 bootstrapped sample，对每支个股减去 tested model 下的 pricing error，然后得到 demeaned bootstrapped sample，并把它视为第二轮 bootstrap 的 pseudo-population。对该 pseudo-population 进行 1000 次 bootstrap，即可得到置信区间。
+
+3
+
+下面讨论五点核心：
+
+第一，为什么是 double bootstrap。在第一轮 bootstrap 中，我们只得到了未知 population 下的一组个股 sample pricing errors，但无法知道这些 pricing errors 是如何变化的。在第二轮 bootstrap 中，我们将第一轮的样本作为第二轮的 pseudo-population，并产生以此为总体的大量 bootstrapped samples，从而刻画 pricing errors 是如何变化的。Bootstrap 方法确保我们能够通过“bootstrapped 样本统计量围绕原始样本统计量的变化”来刻画“原始样本统计量如何围绕总体统计量的变化”。这是我们通过第二轮 bootstrap 计算置信区间并检验模型的依据。
+
+第二，population model 和 tested model。一般来说，在应用 double bootstrap 时，population model 和 tested model 是同一个模型，即待检验的因子模型。如果第一轮的样本统计量处于第二轮 bootstrap 得到的置信区间内，我们就可以接受 tested model，反之即拒绝 tested model。这时：
+
+1. 如果 population model 和 tested model 是同一个，则接受 tested model 是正确的，而拒绝 tested model 是错误的；
+
+2. 如果 population model 和 tested model 不同，比如假设 population model 是 CAPM，但是 tested model 是 FF6（即总体符合 CAPM，但这件事儿对我们是未知的，我们取而代之检验 FF6），那么接受 tested model 则是错误的，而拒绝 tested model 才是正确的。
+
+由上述论述可知，如果 population model = tested model，则错误地拒绝 tested model 的概率衡量了该方法的 size；如果 population model ≠ tested model，则正确地拒绝 tested model 的概率则衡量了该方法的 power。
+
+第三，两个 1000 次。由上述介绍可知，对于第一轮的  bootstrapped sample（并将其根据 tested model 减去个股 α），在第二轮会以此为 pseudo-population 进行 1000 次 bootstrap、计算置信区间。这是第二个“1000 次”。而第一个“1000 次”是我们在第一轮构造 1000 个 bootstrapped sample。这是因为无论 size 还是 power，都代表了错误/正确拒绝 tested model 的概率。
+
+试想，我们在第一轮只有一个 bootstrapped sample，然后其 pricing errors 落在置信区间内，那么我们只能说对于该 bootstrapped sample 接受 tested model，但显然不能说接受 tested model 的概率是 100%（或 size = 0%）；反之，如果 pricing errors 落在置信区间外，我们也只能说对于该 bootstrapped sample 拒绝 tested model，但不能说拒绝 tested model 的概率是 100%（或 power = 100%）。
+
+第四，分组。按照上述方法，对于个股都可以得到其 pricing error 的置信区间。不过在实际操作中，Clarke and Momeni (2021) 并没有在个股粒度上检验模型，而是将个股依照 pricing errors 高低聚合成 10%、20%、……、90% 分位数（共 9 组）以及 1%、2%、……、99% 分位数（共 99 组）两种粒度。在每种情况下，检验全部 9 组（或者 99 组）每组的平均 pricing errors 是否均落在对应的置信区间内。
+
+为了得到对应的置信区间，对于第二轮的每个 bootstrapped sample 中的 pricing errors 也进行了相应的分组。然后对于每一组（例如第 10% 分位数组），由于一共有 1000 个 bootstrapped sample，因此一共有 1000 个 10% 分位数组的取值，即得到了 10% 分位数组 pricing error 的分布，从该分布中便可以得到置信区间两端的取值。
+
+第五，多重假设检验。置信区间的确定依赖于置信区间两端分位数的确定。由于同时检验 9 组（或 99 组）pricing errors 是否落在各自的置信区间，且只要有一个在置信区间之外就拒绝 tested model，因此在确定置信区间大小的时候必须考虑多重假设检验修正。
+
+为此，Clarke and Momeni (2021) 首先考虑了 Bonferonni 修正。但是，Bonferonni 修正的问题是它过于保守，导致置信区间过大，从而降低了该 double bootstrap 方法的 test power。因此，Clarke and Momeni (2021) 也考虑了经验数值法，即通过在给定 size 下最大化 power 来选取最优置信区间的大小。具体方法请阅读原文。
+
+4
+
+最后就来看一些具体的实证结果。
+
+为了说明该方法在保证 size 的同时也有足够的 test power，在检验常见多因子模型之前，Clarke and Momeni (2021) 首先通过模拟来定量刻画了该方法的好处。在模拟中，他们分别假设 population model 是 CAPM 和 FF6，然后令 tested model 也分别使用 CAPM 和 FF6，因此一共四种情况：
+
+1. population model = CAPM，tested model = CAPM；
+
+2. population model = CAPM，tested model = FF6；
+
+3. population model = FF6，tested model = FF6；
+
+4. population model = FF6，tested model = CAPM。
+
+为了直观说明结果，让我们考虑 population = CAPM 的情况。下图显示了第一轮中第一个 bootstrapped sample 的检验结果（panel a 是 tested model = CAPM、panel b 是 tested model = FF6）。在 panel a 中，9 个十分位数的 pricing errors 均在置信区间之内，因此接受 tested model，即接受 CAPM；在 panel b 中，9 个十分位数的 pricing errors 中有 5 个（红色的叉）在置信区间之外，因此拒绝 tested model，即拒绝 FF6。由于在这个模拟中，我们知道 population model = CAPM，因此 panel a 的结果体现了方法的 size，而 panel b 的结果体现了方法的 power。
+
+当然，上述只是第一轮中的第一个 bootstrapped sample 的检验结果。在其他 999 个bootstrapped sample 中会有不同的结果，因此最终我们能够计算错误拒绝 CAPM 的概率（size）以及正确拒绝 FF6 的概率（power）。结果如下表所示（节选了 Bonferonni 修正的情况）。
+
+当 population model 和 tested model 均为 CAPM 时，模型被错误拒绝的概率是 1.5%（目标 size 是 5%，1.5% 小于 5% 表明了 Bonferonni 修正过于保守）；当 population model 为 CAPM 但 tested model 是 FF6 时，FF6 被正确地拒绝的概率是 97.5%，说明该 procedure 有很不错的 test power（这还是在 Bonferonni 修正的前提下！）。
+
+反之，当 population model 和 tested model 均为 FF6 时，模型被错误拒绝的概率是 3.3%（依然小于目标 5%）；而当 population model 为 FF6 但 tested model 是 CAPM 时，CAPM 被正确地拒绝的概率是 83.2%。
+
+最后来看看使用该方法检验常见 ad-hoc 多因子模型以及 Kelly, Pruitt, and Su (2019) 的 IPCA 模型的结果（在使用 double bootstrap 时，population model = tested model）。由于已经通过模拟定量刻画了该方法的统计特性，因此在利用实际数据检验主流多因子模型时，Clarke and Momeni (2021) 只在第一轮 bootstrap 中进行了一次采样，以下是该基于该 sample 的检验结果。红色标记说明在置信区间之外，即模型被拒绝。结果显示，只有 IPCA 模型通过了检验，而且它主流的 ad-hoc 多因子模型（FF5、q 等）均被拒绝。
+
+此外，Clarke and Momeni (2021) 还考察了剔除微小市值股票之后的结果。在这种情况下，ad-hoc 模型的表现要好不少，其中最难以被拒绝的模型是 FF5（检验结果如下图所示）。
+
+5
+
+Clarke and Momeni (2021) 是把 bootstrap 用在检验多因子模型上的一个有益尝试。无独有偶，该文的 discussant Russell Wermers 正是 Kosowski, et al. (2006) 的作者之一，相信这样的讨论一定会擦出新的火花。由于今年 AFA 恢复了线下，该报告未来会不会被挂到网上就不得而知了。
+
+从该文的实证结果来看，我们似乎也可以放心地重申一下之前得到的结论：实证资产定价已经告别了 ad-hoc 多因子模型的阶段，而基于 portfolio sort 的因子也已经逐渐被其他更先进的信息聚合方法（例如 Kelly, Pruitt and Su (2019)）所取代。
+
+本文开头谈到的 Barillas and Shanken (2017)“困境”也再一次表明，在寻找更好的多因子模型时，我们应该关注的是事前能够解释预期收益率差异的协变量，而非事后最大化夏普比率平方的邪门“排列组合”。也许我们可以预期，使用个股取代投资组合作为 test assets 来研究多因子模型以及 SDF 将会成为新的趋势之一。
+
+毕竟，正如 Clarke and Momeni (2021) 所述：
+
+If factor models are truly approaching the ex-ante mean-variance efficient frontier, then better performance on traditional tests should not come at the expense of pricing individual stocks.
+
+最后的最后，还记得本文一开篇那个 data-snooping 出来的模型吗？它的检验结果是这样的……
+
+参考文献
+Barillas, F. and J. Shanken (2017). Which alpha? Review of Financial Studies 30(4), 1316 – 1338.
+
+Clarke and Momeni (2021). Testing asset pricing models on individual stocks. Working paper.
+
+Fama, E. F. and K. R. French (2010). Luck versus skill in the cross-section of mutual fund returns. Journal of Finance 65(5), 1915 – 1947.
+
+Hou, K., C. Xue, and L. Zhang (2020). Replicating anomalies: An investment approach. Review of Financial Studies 33(5), 2019 – 2133.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kosowski, R., A. Timmermann, R. Wermers, and H. White (2006). Can mutual fund “stars” really pick stocks? New evidence from a bootstrap analysis. Journal of Finance 61(6), 2551 – 2595.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+解释 | t-statistic | 
+cumulative abnormal returns around earnings announcement | 4.8 | 
+change in analysts earnings forecast | 4.7 | 
+twelve-month industry lead-lag effect in prior returns | 3.3 | 
+twelve-month quarterly earnings to price | 2.9 | 
+change in net operating assets | 2.7 | 
+four-quarter change in return on equity | 1.7 | 
+seasonality | 1.3 |
+--- 图3 ---
+anuary 6, 2023 8. Location: Sheraton: Napoleon D (3rd Floor)
+Session Chair: Seth Pruitt, Arizona State University
+Session type: invited
+Time Series Variation in the Factor Zoo
+By Hendrik Bessembinder; Arizona State University
+Aaron Burt; University of Oklahoma
+Christopher Hrdlicka; University of Washington
+presented by: Aaron Burt, University of Oklahoma
+Discussant: Shrihari Santosh, University of Colorado Boulder
+three Common Factors
+By Elena Andreou; University of Cyprus
+Patrick Gagliardini; Università della Svizzera italiana
+Eric Ghysels; University of North Carolina-Chapel Hill
+Virco Rubin; EDHEC Business School
+presented by:  $ \underline{\text{Eric Ghysels}} $, University of North Carolina-Chapel Hill
+Discussant:  $ \underline{\text{Dacheng Xiu}} $, University of Chicago
+testing Asset Pricing Models on Individual Stocks
+By Charles Clarke; University of Kentucky
+Morteza Momeni; University of Kentucky
+presented by:  $ \underline{\text{Charles Clarke}} $, University of Kentucky
+Discussant:  $ \underline{\text{Russell Wermers}} $, University of Maryland
+When do Cross-sectional Asset Pricing Factors Span the Stochastic Discount Factor?
+by Serhiy Kozak; University of Maryland
+tefan Nagel; University of Chicago
+presented by:  $ \underline{\text{Serhiy Kozak}} $, University of Maryland
+Discussant: Mikhail Chernov, University of California, Los Angeles
+--- 图4 ---
+We test asset pricing models using individual stocks. We compare the cross-sectional alpha across individual stocks to thousands of new bootstrapped histories generated from an adjusted version of the original sample, altered so that the alpha is zero. The new histories capture the statistical structure of the original data but generate new distributions of the cross-sectional alpha that would be observed under the null hypothesis.
+This procedure is an adaptation of methodology developed by  $ \underline{\text{Kosowski et al.}} $ (2006) and  $ \underline{\text{Fama and French}} $ (2010) in the fund performance literature. Their insight is that we can evaluate whether some fund managers have "skill" without having to pre-specify the predictors of that skill. Skill is alpha relative to a model in the mutual fund literature just as mispricing is alpha relative to a model in the asset pricing literature. Just as managers will outperform or underperform their benchmarks, stocks will outperform or underperform as asset pricing model. But by comparing sample alpha generated by this random variation to data generated by a simulated population, otherwise identical, where all alphas are known to be zero, we can evaluate whether the sample alpha is sufficient to reject that the true alpha is zero.
+--- 图5 ---
+(a) CAPM
+(b) FF6
+Figure 1: One Simulation Run When the CAPM Describes the Population
+This figure shows the first simulation run when the CAPM describes the population. The left panel shows our test of the CAPM and the right panel shows our test of the FF6 model. When the observed alphas are within the confidence intervals, we fail to reject the model (represented with a (blue) dot). When the sample observed alphas are outside the confidence intervals, we reject the model (represented with a (red) X).
+出处：Clarke and Momeni (2021)
+--- 图6 ---
+Panel A: Bonferonni Confidence Intervals
+[表]
+Model | Stat | Test | Rejection | 
+Pop:  $ \alpha_{CAPM} = 0 $ | 
+CAPM | t | Size | 1.5% | 
+FF6 | t | Power | 97.5% | 
+CAPM | $ \alpha $ | Size | 3.2% | 
+FF6 | $ \alpha $ | Power | 98.8% | 
+Pop:  $ \alpha_{FF6} = 0 $ | 
+FF6 | t | Size | 3.3% | 
+CAPM | t | Power | 83.2% | 
+FF6 | $ \alpha $ | Size | 4.9% | 
+CAPM | $ \alpha $ | Power | 78.8% |
+出处 · Clarke and Momeni (2021)
+
+--- 图8 ---
+(a) 9 Percentiles
+(c) 9 Percentiles
+(c) 9 Percentiles
+(b) 99 Percentiles
+(d) 99 Percentiles
+(d) 99 Percentiles
+--- 图9 ---
+(a) 9 Percentiles
+出处：Clarke and Mern:
+(b) 99 Percentiles
+--- 图10 ---
+出处：Clarke and Momeni (2021)
+(e) 9 Percentiles
+(f) 99 Percentiles
+Test of FF5
+--- 图11 ---
+(a) 9 Percentiles
+(b) 99 Percentiles
+Figure 12: Testing Abnormal Factors Using All Stocks
+This figure shows the test of the Abnormal Factors model for all stocks. The left panel shows the test of the Abnormal Factors model for nine percentiles with Bonferroni adjusted confidence intervals. The right panel shows the test of Abnormal Factors model for ninety-nine percentiles with our optimized confidence intervals. The sample observed alphas are represented with (blue) dots and (red) x's for with red x's denoting rejections for lying outside the confidence intervals.
+出处：Clarke and Momeni (2021)
+--- 图12 ---

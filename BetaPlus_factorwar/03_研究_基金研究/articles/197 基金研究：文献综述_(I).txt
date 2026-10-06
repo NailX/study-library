@@ -1,0 +1,276 @@
+# 基金研究：文献综述 (I)
+
+来源：03_研究_基金研究
+链接：https://mp.weixin.qq.com/s/WpL9JjRkhkM64Rwpp_40fQ
+
+作者：llanglli，石川，刀疤连；www.factorwar.com
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+每当我们踏入一个新领域，都是从一篇文献综述开始。
+
+1
+引言
+
+公众号去年的年终总结中曾提到，今年的写作重点之一是基金研究方面文献的梳理，这里特指的是公募基金。为什么？因为关于对冲基金，已经有雄文系统梳理过了，见 Agarwal, Mullally, and Naik (2015)。当然，更重要的原因是公募基金的地位和重要性。在下文中，除特别说明外，“基金”都指代公募基金。
+
+对于公募基金，因为包含的方方面面太多太细碎，涉及的文献太多（光顶刊文章就看不过来了），因此想在一篇文章中做比较全面的综述是非常困难的。正因如此，本文也压根没有这个打算！这也是为什么本文的标题中带了个编号 (I)。
+
+但我们总得迈出第一步。
+
+为此，BetaPlus 小组在本文中首先尝试抛出梳理相关文献的框架。大体上说，相关研究可以被划分到以下六大类：
+
+在这个框架下，本文作为公众号在基金研究方面的第一篇，希望抛砖引玉，就上述每一类给出一些经典的研究文献。但再次强调的是，本文 by no means 是一个全面的文献综述。在未来，我们会就整个基金研究话题以及每一类细分话题给出第 (II)、(III)…… 第 (n) 份文献梳理。
+
+2
+基金业绩评估和归因
+
+基金的业绩评估和归因是基金研究的重要课题之一。假设一个基金获得了战胜市场的收益，那么人们自然关心，这个超额收益是源自何处 —— 选股，择时，又或者行业轮动？业绩又该如何归因？
+
+最直接的评估方式是透过收益率回归视角。在这方面，典型的能力评估模型包括 Treynor and Mazuy (1966) 以及 Henriksson and Merton (1981)。更一般地，我们可以将该模型表示为如下的条件  模型：
+
+  
+
+其中  的不同设定对应着不同的择时模型（如市场择时，波动率择时，流动性择时等），并通过检验  来判断基金经理是否具有择时能力，而通过检验  来评判基金经理是否具有选股能力。
+
+对于业绩归因而言，一类常用的方法是（Brinson）归因分析。而另一类分析方法则主要关注基金相对于业绩基准的表现。这时，如何选择恰当的基准，就变得至关重要。首先，采用市场指数是一个非常自然的选择。但是这种做法不能充分考虑不同基金的风险，从而可能得到具有误导性的结论。
+
+为此，更常见的做法是使用一个标准的多因子定价模型，并使用基金相对于该模型的  来代表基金的业绩。由于动量因子对解释基金表现至关重要，因此 Carhart (1997) 四因子模型就成为了最被广泛采纳的基准。
+
+除上述基准外，另一个思路是依据基金持仓组合的特征进行调整，典型代表是 Daniel et al. (1997) 的经典文章提出的 DGTW 指标。与多因子模型不同的是，该方法通过市值、BM 以及动量将股票分组，并计算每个分组组合的收益。然后依据基金持仓和股票的特征计算基金（持仓加权）的特征，选择其特征所对应的组合作为其基准，即用基金收益减去对应的组合收益来代表基金业绩。
+
+不过，一些最新的研究对上述基准设定方法提出了新的挑战。例如，Busse, Jiang and Tang (2020) 指出，考虑到平均而言，基金的因子暴露同其组合平均公司特征之间的相关性只有约 0.6，因此因子模型和组合特征包含着不完全相同的信息。为此，该文指出应同时用因子模型和特征调整方法对基金业绩进行调整，来计算基金的真实  。他们发现，基于这个双重调整方法的  （double-adjusted   ）可以更好地预测基金未来的超额收益。
+
+另一篇值得一提的文章是 Giglio, Liao and Xiu (2021)。该文考虑了基准模型的遗漏变量问题以及数据缺失问题，并考虑了多重假设检验的影响，从而得到了关于基金  更加稳健的估计结果（实证方面，该文关注的是对冲基金，不过其方法同样适用于公募基金）。
+
+3
+是否有显著的  ?
+
+一旦能够计算基金的超额收益，紧接着一个密切相关的问题就是基金能否获得显著的超额收益，或换个问法，基金能否战胜基准？有多少基金确实战胜了市场？这毫无疑问是基金研究中最核心的问题（没有之一）。在这方面，最著名的两篇文章要数 Kosowski et al. (2006) 以及 Fama and French (2010)。不过有意思的是，它们给出了截然相反的结论。
+
+而令上述问题变得更加棘手的是，这两篇文章使用了相似的数据，且同时采用了 bootstrap 方法。所以得出完全对立的结论着实令人匪夷所思。Kosowski et al. (2006) 认为，有超过 10% 的基金不能被运气解释，因而可以战胜市场；而另一方面，Fama and French (2010) 则表示这个比例不会超过 1%。面对如此的反差，我们应该何去何从？
+
+好消息是，在最新的一篇文章中，Harvey and Liu (2021) 比较了二者并指出了它们差异背后的原因。首先，在方法上，Kosowski et al. (2006) 对每个基金独立进行 bootstrap，而 Fama and French (2010) 则对基金收益率的 cross-section 进行 bootstrap，这有助于保留相关性。另外，前者在分析中，考察的基金被要求有 60 个收益率的观测数据，而在后者中，这一要求被降低到 8 个。
+
+Harvey and Liu (2021) 指出，上述 bootstrap 方法的差异是这两篇文章得出不同结论的原因。Kosowski et al. (2006) 的方法使得该文过度拒绝原假设（原假设是所有基金都没有超额收益），使得在哪怕在所有基金都没有  的情况下，该文依然会拒绝原假设。反观 Fama and French (2010)，对一些基金的采样不足是它最大的问题，这会导致其低估存在超额收益的基金的占比，使得在哪怕存在能够取得  的基金的情况下，依然接受原假设。
+
+权衡二者的优劣，Harvey and Liu (2021) 认为在 bootstrap 时保留 cross-section 的相关性是有必要的，因此他们对 Fama and French (2010) 的算法进行了修正，并通过大量实证结果对新方法进行了说明。结果显示，能够战胜市场的基金比例应介于 Kosowski et al. (2006) 和 Fama and French (2010) 之间。
+
+关于基金能否获得  的研究，另一系列值得一提的文章是 BSW-AP-BSW 三连。首先，Barras, Scaillet and Wermers (2010) 将 false discover rate 应用于基金分析中，得到了和 Fama and French (2010) 的结论，即只有不到 1% 的基金能获得超额收益。Andrikogiannopoulou and Papakonstantinou (2019) 则指出基金收益率的信噪比低导致前文的方法存在 lack of power 的问题。比如，对于  绝对值为 2% 的基金，该文的方法会将其中 65% 的判定为不能获得超额收益。Barras, Scaillet and Wermers (2022) 对此进行了回应，承认最早的研究确实有问题，不过问题也不像 AP 指出的那么严重。当然，他们最后认同，使用 FDR 方法应该谨慎。
+
+结束本节之前，还有一个值得“吐槽”的插曲。Kosowski et al. (2006) 和 Barras, Scaillet and Wermers (2010) 之中均出现了同一个巨佬的名字：Wermers。不过有意思的是，这两篇文章的结论却完全相反。这大概足以说明研究基金能否战胜市场到底有多难。总之，基金能否战胜基准，到底有多少基金能够战胜市场，如何正确识别出确实能够战胜市场的基金，这将会是未来基金研究中持续的热门话题。
+
+4
+业绩可持续性及预测
+
+Sharpe (1966) 是研究基金业绩可持续性的开山鼻祖，不过 Malkiel (1995) 的影响可能更为深远，因为该文的数据中考虑了幸存者偏差。当然，由于是一篇早期文章，因此该文的实证区间仅涵盖 1971 到 1991。Malkiel (1995) 发现可持续性在 70 年代中是存在，但是到了 80 年代便消失了。与之类似，Carhart (1997) 同样使用了 bias free 数据，并发现可持续性仅存在于 1 年之内，1 年之后则会因为动量效应而消失。
+
+与可持续性密切相关的另一个研究方向是基金业绩预测。借鉴股票市场的同类研究（例如，McLean and Pontiff 2016），Jones and Mo (2021) 对常见基金预测指标的样本外表现进行了仔细的考察。他们的研究对象既包括动量、Carhart 四因子  、费率等早期研究提出的指标，也包括主动份额（active share）、行业集中度等后续研究提出的新指标。
+
+特别地，这些指标跟股票因子/异象有一个显著区别，那就是除了少量纯业绩指标以及 Amihud and Goyenko (2013) 提出的  指标，大多数指标都涉及到基金持仓。由于持仓相关数据的披露有时滞，且早年美国只要求基金每半年披露一次详细持仓（我国目前仍是这样），可以猜想，在这一阶段，只有那些有着较强信息收集和分析能力的投资者才能进行有效的业绩预测和套利活动，因而基金市场的效率并不是太理想。
+
+Jones and Mo (2021) 的研究证实了这一猜测。他们利用组合分析和 Fama-MacBeth 回归展开了研究，发现平均而言，基金业绩预测指标在样本外的表现下滑了至少一半，这一降幅与 McLean and Pontiff (2016) 关于股票市场异象的研究结论相当。该文认为这一下滑主要是由于更加频繁的套利活动所致，而次要原因则是基金间更为激烈的竞争。
+
+5
+基金资金流
+
+基金资金流（net flow）的文献可以细分为两个方面：（1）哪些因素影响了投资者决策（即投资者是出于怎样的视角来评估一支基金的好坏），导致了基金资金的净流入；（2）基金资金的流入和基金未来的表现有怎么样的关系。首先看第一点。
+
+在这方面，一篇代表性的文章是 Berk and Green (2004)。该文通过贝叶斯框架抛出了投资者追逐历史业绩是一种理性行为。在他们的模型下，均衡状态下的结果表明资金流与基金历史业绩呈现正相关。而在该结果下的一个重要隐含意义是，绝大部分基金难以产生正的超额收益。
+
+与之类似的，我们也可以从资金流数据中推测出投资者使用的基金评价标准。在这个问题上，两组这方面的大佬无独有偶在 2016 年发表了两篇文章 Berk and van Binsbergen (2016) 以及 Barber, Huang and Odean (2016)。它们达成了反直觉的共识：相较于常见的多因子基准模型，投资者似乎主要依赖于简单的 CAPM 模型。
+
+与上述结论不同的是，一些研究认为 CAPM 仍然过于复杂，而投资者（特别是个人投资者）主要依靠 Morningstar rating 选择基金（Morningstar rating 根据基金风险调整后的业绩对基金进行排序，然后将基金分为 5 类）。例如，Guercio and Tkac (2008) 通过 event-study 研究指出，评级的调升和下降和资金的异常流入密切相关：评级的提升伴随着显著的净流入，而评级的下降则伴随着显著的净流出。Ben-David et al. (2021) 则支持了该文的观点。虽然仅仅依靠评级的变化似乎说明投资者是非理性的，但是 Huang, Li and Weng (2020) 一文为星级评定的最优性提供了理论基础，其逻辑在于离散的星级评价结果可以代表基金的声誉。在该文的论述下，投资者通过星级评估基金是一种理性行为。
+
+除上述研究外，还有不少研究专注于分析其他潜在影响投资者选择的因素。比如，Barber, Odean and Zheng (2005) 研究了不同费用和资金流之间的关系，发现投资者的购买决策受到最抓人眼球的信息的影响。例如，与运营费用相比，那些业绩出色、更注重广告营销的基金更容易引起投资者的注意（想想电梯和地铁上各种基金广告）。除了基金名字，基金经理名字也可能影响投资者的选择。Kumar, Niessen-Ruenzi and Spalt (2015) 的研究发现，基金经理的名字也是投资者考虑的因素之一（可见投资者是多么不理性）。他们发现当基金经理的名字听起来像外国人时，投资者对基金会存有偏见，导致更低的资金流。然而进一步结果显示，无论名字听起来多么“奇特”，基金业绩并没有显著的差异。
+
+Guo and Schönleber (2021) 和 Han, Sui and Yang (2021) 表明，与股票投资者类似，基金投资者受到前景理论刻画的行为偏差的影响。另外，Akbas and Genc (2020) 则发现投资者在追逐基金时也表现出了行为偏差。具体而言，投资者会给予基金历史收益率分布的右尾过高的权重（类似彩票效应）。他们发现，基金资金流和 MAX 变量之间呈现出显著的正相关性，且二者的关系在控制了其他变量后依然稳健。此外，Hartzmark and Sussman (2019) 研究发现，基金表现的可持续性是投资者做出选择的重要依据之一：可持续性低的基金往往伴随着资金的净流出，反之可持续性高的基金则伴随资金的净流入。
+
+第二方面的研究聚焦于资金的净流入和基金未来的表现，即到底是 smart money 还是 dumb money。然而，就这两个观点而言，均有代表性的研究。在一个早期的研究中，Zheng (1999) 发现获得更多资金的基金在之后的表现要显著好于净流出的基金。然而这种效应是短暂的，且很大程度上可以被动量效应所解释。另外该文也指出，没有重大证据表明获得更多资金的基金随后会击败市场。另外，Lou (2012) 为基金业绩可持续性、smart money 效应以及股价动量提出了一个基于资本流动的解释。该文发现，资金流动导致的交易在接下来一年和股票以及基金的收益率呈现正相关，而在之后的时间内则呈现负相关。因此，资金流驱动的收益率效应可以完全解释基金业绩的可持续性以及部分解释股票的动量效应。
+
+反观 dumb money 方面，Frazzini and Lamont (2008) 利用资金流作为投资者情绪的度量，并发现它和资金未来的回报呈现显著的负相关。该文认为，这种 dumb money 和价值效应有关，即投资者情绪高的股票往往是成长股，因为未来的预期收益更低。此外，Akbas et al. (2015) 也发现了 dumb money 效应并指出其加剧了错误定价，从而进一步提升了某些市场异象，比如 growth，accrual 以及 momentum。
+
+Dou, Kogan and Wu (2020) 发现在剔除基金业绩的影响后，基金资金流仍然有显著的共同成分。作者利用主成分分析提取了共同资金流（common fund flows），进而指出共同资金流对股票定价有着显著的影响。其机制在于，共同资金流意味着希望维持规模稳定或持续增长的基金经理，面临着难以充分分散的系统性风险。因此，基金经理会偏好资金流   —— 即收益对共同资金流敏感性 —— 较低的股票，从而导致这些股票被高估，进而未来收益较低。换言之，共同资金流  越高的股票，未来收益显著更高，这一差异在经济意义上也非常显著，且不能被已有的因子模型所解释。
+
+6
+基金交易行为模式
+
+基金的交易行为模式关注于基金经理的交易行为（如过度交易和分散化交易）以及一些行为偏差（如过度自信和羊群效应）。
+
+Grinblatt, Titman and Wermers (1995) 是关于基金羊群效应最重要的研究之一，该文发现超过 75% 的基金是动量交易者，且基金经理更喜欢买入过去的赢家而非卖出过去的输家。此外，Hong, Kubik and Stein (2005) 研究发现身处同一城市的基金经理之间存在“口口相传”效应。即对于一个基金经理来说，如果同一城市的其他基金经理正在买入（或卖出）某只股票，那么他更有可能进行同样的交易。该文还进一步强调了由 career-concern 导致的从众行为，因为有时特立独行会给声誉带来更大的危害。除此之外，Dass, Massa and Patgiri (2008) 以 tech-bubble 时期为例研究了基金的羊群效应，并指出激励措施会促使基金经理克服从众倾向，从而减持泡沫股票。
+
+Cohen, Frazzini and Malloy (2008) 的分析指出基金交易行为也和社交网络有关。该文通过共享教育网络建立了基金经理和公司董事会成员之间的联系。在此基础上，该文发现基金经理倾向于加大关联公司的持仓，而这些股票往往可以在不增加额外风险的前提下提升投资组合的表现。此外，超额的收益率主要集中在公司发布财务公告的时期，这说明基金经理通过共享教育网络能够获得一定的信息优势。基于此，该文认为社交网络可能是信息流入资产价格的重要机制。
+
+Alexander, Cici and Gibson (2007) 分析了基金经理出于估值和流动性原因的交易行为和基金业绩之间的关系。研究发现，在买入方面，因估值动机而导致的交易行为会带来在未来更好的表现，从而战胜市场；相反，因为流动性动机（例如大量资金流入）造成的买入则会跑输基准。反观卖出方面，则和前述结果形成了鲜明的对比：因估值（流动性）动机造成的卖出会导致基金在未来跑输（跑赢）市场，这意味着基金经理有时不得不被迫卖掉股票，哪怕从估值动机出发他们宁愿继续持有这些股票。
+
+在另一项研究中，Pollet and Wilson (2008) 研究了基金规模和持仓分散化之间的关系，并发现二者的关系并不明确。随着资金流入猛增，投资组合中的股票数量并未随资金流入而显著增加，分散化仅以缓慢的速度发生。不过对于规模更大的基金以及投资小盘股的基金，分散化和资金流入二者之间的关联则更加紧密。
+
+在基金行为模式方面，另外两篇不得不提的文章当属 Gaspar, Massa and Matos (2006) 以及 Alexander and Ruenzi (2007)，它们均聚焦于基金公司的内部激励所造成的基金行为以及表现的扭曲。Gaspar, Massa and Matos (2006) 发现，基金公司中的“明星产品”（就是更具价值的那些产品，比如有更好的历史业绩或者能为公司带来更多的收入的产品）往往表现得更好，而这背后是以牺牲“非明星产品”的表现为代价的（例如前者较后者可以获得更多的资源）。
+
+Alexander and Ruenzi (2007) 则研究了基金公司内部的竞争，发现所属同一公司的基金经理之间存在相互竞争意识，这导致了基金经理的风险偏好和他们的过去表现之间呈现一定的关联。例如，在大基金公司中，处于暂时落后位置的基金经理为了迎头赶上会愿意承担更高的风险。不过这个结论却在规模较小的基金公司中发生了逆转。
+
+7
+基金特征因素
+
+最后，基金特征 —— 例如规模、费率、以及基金经理的特征等 —— 如何影响基金表现也是学术界关注的重点之一。
+
+首先，Chen et al. (2004) 指出基金表现和滞后的基金规模之间存在负相关关系，并对可能的原因进行了分析。在费率方面，最早的 Sharpe (1966) 认为费率和基金表现之间存在负相关性，即更低的费用意味着更优异的表现。然而，Elton, Gruber, and Blake (1996) 的发现却指出二者之间的关系并不明确。不过，Carhart (1997) 确认了 Sharpe (1966) 的发现，指出换手率和基金的费率都和基金的表现呈现负相关。
+
+除了上述这些传统的思路，也有一些最新研究另辟蹊径，比如 Bai et al. (2019) 研究了基金经理生日月份和基金表现之间的关系（没错，你猜到了，发在了 JFE）。由于上学年龄限制的约束，导致 9 月份之后出生的基金经理要晚一年上学，这些人平均来看更加成熟，因此在成为基金经理后平均业绩也更好。该文指出，二者之间的关联和这些基金经理更加自信有关。
+
+8
+结束语
+
+以本文为起点，BetaPlus 将致力于在未来进行更多文献梳理以及独立且可复制的基金研究实证分析。
+
+另外，www.factorwar.com 网站上也一直都有基金研究这个话题，网址为：
+
+https://www.factorwar.com/research/fund/
+
+该页面下汇总了因子动物园以及九号线公众号创作的相关文章。借着本文第一节提出的梳理框架，我们对所列文献进行了编排，以供感兴趣的小伙伴查阅，也欢迎感兴趣的读者多关注因子动物园园长在基金方面的相关学术研究。
+
+毫无疑问，基金研究是一个令人着迷的课题，我们期待和各位一起，积累更多的知识，做出更多的贡献。
+
+每当我们踏入一个新领域，都是从一篇文献综述开始。如果一篇文献综述不够，那就继续写下去。
+
+参考文献
+Agarwal, V., K. A. Mullally, and N. Y. Naik (2015). The economics and finance of hedge funds: A review of the academic literature. Foundations and Trends in Finance 10(1), 1 – 111.
+
+Akbas, F., W. J. Armstrong, S. Sorescu, and A. Subrahmanyam (2015). Smart money, dumb money, and capital market anomalies. Journal of Financial Economics 118(2), 355 – 382.
+
+Akbas, F. and E. Genc (2020). Do mutual fund investors overweight the probability of extreme payoffs in the return distribution? Journal of Financial and Quantitative Analysis 55(1), 223 – 261.
+
+Alexander, G. J., G. Cici, and S. Gibson (2007). Does motivation matter when assessing trade performance? An analysis of mutual funds. Review of Financial Studies 20(1), 125 – 150.
+
+Alexander, K. and S. Ruenzi (2007). Tournaments in mutual-fund families. Review of Financial Studies 21(2), 1013 – 1036.
+
+Amihud, Y. and R. Goyenko (2013). Mutual fund's R2 as predictor of performance. Review of Financial Studies 26(3), 667 – 694.
+
+Andrikogiannopoulou, A. and F. Papakonstantinou (2019). Reassessing false discoveries in mutual fund performance: Skill, luck, or lack of power? Journal of Finance 74(5), 2667 – 2688.
+
+Bai, J., L. Ma, K. A. Mullally, and D. H. Solomon (2019). What a difference a (birth) month makes: The relative age effect and fund manager performance. Journal of Financial Economics 132(1), 200 – 221.
+
+Barber, B. M., T. Odean, and L. Zheng (2005). Out of sight, out of mind: The effects of expenses on mutual fund flows. Journal of Business 78(6), 2095 – 2119.
+
+Barber, B. M., X. Huang, and T. Odean (2016). Which factors matter to investors? Evidence from mutual fund flows. Review of Financial Studies 29(10), 2600 – 2642.
+
+Ben-David, I., J. Li, A. Rossi, and Y. Song (2021). What do mutual fund investors really care about? Review of Financial Studies forthcoming.
+
+Berk, J. B. and J. H. van Binsbergen (2016). Assessing asset pricing models using revealed preference. Journal of Financial Economics 119(1), 1 – 23.
+
+Barras, L., O. Scaillet, and R. Wermers (2010). False discoveries in mutual fund performance: Measuring luck in estimated alpha. Journal of Finance 65(1), 179 – 216.
+
+Barras, L., O. Scaillet, and R. Wermers (2022). Reassessing false discoveries in mutual fund performance: Skill, luck, or lack of power? A reply. Journal of Finance forthcoming.
+
+Berk, J. B. and R. C. Green (2004). Mutual fund flows and performance in rational markets. Journal of Political Economy 112(6), 1269 – 1295.
+
+Busse, J. A., L. Jiang, and Y. Tang (2021). Double-adjusted mutual fund performance. Review of Asset Pricing Studies 11(1), 169 – 208.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Chen, J., H. Hong, M. Huang, and J. D. Kubik (2004). Does fund size erode mutual fund performance? The role of liquidity and organization. American Economic Review 94(5), 1276 – 1302.
+
+Cohen, L., A. Frazzini, and C. Malloy (2008). The small world of investing: Board connections and mutual fund returns. Journal of Political Economy 116(5), 951 – 979.
+
+Dass, N., M. Massa, R. Patigiri (2008). Mutual funds and bubbles: The surprising role of contractual incentives. Review of Financial Studies 21(1), 51 – 99.
+
+Daniel, K., M. Grinblatt, S. Titman, and R. Wermers (1997). Measuring mutual fund performance with characteristic‐based benchmarks. Journal of Finance 52(3), 1035 – 1058.
+
+Dou, W., L. Kogan, and W. Wu (2020). Common fund flows: Flow hedging and factor pricing. Working paper.
+
+Elton, E., M. J. Gruber, and C. R. Blake (1996). The persistence of risk-adjusted mutual fund performance. Journal of Business 69(2), 133 – 157.
+
+Fama, E. F. and K. R. French (2010). Luck versus skill in the cross-section of mutual fund returns. Journal of Finance 65(5), 1915 – 1947.
+
+Frazzini, A. and O. A. Lamont (2008). Dumb money: Mutual fund flows and the cross-section of stock returns. Journal of Financial Economics 88(2), 299 – 322.
+
+Gaspar, J.-M., M. Massa, and P. Matos (2006). Favoritism in mutual fund families? Evidence on strategic cross-fund subsidization.Journal of Finance 61(1), 73 – 104.
+
+Giglio, S., Y. Liao, D. Xiu (2021). Thousands of alpha tests. Review of Financial Studies 34(7), 3456 – 3496.
+
+Grinblatt, M., S. Titman, and R. Wermers (1995). Momentum investment strategies, portfolio performance, and herding: A study of mutual fund behavior. American Economic Review 85(5), 1088 – 1105.
+
+Guercio, D. D. and P. Tkac (2008). Star power: The effect of Morningstar ratings on mutual fund flow. Journal of Financial and Quantitative Analysis 43(4), 907 – 936.
+
+Guo, J. and L. Schöenleber (2021). Investor behavior under prospect theory: Evidence from mutual funds. Working paper.
+
+Han, B., P. Sui, and W. Yang (2021). Prospect theory and mutual fund flows. Working paper.
+
+Hartzmark, S. M. and A. B. Sussman (2019). Do investors value sustainability? A natural experiment examining rank and fund flows. Journal of Finance 74(6), 2789 – 2837.
+
+Harvey, C. R. and Y. Liu (2021). Luck versus skill in the cross-section of mutual fund returns: Reexamining the evidence. Journal of Finance forthcoming.
+
+Henriksson, R. D. and R. C. Merton (1981). On market timing and investment performance. II. Statistical procedures for evaluating forecasting skills. Journal of Business 54(4), 513 – 533.
+
+Hong, H., J. Kubik and J. Stein (2005). Thy neighbor’s portfolio: Word-of-mouth effects in the holdings and trades of money managers. Journal of Finance 60(6), 1 – 24.
+
+Huang, C., F. Li, and X. Weng (2020). Star ratings and the incentives of mutual funds. Journal of Finance 75(3), 1715 – 1765.
+
+Jones, C. S. and H. Mo (2021). Out-of-sample performance of mutual fund predictors. Review of Financial Studies 34(1), 149 – 193.
+
+Kosowski, R., A. Timmermann, R. Wermers, and H. White (2006). Can mutual fund “stars” really pick stocks? New evidence from a bootstrap analysis. Journal of Finance 61(6), 2551 – 2595.
+
+Kumar, A., A. Niessen-Ruenzi, and O. G. Spalt. What's in a name? Mutual fund flows when managers have foreign-sounding names. Review of Financial Studies 28(8), 2281 – 2321.
+
+Lou, D. (2012). A flow-based explanation for return predictability. Review of Financial Studies 25(12), 3457 – 3489.
+
+McLean, R. D. and J. Pontiff (2016). Does academic research destroy stock return predictability? Journal of Finance 71(1), 5 – 32.
+
+Malkiel, B. (1995). Returns from investing in equity mutual funds: 1971 to 1991. Journal of Finance 50(2), 549 – 572.
+
+Pollet, J. and M. Wilson (2008). How does size affect mutual fund behavior? Journal of Finance 63(6), 1 – 49.
+
+Sharpe, W. (1966). Mutual fund performance. Journal of Business 39(1), 119 – 138.
+
+Treynor, J. L. and K. Mazuy (1966). Can mutual funds outguess the market? Harvard Business Review 4, 131 – 136.
+
+Zheng, L. (1999). Is money smart? A study of mutual fund investors’ fund selection ability. Journal of Finance 54(3), 901 – 933.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+基金业绩评估和归因
+是否存在显著超额收益
+业绩可持续性及预测
+基金资金流
+基金交易行为模型
+基金特征因素
+出处：BetaPlus 小组
+--- 图3 ---
+专注于多因子模型和异象研究
+概论与综述
+基金研究：常识与趋势
+被动的“积极投资”：ETF视角
+基金业绩评估和归因
+业绩评估的贝叶斯模型
+基金经理隐形交易能力
+能否获得显著的超额收益
+FDR 保卫战
+遗漏因子、缺失数据与多重检验
+假设不存在  $ \alpha $ 前提下，哪些基金能获取真正  $ \alpha $？
+出色不如走运
+• False Discoveries 简介及公募基金中的简单应用
+基金业绩可持续性及预测
+基金业绩预测/分析与FoF管理
+基金资金流
+基金星级评定、投资者反应，与风格因子
+$ \alpha $ or  $ \beta $: 投资者眼中的基金业绩
+基金行为模式
+- 错误定价，分析师建议与基金投资行为
+从因子投资看基金抱团现象
+基金为何持有彩票股？
+如何寻找不随波逐流且 $ \alpha $能力强的基金
+基金特征因素
+从欧超联赛说起
+--- 图4 ---

@@ -1,0 +1,285 @@
+# 前景理论与股票收益 (II)
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/KnDKoQUpmCEmc1um2xAScg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文解读 Barberis, Jin, and Wang (2019)。
+
+01
+前情回顾
+
+前文《前景理论与股票收益 (I)》对累积前景理论（Tversky and Kahneman 1992）进行了介绍，并解读和实证了 Barberis, Mukherjee, and Wang (2016) 这篇论文。该文基于累积前景理论的价值和权重函数，使用股票历史收益率数据为输入，计算了一个 TK 变量（TK 是 Tversky 和 Kahneman 首字母缩写），并用它构建了一个 anomaly。
+
+在那篇推文最后，我画了一张饼，说介绍 Barberis, Mukherjee, and Wang (2016) 其实是为了今后更好的介绍 Barberis, Jin, and Wang (2019) 这篇把利用前景理论研究股市异象提高到另一个高度的文章。所以今天就来兑现了。
+
+Barberis, Mukherjee, and Wang (2016) 以 Prospect theory and stock returns 为题，仅仅是利用前景理论构建了一个获取超额收益的异象。而今天介绍的 Barberis, Jin, and Wang (2019) 则是从前景理论出发提出了模拟真实世界中投资者投资决策的模型，并指出通过该模型计算的异象收益率和市场中真实异象的收益率相符，从而解释了异象。因此该文的题目也较前文升级为 Prospect theory and stock market anomalies，它不再将前景理论视为获得超额收益的渠道，而是将前景理论视为市场中其他异象产生的根源。
+
+看完《前景理论与股票收益 (I)》，就想看《前景理论与股票收益 (II)》！
+
+02
+背景知识
+
+由于公众号之前做过很多铺垫，因此为了本文的紧凑，背景知识就不再详细介绍了。理解 Barberis, Jin, and Wang (2019) 所需的背景知识包括累积前景理论和狭隘框架（Narrow Framing）。后者是 Richard Thaler 提出的心理账户理论中的一部分（见《Thaler 和他的心理账户理论》）。
+
+非常简单的回顾下，前景理论包括价值和权重函数。价值函数的三个特点是：（1）盈亏是基于参考点的（参考点依赖）；（2）投资者损失厌恶；（3）边际效用递减。权重函数的特点是人们会高估尾部事件发生的概率。它们的定性特征如下。
+
+再来说说狭隘框架。它指的是即人们更倾向于把多个决策独立看待，而非放在一个篮子里综合考虑。比如购买股票的时候把不同股票的盈亏独立看待，而非从一个投资组合整体的角度来评判。
+
+其实，早先就有很多将前景理论用于分析股市异象的研究。但那些研究往往只利用前景理论中的单一特性，比如投资者损失厌恶（价值函数），或投资者高估尾部事件发生的概率（权重函数）。而我之所以说 Barberis, Jin, and Wang (2019) 一文将对前景理论的应用提高到了更高的高度，是因为它利用了前景理论的全部特征，以及狭隘框架。
+
+在 Barberis, Jin, and Wang (2019) 之前，所有考虑前景理论的模型都是静态模型。Barberis, Jin, and Wang (2019) 的高级之处在于提出了动态模型。这就能够更好的利用价值函数中的边际效用递减特性。由价值函数的性质可知，未实现盈利值（capital gain overhang，CGO）会影响投资者的风险偏好：处于浮盈的股票被卖出，因而被低估、未来预期收益率更高；处于浮亏的股票被持有，因而被高估、未来预期收益率更低。动态模型考虑了之前的盈亏情况对于未来决策的影响。需要 CGO 背景知识的小伙伴可参考《参考点依赖和股市异象(文献篇)》。
+
+下面就来看看 Barberis, Jin, and Wang (2019) 的模型。由于该文技术性非常强，详细解读超过推文的范畴，因此行文中将以从 high level 讲清楚该文的逻辑为目标，而不会过度关注每一处技术细节。
+
+该文的整体框架可以总结为：
+
+1. 首先提出描述投资者行为的数学模型；
+
+2. 讨论模型的均衡状态，由此得出模型参数在市场出清下应满足的条件；
+
+3. 使用实际数据校准模型参数；
+
+4. 利用模型计算异象预期收益率，并和相应的真实预期收益率对比，以此考察前景理论能否解释市场异象。
+
+03
+模型和均衡状态
+
+在开始之前，先明确一下模型世界和真实世界的区别。真实世界中有形态各异的投资者和股票，股票按照不同的异象变量排序形成了各式各样的异象。但这背后的机制到底是什么，仍然是未知的。人们能做的仅是通过金融学理论来提出模型（猜想）并通过数据来验证。模型世界中有各种参数，参数的校准往往以真实世界中的数据为依据，从而建立模型世界和真实世界的联系。一旦模型世界中的参数全部设定，就可以完全通过模型，在模型世界中计算出人们关注的某个指标，然后把该指标和真实世界中的指标比较，从而检验模型是否合理。在 Barberis, Jin, and Wang (2019) 中，这个指标就是异象的预期收益率。
+
+下面来看 Barberis, Jin, and Wang (2019) 的模型。它是一个 3 期模型（时刻 –1，0，1）。模型关心投资者在时刻 0 如何将财富分配在 N 支股票（以及无风险资产）中，从而最大化时刻 1 的效用。下表给出了模型中需要使用的一些重要数学符号（并非全部）。
+
+投资者在时刻 1 的财富由其决定分配在 N 支股票上的财富，以及这些股票的收益分布有关。利用上述数学符号，其在时刻 1 的财富为：
+
+时刻 1 的财富是一个随机变量，而投资者的效用和它息息相关。Barberis, Jin, and Wang (2019) 假设投资者试图选择最优的财富分配 Θ = [Θ_1, …, Θ_N]’，以最大化如下的目标函数（即投资者的效用）：
+
+这一坨公式看上去很复杂，但其实含义很清晰。其中前两项是遵循 mean-variance 效用，在奖励预期收益率的同时惩罚了波动，而第三项中的 V 代表来自前景理论的效用，其输入 $\tilde G_i$ 是股票在时刻 1 的盈亏情况，它的定义为：
+
+该定义由两部分组成，第一项是时刻 0 到时刻 1 的盈亏，而第二项是时刻 –1 到时刻 0 的效用（别忘了这是个 3 期模型），其中 g_i 是股票 i 在 –1 到 0 之间的盈亏，它在实际中可以通过 CGO 来计算。通过考虑时刻 –1 到 0 时投资者可能已经在股票 i 上的盈亏情况，该模型便巧妙地将价值函数中的边际效用递减特征考虑进来。
+
+此外，再仔细看一下目标函数中的前景理论效用部分（V 部分），它里面也暗藏玄机。这部分效用是 sum over i 的形式，即把全部 N 支股票的效用单独考虑，计算各自的 V(G_i)，然后求和。这里实际上是利用了狭隘框架，即投资者单独对待每个股票的盈亏。
+
+总结一下模型的特色：（1）在传统 mean-variance 外考虑了前景理论效用；（2）前景理论效用单独考虑每个股票的盈亏（狭隘框架）；（3）每个股票的盈亏同时考虑了两期的累积盈亏，因此考虑了 CGO 对风险偏好的影响。
+
+为了求解最优化方程，需要计算前景理论效用 V，这是一个复杂的积分。贴出来感受一下，不具体解释了。
+
+此外，在计算目标函数时，还要知道股票收益的联合分布。考虑到股票收益率尖峰肥尾以及偏度特征，该文并没有使用传统的正态分布，而是使用了一个复杂的分布，再次贴出来感受一下。
+
+在这个分布函数中共有四个参数：μ、S、ζ 和 ν。其中后三个分别控制分布的离散度、偏度以及峰度/肥尾。它们三个都是通过实际股票收益率数据估计而来。而剩下的 μ 则是最重要的参数，有了它就能计算模型中股票的预期收益率：
+
+由于 μ 决定了模型世界中股票的预期收益，而股票的预期收益又影响着模型世界中异象的预期收益，因此 μ 的取值显然不能是随意的，而必须 make sense。下面就来说如何求 μ。这大概是 Barberis, Jin, and Wang (2019) 最核心的内容。
+
+μ 的取值并非通过实际数据估计而来，μ 的取值应使得模型最优解 Θ_i 满足市场出清（market clearing）。怎么理解这句话呢？
+
+这要从提出一个模型是为了什么说起。模型是人们对真实世界如何运转的猜想，是为了模拟真实世界而建。因此，在以最大化目标函数为目标而寻找最优 Θ_1, …, Θ_N 的时候，不应漫无目的瞎求解（比如得到一组一看就没什么意义的 Θ_1, …, Θ_N），而是要将它和现实世界联系起来。真实世界是什么呢？真实世界就是实际市场。市场中每支股票的交易价格已经反映了当前的供需平衡，实现了市场出清，因此每支股票的市值权重就是均衡状态下的最优权重。
+
+真实世界的市场出清条件告诉我们，均衡状态下股票 i 的权重等于它的市值除以市场中所有 assets 的市值之和。令 Θ_{M,i} 代表该权重，下标 M 表示这是来自实际市场的权重。另一方面，模型告诉我们应该通过最大化目标函数来求解在每支股票的权重 Θ_i。最后，通过“模型是为了描述真实世界如何运转”这句话将二者联系在一起，因此求解模型得到的最优 Θ_i 必须和 Θ_{M,i} 密切相关。
+
+（插一句：由于 Barberis, Jin, and Wang (2019) 考虑既有风险资产又有无风险资产，因此 Θ_{M,i} 和一般说的股票市场的市值权重略有差异，因为市值权重的计算仅考虑股票资产。但这不影响模型的求解和理解。下文也会粗略的将 Θ_{M,i} 称为市值权重。）
+
+So far so good?
+
+暂时先不表 Θ_i 和 Θ_{M,i} 应满足的关系（马上会说），先来说说如何求 μ。模型的最优解由模型的参数决定，除了 μ 以外的所有参数要么来自股票收益率数据估计，要么来自前景理论的文献，都已经有了出处。因此，问题就很显然了，在其他参数给定下，模型的最优解 Θ_i 可以看作 μ 的函数 Θ_i(μ)。所以，确定 μ 的逻辑就是搜索其取值，使模型的最优解 Θ_i 和 Θ_{M,i} 满足它们应该满足的关系。以上就是模型中参数 μ 的确定逻辑，它紧密的联系了模型和真实世界。一旦找到满足上述条件的 μ，就可以计算模型中股票的收益率，进而计算异象的收益率，并通过实际异象收益率来检验模型。
+
+呼，这个逻辑链条终于打通了（hopefully）。
+
+理解了如何确定 μ 之后，下面回答残留的问题：Θ_i 和 Θ_{M,i} 的关系。最简单的关系那就是对于每支股票 i，上述两者都相等 —— 那就是搞了一圈前景理论，结果股票的权重其实是按照市值权重分配的。如果这是真的，那么真是白忙活了。好消息是，在这种约束下，模型无解。
+
+既然上面这条路不合理也走不通，就要接着想办法。为了使模型有意义，也为了简化求解（目标函数中的各种非线性让它非常难求解），Barberis, Jin, and Wang (2019) 提出了一种“有限理性下非一致持仓”的均衡结构假设（bounded rationality with heterogeneous holdings），它极大的化简了目标函数求解，且让 Θ_i 和 Θ_{M,i} 满足了市场出清条件下的关系。
+
+概括的说，在这个假设下，模型世界中投资者在决定股票 i 的最优权重 Θ_i 时，会假设其他股票的权重满足 Θ_j = Θ_{M,j}, j ≠ i。利用这个假设就可以把原始目标函数（同时考虑所有 Θ_i, i =1, …, N）转化为独立考虑每个 Θ_i 的目标函数。
+
+第二，在“有限理性下非一致持仓”这一假设下，对于任意一支股票 i，Θ_i 和 Θ_{M,i} 满足以下两个关系之一：
+
+1. 目标函数有唯一全局最优解 Θ_i 恰恰等于 Θ_{M,i}；
+
+2. 目标函数有两个全局最优解 Θ*_i 和 Θ**_i，它们满足 Θ*_i < Θ_{M,i} < Θ**_i。
+
+第一个关系不用多解释了，因为 Θ_i = Θ_{M,i}，满足了市场出清。而在第二个关系中，两个全局最优解意味着对于股票 i，无论投资者选择权重 Θ*_i 或 Θ**_i，目标函数带给他的效用都是一样的。根据 Θ*_i < Θ_{M,i} < Θ**_i，只需要一部分投资者选择权重 Θ*_i，另一部分投资者选择权重 Θ**_i，就能够实现所有投资者持有股票 i 的总权重为 Θ_{M,i}，从而也满足市场出清。
+
+Barberis, Jin, and Wang (2019) 研究发现，在模型和均衡结构的假设下，对于大部分股票来说，模型的最优解满足 Θ_i = Θ_{M,i}；对于极少部分股票，模型最优解满足 Θ*_i < Θ_{M,i} < Θ**_i。在后面这种情况中，他们观察到 Θ*_i 的取值很接近 Θ_{M,i}，只比它小一点，而 Θ**_i 则要大得多。这说明，为了满足市场出清，大多数投资者将会持有 Θ*_i，而只有很少的投资者会重仓以 Θ**_i 的权重持有股票 i。从直觉上说这是合理的，因为通常来说大部分投资者仅集中持有少数几支股票，然后将剩余的资金购买指数（市场组合）。所以，这两点都和美股上的实际情况比较相符。
+
+OK！到这里，模型（Barberis, Jin, and Wang 2019 最重要的部分）就讲完了。总结一下：
+
+1. 模型利用了前景理论，狭隘框架，目标函数是最大化投资者效用，效用中既包含传统的 mean-variance tradeoff，又包括前景理论的效用，模型的决策变量是投资者在股票上的配置权重 Θ_i。
+
+2. 模型的参数涉及股票的收益率分布以及和前景理论相关的参数。股票收益率分布由关于均值、偏度、尖峰肥尾以及离散度的参数来决定；除了 μ 之外，其他参数来自实际股票收益率数据；前景理论的参数则来自相关文献中的参数。
+
+3. 核心参数 μ 需使得模型求解出的最优权重 Θ_i 满足市场出清。在“有限理性下非一致持仓”假设下，大部分股票只有一个全局最优解，满足 Θ_i = Θ_{M,i}；少部分股票两个全局最优解，满足 Θ*_i < Θ_{M,i} < Θ**_i。无论是那种情况，均能满足市场出清。
+
+04
+确定参数
+
+有了模型，接下来就是确定参数。一旦有了模型和参数，就可以在模型世界中做定量分析。前面反复提到模型中的参数分为两部分：和收益率分布相关的，和前景理论相关的。前者来自实际股票数据，后者来自行为金融学文献。关于参数校准，本节只会讨论和收益率分布相关的内容，且只会介绍最关键的内容。
+
+在模型世界中，股票收益率分布由 μ、S、ζ 和 ν 这些参数决定，其中除了 μ 是依据市场出清条件搜索得到，其他都来自实际的股票收益率数据。假设模型世界中有 1000 支股票，那么如何确定它们收益率分布的参数呢？能否从真实世界中抽取 1000 支股票，然后估计它们的参数再送入模型世界呢？答案是否定的。
+
+这是因为即便有了股票的收益分布，模型本身也无从得知股票在每个异象变量上的取值，所以在模型世界中我们根本不可能将股票分组、构建异象投资组合、然后计算模型世界中异象的收益率。因此，以上这种“不带任何先验”的参数估计对后续分析没有任何帮助。
+
+下面看正确的做法。
+
+由于研究的目标是基于前景理论的模型能否解释异象，因此对于任意待研究的异象（比如动量或者特质性波动率），首先使用异象变量将真实世界中的股票分成十组（portfolio sort），然后在每组中，统计这些股票的平均收益分布。同时，将模型世界中的 1000 支股票也分成十组（每组 100 支），然后将模型中的十组和真实世界中的根据异象变量取值高低分成的十组两两对应：比如异象变量的第一组对应模型世界中前 100 支股票，用第一组中平均收益分布参数作为模型中编号 1 到 100 这 100 支股票的参数；异象变量的第十组对应模型世界中最后 100 支股票，用第十组的平均收益分布参数作为模型中编号 901 到 1000 这 100 支股票的参数。
+
+上面这种做法确保了，模型世界中不同股票的收益分布参数符合真实世界中相对应的股票的收益分布参数。只有在这个基础上，在模型世界中计算每组的预期收益率，才和真实世界中异象的这十组的预期收益率可比。
+
+从上面的描述中也可以看出其中隐含的一个简化条件，就是在模型世界中的十组股票，每组内的 100 支的参数都是一样的，所以其实模型世界中只有 10 个不同的收益分布。那么有小伙伴自然会问：那还费什么劲考虑 1000 支股票？在模型世界中考虑 10 个股票不就够了？答案是并不够。
+
+由模型可知，最关键的参数 μ 是根据均衡状态下市场中股票的权重 Θ_{M,i} 决定的。在真实世界中每支股票的权重一般来说是很低的。因此，如果模型世界中只有 10 支股票（每支平均来说占 10%）显然不够合理。因此 Barberis, Jin, and Wang (2019) 在模型中考虑 1000 支股票，而非 10 支。不过由于他们假设每组中的 100 支股票参数都相同，因此实际求解时只需求解 10 个股票即可，这大大降低了计算量。
+
+以上就是关于模型参数的说明。
+
+05
+解释异象
+
+现在有了模型和参数，终于可以分析异象了。Barberis, Jin, and Wang (2019) 考虑了美股市场中最重要的 22 个异象（下表）
+
+对于每个异象，根据第四节的说明确定参数，然后根据第三节的说明求解模型，模型求解时同时搜索参数 μ 使得模型最优解Θ_i 满足市场出清条件。一旦有了参数 μ，利用下式计算模型世界中股票 i 的预期收益：
+
+由于在模型世界中将 1000 支股票分成十组且每组内股票收益分布相同，因此股票 i 的预期收益就等于它所在组的预期收益，对应着真实世界中按异象变量排序得到的相应组的预期收益率。为了检验前景理论能否解释上述异象，只需考虑异象的第 1 组和第 10 组（多、空两头）的实际预期收益率和模型给出的预期收益率是否一致：（1）多、空两头谁高谁低应该一致；（2）模型给出的多、空两头的预期收益率差异应该足够大。
+
+第一点要求模型预测的异象应该和实际观察到的异象收益率符号相同。比如真实世界中特质性波动率异象是低波动的收益率更高，但是如果模型世界中算出高波动的收益率更高，那显然模型就错了。第二点要求，除了收益率符号相同外，模型给出的多空两头预期收益率差异必须足够大，否则也不能认为它能解释异象。
+
+只有这两点同时满足，才说前景理论模型能够解释某个异象。如果模型世界中，多空两头的预期收益之差足够大，但方向却相反，则称前景理论模型无法解释某个异象；如果多空两头预期收益之差不显著，那么认为模型和异象无关。依照上述定义，前景理论模型对这 22 个异象的解释能力如下表所示。
+
+这是非常令人欣喜的结果。在市场中最著名的 22 个异象中，从前景理论出发推出的模型可以解释其中的 13 个（超过 50%）。除此之外，对于很多异象，该模型不仅能够解释异象的收益率（即多空两头预期收益率的差异），更能解释十个投资组合预期收益率的单调性，比如下面这些。
+
+在 Barberis, Jin, and Wang (2019) 一文的最后，三位作者从行为金融学以及收益率分布特征两个角度对该模型为什么能够解释某些变量、不能解释变量进行了分析和探讨。但因为写到这里，我实在写不动了，所以请感兴趣的小伙伴去找原文阅读。
+
+以上就是对该文的介绍。
+
+06
+结语
+
+照例总结一下。Barberis, Jin, and Wang (2019) 的核心贡献是从前景理论角度提出了一个投资者投资决策模型，并通过模型计算异象的预期收益率，从而和实际异象的预期收益率比较。最终结果表明，该模型能够解释 22 个最重要异象中的 13 个。这是一篇值得学习的经典。
+
+需要说明的是，Barberis, Jin, and Wang (2019) —— 最新的版本是 SSRN 上 2020 年五月的 —— 依然是一篇 working paper，最终会发表在哪里尚未可知，最终发表的版本也可能会发生变化。
+
+最后“吐槽”一下。我最初读完该文的感受是，技术性太强，里面涉及的东西太多：模型，均衡，参数，异象……很多内容需要前后对应才能搞清楚到底在说什么。作为读者，能够感受出三位作者在写这篇文章是已经尽可能做到逻辑上的连贯，但我认为这篇文章的某些行文细节上还是可以处理的更好。后来我在 youtube 上找到了一个 presentation，是该文作者之一 L. Jin 汇报的。当我满怀欣喜看完后，发现最重要的模型部分直接滑过去了，稍显遗憾……
+
+希望本文的介绍能够让你掌握 Barberis, Jin, and Wang (2019) 的来龙去脉，至少从大逻辑上。
+
+参考文献
+Barberis, N., A. Mukherjee, and B. Wang (2016). Prospect theory and stock returns: An empirical test. Review of Financial Studies 29(11), 3068 – 3107.
+
+Barberis, N., L. Jin, and B. Wang (2019). Prospect theory and stock market anomalies. Available at: https://ssrn.com/abstract=3477463.
+
+Tversky, A. and D. Kahneman (1992). Advances in prospect theory: cumulative representation of uncertainty. Journal of Risk and Uncertainty 5(4), 297 – 323.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44ae0>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366480>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925379cb0>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ade0>)
+--- 图6 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bb50>)
+--- 图8 ---
+Figure 1
+he prospect theory value function and probability weighting function
+The left panel plots the value function proposed by Tversky and Kahneman (1992) as part of their cumulative prospect theory, namely,  $ v(x)=x^{\alpha} $ for  $ x\geq0 $ and  $ v(x)=-\lambda(-x)^{\alpha} $ for  $ x<0 $, for  $ \alpha=0.5 $ and  $ \lambda=2.5 $. The right panel plots the probability weighting function they propose, namely,  $ w(P)=P^{\delta}/(P^{\delta}+(1-P)^{\delta})^{1/\delta} $, for three different values of  $ \delta $. The dashed line corresponds to  $ \delta=0.4 $, the solid line to  $ \delta=0.65 $, and the dotted line to  $ \delta=1 $.
+出处：Barberis, Mukherjee, and Wang (2016)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44b80>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图11 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图12 ---
+[表]
+说明 | 
+无风险资产的单期总回报（总回报是含本金的回报，因此如果在时刻 0 投资 1 块钱到无风险资产，则时刻 1 的回报为  $ R_f $，它是一个大于 1 的数） | 
+股票 i 的单期总回报，其均值为  $ \bar{R}_i $，不同股票总回报之间的协方差矩阵为  $ \Sigma = \{\sigma_{ij}\} $；令  $ \tilde{R} = [\tilde{R}_1, \cdots, \tilde{R}_N] $&#x27; | 
+决策变量，投资者在时刻 0 分配到股票 i 上的财富比例；令  $ \Theta = [\Theta_1, \cdots, \Theta_N] $&#x27; | 
+投资者在时刻 0 的财富 | 
+投资者在时刻 1 的财富（随机变量） | 
+股票 i 在时刻 1 的盈亏（随机变量） |
+
+--- 图16 ---
+$$ \begin{aligned}&\int_{-\infty}^{R_{f}-\Theta_{i,-1}g_{i}/\Theta_{i}}(\Theta_{i}(R_{f}-R_{i})-\Theta_{i,-1}g_{i})^{\alpha}dw(P(R_{i}\\&\int_{\mathrm{R}_{f}-\Theta_{i,-1}g_{i}/\Theta_{i}}^{\infty}(\Theta_{i}(R_{i}-R_{f})+\Theta_{i,-1}g_{i})^{\alpha}dw(1-P(R_{i}\end{aligned} $$
+--- 图17 ---
+$$ \begin{array}{r l}{=}&{\frac{2^{1-\frac{\nu+N}{2}}}{\Gamma(\frac{\nu}{2})(\pi\nu)^{\frac{N}{2}}|S|^{\frac{1}{2}}}\cdot\frac{K_{\frac{\nu+N}{2}}(\sqrt{(\nu+(R-\mu)^{\prime}S^{-1}(R-\mu))\zeta^{\prime}S^{-1}\zeta})\exp((R-\mu)^{\prime}S^{-1}\zeta)}{\left(\sqrt{(\nu+(R-\mu)^{\prime}S^{-1}(R-\mu))\zeta^{\prime}S^{-1}\zeta}\right)^{-\frac{\nu+N}{2}}(1+(R-\mu)^{\prime}S^{-1}(R-\mu)|\nu|^{\frac{\nu+1}{2}}}}\\ {}&{\mathrm{f o r}\;\zeta\neq0}\\ {=}&{\frac{\Gamma(\frac{\nu+N}{2})}{\Gamma(\frac{\nu}{2})(\pi\nu)^{\frac{N}{2}}|S|^{\frac{1}{2}}}.(1+(R-\mu)^{\prime}S^{-1}(R-\mu)/\nu)^{-\frac{\nu+N}{2}}\mathrm{,~f o r~}\zeta=0,}\end{array} $$
+are  $ \Gamma(\cdot) $ is the Gamma function and  $ K_{l} $ is the modified Bessel function of the second kind
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bc40>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366cf0>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2b9c0>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图24 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a446d0>)
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366ac0>)
+--- 图26 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44590>)
+--- 图27 ---
+[表]
+Anomaly | Abbreviation | 
+Idiosyncratic volatility | IVOL | 
+Market capitalization | SIZE | 
+Value | VAL | 
+Expected idiosyncratic skewness | EISKEW | 
+Momentum | MOM | 
+Failure probability | FPROB | 
+O-Score | OSC | 
+Net stock issuance | NSI | 
+Composite equity issuance | CEI | 
+Accrual | ACC | 
+Net operating assets | NOA | 
+Gross profitability | PROF | 
+Asset growth | AG | 
+Return on equity | ROE | 
+Investment | INV | 
+Maximum daily return | MAX | 
+Organizational capital | ORGCAP | 
+Long-term reversal | LTREV | 
+External finance | XFIN | 
+Short-term reversal | STREV | 
+Difference of opinion | DOP | 
+Post-earnings announcement drift | PEAD |
+出处：Barberis lin and Wang (2010)
+--- 图29 ---
+[表]
+模型能解释异象（13 个） | MOM, failure probability, IVOL, gross profitability, idiosyncratic skewness, ROE, MAX, O-Score, external finance, CEI, NSI, PEAD, DOP | 
+模型和实际相反（7 个） | size, value, long-term reversal, short-term reversal, accrual, asset growth, investment | 
+模型与异象无关（2 个） | net operating assets, organizational capital |
+出处：Barberis, Jin, and Wang (2019)
+--- 图30 ---
+Figure 5. The dashed line plots the historical annual alpha of each momentum anomaly decile. The solid line plots the alphas predicted by a model where investors evaluate risk according to prospect theory.
+出处：Barberis lin and Wang (2019)
+Figure 6. The dashed line plots the historical annual alpha of each failure probability anomaly decile. The solid line plots the alphas predicted by a model where investors evaluate risk according to prospect theory.
+--- 图31 ---
+Figure 7. The dashed line plots the historical annual alpha of each idiosyncratic volatility anomaly decile. The solid line plots the alphas predicted by a model where investors evaluate risk according to prospect theory.
+出处：Barberis Jin and Wang (2019)
+Figure 8. The dashed line plots the historical annual alpha of each gross pro-itability anomaly decile. The solid line plots the alphas predicted by a model when investors evaluate risk according to prospect theory.
+--- 图32 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ade0>)
+--- 图33 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925367060>)
+--- 图34 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图35 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b330>)
+--- 图36 ---

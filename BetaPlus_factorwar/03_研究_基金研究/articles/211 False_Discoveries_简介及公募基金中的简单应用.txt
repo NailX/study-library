@@ -1,0 +1,179 @@
+# False Discoveries 简介及公募基金中的简单应用
+
+来源：03_研究_基金研究
+链接：https://mp.weixin.qq.com/s/AR9Cz6UjQqHYIkw2m0UVjA
+
+基金经理获取良好业绩究竟是靠运气还是实力，一直以来都是学术界和投资界讨论的热点。很久以前写过一篇文章《假设不存在alpha前提下，哪些基金能获取真正alpha？》，提到了用bootstrap方法，剥离基金获取的alpha以排除运气成分，以真正检验基金是否真的有获取alpha的能力。最近看到《因子动物园》分享了几篇介绍False Discoveries Rate的文章以及学术界关于该方法实用性的激烈讨论，感兴趣的朋友可以参考《【069】FDR 保卫战》一文，今天重点要讨论的是如何用FDR发现基金超额收益和择时能力中的运气成分，以及在中国公募基金市场的简单尝试。False Discoveries Rate翻译为伪发现率，是统计学中的一个概念，即错误拒绝原假设（原假设为真）的个数占所有被拒绝的原假设个数的比例的期望值。具体运用到基金绩效分析中，就是当我们通常假设H0：基金超额收益为0，且基金超额收益确实为0的情况下，我们拒绝了H0而误以为基金超额收益不为0。
+一、FDR方法简介BARRAS、SCAILLET、WERMERS三人于2010年发表的文章《False Discoveries in Mutual Fund Performance Measuring Luck in Estimated Alphas》将这一概念运用到基金超额收益alpha的研究中。首先他们讲基金分为三大类：
+他们认为扣除管理费、交易费等各项成本后，大多数基金的超额收益alpha为0，超额收益alpha大于0且显著的基金中有部分是由于好运气（lucky）而非实力强（skilled），而超额收益alpha小于0且显著的基金中有部分是由于坏运气（unlucky）而非实力差（unskilled）。上图中，Panel B是全部样本基金通过FF4因子回后归截距项的t值分布（认为t值比单纯回归系数有更好的统计特性），Panel A是根据alpha大小将全部样本基分为三类且比例分别为23%（unskilled fund）、75%（zero-alpha fund）、2%（skilled fund）。注意这里三类基金的比例是作者人为设定的。通过上图可以看到，部分原本属于zero-alpha的基金因为运气好获得了较大的正t值而被认为skilled，同理部分原本属于zero-alpha的基金因为运气差获得了较大的负t值而被认为unskilled。进一步说明，可以看下图全部样本基金的p值分布。通常p值越小，错误拒绝原假设（这里H0是基金没有超额收益）的概率越低，基金的超额收益（正或者负）越显著，通常会给定一个显著水平比如0.1。但是p值小于0.1的基金中（skilled or unskilled fund），存在误分类的基金，他们原本可能属于zero-alpha fund一类。
+
+所以问题的关键是要找到到底有多少基金是zero-alpha fund？作者给出了如下公式：
+式中λ_*是一个选定的阈值，通常会选取p值分布图中趋于平坦的那个点，比如上图中0.5附近，理由是zero-alpha fund 的 p值是均匀分布的（作者给出了推导过程，有兴趣的读者可以看原文），W（λ_*）/M即样本基金中p值大于λ_*的基金占比。
+其次，从超额收益显著为正或负的基金E（S_Γ+）或E（S_Γ-）中减去zero-alpha fund占比（假设超额收益截面正态分布两边对称，如图1，因此各减去π_0*Γ/2），得到真正的skilled（unskilled） fund占比。这里E（S+）是FF4回归截距项显著为正的基金占比，Γ是给定的显著性水平，通常为0.05、0.1、0.2。
+
+最后得到上式中的E(T_Γ+)、 E(T_Γ-)即为真正有正、负超额alpha的基金占比，从而得到FDR的计算公式如下：
+
+二、基金选股、择时模型基金的选股、择时模型，使用了FF5因子模型和TM模型的结合，如下：
+
+各因子含义不再赘述，其中a为截距项即基金超额收益，平方项系数ξ即为对应的市场或风格择时能力。
+计算π_0（zero-alpha fund）需要用到基金对应系数的p值，考虑到基金收益率分布未必满足正态分布以及基金收益率的截面相关性（由于羊群效应herding），这里采用了Chen 、Liang,在《Do market timing hedge funds time the market》中使用的bootstrap方法计算a或择时系数对应的p值：
+1、对于样本内每只基金，做上述FF5+TM回归模型，得到对应系数的原始t值记为t_0；
+2、步骤1中得到模型的残差序列采用带放回（with replacement）的重抽样，抽取跟原始序列一样长度的残差序列；
+3、假设基金没有alpha（alpha=0）或市场风格择时能力（对应平方项系数设置为0），使用步骤1得到的系数、因子收益率以及重抽样残差序列，计算模拟的基金收益率序列。比如假设基金的市场择时能力为0（不存在正择时能力也不存在反向择时能力），则根据下式计算模拟的基金收益率序列，注意这里残差序列式重抽样后的序列：
+
+然后再次根据原始模型重新回归，并得到系数对应的新的t值记为t_b
+4、上述1~3步骤重复1000次，得到1000个t_b。然后根据下式计算基金的p值，其中B为重复次数，这里取1000。
+
+对所有样本内的基金均采用上述方法计算p值，然后计算π_0，最后可根据设定的显著水平（Γ=0.05、0.1、0.2），计算真正skilled或unskilled的基金占比。
+
+三、数据说明为尽可能避免基金合同对投资风格的影响，我这里选取了基准为沪深300、中证500、中证800或MSCI中国A股的偏股基金，即全市场投资基金，并剔除了量化投资基金以及可以投港股的基金，最后保留了884只主动偏股基金
+因子收益率采用了中南财经大学提供的FF5因子收益率数据，其累积收益率长这样：
+
+详见：http://sf.cufe.edu.cn/info/1198/10271.htm
+
+为了考察不同年份中具有真实能力的基金占比，本文采用日频数据计算2016~2020年（2020截至9月份）间，不同年份样本基金的超额alpha、市场择时、市值择时、估值择时对应的E(T_Γ+)、 E(T_Γ-)。
+参数方面，λ_*根据p值分布选取，Γ取0.05、0.1、0.2。
+
+四、结果展示先来看看基金的超额收益alpha。从bootstrap后的p值分布情况来看：2016、2018、2020年p值呈下降阶梯分布，左侧p值较小的基金中存在一些skilled/unskilled基金。而2017、2019年p值分布比较均衡，可能意味着这两年没有特别突出的skilled/unskilled基金（全靠市场给饭吃？）
+下表展示了基于bootstrap后p值计算的具有显著正负超额alpha 基金占比、zero-alpha fund占比（π_0）以及排除幸运/不幸后的真实具有显著正负超额alpha基金占比 （skilled/unskilled）。
+可以看到，2016、2018等熊市中，unskilled基金占比较高而skilled基金占比较低。2017、2019年几乎没有unskilled基金，但意外的是skilled基金占比也很低。2020年以来，调整后的skilled基金占比较高，似乎说明相对2017、2019年，2020年基金的主动超额更显著？？
+
+再来看看基金的市场择时能力（Rm-Rf），同样从bootstrap后的p值分布情况来看：2017、2018年相对比较均衡一些，没有特别突出的市场择时能力强或弱的选手；2016、2019、2020年分布阶梯状更明显，左侧p值较小的基金中存在一些市场择时能力强或弱的skilled/unskilled基金。可能原因是17、18年都属于单边市场，相对来说择时较难获得超额收益。上面提到根据p值分布图可知2016、2019、2020存在一些市场择时能力强或弱的skilled/unskilled基金，但2020年负市场择时基金占比高，2016、2019年正市场择时基金占比高。2017、2018年存在部分正市场择时基金但占比不多。
+
+下面再来看看基金的大小盘择时能力（smb），从bootstrap后的p值分布情况来看：2016、2018年分布相对均衡一些；2017、2019、2020年分布阶梯状更明显，左侧p值较小的基金中存在一些大小盘择时能力强或弱的skilled/unskilled基金，至于哪种skill还得具体分析。
+下表展示了基于bootstrap后p值计算的具有显著正负smb择时能力的基金占比、zero-smb-timing fund占比（π_0）以及排除幸运/不幸后的真实具有显著正负smb择时能力的基金占比 （skilled/unskilled）。如前所述，2017、2019、2020年存在较高比例的正向smb择时能力基金，且2020、2019年占比更多。2016、2018年存在较少比例的正向smb择时能力基金，而且整体上大盘择时能力显著的基金不多（2020年有很低的比例）。
+
+当然还可以检验具有hml、rmw择时能力的基金占比，这里不再赘述。整体感觉使用FDR方法调整后真正有显著alpha的基金占比大幅降低，这可能和alpha均值有关、也和回归的残差波动率分布有关，具体可以参考Andrikogiannopoulou、Papakonstantinou合作的《ReassessingFalseDiscoveriesIn MutualFundPerformance》，里面提出了该方法存在的一些问题。对于择时能力的刻画，如market-timing，smb-timing，结论还比较符合常识。
+总之，关于基金某种能力是源自实力还是运气是基金研究领域经久不衰的话题，以后有看到好的paper再和大家分享。        
+五、参考文献1、LAURENT BARRAS, OLIVIER SCAILLET and RUSS WERMERS：《False Discoveries in Mutual Fund Performance Measuring Luck in Estimated Alphas》2、Yong Chen and Bing Liang：《Do Market Timing Hedge Funds Time theMarket?》
+3、Li Yi  and  Lei He：《False discoveries in style timing of Chinese mutual funds》4、因子动物园：《FDR保卫战》
+5、王燕鸣、王宜峰：《开放式基金超额收益,运气还是能力——基于残差自助法的应用分析》
+
+【图片文字】
+--- 图1 ---
+Unskilled funds: funds that have managers with stock-picking skills in sufficient to recover their trading costs and expenses, creating an “alpha shortfall” ( $ \alpha < 0 $),
+Zero-alpha funds: funds that have managers with stock-picking skills sufficient to just recover trading costs and expenses ( $ \alpha = 0 $), and Skilled funds: funds that have managers with stock-picking skills sufficient to provide an “alpha surplus,” beyond simply recovering trading costs.
+--- 图2 ---
+Panel A: Individual fund t-statistic distribution
+--- 图3 ---
+
+--- 图5 ---
+As mentioned in Barras et al. (2010), an intuition of the FDR method is to use information from the center of the cross-sectional distribution $ ^{8} $ of volatility timing to correct for misclassification in both tails. The first stage of the FDR method is to determine the proportion of non-timing funds in the population,  $ \pi_{0} $, to measure misclassification. The simplest way to estimate  $ \pi_{0} $ is to choose a value of  $ \lambda $ for which the histogram of p-values becomes flat, because non-timing funds satisfy the null hypothesis ( $ \delta_{i}=0 $) and have uniformly distributed p-values, while the p-values of procyclical and countercyclical volatility timing funds are very small. Thus, is estimated as
+--- 图6 ---
+$$ \begin{array}{c}{{\mathrm{\boldmath~J~}=E(S_{\gamma}^{+})-E(F_{\gamma}^{+})=E(S_{\gamma}^{+})-\pi_{0}\cdot\gamma}}\\ {{\mathrm{\boldmath~J~}=E(S_{\gamma}^{-})-E(F_{\gamma}^{-})=E(S_{\gamma}^{-})-\pi_{0}\cdot\gamma.}}\end{array} $$
+--- 图7 ---
+$$ \mathbf{D}\mathbf{R}_{\gamma}^{+}=\frac{E\left(\mathbf{F}_{\gamma}^{+}\right)}{E\left(\mathbf{S}_{\gamma}^{+}\right)}=\frac{\pi_{0}\times\gamma/2}{E\left(\mathbf{S}_{\gamma}^{+}\right)} $$
+九号
+--- 图8 ---
+$ R_i = a + \beta_1 * Rm + \beta_2 * Rsmb + \beta_3 * Rhm1 + \beta_4 * Rumd + \beta_5 * Rrmw + \beta_6 * Rcm2 + \xi_1 * Rm^2 + \xi_2 * Rsmb^2 + \xi_3 * Rhm1^2 + \xi_4 * Rund^2 + \xi_5 * Rrmw^2 + \xi_6 * Rcm2 $
+--- 图9 ---
+i = a + β₁*Rm + β₂*Rsmb + β₃*Rhm1 + β₄*Rum + β₅*Rrmw + β₆*Rcma +
+-ξ₄*Rm^2 + ξ₂*Rsmb^2 + ξ₃*Rhm1^2 + ξ₄*Rum^2 + ξ₅*Rrmw^2 + ξ₆*Rcma^2
+--- 图10 ---
+$$ \mathrm{e}_{\mathrm{i}}=2\times\min\left[\sum_{b=1}^{\mathrm{B}}I\left(t_{\mathrm{i}}^{b}>t_{\mathrm{i}}\right)/B,\sum_{b=1}^{B}I\left(t_{\mathrm{i}}^{b}<t_{\mathrm{i}}\right)/B\right] $$
+--- 图11 ---
+$$ \begin{array}{c}{{\mathrm{\boldmath~J~}=E(S_{\gamma}^{+})-E(F_{\gamma}^{+})=E(S_{\gamma}^{+})-\pi_{0}\cdot\gamma}}\\ {{\mathrm{\boldmath~J~}=E(S_{\gamma}^{-})-E(F_{\gamma}^{-})=E(S_{\gamma}^{-})-\pi_{0}\cdot\gamma.}}\end{array} $$
+--- 图12 ---
+
+--- 图14 ---
+2016年
+2017年
+--- 图15 ---
+[表]
+ | Positive tail | Negative tail | 
+Sig. level | 0.05 | 0.1 | 0.2 | 0.05 | 0.1 | 0.2 | 
+Significant | 0.0217 | 0.0524 | 0.0814 | 0.0759 | 0.1085 | 0.1664 | 
+lucky | 0.0193 | 0.0385 | 0.0770 | 0.0193 | 0.0385 | 0.0770 | 
+skilled | 0.0024 | 0.0139 | 0.0043 | 0.0567 | 0.0700 | 0.0893 | 
+Significant | 0.0282 | 0.0549 | 0.1034 | 0.0063 | 0.0078 | 0.0345 | 
+lucky | 0.0238 | 0.0476 | 0.0953 | 0.0238 | 0.0476 | 0.0953 | 
+skilled | 0.0044 | 0.0072 | 0.0082 | -0.0176 | -0.0398 | -0.0608 | 
+Significant | 0.0167 | 0.0460 | 0.0739 | 0.0307 | 0.0586 | 0.1004 | 
+lucky | 0.0209 | 0.0417 | 0.0834 | 0.0209 | 0.0417 | 0.0834 | 
+skilled | -0.0041 | 0.0043 | -0.0095 | 0.0098 | 0.0169 | 0.0170 | 
+Significant | 0.0299 | 0.0524 | 0.0873 | 0.0000 | 0.0025 | 0.0062 | 
+lucky | 0.0243 | 0.0486 | 0.0973 | 0.0243 | 0.0486 | 0.0973 | 
+skilled | 0.0056 | 0.0037 | -0.0100 | -0.0243 | -0.0461 | -0.0910 | 
+Significant | 0.0805 | 0.1342 | 0.2205 | 0.0000 | 0.0000 | 0.0047 | 
+009 | lucky | 0.0177 | 0.0355 | 0.0177 | 0.0355 | 0.0709 | 
+ | skilled | 0.0628 | 0.0987 | 0.1496 | -0.0177 | -0.0355 |
+[表]
+Sig. level | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unskilled |
+--- 图16 ---
+$ ^{*} $注：
+--- 图17 ---
+[表]
+ |  | Positive tail | Negative tail | 
+ | Sig. level | 0.05 | 0.1 | 0.2 | 0.05 | 0.1 | 0.2 | 
+ | Significant | 0.1031 | 0.1320 | 0.1790 | 0.0597 | 0.0741 | 0.1085 | 
+ | lucky | 0.0153 | 0.0306 | 0.0611 | 0.0153 | 0.0306 | 0.0611 | 
+ | skilled | 0.0878 | 0.1014 | 0.1179 | 0.0444 | 0.0436 | 0.0474 | 
+ | Significant | 0.0502 | 0.0799 | 0.1317 | 0.0376 | 0.0502 | 0.0658 | 
+ | lucky | 0.0209 | 0.0418 | 0.0837 | 0.0209 | 0.0418 | 0.0837 | 
+ | skilled | 0.0292 | 0.0381 | 0.0480 | 0.0167 | 0.0083 | -0.0179 | 
+ | Significant | 0.0488 | 0.0781 | 0.1437 | 0.0028 | 0.0084 | 0.0195 | 
+ | lucky | 0.0228 | 0.0456 | 0.0912 | 0.0228 | 0.0456 | 0.0912 | 
+ | skilled | 0.0260 | 0.0325 | 0.0524 | -0.0200 | -0.0372 | -0.0717 | 
+ | Significant | 0.1708 | 0.2319 | 0.3105 | 0.0062 | 0.0162 | 0.0349 | 
+9 | lucky | 0.0137 | 0.0273 | 0.0546 | 0.0137 | 0.0273 | 0.0546 | 
+ | skilled | 0.1572 | 0.2046 | 0.2559 | -0.0074 | -0.0111 | -0.0197 | 
+ | Significant | 0.0303 | 0.0502 | 0.0875 | 0.0782 | 0.1085 | 0.1645 | 
+009 | lucky | 0.0158 | 0.0315 | 0.0630 | 0.0158 | 0.0315 | 0.0630 | 
+ | skilled | 0.0146 | 0.0187 | 0.0245 | 0.0624 | 0.0770 | 0.1015 |
+[表]
+Sig. level | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unskilled |
+--- 图18 ---
+
+--- 图19 ---
+[表]
+ | Positive tail | Negative tail | 
+Sig. level | 0.05 | 0.1 | 0.2 | 0.05 | 0.1 | 0.2 |  | 
+Significant | 0.0579 | 0.0868 | 0.1429 | 0.0145 | 0.0289 | 0.0542 |  | 
+lucky | 0.0184 | 0.0369 | 0.0738 | 0.0184 | 0.0369 | 0.0738 |  | 
+skilled | 0.0394 | 0.0499 | 0.0691 | -0.0040 | -0.0080 | -0.0195 |  | 
+Significant | 0.0940 | 0.1583 | 0.2382 | 0.0204 | 0.0235 | 0.0313 |  | 
+lucky | 0.0146 | 0.0292 | 0.0583 | 0.0146 | 0.0292 | 0.0583 |  | 
+skilled | 0.0795 | 0.1292 | 0.1799 | 0.0058 | -0.0056 | -0.0270 |  | 
+Significant | 0.0572 | 0.0893 | 0.1562 | 0.0014 | 0.0042 | 0.0126 |  | 
+lucky | 0.0198 | 0.0396 | 0.0792 | 0.0198 | 0.0396 | 0.0792 |  | 
+skilled | 0.0374 | 0.0497 | 0.0770 | -0.0184 | -0.0354 | -0.0667 |  | 
+Significant | 0.1534 | 0.2282 | 0.3055 | 0.0087 | 0.0200 | 0.0362 |  | 
+lucky | 0.0163 | 0.0327 | 0.0653 | 0.0163 | 0.0327 | 0.0653 |  | 
+skilled | 0.1370 | 0.1955 | 0.2401 | -0.0076 | -0.0127 | -0.0292 |  | 
+Significant | 0.1534 | 0.2282 | 0.3055 | 0.0350 | 0.0548 | 0.0922 |  | 
+09 | lucky | 0.0163 | 0.0327 | 0.0653 | 0.0199 | 0.0796 |  |
+[表]
+Sig. level | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky | 
+unskilled | 
+Significant | 
+unlucky |

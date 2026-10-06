@@ -1,0 +1,89 @@
+# \alpha \text{ or } \beta: 投资者眼中的基金业绩
+
+来源：03_研究_基金研究
+链接：https://mp.weixin.qq.com/s/0TK91t4Lk3bKg7pXZqcYrA
+
+I tried telling a hedge fund manager, “You don’t have alpha. Your returns can be replicated with a value-growth, momentum, currency and term carry, and short-vol strategy.” He said, “‘Exotic beta’ is my alpha. I understand those systematic factors and know how to trade them. My clients don’t.” He has a point.——Cochrane (2011)资产管理行业日益扩张，尤其是权益类投资，因此，投资者如何评估基金业绩并决定其投资选择，便成为了很重要的问题。这既包括共同基金/公募基金，也包括对冲基金/私募基金。这既同在业界从事资产管理的基金经理有关，也是园长自己学术研究的一个重要领域。理论上，由于基金收益与基金经理技能（alpha）和承担风险获得的因子溢价（factor-related return, FRR）有关，因此，理论上，一个理性的投资者会区分这两种收益来源，只追逐 alpha 而不对因子收益做出反应。但投资者是否真的如此呢？
+1. 共同基金投资者 2016 年，两组基金研究大佬分别在顶刊 JFE 和 RFS 就基金投资者使用何种模型评估基金业绩这一问题发表文章（传言由于主题太过相近，还有过撕逼，也是一个有意思的插曲）。令人略感惊讶的是，虽然采用了不同的方法，Berk and van Binsbergen (2016, BvB) 和 Barber, Huang and Odean (2016, BHO) 却达成了反直觉的共识：共同基金投资者主要依赖于简单的 CAPM 模型。由于投资者的偏好没法直接观测，两篇文章都基于基金资金流（fund flows）来进行实证检验，因为资金流可以很好地表征投资者的偏好。特别地， 月的净资金流可以根据下式进行估计：其中， 和  分别为基金 在 月末的净资产和 月的收益。首先来看 BHO (2016)。作者们构建了一种模型**配对比较（pairwise comparison）**方法。以 CAPM 和 FF3 模型为例进行说明。首先在每个月末，分别按照 CAPM-alpha 和 FF3-alpha 对基金排序，将基金分为 10 组，其中，组合 1 包含 alpha 最小的基金，而组合 10 包含 alpha 最大的基金。然后进行如下回归：其中， 是基金 在 月的净资金流， 是一个虚拟变量，当基金 按照 CAPM-alpha 属于第 个组合而按照 FF3-alpha 属于第 个组合时取 1，否则为 0。为了保证模型可估计，剔除掉 的情况。 为控制变量，包含滞后的基金资金流等，而 用于控制时间固定效应。检验的核心是回归系数 ，其中，。估计结果可以表示为如下图 1 所示的矩阵。黑色的方框是去掉的 的情况。对角线上的灰色方框也有 ，也不在考虑范围内。检验的核心是比较左下方的系数同右上方的系数的差异。例如，比较 和 ，若前者大于后者，则表明对于极端组合，CAPM 比 FF3 能更好地解释投资者的行为。图 1: 模型配对比较示意图. 数据来源：BHO (2016).因此，通过比较左下方的系数与右上方系数的差异和，可以检验两个候选模型中哪一个更贴近投资者的真实选择。BHO (2016) 考察了 6 个模型，包括：市场调整（market-adjusted return, MAR）；CAPM；FF3；Carhart 四因子：在 FF3 基础上加入动量；七因子模型：四因子加上 3 个行业因子；九因子模型：七因子加上盈利和投资。表 1 展示了部分结果。Panel A 展示了核心结果，即 CAPM 完胜其他候选模型。Panel B 则进一步表明，最简单的 MAR 优于各种复杂的模型。而此处未展示的其他 Panels 则显示，简单的模型总是优于更复杂的模型。表 1: 模型配对比较检验结果. 数据来源：BH0 (2016).BvB (2016) 则从检验资产定价模型的角度更加正式地定义了基于资金流的显示性偏好方法（revealed references）。他们首先推导出基金资金流与投资者对 alpha 的预期有相同的符号的均衡结果，进而指出，对于两个模型 和 ，进行下述回归：其中， 为基金 在 期的资金流，而 为基金 在 期相对于模型 的 alpha，而 表示 的符号。此时，回归系数 等价于模型 优于 模型 。在实证检验中，除了多因子模型，BvB 还考察了一些宏观资产定价模型，例如，long-run risk model 和 habit model。他们也考察了不同周期下的表现。总体而言，CAPM 毫无悬念地胜出。除了在 24 个月的期限下屈居第二，CAPM 在其他所有期限下都是表现最好的。表 2: 模型比较结果. 数据来源：BvB (2016).但需要注意的是，虽然得到了相同的实证结果，但 BHO 和 BvB 对结果的阐释却是截然不同的。BvB 是从检验资产定价模型的角度出发的，因而他们认为这一结果表明 CAPM 是最好的模型。反之，BHO 认为这表明基金投资者可能并不是足够专业的，他们不能很好地区分基金的真实技能（alpha）和承担风险获得的因子收益。除此之外，还有一些细节上的差异也可能影响结果。例如，BHO 在进行分析时，被解释变量为 月的基金净资金流，但解释变量并非像大多数同类研究那样采用 月的 alpha，而是考虑了 alpha 的衰减，采用过去 18 个月 alpha 的指数衰减移动平均。当然，不同处理都得到了相同的结果，这在某种意义上也表明了结果的稳健性。
+2. 因子收益的影响 Song (2020) 则进一步检验了投资者是否对因子收益做出了过度反应及其影响。参照 BHO，Song (2020) 利用七因子模型来估计基金 alpha 和因子收益，其中，因子收益定义为过去 12 个月除市场因子以外的因子的收益和。在此基础上，Song (2020) 在每年 3 月末，首先根据基金的七因子 alpha 将全部基金分为 5 组，然后在每一组内，再按照因子收益进一步分为 3 组。其中，选择在 3 月末进行分组是为了规避已有研究发现的股票型、债券型和货币市场基金之间总体资金流的季节性。而采用其他时间节点进行划分，结果大体上也是类似的。表 3 展示了相关结果。行代表不同 alpha 分组。3 个 tercile 分组代表不同因子收益分组。 和 分别代表期初和期末，组内基金的平均管理规模（百万美元）。 为组合内基金的平均因子收益，结果表明因子收益的差异是非常显著的。而 为基金相对于 CAPM 模型的平均 alpha，显然，其中有相当部分其实是因子收益。不同组合的 同样有着显著的差异。最为重要的变量自然是 ，即基金的平均百分比净资金流。显然，给定基金 alpha，因子收益越高，当期吸引的资金流也显著更高。这表明投资者的确对因子收益做出了显著的反应。表 3: 基金 alpha 和因子收益分组统计. 数据来源：Song (2020).Song (2020) 的一个主要猜想是，因子收益事实上是不可持续的，因此，当基金因为较高的因子收益从而吸收了过多的净资金流入后，基金规模将超过最优规模，从而导致基金获得负的 alpha，而非 Berk and Green (2004) 的经典文章所含意的零 alpha。换言之，给定基金 alpha，因子收益高的基金，其未来收益，尤其是 alpha，将显著更低。表 4 展示了相关结果。行仍然代表 alpha。Panel A 显示低因子收益组合未来一年的收益显著更高，Panel B 也展示了四因子 alpha，其中，除低 alpha 组以外，其余组中差异都是显著的。Panel C 则说明七因子 alpha 也呈现类似的结果。表 4: 基金 alpha 和因子收益分组组合分析. 数据来源：Song (2020).由于基金 alpha 和因子收益都同基金资金流、从而同基金规模有关，上述推论也意味着给定基金规模，因子收益高的基金，同样有显著更低的未来收益。实证检验结果也的确如此，此处不再赘述。
+3. 对冲基金有何不同？ 前述讨论表明，共同基金投资者会对基金 alpha 和因子收益都做出显著的反应。但对于对冲基金，结果是否会不一样呢？支持对冲基金投资者的反应可能会有所不同的理由主要是相比共同基金投资者，对冲基金投资者往往要更加专业，因而他们会明白常见因子溢价可以通过便宜的指数基金来获取，因而，他们对因子收益的反应应该会更弱。Agarwal, Green and Ren (2018, AGR) 对此进行了检验。基于关于解释对冲基金收益的已有研究，除了常见的简约因子模型，他们还将专门用于解释对冲基金收益的 FH7 七因子模型和一个扩展的 12 因子模型纳入了备选。他们同时利用了 BvB 和 BHO 的方法进行实证检验。结果却再次令人惊讶：对于对冲基金投资者，CAPM 模型看起来仍然是最为贴切的，没有一个复杂模型可与之相比。那么，问题出在哪里呢？为了理解问题所在，就要回到本文开头所引用的 John Cochrane 在 2011 年 AFA 年会发表的 presidential address 中的讨论。相比于更加便宜的共同基金等投资工具，对冲基金的核心价值在于不仅仅可以提供 alpha，还可以提供一些奇异 beta（exotic beta）。这些奇异 beta 可以提供在大多数情况下稳健的收益率（卖看跌期权）、捕捉大级别趋势并在危机时期提供保护（趋势交易，CTA）。对冲基金经理往往有技能去获取这些奇异 beta 暴露，但他们的投资者却缺乏相关的技能。因此，对于对冲基金投资者，它们就意味着 alpha，从而投资者愿意为此付费。上述分析的一个自然推论便是对冲基金投资者对这些奇异 beta 的反应要比那些经典因子更加强烈。AGR 为此利用回归方法，将对冲基金在过去一段时间的收益分解为 alpha、传统因子收益和奇异因子收益三个部分。基于收益进行分析有两个原因。首先，不同因子的风险暴露并不直接可比。其次，投资者真正关注的是预期收益而非因子暴露，因此，只有从收益角度来研究 flow-performance relationship，才能真正揭示投资者的反应。AGR 为每一模型分别定义了传统因子和奇异因子集合，然后估计了不同模型下基金资金流对不同收益部分的反应。在此基础上，他们检验了，资金流对传统因子收益的反应是否显著小于对奇异因子的反应。表 5 展示了相关结果。结果显示，投资者对传统因子的反应的确比对奇异因子要弱一些，虽然在 Carhart 四因子和 AN 模型中不显著。这一结果表明，虽然跟共同基金一样，CAPM 模型可以最好地刻画对冲基金投资者的偏好。但有所不同的是，对冲基金投资者更加看重对冲基金所特有的因子敞口，并对此回报以更高的资金流。表 5: 基金资金流对传统与奇异因子收益的反应差异. 数据来源：AGR (2018).
+4. CAPM 就是定论吗？ 虽然两组大佬的实证研究都认同 CAPM 能最好地刻画基金投资者的偏好。但这并不代表学术研究已就此达成了一致。分歧主要体现在两个方面。首先，不少研究认为 CAPM 仍然过于复杂。表现最好的是 Morningstar rating（晨星星级评定）。Morningstar rating 根据基金风险调整后的业绩对基金进行排序，然后将基金分为 5 类。一系列研究指出，相比包括 CAPM 在内的各种因子模型，投资者实际上主要依赖 Morningstar rating。而 Huang, Li and Weng (2020) 更是为星级评定的最优性提供了理论基础，其逻辑在于离散的星级评价结果可以代表基金的声誉。其次，另一些研究同 BHO 类似，认为 CAPM 过于简单。典型代表是 Jegadeesh and Mangipudi (2021, JM)。他们指出，BvB 和 BHO 的分析都有一些问题。BvB 认为 CAPM 是最好的模型的结论依赖于一个重要的假设，即投资者知道真实的定价模型，但这一假设事实上并不成立。BHO 认为越专业的投资者会使用越复杂的模型，因而在他们的分析中，BHO 支持七因子模型是最好的。JM 指出，七因子模型中的三个行业因子有较大的估计误差，会影响其应用。因而，JM 指出，Carhart 四因子模型才是最优的。
+5. 结语 投资者如何评估基金业绩并决定其配置，无论从学术还是业界角度，都具有巨大的意义。从学术角度，这有利于理解投资者行为和市场效率。从业界角度，可以帮助基金投资者更好地分析和筛选基金。当然，换个角度，也许不利的一面是，这也可以帮助部分基金去进行包装，从而在短期更好地迎合投资者，从而吸引到更多的资金流入，扩大管理规模。但这必然是短期的。已有研究普遍认为投资者倾向于采用 CAPM 乃至 Morningstar rating 这样较为简单的模型和方法来评估基金业绩。这也意味着投资者会对因子收益（factor-related return）做出过度反应。Song (2020) 则指出，这一反应模式会导致这些基金未来的业绩显著更差。而 AGR 进一步指出，CAPM 不仅能最好地刻画共同基金投资者的行为，对于对冲基金投资者，也是一样的。当然，由于产品性质的不同，对冲基金投资者会更加关注对冲基金所特有的奇异 beta。但正如其他研究所指出的，CAPM 并非定论。而投资者对于 alpha 和因子收益的反应，其实也非常模糊。相关研究仍有待更加深入的挖掘。毕竟，正如 Cochrane 所论及的：Most active management and performance evaluation today just is not well described by the alpha–beta, information-systematic, selection-style split anymore. There is no “alpha.” There is just beta you understand and beta you do not understand, and beta you are positioned to buy versus beta you are already exposed to and should sell.全文完。祝您阅读愉快！免责声明：文中图表均来自相关文章、期刊，或互联网数据，版权归原作者和期刊所有，也不代表本公众号的意见。References:Barber, Brad M., Xing Huang, and Terrance Odean. "Which factors matter to investors? Evidence from mutual fund flows." Review of Financial Studies 29.10 (2016): 2600-2642.Berk, Jonathan B., and Jules H. Van Binsbergen. "Assessing asset pricing models using revealed preference." Journal of Financial Economics 119.1 (2016): 1-23.Cochrane, John H. "Presidential address: Discount rates." Journal of Finance 66.4 (2011): 1047-1108.Huang, Chong, Fei Li, and Xi Weng. "Star ratings and the incentives of mutual funds." Journal of Finance 75.3 (2020): 1715-1765.Jegadeesh, Narasimhan, and Chandra Sekhar Mangipudi. "What do fund flows reveal about asset pricing models and investor sophistication?." Review of Financial Studies 34.1 (2021): 108-148.Song, Yang. "The mismatch between mutual fund scale and skill." Journal of Finance 75.5 (2020): 2555-2589.
+
+【图片文字】
+--- 图1 ---
+
+--- 图2 ---
+A. CAPM victories
+[表]
+ | Winning model | CAPM | CAPM | CAPM | CAPM | CAPM | 
+ | Losing model | MAR | 3-factor | 4-factor | 7-factor | 9-factor | 
+Sum of coefficient differences | $ t-stat $ | $ 7.41^{***} $ | $ 22.94^{***} $ | $ 27.50^{***} $ | $ 28.52^{***} $ | $ 33.03^{***} $ | 
+ | t-stat | (3.46) | (10.55) | (13.29) | (14.68) | (17.56) | 
+% of coefficient differences > 0 | 77.78 | 100.00 | 100.00 | 100.00 | 100.00 | 100.00 | 
+Binomial p-value | <0.01 | <0.01 | <0.01 | <0.01 | <0.01 | <0.01 |
+B. Market-adjusted return (MAR) victories
+[表]
+ | Winning model | MAR | MAR | MAR | MAR | 
+ | Losing model | 3-factor | 4-factor | 7-factor | 9-factor | 
+Sum of coefficient differences | t-stat | $ 15.93^{{***}} $ | $ 20.41^{{***}} $ | $ 25.11^{{***}} $ | $ 28.89^{{***}} $ | 
+ |  | (7.39) | (9.28) | (13.37) | (15.08) | 
+% of coefficient differences > 0 | Binomial p-value | 100.00 | <0.01 $ ^{{***}} $ | <0.01 $ ^{{***}} $ | <0.01 $ ^{{***}} $ |
+--- 图3 ---
+[表]
+ | Horizon (months) | 
+ | 6 | 12 | 24 | 36 | 48 | 
+CAPM | CAPM | CAPM | LRR 0 | CAPM | CAPM | 
+FFC | FFC | FFC | CAPM | FF | FF | 
+FF | FF | FF | FF | LRR 0 | FFC | 
+CAPM SP500 | CAPM SP500 | CAPM SP500 | FFC | FFC | LRR 0 | 
+Excess market | Excess market | Excess market | Excess market | Excess market | Excess market | 
+Return | Return | LRR 0 | CAPM SP500 | CAPM SP500 | Excess | 
+C-CAPM | Excess return | LRR 70 | Excess return | Excess return | Return | 
+Excess return | LRR 0 | LRR 90 | Excess return | Return | C-CAL | 
+Habit | C-CAPM | Return | C-CAPM | Habit | Habit | 
+LRR 0 | Habit | Excess return | LRR 70 | C-CAPM | CAPM | 
+LRR 90 | LRR 90 | C-CAPM | Return | LRR 70 | LRR 90 | 
+LRR 70 | LRR 70 | Habit | LRR 90 | LRR 90 | LRR 70 |
+--- 图4 ---
+[表]
+ | $A_s$ | $A_e$ | Flow | $\Delta$ | $\alpha$CAPM | $A_s$ | $A_e$ | Flow | $\Delta$ | $\alpha$CAPM | $A_s$ | $A_e$ | Flow | $\Delta$ | $\alpha$CAPM | $\delta$ | 
+ | Top-Tercile $\Delta$ | Middle-Tercile $\Delta$ | Bottom-Tercile $\Delta$ | (1) | 
+ | (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9) | (10) | (11) | (12) | (13) | (14) | (15) | 
+(L) | 383 | 413 | -6.2 | 5.0 | -2.5 | 418 | 376 | -15.0 | 0.5 | -5.9 | 488 | 292 | -18.2 | -3.3 | -10.1 | 6 | 
+ | 487 | 775 | 4.4 | 3.9 | 1.2 | 539 | 519 | -9.2 | 0.4 | -2.1 | 490 | 413 | -13.1 | -2.8 | -5.4 | 5 | 
+ | 514 | 936 | 13.3 | 3.7 | 2.9 | 641 | 745 | 2.7 | 0.4 | -0.4 | 591 | 597 | -7.2 | -2.8 | -3.6 | 4 | 
+ | 727 | 1,395 | 24.9 | 3.6 | 4.6 | 916 | 1,325 | 15.0 | 0.4 | 1.4 | 723 | 756 | 0.0 | -3.0 | -2.0 | 8 | 
+(H) | 601 | 1,599 | 38.1 | 4.0 | 9.0 | 679 | 1,370 | 27.7 | 0.4 | 4.9 | 588 | 855 | 10.5 | -3.7 | 1.6 | * |
+--- 图5 ---
+[表]
+ | Panel A: Ret(%) | Panel B:  $ \alpha^{FFC} $(%) | Panel C:  $ \alpha^{7F} $(%) | 
+ | Top | Middle | Bottom | Diff | Top | Middle | Bottom | Diff | Top | Middle | Bottom |  | 
+(L) | 5.17 | 6.59 | 7.56 | 2.39 | $ -2.89^{{***}} $\n(1.04) | -0.89\n(0.78) | -0.67\n(1.13) | 2.22\n(1.55) | $ -3.18^{{***}} $\n(0.96) | -0.89\n(0.73) | -0.57\n(1.09) |  | 
+ | 5.03 | 7.23 | 8.14 | 3.10 | $ -2.56^{{***}} $\n(0.75) | -0.35\n(0.55) | 0.25\n(1.05) | $ 2.82^{{**}} $\n(1.41) | $ -2.73^{{***}} $\n(0.68) | -0.29\n(0.51) | 0.40\n(1.00) |  | 
+ | 5.15 | 6.75 | 8.04 | 2.89 | $ -2.52^{{***}} $\n(0.89) | -0.30\n(0.47) | 0.67\n(0.97) | $ 3.20^{{**}} $\n(1.63) | $ -2.68^{{***}} $\n(0.86) | -0.34\n(0.42) | 0.82\n(0.92) | 3\n(1.3) | 
+ | 5.02 | 6.78 | 7.75 | 2.73 | $ -2.51^{{***}} $\n(0.81) | -0.24\n(0.46) | 0.28\n(0.97) | $ 2.78^{{*}} $\n(1.55) | $ -2.63^{{***}} $\n(0.78) | -0.22\n(0.40) | 0.43\n(0.93) | 3.0\n(1.5) | 
+(H) | 4.82 | 7.40 | 8.87 | 4.05 | $ -2.52^{{*}} $\n(1.32) | 0.57\n(0.62) | 1.65\n(1.09) | $ 4.17^{{**}} $\n(1.99) | $ -2.77^{{**}} $\n(1.29) | 0.55\n(0.61) | 1.70\n(1.08) | 4.4\n(1.9) |
+--- 图6 ---
+[表]
+ | Adj. R | Coefficient | p-Value | b2-b3 | p-Value | 
+Carhart 4-factor model | 0.1046 |  |  |  |  | 
+Alpha |  | 11.766 | 0.0000 |  |  | 
+Traditional: Market, size, and value risks |  | 5.517 | 0.0011 |  |  | 
+Exotic: Momentum risk |  | 6.170 | 0.0062 |  |  | 
+Traditional - Exotic |  |  |  | -0.653 | 0.6931 | 
+AN model | 0.1030 |  |  |  |  | 
+Alpha |  | 10.833 | 0.0000 |  |  | 
+Traditional: Market, size, and value risks |  | 6.305 | 0.0000 |  |  | 
+Exotic: Momentum, call and put option risks |  | 7.154 | 0.0000 |  |  | 
+Traditional - Exotic |  |  |  | -0.849 | 0.1652 | 
+FH7 model | 0.1039 |  |  |  |  | 
+Alpha |  | 11.181 | 0.0000 |  |  | 
+Traditional: Market, size, and bond factor risks |  | 5.493 | 0.0001 |  |  | 
+Exotic: Trend-following factor risk |  | 9.468 | 0.0000 |  |  | 
+Traditional - Exotic |  |  |  | -3.974 | 0.0540 | 
+12-factor model | 0.1026 |  |  |  |  | 
+Alpha |  | 10.406 | 0.0000 |  |  | 
+Traditional: Market, value, size, bond factor, and emerging market risks |  | 7.116 | 0.0000 |  |  | 
+Exotic: Momentum, trend-following factors, and option factor risks |  | 8.287 | 0.0000 |  |  | 
+Traditional - Exotic |  |  |  | -1.171 | 0.0519 |

@@ -1,0 +1,195 @@
+# “茴”字有三种写法，低风险异象因子呢 ?
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/5tfG7TpZ4pqfVOe26RX1rQ
+
+这是低风险专题的第 2 篇文章，也是因子动物园的第 5 篇文章。
+
+【30秒速览】 【【002】高风险高收益，常识or谎言？】一文介绍了低风险异象的常规定义和主要实证表现，并给出了研究者提出的多种低风险因子的列表。本文则更进一步，详细介绍每一种因子的具体定义，帮助您更好地理解它们的异同。
+
+01 低风险异象基础
+
+目前，大量文献发现股票市场存在低风险异象（low risk anomaly），即风险低的股票反而能获得更高的收益，这和CAPM的假设相悖，也不符合人们的常识。
+利用低风险异象进行投资已经变成了一种流行的方式，主流的指数公司几乎都设计和编制了相关指数，相关的基金产品也早已上市。
+千里之行，始于足下，研究该异象的第一步便是度量股票风险。讨论低风险异象的文献比较多，提出了各色各样衡量指标。本文介绍一些经典定义方式。这些指标形状各异，既有共同的基因，又各自别具一格。
+
+02 因子列表
+
+表 1 列出了因子定义及参考文献，后续我们也将提供国内市场上相关因子的数据：
+
+表1：低风险因子列表
+
+数据来源：因子动物园
+
+03 因子定义
+
+接下来让我们来逐个认识这些因子。
+
+3.1. 总波动率（Total Volatility）
+总波动率，又称为简单波动率，常常用过去T个交易日收益率的标准差进行估计，在 Blitz 和 Van Vliet（2007）有讨论。T的选择可长可短，越短估计结果变动越剧烈，越长结果变动越平滑。
+利用日度收益率，年化总波动率的计算公式：
+
+其中，年化系数统一为252。
+
+3.2. 特质波动率（Idiosyncratic Volatility）
+因子模型认为个股收益同时受到共同因子和特异因子影响，前者作用于每一支个股，后者则是个股独有的因素，且两者不相关。相应地，个股的风险也由共同风险和特质风险组成。总波动率衡量的是个股整体的风险，但没有对两者进行区分，特质波动率则试图将个股的特质风险从总体风险中剥离出来。
+根据共同因子的不同定义，可以有多个版本的特质波动率。常见的有超额收益、单因子模型（CAPM）、Fama-French 三因子模型、Carhart 四因子模型和 Fama-French 五因子模型。例如，Ang、Hodrick、Xing 和 Zhang（2006, 2009）在计算特质波动率时，采用的就是Fama-French三因子模型残差。
+以 Fama-French 三因子模型为例，计算特质波动率的步骤如下。
+首先，利用回归模型得到特质收益率：
+
+然后，计算特质收益率的标准差并年化，即为特质波动率：
+
+当然，依据回归使用的窗宽，估计结果也可能有所不同。
+
+3.3. 特异度（Idiosyncratic R-squared）
+按照朱剑涛（2015）的定义，特异度因子定义为1 减去因子模型的拟合优度，即
+
+特异度反映了个股收益中不能被共同因子解释的程度。特异度越高则说明个股的涨跌和市场大盘及主要风格的相关性越低，特有因素的贡献越高，特质性风险越大。依据因子模型的不同选择，特异度也可以有多种计算方式。
+
+3.4. 离散度（Dispersion）
+离散度指标由特异度和特质波动率合成，刘富兵（2015）在其报告中测试过这个因子，其计算方式为：
+
+同样，依据因子模型的不同选择，离散度也有多种计算方式。
+
+3.5. 累计振幅（Cumulative Range）
+在 Barra 的结构化风险因子模型中，累计振幅为波动因子的一部分，用来区分不同个股的价格波动范围宽窄，详细定义可见 Orr，Mashtaler  和Nagy (2012)。
+首先计算累计超额收益序列：
+
+进一步按照如下方式计算累计振幅：
+
+从累计振幅的定义可以看出，其衡量了个股价格波动的振动幅度，和最大回撤很相似。需要注意的是，Barra 在计算时采用的是过去 12 个月的月度数据，21 个交易日表示 1 个月。
+
+3.6. 市场贝塔（Market Beta）
+市场 Beta 用来衡量股票收益相对于基准指数的波动情况，是评估股票风险的最常用指标之一。如果某个股票和市场组合价格波动完全一致，那么其 Beta 值变为 1 ；如果某个股票价格波动小于市场，那么 Beta 小于 1 ；如果某个股票价格波动大于市场，那么 Beta 大于 1 。作为一种特殊情况，市场组合的 Beta 等于 1 。
+常常用月度收益率估计 CAPM。Fama 和 French（1992）在估计个股市场 Beta 时，就采用的这种方式。
+
+即：
+
+Frazzini 和 Pedersen（2014）在估计市场Beta时，细节上做了优化。首先，用日度收益率估计市场 beta，精确性更高；其次，因为不同程度的估计误差，分别使用不同长度的数据估计个波动率和相关系数，再合成 Beta ；为了控制异常值的影响，对 beta 进行压缩处理 （shrinkage estimator）。
+
+3.7. 下行贝塔（Downside Beta）
+Ang, Chen 和 Xing (2006）认为，用市场 Beta 来度量个股系统风险存在缺陷，因投资者往往更关注下行风险，故在计算市场 Beta 时，他们剔除了市场收益向上的样本，只考虑下跌的交易日，即：
+
+Ang et al. (2006) 的实证结果表明，下行Beta能较好地度量个股的系统性风险，能获得明显的下行风险溢价。
+
+3.8. 总偏度 （Total Skewness）
+传统的金融学理论假设资产收益率服从正态分布，因此用均值和方差就能完全衡量其分布特征。但收益率的非正态分布已经是公认的事实，因此收益率的高阶矩包含着有用的信息，其中最典型的便是收益率偏度（收益率的三阶矩），该指标也称为总偏度（Total Skewness）。
+总偏度在 Bali, Engle 和 Murray（2016）的书中有详细讨论，由于投资者追求具有正偏度的股票，导致其价格容易被高估，预期收益率也因而较低。通过做空偏度大的股票，做多偏度小的股票，能获得显著超额收益。
+总偏度的计算公式如下：
+
+3.9. 特质偏度（Idiosyncratic Skewness）
+和特质波动率类似，不考虑总收益率能被风险因子解释的部分，只考虑特质收益率的偏度情况，即为特质偏度（Idiosyncratic Skewness）。因为特质收益率可以由不同的因子模型得出，因此特质偏度也可以有多个版本，例如 Boyer, Mitton  和Vorkink (2010) 的研究使用的Fama-French三因素模型残差计算。
+特质偏度的计算和总偏度相同，只是将收益率换为特质收益率，具体计算公式如下：
+
+3.10. 协偏度（co-skewness，systematic skewness）
+协偏度又被称为系统偏度，用来刻画个股对基准的相对偏态，考虑了比较基准的影响。其基本逻辑是，投资者在进行个股选择时，当相对于整个市场具有明显的正偏度时，其“彩票型”性质才会更具吸引力。
+依据 Harvey 和 Siddique (2000) ，协偏度计算方法如下：
+
+3.11. 潜在亏损（VaR）
+VaR，即 Value at Risk，即风险价值模型，也称在险价值模型，早在1993年被提出，已经被众多金融机构用来测量市场风险。其更确切的含义是，在一定概率水平（置信度）下，某一股票在未来特定时期内可能收到的最大损失。
+VaR 的一般数学表达式为：
+
+上述 VaR 定义的含义是，在置信水平为 0.05 的情况下，未来一段时间内，资产或组合的最大损失，故VaR用于度量资产或组合的潜在损失（尾部风险）。
+
+3.12. 最大收益率（MAX）
+MAX衡量股票异常正收益，表示潜在的收益可能性。Bali, Cakici 和 Whitelaw（2011）用过去一月中的最大日度收益率定义MAX，Asness、Frazzini、Gormsen 和 Pedersen (2016) 则用过去一个月中最大的 5 个日收益率均值定义MAX。
+为了测试MAX的稳健性，Asness et al.(2016) 将计算周期拉长，在过去 1 年的里选择 20 个最大日收益率的平均值，作为MAX的替代方案。从结果来看，虽然更长的时间窗口降低了换手率，但因子收益也降低了。
+另外，和市场beta等于相关系数乘以波动率一样，一个股票的高MAX即可能是由高波动引起的，也可能是由于正偏度造成的，因此Asness et al.(2016) 定义了Scaled MAX，即MAX/波动率。
+
+3.13. 大盘相关性（BAC）
+为了更深入地讨论低 beta 异象，Asness、Frazzini、Gormsen 和 Pedersen (2016) 将 BAB 分解为 BAC 和 BAV 两个部分，前者从大盘相关性的角度衡量系统性风险，后者从个股波动率的角度衡量投资者行为。
+在计算个股和大盘相关性因子时，Asness采用了滚动5年数据计算，并通过3日收益率消除交易不同步的问题。
+
+3.14. 尾部风险因子（Tail Risk Loading）
+Kelly 和 Jiang (2014) 将 Tail Risk （尾部风险）纳入到传统的定价模型，这里 Tail Risk 为整个市场的尾部风险，是一个潜在的系统性风险因子。
+个股的尾部风险暴露通过两个步骤估计。
+首先，估计整个市场的尾部风险。具体而言，在每个月，将所有股票日收益率放在一起，Kelly和Jiang通过如下公式计算每个月的市场尾部风险：
+
+然后，通过回归模型，计算个股在市场尾部风险上的暴露，便得到了尾部风险因子：
+
+3.15. 系统风险变动因子（Innovations in Market Volatility）
+如果市场波动率是一个系统风险，那么对市场波动不同反应程度的股票，应该具有不同的收益率。Ang、Hodrick、Xing 和 Zhang（2006）讨论了市场波动率在股票横截面是如何定价的。
+Ang et al.（2006）将市场波动率纳入股票定价模型，并对理论模型进行了经验简化，用市值加权组合代替市场因子，用VIX的变化替代市场风险变动因子。通过估计如下模型，来得到每个个股的系统风险变动因子。
+
+3.16. 价格时滞（Price Delay）
+价格时滞，顾名思义，衡量股票价格对市场信息的反应快慢。如果价格时滞较大，表明股票价格对市场信息的反应存在滞后，过去的市场收益能显著解释当前股票收益；相反，如果股票价格时滞较低，那么股票收益和市场收益变动同步性较高。Hou 和 Moskowitz (2005) 利用过去1年的周度收益率数据估计价格时滞，结果表明，具有高价格时滞的股票，能获得显著的超额收益。
+Hou 和 Moskowitz (2005) 的研究定义了三个价格时滞因子。
+首先，估计如下两个回归模型：
+
+其中ll表示滞后期数。
+接下来，计算如下三个因子：
+
+04 小结
+
+本文详细梳理了16个常见的低风险异象因子，如果考虑到不同的计算细节，因子数量会进一步爆炸增长。无论如何，研究员需要时刻保持敬畏之心，以科学的态度和工匠的精神，反复思考每一个因子的逻辑和定义。毕竟因子类型就那么多，玩出花样细节很重要。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：
+Asness, C. S., Frazzini, A., Gormsen, N. J., & Pedersen, L. H. (2016). Betting Against Correlation: Testing Theories of the Low-Risk Effect. Social Science Research Network,.
+Ang, A., Chen, J., & Xing, Y. (2006). Downside risk. Review of Financial Studies, 19(4), 1191-1239.
+Ang, A., Hodrick, R. J., Xing, Y., & Zhang, X. (2006). The Cross-Section of Volatility and Expected Returns. Journal of Finance, 61(1), 259-299.
+Ang, A., Hodrick, R. J., Xing, Y., & Zhang, X. (2009). High Idiosyncratic Volatility and Low Returns: International and Further U.S. Evidence. Journal of Financial Economics, 91(1), 1-23.
+Bali, T. G., Cakici, N., & Whitelaw, R. F. (2011). Maxing Out: Stocks as Lotteries and the Cross-Section of Expected Returns. Journal of Financial Economics, 99(2), 427-446.
+Bali, T. G. , Engle, R. F. , & Murray, S. . (2016). Empirical asset pricing: the cross section of stock returns.
+Blitz, D., & Van Vliet, P. (2007). The Volatility Effect: Lower Risk Without Lower Return. ERIM report series research in management Erasmus Research Institute of Management,.
+Boyer, B. H., Mitton, T., & Vorkink, K. (2010). Expected Idiosyncratic Skewness. Review of Financial Studies, 23(1), 169-202.
+Barberis, N., & Huang, M. (2008). Stocks as Lotteries: the Implications of Probability Weighting for Security Prices. The American Economic Review, 98(5), 2066-2100.
+Fama, E. F., & French, K. R. (1992). The Cross‐Section of Expected Stock Returns. Journal of Finance, 47(2), 427-465.
+Frazzini, A., & Pedersen, L. H. (2014). Betting Against Beta. Journal of Financial Economics, 111(1), 1-25.
+Harvey, C. R., & Siddique, A. R. (2000). Conditional Skewness in Asset Pricing Tests. Journal of Finance, 55(3), 1263-1295.
+Hou, K., & Moskowitz, T. J. (2005). Market Frictions, Price Delay, and the Cross-Section of Expected Returns. Review of Financial Studies, 18(3), 981-1020.
+Hou, K., Xue, C., & Zhang, L. (2017). Replicating anomalies. Social Science Electronic Publishing.
+Kelly, B. T., & Jiang, H. (2014). Tail Risk and Asset Prices. Review of Financial Studies, 27(10), 2841-2871.
+Orr, D. J., Mashtaler, I., & Nagy, A. (2012). The Barra China Equity Model (CNE5). MSCI BARRA.
+刘富兵. (2015). 如何将阿尔法因子转化为超额收益. 国泰君安.
+刘富兵. (2018). 基于不同域研究的多因子选股体系. 国泰君安.
+朱剑涛. (2015). 投机、交易行为与股票收益（上）. 东方证券.
+
+【图片文字】
+--- 图2 ---
+[表]
+因子名 | 参考文献 | 
+简单波动率 | Blitz和van Vliet(2007) | 
+特质波动率 | Ang、Hodrick、Xing和Zhang (2006, 2009) | 
+特异度 | 朱剑涛 (2015) | 
+离散度 | 刘富兵 (2015) | 
+累计振幅 | Orr, Mashtaler和Nagy(2012) | 
+市场贝塔 | Fama和French (1992) ; Frazzini和Pedersen (2014) | 
+下行贝塔 | Ang, Chen和Xing (2006) | 
+总偏度 | Bali, Engle, and Murray (2016) | 
+协偏度 | Harvey和Siddique (2000) | 
+特质偏度 | Boyer, Mitton和Vorkink (2009) | 
+价格时滞 | Hou和Moskowitz (2005) | 
+系统风险变动因子 | Ang、Hodrick、Xing和Zhang (2006) | 
+最大收益率 (MAX) | Bali, Cakici和Whitelaw (2011) | 
+尾部风险 (Tail Risk) | Kelly和Jiang (2014) | 
+大盘相关性 | Asness、Frazzini、Gormsen和Pedersen(2016) | 
+潜在亏损 (VaR) | - |
+--- 图3 ---
+$$  TV_{i}=\sqrt{252}std(r_{i})=\frac{\sqrt{252}\times\sum_{t=1}^{T}(r_{it}-\bar{r}_{i})^{2}}{T-1} $$
+$$ \bar{r}_{i}=\frac{\sum_{t=1}^{T}r_{it}}{T} $$
+--- 图7 ---
+$ Dispersion_{i} = \sqrt{1 - R_{i}^{2}} \times IdiVol_{i} $
+--- 图8 ---
+$$ \mathbf{Z}(t)=\sum_{t=1}^{T}[ln(1+r_{t})-ln(1+r_{ft})] $$
+--- 图11 ---
+$$ \beta_{i}=\frac{cov(r_{i},r_{m})}{var(r_{m})} $$
+--- 图12 ---
+$$ \beta_{i}^{-}=\frac{\mathrm{cov}(r_{i},r_{m})r_{m}<\overline{\tau}_{m})}{var(r_{m}(r_{m}<\overline{\tau}_{m})} $$
+--- 图13 ---
+$$ S k e w_{i}=\frac{\underset{\overline{\mathbf{T}}}{\underbrace{\lambda}}{\sum_{t=1}^{\mathbf{T}}}\left(\mathbf{r}_{i t}-\overline{\mathbf{r}}_{i}\right)^{3}}{(\underset{\overline{T}}{\underline{\lambda}}\sum_{t=1}^{T}\left(\mathbf{r}_{i t}-\overline{\mathbf{r}}_{i}\right)^{2})^{\frac{3}{2}}} $$
+--- 图14 ---
+$$ I d o S k e w_{i}=\frac{\frac{1}{T}\sum_{t=1}^{T}\epsilon_{i t}^{\mathcal{I}}}{(\frac{1}{T}\sum_{t=1}^{T}\epsilon_{i t}^{2})^{\frac{3}{2}}} $$
+--- 图15 ---
+$$ r_{i}-r_{f}=\alpha+\beta_{i}(r_{m}-r_{f})+\gamma_{i}(r_{m}-r_{f})^{2}+\epsilon_{i} $$
+--- 图17 ---
+$$ \lambda_{m}=\frac{1}{K}\sum_{k=1}^{K}ln\frac{r_{k}}{\mu} $$
+--- 图20 ---
+$$ \begin{aligned}\mathbf{r}_{i}&=\alpha+\beta_{i}\mathbf{r}_{m}+\epsilon_{i}\\\mathbf{r}_{i}&=\alpha+\beta_{i}\mathbf{r}_{m}+\sum_{l=1}^{4}\delta_{l}\mathbf{r}_{ml}+\epsilon_{i}\end{aligned} $$
+--- 图21 ---
+
+--- 图22 ---
+$$ D_{2}=\frac{\sum_{l=1}^{4}l\delta_{l}}{\beta_{i}+\sum_{l=1}^{4}\delta_{l}} $$
+$$ D_{3}=\frac{\sum_{l=1}^{4}\frac{l\delta_{l}}{\mathrm{se}(\delta_{l})}}{\frac{\beta_{i}}{\mathrm{se}(\beta_{i})}+\sum_{l=1}^{4}\frac{\delta_{l}}{\mathrm{se}(\delta_{l})}} $$
+--- 图23 ---

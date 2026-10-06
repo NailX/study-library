@@ -1,0 +1,38 @@
+# 检验因子模型：Alpha，GRS 与 GMM
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/zJDWDBhgTgaCHms-f30G3Q
+
+这是基础方法论专题的第 002 篇文章，也是因子动物园的第 030 篇独立原创文章。【未经授权，严禁转载。】
+
+【30 秒速览】本文在此前关于如何构建因子的讨论的基础上，本文对因子模型的估计和检验进行了更详细的讨论。主要方法包括：alpha 的个体检验，alpha 的联合检验（GRS 检验），以及 GMM 估计与卡方检验（替代 Fama-MacBeth 两步回归法）。
+文章结构：01. 概述
+02. Alpha 检验03. GRS 检验04. GMM05. 结语01 概述
+【027】追寻因子的足迹：分类、构造与检验一文介绍了如何构建因子，本文进一步介绍如何对因子及因子模型进行严谨的检验。之所以要对因子进行检验，有以下几点原因。首先，因子的表现是我们根据历史数据估计的，并不代表未来的真实收益。因此，我们需要检验因子良好的历史表现，是因为它的确其可以带来持续的超额收益，还是由它对其他有优异表现的因子的暴露带来的，抑或仅仅是特定时期的运气所致。这类方法的典型是分组组合分析与 alpha 检验。其次，除了关注因子自身的表现，我们还关注某些因子是否具有普适性，可以用以解释各类资产和其他因子的表现。这就需要对因子定价模型进行检验。由于目的不同，检验方法自然也有所区别。典型代表是 GRS 检验。此外，基于 Sharpe 比率的模型比较也日益受到重视。最后，上述检验主要利用的是时间序列回归方法。更一般地，由于选股模型主要关注股票的横截面收益的差异，因此，为了更仔细地考察在控制了各类公司特征及市场特征后，某一因子是否有显著的风险溢价，往往还会同时利用横截面和时间序列分析。其典型代表便是 Fama-MacBeth 回归，这在基础方法论系列的第 1 篇文章中我们已经讨论过。当然，随着现代计量经济学的发展，GMM 也逐渐得到更广泛的应用。本文将依次对这些方法进行简要的梳理。
+详细内容，请点击文末【阅读原文】，获取 PDF 版本文章。也可在公众号后台回复关键字 检验 ，获取 PDF 文章链接。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：Bali, Turan G., Robert F. Engle, and Scott Murray. “Empirical Asset Pricing: The Cross Section of Stock Returns.” John Wiley & Sons, 2016.
+Bates, Charles E., and Halbert White. "Determination of Estimators with Minimum Asymptotic Covariance Matrices." Econometric Theory 9.4 (1993): 633-648.
+
+Chincarini, Ludwig B. "Quantitative Equity Portfolio Management: An Active Approach to Portfolio Construction and Management." McGraw-Hill, 2006.
+Fama, Eugene F., and James D. MacBeth. "Risk, Return, and Equilibrium: Empirical Tests." Journal of Political Economy 81.3 (1973): 607-636.
+Gallant, A. Ronald, and George Tauchen. "Which Moments to Match?." Econometric Theory 12.4 (1996): 657-681.
+
+Gibbons, Michael R., Stephen A. Ross, and Jay Shanken. "A Test of the Efficiency of a Given Portfolio." Econometrica: Journal of the Econometric Society (1989): 1121-1152.
+Giglio, Stefano, Yuan Liao, and Dacheng Xiu. "Thousands of Alpha Tests." Chicago Booth Research Paper 18-09 (2018).
+
+Hansen, Lars Peter. "Large Sample Properties of Generalized Method of Moments Estimators." Econometrica: Journal of the Econometric Society (1982): 1029-1054.
+
+Harvey, Campbell R., Yan Liu, and Heqing Zhu. "… and the Cross-section of Expected Returns." Review of Financial Studies 29.1 (2016): 5-68.
+Pedersen, Lasse Heje. "Efficiently Inefficient: How Smart Money Invests and Market Prices are Determined." Princeton University Press, 2019.
+Shanken, Jay. "On the Estimation of Beta-pricing Models." Review of Financial Studies 5.1 (1992): 1-33.
+Wooldridge, Jeffrey M. "Estimation and Inference for Dependent Processes." Handbook of Econometrics 4 (1994): 2639-2738.
+
+Zhou, Guofu. Lecture Notes on Empirical Asset Pricing. Southwestern University of Finance and Economics, 2019.
+
+题图：Rocky Mountain by eberhard_grossgasteiger, from www.pexels.com.
+
+【图片文字】
+--- 图2 ---

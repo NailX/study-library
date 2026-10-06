@@ -1,0 +1,120 @@
+# Augmented Fama-MacBeth Regression
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/TZogoW--e7Nz1-1376lXzw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+增强版 Fama-MacBeth Regression 是研究 nontradable factor 的利器。
+
+1
+
+因子有 tradable factors 和 nontradable factors 之分。对于前者而言，常见的做法是直接用公司特征构造 managed portfolios；而对于后者，Fama-MacBeth two-pass regression 往往是首选，即在第一步中在时序上用资产（超额）收益率对因子取值回归来估计  ，第二步中每期在截面上用资产（超额）收益率对  回归估计因子 risk premia 和资产的 pricing errors。
+
+令  表示  期资产  的因子暴露向量，  表示  期资产  的超额收益率，则上述第二步截面回归模型可以表示为（为了简化符号，假设不带截距项）：
+
+  
+
+式中  为  期因子收益率向量，残差  则为资产  的 pricing error。按照传统做法，只需在每期  进行截面回归，然后就可以对  和  进行相应的检验。
+
+故事到此似乎就结束了。不过，既然本文的题目带个“enhanced”，下面我们就来看看上述过程有什么痛点。
+
+2
+
+在上述过程中，如果 nontradable factors 数量众多（比如远远超过 ad-hoc 模型中通常使用的 3 – 5 个因子）且高度相关，那么回归估计就会有巨大的误差。因此，一个自然的想法就是对因子进行降维处理。这时，我们便可以请出这几年非常火的 IPCA（工具变量 PCA）方法（Kelly, Pruitt, and Su 2019）。
+
+该方法将  视为原始（高维）协变量的线性组合，即：
+
+  
+
+其中  维向量  表示  期资产  在  个原始高维协变量（工具变量）的取值，  是  维矩阵，将原始工具变量通过  个线性组合降为到  个因子，得到资产  对  个因子的暴露向量  。加入 IPCA 之后，Fama-MacBeth 第二步的截面回归变为
+
+  
+
+在实际应用中，  已知。我们可以通过最小化所有资产的 pricing errors 来估计  。在上述目标下，最优化问题的目标函数等价于
+
+  
+
+值得一提的是，虽然上述最优化问题中的变量包括  和每期的  。但是，一旦给定  ，  实际上就确定了，而一旦  确定了，使得 pricing errors 最小的因子收益率  自然而然就得到了。上述逻辑保证了  和  之间内在的 economic connection。
+
+那么至此，我们是否 enhanced 完了呢？（Hint：既然问了，当然还没有。）
+
+3
+
+在第二节中，我们将 IPCA 加入到 Fama-MacBeth 中，将原始  个工具变量通过  个线性组合转化成  个因子，从而实现了降维。但是从数学表达式中不难看出，每个因子都是  个变量的某种组合。
+
+在现实中，  很可能是高维的（几百甚至上千），而我们虽然指望数据发声，但同时有先验告诉我们  中的某些工具变量和  没什么关系，因此在  中不应该发挥作用（即对应的列应该都是元素零）。在这样的背景下，我们希望在构造  的时候，引入稀疏性（sparsity），得到 Sparse IPCA。
+
+为此，在估计  （以及  ）的时候加入罚项：
+
+  
+
+式中  表示  的第  列，且
+
+  
+
+目标函数中第一个罚项（式中第二项）可理解为 column-wise group lasso。如果第  个工具变量对估计  没有帮助，那么  中的第  列将会为零。
+
+目标函数中的第二个罚项（式中第三项）是出于技术方面的考虑而加上的。注意，目标函数中的第一项是 pricing errors，在缩放  时，我们总能通过扩大  来保证第一项不变。因此，如果目标函数中没有第二个罚项，那么将会出现这样的结果，即在不改变 pricing errors 的前提下  将会变得非常小从而使正则化失去本来的作用。目标函数中置于  的罚项正是为了避免上述情况发生而出现。
+
+最后，由于加入了罚项，我们需要对超参数  调优。对于每个给定的  ，求解最优化问题可得到对应的  和  时序。由资产定价理论可知，因子构造的 OOS 夏普比率平方应该尽可能大，而夏普比率可以表示为：
+
+  
+
+其中  是因子预期收益率，  是因子协方差矩阵，它们均可通过因子收益率时序估计得到。因此可以以此为目标确定最优的  。
+
+Okay！以上就完成了“enhanced”部分的介绍。即我们从 Fama-MacBeth two-pass regression 出发，首先加入了 IPCA 实现了降维，然后又在 IPCA 基础上进而使用 Sparse IPCA 从而确保聚焦于只和  有关的变量，最后通过经济学理论为依据进行超参数调优。
+
+4
+
+前面三节简单说了方法论，本文最后一节来说说应用以及本文的动机。
+
+我写今天这篇文章时之所以没有上来就介绍动机，是因为我认为这个 enhanced Fama-MacBeth regression 的价值更大，而非下面要介绍的实证结果。
+
+这个方法出自 Bybee, Kelly, and Su (forthcoming) 这篇题为 Narrative Asset Pricing 的文章。介绍该文之前，先来简单说一下 Bybee, et al. (forthcoming)。Bybee, et al. (forthcoming) 使用 LDA 将 1984 至 2017 年间华尔街日报的文章分析出了 180 个 topics，并且给每个 topic 计算了一个 attention 的时间序列。（例如，下图展示了 Commodities, Mortgages 以及 Small caps 三个 topics 的 attention 的时间序列。）
+
+再来说 Bybee, Kelly, and Su (forthcoming)。这篇文章的动机是从 ICAPM 出发，猜想财经新闻揭示了投资者关于未来投资机会的信念，从而能够影响资产的价格。为此，该文利用 Bybee, et al. (forthcoming) 构造的 180 个 topics 构造了基于新闻报道的多因子模型，这也是该文题为 Narrative Asset Pricing 的原因。
+
+在实证细节方面，该文使用资产收益率和新闻 topics 时序  的协方差作为工具变量，即  。而至于为什么不在有了  之后直接使用 Fama-MacBeth，而是既要降维又要稀疏呢？该文给出的回答是：（1）很多 topics 所代表的 state variable 很可能是非常接近的，比如 Economic growth 和 Recession 这两个 topics，所以降维是必要的；（2）很多 topics 可能和资产定价没什么关系，比如 Gender issues，因此稀疏性也是必要的。
+
+基于此，该文最终提出了上文介绍的 Sparse IPCA enhanced Fama-MacBeth 方法。具体的细节，感兴趣的小伙伴请阅读 Bybee, Kelly, and Su (forthcoming) 原文（注意该文中的数学 notation 和我本文中的不尽相同，例如本文中的  是 Bybee, Kelly, and Su (forthcoming) 中  的转置）。
+
+在实证结果方面，无论是对 test assets 的定价能力还是因子构造的 OOS 最大夏普比率，该方法构造的新闻因子在和传统基于公司特征的 ad-hoc 多因子模型相比都是不落下风的。以夏普比率而言，当使用 6 个因子时，该模型 OOS 的夏普比率为 1.31，而 FF5 + Carhart 动量的 OOS 夏普比率只有 0.67。
+
+仅从实证结果来看，该新闻因子模型构造的最大夏普比率确实不如近年来各种公司特征 + 机器学习所构造的因子。但不要忘了，该模型中的因子仅仅来自资产收益率和新闻的协方差，而没有使用任何公司特征。此外，Bybee, Kelly, and Su (forthcoming) 除了我详细介绍的 return model 之外，还有 news model 的部分。通过它可以反推出 state variables，从而提供公司特征之外的 insights。
+
+而对我而言，该文 Fama-MacBeth regression + IPCA + Sparsity + OOS SR based tuning 这个清晰的框架才是最大的收获。它可以成为分析 nontradable factors 的有力工具之一。
+
+最后，我再忍不住“吐个槽”。Bybee, Kelly, and Su (forthcoming) 如今已经 RFS forthcoming。在 2022 年某个会议上 Kelly 作报告时，他在实证部分几乎每页 slide 都强调他们的结果是 OOS 的。但是，他们使用的 180 个 topics 可是用 1984 到 2017 全局的新闻数据构造出来的（180 这个取值就是通过全局数据最优化选定的）。因此，这样的 asset pricing 结果真的是 100% OOS 吗？
+
+最后，鉴于国内顶刊无脑照搬海外顶刊不可阻挡的大趋势，还想对国内的某些（伪）一流学者说一句，如果这篇文章在你的 to replicate list 之上，那么请你在照搬之前至少先搞清楚 Bybee, Kelly, and Su (forthcoming) 最核心的内容是什么。
+
+参考文献
+Bybee, L., B. T. Kelly, A. Manela, and D. Xiu (forthcoming). Business news and business cycles. Journal of Finance.
+
+Bybee, L., B. T. Kelly, and Y. Su (forthcoming). Narrative asset pricing: Interpretable systematic risk factors from news text. Review of Financial Studies.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+THE STRUCTURE OF ECONOMIC NEWS
+HE STRUCTURE OF ECONOMIC NEWS
+HE STRUCTURE OF ECONOMIC NEWS
+E STRUCTURE OF ECONOMIC NEWS
+Topic Detail News Taxonomy Downloadable Data
+--- 图3 ---

@@ -1,0 +1,179 @@
+# Trend Factor in China ：中国版定价模型
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/AKrS-Qyait1UJ0gctS9x0A
+
+本文是技术因子专题的第 004 篇，也是因子动物园的第 040 篇独立原创研究。【未经授权，禁止转载！】欢迎私信公众号后台或动物园园长获取转载授权。
+
+【30 秒速览】LZZ (2019) 通过纳入成交信息，构建了一个新的 trend factor，该因子不仅自身表现优异（A 股的最大回撤仅 13%），而且用其取代 LSY-4 的换手率因子后，新模型的解释力进一步提升，在各种检验中，表现都显著优于其他模型，有机会成为未来 A 股的基准定价模型。当然，在此之前，作者们可能还得更清楚地解释模型的 economic foundation ，否则，blackbox 式的模型，难免令人充满疑虑。
+
+目录
+01. 简介
+02. 经典 Trend Factor
+
+03. 新 Trend Factor
+04. 股票定价表现
+
+    05. 解释基金收益
+06. Trend Factor 分解
+07. 一点感想
+08. 结语
+【写在前面的话】最近由于在写一篇论文，所以公众号更新放缓了。我们的新文章部分着眼于解释 A 股市场股票收益，而正好，最近读到周国富教授的一篇新文章，也是相关的主题。于是有了今天这篇推文。
+
+01 简介
+Han, Zhou, and Zhu (2016) 提出了大名鼎鼎的 trend factor，以综合利用不同时期的价格信息。Huang et al. (2019) 则更进一步，提出了利用基本面数据移动平均值的基本面动量（参见 【038】不止于价格动量：基本面动量也很酷）。但颇为令人遗憾的是，同主流研究一样，上述研究都是基于美股进行的。好在，随着中国市场变得越发重要，作者们也于近期发布了一篇新的 working paper ，那就是本文要介绍的 Trend Factor in China （Liu, Zhou, and Zhu (LZZ, 2019)）。当然，如果仅仅是纯粹的 trend factor 的 A 股实证，其实并不值得如此大费周章。这篇文章还有一些新的贡献。
+
+02 经典 Trend Factor
+Han et al. (2016) 提出的 trend factor，主要利用标准化的移动平均价格来预测股票收益。换言之，每月末，拟合下述横截面回归：其中，R_{j, t} 为 t 月股票 j 的收益，MA_{j, t, L}为 t 月股票 j 的 L 日均价，\tilde{MA}_{j, t, L}为用最新价格标准化后的 L 日均价，\beta_{i, t}为 t 月股票 i 对 L_{i} 日均价的暴露。根据回归方程，可得到股票未来收益的预测：其中，稳妥起见，利用过去 12 个月的 beta 估计均值来代表预期 beta ：
+接着，按照预期股票未来收益，对股票从高到低排序分组，并构建多空组合，便得到了经典的 trend factor。关于此文更详细的介绍，可参见 美股上一个跨越时间尺度的趋势因子。
+
+03 新 Trend Factor
+Liu, Stambaugh, and Yuan (LSY, 2019) 堪称中国市场因子定价体系的典范。这篇文章投稿不满 2 个月就被 JFE 接收，并于最近正式见刊。该文有几个重要论点，包括：在 A 股市场，EP 是更好的价值因子的代表；A 股极易受壳价值污染，为此应剔除市值最小的 30% 股票；A 股市场的投资者结构决定着换手率对股票定价很重要。这些论点是否真的正确，暂且不论，但它们的确表明 A 股市场有着异于主流市场的特征。其中，尤为重要的是最后一点，股票成交反映着股票的活跃程度，在 A 股这样投机氛围浓厚的市场，对于股票未来收益有着显著影响。LSY (2019) 因此构建了其 CH4 模型（LSY-4），他们用 EP 替换了 FF3 因子的 BM 来构建 value factor，并加入了 PMO factor（pessimistic minus optimistic, 换手率因子，低换手率减高换手率）。大概受此启发，LZZ (2019) 重新构建了一个新的 trend factor ，将成交信息纳入其中。具体而言，在每月末进行如下横截面回归，然后利用最新的数据进行预测：其中，上标 P 和 V 分别代表价格和成交量。与 Han et al. (2016) 不同的是，LZZ (2019) 利用了更长周期的指数移动平均来估计预期的 beta ：并取  \lambda = 0.02 ，即大约 50 个月后 beta 会彻底更新。LZZ (2019) 以 2000 年 1 月至 2018 年 7 月的 A 股数据进行了实证研究。他们按照 LSY (2019) 的做法，剔除了市值最小的 30% 股票。表 1 展示了几个主要因子的表现。可见，trend factor 无论在经济意义还是统计角度，都高度显著，表现也显著优于 LSY-4 模型的 4 个因子。这个新因子的 Sharpe 比率高达 0.48，比表现第二好的 VMG （价值因子）高出 71% ，最大回撤更是只有 13% 。要知道，同期市场基准指数的最大回撤高达约 70% ！这使得 trend factor 对于投资实践而言，极具价值。
+表 1 ：主要因子表现统计. 
+数据来源：LZZ (2019), Table 1.
+
+04 股票定价表现
+当然，如果仅仅是纳入成交信息，优化 trend factor 作为 alpha 因子的表现，这篇文章就太简单了。LZZ (2019) 的目标显然不仅于此。由于 trend factor 和 LSY (2019) 的 PMO 一样包含成交信息，同时还额外包含均价的信息，因此，LZZ (2019) 用 trend factor 取代 PMO ，重新构建了一个中国版 4 因子模型（LZZ-4）。表 2 展示了用不同因子模型解释 trend factor 和 PMO 的结果。Trend factor 和 PMO 相对 CAPM 和 LSY-3 模型，都有显著为正的 alpha ，且 trend factor 更加显著。更为重要的是，trend factor 相对加入 PMO 的 LSY-4 模型，alpha 仍然显著为正，而将 trend factor 加入 LSY-3 模型后，PMO 变得不显著。
+
+表 2 ：解释 Trend Factor 和 PMO 因子.
+数据来源：LZZ (2019), Table 3.
+
+换言之，LZZ-4 模型可以解释 PMO ，但 LSY-4 模型不能解释 trend factor 。那么，自然地，我们要问，如果用来解释其他常见异象，结果是怎样的呢？表 3 对比了 LZZ-4 和 LSY-4 对 14 种异象的解释，这些异象都有着显著为正的超额收益。相对于 LSY-4 ，有 9 个异象仍然显著，包括简单的 size factor 。而相对于 LZZ-4 ，则没有一个异象显著。
+
+表 3 ：LZZ-4 和 LSY-4 对不同异象的解释力.
+数据来源：LZZ (2019), Table 4.
+
+表 4 的汇总结果更好地说明了这一点。14 个异象相对于 LZZ-4 的 alpha 绝对值均值和 t 统计量均值仅为 0.32 ，远远低于其他模型。定价误差同样远小于其他模型。GRS 检验则更为直观，接受 LZZ-4 ，并拒绝其他模型。
+
+表 4 ：LZZ-4 和 LSY-4 模型比较结果汇总.
+数据来源：LZZ (2019), Table 5.
+
+上述对比表明，LZZ-4 对于解释 A 股市场的股票和投资异象，显著优于其他模型。当然，除 LZZ-4 外，LSY-4 的确表现最好。
+
+05 解释基金收益
+为了更进一步检验结果的稳健性，LZZ (2019) 进一步尝试对公募基金的表现进行了解释。Carhart-4 模型是应用最为广泛的基金业绩分析模型，但众所周知，动量因子在 A 股并不显著，这使得 Carhart-4 模型在 A 股的作用也受到限制。LZZ (2019) 在每月末将偏股型按照惯例规模分为 10 组，并比较了不同模型对基金组合表现的解释力。表 5 给出了与表 4 相似的模型对比汇总结果。LZZ-4 毫无悬念地在各项指标上胜出。
+
+表 5 ：LZZ-4 和 LSY-4 模型解释基金表现.
+数据来源：LZZ (2019), Table 7.
+
+06 Trend Factor 分解
+这个新的 trend factor 综合了价格和成交量的信息，那么，价格和成交量对其的贡献到底有多少呢？成交量的影响，在中美市场上是否真的有显著的差异呢？
+为了回答这一问题，作者们利用了 Sharpe (1988, 1992) 的风格分析方法。该方法利用风格因子对资产收益进行时序回归，且要求回归斜率之和为 1 ，以反映资产对不同风格的暴露。具体而言，LZZ (2019) 分别构建了综合性的 trend factor  TR^{PV} 和只包含价格信息与成交信息的 TR^{P} 与 TR^{V}，然后以后两者作为解释变量，对前者进行 Sharpe 风格分析。结果显示，成交信息在 A 股的影响非常大，TR^{V} 的贡献高达 42%，与此相应，对于美股，其贡献只有区区 6% 。
+
+07 一点感想
+本文的基本思想秉承周国富和朱英姿教授关于 trend factor 和 fundamental momentum 相关研究的一贯思路，并融入了成交信息，来构建新的 trend factor 。因子表现固然很优异，但坦率地说，单论因子的 idea 方面，创新其实是有限的。毕竟，他们 2016 年提出的 price trend factor 已经表现不错，而成交在 A 股有着重要影响，也是众所周知的事。但这篇文章有两个方面极为出色，使得其价值不可小觑，个人认为有机会在未来发表在顶刊。首先，作者们没有止步于分析因子的表现，而是进一步用其取代 LSY-4 的 PMO，构建了中国版的因子定价模型。基于其在定价方面的良好表现，这篇文章，连同他们提出的 LZZ-4 模型，有不小的机会同 LSY (2019) 一样，成为中国市场的重要定价模型，甚至是最重要的基准定价模型。在中国市场日益重要的今天，若能达成这个成就，发表于顶刊是很自然的事情了。其次，他们的实证研究相当的扎实。除了基本的不同异象的 alpha 分析，定价误差与 GRS 检验及 Fama-MacBeth 回归分析这些标准模块，他们还做了解释公募基金的测试，乃至将基于 A 股构建的定价模型，搬到美股市场进行样本外测试和对比分析。此外，文章也仔细分析了交易费率的影响，以确保因子在实践中也有价值。但除此之外，从早前的 price trend factor 和 fundamental momentum 起，这种类机器学习的做法就令人充满疑虑，至少对我这样高度依赖 economic foundation 的人来说，这一系列 trend factors 的构建过程，实际上是个 blackbox ，并不太 make sense 。我们并不知道为何选了这些滞后期的均值，用最新数据对均值做标准化到底有何影响，也不知道不同时期均值对预期收益的影响到底是怎样的。此外，对 beta 进行平滑处理，对预测的股票收益和最终的因子表现有什么样的影响，也很难讲清楚。这些疑虑，可能会长期伴随该因子和由此而来的定价模型。
+
+08 结语
+LZZ (2019) 通过纳入成交信息，构建了一个新的 trend factor，该因子不仅自身表现优异，而且用其取代 LSY-4 的换手率因子后，新模型的解释力进一步提升，在各种检验中，表现都显著优于其他模型。颇为有趣的是，这篇文章初稿完成于 2016 年 5 月，彼时 Han et al. (2016) 刚被 JFE 接收不久，尚未正式见刊。考虑到 LSY (2019) 今年初才 available online ，LZZ (2019) 相对于其初稿的改动自然不小。个人猜测，这篇文章的早期版本更多关注的是 trend factor 本身，但在基于价格的 trend factor 已经被 JFE 接收的背景下，这种边际改进很难有大影响。而随着 LSY (2019) 的火爆，中国市场越发受到关注，基准定价模型的影响力与单纯的因子，自然不可同日而语。因此，作者们对这篇文章进行了大幅的修订，如今的版本，则有不小的机会成为未来的 A 股基准定价模型，重要性也便不言而喻。对于学术研究而言，这也许是个启发。通过更深入的分析，挖掘自己研究的更深入影响，也许可以大大提升一项研究的价值。对于业界的朋友，也可以在未来，考虑将 trend factor，或者其他具有重要经济学/行为学含义的因子放入定价和风险管理模型，来更好地评估投资组合的表现。
+
+全文完。本文仅为分享，不代表任何投资建议。文章图表来自于相应论文，仅为介绍之用，版权归原作者所有。
+
+历史推荐
+
+文章索引：因子投资小册子
+
+因子体系：FF 和 Barra 体系，谁是你的菜？
+
+实践方法论：【037】资产配置与因子配置：可以团圆吗？
+
+投资因子：【031】投资效应：Factor War 前传
+
+研究方法论：【027】追寻因子的足迹：分类、构造与检验
+搞事情小组：搞事情深度研究| 异质波动率之谜
+实证研究：【026】低 Beta 在 A 股：证券市场线是平坦的吗？
+
+技术因子：【023】止损的价值：对冲动量崩溃
+低风险因子：【018】低风险异象靠谱吗？解释与批判
+动量因子：【010】横截面动量那些事
+
+基本面动量：【038】不止于价格动量：基本面动量也很酷
+
+参考文献：Bali, Turan G., Robert F. Engle, and Scott Murray. "Empirical Asset Pricing: The Cross Section of Stock Returns." John Wiley & Sons, 2016.
+Carhart, Mark M. "On Persistence in Mutual Fund Performance." Journal of Finance 52.1(1997):57-82.
+Han, Yufeng, Guofu Zhou, and Yingzi, Zhu. "A Trend Factor: Any Economic Gains from Using Information over Investment Horizons?" Journal of Financial Economics 122.2(2016): 352-375.
+Huang, Dashan Huacheng Zhang, Guofu Zhou, and Yingzi, Zhu. "Twin Momentum: Fundamental Trends Matter ." 2019. Available at SSRN: https://ssrn.com/abstract=2894068 or http://dx.doi.org/10.2139/ssrn.2894068
+
+Liu, Yang, Guofu Zhou, and Yingzi, Zhu. "Trend Factor in China." Working paper, 2019.
+Liu, Jianan, Robert F. Stambaugh, and Yu Yuan. "Size and Value in China." Journal of Financial Economics 134.1(2019): 48-69.
+
+题图：Skyline Photograph of Buildings, from www.pexels.com.
+
+【图片文字】
+--- 图2 ---
+$ R_{j,t} = \alpha_t + \sum_i \beta_{i,t} \tilde{M} A_{j,t-1,L_i} + \varepsilon_{j,t} $
+--- 图4 ---
+$$ [\beta_{i,t+1}]=\frac{1}{12}\sum_{m=1}^{12}\beta i,t+1-m $$
+--- 图5 ---
+$$ \mathrm{t}=\alpha_{\mathrm{t}}+\sum_{i}\beta_{i,\mathrm{t}}^{\mathrm{P}}\tilde{\mathrm{M}}\mathrm{A}_{\mathrm{j},\mathrm{t}-1,\mathrm{L}_{\mathrm{i}}}^{P}+\sum_{i}\beta_{i,\mathrm{t}}^{V}\tilde{\mathrm{M}}\mathrm{A}_{j,\mathrm{t}-1,\mathrm{L}_{\mathrm{i}}}^{V}+ $$
+--- 图7 ---
+Summary statistics
+This table reports the summary statistics for the trend factor (Trend), and the LSY-3 factors, including the market factor (MKT), the size factor (SMB) and the value factor (VMG), and the turnover factor (PMO). Panel A reports the sample mean, Newey-West (1987) adjusted t-statistics sample standard deviation, Sharpe ratio, skewness and maximum drawdown (MDD) for each factor. Panel B reports the correlation matrix of the factors. The sample period is from January 2005 through July 2018.
+[表]
+ | Trend | MKT | SMB | VMG | PMO | 
+Panel A: Summary statistics | 
+Mean (%) | $ 1.43^{{***}} $\n(6.10) | 0.91\n(1.20) | $ 0.97^{{**}} $\n(2.37) | $ 1.15^{{***}} $\n(4.11) | $ 0.78^{{***}} $\n(3.12) | 
+Std dev (%) | 3.00 | 8.30 | 5.05 | 4.06 | 3.67 | 
+Sharpe ratio | 0.48 | 0.11 | 0.19 | 0.28 | 0.21 | 
+Skewness | 0.33 | -0.38 | -0.12 | 0.32 | -0.94 | 
+MDD (%) | 13.17 | 69.33 | 25.94 | 19.65 | 25.15 | 
+Panel B: Correlation matrix | 
+Trend | 1.00 | -0.12 | 0.12 | 0.04 | 0.52 | 
+MKT | -0.12 | 1.00 | 0.10 | -0.24 | -0.30 | 
+SMB | 0.12 | 0.10 | 1.00 | -0.66 | 0.10 | 
+VMG | 0.04 | -0.24 | -0.66 | 1.00 | -0.05 | 
+PMO | 0.52 | -0.30 | 0.10 | -0.05 | 1.00 |
+--- 图8 ---
+This table reports the alphas of the trend factor (Trend) and the turnover factor (PMO) respect to different benchmark models. Panel A reports the result for CAPM, Panel B report result for LSY-3 factor model, Panel C reports the result for LSY-4 factor model, and Pa reports the result for our 4-factor model. Newey-West (1987) adjusted t-statistics are report parentheses. The sample period is from January 2005 through July 2018.
+[表]
+ | Trend | PMO | Trend | PMO | 
+ | Panel A: CAPM | Panel B: LSY-3 factor model | 
+$ \alpha $(%) | $ 1.47^{{***}} $\n(6.30) | $ 0.90^{{***}} $\n(4.70) | $ 1.17^{{***}} $\n(3.91) | $ 0.91^{{***}} $\n(2.96) | 
+$ \beta_{{MKT}} $ | -0.04\n(-1.31) | $ -0.13^{{***}} $\n(-2.61) | -0.04\n(-0.92) | $ -0.14^{{**}} $\n(-2.48) | 
+$ \beta_{{SMB}} $ |  |  | 0.15\n(1.48) | 0.07\n(0.64) | 
+$ \beta_{{VMG}} $ |  |  | 0.13\n(1.15) | -0.06\n(-0.39) | 
+ | Panel C: LSY-4 factor model | Panel D: Our  $ 4 $-factor model | 
+$ \alpha $(%) | $ 0.82^{{***}} $\n(3.35) |  | 0.26\n(0.95) |  | 
+$ \beta_{{MKT}} $ | 0.03\n(1.05) |  | $ -0.12^{{***}} $\n(-2.99) |  | 
+$ \beta_{{SMB}} $ | 0.10\n(1.41) |  | -0.03\n(-0.36) |  | 
+$ \beta_{{VMG}} $ | $ 0.15^{{**}} $\n(2.07) |  | -0.17\n(-1.41) |  | 
+$ \beta_{{PMO}} $ | $ 0.43^{{***}} $\n(5.44) |  |  |  | 
+$ \beta_{{Trend}} $ |  |  | $ 0.61^{{***}} $\n(4.31) |  |
+--- 图9 ---
+able 4
+alphas of anomalies
+This table reports the mean return and the alphas of the anomalies under three different factor models: LSY-3, LSY-4, and our -factor model. For each anomalies, we compute a monthly long-short VW return spread based on the decile portfolios sorted by the corresponding characteristics in the most recent month-end. The anomalies and the corresponding characteristics are: Size-market capitalization, EP: earnings-to-price ratio, BM: book-to-market ratio, CP: cashflow-to-market ratio, Turnover: turnover, TrendPV: trend of price and volume, TrendP: trend of price, TrendV: trend of volume, Illiq: the Amihud (2002) illiquidity measure, Reversal: 1-month reversal, ROE: return-on-equity, Vol: the volatility of the daily return in the last month, IVol: biosyncratic volatility, MAX: the maximum daily return in the last month, Newey-West (1987) adjusted t-statistics are reported in parentheses. The sample period is from January 2005 through July 2018.
+[表]
+ | Size | EP | BM | CP | Turnover | TrendPV | TrendIP | TrendV | Iliq | Reversal | ROE | Vol | IVol | MAX | 
+Panel A: Mean return (%) | 
+Return | $ 1.03^{{*}} $ | $ 1.37^{{**}} $ | $ 1.62^{{***}} $ | $ 0.80^{{*}} $ | $ 1.56^{{**}} $ | $ 1.83^{{***}} $ | $ 1.60^{{***}} $ | $ 1.42^{{***}} $ | $ 1.39^{{**}} $ | $ 1.62^{{***}} $ | $ 0.84^{{*}} $ | $ 1.07^{{*}} $ | $ 1.43^{{***}} $ | $ 1.05^{{*}} $ | 
+ | (1.68) | (2.47) | (2.98) | (1.71) | (2.55) | (5.11) | (3.88) | (4.78) | (2.16) | (2.72) | (1.74) | (1.88) | (2.67) | (1.80) | 
+Panel B: Alpha w.r.t. LSY-3 factor model (%) | 
+$ \alpha $ | $ 0.31^{{**}} $ | 0.22 | $ 1.05^{{*}} $ | 0.19 | $ 1.23^{{**}} $ | $ 1.50^{{***}} $ | $ 1.29^{{**}} $ | $ 1.22^{{***}} $ | $ 0.71^{{***}} $ | $ 1.59^{{**}} $ | 0.05 | 0.60 | $ 1.21^{{**}} $ | 0.77 | 
+ | (2.44) | (0.71) | (1.83) | (0.57) | (2.31) | (3.51) | (2.46) | (3.81) | (3.44) | (2.51) | (0.17) | (0.85) | (2.28) | (1.21) | 
+Panel C: Alpha w.r.t. LSY-4 factor model (%) | 
+$ \alpha $ | $ 0.33^{{*}} $ | 0.20 | $ 1.02^{{*}} $ | -0.04 | 0.22 | $ 0.99^{{***}} $ | $ 0.95^{{*}} $ | $ 0.59^{{**}} $ | $ 0.47^{{*}} $ | $ 1.23^{{**}} $ | -0.01 | -0.06 | $ 1.06^{{*}} $ | -0.13 | 
+ | (1.91) | (0.65) | (1.70) | (-0.11) | (0.45) | (2.62) | (1.93) | (2.04) | (1.97) | (2.00) | (-0.04) | (-0.09) | (1.69) | (-0.24) | 
+Panel D: Alpha w.r.t. our 4-factor model (%) | 
+$ \alpha $ | 0.13 | 0.23 | 0.47 | 0.00 | 0.45 | 0.11 | -0.22 | 0.36 | 0.44 | 0.67 | 0.17 | -0.06 | 0.92 | -0.18 | 
+ | (0.51) | (0.63) | (0.79) | (0.01) | (0.81) | (0.33) | (-0.55) | (1.20) | (1.39) | (1.00) | (0.45) | (-0.09) | (1.48) | (-0.32) |
+--- 图10 ---
+table 5
+Comparison of the model performance in explaining anomalies
+This table compares the pricing ability of different factor models, including Liu, Stambaugh and Yuan (2019) 3-factor (LSY-3) and 4-factor (LSY-4), Hou, Xue and Zhang (2015) q-factor (q-4) Fama and French (2015) 5-factor (FF-5), and our 4-factor model, in explaining anomalies. Also reported are results for "unadjusted" return spread (i.e., for a model with no factors). For each model, the table reports the average absolute monthly alpha (%), the average absolute t-statistics the aggregate pricing error  $ \Delta = \alpha' \Sigma^{-1} \alpha $, and the Gibbons, Ross, and Shaken (1898) "GRS" B statistics with associated p-values in the brackets. The sample period is from January 2005 through July 2018.
+[表]
+Measure | Unadjusted | LSY-3 | LSY-4 | q-4 | FF-5 | Our-4 | 
+Average  $ |\alpha| $ | 1.33 | 0.85 | 0.52 | 1.48 | 0.73 | 0.32 | 
+Average  $ |t| $ | 2.72 | 2.01 | 1.25 | 2.98 | 1.77 | 0.68 | 
+$ \Delta $ | 0.527 | 0.296 | 0.256 | 0.479 | 0.257 | 0.140 | 
+GRS | 5.60 $ ^{***} $ | 2.24 $ ^{***} $ | 1.84 $ ^{**} $ | 4.01 $ ^{***} $ | 1.89 $ ^{**} $ | 0.91 | 
+ | [0.00] | [0.00] | [0.03] | [0.00] | [0.03] | [0.55] |
+--- 图11 ---
+Comparison of the model performance in explaining mutual funds
+This table compares the pricing ability of different factor models, including Liu, Stambaugh and Yuan (2019) 3-factor (LSY-3) and 4-factor (LSY-4), Hou, Xue and Zhang (2015) q-factor (q-4). Fama and French (2015) 5-factor (FF-5), and our 4-factor model, in explaining mutual funds portfolios. Also reported are results for "unadjusted" return spread (i.e., for a model with no factors). For each model, the table reports the average absolute monthly alpha (%), the average absolute t-statistics, the aggregate pricing error  $ \Delta = \alpha / \Sigma^{-1} \alpha $, and the Gibbons, Ross, and Shaken (1898) "GRS" F-statistics with associated p-values in the brackets. The sample period is from January 2005 through July 2018.
+[表]
+Measure | Unadjusted | LSY-3 | LSY-4 | q-4 | FF-5 | Our-4 | 
+Average  $ \alpha $ | 1.47 | 0.35 | 0.30 | 0.48 | 0.55 | 0.26 | 
+Average  $ |t| $ | 1.81 | 1.38 | 1.05 | 1.02 | 1.22 | 0.88 | 
+$ \Delta $ | 0.109 | 0.045 | 0.034 | 0.040 | 0.052 | 0.025 | 
+GRS | 1.67 $ ^{*} $ | 0.49 | 0.35 | 0.48 | 0.55 | 0.24 | 
+ | [0.09] | [0.89] | [0.96] | [0.89] | [0.85] | [0.99] |

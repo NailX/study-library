@@ -1,0 +1,258 @@
+# 出色不如走运 (IV)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/2CGEBnu5kR6YmQxqNJR4DA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+继 Harvey, Liu, and Zhu (2016) 把因子显著性 t-statistic 阈值提升到 3.0 之后，如今它又被提升到 3.4 以上？
+
+00
+引言
+
+上周，Review of Financial Studies 发布了最新的一刊（2020 年五月刊）。令人颇为惊喜的是，它是一个关于股票截面收益率研究新方法的特刊（Special Issue: New methods in the cross-section）。
+
+下图是这期的封面，罗列它所包含的文章。除了第一篇是来自编辑的介绍软文外，从第二篇 Eugene Fama 和老搭档 Ken French 的文章开始就是被收录的论文。大咖云集、众星闪耀。
+
+关于这 9 篇论文，本公众号和 [因子动物园] 之前零星介绍过一些（因为有些能够在 SSRN 上拿到早期的研究手稿），例如 Fama and French (2020)，Daniel et al. (2020) 以及 Gu, Kelly, and Xiu (2020) 等；另外相信各位小伙伴对于 Hou, Xue, and Zhang (2020) 的 Replicating Anomalies 也一定不陌生（这篇文章终于见刊了！）。
+
+本文的目的并非逐一介绍这个特刊收录每篇论文，而是重点关注其中的一篇。也许各位已经从本文的题目猜到了，它是《出色不如走运》系列的最新一篇，而这一系列所阐述的都是到底如何排除运气的成分、找到真正显著的异象。因此，本文的主要内容就是介绍 Chordia, Goyal, and Saretto (2020) 这篇题为 Anomalies and false rejections 的论文。
+
+当然，由于特刊过于精彩，它精彩的勾勒出关于截面预期收益率研究的三个趋势。因此本文也会对其进行简要介绍。下文的第一节将会深入浅出的解读 Chordia, Goyal, and Saretto (2020)；第二节会介绍特刊中的三大趋势；第三节总结。
+
+需要背景知识的小伙伴，请参考本系列的前几篇文章《出色不如走运?》、《出色不如走运(II)?》以及《出色不如走运(III)?》。
+
+01
+Chordia, Goyal, and Saretto (2020)
+
+本节简要介绍 Chordia, Goyal, and Saretto (2020) 一文的核心思想和结论。行文会尽可能采用直白的方式，辅以少量（？）的公式。对技术细节感兴趣的小伙伴请直接阅读论文原文。
+
+近年来，学术界越来越重视多重假设检验（multiple hypothesis testing，简称 MHT 问题）对异象显著性的影响。所谓 MHT 问题，就是说当很多学者对着同样的数据（过去几十年的美股数据）挖异象的时候，仅靠运气就能发现很多显著的异象。举个具象一些的例子，比如同时测了 100 个异象，其中最高的那个的 t-statistic 就会很高 —— 哪怕从金融学角度来说它可能和股票收益率根本没什么关联。
+
+MHT 问题的存在使得单一检验的 t-statistic 被高估了，即里面有运气的成分。当排除了运气成分后，该异象很可不再显著。如果仍然按照传统意义上的 2.0 作为 t-statistic 阈值来评价异象是否显著，一定会有很多 false rejections。MHT 问题的核心就是控制 false rejections 发生的概率。这意味着，单一异象的 t-statistic 只有比传统意义上的 2.0 要高的多，那么这个异象才在控制了 false rejections 概率之后仍然有可能是真实的。
+
+因此，问题的核心就是：t-statistic 的阈值应该是多少？
+
+关于这个问题，统计学和医学界做过大量的研究。而金融领域开始（格外）重视它大概是在近 5 年。其中的代表是 Harvey, Liu, and Zhu (2016) 这篇同样发表在 Review of Financial Studies 上的论文，它把 t-statistic 从 2.0 提升至 3.0。而今天的这篇 Chordia, Goyal, and Saretto (2020) 从某种程度上正是对标了 Harvey, Liu, and Zhu (2016)。
+
+为了回答 t-statistic 阈值是多少，需要有两个问题需要解决。先来看第一个，即使用何种算法来控制 false rejections 的概率。就这个问题，学术界提出了很多不同的方法，下面借助下表来解释它们。
+
+假设一共研究了 S 个异象，其中 S_0 个在原假设下为真（即不能预测收益率），S_1 个在原假设下为假（即能够预测收益率）。接下来，按 5% 的显著性水平对每个 hypothesis 进行检验，并一共拒绝了 R 个假设，其中 F_1 个 false rejections（因为它们的原假设为真）。使用 F_1 和 R 可以定义一些不同的统计量，而不同的 MHT 算法是以控制不同的统计量为目标。这些统计量包括三大类：FWER、FDR 和 FDP。
+
+FWER 是 familywise error rate，控制它相当于：
+
+其中 α 为显著性水平。由定义可知，FWER 是控制出现 1 个 false rejection 的概率。常见的算法包括 Bonferroni 和 Holm 方法（见《出色不如走运(II)?》），以及 White (2000) 的 bootstrap reality check 算法和 Romano and Wolf (2005) 的 StepM 算法等。毫无疑问，这个控制太过严苛，不适用于分析异象。
+
+FDR 是 false discover rate，它是 F_1/R 的期望。因此控制它相当于：
+
+从定义可知，FDR 比 FWER 要温和得多，它允许 F_1 着 R 的增大而成比例上升。常见的算法为 BHY 方法（见《出色不如走运(II)?》）。
+
+FDP 是 false discovery proportion，它和 FDR 类似，控制它相当于：
+
+它的含义是控制伪发现比例（F_1/R）超过 γ 的概率低于显著性水平 α。这其中著名的算法包括 Romano and Wolf (2007) 以及 Romano, Shaikh, and Wolf (2008)。
+
+Chordia, Goyal, and Saretto (2020) 选择的控制 false rejections 的对象是控制 FDP（他们并非“凭空想象”而是给出了理由）。该文采用了 Romano and Wolf (2007) 以及 Romano, Shaikh, and Wolf (2008) 的算法，并结合 bootstrap 方法以保留异象之间的相关性。具体方法本文暂且不表，感兴趣的朋友请参考论文原文，因为选择哪种控制算法并不是 Chordia, Goyal, and Saretto (2020) 一文的核心贡献。
+
+前文说过，要找到正确的阈值，需要解决两个问题。第一个问题是选择如何控制 false rejections。但是，这并不是问题的关键。计算 t-statistic 阈值的关键是下面马上要介绍的第二个问题 —— 学术界到底挖了多少个异象？
+
+为什么说这个问题重要？因为这个基数决定了运气的多寡。这就好比，检验 100 个和 10000 个异象相比，万里挑一的肯定要比百里挑一的更显著。所以，只有知道学术界到底挖了多少异象，才有可能正确给出 t-statistic 的阈值，而这个问题比如何控制 false rejections 重要的多。
+
+有的小伙伴可能会说 —— 不就那 300 来个吗，就是 Harvey, Liu, and Zhu (2016) 考虑的那些；或者 450 个左右，就是 Hou, Xue, and Zhang (2020) 复现的那些。答案并没有这么简单。其原因是，一个异象之所以被发表，显然因为它本身达到了传统意义上的显著性水平（如 2.0）。如果一个学者研究出来的异象不显著，那么他也不会针对它写篇论文，或者即便写了也不会被发表。令 P 代表被发表的异象的集合，R 代表被挖出来的异象的集合，由上述的论述可知 P 是 R 的一个子集。且我们可以合理的假设它们大约满足如下的关系：
+
+由于 P 仅仅是 R 的子集（“下界”），使用 P 来进行 false rejections 控制只能低估了运气的成分，因此 Harvey, Liu, and Zhu (2016) 找到的 3.0 阈值只可能是真实 t-statistic 阈值的下限。
+
+有了 R 的“下界”，再来看看“上界”。Chordia, Goyal, and Saretto (2020) 使用财务三大表中的指标，经过“无脑”加减乘除运算，构建了 2,393,641 个异象。令集合 E 代表这些异象，它就是 R 的上界。两百多万个异象，哇咔咔，但需要说明的是，这些只是通过“无脑”加减乘除得到的，这可以理解成从 econometrician（计量经济学家）的角度找到的异象个数。
+
+那么，能不能用 E 当作异象集来控制 false rejections 呢？答案也是否定的。Chordia, Goyal, and Saretto (2020) 指出，和 econometrician 们不同，金融学教授那都是有 domain knowledge 的，显然不会胡乱找一个看着就不太可能预测收益率的变量构建异象。因此，金融学者们研究的异象肯定（远）小于 2,393,641 个，所以 R 是 E 的子集。综合上述讨论得到：
+
+绕了一大圈似乎啥也没解决，还是不知道 R 有多大。别着急，确定 R 的统计特征、从而依据其特征控制 false rejections 计算 t-statistic 阈值就是 Chordia, Goyal, and Saretto (2020) 一文最大的亮点。而他们采用的方法则是 simulation。Simulation 的好处是 data generating process 是已知的，因此能够知道哪些 H_0 为真、哪些 H_0 为假，从而计算出正确的 t-statistic 阈值。
+
+为了进行 simulation，就要有模型。该文假设股票收益率在时序上满足如下多因子模型：
+
+其中 α_i 是模型无法解释的超额收益。此外，在所有能够构建异象的变量中，模型假设显著变量的概率为 π。对于该变量，simulation 中假设其在 t 期的取值满足以下模型：
+
+式中 η 满足正态分布 N(0, σ^2)，是随机扰动。如果变量是真的异象（发生概率 π），则它对于股票 i 在 t 期的取值为 α_i + η_{it}。值得说明的是，simulation 中当然无从知道异象变量到底应该怎么取值，但既然真正的异象能够获得超额收益，那么异象变量的取值一定和个股的 α_i 相关（否则按 portfolio sort 排序就没法获得超额收益了），因此令 s_{it} = α_i + η_{it} 是合理的。如果变量是假的异象（发生概率 1 - π），则 s_{it} = η_{it} 是随机噪声。
+
+除了关于收益率的模型和异象变量的模型外，simulation 中还有一个至关重要的参数 —— Ω。它代表了金融学者们挖出真正异象的能力。怎么理解呢？前面已经说了 π 是异象的概率，但这只不过是随机抽取的概率。对于金融学教授来说，因为有先验知识，因此他们获得异象的条件概率要高于非条件概率 π。这个参数 Ω 就是衡量金融学教授挖出异象的概率，这个概率为 Ωπ，即二者的乘积。
+
+OK！现在有了模型，只要知道参数取值就可以跑仿真了。参数如何取值呢？对于收益率模型中的因子收益率、因子暴露以及超额收益，Chordia, Goyal, and Saretto (2020) 采用了真实美股市场数据的分布进行估计，而对于异象变量模型的参数 π、Ω 以及 σ，他们使用了校准。
+
+既然要校准，就要给定 target quantities，用它们作为校准参数来逼近的对象。为了解释这些 target quantities，先介绍一个概念。如果某个 H_0 在单一检验下被拒绝了，但是在考虑了多重假设检验后没有被拒绝，则称它为 single, but not multiple（SnM）rejection。
+
+通过控制 FDP，Chordia, Goyal, and Saretto (2020) 发现不带任何先验的计量经济学家集合 E 中，SnM 的比例为 97.9% —— 如此之高，说明不带金融学先验去挖异象确实不靠谱。回到 simulation，这个 SnM 值显然和无条件的异象概率 π 有关，因此它就是对 π 校准的 target quantity。
+
+接下来如法炮制，对于发表的异象集合 P，它的 SnM 的比例为 27.0% —— 看来金融学教授们要靠谱得多。这个数值显然和异象的条件概率 Ωπ 有关。但是注意这个 SnM 是针对集合 P 的，它是被发表的异象，而 Ωπ 所代表的是学者们在研究中挖出显著异象的概率。因此，使用 SnM = 27.0% 来校准 Ωπ 的思路是正确的，但是必须带上 P 和 R 的关系，即 P = {s \in R, t ≥ 2.0}。
+
+最后是随机扰动的波动 σ。为了校准它，Chordia, Goyal, and Saretto (2020) 选择了两个 target quantities。为了便于理解，在此介绍其中一个。由于 σ 控制随机扰动的波动，因此它直接影响着信噪比。该文采用下式来衡量信噪比：
+
+其中分子是显著异象组合超额收益 α_s 绝对值的期望；分母是显著股票超额收益 α_i 绝对值的期望。该比值来自真实美股数据，大小为 0.12。
+
+有了上述这些，Chordia, Goyal, and Saretto (2020) 通过全局优化算法求解，并平均了 1000 次 simulation 结果确定了 π、Ω 以及 σ 的取值。再次强调的是，有了这些取值，就相当于整个学者挖异象的 data generating process 是已知的了！利用这些参数，和前述的股票收益率和异象变量模型，他们又进行了 1000 次 simulation —— 这次是为了模拟 R 集合下（学者们挖掘异象的集合），当控制了 FDP 之后 t-statistic 应该是多少。
+
+最后，Chordia, Goyal, and Saretto (2020) 发现，如果以 portfolio sort 的超额收益（时序回归，用多因子模型作为解释变量）为研究对象，其 t-statistic 阈值高达 3.8；如果以 Fama-MacBeth 回归斜率（即在控制了其他变量后异象的收益率）为研究对象，其 t-statistic 阈值高达 3.4。一般来说，比起 portfolio sort，Fama-MacBeth 回归更不容易受多重假设检验影响，因此其 t-statistic 阈值略低。但无论如何，这两个数值均高于 Harvey, Liu, and Zhu (2016) 提出的 3.0，符合预期。
+
+以上这两个阈值就是 Chordia, Goyal, and Saretto (2020) 一文的核心结论。除此之外，该文还通过 simulation 计算了 false rejections 比例（即 F_1/R），高达 45.3%。
+
+呼！我希望你没有 get lost！
+
+02
+截面研究新趋势
+
+本节简要介绍本期 RFS 特刊中关于截面收益率研究的三个趋势（下图）。
+
+本期一共收录 9 篇文章，每个趋势下三篇。第一个趋势是 extracting information from both the cross-section and time series。其实，用白话说，它的意思就是 portfolio sort vs cross-sectional regression。
+
+从 Fama-French 三因子模型开始，用 portfolio sort 构建因子投资组合，计算其收益率作为因子便是多因子模型中采用的做法，无一例外。然而，越来越多的研究，包括 Fama 自己都发现，截面回归的纯因子组合似乎更能解释截面预期收益率的差异。因此，从这两个角度去理解因子就是第一个趋势。这个话题下的三篇文章是：
+
+对于上面第一篇，《Which Beta (II)?》一文做过详细解读；而第二篇，[因子动物园] 的《对冲：获取更纯粹的 CP》一文进行了系统说明。第三篇嘛，还没看……不过排上号了。
+
+第二个趋势是 replicating anomalies, multiple hypothesis testing, and transaction costs，包括如下三篇：
+
+其中 Replicating anomalies 不用做太多介绍了，而本文重点梳理了其中第二篇。至于第三篇嘛，again，还没看……不过也排上号了。
+
+最后一个趋势是 machine-learning tools，它关注如何将机器学习算法科学的应用在古老的实质资产定价之中。这个话题下包含的三篇文章为：
+
+其中第一篇 Gu, Kelly, and Xiu (2020) 是最近一两年非常火的一篇论文。[因子动物园] 的《因子投资中的机器学习》一文对它进行了梳理。第二篇提出了一个 PCA estimator，在降维的同时保留主成分对截面收益率的预测能力。第三篇则提出了一个非参数的方法，从 62 个常见的收益率预测变量中找到 13 个真正有效的。今后会找机会介绍这些新的方法。
+
+03
+结语
+
+本期 RFS 特刊在描述三大趋势的同时也给出了四个展望，不妨以它们作为本文的结尾：
+
+1. 重视 multiple hypothesis testing 问题，形成科研中更好的研究流程，避免 publication bias，data snooping 以及 p-hacking。
+
+2. 不同降维方法极大减少了因子的个数（通常不超过 10 个）。不过有意思的是，不同方法得到的因子可能差异很大，在这方面学术界需要寻求 common ground across methods。
+
+3. 根据资产定价理论，SDF（随机折现因子）其实是 factors 的某种线性组合。因此只有 factors 有意义，SDF 才有意义。从这个意义上说，无论采用传统方法还是新的机器学习算法，都要重视因子的经济学含义。
+
+4. 将源于预测股票收益率的这些新方法应用于金融学的其他领域，比如预测其他资产，或者用于评价基金经理以及公司决策等领域。
+
+毫无疑问，这期 RFS 特刊十分过瘾。而我们也有理由相信，未来关于实证资产定价和因子投资的研究会更加精彩。
+
+感谢阅读，预祝各位五一快乐。
+
+参考文献
+Chordia, T., A. Goyal, and A. Saretto (2020). Anomalies and false rejections. Review of Financial Studies 33(5), 2134 – 2179.
+
+Daniel, K., L. Mota, S. Rottke, and T. Santos (2020). The cross-section of risk and returns. Review of Financial Studies 33(5), 1927 – 1979.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Gu, S., B. Kelly, and D. Xiu (2020). Empirical asset pricing via machine learning. Review of Financial Studies 33(5), 2223 – 2273.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Hou, K., C. Xue, and L. Zhang (2020). Replicating anomalies. Review of Financial Studies 33(5), 2019 – 2133.
+
+Romano, J. P., A. M. Shaikh, and M. Wolf (2008). Formalized data snooping based on generalized error rates. Econometric Theory 24(2), 404 – 447.
+
+Romano, J. P. and M. Wolf (2005). Stepwise multiple testing as formalized data snooping. Econometrica 73(4), 1237 – 1282.
+
+Romano, J. P. and M. Wolf (2007). Control of generalized error rates in multiple testing. The Annals of Statistics 35(4), 1378 – 1408.
+
+White, H. (2000). A reality check for data snooping. Econometrica 68(5), 1097 – 1126.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8e390>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44fe0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aa20>)
+--- 图6 ---
+ISSN 0893-9454 (PRINT)
+ISSN 1465-7368 (ONLINE)
+The Review of Financial Studies
+Volume 33 • Number 5 • May 2020
+Special Issue: New Methods in the Cross-Section G. Andrew Karolyi and Stijn Van Nieuwerburgh, editors
+New Methods for the Cross-Section of Returns
+G. Andrew Karolyi and Stijn Van Nieuwerburgh
+Comparing Cross-Section and Time-Series Factor Models
+Eugene F. Fama and Kenneth R. French
+The Cross-Section of Risk and Returns
+Kent Daniel, Lira Mota, Simon Rottke, and Tano Santos
+Factor Timing
+Valentin Haddad, Serhiy Kozak, and Shrihari Santosh
+Replicating Anomalies
+Kewei Hou, Chen Xue, and Lu Zhang
+Anomalies and False Rejections
+Tarun Chordia, Armit Goyal, and Alessio Saretto
+A Transaction-Cost Perspective on the Multitude of Firm Characteristics
+Victor DeMiguel, Alberto Martin-Utrera, Francisco J. Nogales, and Raman Up
+Empirical Asset Pricing via Machine Learning
+Shihao Gu, Bryan Kelly, and Dacheng Xiu
+Factors That Fit the Time Series and Cross-Section of Stock Returns
+Martin Lettau and Markus Pelger
+Dissecting Characteristics Nonparametrically
+Joachim Freyberger, Andreas Neuhiert, and Michael Weber
+Published on behalf of The Society for Financial Studies
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b240>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2b970>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a0c0>)
+--- 图11 ---
+[表]
+ | $ H_{0} $ not rejected | $ H_{0} $ rejected | Total | 
+$ H_{0} $ true | $ T_{0} $ | $ F_{1} $ | $ S_{0} $ | 
+$ H_{0} $ false | $ F_{0} $ | $ T_{1} $ | $ S_{1} $ | 
+ | S - R | R =  $ F_{1} $ +  $ T_{1} $ | S |
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44770>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aa20>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44720>)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b150>)
+--- 图24 ---
+3 What Is Included in This Special Issue?
+3.1 Extracting information from both the cross-section and time series
+3.2 Replicating anomalies, multiple hypothesis testing, and transaction cost
+3.3 Machine-learning tools
+--- 图25 ---
+Eugene F. Fama and Kenneth R. French
+The Cross-Section of Risk and Returns
+Kent Daniel, Lira Mota, Simon Rottke, and Tano Santos
+Factor Timing
+Valentin Haddad. Serhiy Kozak. and Shrihari Santosh
+--- 图26 ---
+Replicating Anomalies
+Kewei Hou, Chen Xue, and Lu Zhang
+Anomalies and False Rejections
+Taron Chordia, Amit Goyal, and Alessio Saretto
+Transaction-Cost Perspective on the Multitude of Firm Characteristics
+Victor DeMiguel, Alberto Martin-Utrera, Francisco J. Nogales, and Raman Upa
+--- 图27 ---
+Empirical Asset Pricing via Machine Learning
+Shihao Gu, Bryan Kelly, and Dacheng Xiu
+Factors That Fit the Time Series and Cross-Section of Stock Returns
+Martin Lettau and Markus Pelger
+Dissecting Characteristics Nonparametrically loachim Freyberger. Andreas Neuhierl, and Michael Weber
+--- 图28 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图29 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a448b0>)
+--- 图30 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a0c0>)
+--- 图31 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b63010>)
+--- 图32 ---

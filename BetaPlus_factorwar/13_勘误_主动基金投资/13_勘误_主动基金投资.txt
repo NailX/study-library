@@ -1,0 +1,15 @@
+# 勘误.III – BetaPlus
+
+来源：https://www.factorwar.com/typos3/
+
+本页面不定期更新发布《主动基金投资》的勘误及补充说明。
+
+以下勘误出现在第一次印刷中：
+
+- 序言第 2 页，“直至 2004 年 1 月，大量基金公司……”应为“直至 2024 年 11 月，大量基金公司……”。
+
+- P20，脚注 2 缺失了动量因子。正确表述应为：为估计基金 i 的四因子 Alpha，利用过去 T 月的数据构造如下回归模型：R_ {i,t}^{e} = a_{i} + \beta_{i, \mathrm{MKT}} \mathrm{MKT}_{t} + \beta_{i, \mathrm{SMB}} \mathrm{SMB}_{t} + \beta_{i, \mathrm{HML}} \mathrm{HML}_{t} + \beta_{i, \mathrm{UMD}} \mathrm{UMD}_{t} + \varepsilon_{i, t}，其中，R_{i,t}^{e} 为基金 i 在 t 月的超额收益率。然后计算 t 月的因子模型调整后收益率：\hat{\alpha}_{i, t} = R_{i,t}^{e} – \left(\hat{\beta}_{i, \mathrm{MKT}} \mathrm{MKT}_{t} + \hat{\beta}_{i, \mathrm{SMB}} \mathrm{SMB}_{t} + \hat{\beta}_{i, \mathrm{HML}} \mathrm{HML}_{t} + \hat{\beta}_{i, \mathrm{UMD}} \mathrm{UMD}_{t}\right) = \hat{a}_{i} + \hat{\varepsilon}_{i,t}。
+
+© 2026 Factorwar. All rights reserved.
+
+京ICP备17020789号-2

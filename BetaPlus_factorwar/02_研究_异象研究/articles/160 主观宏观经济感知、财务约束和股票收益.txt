@@ -1,0 +1,234 @@
+# 主观宏观经济感知、财务约束和股票收益
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/4xnEeeYvEOw68pPdzSXuYg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+一篇整合了宏观，理性文献的财务约束摩擦以及行为金融学的过度外推，并强调它们的 interaction 对股票收益率截面影响的实证佳作。
+
+0
+
+好久没介绍实证论文了。
+
+上一次还是 Factor Momentum and the Momentum Factor。但是今天，我忍不住要介绍一篇近期发表在 JFE 上的论文 Macroeconomic perceptions, financial constraints, and anomalies (He, Su and Yu 2024)。
+
+先来一个高度概括：
+
+这篇文章研究了主观宏观经济生产力预期修正对股票收益率的影响。它整合了理性文献中的财务约束摩擦与行为金融学中的过度外推偏差，深入探讨了它们的交互作用如何驱动股票市场异常表现随时间变化。文章揭示了财务约束较强的企业在不同宏观预期环境下呈现出截然不同的回报表现，是理解异象回报异质性的一篇实证佳作。
+
+除了实证的精彩之外，这篇文章在实证结果的汇报以及对相关文献的梳理方面都令人称道，读完让我大呼过瘾。下面听我一一道来。
+
+1
+
+首先，再次陈述一下文章的核心观点：主观宏观经济生产力预期的修正对股票异象有显著影响，尤其是在财务约束更大的公司中表现得尤为明显。
+
+这里面有两个关键词，第一个是主观宏观经济预期的修正中的“主观”，而第二个是“财务约束更大”。我们先来说后者，把前者留到下一节。
+
+本文中，作者强调的财务约束指的是企业在融资、投资和运营决策中受到的限制。比如，小型企业、财务困境企业或低盈利企业可能比大型企业更难以获得融资，因此财务约束更大的公司具备的特征是小市值、价值股、低投资、低盈利、低质量等。而与它们相对应的就是财务约束较低的公司，即大市值、高估值、高投资、盈利强以及高质量等。为了从实证检验本文的核心观点，作者从上述特征出发挑选了最具代表性的 12 个异象，如下表所示。
+
+这个表中，第一处让我感叹的是它把这 12 个异象按照多头和空头中哪一方的财务约束更大进行了划分。这个看上去非常自然的举动却给读者阅读后文所有的实证结果带来了极大的便利。
+
+我们知道，每个异象都是由多空两头构造的对冲组合，那么多空两头的某一边自然也就更倾向于落入作者定义的财务约束更大的公司。例如，ROE 盈利异象，它的空头是盈利更差的公司，因此这些公司就是财务约束更大的公司；又比如 BM 价值异象，它的多头是低估值的价值股，因此这些公司的财务约束更大。所以，表中 Panel A 的异象，全部都是其空头一方的公司受到财务约束的影响更严重；而 Panel B 的异象，全部都是其多头一方的公司受到财务约束的影响更严重。
+
+第二个让我感叹的地方是作者为所有的异象都提供了既有的文献，来支持这些异象受到财务约束影响（Evid. Of financial constraints 这一列）。我看到这里的时候，沉默了半分钟。我曾觉着自己文献看的不少，但是和本文的三位作者比起来，实在自愧不如。（必须让我感慨一句：余老师和他的 co-authors 真是行走的资料库！）
+
+为了进一步支持他们的论点，三位作者使用 Lamont, Polk, and Saa-Requejo (2001) 提出的 KZ index，Whited and Wu (2006) index 以及 Hadlock and Pierce (2010) index 这三个常用来描述财务约束的指标，计算了上述 12 个异象多空两头各自的财务约束程度，其中综合指数（FC index）越高表明约束越大。下表汇报了结果。不难看出，Panel A 中，全部 8 个异象的空头的财务约束综合指数都显著高于多头（表明约束更大）；而与之形成鲜明对比的是，Panel B 中，全部 4 个异象的多头的 FC index 都显著高于对应的空头。
+
+2
+
+下面再来说另一个关键点，即主观宏观经济预期修正。
+
+这里，作者强调的是主观的预期修正，也可以说是主观的错误感知。这是因为该文的另一块重要的 building block 是来自行为金融学。文章认为，投资者在面对宏观经济预期的修正时，往往表现出过度乐观或过度悲观的行为，尤其是当这些预期发生大幅调整时。换言之，投资者会对过度外推预期的变化，而这对于异象的收益率有着深远的影响。
+
+为此，作者使用 Survey of Professional Forecasters（SPF）的数据。这里简单补充一点背景知识：SPF 是美国历史最悠久的经济预测调查之一，它的独特之处在于依赖私人部门（例如各大金融机构、经济研究机构）经济学家的专业预测数据，而非政府官员或央行内部预测。通过汇总和分析这些预测，SPF 为市场提供了一个重要的主观经济预期的衡量工具。
+
+通过这个调查数据，作者得到了市场参与者对未来工业生产增长的预期，并将这些预期与上一季度的预期进行对比，来衡量主观预期的变化，构造了  指标：
+
+  
+
+其中  表示本季度对下一季度工业生产增长的预期，而  表示上一季度对同一时期（也即下个季度！）的预期，所以二者之差就是预期的修正。如果这个差值为正，意味着预期的上调，即主观宏观经济生产率预期变得乐观；如果为负，意味着预期的下调，即主观宏观经济生产率预期变得悲观。
+
+通过  ，作者定量化描述了投资者对宏观经济生产率的预期变化。它反映了市场参与者的主观预期修正，而非基于实际的经济数据。下图展示了按上式计算的主观预期修正如何随时间的变化，其中阴影部分表示 NBER 定义的经济衰退期。
+
+3
+
+以上说完了两个关键词，即“主观修正”和“财务约束”，本节就来介绍这篇实证背后最精彩的 narrative，即这二者 —— 特别是二者的交互作用 —— 如何影响不同异象的时变收益特征。（I know 我还没有给出异象表现的实证结果；实证结果我放到本文第 4 节；我认为这样的陈述逻辑最通顺。）
+
+作者对机制的讨论和 Deng (2023) 以及 Gulen, Ion and Rossi (2023) 的理论分析相似。Deng (2023) 指出，由于金融市场的反馈通过资本成本影响公司的投资和融资决策，因此财务摩擦与外推性预期的相互作用使得财务约束公司对生产率冲击的反应更强，此外，Gulen, Ion and Rossi (2023) 表明，财务约束更大的公司应在信贷市场情绪冲击下经历更大的波动。
+
+直观来看，当主观预期上调时，外推性投资者会过度上调对总生产率的预期并变得过度乐观。因对生产率的乐观预期而导致感知违约概率下降，改善了公司的融资条件并推动了其投资和借贷。更为重要的是，这一效果对于财务约束更大的公司尤为显著（因为它们对外部融资更敏感）。另一方面，对于不受财务约束的公司而言，过度乐观不会产生同样的效果，因为它们的融资成本本就比较低。因此，虽然所有公司在预期上调期间都有改善，但由于融资条件放松和资本成本下降带来了额外的影响，所以财务约束较强的公司受益更多。
+
+换言之，预期上调和财务约束放松二者的合力更大程度地影响了财务约束大的公司，进而推高了这些公司的股价（具体 channels 下文会说明）。然而，一旦实际生产率在未来不及预期，股价最终发生反转，导致这些公司股票的预期收益率显著更低。
+
+相同的逻辑适用于主观预期下调时。面对不利冲击，外推性投资者变得过度悲观，加剧了公司的财务约束。对于不受财务约束的公司，这种悲观情绪不会显著影响其财务约束，它们仍然能够以低成本为投资提供资金。然而，对于受到财务约束影响的公司，这种悲观情绪进一步加剧了其财务约束，导致其股价承受更多下行压力，因此这些公司股票未来的预期收益率更高。
+
+让我们把上述逻辑“映射”到异象层面。当主观预期上调的时候，财务约束更大的公司未来的预期收益率更低。因此，以这些公司作为多头的异象未来的表现也就更差；这些异象包括 Panel B 中的 BM、LTR、IA 以及 SIZE。而以这些公司作为空头的异象未来的表现将会更好；这些异象包括 Panel A 中的 ROA、ROE、OP、Quality、FProb、O-Score、TV 以及 IVOL。
+
+反之（完全镜像的结论），当主观预期下调的时候，财务约束更大的公司未来的预期收益率会更高。因此，以这些公司作为多头的异象未来的表现也就更好；即 BM、LTR、IA 以及 SIZE。而以这些公司作为空头的异象未来的表现将会更差；即 ROA、ROE、OP、Quality、FProb、O-Score、TV 以及 IVOL。
+
+He, Su and Yu (2024) 一文中最漂亮的实证结果当然就是上面这个（该文的 Table 4）。不过在介绍它（下一节）之前，我们还是先看看实证数据是否支持作者给出的机制分析。
+
+关于主观预期修正会造成过度外推，作者考察了分析师对公司长期盈利增长率的预测误差（LTG Error）与主观宏观经济预期修正  的关系。长期盈利增长率（LTG）定义为公司在未来一个完整商业周期（通常为 3 至 5 年）内预计的年化营业利润增长：
+
+  
+
+其中  是  季度的每股收益。上式意味着  代表实际值减去预测值的差异。因此，正的  表示分析师对长期收益过于悲观，而负的  则表示过于乐观。文章通过回归分析，考察了  与  的关系：
+
+  
+
+回归结果如下表所示。由上述定义可知，我们关心的是回归系数  。从结果可知，回归系数都是负数。在  的定义下（实际值 – 预测值），负的  表明  增大会降低  ，即预测值相对于实际值而言更高，即主观预期修正确实会造成过度外推。更重要的是，对于 Panel A 的异象来说，空头端的  系数更负；而对于 Panel B 的异象而言，多头端的  系数更负。这意味着，财务约束较强的公司（short leg 或 long leg，视情况而定）在主观预期上调时，外推性预期导致 LTG 预期过高。和上面关于机制的描述中，来自行为金融学的过度外推相符。
+
+另一方面， 该文的 4.3 节探讨了公司在面对主观宏观经济预期修正时的投融资活动，并分析了这些活动如何通过两个 channels —— 投资过度和市场择时 —— 影响财务约束公司和不受财务约束公司的行为和回报。
+
+首先，作者强调了当预期上调时，财务约束较强的公司会因为融资条件的改善而增加投资和借贷，表现出过度投资的现象。这种现象通过投资过度 channel 表现出来，导致这些公司在预期过度乐观时进行非理性扩张，推高当前股价，但后续回报却显著下降。同时，文章也讨论了市场择时 channel，即财务约束公司会趁着融资条件较好时，利用市场乐观情绪进行融资操作（如发行股票或债券），进一步推高股价。然而，随着实际生产率未能达到最初的预期，股价出现回调。作者通过实证验证了上述两个方面对财务约束公司回报的负面影响。具体实证结果请参考论文原文。
+
+4
+
+Okay！以上我们梳理了这篇文章的核心组成部分：主观预期，财务约束，以及二者的交互作用如何影响不同异象的多头和空头，进而造成异象本身时变的风险收益特征。
+
+接下来，就是该文最重要的实证结果。让我简单重复一下：
+
+当主观预期上调的时候，财务约束更大的公司未来的预期收益率更低。因此，Panel B 中异象的预期收益率更低；Panel A 中异象的预期收益率更高。
+
+当主观预期下调的时候，财务约束更大的公司未来的预期收益率更高。因此，Panel B 中异象的预期收益率更高；Panel A 中异象的预期收益率更低。
+
+好了，一表胜千言！
+
+首先来看 Panel A。红色和蓝色部分分别 highlight 了空头组合在预期上调和下调时的表现。可以看到：上调时，空头未来表现更差（红色）；下调时，空头未来表现更好（蓝色）。反观多头（财务约束影响较小的公司）在两种情况下的未来表现差异不大（我没有 highligh 出来）。因此，综合多头和空头的表现，最终异象是在预期上调时表现更好（因为此时空头更差！），正如图中黄色框框所示。
+
+再来看 Panel B。此时，红色和蓝色部分分别 highlight 了多头组合在预期上调和下调时的表现。可以看到：上调时，多头未来表现更差（红色）；下调时，多头未来表现更好（蓝色）。反观空头（财务约束影响较小的公司）在两种情况下的未来表现差异不大（Again，没有 highligh 出来）。因此，综合多头和空头的表现，最终异象是在预期下调时表现更好（因为此时多头更好！），正如图中黄色框框所示。
+
+Beautiful!
+
+最后，这个实证结果对因子投资的 implication 是什么？因子择时！下图给出了基于上述逻辑的因子择时结果，无需我更多的解读。
+
+5
+
+以上就是对 He, Su and Yu (2024) 一文核心内容的梳理。这篇论文还有很多更细致的实证结果，留给感兴趣的小伙伴自己去品味。
+
+此外，这篇文章在汇报结果方面，对于读者的考虑也非常值得借鉴。它一开始对于两类异象的区分对待，极大方便了我对后文的阅读（因为每次只需要 confirm 新的实证结果是否和两类异象的划分相符合即可）。
+
+毫无疑问，这是一篇精彩的实证。而就我个人的感受，正如本文开篇所说的那样，我上一次读这么精彩的实证，还是上一次。
+
+参考文献
+Deng, Y. (2023). Extrapolative expectations, corporate activities, and asset prices. Working Paper.
+
+Hadlock, C.J. and J. R. Pierce (2010). New evidence on measuring financial constraints: Moving beyond the KZ index. Review of Financial Studies 23, 1909-1940.
+
+He, W., Z. Su, and J. Yu (2024). Macroeconomic perceptions financial constraints, and anomalies. Journal of Financial Economics 162.
+
+Gulen, H., M. Ion, and S. Rossi (2023). Credit cycles and corporate investment. Working Paper.
+
+Lamont, O., C. Polk, and J. Saa-Requejo (2001). Financial constraints and stock returns. Review of Financial Studies 14, 529-554.
+
+Whited, T.M. and G. Wu (2006). Financial constraints risk. Review of Financial Studies 19, 531-559.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+stock market anomalies.
+The table displays the 12 prominent anomalies that this paper tries to link to biased beliefs and financial constraints. The second column list he acronyms that are used in subsequent tables to refer to the anomalies. The third column lists the literature that attributes the anomaly to biased beliefs. The fourth column lists the literature that links the anomaly characteristic to financial constraints or their major component size, age, and profitability).
+[表]
+Anomaly | Acronym | Evid. of biased beliefs | Evid. of financial constraints | 
+Panel A: Short leg more financially constrained | 
+Return on assets | ROA | Stambaugh et al. (2012) | Lian and Ma (2021) | 
+Return on equity | ROE | Chen et al. (2023) | Lian and Ma (2021) | 
+Operating profitability | OP | Chen et al. (2023) | Lian and Ma (2021) and Whited and Wu (2006) | 
+Quality | Quality | Asness et al. (2019) | Based on profitability, profitability growth, and safety | 
+Failure probability | FProb | Stambaugh et al. (2012) | Hoberg and Maksimovic (2015) | 
+Ohlson&#x27;s O-score | O-Score | Stambaugh et al. (2012) | Hoberg and Maksimovic (2015) | 
+Total volatility | TV | Pflueger et al. (2020) | Dasgupta et al. (2011) and Lin and Paravisini (2013) | 
+Idiosyncratic volatility | IVOL | Hou and Loh (2016) and Stambaugh et al. (2015) | Jiang et al. (2009) | 
+Panel B: Long leg more financially constrained | 
+Book-to-market equity | BM | Lakonishok et al. (1994) | Fama and French (1995) and Maio (2014) | 
+Long-term reversals | LTR | De Bondt and Thaler (1985) | Lamont et al. (2001) and Maio (2014) | 
+Asset growth | IA | Cooper et al. (2008) | Cooper et al. (2008) | 
+Market capitalization | SIZE | Barberis et al. (2021) | Hadlock and Pierce (2010) |
+
+--- 图5 ---
+[表]
+ | Panel A: Short leg more financially constrained | 
+ROA | -3.23 | -6.66 | 3.4 | 
+ | (-3.16) | (-3.54) | (1.1) | 
+ROE | -1.87 | -10.46 | 8.6 | 
+ | (-2.62) | (-2.90) | (2.2) | 
+OP | -2.70 | -3.68 | 0.9 | 
+ | (-2.94) | (-1.46) | (0.3) | 
+Quality | -2.60 | -9.71 | 7.1 | 
+ | (-2.79) | (-4.09) | (2.7) | 
+Prob | -3.18 | -18.65 | 15.4 | 
+ | (-3.27) | (-1.48) | (1.1) | 
+D-Score | -3.97 | -6.09 | 2.1 | 
+ | (-3.06) | (-3.25) | (0.8) | 
+TV | -2.19 | -6.50 | 4.3 | 
+ | (-2.81) | (-2.37) | (1.5) | 
+VOL | -1.91 | -7.22 | 5.3 | 
+ | (-2.46) | (-3.35) | (2.7) | 
+average | -2.74 | -8.90 | 6.1 | 
+ | (-3.46) | (-3.62) | (2.4) | 
+Panel B: Long leg more financially constrained | 
+RM | -7.91 | -1.91 | -6.0 | 
+ | (-3.20) | (-2.43) | (-2.3) | 
+TR | -7.90 | -3.72 | -4.18 | 
+ | (-2.79) | (-2.62) | (-1.3) | 
+A | -6.73 | -4.09 | -2.64 | 
+ | (-2.83) | (-3.15) | (-1.38) | 
+IZE | -2.94 | -2.80 | -0.14 | 
+ | (-2.95) | (-3.75) | (-0.14) | 
+average | -7.43 | -3.65 | -3.78 | 
+ | (-2.80) | (-3.01) | (-1.78) |
+--- 图6 ---
+The table reports the average quarterly excess returns for anomalies following upward and downward revisions in expectations of industrial production growth (IPG). The average returns following upward and downward forecast revisions are estimated as  $ a_{U} $ and  $ a_{D} $ in the regression
+$$ \boldsymbol{R}_{t+1}=\boldsymbol{a}_{U}\cdot\mathbf{1}_{U,t}+\boldsymbol{a}_{D}\cdot\mathbf{1}_{D,t}+\boldsymbol{\epsilon}_{t+1}, $$
+where  $ I_{U,i} $ and  $ I_{D,i} $ are, respectively, indicators for quarters with upward and downward revisions in IPG expectations from the SPF survey, and  $ R_{t+1} $ is the excess return on  $ t $ long leg, the short leg, or the difference. Panel A reports results for anomalies with more financially constrained short legs, and Panel B reports results for anomalies with mo
+nancially constrained long legs. Average is the return to the portfolio that equally combines the anomalies in each panel. The sample period spans from 1969Q1 to 2019Q4 but the failure probability anomaly (FProb), whose data begin in 1976Q1. Newey-West eight-lag adjusted t-statistics are reported in parentheses.
+[表]
+ | Long leg | Short leg | Long-Short | 
+ | Up | Down | Up-Down | Up | Down | Up-Down | Up | Down | Up-Down | 
+Panel A: Short leg more financially constrained | 
+A | 1.11 | 2.53 | -1.42 | -1.73 | 3.25 | -4.97 | 2.84 | -0.72 | 3.55 | 
+ | (1.14) | (2.95) | (-1.13) | (-1.23) | (2.53) | (-2.70) | (3.74) | (-0.89) | (3.61) | 
+ | 0.99 | 2.59 | -1.61 | -1.49 | 3.85 | -5.34 | 2.48 | -1.26 | 3.74 | 
+ | (1.09) | (2.95) | (-1.30) | (-1.06) | (3.00) | (-2.89) | (2.86) | (-1.40) | (3.50) | 
+ | 1.27 | 2.45 | -1.18 | -2.71 | 2.53 | -5.24 | 3.97 | -0.08 | 4.06 | 
+ | (1.25) | (2.78) | (-0.90) | (-2.11) | (1.97) | (-2.98) | (5.47) | (-0.10) | (4.49) | 
+ty | 1.71 | 2.82 | -1.11 | -2.47 | 2.43 | -4.90 | 4.18 | 0.39 | 3.79 | 
+ | (1.74) | (3.37) | (-0.90) | (-1.78) | (1.79) | (-2.64) | (4.99) | (0.40) | (3.27) | 
+ | 1.82 | 3.00 | -1.18 | -3.65 | 3.30 | -6.96 | 5.48 | -0.30 | 5.78 | 
+ | (1.90) | (3.49) | (-0.89) | (-1.97) | (1.92) | (-2.98) | (4.08) | (-0.21) | (3.37) | 
+re | 0.86 | 2.34 | -1.49 | -1.88 | 3.65 | -5.53 | 2.73 | -1.31 | 4.04 | 
+ | (0.81) | (2.68) | (-1.10) | (-1.49) | (2.75) | (-3.04) | (3.36) | (-1.64) | (3.78) | 
+ | 1.29 | 1.78 | -0.49 | -2.71 | 1.87 | -4.58 | 4.00 | -0.09 | 4.09 | 
+ | (1.94) | (2.45) | (-0.53) | (-1.84) | (1.23) | (-2.18) | (3.49) | (-0.07) | (2.53) | 
+ | 1.43 | 2.02 | -0.59 | -2.65 | 1.52 | -4.18 | 4.08 | 0.50 | 3.58 | 
+ | (2.21) | (2.63) | (-0.59) | (-1.87) | (1.03) | (-2.09) | (3.50) | (0.41) | (2.34) | 
+ge | 1.26 | 2.39 | -1.13 | -2.46 | 2.74 | -5.20 | 3.73 | -0.35 | 4.07 | 
+ | (1.48) | (2.94) | (-0.98) | (-1.84) | (2.05) | (-2.84) | (4.90) | (-0.38) | (3.97) | 
+Panel B: Long leg more financially constrained | 
+ | 0.51 | 4.34 | -3.83 | 0.79 | 2.10 | -1.31 | -0.28 | 2.24 | -2.52 | 
+ | (0.58) | (3.60) | (-2.37) | (0.75) | (2.14) | (-0.92) | (-0.28) | (2.11) | (-2.0) | 
+ | -0.58 | 4.61 | -5.19 | 1.06 | 2.46 | -1.41 | -1.63 | 2.15 | -3.78 | 
+ | (-0.54) | (3.41) | (-2.82) | (0.87) | (2.31) | (-0.86) | (-2.01) | (1.85) | (-3.3) | 
+ | -0.34 | 4.20 | -4.54 | 0.20 | 1.91 | -1.72 | -0.53 | 2.29 | -2.82 | 
+ | (-0.38) | (3.96) | (-3.16) | (0.17) | (1.94) | (-1.12) | (-0.76) | (3.25) | (-3.1) | 
+ | -1.70 | 4.70 | -6.40 | 1.05 | 2.03 | -0.97 | -2.75 | 2.67 | -5.43 | 
+ | (-1.51) | (3.74) | (-3.72) | (1.27) | (2.49) | (-0.88) | (-3.32) | (2.54) | (-5.1) | 
+rage | -0.53 | 4.46 | -4.99 | 0.77 | 2.13 | -1.35 | -1.30 | 2.34 | -3.64 | 
+ | (-0.58) | (3.89) | (-3.19) | (0.75) | (2.28) | (-0.97) | (-2.13) | (2.78) | (-4.7) |
+--- 图7 ---
+g. 3. Rotation strategy performance. This figure compares the performance of the factor rotation strategy with the underlying anomalies from 1969Q1 to 2019Q4. Quarter APM alpha, quarterly Fama and French (2015) five-factor alpha, and annual Sharpe ratio (SR) are displayed in brackets, with Newey and West (1987) eight-lag adjusted t-statistic parentheses. The solid line plots the cumulative excess returns to the factor rotation strategy (CAPM alpha = 3.18% (t-statistic = 5.11); FF5 alpha = 1.93% (t-statistic = 3.71; R = 0.71), which invests in the equal combination of anomalies with more financially constrained short legs (ROA, ROE, OP, Quality, FProb, O-Score, TV, and IVOL) followin upward revisions in expectations of industrial production growth, and the equal combination of anomalies with more financially constrained long legs (BM, LTR, IA, and SIZE). Following downward revisions in expectations of industrial production growth, the dashed line plots the cumulative average returns on anomalies with more financially constrained short legs (CAPM alpha = 2.42% (t-statistic = 3.68); FF5 alpha = 1.27% (t-statistic = 3.12); SR = 0.29). The dash-dotted line plots the cumulative average returns on anomalies with more financially constrained long legs (CAPM alpha = 0.67% (t-statistic = 0.97); FF5 alpha = -0.23% (t-statistic = -0.85); SR = 0.22).
+--- 图8 ---

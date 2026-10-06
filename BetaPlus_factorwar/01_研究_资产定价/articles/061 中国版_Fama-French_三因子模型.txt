@@ -1,0 +1,291 @@
+# 中国版 Fama-French 三因子模型
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/um7eHtLRA5zcIlQz1ud_Hw
+
+作者：石川，量信投资创始合伙人，清华大学学士、硕士，麻省理工学院博士；精通各种概率模型和统计方法，擅长不确定性随机系统的建模及优化。知乎专栏：
+https://zhuanlan.zhihu.com/mitcshi。 
+
+未经授权，严禁转载。
+
+摘
+要
+Liu et al. (2018) 通过剔除市值最小的 30% 的股票降低了壳价值污染，在 Fama-French 三因子的基础上提出了适合 A 股的中国版三因子模型。
+
+1
+引言
+
+本周一，我关注的金融学术类公众号 [金融学前沿论文速递]（在我看来是最好的金融学术类公众号之一）推送了一篇抓人眼球的最新论文。这篇即将刊发于顶刊 Journal of Financial Economics 上的文章题为 Size and Value in China（Liu et al. 2018），作者是三位来自 UPenn 的学者。
+
+该文的核心思想是说：由于中国股市特有的壳价值问题，美国市场流行的 Fama-French 三因子模型（Fama and French 1993）在中国并不好用，并提出了符合中国国情的中国版三因子模型。中国版三因子模型能够很好的解释学术界在中国市场上发现出的绝大部分收益率截面异象，比 Fama-French 三因子的解释力度要强得多。
+
+无论是研究 asset pricing 还是因子选股，该文的 empirical results（回测期 2000 年 1 月到 2016 年 12 月）对于 A 股都有很高的价值，很多观点和我自己平时的研究发现也非常契合。因此，今天的文章就来对它进行介绍。对于行文中涉及的 Fama-MacBeth regression 以及 GRS test 这些 asset pricing 里面的统计手段，不熟悉的小伙伴请参考《股票多因子模型的回归检验》。
+
+下面马上进入正题。
+
+2
+壳价值污染和三因子定义
+
+长久以来，Fama-French 三因子模型都是研究美股时铁打不动的 benchmark。要想证明一个新的潜在异象能够解释截面预期收益率差异，那必须说明它的 α 不能被 MKT，SMB 和 HML —— 即 Fama-French 三因子 —— 解释。
+
+然而，在中国的 A 股市场中，很多照搬 Fama-French 三因子的研究并没有取得非常理想的结果。究其原因，Liu et al. (2018) 认为是中国市场特有的 IPO 监管造成的壳价值问题（见 Lee et al. 2017 或《量化壳价值》），造成了这些主流因子在 asset pricing 时的效果被破坏，他们将这个现象称为壳价值污染（shell-value contamination）。
+
+Liu et al. (2018) 研究指出，中国股市中市值最小的 30% 的上市公司会受到壳价值污染的严重影响，造成 asset pricing 模型不能正确反映出股票截面预期收益率的差异。为了更好的研究 A 股的定价机制，必须“壮士断腕”，抛弃这市值最小的 30% 的公司。这正是中国版三因子模型对 Fama-French 三因子的第一个改动。
+
+在 Fama and French (1993) 这篇正式提出三因子模型的前作 Fama and French (1992) 中，Fama 和 French 研究了多个价值因子的指标 —— 包括 EP（Earnings-to-Price），BM（Book-to-Market），以及 AM（Assets-to-Market）—— 并因 BM 的效果最好而选择它构建了三因子中大名鼎鼎的 HML 投资组合。
+
+针对 A 股市场，Liu et al. (2018) 采用了同样的分析思路，通过Fama-MacBeth regression（Fama and MacBeth 1973）比较 EP、BM、AM 以及 CP（Cash flow-to-Price）这四个价值因子指标的效果。在回归中，指标的取值就作为 factor loading，而通过回归确定 factor return。为了使 factor loading 的取值有意义，Liu et al. (2018) 对 BM 和 AM 取了对数得到 logBM 和 logAM，对 EP 和 CP 做了非负处理 —— EP 和 CP 为正的公司的指标取值就是 EP 或 CP 本身，为负的公司的指标为零，并采用 dummy variables 来区分。股票池为排除了市值最小的 30% 后的剩余股票。
+
+Fama-MacBeth regression 的结果如下表所示（重点可以看一下第 8 列）。它说明在这四个价值指标中，EP 的效果是最显著的。当回归右侧的 regressors 中加入了 EP 之后，其他变量也不再显著。基于此，Liu et al. (2018) 最终选择 EP 来构建价值因子。这是中国版三因子模型的第二个改动。
+
+选定了价值指标后，就可以构建中国版的三因子模型了。首先排除市值最小的 30%，剩余的 70% 的股票为评价因子模型的股票池。将股票之中的股票按照市值大小分成 Small 和 Big 两组、按照 EP 分成 Value、Middle 以及 Growth 三组（见下图）。
+
+中国版的三因子模型中，SMB（Size）和 VMG（Value —— Value Minus Growth）因子分别为按照如下定义构建的投资组合的收益率：
+
+对于三因子中的最后一个因子 —— MKT 市场因子 —— 其构建方法和 Fama-French 三因子类似：使用股票池中的股票按照市值加权得到的投资组合的收益率相对于一年期存款利率的超额收益作为 MKT 因子。
+
+下表显示了中国版三因子（月频）各自的收益率均值、标准差、t-statistic 以及它们之间的相关系数。当然，一个因子模型是否有效需要看它能否解释股票（或投资组合）预期收益率在截面上的差异，这将是后面几小节具体关注的内容。
+
+3
+中美三因子模型大 PK
+
+排除壳价值污染、选择 EP 取代 BM 作为价值指标；毫无疑问，中国版三因子模型在 Fama-French 三因子基础上针对 A 股市场的做了不少的改动。下面是时候进行 apple-to-apple 的比较来看看两个版本的三因子模型孰优孰劣了（答案不重要 —— 显而易见，分析的过程才重要）。
+
+首先，针对 A 股的选股池（排除了市值最小的 30%），使用 BM 复制 Fama-French 三因子（前缀 FF 代表 Fama and French）：
+
+来看看 PK 的第一回合：“1 vs 2” —— 对于中国（美国）版模型中的 SMB 和 VMG（FFSMB 和 FFHML），逐一使用美国（中国）版的两个因子来进行回归分析，考察后者是否能解释前者。结果如表所示。
+
+结果（α 那一列）显示，对于 FFSMB 和 FFHML 来说，当考虑了 SMB 和 VMG 之后，它们无法获得显著的超额收益；相反的，FFSMB 和 FFHML 只能解释 SMB 和 VMG 的一部分。从这个角度来看，中国版的三因子更符合中国的国情。
+
+再来看看 PK 的第二回合：“2 vs 2”—— 使用 GRS test（Gibbons, Ross, and Shanken 1989）来测试 FFSMB 和 FFHML 能否解释 SMB 和 VMG（反之亦然）。
+
+对于一个因子模型，GRS test 检验 n 个个股（或投资组合）在考虑了该因子模型后的 n 个定价错误（pricing error）—— 即 α —— 是否在统计上联合为零（jointly equal to zero）。在我们的比较中，首先选择 SMB 和 VMG 作为因子来分析 FFSMB 和 FFHML 的定价错误是否联合为零；然后再选择 FFSMB 和 FFHML 作为因子分析 SMB 和 VMG 的定价错误是否联合为零。
+
+结果（下表）显示，前者（p-value = 0.41）无法拒绝原假设（原假设为定价错误为零），说明考虑了 SMB 和 VMG 之后，FFSMB 和 FFHML 的定价错误可以认为是零；后者（p-value 是 10 的 -13 次方这个量级）显著的拒绝了原假设，说明考虑了 FFSMB 和 FFHML 之后，SMB 和 VMG 依然存在显著不为零的定价错误。
+
+上述两个比较均说明，中国版的三因子模型比原始的 Fama-French 三因子模型更适合 A 股市场。
+
+4
+解释其他异象
+
+随着中国市场重要性的不断提升，近年来学术界有很多文章分析了 A 股市场的多种异象，这其中主要包括 size、value、profitability、volatility、reversal、turnover、investment、accruals 以及 illiquidity 九大类。由于学术界普遍存在的 data snooping 问题，很多异象的结论和显著性也参差不齐。
+
+Liu et al. (2018) 在他们的回测期内分析了这些异象并发现其中六大类的十个指标能够获得显著 CAPM-α 的异象（即这些因子至少能获得无法被 CAPM 解释的超额收益）。这六大类为 size、value、profitability、volatility、reversal 和 turnover；这十个指标的 CAPM-α 如下表所示。这些因子中有哪些能被中国版三因子模型解释呢？这就是本节的重点。
+
+为了排除小市值在中国股市的巨大影响，在构建这些异象因子时，Liu et al. (2018) 考虑了仅用指标本身排序来构建投资组合（称为 unconditional sort）以及使用指标和市值交叉排序构建投资组合（称为 size-neutral sort）两种情况。通过中国版三因子模型和这些投资组合进行时序回归，得到的截距项就是三因子模型无法解释的 α。
+
+无论采用哪种构建方法，分析结果（下表，重点看 t(α) 那一列）均表明，三因子模型可以解释中国市场中的 size、value、profitability、volatility 异象。诚然，三因子模型也有它的极限 —— 它无法解释 reversal 和 turnover 异象。
+
+作为比较，Liu et al. (2018) 也采用了 Fama-French 三因子解释了这十个异象，其解释力度要弱的多。
+
+5
+更进一步
+A Four Factor Model
+
+前面的分析指出，中国版三因子模型对于 reversal 和 turnover 异象无能为力。反转无需多言，它强烈到几乎使用任何长度的时间窗口对收益率排序来构建投资组合，在未来的一段时间内都能观察到收益率反转。而 turnover 和以散户为主导的交易者结构以及难以做空的限制密切相关。
+
+换手率高往往意味着更多的非理性以及舆情驱动型交易者过度关注的股票；频繁交易往往造成这些股票近期价格的虚高，导致未来收益率的下降。做空的限制意味着空头无法利用这种非理性来做空，因此无法抑制高换手率股票价格的上涨。
+
+针对上述情况，Liu et al. (2018) 在三因子的基础上加入了第四个因子 —— 换手率因子 PMO（Pessimistic Minus Optimistic），核心逻辑是低换手率的因子比高换手率的因子能获得更高的收益。这便得到了中国市场的四因子模型。
+
+加入 PMO 之后，来看看新的四因子模型对上一节的十个异象的解释效果（下图）。新加入的 PMO 有效的填弥补了三因子的不足，使得这十个异象均能被四因子模型很好的解释。
+
+6
+结语
+
+Liu et al. (2018) 是一篇逻辑严谨的研究中国股市 asset pricing 的文章。
+
+长久以来，在针对中国股市进行选股的研究时，壳价值的存在都是必须克服的难题（见《国内因子量化选股的七宗罪》）。Liu et al. (2018) 通过剔除市值最小的 30% 的股票从一定程度上降低了壳价值污染，指出市场、价值、市值以及换手率可以解释中国股市的绝大多数异象。
+
+虽然该文的 empirical results 是针对剩余的 70% 的股票而言，但它对于 A 股的选股实践也非常有价值。例如，很多指数增强策略是针对沪深 300 或者中证 500 的成分股来选股的。此外，该文使用的 Fama-MacBeth regression，GRS test 以及分析其他异象时使用的 portfolio test 都为分析 A 股的选股研究树立了标杆。
+
+希望今后有更多的学者来研究 A 股市场，这些高质量的文章无论对于学术界还是业界都意义非凡，它们能够加深我们对中国股市 asset pricing 机制的理解、帮助我们实践更好的投资实务。
+
+中国版的三因子模型，你值得拥有。
+
+参考文献
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: empirical tests. Journal of Political Economy, Vol. 81(3), 607 – 636.
+
+Fama, E. F. and K. R. French (1992). The cross-section of expected stock returns. Journal of Finance, Vol. 47(2), 427 – 465.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics, Vol. 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics, Vol. 116(1), 1 – 22.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica, Vol. 57(5), 1121 – 1152.
+
+Lee, C. M. C., Y. Qu, and T. Shen (2017). Reverse mergers, shell value, and regulation risk in Chinese equity markets. Working paper.
+
+Liu, J., R. F. Stambaugh, and Y. Yuan (2018). Size and Value in China. Journal of Financial Economics, forthcoming.
+
+【图片文字】
+--- 图1 ---
+量化核武研究
+--- 图2 ---
+[表]
+Quantity | (1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9) | 
+Intercept | 0.0149 | 0.0581 | 0.0571 | 0.0659 | 0.0629 | 0.0690 | 0.0564 | 0.0716 | 0.072 | 
+ | (1.94) | (3.32) | (3.19) | (3.90) | (3.74) | (4.03) | (3.19) | (4.40) | (4.38) | 
+-0.0002 |  |  | -0.0010 | -0.0018 | -0.0017 | 0.0002 | -0.0010 | -0.0002 | -0.0006 | 
+(-0.09) |  |  | (-0.37) | (-0.71) | (-0.67) | (0.07) | (-0.37) | (-0.06) | (-0.1) | 
+ME |  | -0.0049 | -0.0046 | -0.0046 | -0.0048 | -0.0068 | -0.0047 | -0.0066 | -0.0006 | 
+ |  | (-2.91) | (-2.69) | (-2.73) | (-3.00) | (-4.34) | (-2.80) | (-4.49) | (-4.4) | 
+M |  |  |  | 0.0057 |  |  |  | 0.0022 | 0.003 | 
+ |  |  |  | (3.21) |  |  |  | (1.31) | (1.7) | 
+AM |  |  |  |  | 0.0045 |  |  | 0.0014 |  | 
+ |  |  |  |  | (3.03) |  |  | (0.99) |  | 
+P+ |  |  |  |  |  | 0.9503 |  | 0.7825 | 0.790 | 
+ |  |  |  |  |  | (4.88) |  | (4.38) | (5.0) | 
+D(EP<0) |  |  |  |  |  | 0.0006 |  | -0.0005 | -0.0006 | 
+ |  |  |  |  |  | (0.31) |  | (-0.29) | (-0.0) | 
+CP+ |  |  |  |  |  |  | 0.0546 | 0.0181 |  | 
+ |  |  |  |  |  |  | (3.41) | (1.35) |  | 
+D(CP<0) |  |  |  |  |  |  | 0.0019 | 0.0016 |  | 
+ |  |  |  |  |  |  | (3.11) | (2.37) |  | 
+R2 | 0.0196 | 0.0277 | 0.0441 | 0.0652 | 0.0677 | 0.0615 | 0.0454 | 0.0832 | 0.077 |
+山地：livet al (2019)
+--- 图3 ---
+Small (bottom 50%)
+Big (top 50%)
+[表]
+S/V | S/M | S/G | 
+B/V | B/M | B/G |
+--- 图4 ---
+$$ \begin{array}{rcl}SMB&=&\frac{1}{3}(S/V+S/M+S/G)-\frac{I}{3}(B/V+B/M+B/G)\\&&\\ VMG&=&\frac{1}{2}(S/V+B/V)-\frac{1}{2}(S/G+B/G)\end{array} $$
+--- 图5 ---
+[表]
+Factor | Mean | Std. Dev. | t-stat. | Correlations | 
+MKT | SMB | VMG | 
+MKT | 0.66 | 8.09 | 1.16 | 1.00 | 0.12 | -0.27 | 
+SMB | 1.03 | 4.52 | 3.25 | 0.12 | 1.00 | -0.62 | 
+VMG | 1.14 | 3.75 | 4.34 | -0.27 | -0.62 | 1.00 |
+--- 图6 ---
+Small (bottom 50%)
+Big (top 50%)
+[表]
+S/H | S/M | S/L | 
+B/H | B/M | B/L |
+--- 图7 ---
+$$ \begin{aligned}&FFSMB&=\frac{1}{3}(S/H+S/M+S/L)-\frac{1}{3}(B/H+B/M+B/L\\&FFHML&=\frac{1}{2}(S/H+B/H)-\frac{1}{2}(S/L+B/L)\quad 量信投 \end{aligned} $$
+--- 图8 ---
+Regressions of CH-3 and FF-3 size and value factors on the other model's factors
+Each row reports a factor's mean, its estimated monthly alpha (in percent), and the factor's loadings with respect to the other model. White (1980) heteroscedasticity-consistent t-statistics are in parentheses. The sample is from 2000 to 2016.
+[表]
+Factors | 
+Dep. variable | Mean (%) | Alpha (%) | MKT | SMB | VMG | FFSMB | FFHML | 
+FFSMB | 0.64 | -0.04 | -0.01 | 0.95 | -0.25 |  |  | 
+ | (1.84) | (-0.66) | (-0.69) | (38.79) | (-8.33) |  |  | 
+FFHML | 0.84 | 0.34 | 0.05 | -0.00 | 0.41 |  |  | 
+ | (2.60) | (0.97) | (0.96) | (-0.04) | (2.83) |  |  | 
+SMB | 1.03 | 0.47 | -0.01 |  |  | 0.89 | 0.00 | 
+ | (3.26) | (7.03) | (-1.24) |  |  | (39.28) | (0.07) | 
+VMG | 1.14 | 1.39 | -0.08 |  |  | -0.50 | 0.14 | 
+ | (4.35) | (7.93) | (-3.15) |  |  | (-11.15) | (3.49) |
+出处： Liu et al （2018）
+--- 图9 ---
+[表]
+Panel B: GRS F-statistics (p-value) | 
+FFSMB, FFHML | 0.88 | - | 
+ | (0.41) | - | 
+SMB, VMG | - | 33.90 | 
+ | - | $ 2.14 \times 10^{-13} $ |
+出处：Liu et al. (2018)
+--- 图10 ---
+[表]
+Panel A: Unconditional Sorts | 
+Size | Market Cap | 1.09 | 0.97 | 0.18 | 1.92 | 1.81 | 1.9 | 
+Value | EP | 1.27 | 1.37 | -0.16 | 2.58 | 2.93 | -2.1 | 
+Value | BM | 1.14 | 1.14 | 0.01 | 2.08 | 2.13 | 0.0 | 
+Value | CP | 0.73 | 0.70 | 0.04 | 1.67 | 1.69 | 0.5 | 
+Profitability | ROE | 0.83 | 0.93 | -0.15 | 1.77 | 2.11 | -2.0 | 
+Volatility | 1-Month Vol. | 0.81 | 1.03 | -0.34 | 1.64 | 2.31 | -5.5 | 
+Volatility | MAX | 0.57 | 0.81 | -0.36 | 1.26 | 2.02 | -6.3 | 
+Reversal | 1-Month Return | 1.47 | 1.49 | -0.02 | 2.96 | 3.06 | -0.2 | 
+Reversal | 12-Mon Turn. | 0.33 | 0.53 | -0.29 | 0.63 | 1.09 | -3.4 | 
+Turnover | 1-Mo. Abn. Turn. | 1.14 | 1.27 | -0.19 | 2.44 | 2.92 | -2.6 | 
+Panel B: Size-Neutral Sorts | 
+Value | EP | 1.80 | 1.89 | -0.14 | 4.32 | 4.72 | -2.2 | 
+Value | BM | 1.14 | 1.10 | 0.05 | 2.23 | 2.22 | 0.64 | 
+Value | CP | 0.78 | 0.76 | 0.04 | 2.27 | 2.25 | 0.71 | 
+Profitability | ROE | 1.45 | 1.50 | -0.07 | 3.90 | 4.11 | -1.30 | 
+Volatility | 1-Month Vol. | 0.66 | 0.90 | -0.37 | 1.41 | 2.19 | -6.20 | 
+Volatility | MAX | 0.39 | 0.60 | -0.32 | 0.93 | 1.61 | -6.14 | 
+Reversal | 1-Month Return | 1.67 | 1.65 | 0.02 | 3.65 | 3.68 | 0.32 | 
+Reversal | 12-Mon Turn. | 0.51 | 0.74 | -0.34 | 1.06 | 1.74 | -4.94 | 
+Turnover | 1-Mo. Abn. Turn. | 1.29 | 1.39 | -0.15 | 3.19 | 3.68 | -2.56 |
+出处：Liu et al (2018)
+信息
+--- 图11 ---
+[表]
+Panel A: Unconditional Sorts | 
+Size | Market Cap | 0.21 | 0.01 | 1.45 | -0.54 | 1.71 | 0.77 | 40.88 | -11.70 | 
+Value | EP | 0.04 | 0.04 | -0.38 | 1.40 | 0.16 | 1.31 | -4.73 | 14.75 | 
+Value | BM | 0.64 | 0.06 | -0.03 | 0.43 | 1.02 | 0.65 | -0.14 | 1.64 | 
+Value | CP | 0.20 | 0.14 | -0.28 | 0.64 | 0.45 | 2.10 | -1.95 | 4.00 | 
+Profitability | ROE | -0.36 | 0.03 | -0.29 | 1.28 | -0.88 | 0.70 | -2.35 | 9.43 | 
+Volatility | 1-Month Vol. | 0.23 | -0.23 | -0.12 | 0.75 | 0.44 | -3.81 | -0.67 | 3.86 | 
+Volatility | MAX | 0.27 | -0.30 | -0.05 | 0.48 | 0.65 | -4.57 | -0.30 | 2.55 | 
+Reversal | 1-Month Return | 0.93 | -0.06 | 0.56 | 0.01 | 1.70 | -0.69 | 3.15 | 0.03 | 
+Turnover | 12-Month Turn. | 0.42 | -0.14 | -0.85 | 0.77 | 1.30 | -3.69 | -9.33 | 7.90 | 
+Turnover | 1-Mo. Abn. Turn. | 1.28 | -0.22 | 0.18 | -0.16 | 2.86 | -2.78 | 0.93 | -0.76 | 
+Panel B: Size-Neutral Sorts | 
+Value | EP | 0.23 | 0.02 | 0.05 | 1.32 | 0.82 | 0.47 | 0.57 | 11.97 | 
+Value | BM | 0.61 | 0.13 | -0.15 | 0.53 | 0.98 | 1.60 | -0.80 | 2.19 | 
+Value | CP | 0.18 | 0.11 | -0.06 | 0.52 | 0.54 | 1.98 | -0.50 | 3.84 | 
+Profitability | ROE | -0.37 | 0.05 | 0.41 | 1.20 | -1.04 | 1.23 | 4.14 | 9.66 | 
+Volatility | 1-Month Vol. | 0.20 | -0.28 | -0.08 | 0.64 | 0.42 | -4.96 | -0.49 | 3.34 | 
+Volatility | MAX | 0.00 | -0.26 | 0.05 | 0.45 | 0.00 | -4.38 | 0.30 | 2.50 | 
+Reversal | 1-Month Return | 1.13 | 0.01 | 0.41 | 0.10 | 2.12 | 0.11 | 2.59 | 0.55 | 
+Turnover | 12-Month Turn. | 0.25 | -0.22 | -0.43 | 0.74 | 0.69 | -4.94 | -3.91 | 5.74 | 
+Turnover | 1-Mo. Abn. Turn. | 1.24 | -0.18 | 0.25 | -0.08 | 3.04 | -2.79 | -1.55 | 0.33 |
+--- 图12 ---
+[表]
+Panel A: Unconditional Sorts | 
+Size | Market Cap | 0.16 | 0.04 | 1.55 | -0.11 | 1.36 | 1.86 | 34.29 | -2.43 | 
+Value | EP | 1.54 | -0.07 | -0.98 | 0.48 | 5.57 | -1.63 | -13.29 | 6.54 | 
+Value | BM | -0.28 | 0.00 | 0.12 | 1.60 | -1.25 | 0.09 | 1.48 | 30.61 | 
+Value | CP | 0.63 | 0.08 | -0.49 | 0.43 | 1.40 | 1.31 | -3.84 | 2.31 | 
+Profitability | ROE | 1.75 | -0.06 | -1.01 | -0.28 | 5.67 | -1.36 | -12.74 | -3.08 | 
+Volatility | 1-Month Vol. | 0.83 | -0.30 | -0.40 | 0.52 | 2.11 | -5.41 | -3.07 | 4.18 | 
+Volatility | MAX | 0.74 | -0.33 | -0.28 | 0.28 | 1.85 | -5.70 | -1.79 | 1.96 | 
+Reversal | 1-Month Return | 0.94 | -0.06 | 0.53 | 0.28 | 1.97 | -0.83 | 3.50 | 1.58 | 
+Turnover | 12-Month Turn. | 0.83 | -0.19 | -1.08 | 0.38 | 2.96 | -4.97 | -13.10 | 3.72 | 
+Turnover | 1-Mo. Abn. Turn. | 1.34 | -0.21 | 0.16 | -0.20 | 2.86 | -2.76 | 0.95 | -0.99 | 
+Panel B: Size-Neutral Sorts | 
+Value | EP | 1.76 | -0.09 | -0.53 | 0.52 | 5.49 | -1.79 | -6.52 | 6.17 | 
+Value | BM | -0.01 | 0.07 | -0.10 | 1.39 | -0.04 | 1.75 | -1.36 | 20.12 | 
+Value | CP | 0.52 | 0.06 | -0.23 | 0.44 | 1.73 | 1.33 | -2.33 | 4.05 | 
+Profitability | ROE | 2.01 | -0.04 | -0.36 | -0.35 | 5.72 | -0.71 | -3.75 | -3.38 | 
+Volatility | 1-Month Vol. | 0.76 | -0.33 | -0.33 | 0.40 | 2.06 | -6.04 | -2.64 | 3.47 | 
+Volatility | MAX | 0.43 | -0.30 | -0.16 | 0.31 | 1.14 | -5.67 | -1.10 | 2.60 | 
+Reversal | 1-Month Return | 1.21 | -0.01 | 0.35 | 0.29 | 2.55 | -0.09 | 2.63 | 1.78 | 
+Turnover | 12-Month Turn. | 0.80 | -0.28 | -0.68 | 0.39 | 2.46 | -5.89 | -6.37 | 3.74 | 
+Turnover | 1-Mo. Abn. Turn. | 1.37 | -0.17 | 0.21 | -0.12 | 3.26 | -2.82 | 1.43 | 0.61 |
+--- 图13 ---
+[表]
+Panel A: Unconditional Sorts | 
+Size | Market Cap | 0.23 | 0.05 | 1.50 | -0.42 | 0.01 | 1.41 | 3.05 | 39.38 | -6.88 | 
+Value | EP | 0.02 | 0.00 | -0.46 | 1.34 | 0.04 | 0.08 | 0.07 | -5.38 | 13.15 | 
+Value | BM | 0.75 | 0.03 | -0.02 | 0.43 | -0.13 | 1.04 | 0.32 | -0.09 | 1.55 | 
+Value | CP | 0.31 | 0.09 | -0.26 | 0.65 | -0.20 | 0.57 | 1.43 | -1.81 | 3.60 | 
+Profitability | ROE | -0.29 | -0.03 | -0.36 | 1.28 | -0.10 | -0.68 | -0.70 | -3.21 | 8.74 | 
+Volatility | 1-Month Vol. | -0.27 | -0.16 | -0.27 | 0.59 | 0.72 | -0.51 | -2.71 | -1.85 | 3.27 | 
+Volatility | MAX | -0.59 | -0.18 | -0.13 | 0.44 | 0.88 | -1.64 | -3.07 | -0.90 | 2.91 | 
+Reversal | 1-Month Return | 0.49 | 0.02 | 0.54 | 0.04 | 0.46 | 0.87 | 0.29 | 3.19 | 0.18 | 
+Turnover | 12-Month Turn. | 0.04 | -0.11 | -0.94 | 0.64 | 0.43 | 0.11 | -3.36 | -10.60 | 5.09 | 
+Turnover | 1-Mo. Abn. Turn. | -0.00 | -0.01 | 0.07 | -0.27 | 1.44 | -0.01 | -0.32 | 0.68 | -2.43 | 
+Panel B: Size-Neutral Sorts | 
+Value | EP | 0.43 | -0.04 | -0.03 | 1.28 | -0.12 | 1.42 | -0.79 | -0.35 | 11.74 | 
+Value | BM | 0.57 | 0.12 | -0.18 | 0.46 | 0.09 | 0.82 | 1.58 | -1.04 | 1.83 | 
+Value | CP | 0.19 | 0.08 | -0.03 | 0.57 | -0.12 | 0.49 | 1.56 | -0.26 | 3.67 | 
+Profitability | ROE | -0.30 | 0.02 | 0.35 | 1.23 | -0.05 | -0.76 | 0.51 | 3.67 | 8.99 | 
+Volatility | 1-Month Vol. | -0.27 | -0.21 | -0.20 | 0.51 | 0.63 | -0.59 | -3.95 | -1.37 | 2.87 | 
+Volatility | MAX | -0.77 | -0.17 | 0.00 | 0.45 | 0.74 | -2.05 | -2.86 | 0.01 | 2.95 | 
+Reversal | 1-Month Return | 0.71 | 0.07 | 0.40 | 0.12 | 0.42 | 1.28 | 1.14 | 2.62 | 0.68 | 
+Turnover | 12-Month Turn. | -0.07 | -0.19 | -0.53 | 0.61 | 0.44 | -0.19 | -4.16 | -4.38 | 3.77 | 
+Turnover | 1-Mo. Abn. Turn. | 0.17 | -0.00 | 0.17 | -0.17 | 1.21 | 0.67 | -0.05 | 1.83 | -1.90 |
+出处：Liu et al (2010)
+--- 图14 ---
+本文为量信投资原创，如需转载，请联系「量信投资」获得授权（可在公众号下回复“转载”查看授权规则）。
+量信投资 全类资产量化配置
+长按二维码加关注，及时获取投资技能

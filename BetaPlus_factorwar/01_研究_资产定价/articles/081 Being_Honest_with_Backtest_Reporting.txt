@@ -1,0 +1,161 @@
+# Being Honest with Backtest Reporting
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/CfhVXfq9i90aLpwXcfIIow
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+比起传统定义下的动量，FF3-α 动量能够获得显著的超额收益。然而这背后又藏着哪些不为人知的真相？
+
+01
+
+由多因子模型定义可知，股票的超额收益可以分解为特质部分以及被因子解释的部分。如果使用特质收益率计算动量，就构成了 α 动量。
+
+Hühn and Scholz (2018) 指出以 Fama and French (1993) 三因子（FF3）为基准计算的 FF3-α 动量在美股上有很好的效果。此外，相比于传统的动量，α 动量背后的逻辑是投资者对公司特质信息的反应不足所致，因此更加持续；且由于剔除了对常见因子的暴露，α 动量比传统动量波动更低。
+
+下面我们看看 FF3-α 动量在 A 股上的表现怎么样。
+
+为了构造 FF3-α 动量因子，利用过去一段时间个股日超额收益对 FF3 的因子超额收益回归，得到其超额收益 α，并将其作为构造 FF3-α 动量因子的变量：
+
+使用自 2017/01/01 到 2021/06/30 近 5 年的实证窗口；股票池为从所有在市交易的股票中剔除掉黑名单（包括待退市股票、净资产为负股票、风险警示股票和次新股等）和不可交易股票（包括停牌股和一字涨跌停股票等）之后的剩余股票，并剔除异常值（详细处理方法请参考《因子投资：方法与实践》的 3.1 节）。
+
+在每月末，使用 T – 13 到 T – 2（即剔除最近 1 个月）的数据计算 FF3-α，通过 portfolio sort 构造因子多空对冲组合，其中多头和空头均按照市值加权。在实证窗口内，上述 FF3-α 动量的月均超额收益为 2.05%，因子累计收益曲线如下图所示。
+
+由上述介绍可知，α 动量理论似乎基础清晰，在 A 股中的实证结果也算给力，看上去是一个能够取代传统动量的合格因子。
+
+看到这里，细心地小伙伴可能品出了上面这句话中的关键词：“似乎”，“也算”，“看上去”。而且，公众号的老朋友也许会感到困惑，因为最近几年在检验因子和异象的文章中，我几乎不再使用累计收益曲线图了，取而代之的是用检验结果的表格。然而，上面实证分析连 t-statistic 都没有给出。
+
+这很不“川总写量化”。
+
+没错，接下来的内容才是本文的重点，我们就来盘一盘 FF3-α 动量诞生之路上的三宗罪。
+
+02
+
+先说第一宗。
+
+John Cochrane 曾说过：Every important number should include a standard error。
+
+在上面的检验中，FF3-α 因子的月均收益率无疑是我们的目标，但是却只给出了均值（2.05%）而没有给出 standard error（或者 t-statistic），取而代之的试图利用一条持续上行的累计收益曲线来传递出它很不错的信号。没有计算 standard error 就是第一宗罪。
+
+通过计算可知，其经过 Newey and West (1987) 调整后的 t-statistic 为 3.06，超过了 Harvey, Liu, and Zhu (2016) 提出的 3.0 阈值。面对这个检验结果（而非一条累计收益曲线），我们似乎终于能松了一口气。但是，我没有告诉你的是，如果不使用 Newey and West (1987) 调整，那么该因子月均收益率的 t-statistic 只有 2.70，小于 3.0 阈值。另一个我向你隐瞒的参数是，计算 Newey and West (1987) 时使用的滞后期数。
+
+下表显示了不同滞后期（L）取值下，该 FF3-α 动量因子月均超额收益的 t-statistic 取值。结果说明，我们可以通过改变 L 的取值来操纵 t-statistic，使之满足我们需要的阈值。
+
+然而，如果我不告诉你这些呢？事实上，t-statistic = 3.06 对应的是 L = 3，而 3 这个取值是根据 Newey and West (1994) 的算法得到的。因此，如果在行文中使用“考虑到因子收益率的自相关和异方差，使用 Newey and West (1987) 调整 standard error 并计算 t-statistic，在计算中根据 Newey and West (1994) 确定滞后期 L”将显得非常自然以及合情合理，不会给人数据操纵的感受。而另一方面，如果我需要的滞后期为 L 等于 4 或者 5，上述措辞又可以被“合情合理地”改为“遵循使用月频收益率进行实证研究的惯例，取 L = 4（或者 5）”。
+
+一切都是那么的自然。
+
+尽管对 t-statistic 的操纵已经令人尴尬，但这个第一宗罪仅仅是最初级的问题。
+
+下面来说第二宗。
+
+实证窗口到底是怎么选的？为什么实证窗口从 2017/01/01 开始，而不是更早？为什么因子多空组合用市值加权，而不是等权？答案分别是（1）在 2017/01/01 之前，FF3-α 动量因子不好使；（2）使用等权后，FF3-α 动量因子不好使。因此，第二宗罪就是：Hypothesizing After the Results are Known（HARKing），即先看数据，后提出假设。
+
+如果我们希望粉饰数据窗口的选择，那么找一些理由似乎并不困难，比如从 2017/01/01 之后，投资者结构发生了变化，机构投资者占比上升；而如果我们想要掩饰股票权重的选择，也可以冠冕堂皇的说出于流动性的考虑按照市值加权而非等权，而刻意选择性失忆忽视过去几年大市值跑赢小市值的事实。
+
+写到这里，我想强调的是，投资者结构变化导致因子表现变化以及按照市值加权构造因子组合 per se 都是合理的。但在我们的场景下，如果仅仅汇报能够获得最显著结果的实证设定，而隐瞒其他设定下的结果，那无疑是不负责任的。Eugene Fama 曾说“实证研究其实就是 data description，当你完成实证研究之后，你总是希望收集新的数据来验证观点。”这是一种值得学习的态度。
+
+下表给出了不同实证窗口内，分别按照等权和市值加权计算的 FF3-α 月均超额收益检验结果。不出意外的是，只有在本文第一节选择的实证设定（2017/01/01 开始且市值加权）下，FF3-α 月均超额收益才是显著的，而其他实证设定则全军覆没。汇报不同设定下的结果而非 HARKing，能够帮助我们更加客观的评判这个因子并在样本外使用这个它。
+
+上面两宗罪体现出的数据操纵足以令人不安，但它们和最后一宗罪比起来只能算是小巫见大巫。因为无论是计算 t-statistic 还是选择实证设定，上述结果似乎都在传递出一个假象，即我们在进行 single hypothesis test —— 似乎我们从一个合理的金融学依据出发，提出了 α 动量，然后进行实证分析。
+
+然而，找到 FF3-α 动量背后的真相其实是，我们尝试了 8 个改造后的动量因子，然后从中精挑细选出了最好的一个，即 FF3-α。除 FF3-α 外，其他 7 个因子包括：传统动量、距离最高点距离、未实现盈利值、动量加速度、特质动量、累计异常收益、左尾动量以及相似动量。在本文第一节的实证设定下，这些动量的月均超额收益检验结果如下表所示。
+
+毫无疑问，从上述变量中挑出 FF3-α 动量并不困难；虽然其显著性略逊累计异常收益一筹，但其高达 2.05% 的月均收益率比起累计异常收益的 0.72% 要高得多（因此经济意义上更加显著），且累计异常收益是一个 PEAD 类的因子。所以综合考虑，FF3-α 脱颖而出。
+
+试了 8 个，却只挑出了最好的，这无疑是 multiple hypothesis testing（MHT）。然而，如果我们只像第一节那样介绍 FF3-α 动量而对试过的其他 7 个讳莫如深，就会给人一种 single hypothesis testing 的错觉，这就是如今学界大力呼吁的 p-hacking 问题。只有如实汇报全部 8 个因子，才能够在合理的 MHT 框架下对结果进行修正（当然，面对原始的 t-statistic，依然有前面两宗罪的问题）。
+
+p-hacking 就是第三宗罪。
+
+如果你和我一样也关注了 [Chihiro Quantitative Research] 公众号，那么一定发现了今天的文章使用的是连长最新文章《动量 Plus（上）》里面的数据。在这里我特地给连长打个 call，该文计算了 standard errors，如实汇报了上述 8 个因子和传统动量（一共 9 个因子）在不同窗口内以及等权和市值加权下的检验结果。这是应有的研究态度。
+
+我在本文中的分析仅仅是使用他的实证数据借花献佛。
+
+03
+
+我曾经非常纠结于本文的标题，因为它肯定会剧透，从而让行文中的反转效果打些折扣（其它曾经使用的题目就包括 FF3-α 动量），但最终还是保留了 Being Honest with Backtest Reporting 这个标题（但我尽量让摘要显得不那么直接），这是本文希望传递出的态度。而这个标题也是借鉴了 Fabozzi and Lopez de Prado (2018) 发表在 Journal of Portfolio Management 上的同名文章。（我也要 be honest with my title picking。）
+
+为了降低 MHT 的影响，该文主张在回测中如实汇报如下几点：
+
+Family of trials
+Family size
+Familywise error rate (FWER)
+Power of the test
+Robustness analysis
+
+其中 family of trails 和 family size 可以理解为尝试次数（或变量个数）以及尝试的有明显差异的实验（或变量）的个数，具体解释见截图如下。
+
+由本文关于改造动量因子的例子可知，仅汇报通过数据操纵得到的最显著结果是不负责任的，而上述 checklist 能够从一定程度上帮助规避文中提到的几宗罪，让我们对实证结果更加安心。
+
+最后，本文和 Fabozzi and Lopez de Prado (2018) 都传递出和 Campbell Harvey 教授的《Tortured Data》同样的观点：“数据不会发声，而是进行数据分析的人通过数据发声。而在这背后，又有多少不同的动机、原因、理由来追求人们希望看到的结论，或者希望讲述的故事呢？”
+
+Be honest with your backtest reporting.
+
+参考文献
+刀疤连，动量 Plus（上），https://mp.weixin.qq.com/s/_LBmaL2JRdARCZg4Ce7UAA
+
+Fabozzi, F. J. and M. Lopez de Prado (2018). Being honest in backtest reporting: A template for disclosing multiple tests. Journal of Portfolio Management 45(1), 141 – 147.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Hühn, H. L. and H. Scholz (2018). Alpha momentum and price momentum. International Journal of Financial Studies 6(2), 49.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica 55(3), 703 – 708.
+
+Newey, W. K. and K. D. West (1994). Automatic lag selection in covariance matrix estimation. Review of Economic Studies 61(4), 631 – 653.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+
+--- 图3 ---
+[表]
+不同滞后期（L）取值下，FF3- $ \alpha $ 动量月均超额收益率经 Newey and West (1987) 调整后的 t-statistics。 | 
+L | 0 | 1 | 2 | 3 | 4 | 5 | 
+t-statistic | 2.70 | 2.84 | 3.00 | 3.06 | 3.12 | 3.23 | 
+出处：川总写量化；因子收益率数据来源：刀疤连《动量 Plus（上）》 |
+--- 图4 ---
+不同实证区间内，FF3- $ \alpha $ 动量月均超额收益率（%）检验结果。括号内为经 Newey and West (1987) 调整后的 t-statistics，滞后期按照 Newey and West (1994) 计算。
+[表]
+ | 等权 | 市值加权 | 
+2005/01/01 - 2016/12/31 | -0.38 | -0.42 | 
+ | (-1.00) | (-0.88) | 
+2017/01/01 - 2021/06/30 | 0.72 | 2.05 | 
+ | (1.62) | (3.06) | 
+2005/01/01 - 2021/06/30 | -0.08 | 0.25 | 
+ | (-0.25) | (0.60) |
+出外·川当它量化，
+--- 图5 ---
+不同改造动量因子月均超额收益率（%）检验结果。括号内为经 Newey and West (1987) 调整后的 t-statistics，滞后期按照 Newey and West (1994) 计算。实证区间 2017/01/01 到 2021/06/30。
+[表]
+距最高点距离 | 未实现盈利值 | 动量加速度 | 特质动量 | 
+1.61(1.87) | 1.59(1.92) | 0.76(1.46) | -0.05(-0.12) | 
+累计异常收益 | FF3- $ \alpha $ 动量 | 左尾动量 | 相似动量 | 
+0.72(3.13) | 2.05(3.06) | 1.28(1.26) | 0.30(0.48) |
+出处：川总写量化；因子收益率数据来源：刀痴连《动县D1...
+--- 图6 ---
+Family of Trials
+A family of trials is the collection of results from which the researcher selected the one result submitted for publication. Examples of families include
+- a series of backtests computed on alternative investment strategies, with the purpose of choosing the best result according to some performance statistic (e.g., Sharpe ratio, information ratio, return to drawdown), and
+- a series of regressions computed on alternative datasets or model specifications, with the purpose of selecting the most statistically significant outcome (e.g., effects with the lowest p-values, highest adjusted  $ R^{2} $)
+1 外：Ebberri and I. J. D. 1 (2018)
+--- 图7 ---
+Family Size
+The family size is the number of significantly different experiments conducted $(K)$, where $K \leq N$.
+占处：Fabozzi and Lopez de Prado (2018)
+--- 图8 ---

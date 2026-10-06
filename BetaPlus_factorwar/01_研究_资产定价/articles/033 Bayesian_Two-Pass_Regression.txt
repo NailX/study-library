@@ -1,0 +1,131 @@
+# Bayesian Two-Pass Regression
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/qtu7P1vHH0yIaVIUojf2Tg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+当无用因子存在时，Two-Pass Regression 无法给出正确的统计推断结果。利用贝叶斯统计能够有效的解决这个问题。
+
+1
+Useless Factors
+
+由多因子模型可知，资产预期超额收益率由其对因子的暴露和因子的风险溢价决定。资产对因子的暴露  通过资产超额收益率对因子风险溢价时序回归确定。如果所有资产对某个因子的暴露都非常接近零，这样的因子被称为无用因子（useless factors 也称 spurious factors）。
+
+在资产定价检验中，无用因子是非常讨厌的存在，它能够很大程度上影响因子溢价检验结果。
+
+以我们最熟悉的 two-pass regression 或 Fama and MacBeth (1973) regression 为例，因子溢价的估计是在得到  的前提下进行的。在上述回归的第二步，我们在截面上用资产收益率对因子暴露  回归，便得到因子溢价的估计。无论使用 OLS 还是 GLS，无用因子的存在使得因子溢价估计时产生下列问题（Kan and Zhang 1999）：
+
+1. 无用因子的溢价估计结果不靠谱（资产对无用因子的暴露  非常接近零，因而极易受到噪声的影响。数据中的一些轻微变化可能导致因子暴露变号，进而造成其因子溢价正负号发生变化）；
+
+2. 无论是无用因子还是有用因子，其溢价的统计推断都受到巨大挑战（不管 OLS 还是 GLS，都要对  求逆运算，所以可想而知如果某一列  接近零的影响，它和截距项还近似共线性）；
+
+3. 检验结果往往 over-reject 无用因子溢价为零的原假设，即让人们轻易得到无用因子的风险溢价是显著的结论而错失真正的风险源。
+
+2
+Bayesian Two-Pass Regression
+
+为了解决无用因子的问题，Bryzgalova, Huang, and Julliard (2020) 利用贝叶斯统计提出了 Bayesian two-pass regression。值得一提的是，这篇文章近日被 Journal of Finance 有条件的录用了，不过其最新版本中的阐述视角也从传统的截面回归变成了估计 SDF（当然方法论是大同小异的）。
+
+本节的介绍是基于该文早期的版本，也是我个人更喜欢的版本。另外要说的是，本小节仅是介绍了其中的“九牛一毛”。
+
+令  代表  期资产超额收益向量，  代表  期  个因子取值矩阵（为简化数学符号，假设所有因子的截面均值为零）。时序上，资产和因子满足如下回归模型：
+
+假设其中  满足独立同分布  。通过时序回归，我们就可以估计因子暴露矩阵  。
+
+Two-pass 的第二步是在截面上用资产平均收益率对  回归：
+
+为了方便后文数学推导，定义  ，  ，  ，  ，  。
+
+第二步截面回归中通过 OLS 得到因子溢价估计为：
+
+从以上介绍可知，无用因子问题是通过资产对其的因子暴露引入的。对于这个问题，在频率主义学派视角下我们似乎无能为力了，但若使用贝叶斯统计就不一样了。贝叶斯统计的关键是在上述 two-pass 估计过程中引入参数分布的先验，并结合数据（即资产收益率和因子取值）得到其后验，因此让最终得到参数分布的后验。在后验的基础上，我们就能够有效甄别无用因子。
+
+Bryzgalova, Huang, and Julliard (2020) 假设时序回归模型中的参数  满足无信息 Jeffreys 先验。在这一假设下，通过推导可知，  的后验分布满足：
+
+虽然看着复杂，但上式解读起来十分直观。其中  和  是时序 OLS 估计的结果。上式意味着，给定资产收益率和因子取值（data）后，  的后验分布满足 inverse-Wishart 分布；而给定 data 和  之后，我们所关心的因子暴露  的后验分布满足多元正态分布。
+
+当然，人们最终关心的是因子溢价估计  的后验分布。但我们注意到，一旦给定了  、  以及 data 之后，  的取值也就随之确定了，即  （这里假设使用 OLS 估计；GLS 估计的版本请见原论文）。因此，只要不断地从  和  的后验分布中抽取二者的取值，就可以得到  的分布。
+
+因此，因子溢价的 Bayesian two-pass regression estimator 步骤可以总结为：
+
+1. 和传统 two-pass regression 一样进行第一步时序回归，得到  ，  以及  ；
+
+2. 根据 data，从  的后验分布抽取它的取值；
+
+3. 根据 data 和上一步中抽取的  ，从  的后验分布中抽取它的取值；
+
+4. 利用第 3 步抽取的  和第 1 步的  ，计算  ；
+
+5. 重复上述 2-4 步，得到  的后验分布，其均值就是因子溢价的贝叶斯估计。
+
+本节最后通过例子说明贝叶斯 two-pass estimator 在因子溢价估计时的优势。
+
+先看上图中 Panel (a)，其中有一个 data generating process 已知的无用因子（因此其真实收益率为零）。在图中所示的这个 realization 中，由于因子暴露的 estimator error，导致一些资产对该因子的暴露大于零，另一些小于零，最终在频率主义学派视角下经过 OLS 估计得到该月均因子收益率 -1.19%（t-statistic = -2.55），图中红色曲线为它的渐近分布。因此，以频率主义学派来看，会拒绝原假设。
+
+反观贝叶斯方法，蓝色虚线绘制了该因子溢价的后验分布，它几乎完美地围绕真实因子收益率（零）呈现对称形状。从该分布不难看出，其均值和零非常接近，且真实值（零）也轻松地落在置信区间之内。因此，若采用 Bayesian two-pass estimator，我们便会接受原假设。
+
+之所以会出现这种情况，其背后的原因如下。由于 OLS 估计的  非常接近零，因此当我们不断从  和  的后验分布中抽取时，得到的  会随机的大于零或者小于零；而基于它计算的因子溢价  也将有正有负，并最终使它围绕零分布。
+
+上图中 Panel (b) 给出了一个真实因子的情况。在这时，两种方法均能给出正确的推断结果。
+
+3
+结语
+
+Bryzgalova, Huang, and Julliard (2020) 提出的 Bayesian two-pass estimator 是将贝叶斯统计应用于因子溢价估计以及多因子模型选择的一个有益尝试。该文也是这近两年来让我印象非常深刻的论文之一。
+
+其实，贝叶斯统计在金融投资中一直有着广泛的应用。比如，收益率和协方差矩阵的贝叶斯收缩，以及家喻户晓的 Black-Litterman 资产配置模型，均是贝叶斯统计的典型应用，发挥了很大的作用。此外，从 Campbell Harvey 和 Yan Liu 的一系列文章来看，它在研究 p-hacking 问题上也很有前景。
+
+鉴于贝叶斯统计在金融投资中的应用价值，明年公众号将会花更多的篇幅从不同角度介绍贝叶斯统计的应用（是不是剧透了？！）。不过，在结束本文之际，还有一个事情不得不提。
+
+众所周知，2022 年 AFA 年会将在明年 1 月份举行。从大会挂出来的 program 来看，由 Bryan Kelly 领衔的 Jensen, Kelly, and Pedersen (2020) 一文赫然在列，它的题目是 Is there a replication crisis in finance?。该标题通过反问异常鲜明的表明了观点：There is NO replication cirsis in Finance。该文通过贝叶斯模型指出，学术界绝大多数被发表的异象都是可以被复现的，且在样本外依然是显著的，这个结论直接“怼”了 Campbell Harvey 所主张的看法，即学术界应该 take a step back，重新审视之前由于 p-hacking 和 publication bias 造成的虚假发现。
+
+有意思的是，根据 Bryan Kelly 个人官网上的介绍，该文已经被 Journal of Finance 录用了……可以想见学术界是多么希望看到这种为自己过去发现辩护的论文。扯远了……
+
+Bryan Kelly 将作为三位作者的代表在 AFA 上报告这篇文章。看到这里你可能已经猜到了，该文的 discussant 不是别人，正是 Campbell Harvey！近日，Harvey 在接受采访的时候也承诺“That’s going to be a very interesting discussion.”。
+
+就我个人而言，Jensen, Kelly, and Pedersen (2020) 一文的结论不足以令人信服。因此，真心期待 Harvey 对该文的点评。我想我已经迫不及待了。当然，不光是我，有大佬对此迫不及待了。
+
+毫无疑问，光是这场“火星撞地球”的思辨就值回 AFA 的注册费了。期待二位的精彩讨论！
+
+参考文献
+Bryzgalova, S., J. Huang, and C. Julliard (2020). Bayesian solutions for the factor zoo: We just run two quadrillion models. Working paper.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Jensen, T. I., B. Kelly, and L. H. Pedersen (2020). Is there a replication crisis in finance? Working paper.
+
+Kan, R. and C. Zhang (1999). Two-pass tests of asset pricing models with useless factors. Journal of Finance 54(1), 203 – 235.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(a) Model with a spurious factor
+(b) Model with a strong factor
+Figure 1: Distribution of risk premia estimates.
+Posterior distribution of risk premia (blue dashed line) from BFM-OLS estimation of a misspecified one-factor model based on a single simulation with  $ T = 1000 $, and asymptotic distribution of the frequentist FM estimate (red solid line). The dotted line corresponds to the pseudo-true value of the parameter (defined to be 0 for a useless factor). Panel (a): case of a single spurious factor included into the model. Panel (b) relies on a strong, well-identified factor, included in a (nevertheless) misspecified model.
+此处：Brzezova Huang and Lulliard (2020)
+--- 图3 ---
+Is There a Replication Crisis in Finance?
+By Theis Jensen; Copenhagen Business School
+Bryan Kelly; Yale University
+Lasse Pedersen; Copenhagen Business School, AQR, CEPR
+presented by:  $ \underline{\text{Bryan Kelly}} $, Yale University
+Discussant:  $ \underline{\text{Campbell Harvey}} $, Duke University
+--- 图4 ---
+@camharvey promises an "interesting discussion" at AFA with the authors of "Is There a Replication Crisis in Finance?" I can't wait!
+The hidden ‘replication crisis’ of finance
+--- 图5 ---

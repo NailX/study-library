@@ -1,0 +1,83 @@
+# 大破动量危机：批判与拓展
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/88jZpj7DS8e-Pt6mVRiAFg
+
+这是动量专题的第 004 篇文章，也是因子动物园的第 007 篇文章。
+
+【30秒速览】 【【006】动量是如何炼成的？风险溢价 or 行为偏差】一文仔细梳理了对动量成因的解释，包括系统性风险溢价和投资者行为偏差两大类假说。本文则进一步回顾了对动量的诸多批判研究，这些研究在相当程度上导致了动量危机，而更多学者通过对经典价格动量的拓展，来回应了这些批判，并指出动量仍然是简单可靠的方法。
+本文框架如下：
+1. 动量危机：对动量的批判
+2. 大破动量危机：对动量的拓展：
+残差动量；
+尾部风险调整动量；
+文化对动量的影响；
+新闻动量。
+           
+
+01 007与动量危机
+
+这是因子动物园的第 007 篇文章。既然说到 007 ，那就不得不提经典的 007 与詹姆斯·邦德。我印象最深的，便是大破动量危机那一集。
+神马？您只看过大破量子危机呀？那您可得听我们给您好好捋一捋 007 大破动量危机的故事，老精彩了呢。
+
+02 动量危机：批判
+
+动量危机主要是一些学者对动量的批判所致。这些批判主要集中在三个方面。其三，诸多研究指出，它的大部分收益往往来自空头组合，但在很多市场，卖空并不容易，或者有非常高的成本。最后，它往往有着较高的换手率，对交易费用非常敏感，纸面的高收益，在实际交易中难以实现。
+首先，Novy-Marx (2012) 指出，真正对未来收益有决定性影响的是过去 12 至 7 个月期间的收益，而最近的一段时间内的收益，反而与未来中期收益负相关。因此，动量的实质并非收益率的正自相关性。
+其次，动量的收益可能来自于对其他经典风险因子的暴露，例如市值和低波动因子。换言之，动量对其他因子有着显著的暴露。这方面也有不少研究成果。Liu (2018) 就动量对市值因子和低波动因子的暴露进行了系统性的分析，并指出调整这些风险暴露后，动量仍可获得超额收益，但无论是绝对水平还是统计显著性，都大幅下降。
+再次，诸多研究指出，它的大部分收益往往来自空头组合，但在很多市场，卖空并不容易，或者有非常高的成本。这一点对于经典的价格动量尤为显著。一些研究直接通过实证分析检验多空组合对动量表现的贡献，另一些则通过检验多空组合在不同经济周期、市场环境/情绪及信息新鲜度下的表现，来更精细地分析多空组合对因子表现的贡献，并得到了类似的结论。大部分文献在前文已有提及。
+最后，动量有着较高的换手率，这使得实际交易收益和纸面收益可能存在巨大差异，从而导致纸面富贵难以变为真金白银。当然，这其实是相当多因子都面临的共性问题。Patton and Weller (2018) 构造了两种方法——拓展的 Fama-MacBeth 回归和基于风险特征匹配的基金数据的分析——对这一差异进行了实证检验，并指出，在现实交易中，动量难以带来超额回报。
+
+03 大破动量危机：拓展
+
+前述对动量的批判研究看起来合情合理，也因此导致了实质性的动量危机。那我们就必须要接受危机带来的巨大损失，承认动量的无能吗？显然大部分人并不接受。那该怎么办呢？改进经典动量，破除动量危机，自然成了不二选择。
+接下来我们就一一看一下，这些破除动量危机的拓展研究，其中可是有着满满的脑洞呢。它们包括：
+基于资产定价模型的残差动量；
+尾部风险调整动量；
+基于文化的动量；
+新闻动量。
+残差动量Blitz, Huij, and Martens (2011) 提出了残差动量，即基于收益残差项的动量。具体而言，利用过去36个月的数据，构建Fama-French三因子模型，计算每支股票的残差，获得其过去12个月经标准化残差收益，再按此指标排序，做多高残差收益组合，做空低残差收益组合。
+相比于经典的价格动量，残差动量可以略微提升年化收益，并大幅降低波动率，从而使得 Sharpe Ratio 大幅提升约一倍。作者们指出，传统的价格动量，往往会对市场组合、规模、价值等经典因子有明显的暴露，从而导致市场转折时期的大幅回撤合和组合的较高波动率。而残差动量在构造时充分剥离了这些已知系统性风险因子的影响，因而更加纯粹、稳健。
+Huij and Lansdorp (2017) 则为这一发现提供了来自全球市场的更多证据。Chang, Ko, Nakano, Rhee (2018) 更进一步指出，即便在价格呈现明显反转的日本市场，残差动量也可以获得丰厚的短期收益，且在长期内并没有明显的反转（连日本股市都有效了，我大 A 股真的这么孤独吗？[泪目]）。
+Chaves (2012) 引入了另一种残差动量，并指出这一修正的动量，在日本市场也有很好的表现（A 股又一次躺枪）。他们按照如下方式定义残差动量：
+
+ 其中 i 代表第 i 支股票，t 代表时期 t，而残差依据经典 CAPM 模型计算得到：
+ 
+
+尾部风险调整的动量Daniel and Moskowitz (2016) 指出基于对动量策略均值和波动率预测的动态动量策略，可以将静态动量策略的 alpha 和 Sharpe Ratio 提升一倍。而 Barroso and Santa-Clara (2015) 也指出，动量的尾部风险虽然巨大，但是是可预测的，且通过对其尾部风险的预测和动态管理，可以显著提升动量的表现。
+文化对动量的影响传统的研究主要围绕一国国内市场，或是多个发达国家市场展开。Chui, Titman, and Wei (2010) 则另辟蹊径，从文化角度对全球股市的动量效应进行了分析。他们借鉴了 Hofstede (2001) 的个人主义指数这一与人们过度自信和归因偏差密切相关的指数，来衡量不同国家的文化差异，并指出个人主义指数越高，成交就越活跃，市场波动也越大，动量的利润也越丰厚。此外，他们也指出，分析师预期分歧度、交易费用等，都对动量表现有正向影响，而公司规模和波动率，则同动量的表现负相关。而在控制所有这些影响因素的情况下，个人主义指数仍然对动量有着显著的影响。因此，文化差异是动量的一个重要来源。
+Bornholt, Dou, Malin, Truogh, and Veeraraghavan (2012) 利用来自 37 个国家的 38,273 支股票的数据，得到了类似的结论，支持文化对动量表现有显著影响。Li and Wei (2015) 则更进一步，将文化对动量的应，放入生命周期场景进行分析，并指出在生命周期的两个不同阶段，动量的驱动因素是不同的，文化对动量的影响主要体现在生命周期的第二阶段，而在生命周期的第一阶段则没有显著影响。特别地，在生命周期第二阶段，动量在那些套利限制较少的市场会有更好的表现。
+新闻动量信息对动量有着显著影响毋庸置疑，回顾前文关于对动量的诸多解释，最核心的假说就是投资者对信息的反应不足。但也有研究者不满足与此，并从收益是否由信息驱动、信息的新鲜度，以及信息本身的持续性三个方面进行了拓展。
+Jiang, Li, and Wang (2017) 将股票收益拆分为信息驱动的和非信息驱动的，并指出，非信息驱动的收益往往会在之后反转，但信息驱动的收益则有较强的连续性。他们发现，买入高信息驱动收益的股票，并做空低信息驱动收益的股票，可以带来 40.08% 的年化收益，而经 Carhart 四因子模型调整后的alpha 还要略高一点，为 40.44% 。他们进一步指出，该策略的收益主要来自个股收益的正自相关性，且对于隔夜和周末信息的反应尤为显著。此外，与经典价格动量一样，该效应在分析师覆盖率较低、波动较大、流动性较差的小盘股中尤其明显。
+Huynh and Smith (2013) 在研究了信息新鲜度的影响后指出，买入有陈旧利好信息的赢家组合，并卖空有新鲜利空信息的输家组合，可以获得显著的超额收益，该策略表现优于传统的价格动量，且即便在日本这样传统价格动量表现不佳的市场中，也同样可获得显著的超额收益（大 A 股再次表示，why always me?）。
+Wang, Zhang, and Zhu (2018) 则将关注点完全放到信息本身上，并提出了新闻动量。他们利用一个非常完善的新闻数据集指出，过去有较多利好信息的股票，在未来一段时间，仍有较多利好信息，反之，过去有较多利空信息的股票，接下来的利空信息也较多。因此，构建一个组合，做多过去有较多利好信息的股票，同时做空过去有较多利空信息的股票，可以获得很好的风险调整后回报。
+
+04 结语
+
+Novy-Marx (2012) 等人的批判，一度使得动量陷入危机，但“特工”们并不会就此屈服，通过不同角度的拓展研究，他们进行了严厉的反击，成功破除了动量危机。
+当然，这么说其实是不严谨的。事实上，关于经典的、简单的价格动量的危机，并未完全破除，毕竟，随着其广为人知，表现也不那么理想了。但新发现的一些拓展方法，例如，残差动量，基于文化的动量，和基于大数据的新闻动量，则有着上佳表现。从这个角度看，大破动量危机也并不非虚言。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：
+Barroso, Pedro, and Pedro Santa-Clara. "Momentum Has Its Moments." Journal of Financial Economics 116.1 (2015): 111-120.
+Blitz, David, Joop, Huij, and Martin Martens. "Residual Momentum." Journal of Empirical Finance 18.3 (2011): 506-521.
+Bornholt, Graham N., Yiwen, Dou, Mirela D., Malin, Cameron, Truogh, and Madhu, Veeraraghavan. "Individualism, Trading Volume, and Momentum around the World." 25th Australasian Finance and Banking Conference (2012). Available at SSRN: https://ssrn.com/abstract=2131998.
+Chang, Rosita P., Kuan-Cheng Ko, Shinji Nakano, S. Ghon Rhee. "Residual Momentum in Japan." Journal of Empirical Finance 45 (2018): 283-299.
+Chaves, Denis B. "Eureka! A Momentum Strategy that Also Works in Japan." Social Science Electronic Publishing (2012). Available at SSRN:  https://ssrn.com/abstract=1982100.
+Chui, Andy CW, Sheridan Titman, and KC John Wei. "Individualism and Momentum Around the World." The Journal of Finance 65.1 (2010): 361-392.
+Daniel, Kent, and Tobias J. Moskowitz. "Momentum Crashes." Journal of Financial Economics 122.2 (2016): 221-247.
+Hofstede, Geert. "Culture's Consequences: Comparing Values, Behaviors, Institutions and Organizations Across Nations." Administrative Science Quarterly 27.3 (2001): 127-131.
+Huij, Joop, and Simon Lansdorp. "Residual Momentum and Reversal Strategies Revisited." Social Science Electronic Publishing (2017). Available at SSRN: https://ssrn.com/abstract=2929306.
+Huynh, Thanh D., and Daniel R. Smith. "News Sentiment and Momentum." FIRN Research Paper (2013).
+Jiang, Hao, Sophia Zhengzi, Li, and Hao, Wang. "News Momentum." Social Science Electronic Publishing (2017). Available at SSRN: https://ssrn.com/abstract=2679614.
+Li, Frank Weikai, and K. C. J., Wei. "Momentum Life Cycle around the World." Social Science Electronic Publishing (2015). Available at SSRN: https://ssrn.com/abstract=2565305.
+Liu, Ruomeng. "Asset Pricing Anomalies and the Low-Risk Puzzle." Social Science Electronic Publishing (2018). Available at SSRN:  https://ssrn.com/abstract=3258015.
+Novy-Marx, Robert. "Is Momentum Really Momentum?." Journal of Financial Economics 103.3 (2012): 429-453.
+Patton, Andrew J., and Brian Weller. "What You See Is Not What You Get: The Costs of Trading Market Anomalies." Economic Research Initiatives at Duke (ERID) Working Paper 255 (2018). Available at SSRN:  https://ssrn.com/abstract=3034796.
+Wang, Ying, Bohui, Zhang, and Xiaoneng, Zhu. "The Momentum of News." Social Science Electronic Publishing (2018). Available at SSRN: https://ssrn.com/abstract=3267337.
+
+【图片文字】
+--- 图3 ---
+$$ \mathbf{r}_{i,t}-\mathbf{r}_{t}^{f}=\alpha+\beta(\mathbf{r}_{t}^{M}-\mathbf{r}_{t}^{f})+\varepsilon $$
+--- 图4 ---

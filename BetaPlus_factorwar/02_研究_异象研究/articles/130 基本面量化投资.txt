@@ -1,0 +1,115 @@
+# 基本面量化投资
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/YiwKnEjkqqZ6PsoIxzrPeg
+
+作者：石川，著有《因子投资：方法与实践》、《Navigating the Factor Zoo》，译有《机器学习与资产定价》。
+封面来源：www.pexels.com
+未经授权，严禁转载。
+摘要：本文简要探讨基本面量化投资。
+07 月 12 日，2024/25 年度中国量化投资白皮书发布。在这份展现行业最新趋势的报告中，有一个 survey 结果引起了我的兴趣，它就是机构的策略探索清单。在这个清单上，基本面量化位居第三位，仅次于人工智能和极端风控应对。
+今天我们就（再）来聊聊基本面量化。
+这不是我第一次讨论基本面量化。2019 年 7 月 18 日的文章就借由 Sloan 教授的 Fundamental analysis redux 一文讨论了基本面分析和基于因子的基本面量化是否可以画等号的问题（答案是否定的）。如今，我依然持有这样的观点。
+如果说要比较全面的讨论基本面量化，就要从基本面分析的本质说起：
+所以，基于因子的基本面量化只是其中一条腿。而另外一条腿，则在 Charles Lee 教授的文章 Lee, So and Wang (2021) 中被清晰地勾勒出来：
+左边是我们熟悉的各种使用基本面因子的多因子模型；而右边则是基于现金流折现的研究。它通过将公司未来的预期现金流（如盈利、自由现金流、分红等）折现到当前股价，反推出一个隐含的资本成本（即企业预期回报率）。这种方法关注如何预测现金流和终值，以及预期回报率的动态假设。
+Okay，铺垫得差不多，下面让我们展开聊聊。
+1基本面量化投资融合了基本面分析与量化分析这两种不同的投资理念。随着金融市场的演变、金融科技的进步，投资机构为了寻求持续的竞争优势，使得基本面量化这一在金融发展历史中相对较新的投资理念应时而生。
+Benjamin Graham 和 David Dodd 在 1930 年代开创了基本面分析方法，通过审查公司的财务报表、管理质量、竞争对手和宏观经济因素来评估公司的内在价值。坚持这一投资理念的人认为，虽然股票的市场价格在短期内可能会偏离其内在价值，但随着时间的推移，价格最终会回归到其应有的水平。基本面分析法在 20 世纪的大部分时间里一直是投资决策的基石。
+随着 20 世纪后期计算机算力的提升，量化分析逐渐在投资领域崭露头角。在认为市场并非总是完全有效的假设下，量化投资者通过构建数学模型，深入挖掘历史数据和统计规律，从中寻找潜在的投资机会。上世纪七八十年代，计算机技术的普及让大规模数据处理和复杂模型的实现成为可能，量化投资方法也因此得到了迅速发展。数据量的爆炸式增长和机器学习算法的快速进步，逐渐拓宽了量化投资的边界。量化分析的对象不再局限于结构化的财务数据，还能将卫星图像、社交媒体情绪等大量非结构化数据纳入模型。借助机器学习技术，量化分析师能够识别出数据中的非线性模式以及传统人工分析难以察觉的微妙关联。
+基本面分析和量化分析各有优势，也各有其局限性。基本面分析有时带有主观性，且很难抓住因市场短期非有效性而出现的投资机会；而量化模型则很会因为过度依赖历史数据而忽略全局，如企业或经济的重大结构性变化等。2008 年全球金融危机暴露了这两种策略的不足，尤其是对历史数据和模型的过度依赖。因此，这场金融危机成为推动投资方法变革的重要契机。为了更有效地应对类似的金融风险，结合了两种方法优势的复杂投资策略应运而生。
+基本面量化投资将基本面分析的深度和定性洞察，与量化方法的精确性、效率和强大的数据处理能力相结合。这种融合的投资理念，使投资者能够借助海量数据和强劲算力，丰富和优化传统的估值模型，从而获得更加准确、及时且具有实操性的投资判断。投资者如今借助量化工具，更高效地处理和分析基本面数据，同时将对基本面的深刻理解融入量化模型的构建与优化。这种有机结合不仅有助于更精准地把握市场中的错误定价，还能提升风险管理水平，争取更优异的投资回报。
+2在进一步探讨基本面量化方法的技术细节之前，有必要概述一下常用的估值框架。在这方面，两个主要的方法包括现金流折现模型（Discounted Cash Flow，DCF）和剩余收益模型（Residual Income Model）。这些方法侧重于对公司未来最长达 15 年的收益进行预测。前五年的预测基于最近五年的增长率，体现了对公司短期增长潜力的信心。接下来的五到十年，考虑到竞争加剧和行业环境变化可能削弱公司市场地位的影响，增长假设会调整为更为保守的水平。这一阶段对于评估企业应对新进入者的能力以及维持利润率的能力至关重要。利润率通常通过毛利率来衡量。
+然而，要全面理解研发（R&D）投入对销售业绩的影响，不能仅仅关注毛利率，还需要考察将研发费用计入在内的营业利润率或净利润率。销售增长是企业保持竞争优势的核心驱动力。在这一过程中，资产周转率作为衡量资产创造销售效率的重要指标，发挥着关键作用。与利润率类似，资产周转率的预测也分阶段进行：前五年通常采用最近实际数据，随后十年则逐步下调，以反映市场竞争的加剧。
+基本面分析的另一项关键指标是杠杆率。随着企业扩张，资本需求上升，负债通常也会随之增加，导致杠杆水平提升。分析师会密切关注流动比率等指标，以评估企业的潜在杠杆状况。
+在上述指标中，销售增长率和利润率被视为动态比率，可以通过利润表数据进行预测；而资产周转率和杠杆率则更偏向静态指标，反映的是资产负债表所揭示的财务状况。
+在对企业进行估值时，分析师通常会在第 15 年后采用与所在国家 GDP 增长率相一致的终值增长率。这一做法基于企业增长最终将趋于稳定，并与整体经济同步的原则。因此，企业估值在很大程度上取决于其竞争优势的可持续期限，这体现在第六年至第十五年期间利润率的逐步下降。利润率缓慢下滑通常意味着企业拥有较高的进入壁垒或专有资产（如专利），这些都表明企业具备持久的竞争护城河，从而在量化基本面分析框架下提升其估值水平。
+3接下来从因子投资的视角下，解读企业估值原理和基本面量化的实际应用。因子投资是现代投资组合理论的重要基石。它通过因子的视角分析市场，每个因子代表着不同的风险和收益特征，投资者可以据此优化投资策略。
+MSCI 将系统性因子分为六大类：价值、规模、低波动、高股息、质量，以及动量与成长。这一分类体系不仅简化了复杂的市场风格，也突显了证券分析的多维特性。
+在该框架下，价值、规模、股息率和质量因子与基本面变量密切相关，为传统财务分析与量化方法之间搭建了桥梁。通过基本面分析的视角审视这些因子，投资者能够更深入地理解驱动资产回报的内在特征。
+下图整理了实证研究文献中常见的基本面变量以及它们在美股市场中的表现。对于每个变量，表中列出了其名称、来源、实证区间以及因子平均超额回报的 t-statistics。
+4本节探讨在利用基本面信息方面取得的一些新进展。
+1 错误定价
+基本面数据的一个重要用途是比较市场价格相对于企业公允价值而言是高估还是低估。这通常通过一些基于基本面因子的多因子模型来判断。如果存在较大偏离，即被称为错误定价，这是量化基本面投资中的一个核心议题。
+Stambaugh, Yu and Yuan (2015) 通过结合11种异象来衡量错误定价。这些异象包括：财务困境、O-score （Ohlson 1980）、净股票发行、综合股权发行、总应计项目、净经营资产、动量、毛利润率、资产增长、资产回报率，以及投资与资产比率。对于每只股票而言，错误定价的大小由其在这 11 个异象变量的综合排名来决定：对于每一个异象，排名越高对应的未来平均回报越低，即该股票被高估的程度越大。给定股票的综合排名为其在 11 个异象变量中排名的算术平均。
+此外，研究者尝试使用不同的基本面变量来构建反映股票财务健康状况的指标。Alman (1968) 所提出的 Z-score 是这方面研究的先驱，它常被用于预测公司在两年内破产的概率。类似的，Piotroski (2000) 的 F-score 也被用于评估公司的财务健康状况，分数越高，财务状况越好。
+Altman Z-score 和 Piotroski F-score 这两种度量公司基本面健康程度的指标均是基于排名或预设的规则（比如加权总和或得分总和），其中强弱的划分标准具有一定的主观性。Bartram and Grinblatt (2018) 试图利用纯统计学方法、利用截面上的所有公司来估计每个公司的内在价值，并基于此在市场中寻找定价错误。
+为此，作者使用股票的市值对公司层面的诸多会计条目进行截面回归，并通过残差来判断一个公司到底是被高估还是低估。而由于回归模型中包含截距项，因此残差之和为零，意味着市场组合整体的估值是公允的。因此，残差大于零表明公司被高估、残差小于零表明公司被低估。
+Bartram and Grinblatt (2018) 选择的会计条目包括资产水平、股息、股东权益、净收入、投资资本、债务、所得税、负债、现金、应付账款、应计项目等。实证结果表明，将股票按照错误定价的程度排序后分为 5 分组，并通过做多最被低估同时做空最被高估所构造的投资组合，其月均收益率为 0.42%，对应的 t-statistic 为 2.38，在经济上和统计上都十分显著。
+2 业绩公告
+考察业绩公告对股票预期收益率横截面差异的影响是另一个重要的研究方向。Savor and Wilson (2016) 指出，公司在计划披露财报的期间，股价通常会出现上涨。未公告公司以及整个市场会对那些提供更具盈余信息含量的公告作出更强烈反应。当更多公司同时披露财报时，市场的反应也会更为强烈，因为这为整体现金流信息提供了更精确的信号。未公告公司对其他公司公告的敏感性也会随着自上次财报公告以来时间的推移而增强。
+在这一背景下，业绩公告风险可被视为整体现金流风险的代理变量，因此应获得风险溢价。公告风险溢价在股票间具有较强的持续性：历史上在公告期间收益较高（较低）的股票，在未来公告日依然会获得较高（较低）收益。未公告公司，尤其是长时间未披露财报的公司，相较于近期刚披露过的公司，对新发布的公告表现出更强烈的反应。
+3 投机情绪
+资产定价中的一个重要因素是投资者情绪。研究者们正在尝试利用与交易相关的基本面数据来捕捉它。Devault, Sias and Starks (2019) 研究了由于机构和个人投资者的情绪突然变化造成的需求突变对市场的影响。他们发现情绪指标捕捉到的是机构投资者而非个人投资者的需求冲击。经过进一步的研究，作者揭示了潜在的经济机制，并得出结论：市场情绪与投资机构之间的关系很大一部分取决于机构的投资风格，如风险管理和动量交易等。
+在衡量投资者情绪时，Devault, Sias and Starks (2019) 借鉴了Baker and Wurgler (2006) 的方法，而后者本身也非常值得探讨。该文使用六个投资者情绪代理指标来综合衡量投资者情绪，包括封闭式基金折价、纽约证券交易所的股票换手率、IPO 数量、IPO 首日平均收益率、股权发行在总债务和股权发行中的比例，以及股息溢价。为了提取这六个变量中包含的公共信息，两位作者采用了 PCA，即投资者情绪的变化由六个代理指标变化的第一主成分捕捉。实证研究结果表明，第一主成分解释了样本方差的 49%，具有显著的代表性。
+实证研究表明，投资者情绪与许多市场异常现象密切相关。例如，Stambaugh, Yu and Yuan (2012) 利用投资者情绪指数来检验前面提到的 11 个异象的多空投资组合，以及在不同投资者情绪状态下多头和空头部分的表现，从而提供了关于投资者情绪与错误定价之间关系的详细讨论。
+通过比较多头和空头部分的表现，而不仅仅是多空投资组合的表现，他们发现了一些有趣的现象：在这 11 个异象中，有 10 个异象的空头端的预期回报在不同投资者情绪状态下出现了明显的不同。具体而言，在投资者情绪较高的时期，这些异象空头端的预期回报显著低于投资者情绪较低的时期。相比之下，多头部分的表现则截然不同：在全部 11 个异象中，不同情绪状态下的多头部分表现均没有显著差异。上述强烈的对比意味着，不同情绪状态下异象收益率的差异表现主要由空头驱动。
+4 经济关联公司
+经济活动和业务运营使市场中的公司形成相互交织的网络。企业之间通过供应链、行业业务关联、合作伙伴关系以及共享资源等多种形式的企业间关系，直接或间接地联系在一起，构成了一个复杂的关联体系。公司之间经营上的联系可能带来绩效的相互影响，并反映出更广泛的市场趋势，而股票回报通常会表现出一种领先—滞后效应，即当一类资产比另一类资产更快或更早地对信息或事件作出反应时，后者的价格调整在时间上滞后。这个现象反映了市场上信息传播的不均衡性，并为基本面量化分析提供了另一种思路。
+在基本面量化方法中利用领先—滞后效应，首先需要识别公司之间的经济关联，然后将领先公司（也被称为关联公司）的回报作为预测变量，用于预测滞后公司（也被称为焦点公司）未来的预期收益率。关联公司和焦点公司收益率之间的关系是动量溢出效应的一种体现，揭示了驱动资产价格动态变化的潜在经济机制和市场行为。
+对领先—滞后效应展开实证研究，第一步需要刻画公司间的经济关联——这也是长期以来学术研究的主要方向。下图列出了这方面的代表性研究。
+一旦有了经济关联，就可以按照如下方法构造因子，即对于任何一个焦点公司，计算其关联公司历史收益率的加权平均，其中权重由关联的强弱决定：
+
+其中  代表焦点公司  的所有关联公司， 用于衡量焦点公司  与关联公司  的关联强弱， 表示  期公司  的回报。为了检验动量溢出效应，可以通过如下方式构造投资组合：做多高  的股票并同时做空低  的股票。实证结果显示该策略能够获得显著的超额收益，表明企业间的关系网络包含有关资产回报的有效信息。
+5本文探讨了基本面量化投资的这一创新领域。这类策略巧妙融合了基本面分析的深度与定量方法的精确性。
+值得一提的是，利润表和资产负债表中的基本面数据早已被广泛应用于投资实践，因此相关因子的收益率随着时间的推移而出现衰减，而业界对于这一现象也早有预期。在此背景下，行业亟需探索并纳入更多交易数据的新型基本面因子。例如，考察卖空数量和基金资金流及其潜在变化，有望开辟基本面量化分析的新维度。
+基本面量化投资需要融合多领域的专业知识，如金融学、经济学、统计学、计算机科学等不一而足。基本面量化专家需要同时具备对金融市场和投资原则的深刻理解，从而有效地从基本面视角评估证券价值和市场趋势。此外，严谨的统计分析能力为他们发现模式和检验假设提供了支持，而计算机科学的专业知识则是管理和分析支撑量化基本面策略所需海量数据的必备条件。随着机器学习和人工智能在预测建模中的作用日益突出，熟悉这些领域也正成为当代量化投资者的必备能力。最后，上述技能还需与敏锐的风险管理意识和对心理因素的理解相结合，这些往往决定了投资结果的成败。
+写到此处，“金融工程”这个抽象的概念也具象化了。
+实践中，量化基本面团队通常由专注于上述领域的成员组成——金融分析师、量化分析师、数据科学家、程序员、风险管理人员，有时还包括行为科学家——每个人都带来了独特的视角，协同合作，形成了远超个体能力总和的投资策略。
+（完）
+特别说明：本文的正文部分节选和翻译自麦教授、卢博士和我所著的《Navigating the Factor Zoo: The Science of Quantitative Investing》。
+References
+Ali, U. and D. Hirshleifer (2020). Shared analyst coverage: Unifying momentum spillover effects. Journal of Financial Economics 136(3), 649–675.Alman, E. (1968). Financial ratios, discriminant analysis and the prediction of corporate bankruptcy. Journal of Finance 23(4), 189–209.Alwathainani, A. M. (2009). Consistency of firms' past financial performance measures and future returns. The British Accounting Review 41(3), 184–196.Baker, M. and Wurgler, J. (2006). Investor sentiment and the cross-section of stock returns. Journal of Finance 61(4), 1645-1680.Balakrishnan K., E. Bartov, and L. Faurel (2010). Post loss/profit announcement drift. Journal of Accounting and Economics 50(1), 20–41.Banz, R. W. (1981). The relationship between return and market value of common stocks. Journal of Financial Economics 9(1), 3–18.Bartram, S. M. and M. Grinblatt (2018). Agnostic fundamental analysis works. Journal of Financial Economics 128(1), 125–147.Basu, S. (1977). Investment performance of common stocks in relation to their price-earnings ratios: A test of the efficient market hypothesis. Journal of Finance 32(3), 663–682.Cao, J., T. Chordia, and C. Lin (2016). Alliances and return predictability. Journal of Financial and Quantitative Analysis 51(5), 1689–1717.Cohen, L. and A. Frazzini (2008). Economic links and predictable returns. Journal of Finance 63(4), 1977–2011.Cohen, L. and D. Lou (2012). Complicated firms. Journal of Financial Economics 104(2), 383–400.Devault, L., R. Sias, and L. Starks (2019). Sentiment metrics and investor demand. Journal of Finance 74(2), 985–1024.Fama, E. F. and K. R. French (1992). The cross-section of expected stock returns. Journal of Finance 47(2), 427–465.Haugen, R. A. and Nardin L. Baker (1996). Commonality in the determinants of expected stock returns. Journal of Financial Economics 41(3), 401–439.Lee, M. C. M., E. C. So, and C. C. Y. Wang (2021). Evaluating firm-level expected-return proxies: Implications for estimating treatment effects. Review of Financial Studies 34(4), 1907-1951.Lee, C. M. C., S. T. Sun, R. Wang, and R. Zhang (2019). Technological links and predictable returns. Journal of Financial Economics 132(3), 76–96.Litzenberger R. H. and K. Ramaswamy (1979). The effect of personal taxes and dividends on capital asset prices: Theory and empirical evidence. Journal of Financial Economics 7(2), 163–195.Loughran, T. and J. R. Ritter (1995). The new issues puzzle. Journal of Finance 50(1), 23–51.Loughran, T. and J. W. Wellman (2011). New evidence on the relation between the enterprise multiple and average stock returns. Journal of Financial and Quantitative Analysis 46(6), 1629–1650.Ohlson, J. A. (1980). Financial ratios and the probabilistic prediction of bankruptcy. Journal of Accounting Research 18(1), 109–131.Parsons, C. A., R. Sabbatucci, and S. Titman (2020). Geographic lead–lag effects. Review of Financial Studies 33(10), 4721–4770.Piotroski, J. D. (2000). Value investing: The use of historical financial statement information to separate winners from losers. Journal of Accounting Research 38, 1–41.Savor, P. and M. Wilson (2016). Earnings announcements and systematic risk. Journal of Finance 71(1), 83–138.Stambaugh, R. F., J. Yu, and Y. Yuan (2012). The short of it: Investor sentiment and anomalies. Journal of Financial Economics 104(2), 288–302.Stambaugh, R. F., J. Yu, and Y. Yuan (2015). Arbitrage asymmetry and the idiosyncratic volatility puzzle. Journal of Finance 70(5), 1903–1948.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+明九本页
+基本面分析的核心是衡量公司的内在价值。基本面量化投资的本质是通过定量化的手段进行资产定价。
+过去，人们关注的重点是： $  \mathrm{E}[\mathrm{R}^{\mathrm{c}}] = \alpha + \beta^{\prime}\lambda  $；式中 RHS 式诸如 HML、SMB 等因子的收益率。它把资产预期收益转换成研究因子收益率的问题。
+E[R^ε] = α + β′λ 是从 P = E[mX] 演变来的。
+What did we miss?
+--- 图3 ---
+补充的两条腿
+出处：Lee, So and Wang (2021)
+--- 图4 ---
+估值模型
+[表]
+文献 | 模型 | 
+Gordon and Gordon (1997) | $ P=\frac{D_{1}}{r-g} $ | 
+Gebhardt, Lee and Swaminathan (2001) | $ M_{t}=B_{t}+\sum_{\kappa=1}^{11}\frac{E_{t}[(ROE_{t+\kappa}-R)\times B_{t+\kappa-1}]}{(1+R)^{\kappa}}+\frac{E_{t}[(ROE_{t+12}-R)\times B_{t+11}]}{R\times(1+R)^{11}} $. | 
+Claus and Thomas (2001) | $ M_{t}=B_{t}+\sum_{\kappa=1}^{5}\frac{E_{t}[(ROE_{t+\kappa}-R)\times B_{t+k-1}]}{(1+R)^{\kappa}}+\frac{E_{t}[(ROE_{t+5}-R)\times B_{t+4}](1+g)}{(R-g)\times(1+R)^{5}} $. | 
+Ohlson and Juettner-Nauroth (2005) | $ R=A+\sqrt{A^{2}+\frac{E_{t}[E_{t+1}]}{M_{t}}\times(g-(\gamma-1))} $. where  $ A=0.5\left((\gamma-1)+\frac{E_{t}[D_{t+1}]}{M_{t}}\right) $, g=0.5 $ \left(\frac{E_{t}[E_{t+3}]-E_{t}[E_{t+2}]}{E_{t}[E_{t+2}]}+\frac{E_{t}[E_{t+5}]-E_{t}[E_{t+4}]}{E_{t}[E_{t+4}]}\right) $. |
+--- 图5 ---
+收益率预测 vs 盈利预测
+相比于预测收益率，预测基本面时，信噪比或更高。
+--- 图6 ---
+ཡོད་པ་ཡིན
+分析师一致预期通常是估值模型中预期盈利的最重要依据，但分析师预期存在偏差以及覆盖度问题（ $ \underline{\text{So}} $ 2013，Kothari，So and Verdi 2016）。
+线性和非线性模型在预测基本面时或大有可为（Bartram and Grinblatt 2018）：
+使用线性回归模型，基于公司特征预测未来盈利，计算 ICC 并选股取得了显著的超额收益（Hou, van Dijk and Zhang 2012）。
+使用非线性机器学习算法（例如随机森林）预测盈利是当下学术界的研究重点之一（van Binsbergen, Han and Lopez-Lira 2020）。
+--- 图7 ---
+[表]
+value | Book-to-Market Ratio | Fama and French (1992) | 1963-1990 | 5.71 | 
+Earnings-to-Price Ratio | Basu (1977) | 1957-1971 | N/A | 
+Enterprise Multiple | Loughran and Wellman (2011) | 1963-2009 | 6.54 | 
+size | Market Cap | Banz (1981) | 1926-1975 | 3.07 | 
+High Yield | Divide Yield | Litzenberger and Ramaswamy (1979) | 1936-1977 | 6.33 | 
+Quality | Return on Equity | Haugen and Baker (1996) | 1979-1993 | 4.50 | 
+Return on Asset | Balakrishnan, Bartov and Faurel (2010) | 1976-2005 | 6.45 | 
+Book Leverage | Fama and French (1992) | 1963-1990 | 5.34 | 
+Earnings Consistency | Alwathainani (2009) | 1971-2002 | 2.67 |
+--- 图8 ---
+[表]
+economic Link | Source | Period | t-statistic | 
+plier-customer link | Cohen and Frazzini (2008) | 1981–2004 | 4.93 | 
+emerate link | Cohen and Lou (2012) | 1977–2009 | 5.51 | 
+ner link | Cao, Chordia, and Lin (2016) | 1991–2012 | 4.51 | 
+ry link | Lee et al. (2019) | 1963–2012 | 5.47 | 
+ic link | Parsons, Sabbatucci, and Titman (2020) | 1970–2013 | 5.11 | 
+alyst coverage link | Ali and Hirshleifer (2020) | 1984–2015 | 6.23 |
+--- 图9 ---

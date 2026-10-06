@@ -1,0 +1,402 @@
+# Generalized Method of Moments
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/CIbMnqFY5cxCAcjK6bI3nw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+GMM 是研究 asset pricing 时绕不过的工具。本文介绍 GMM 框架的强大之处，并阐述其背后的数学之美。
+
+01
+引言
+
+好了，来写写 GMM（Generalized Method of Moments，广义矩估计）吧，站在 asset pricing 的视角。
+
+前文《理解资产价格》已经提到，Hansen (1982) 提出的 GMM 在 empirical asset pricing 研究的历史上起到了举足轻重的作用，而如今无论是在经济学领域还是金融学领域，GMM 因其数学上的优雅和特性上的强大都被广泛的运用。
+
+今天这篇文章算是我自己关于 GMM 的一个学习笔记，而我的学习资料（公众号的老朋友一定猜到了）正是 John Cochrane 教授的神书 Asset Pricing（Cochrane 2005）以及他在 UChicago 时做的 Online 课程中对 GMM 的介绍。Cochrane 教授讲的实在是太清楚、到位了，本文是我做对他所讲的内容的消化、梳理和再串联。
+
+本文的目标是试图从 intuition 出发揭示 GMM 蕴含数学之美；试图把公式掰开揉碎讲清楚从而帮助感兴趣的朋友理解大公式背后的本质。Cochrane 教授说，学习 GMM 时最大的障碍就是它的 notation（数学符号）繁多；只要搞清楚 notation，其实 GMM 背后的数学精髓是非常简单的，因为 GMM 的核心最终能够归结为计算 the variance of the sample mean。希望本文能够带给你这种恍然大悟之感。
+
+先来剧透一下，本文希望传达以下三方面内容：
+
+1. GMM 的框架包括 model、estimate 以及 test 三部分；
+
+2. 学习 GMM 时，最大的障碍往往来自 notation；搞清楚 notation 后，GMM 背后的数学非常容易理解；
+
+3. GMM 不应被当作计量学的黑箱。
+
+以我一贯的风格，行文中会“死磕”数学公式，因此这注定是一篇十分 technical 的文章。本文的技术性远超《股票多因子模型的回归检验》，因此同样建议在一个能静下心来思考的心境下和环境中阅读。对于不关心数学、仅想快速了解 GMM 是什么的读者来说，我强烈推荐慧航大神在知乎上关于 GMM 的回答（参考文献中最后一条）。那篇回答对读者非常友好，涉及到的数学恰到好处，深入浅出的介绍了 GMM 的原理。
+
+如果本文能对你理解 GMM 起到一点帮助，那完全是 Cochrane 教授的功劳；如果你看完后依然困惑，那一定也必须是怪我没写好……鉴于写作本文耗时较长（消耗脑细胞过多），接下来公众号将会暂停一段时间。
+
+Cochrane 教授说 GMM 的核心最终能够归结为计算 the variance of the sample mean；让我们就从 the variance of the sample mean 说起。
+
+02
+Variance of the Sample Mean
+
+考虑某随机变量 u_t。假设它在某个样本内的取值为 0，-1，3，3，-3。我们可以很容易的算出样本均值：
+
+上式中，E_T = (1/T)Σ(.) 表示对样本数据求平均，\bar u 表示 u_t 的样本均值。由于 u_t 是一个随机变量，因此其样本均值本身（即 \bar u_t）也是一个随机变量。虽然它在我们这个样本中的取值为 0.4，但如果我们能够乘坐时光机回到过去“重写历史”，得到不同的样本，那么在不同样本中，样本均值的取值也会有所变化。比如在下面这个表中，假设除样本一（就是上面这个样本）之外，还有三个样本，而它们的样本均值 \bar u 的取值分别为 -0.8，0.6 和 1.6。
+
+既然样本均值本身也是一个随机变量，那么一个很自然的问题就是样本均值在不同的样本中是如何变化的，即 variance of the sample mean。从 variance 的定义出发可得：
+
+在最简单的情况中，假设 u_t 序列满足 i.i.d.，则上式可以简化成：
+
+把两边开方就得到样本均值的 standard error：
+
+这大概是我们在统计课中学到的印象最深的一个式子（假设 u_t 满足 i.i.d. 条件下样本均值的 standard error）。在更一般的情况中 —— 尤其是在金融数据（比如收益率）数据中 —— u_t 序列是前后是有非零的自相关的，即 cov(u_t, u_{t-j}) ≠ 0，因此需要得到更一般下样本均值 \bar u 的 variance：
+
+当 T 趋于无穷大时（即 sample size 越来越大），(T – j)/T 趋于 1，就可以求出 var(\bar u) 的渐进（asymptotic）形式：
+
+下面再假设一个特殊的情况，即随机变量 u_t 的总体均值 E[u_t] = 0，并利用方差的定义 var(X, Y) = E[XY] – E[X]E[Y] 可得：
+
+上式最后一项中的 S 代表了中间项中那一大坨求和项。在 GMM 的术语中，S 被称作 spectral density matrix at frequency zero of u_t。
+
+OK！整理一下。本小节从我们熟悉的样本均值出发指出样本均值本身也是一个随机变量，并推导出当 sample size（T）趋于无穷且假设 E[u_t] = 0 时，variance of the sample mean 渐进趋于 S/T，其中 S 是无穷级数求和 ΣE[u_tu_{t-j}]。
+
+千万不要小看这个 var(\bar u) --> S/T 这个式子，它在下文 GMM 的数学推导中起着至关重要的作用。用 Cochrane 的话说，GMM 中大绝大部分计量学均可归结到这个式子（most econometrics boils down to this）！
+
+03
+GMM 框架
+
+回顾了 variance of the sample mean 之后，本小节就来直观的看看 GMM 到底是怎么回事儿。
+
+GMM 的作用是为了检验模型。模型到底对不对？模型的参数如何估计？误差是来自运气还是因为模型有误？GMM 提供了一个优雅而强大的计量学框架来回答这些问题。一般来说，GMM 框架分为以下三个部分：
+
+第一部分：把待研究的问题表达成一系列总体矩条件（population moment conditions） —— 这是提出 model；
+
+第二部分：使用样本数据得到对应的样本矩（sample moments），从而对参数进行估计 —— 这是把 model 和 data 联系起来；
+
+第三部分：计算 sample moments 的 variance，从而对 population moments 进行 statistical test —— 这是检验 model。
+
+所以概括来说就是 GMM 就是用 sample moments 代替 population moments 然后对 population moments 进行统计检验。
+
+3.1 GMM 第一部分
+
+我们用 x_t 代表 data，b 代表参数（这些都是 vectors），且存在一系列关于 x_t 和 b 的函数 f(x_t, b)。f(x_t, b) 的 expected value 即 E[f(x_t, b)] 就是 population moments。在 GMM 中，我们要求 population moments 满足 E[f(x_t, b)] = 0 的约束，这一系列 E[f(x_t, b)] = 0 约束就是 GMM 中的 population moment conditions（矩条件）。这些 moment conditions 是我们关于真实模型（true model）的猜测。
+
+需要说明的是，期望符号 E 表示对总体求均值；而前面使用的（接下来也将会继续使用的）期望符号 E_T（有个下标 T）表示对样本求均值。
+
+GMM 的第一部分是把待研究的问题转化成数据 x_t 和参数 b 的一系列方程 f、且假设在 true model 下这些方程的 moments 满足 E[f(x_t, b)] = 0。
+
+仍然晦涩？马上来看一些 asset pricing 中的例子。
+
+从最基础的 p = E[mx] 出发（详见《理解资产价格》），其中 m 是 stochastic discount factor（由某些未知参数 b 决定）、x 是回报、p 是价格。如果把 x 换成超额收益（用 R^e 表示）则有：
+
+如果把 x 换成 gross risk-free rate R_f（即 t 投入 1，t + 1 得到 R_f）则有：
+
+这些都是 asset pricing 中常见的 moment conditions。
+
+3.2 GMM 第二部分
+
+第一部分虽然把问题描述清楚了，但它们都是 population moment conditions，只是我们对于真实模型的猜想，我们有的只是样本数据。GMM 的第二部分就是用 sample moments 来代替 population moments，从而建立起模型和数据之间的联系，以进行参数估计。
+
+和本文第二节一样，用 E_T 代表对样本数据求平均，则 sample moments 可以写成：
+
+上式中最后引入符号 g_T 仅仅是为了下文中简化公式。怎么样？看着这个式子有没有什么感想？无论研究的具体问题是什么（我们研究的是 asset pricing，而别人也可以研究经济学或金融学中其他的问题），不管 f 到底长什么样子或数据 x_t 和参数 b 向量都是什么，上面的 sample moment 实际上只是 f(x_t, b) 在样本内取平均，因此也是一种 sample mean！
+
+从 sample moments 出发就可以进行参数估计。来自总体的 moment conditions 要求 E[f(x_t, b)] = 0；使用样本数据，GMM estimator 的核心是找到 b 的估计 —— 记为 \hat b —— 使得所有 sample moments 都尽可能的等于零：
+
+上式中之所以用了约等于而非等于，是因为在实际问题中，sample moments 的个数往往超过参数的个数（这也被称为 overidentification）。假设一共有 n 个 moments（即 g_T 是 n × 1 阶 vector），p 个参数（即 b 是 p × 1 阶 vector）。当 n > p 时，我们无法让所有的 sample moments 都等于零，而是选择让这其中的 p 个 sample moments 或者这些 sample moments 的 p 个线性组合等于 0。这就是 GMM estimator：
+
+上式中，a 是 p × n 阶矩阵，每一行都代表一个 sample moments 的线性组合。在具体问题中，根据 g_T 的具体形式，上式可能有解析解或数值解。求解上式就可以获得 \hat b。不过有的小伙伴可能会说：等一下，你还没说矩条件的线性组合矩阵 a 是什么！不同的 a 显然会得到不同的参数估计。没错，在 GMM 的框架下，我们可以自由选择 a。然而，纯从计量学的角度，有一个特殊的矩阵 a 会让 GMM estimator 成为 efficient estimator。下文第 3.3 节和第 5 节将会就 efficiency 进行说明。
+
+为了加深理解，仍然用 asset pricing 来举例子。假设 consumption-based CAPM（CCAPM）是真正的模型，因此随机折现因子 m 由两个参数 β 和 γ 决定（CCAPM 的介绍请见《理解资产价格》），即 b = [β, γ]'；进一步假设我们有四个资产来检验 CCAPM，它们是 risk-free、市场组合以及 Fama and French (1993) 中的 HML 和 SMB。在这个例子中，n = 4 而 p = 2，因此 a 是一个 2 × 4 阶矩阵，而 GMM estimator 可以写成：
+
+根据上式就可以使用 sample moments 求出参数估计 \hat b。
+
+3.3 GMM 第三部分
+
+使用 GMM estimator 得到的 \hat b 仅仅是真实但未知参数 b_0 的一个估计。从统计学的角度，我们自然关心估计的误差，即 var(\hat b)。马上来回答上面遗留的矩阵 a 的选择的问题。对于给定的 moments g_T，从计量学的角度有一个特殊的矩阵 a 使得 var(\hat b) 最小，这就是 efficient 的含义。Hansen (1982) 给出了这个 a 的形式。关于 a 的进一步讨论将放在本文第五节。
+
+Var(\hat b) 的大小仅仅告诉我们参数估计是否准确，而对于研究的问题来说，我们更加关注的是当给定 \hat b 时，sample moments 的 variance var(g_T(\hat b)) 的大小。在一般的 overidentification 问题下（moments 个数多于参数个数），sample moments 不可能都是零（如果 moments 个数 n 等于参数个数 p，我们可以令每个 moment 都等于零从而求出全部 p 个参数），因此我们关心 sample moments 联合起来相对于零的偏离的大小是多少。
+
+我们必须搞清楚 g_T(\hat b) 联合起来相对于零的偏离是因为运气成分还是因为选择的 population moment condition 就是错的。如果仅仅因为运气（即偏离的很小），那可以接受 population moment conditions —— 比如接受一个选择的 asset pricing 模型；如果不是因为运气（即偏离很大），那就只能拒绝 population moment conditions —— 即 reject 一个 asset pricing 模型。这就是 statistical test。唯有有了 var(g_T(\hat b))，才能够进行 statistical test。计算 sample moments 的 variance 并进行 statistical test 就是 GMM 的第三部分。
+
+值得一提的是，由于 \hat b 和 g_T(\hat b) 都是向量，因此 var(\hat b) 和 var(g_T(\hat b)) 事实上都代表了它们各自的 variance-covariance matrix，其中 var(\hat b) 是 p × p 阶矩阵（共有 p 个参数），而 var(g_T(\hat b)) 是 n × n 阶矩阵（共有 n 个 moments）。
+
+有了 var(\hat b) 和 var(g_T(\hat b)) 就可以写出 \hat b 和 g_T(\hat b) 的分布。当 sample size T 趋于无穷时，\hat b 的满足以下渐进正态性：
+
+上式中，-1 表示求逆，’ 表示转置，所以 (ad)^{-1}’ 表示先求 ad 的逆矩阵再转置。这个式子正是 Hansen (1982) 中的 Theorem 3.1。Hansen (1982) 给出了渐进分布成立需要满足的一系列假设。在实际应用中，我们需要记住的是数据 x_t 需要满足弱平稳性，这是因为 GMM 的基础是随着 T 的增大，sample mean 向 population mean 收敛。
+
+此外，g_T(\hat b) 满足如下渐进正态性：
+
+上式中，I 是 n × n 阶单位阵。这个式子正是 Hansen (1982) 中的 Lemma 4.1。
+
+看到这里，你大概在想：What the hell?! 这又 a 又 d 又 S 又求逆又转置，这都是什么“牛鬼蛇神”？有一种“每个字都认识、但是放在一起就看不懂了”的既视感。这里的 a 就是上面 sample moments 的线性组合矩阵，但是 d 和 S 还没有介绍。别着急，第四节将会把这些式子掰开了、揉碎了说清楚的。
+
+看到 S 你是否想到什么？没错，本文第二节讲 the variance of the sample mean 的时候提到了 S。而上面 var(\hat b) 和 var(g_T(\hat b)) 看似无比复杂，但它们的本质也都离不开 the variance of the sample mean！
+
+在有了 g_T(\hat b) 的分布后，就可以对 GMM 第一部分中选择的模型进行检验，从而决定是接受还是拒绝它。以 asset pricing 为例，这些 moments 代表了给定定价模型下不同资产或投资组合的 pricing errors。我们关心 pricing errors 是否联合起来显著不为零，这时可以用 g_T(\hat b) 的分布构建 chi-squared statistic 来检验。如果 test statistic 超过给定显著性水平的阈值，那么我们就可以拒绝该 asset pricing 模型。
+
+总结一下，本小节介绍了 GMM 的三部分：
+
+第一部分是把关心的问题表述成一组 population moment conditions；
+
+第二部分是用 sample moments 代替 population moments 从而把样本数据和模型联系起来，并进行参数估计；
+
+第三部分是计算 var(\hat b) 和 var(g_T(\hat b))，从而进行 statistical test，决定是否接受第一部分中的模型。
+
+下一节就来看看 statistical test 背后的数学基础。
+
+04
+数学基础
+
+OK! Let’s do the math!
+
+本节的目标是解释 var(\hat b) 和 var(g_T(\hat b)) 里面的那些 a、d、S、求逆以及转置。我会力争把所有涉及到的公式都讲清楚。了解本节的内容无疑会更好的理解 GMM 背后的数学之美（汗），但是从阅读的角度，跳过本小节也不影响对后文的理解。
+
+先说 S，这是一切的核心。从下式出发来解释 S：
+
+上式中第一个等价符号是 g_T 的定义（参考 3.2 节），第二个等号是使用 U_t 来代表 f(x_t, b_0)。需要强调的是，上式中 g_T 的参数是真实（但未知）的参数 b_0。而 g_T(b_0) 的方差 var(g_T(b_0)) 就表示 sample moments g_T 在真实参数 b_0 下的 sampling variance。无论 f 长什么样子，sample moments 的数学形式都仅仅取平均，因此 var(g_T(b_0)) 正是 the variance of the sample mean！（这就是本文第二节的价值所在。）
+
+上面之所以用了 U_t，一是为了简化表达式，二是为了和本文第二节中的小写 u_t 呼应起来：这里的 U_t 对应第二节的 u_t、g_T(b_0) 就是第二节的 \bar u，因此马上得到（当 T 趋于无穷）：
+
+这正是 S 的定义（实际中，它可以用样本数据来估计）。上面的计算中之所以能把方差和协方差写成 E[XY] 的形式是因为我们假设真实模型满足 E[f(x_t, b_0)] = E[U_t] = 0。（预期符号 E 没有下标 T，表示 population expectation。）
+
+重要的事情说三遍：
+
+上面求的 var(g_T(b_0)) 是 g_T 在真实参数 b_0、而非估计量 \hat b 下的 variance。
+
+上面求的 Var(g_T(b_0)) 是 g_T 在真实参数 b_0、而非估计量 \hat b 下的 variance。
+
+上面求的 Var(g_T(b_0)) 是 g_T 在真实参数 b_0、而非估计量 \hat b 下的 variance。
+
+当然，我们最终关心的是当 b = \hat b 时 g_T 的方差，即 var(g_T(\hat b))。然而，一旦有了 var(g_T(b_0)) = S/T，计算 var(\hat b) 以及 var(g_T(\hat b)) 就变得迎刃而解。这就是为什么 Cochrane 教授说一切都可以归结为计算 the variance of the sample mean。
+
+接下来就看看 var(\hat b) 如何计算。由 GMM estimator 可知，ag_T(\hat b) = 0。将该式在真实参数 b_0 进行一阶泰勒展开有：
+
+细心的小伙伴可能注意到了一阶偏导数 ∂g_T/∂b’ 的分母中 b 右上角有个十分诡异的转置符号。在计算偏导数时，g_T 是一个 n × 1 阶向量（n 个 moments），而 b 是一个 p × 1 阶向量（p 个参数），因此偏导数其实是一个矩阵（要么 n × p 阶、要么 p × n 阶），而这类运算属于 matrix calculus。当转置符号出现在分母时，得到的矩阵是 n × p 阶，即每一行代表一个 moment，这种排列方式称作 numerator layout，也称作 Jacobian formulation。而这个一阶偏导数矩阵也正是我们的 d：
+
+严格来说，d 应该由 population moments 的一阶导数计算（上面的第一个等价条件）；但在应用中，d 的取值用 sample moments 和 b = \hat b 来估计（上面的第二的等式）。用 d 替换 ∂g_T/∂b’ 并代入上面的泰勒展开，进行简单的代数运算可得：
+
+上式两边直接求 variance 就得到 var(\hat b)。值得一提的是，上式右侧的 (ad)^{-1}a 是系数矩阵而 g_T(b_0) 的 variance 我们之前已经求出来了 —— 没错正是 S/T。因此有：
+
+数学上虽然通过泰勒展开顺理成章的从 var(g_T(b_0)) 得到了 var(\hat b - b_0)，但我们仍然希望从直觉上了解上面一顿操作猛如虎到底干了什么。考虑最简单的情况，即一个 moment 和一个参数（因此 a 是一个标量，令 a = 1），我们可以画出 var(g_T(b_0)) 和 var(\hat b - b_0) 的关系。
+
+图中，灰色曲线表示不同参数 b 时的 population moment，用 g(b) 表示。对于真实参数 b_0，由假设有 g(b_0) = E[f(x_t, b_0)] = 0，因此在图上，灰色曲线经过 (b_0, 0) 这个点；蓝色曲线表示不同参数 b 时的 sample moment，用 g_T(b) 表示。图中 g_T(b_0) 和 g(b_0) = 0 之间的距离就是 g_T(b_0) 的 sampling variation，即我们的样本可能由于 luck 或者 unluck，以至于 g_T(b_0) ≠ 0 而是较 0 有一定的偏离，在统计上它就是 var(g_T(b_0))。
+
+接下来，对于 sample moment g_T，我们令其等于 0 求出的参数估计为 \hat b，因此蓝色曲线 g_T 经过 (\hat b, 0) 这个点。下面在蓝线上的 \hat b 点计算其切线（红色）并计算切线的斜率 d = dg/db。通过 d 我们就可以把 g_T(b_0) 和 g(b_0) = 0 之间的 sampling variation 转换成 \hat b 和 b_0 之间的 sampling variation，即 var(\hat b – b_0)。这正是 var(g_T(b_0)) 和 var(\hat b - b_0) 关系的几何含义。
+
+下面我们如法炮制，利用一阶泰勒展开从 var(g_T(b_0)) 求解 var(g_T(\hat b))：
+
+由于 \hat b – b_0 已经在之前求出了，因此只需把它代入到上式就可得到：
+
+两边同时求 variance（确切的说是 variance-covariance matrix）有：
+
+上式中的第二个等式用到了我们的老朋友：var(g_T(b_0)) = S/T —— variance of sample mean！关于 var(g_T(\hat b)) 和 var(g_T(b_0)) 的关系也可以从直觉上解释两句。不难看出，var(g_T(\hat b)) 是 var(g_T(b_0)) 乘以一个系数矩阵，这个系数矩阵是单位阵 I 减去这一大坨 d(ad)^{-1}a。因此从直觉上说，g_T 在 b = \hat b 时的方差 var(g_T(\hat b)) 会比 g_T 在 b = b_0 时的方差 var(g_T(b_0)) 要小一些。这是因为在 GMM 估计时，我们要求 g_T 的 p 个线性组合等于零 —— ag_T(\hat b) = 0 —— 从而求出 \hat b，因此求解 \hat b 的过程用掉了 sample moments 的一些 variation，所以当 b = \hat b 时 g_T 的方差小于当 b = b_0 时 g_T 的方差。
+
+无论是 var(\hat b) 还是 var(g_T(\hat b))，上面一顿泰勒展开操作虽然非常热闹，但它们其实都仅是用了统计学中的 delta method。所以，其实我们只是用了 variance of the sample mean（S/T）+ delta method 就求出了我们关心的 var(\hat b) 和 var(g_T(\hat b))。就是这么简单。
+
+有了 var(g_T(\hat b))，就可以得到 g_T(\hat b) 的渐近分布（3.3 节介绍过），使用它的分布就可以构建 chi-squared statistic 来对模型进行检验：
+
+上式的第二步是把 var(g_T(\hat b)) 的表达式代入并求逆；chi-squared statistic 的自由度是 moments 的个数减去参数的个数，即 n – p。由于估计 \hat b 的时候用掉了 p 个自由度，所以 g_T(\hat b) 的 variance-covariance matrix 不是满秩的（这也体现在了 chi-squared statistic 的自由度 n – p 上），因此上式中对 var(g_T(\hat b)) 求逆实际上是 pseudo-inverse。
+
+如果你在 Wikipedia 或者其他书籍上查阅 GMM 的资料，也许看到的 chi-squared statistic 的表达式远没有上面这个复杂。上述表达式是最 general 的情况，因为我们尚未讨论那个使 GMM estimator 变得 efficient 的特殊的矩阵 a。在那个 a 下，var(g_T(\hat b)) 矩阵以及 chi-squared statistic 表达式将被大大的简化。Efficient GMM 就是下一节的内容。
+
+总结一下本小节。上面用了大量的文字和推导把 var(\hat b) 和 var(g_T(\hat b)) 背后的数学含义呈现给各位，是希望这个过程能帮助小伙伴们加深对 GMM 的理解。站在 notation 的角度来说，虽然这些公式看上去很复杂（又是转置、又是求逆的），但我们只需给 GMM 框架提供它需要的 a、g_T、d 和 S，剩下的“无脑”交给 GMM 就可以计算出各种想要的统计量并进行 test，非常方便。
+
+05
+Efficient GMM
+
+本文的 3.2 小节给出的 GMM estimator 如下：
+
+其中 a 是一个 p × n 阶矩阵，每一行都代表一个 sample moments 的线性组合。本节关心的问题是，如何选取矩阵 a？回答这个问题可以从业务上和统计上两方面思考 —— 永远不要忘记业务层面的思考！从经济学或金融学原理出发，尤其是针对 asset pricing 的问题，我们可以选择一些最 economically important 的 moments，让它们或它们的线性组合等于零。我们不应让 GMM 成为一个 statistical 黑箱，代替我们的思考。第七节将会进一步说明。
+
+再来从统计上说，Hansen (1982) 指出了一个特殊的 a 矩阵，它能确保得到 efficient GMM estimator，即在给定的 moments g_T 下，该矩阵 a 使得 var(\hat b) 最小。这个特殊的 a 矩阵为：
+
+看到这儿可能又有小伙伴会问：d 见过、S 见过、转置明白、求逆矩阵清楚，但是这四个符号组合在一起得到的 d’S^{-1} 是个什么鬼？？这个 a 到底有没有什么更直观的含义？别急，先来看看 a 的阶数。本文的 3.2 节已经指出 a 是一个 p × n 阶矩阵，下面我们来验证一下。
+
+前面首次提到 d 的时候说过了，它是一阶偏导数 ∂g_T/∂b’。但由于 g_T（n × 1 阶）和 b（p × 1 阶）都是 vectors，因此 d 是一个遵照 numerator layout（也称作 Jacobian formulation）排列的 n × p 阶矩阵。因此矩阵 d 的转置 d’ 就是 p × n 的矩阵，它同样也是一个一阶偏导数 ∂g_T’/∂b —— 这次转置在 g_T 上，遵循的是 denominator layout（也称 Hessian formulation），通常表示求梯度（gradient）。最后，由于 S 是 n × n 阶，因此 a 确实是 p × n 阶。
+
+下面我们就来看看 d’S^{-1} 到底是个什么鬼。其实它有着非常清晰的含义。为了解释 a 就不得不提 GMM estimator 的另一种表达式，这可能也是之前接触过 GMM 的小伙伴更熟悉的一种表达式：
+
+上式中 W 是权重矩阵（weighting matrix），它是一个半正定矩阵。这个式子的含义是，在 overidentification 问题中，既然我们无法让所有的 g_T 都等于零，那么就让所有 n 个 g_T 的范数的加权之和尽可能的接近零，以此来确定 \hat b。
+
+正如在本文的第一种 GMM estimator 表达中我们可以随意选择矩阵 a 一样，在上面的第二种 GMM estimator 表达中我们可以随意选择权重矩阵 W。但是从 efficiency 的角度，最优的权重矩阵 W 满足：
+
+这从统计上非常好理解：我们有一组 moments g_T，我们希望它们（非负）加权之和最接近零。使用 W = S^{-1} 即 S 的逆矩阵（别忘了 S/T 是 var(g_T(b_0))）相当于给那些 sampling variation 大的 g_T 更低的权重、给那些 sampling variation 小的 g_T 更高的权重（inverse 的意义）。换句话说，我们更愿意相信那些误差小的 moments 并使用它们来得到尽可能准确的参数估计 \hat b，从而使 var(\hat b) 最低，这也就是 efficient 的含义。
+
+将 W = S^{-1} 代入上面第二个 GMM estimator 并求其 first order condition 有：
+
+怎么样，看着眼熟不？括号里的第一项正是 d 的转置 d’，第二项是 S^{-1}，这两个放一起 d’S^{-1} 正是第一种 GMM estimator 下最优的矩阵 a = d’S^{-1}：
+
+这就是最优矩阵 a = d'S^{-1} 的含义。从上面的推导也不难看出这两种 GMM estimator 表达式是等价的：无论我们取何种 W 权重矩阵，都有一个与之对应的 a = d’W 矩阵。当矩阵 a 或权重矩阵 W 取统计上最优时，var(\hat b)、var(g_T(\hat b)) 以及 chi-squared test statistic 的表达式均可以大大化简。Hansen (1982) 给出了它们的形式：
+
+需要强调的是，以上的这些大大简化了的表达式只有当 a = d’S^{-1}（或 W = S^{-1}）时才成立！如果 a 或 W 取别的值，则应该使用本文第 4 节中介绍的更 general 的形式。很多关于 GMM 的材料中默认 W = S^{-1} 而给出了这些统计量的简化形式，使用时应搞清楚前提条件。
+
+在实际估计中，因为必须先有 \hat b 才能估计 S，并计算 W = S^{-1}（或最优的 a）；但另一方面只有使用 S^{-1} 才能得到最优的 \hat b。这似乎是一个鸡生蛋、蛋生鸡的问题。因此，实际中往往采用 two-stage estimates：
+
+First Stage：通常取 W = I 单位阵，估计出 \hat b；
+
+Second Stage：使用 \hat b 估计 S，令 W = S^{-1} 进行再一次估计得到新的 \hat b。
+
+当然，如果愿意，也可以把上面的第二步迭代多次，得到最终的 \hat b。以上就完成了关于 GMM 的全部介绍。
+
+06
+GMM does OLS
+
+GMM 之所以如此强大，是因为它自带的“estimate、variance、test”三部曲能够干很多事儿！对于很多需要研究的问题，只要把它的模型塞进 GMM 的框架，就可以得到想要的分析结果。
+
+本节就把我们熟悉的 OLS 放在 GMM 的框架下看看后者的强大之处。由于参数个数和 moments 个数相同，因此 OLS 不存在 overidentification 的问题，我们没有什么可以检验的。但是 GMM 仍然可以轻松的计算出参数的 variance（即完成 estimate 和 variance 两步），无论 OLS 的残差是否存在自相关或异方差。
+
+想要使用 GMM 框架，只需要把 OLS 表述成 moment conditions。考虑 OLS 问题（截距被视作一个解释变量，不做区分；假设一共有 k 个解释变量，因此 x_t 表示 k × 1 阶向量）如下：
+
+由 OLS 的性质可知，其解释变量和残差正交，因此 OLS 的 moment conditions 为：
+
+由于 moments 个数和参数个数相同，因此我们只需要令所有 sample moments 都等于零即可，这意味着矩阵 a 是单位阵 I，因此在上式的 GMM estimator 中省略了 a。求解上述 sample moment conditions 就可以得到参数的估计：
+
+如果令 X = [x_1 x_2 … x_t]’ 表示 data matrix，则有 (1/T)X’X = E_T[x_tx_t’]，因此上式又可以写成：
+
+这正是我们熟悉的 OLS estimator。GMM 的强大之处在于轻松的计算 var(\hat β)。为此，我们需要给 GMM 框架提供它所需要的 d 和 S（已经有了 a 和 g_T）。根据 d 和 S 的定义可得：
+
+有了 a、g_T、d、S，直接利用 GMM 中的公式就可以求出 var(\hat β)：
+
+这正是广义 OLS 下 var(\hat β) 的表达式（请参考《多因子回归检验中的 Newey-West 调整》对比）。
+
+We are done!
+
+下面考察几种情况。首先如果残差满足 i.i.d.，var(\hat β) 就可以简化成我们最熟悉的样子：
+
+通常来说，残差中可能存在异方差、自相关或者两者皆有。在 GMM 的框架下，为了计算 var(\hat β) 仅需要在 S 矩阵中考虑异方差和自相关造成的影响。当残差仅存在异方差时，S 的表达式为：
+
+因此 var(\hat β) 的表达式变成：
+
+这正是大名鼎鼎的 White (1980) heteroscedasticity consistent estimator。
+
+当残差即存在异方差又存在自相关时，S 可以写作：
+
+而 var(\hat β) 的表达式变成：
+
+这正是大名鼎鼎的 Newey and West (1987) autocorrelation consistent covariance estimator（见《多因子回归检验中的 Newey-West 调整》）。
+
+无论残差具有什么特性，整个 OLS 的求解过程都可以很好的装到 GMM 的框架中。而当使用 GMM 框架时，只需按照它的要求来定义 a、g_T、d 以及 S，就可以“无脑”的利用 GMM 给出的结果。这正是 GMM 的强大之处。
+
+07
+不应成为黑箱
+
+在结束本文之前，再花一小节讨论一个很重要的问题：GMM 不应该成为计量学黑箱。这是我听完 Cochrane 教授的讲解后印象非常深刻的一点。
+
+GMM 如此强大再加上现在各种编程语言（R、Stata 等）都能方便的计算，这种便捷性似乎把人们都惯坏了；人们习惯于把问题描述成 moment conditions 然后一股脑塞进 GMM 并纯从统计的角度使用 efficient estimator（即 W = S^{-1}）。Cochrane 教授警告说这么做十分危险。
+
+GMM 的强大之处在于它不仅仅是一个计量学工具来做 test，而是它足够 flexible 从而可以让我们研究我们真正关心的经济学或金融学问题，这体现在我们可以从“先验”出发去定义最适合待研究问题的矩阵 a（或权重矩阵 W），而非无脑的选择 W = S^{-1}。
+
+以 3.2 节中 asset pricing 的例子来说，我们有四个 moments，两个参数。这四个 moments 来自四个资产：risk-free、市场组合以及 HML 和 SMB，我们假设待检验的模型是 CCAPM。从经济学业务出发，我们可以选择如下的 ag_T(\hat b) = 0：
+
+在这个矩阵 a 中，我们令市场超额收益和 R_f 完美满足两个 sample moment conditions，并由此进行 CCAPM 的参数估计，求出两个参数，然后使用另外两个资产 HML 和 SMB 来检验 CCAPM。由 GMM 框架可知，最终的 chi-squared test statistic 的自由度为 2（因为一共 4 个资产，2 个被用来估计参数），因此联合检验的实际上正是 HML 和 SMB 在 CCAPM 这个定价模型下的 pricing errors。如果 pricing errors 联合显著不为零，那么就可以拒绝 CCAPM。这个例子说明，从经济学原理出发选择合适的 a 或 W 能让我们回答最感兴趣的经济学问题。GMM 的强大之处正在于此。
+
+纯从统计学的角度来说，W = S^{-1} 确实能够得到 efficient GMM。但不要忘记，这个 efficient 的是以给定的 moments 为前提的 —— 如果换了或者添加了更多的 moments，参数的 efficient 估计也会发生变化。在金融市场中，有无数的资产，包括股票、债券、外汇、商品等，还有无数的投资组合，这些资产可以构成无数的 moments。为了 efficiency，我们应该把这成千上万资产的 moments 都塞进 GMM 才能得到 efficient 的估计。但从业务的角度来说这毫无意义。在研究资产定价的时候，我们应该使用最“clever”的资产，比如 HML、SMB 这些投资组合。它们才是我们真正关心的问题。
+
+“ The quest for efficiency doesn’t really drive us as much as the quest for something that is robust and that expresses what the model is supposed to do. —— John Cochrane
+”
+GMM 非常好使，但在 asset pricing 的研究中，我们不应追求使用 GMM 进行一个仅在统计上正式但模型却缺乏含义的 statistical test。GMM 的强大在于它让我们从经济学和金融学原理出发，去 measure 和 estimate 最合理的模型、并同时对 sampling error 保持足够的认识。
+
+不要让 GMM 成为计量学的黑箱。
+
+08
+结语
+
+呼！终于写完了！感谢你看到最后！
+
+作为感谢，上点硬货 —— GMM 的 formula sheet（出自 Cochrane 2005）。它总结了前文解读的每一个公式。网上能找到的 Asset Pricing 的电子版还是 2000 年 6 月的版本，有不少 Typo。这张截图是来自 2005 年的修订版。怎么样？GMM 其实并不复杂，我们只需要提供并计算 a，g_T，d 和 S；有了它们，GMM 框架 takes care of everything else！
+
+最后对全文简要总结如下：
+
+1. GMM 的框架下包括 model、estimate 以及 test 三部分；它用 sample moments 代替 population moments 来检验后者；GMM 涉及的数学（不那么严谨的说）可以归结为 the variance of the sample mean + delta method。
+
+2. 从 notation 的角度，我们只需找到 a、g_T、d 和 S，剩下的交给 GMM 的公式；
+
+3. GMM 允许我们自由挑选矩阵 a（或 W）；从统计学的角度存在一个特定的 a（或 W）是最 efficient 的；但 GMM 不应被当作计量学的黑箱，理解你所研究的问题永远是最重要的。
+
+写完本文，我的感受和写完《股票多因子模型的回归检验》是一模一样的，对 Cochrane 教授崇拜的五体投地。关于 GMM 的内容，Cochrane 教授在其 UChicago 的课程中介绍的非常生动、到位，听完再结合他的书仔细体会，那收获就一个字 —— 爽！
+
+最后，我想用和《股票多因子模型的回归检验》一文同样的结语作为本文的收尾。在介绍 Asset Pricing 这门课的时候，Cochrane 教授谈到：
+
+“ The math in real, academic, finance is not actually that hard. Understanding how to use the equations, and see what they really mean about the world... that's hard, and that's what I hope will be uniquely rewarding about this class.
+”
+再一次的，我也真心希望本文在你理解 GMM 以及应用它研究 asset pricing 的道路上起到一点点帮助。
+
+参考文献
+Cochrane, J. H (2005). Asset Pricing (revised edition). Princeton University Press.
+
+Fama, E. F. and K. R. French (1993). Common Risk Factors in the Returns on Stocks and Bonds. Journal of Financial Economics, Vol. 33(1), 3 – 56.
+
+Hansen, L. P. (1982). Large sample properties of generalized method of moments estimators. Econometrica, Vol. 50(4), 1029 – 1054.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica, Vol. 55(3), 703 – 708.
+
+White, H. (1980). A heteroskedasticity-consistent covariance matrix estimator and a direct test for heteroskedasticity. Econometrica, Vol. 48(4), 817 – 838.
+
+https://www.zhihu.com/question/41312883/answer/91484566?utm_source=wechat_session&utm_medium=social&utm_oi=728969207022125056&from=singlemessage&isappinstalled=0
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图3 ---
+[表]
+ | 样本一 | 样本二 | 样本三 | 样本四 | 
+Data
+ $ u_t $ | 0 | -2 | 0 | 3 | 
+-1 | 2 | 5 | -2 | 
+3 | 2 | -1 | 1 | 
+3 | -3 | 1 | 2 | 
+-3 | -3 | -2 | 4 | 
+$ E_T[u_t] $ | 0.4 | -0.8 | 0.6 | 1.6 |
+--- 图16 ---
+$$ \left.\begin{array}{l l l l}{a_{11}}&{a_{12}}&{a_{13}}&{a_{14}}\\ {a_{21}}&{a_{22}}&{a_{23}}&{a_{24}}\end{array}\right]\left\lbrace\begin{array}{l}{\operatorname{E}_{T}[m(\beta,\hat{\gamma})R_{m}^{e}]}\\ {\nonumber}\\ {\operatorname{E}_{T}[m(\hat{\beta},\hat{\gamma})R_{f}-1]}\\ {\nonumber}\\ {\operatorname{E}_{T}[m(\hat{\beta},\hat{\gamma})R^{\mathrm{H M L}}]}\\ {\nonumber}\\ {\operatorname{E}_{T}[m(\hat{\beta},\hat{\gamma})R^{\mathrm{S M B}}]}\end{array}\right\rbrace= $$
+--- 图18 ---
+THEOREM 3.1: Suppose Assumptions 3.1–3.6 are satisfied. Then $\{\sqrt{N}(b_N^* - \rho) \geq 1\}$ converges in distribution to a normally distributed random vector with me ro and covariance matrix $(a_0^* d_0)^{-1} a_0^* S_w a_0^*'(a_0^* d_0)^{-1}$.^{20}
+--- 图20 ---
+LEMMA 4.1: Suppose Assumptions 3.1–3.6 are satisfied. Then  $ \{\sqrt{Ng_N}(b_N^*)\} $:
+
+\{ \} converges in distribution to a normal random vector with mean zero an
+variance matrix  $ \zeta_0 = \{I - d_0(a_0^* d_0)^{-1} a_0^* \{S_w [ I - d_0(a_0^* d_0)^{-1} a_0^* \}\} $.
+--- 图27 ---
+mpling variation of gT (b0)
+$$ \hat{b}-b_{0}=d^{-1}[g_{T}(b_{0})-g(b_{0})]=d^{-1}g_{T} $$
+--- 图30 ---
+$$ \begin{array}{l l l}{r(\dot{b}))}&{=}&{\left[I-d(a d)^{-1}a\right]\operatorname{v a r}(g_{T}(b_{0}))\left[I-d(a d)^{-}\right.}\\ {}&{}&{}\\ {}&{=}&{\frac{1}{\mathcal{T}}\left[\mathrm{I}-\mathrm{d}(a\mathrm{d})^{-1}a\right]\mathrm{S}\left[\mathrm{I}-d(a d)^{-\Lambda}a\right]}\\ \end{array} $$
+--- 图31 ---
+$$\mathcal{G}T(b)\operatorname{Var}(\mathcal{G}T(b))\quad\mathcal{G}T(b)\sim\chi_{n-p}$$
+$$\mathcal{T}g_{T}(\hat{b})^{\prime}\left\{\left(\mathrm{I}-\mathrm{d}(\mathrm{ad})^{-1}\mathrm{a}\right)\mathrm{S}\left(\mathrm{I}-d(ad)^{-1}a\right)^{\prime}\right\}^{-1}g_{T}(\hat{b})\sim$$
+--- 图37 ---
+GMM estimator  $ W = S^{-1} : b = \arg\min g_T(b)  $
+first order condition:  $ \left(\frac{\partial g_{T}^{\prime}}{\partial b}S^{-1}\right)g_{T}(\hat{b})=0 $
+$$ \left(\left[\frac{\partial g_{T}}{\partial b^{\prime}}\right]^{\prime}S^{-1}\right)g_{T}(\hat{b}) $$
+$$ \left(d^{\prime}S^{-1}\right)g_{T}(\hat{b})=0 $$
+$ u c-1 $  $ (\hat{x}) $
+--- 图38 ---
+$$ \begin{array}{rcl}var(b)&=&\overline{T}\left(d^{\prime}S^{-1}d\right)^{-1}\\ \\ var(g_{T}(\hat{b}))&=&\overline{T}\left(S-d(d^{\prime}S^{-1}d)\right.\\ &&\\ (\hat{c})t_{S-1}-(\hat{i})&\cdots&\gamma^{2}\end{array} $$
+--- 图43 ---
+$$ \begin{array}{r c l}{d}&{=}&{-\mathrm{E}[x_{t}x_{t}^{\prime}]}\\ {c_{t},\beta)}&{=}&{x_{t}\varepsilon_{t}}\\ {\mathrm{S}}&{=}&{\displaystyle\sum_{i=-\infty}^{\infty}\mathrm{E}[\varepsilon_{t}x_{t}x_{t-j}^{\prime}\varepsilon_{t-}}\end{array} $$
+--- 图50 ---
+$$ \begin{array}{r}{\left.\begin{array}{r l r}{\mathrm{E}_{T}[m(\beta,\hat{\gamma})R_{m}^{e}]}\\ {\mathrm{E}_{T}[m(\hat{\beta},\hat{\gamma})R_{f}-1]}\\ {\mathrm{E}_{T}[m(\hat{\beta},\hat{\gamma})R^{H M L}]}\\ {\mathrm{E}_{T}[m(\hat{\beta},\hat{\gamma})R^{S M B}]}\end{array}\right\}}\\ {\left.\begin{array}{r l}{\mathrm{O}_{1}}&{\mathrm{O}_{0}}&{\mathrm{O}_{0}}\\ {\mathrm{O}_{2}}&{\mathrm{O}_{1}}&{\mathrm{O}_{2}}\end{array}\right]\left\langle\right.}\end{array} $$
+--- 图51 ---
+作为一个人工智能语言模型，我还没学习如何回答这个问题，您可以向我问一些其它的问题，我会尽力帮您解决的。
+The general GMM estimate:
+$$ a_{T}g_{T}(\hat{b})=0. $$
+Distribution of $\hat{b}_{i}$
+$$ T\mathrm{c o v}(\hat{b})=({a d})^{-1}{a S a}^{\prime}({a d})^{-1\prime}. $$
+Distribution of  $  g_{T}(\hat{b})  $:
+$$ T\mathrm{c o v}\big[g_{T}(\hat{b})\big]=(I-d(a d)^{-1}a)S(I-d(a d)^{-1}a)^{\prime}. $$
+The “optimal” estimate uses $a = d'S^{-1}$. In this case,
+$$ T\mathrm{c o v}(\hat{b})=(d^{\prime}S^{-1}d)^{-1}, $$
+$$ T\mathrm{c o v}\big[g_{T}(\hat{b})\big]=S-d(d^{\prime}S^{-1}d)^{-1}d^{\prime}, $$
+and
+$$ T J_{T}=T g_{T}(\hat{b})^{\prime}S^{-1}g_{T}(\hat{b})\rightarrow\chi^{2}(\#\mathrm{m o m e n t s}-\#\mathrm{p a r a m e t e r s}). $$
+An analogue to the likelihood ratio test,
+$$ T J_{T}(\mathrm{r e s t r i c t e d})-T J_{T}(\mathrm{u n r e s t r i c t e d})\sim\chi_{\mathrm{N u m b e r~o f~r e s t r i c t i o n s}}^{2}. $$
+--- 图52 ---
+分享量化理论和实证心得
+☐
+免责声明：
+文章内容不可视为投资意见。资本市场有风险，入市投资需谨慎。

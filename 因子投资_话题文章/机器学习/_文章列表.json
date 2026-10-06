@@ -1,0 +1,110 @@
+[
+ {
+  "pos": 1,
+  "title": "【041】机器学习驱动的基本面量化投资",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484256&idx=1&sn=0789b472815f8ebaff87debf47e008f9&chksm=f995b2e2cee23bf440f8e007f4cdb10388c071ca0555cf532a1948d4c2e55ab3a28292eac95e#rd",
+  "date": "1571832232"
+ },
+ {
+  "pos": 2,
+  "title": "【045】Which Characteristics?",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484364&idx=1&sn=fa2f763f6ec767b2090a94bb48a750bd&chksm=f995b24ecee23b58fb31868e2c1cec676ec1d445d2fb4db3ed2a0a432becbb96bfa2a4ab34c3#rd",
+  "date": "1573214460"
+ },
+ {
+  "pos": 3,
+  "title": "【054】因子投资中的机器学习",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484568&idx=1&sn=986ec4bed9bc5c72409cdc3899679bc5&chksm=f995b51acee23c0c89cea7ff2d084a2b2472ef0befcd1e2031558c75a3395e8e7b9f98bedd57#rd",
+  "date": "1585052236"
+ },
+ {
+  "pos": 4,
+  "title": "搞事情专栏|因子投资中的无监督学习",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484715&idx=1&sn=ed50a1c5bf328b2511b891c6cad9d5b2&chksm=f995b4a9cee23dbfc6c1668d8390d1d0df744284bf3c7c4b6f746e129c60b3f8fbc175552832#rd",
+  "date": "1587988868"
+ },
+ {
+  "pos": 5,
+  "title": "【067】遗漏因子、缺失数据与多重检验",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484969&idx=1&sn=fcb03a6778a3fa972c67592be6494ca4&chksm=f995b7abcee23ebd636b6bf744f3f185e1b035d57f8cacdffabdb407f30dd659e410a1c17953#rd",
+  "date": "1601032821"
+ },
+ {
+  "pos": 6,
+  "title": "【070】看图识趋势",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485006&idx=1&sn=24b5c970911a835c39fbc12de78a10cc&chksm=f995b7cccee23edab1b29cccdb850a1792f38befcbb662b52fb28dbd4b860b1899add1768948#rd",
+  "date": "1609934460"
+ },
+ {
+  "pos": 7,
+  "title": "【075】叮！您的行业分类需要更新啦~",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485098&idx=1&sn=4543d05de820b3faee792b8a0c8c86ce&chksm=f995b728cee23e3e21dd92741e36d7ad2936dea3c5fb6e95916cef2530b65c207ad72b7c53c2#rd",
+  "date": "1620975671"
+ },
+ {
+  "pos": 8,
+  "title": "【080】内卷时代的脑洞研究：投资者情绪研究新进展",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485273&idx=1&sn=865c5f304caf1477ec7913824a91e30a&chksm=f995b6dbcee23fcd50207870c1d5e81cf47a21c15bf128b75f3764ea34d71b9bb7b3812b82e6#rd",
+  "date": "1629276984"
+ },
+ {
+  "pos": 9,
+  "title": "【081】顶刊中的 A 股市场",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485281&idx=1&sn=39178b9f76ac2d30f787847c622dcc93&chksm=f995b6e3cee23ff51f81c7fd5649dcc548a8f12e1bfc4c9870648f7154e587c7b2b04a10398e#rd",
+  "date": "1630570745"
+ },
+ {
+  "pos": 10,
+  "title": "文献推荐",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485307&idx=1&sn=cab1b629b43ed654698413f62273bef4&chksm=f995b6f9cee23fef71680eb784dc30fa8ac2c9be4fc3581cbde18730a414287f3be04dded506#rd",
+  "date": "1636709177"
+ },
+ {
+  "pos": 11,
+  "title": "【093】机器学习与基金研究（I）：业绩预测",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485469&idx=1&sn=8d7bcd91e2d3c9b259b72b701abf93ac&chksm=f995b99fcee2308936ad2afc27fe8e0701aa4b395c5481821457ea051096325ecb6922e3a778#rd",
+  "date": "1658138067"
+ },
+ {
+  "pos": 12,
+  "title": "【094】基于回归斜率的因子溢价估计与因子模型",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485487&idx=1&sn=0acea5351a4c4ac18d5a5456aef763cc&chksm=f995b9adcee230bb94fc7ba9d5ce0c95f21dba1f5164f63c9c72827900cbb1b6d69702c252b2#rd",
+  "date": "1658831137"
+ },
+ {
+  "pos": 13,
+  "title": "【095】因子动物园的另一面：如何估计异象的先验概率",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485495&idx=1&sn=dc3e7ceaf4189890822e4160c560a2d4&chksm=f995b9b5cee230a3d8732c3e63b45b8b49bf7bd1d40585115fc22b834dd42f726b92ddf99809#rd",
+  "date": "1659947071"
+ },
+ {
+  "pos": 14,
+  "title": "【101】新闻叙事、文本分析与资产定价",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485670&idx=1&sn=8c8eafd05e57371bc9058ea19bc61be4&chksm=f995b964cee23072827e0f6cba939261fa82089e3380fcd7d5a52598d3c0927348eda1d7fb9c#rd",
+  "date": "1677412824"
+ },
+ {
+  "pos": 15,
+  "title": "【103】Options: Factors, Models, and Factor Momentum",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485700&idx=1&sn=94e660e4181d50134615af4d3f5d222a&chksm=f995b886cee23190962d96d6e128f3d9cf12348a825a51146b5687702b5552101a174fb591b4#rd",
+  "date": "1682588199"
+ },
+ {
+  "pos": 16,
+  "title": "【104】文本分析与基金研究（I）：基于文本的基金分类",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485712&idx=1&sn=00da26321206911888b320c7a76fb894&chksm=f995b892cee23184ff885abc80dc6b27f3d226216aa41974bf0023cec11e417183868dc4d647#rd",
+  "date": "1684152169"
+ },
+ {
+  "pos": 17,
+  "title": "【105】因子择时到底行不行？",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485727&idx=1&sn=cff1befd4e46974edb2ce7acb276025a&chksm=f995b89dcee2318bc41658c3e773d8b93d63ce4dd8f4512db8dcc020923d9153401a068d023e#rd",
+  "date": "1685091313"
+ },
+ {
+  "pos": 18,
+  "title": "【107】文本分析与基金研究（II）：学术视角下的量化基金",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485758&idx=1&sn=56db7a090fce55a1fb20685c316d61e6&chksm=f995b8bccee231aa6f643790aec94602e4a0260ac4a56ce6fec27e440e787372ec020666c98b#rd",
+  "date": "1693401107"
+ }
+]

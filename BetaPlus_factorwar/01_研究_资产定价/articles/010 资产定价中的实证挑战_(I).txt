@@ -1,0 +1,247 @@
+# 资产定价中的实证挑战 (I)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/plLtqu8blplRL1j9VgXOeA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+人们对于资产定价的理解离不开层出不穷的实证挑战。本文梳理当下的一个重要的驱动力：协变量的高维数。
+
+0
+
+很大程度上，资产定价的发展历程是由实证挑战来驱动的。
+
+这里，通过几张我自己的 slides 简单整理一下。由于小伙伴们都比较熟，此处不再过多的说明。
+
+从最后三张 slides 可知，现如今，实证资产定价研究范式从计量经济学转向了机器学习；而这背后的驱动因素来自（至少）两方面的实证挑战：（1）协变量的高维数；（2）公司特征和收益率之间的复杂关系。
+
+我想通过两篇小文对这两方面进行梳理。作为第一篇，本文聚焦于协变量的高维数。
+
+1
+
+时至今日，恐怕没人会否认我们已经步入了协变量的高维数时代。仅仅是基于量价和公司财务报表数据，学术界就已经挖掘出了数百个因子（Harvey et al. 2016, Hou et al. 2020），而业界使用的只会更多。除了传统数据外，另类数据也在近年来不断涌现。它们在金融领域，特别是资产定价领域，迅速崭露头角并得到了广泛的关注。
+
+与传统的数据相比，另类数据提供了从不同维度观察市场和经济活动的可能性，为投资决策提供了更为丰富和多元的信息来源。它们中不乏非结构化和半结构化数据。机器学习算法的进步使得处理和分析复杂的另类数据成为可能。由于能为资产定价研究提供更为细致和深入的见解，其成功应用不仅在投资业界落地开花，也促使学术界将实证研究的重点转移到检验新数据中蕴含的股票收益率截面信息。
+
+此外，近年来 ESG（环境、社会和治理）概念越来越受到重视。随着对 ESG 评估的需求增加，另类数据成为了收集和评估 ESG 相关信息的重要来源。例如，卫星图像可以用来监测工厂的排放量或者森林砍伐情况，从而为环境评估提供数据。社交媒体和新闻源可以提供关于公司社会责任事件或争议的实时信息。因此，另类数据会通过 ESG 这个渠道影响投资者对于公司的看法，从而可能改变他们的投资策略和决策，最终间接地影响资产的收益率和市场表现。
+
+然而，另类数据也带来了新的挑战，如数据清洗、完整性和时效性问题，以及如何从这些非传统数据中提取真正有价值的信息。但无可否认，另类数据重新定义了人们对市场的理解和投资策略的制定，为金融领域带来一场创新革命。
+
+2
+
+本节挑选一些最具代表性的另类数据类别和论文，简要介绍学术界基于这些新数据的实证资产定价发现。需要明确说明的是，本节绝非全面的文献综述。我只是希望通过所选择的文章帮助读者对另类数据在资产定价方面的多样应用有一个整体的了解。
+
+2.1 交易账户数据
+
+关于散户投资者（retail investors）交易账户数据的研究至少可以追溯到 20 年前。这方面的研究成果有助于帮助散户纠正错误的交易习惯。不过，这类数据通常是非公开的。在诸多研究中，Barber and Odean (2000) 所用的包含约 78,000 个账户的交易数据集非常有名（学术界后来称之为 Odean 数据集），在后来针对散户投资者以及行为金融学的相关研究中得到了广泛的应用。使用账户交易数据的最大问题在于数据集是非公开的，这往往使得相关研究难以被复现或扩展，而前述的那些代表性研究均存在这个问题。不过，该问题在 Boehem et al. (2021) 中得到了改善。该文并没有使用账户数据，而是通过算法从交易数据中有效识别出散户的交易数据。
+
+2.2 订单簿数据
+
+订单簿（order book）记录了市场参与者对特定资产的买卖意向。这些记录反映了参与者的预期和市场的潜在压力。订单簿数据在市场微观结构和高频交易研究中起着重要作用。实证研究发现，订单簿数据带有揭示关于未来价格方向的预测信息。Cont et al. (2014) 使用纽交所交易和报价数据，研究了 50 支股票的订单簿事件（如限价订单、市价订单和取消订单）对价格的影响，发现在短时间内，价格变化主要由最佳买入价和卖出价之间的供求失衡（订单流失衡）驱动，并且这种失衡与价格变化之间存在线性关系。此外，文章还探讨了这种关系对于日内股价波动动态的意义。
+
+2.3 社交媒体数据
+
+社交媒体和在线平台为金融市场提供了丰富而即时的数据，这些数据被证明在预测股票收益率乃至公司基本面方面具有价值。从负面新闻的影响，到社交媒体上的人群智慧，再到特定平台如 Twitter 的数据分析，学术研究探索了新数据来源的多种应用方式。举例来说，Chen et al. (2014) 探讨了通过社交媒体媒介传播的投资者观点能够在多大程度上能预测股票未来的收益率以及公司的预期外盈利。通过对美国最受欢迎的投资者社交媒体平台上发布的文章以及文章下的评论进行文本分析，作者发现二者均能预测收益率和预期外盈利。上述研究不仅表明社交媒体数据带有预测信息，也强调投资者和实证研究人员应给予这些数据足够的重视，以获取和捕捉有关股票市场动态的更多信息。
+
+2.4 众包数据
+
+另一类应用广泛的另类数据是众包数据。Green et al. (2019) 使用 Glassdoor.com 数据研究了员工评价与股票收益率之间的关系。该网站提供了员工对公司的综合评价和五个标准化评价指标，包括职业机会，薪酬福利，工作/生活平衡度，高层管理，企业文化与价值，所有评价皆为 1 至 5 星。理论上，员工评价变高，意味着经济环境及公司前景很可能在变好，在其他条件相同的情况下，公司应有更好的表现，因此股票的预期收益率更高。为了验证上述猜想，该文依据员工评价变化高低将股票分为三组，并通过做多高分组、做空低分组构造了因子，实证结果支持了他们的猜想，该因子的平均超额收益率非常显著。此外，Da et al. (2021) 所使用的数据是一个名为 Forcerank 的移动应用上散户对股票的周度评分。该文研究了投资者过度外推信仰和未来股票收益率之间的负相关关系。
+
+2.5 文本数据
+
+随着机器学习算法的普及，文本即数据这一看法早已深入人心，对文本数据的研究也成为了学术界的必争之地，文本数据也在金融学领域得到了广泛的应用。Cohen et al. (2020) 发现美股上市公司季报和年报中的文本措辞变化能够预测股票收益率。具体而言，文本改动越少的公司未来的预期收益越高。通过做多改动少的公司、做空改动多的公司，该投资组合可以获得超过 20% 的年化超额收益率。除了实证结果外，该文的精彩之处在于对背后机制的讨论。该文发现财报中措辞变动背后的原因通常是以下几种：更加负面的情绪、更高的不确定性、更多的诉讼以及 CEO/CFO 变动。这些原因往往意味着公司的运营面临更高的风险和不确定性。另一方面，Bybee et al. (2023) 则基于文本数据构造了一个实证资产定价模型，发现基于新闻数据的多因子模型不输诸如 FF5，HXZ 等主流多因子模型。
+
+2.6 图像数据
+
+Obaid and Pukthuanthong (2022) 和 Jiang et al. (2023) 将卷积神经网络应用于挖掘图像数据中关于资产收益率的预测信息。前者对新闻照片进行情感分类并创建了一个每日投资者情绪指标。该情绪指标能够预测市场收益率以及交易量。此外，该文还探讨了照片中的悲观情感与新闻文本中的悲观情感在预测股价方面的可替代性，发现二者的关系更倾向于替代而非互补。后者则将机器学习直接应用于股票的 K 线图之上。与传统的按照特定模式定义动量或反转不同，他们的方法可以灵活地识别与收益率高度相关的价格模式。机器学习算法识别的模式与常规技术分析中的趋势信号有很大差异，并含有更高的预测信息。值得一提的是，这些模式在不同的市场环境中同样适用，例如短期内的价格模式在长期时间尺度上表现良好，而从美国股市中学到的模式在国际市场上也依然有效。
+
+2.7 另类数据与分析师预测
+
+除了用来预测资产收益率外，另类数据的丰富是否也在其他方面提高了金融预测的质量呢？Dessaint et al. (2024) 探讨了另类数据的使用如何影响卖方分析师关于上市公司盈利预测的准确度，加深了人们关于另类数据对市场有效性的理解。该文首先通过梳理 26 篇相关学术论文（使用的另类数据包括社交媒体、卫星数据、搜索引擎数据等），发现另类数据的预测时间尺度均不超过 1 年。换句话说，它们都是短期导向数据，只能对短期的预测提供信息增量。在这个前提下，一系列问题自然而然地浮出水面。分析师的估值模型中往往需要同时应用短期和长期的盈利预测作为输入，那么大量含有短期预测信息的另类数据的涌现对于分析师不同时间尺度（短期 vs. 长期）的盈利预测结果会有怎样的影响？不同尺度上的综合影响又是否能够提高整体的预测质量呢？在另类数据愈加普及的今天，回答这些问题对于使用分析师盈利预测信息至关重要。就上述问题，该文通过理论和实证给出了精彩的论述。
+
+理论模型，该文假设分析师在进行盈利预测时，需要最优地分配其投入到不同时间尺度预测的精力，从而最小化预测误差以及获取不同时间尺度预测信息的成本这二者之和。另类数据的出现降低了获取短期预测数据的成本，并同时提高了短期预测数据的准确度。因此，它促使分析师将更多的精力投入到获取和分析短期预测信息上，以此来提高短期预测的准确度。然而顾此失彼，由于分析师的精力是有限的，这造成的后果是降低了他们长期预测的准确度。
+
+实证方面，该文绘制了分析师盈利预测准确度的期限结构（即预测准确度随预测的时间尺度的变化曲线），并考察了该期限结构的斜率如何随另类数据的出现和普及而变化。首先，不管实证窗口如何，该期限结构都呈现出短时间尺度预测准确性高、长时间尺度预测准确性低的结构。接下来（最重要的一点），随着另类数据的出现，期限结构变得更加陡峭，即短时间尺度上预测准确度增加，而其代价是长时间尺度上预测准确度下降。此外，该文考察了不同行业的期限结构随时间的变化趋势与另类数据的使用关系。回归结果显示，另类数据使用越多的行业，其期限结构变得更加陡峭，从而说明了另类数据的使用以及长短期预测准确度变化差异二者之间的联系。
+
+针对 A 股，利用朝阳永续的分析师预测数据（时间跨度为 2012 到 2023，共 4208520 个样本），我们此前考察了分析师准确度的期限结构如何变化。具体而言，以 2016 年为分界将分析师盈利预测样本分成前后两个区间，分别计算并绘制这两个区间内分析师盈利预测准确度的期限结构。从下图所示结果可知，后一个区间内的短期预测准确度确有提升（和美股一致），另外有意思的现象是在跨度为 1 至 2 年（即 12 到 24 个月）的预测尺度上，第二个区间内的准确度较第一个区间显著降低。不过和美股不同的是，在大于 2 年的预测尺度上，两个区间内的结果并无显著差异。
+
+3
+
+另类数据中蕴含的潜在预测信息固然令人兴奋，但因数据可得性问题（比如数据成本往往很高、有些甚至无法获取）的原因，其在学术研究中广泛普及尚需时日。另一方面，与之相对应的准另类数据则得到了更多的关注。关于准另类数据，其非正式的定义包含以下三点：（1）它不是典型的公司特征或宏观经济数据；（2）它比另类数据的可得性更高；（3）它往往被忽视，因而被研究和利用的不够充分。准另类数据中最重要的两类是公司间关联和基金隐藏信息。它们均能为预测股票收益率提供增量信息。
+
+3.1 公司间关联
+
+在经济活动和业务操作中往往存在直接或间接关联的公司，这种关系被称为公司间关联。它可能基于供应链、行业关系、合作伙伴关系或共享资源等因素。这些经济上相关联的公司的经济表现可能会受到彼此的影响或反映相似的市场动态，其股票收益率往往存在领先-滞后效应（lead-lag effect），即当一组资产对某一信息或事件的反应比另一组资产更早或更迅速，导致后者的价格变动在时间上滞后于前者。
+
+这种效应反映了信息在市场中的不均匀扩散或某些资产的反应速度相对较慢。只要我们从某个切入点找到公司之间的关联，就可以利用领先公司的收益率作为预测变量来预测滞后公司未来的收益率。在学术界的术语中，将被预测的公司（即滞后的公司）称为焦点公司，将与之关联的领先公司称为关联公司。因此，公司间的关联是关联公司对焦点公司的一种溢出效应，对它的研究有助于揭示资产价格动态背后的经济机制和市场行为。
+
+领先-滞后效应实证研究的第一步往往是从某个经济视角出发度量公司之间的关联度。在这方面，学术界的研究由来已久。下表汇总了发表在顶刊上的最重要的公司间关联，包括行业内关联、重要客户关联、复杂公司关联、科技关联、地理关联以及分析师共同覆盖关联。
+
+一旦有了关联指标，接下来便可以按照如下的方法构造预测变量：
+
+  
+
+式中  表示  期和焦点公司  相关联的关联公司集合，  为  期关联公司  和焦点公司  的关联度指标（取值越高说明二者的关联越强），  为  期关联公司  的（累计）收益率。由该定义可知，焦点公司预测变量是  期其关联公司收益率的加权平均（即关联收益率），权重由关联度强弱决定。利用预测变量  ，做多关联收益率高的股票，同时做空关联收益率低的股票。实证结果显示，以此构造的投资组合能够获得显著的超额收益，意味着公司间关联中蕴含着关于资产收益率的有用信息。
+
+以分析师共同覆盖动量为例，下表展示了其在 A 股上的实证检验结果。通过将该预测变量和市值进行双重排序检验发现，无论是对小市值、大市值还是全市场平均，该关联效应均能显著预测股票的收益率。比如全市场平均而言，通过做多关联收益率高、做空关联收益率低股票而构造的投资组合的月均超额收益率为 0.71%，t-statistic 为 2.68。
+
+和上述既有公司间关联的研究不同， Eisdorfer et al. (2022) 另辟蹊径，对年报的竞争章节进行了文本分析，并使用一家公司被多少其他公司当作竞争对手来衡量该公司的竞争力或竞争关联。竞争关联的基本逻辑非常容易理解，即被被提及的次数越多，表明公司越有竞争力，从而其股票的未来收益更高。在竞争关联的机制方面，他们讨论了一家公司 A 为何会在报告中提及另一家公司 B 作为其竞争对手：若 B 公司比 A 公司大很多（比如 B 可能是行业龙头），那么 A 公司提及 B 公司可能是很自然的事，因而这种提及并没有非常深刻的寓意；另一种情况是 B 公司比 A 公司小很多，这种情况下，A 公司提及 B 公司更可能是因为 A 公司的管理层注意到了 B 公司有一些独特的、很可能成功的商业模式，因此这一提及包含着对 B 公司基本面的有用且尚未被投资者充分利用的预测信息。实证结果证实了上述猜想，即竞争关联能够预测股票收益率，且第二种情况下的预测信息更高。
+
+究其内在原因，公司间关联的可预测性主要源于投资者对于关联信息的注意力缺乏，从而导致的反应不足（Huang et al. 2022）。这种注意力不足可能表现为两种主要形式。首先是信息溢出，即当关联公司发布重要信息或有重大事件发生时，这些信息可能首先影响该公司的股票价格。但随后，与之密切相关的其他公司也可能受到影响。这是因为市场参与者可能预期这些信息或事件也会对焦点公司产生影响。其次是经济效应溢出。当关联公司的经济状况发生变化，如盈利增长或下降，这种经济变动可能会对焦点公司产生溢出效应，特别是当它们在同一供应链中或在相同的市场环境下运营时。由于投资者没有充分关注或理解这些企业之间的关联性，导致他们对相关信息的反应不足或滞后。这种信息的不完全反应为其他更为敏感和知情的投资者提供了套利机会。进一步地，这种企业间的关联效应还能为公司的未来基本面变化提供预测线索。
+
+值得注意的是，这类关于公司间关联的数据在许多公开渠道都可以轻松获取，为研究者提供了深入研究和分析的基础。基于已有的实证研究，公司间关联效应在 A 股市场上被证明具有很好的应用前景。
+
+3.2 基金隐含信息
+
+公募基金的隐含信息在资产定价领域已成为一个重要的研究方向，它为投资者提供了关于未来股票收益率的潜在预测信息。在诸多隐藏信息之中，和基金持仓以及基金的资金流入流出相关的信息尤为重要。
+
+基金的持仓结构为投资者提供了一窥基金经理所持信息和看法的途径。Wermers et al. (2012) 利用基金持仓数据以及基金的历史表现等指标构造了个股收益率的预测信号。该信号有效汇总了跨基金的选股信息，捕捉了基金经理在选股方面的集体智慧。和早期的研究相比，该研究的一个关键之处在于它同时考虑了基金经理的技能差异以及不同基金之间的持有股票的相似性，从而更准确地提取股票选择的信息。实证结果显示，该信号和股票下期的收益率在截面上成正比。
+
+基金流是指投资者的资金流入或流出基金。当基金经历大量的资金流入时，基金经理可能会购买更多的股票，这反过来可能会推高这些股票的价格。相反，当基金流出时，基金经理可能会出售股票，导致价格下跌。Lou (2012) 探讨了资金流动对股票回报预测性的影响，并为公募基金业绩可持续性、``聪明钱''效应和股票价格动量这些典型事实提供了解释。首先，该文通过汇总全部基金的资金流导致的交易信息，构建了一个衡量个股需求冲击的指标。鉴于公募基金的资金流是高度可预测的，作者进一步指出预期资金流能够在未来一年正向预测股票和基金的收益率，但在随后的年份会发生逆转。更重要的是，这种基于资金流的效应能够完全解释公募基金绩效的持续性``聪明钱"效应；而对于股票价格的动量，它也提供了部分解释。
+
+以上简要梳理了当下资产定价研究的第一个实证挑战。我大概率不会再专门写 2024 年的公众号总结了，所以各位小伙伴，我们 2025 的第二个实证挑战再见了。
+
+最后，一首《青花》送给各位。每个成年人心中，都有一首周传雄。
+
+参考文献
+Ali, U. and D. Hirshleifer (2020). Shared analyst coverage: Unifying momentum spillover effects. Journal of Financial Economics 136(3), 649-675.
+
+Barber, B. M. and T. Odean (2000). Trading is hazardous to your wealth: The common stock investment performance of individual investors. Journal of Finance 55(2), 773-806.
+
+Boehmer, E., C. M. Jones, X. Zhang, and X. Zhang (2021). Tracking retail investor activity. Journal of Finance 76(5), 2249-2305.
+
+Bybee, L., B. T. Kelly, and Y. Su (2023). Narrative asset pricing: Interpretable systematic risk factors from news text. Review of Financial Studies 36(12), 4759-4787.
+
+Chen, H., P. De, Y. Hu, and B.-H. Hwang (2014). Wisdom of crowds: The value of stock opinions transmitted through social media. Review of Financial Studies 27(5), 1367-1403.
+
+Cohen, L. and A. Frazzini (2008). Economic links and predictable returns. Journal of Finance 63(4), 1977-2011.
+
+Cohen, L. and D. Lou (2012). Complicated firms. Journal of Financial Economics 104(2), 383-400.
+
+Cohen, L., C. Malloy, and Q. Nguyen (2020). Lazy prices. Journal of Finance 75(3), 1371-1415.
+
+Cont, R., A. Kukanov, and S. Stoikov (2014). The price impact of order book events. Journal of Financial Econometrics 12(1), 47-88.
+
+Da, Z., X. Huang, and L. J. Jin (2021). Extrapolative beliefs in the cross-section: What can we learn from the crowds? Journal of Financial Economics 140(1), 175-196.
+
+Dessaint, O., T. Foucault, and L. Fresard (2024). Does alternative data improve financial forecasting? The horizon effect. Journal of Finance 79(3), 2237-2287.
+
+Eisdorfer, A., K. Froot, G. Ozik, and R. Sadka (2022). Competition links and stock returns. Review of Financial Studies 35(9), 4300-4340.
+
+Green, T. C., R. Huang, Q. Wen, and D. Zhou (2019). Crowdsourced employer reviews and stock returns. Journal of Financial Economics 134(1), 236-251.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). ... and the cross-section of expected returns. Review of Financial Studies 29(1), 5-68.
+
+Hou, K. (2007). Industry information diffusion and the lead-lag effect in stock returns. Review of Financial Studies 20(4), 1113-1138.
+
+Hou, K., C. Xue, and L. Zhang (2020). Replicating anomalies. Review of Financial Studies 33(5), 2019-2133.
+
+Huang, S., C. M. Lee, Y. Song, and H. Xiang (2022). A frog in every pan: Information discreteness and the lead-lag returns puzzle. Journal of Financial Economics 145(2), 83-102.
+
+Jiang, J., B. Kelly, and D. Xiu (2023). (Re-)Imag(in)ing price trends. Journal of Finance 78(6), 3193-3249.
+
+Lee, C. M. C., S. T. Sun, R. Wang, and R. Zhang (2019). Technological links and predictable returns. Journal of Financial Economics 132(3), 76-96.
+
+Lou, D. (2012). A flow-based explanation for return predictability. Review of Financial Studies 25(12), 3457-3489.
+
+Obaid, K. and K. Pukthuanthong (2022). A picture is worth a thousand words: Measuring investor sentiment by combining machine learning and photos from news. Journal of Financial Economics 144(1), 273-297.
+
+Parsons, C. A., R. Sabbatucci, and S. Titman (2020). Geographic lead-lag effects. Review of Financial Studies 33(10), 4721-4770.
+
+Wermers, R., T. Yao, and J. Zhao (2012). Forecasting stock returns through an efficient aggregation of mutual fund holdings. Review of Financial Studies 25(12), 3490-3529.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+Stage 1: CAPM (1960s)
+• The Capital Asset Pricing Model (CAPM):
+$$ \mathrm{E}[R_{i}]-R_{f}=\beta_{i}(\mathrm{E}[R_{M}]-R_{f}) $$
+It says asset's expected excess return is determined by its exposure  $ \beta_{i} $ to the market risk.
+- Eugene Fama: The arrival of the CAPM was like the time after a thunderstorm, when the air suddenly clears.
+--- 图3 ---
+Stage 1: CAPM (1960s), Cont'd
+• Empirical Challenge 1: Average return does not align with beta
+--- 图4 ---
+Stage 1: CAPM (1960s), Cont'd
+- Empirical Challenge 2: Some assets earn abnormal returns against CAPM, and they are called anomalies.
+• Value stocks outperform growth stocks (Basu 1977)
+• Small-cap stocks outperform large-cap stocks (Banz 1981)
+$$ \mathrm{E}[R_{i}]-R_{f}=\alpha_{i}+\beta_{i}(\mathrm{E}[R_{M}]-R_{f}) $$
+where  $ a_{i} $ is the abnormal return that cannot be explained by the model.
+--- 图5 ---
+Stage 2: Fama-French (1990s)
+- In spirit of Ross (1976)'s arbitrage pricing theory, Fama and French (1993) proposes a three-factor model:
+$$ \mathbf{E}[R_{i}^{e}]=\beta_{i,M}(\mathbf{E}[R_{M}]-R_{f})+\beta_{i,HML}\mathbf{E}[R_{HML}]+\beta_{i,SMB}\mathbf{E}[R_{SMB}] $$
+Fama and French augment CAPM by adding two additional factors: High-Minus-Low and Small-Minus-Big.
+--- 图6 ---
+Stage 2: Fama-French (1990s), Cont'd
+• Empirical Challenge: Zoo of factors (Cochrane 2011)
+Source: Harvey and Liu (2019). A Census of the Factor Zoo
+--- 图7 ---
+Stage 3: “Factor War” (2010s)
+• New ad-hoc parsimony factor models are proposed since 2010:
+[表]
+Model | Factors | 
+Fama and French (1993) | Market, Size, Value | 
+Novy-Marx (2013) | Market, Value, Momentum, Profitability | 
+Fama and French (2015) | Market, Size, Value, Profitability, Investment | 
+Hou, Xue and Zhang (2015) | Market, Size, Profitability, Investment | 
+Stambaugh and Yuan (2017) | Market, Size, Management, Performance | 
+Daniel, Hirshleifer and Sun (2020) | Market, LT behavioral, ST behavioral |
+
+--- 图9 ---
+Stage 3: "Factor War" (2010s), Cont'd
+- Empirical Challenge 2: Nonlinear relationship between covariates and asset returns.
+[表]
+ | Highest IVOL | Next 20% | Next 20% | Next 20% | Lowest IVOL | Highest -Lowest | All Stocks | 
+Most Overpriced (Top 20%) | -1.89 (-12.05) | -0.95 (-7.39) | -0.72 (-4.90) | -0.47 (-3.62) | -0.39 (-3.04) | -1.50 (-7.36) | -0.81 (-8.14) | 
+Next 20% | -0.88 (-5.86) | -0.41 (-3.36) | -0.31 (-3.00) | -0.21 (-2.08) | -0.04 (-0.44) | -0.64 (-4.41) | -0.23 (-3.88) | 
+Next 20% | -0.09 (-0.53) | -0.01 (-0.09) | -0.05 (-0.48) | -0.12 (-1.29) | 0.02 (0.18) | -0.10 (-0.53) | -0.07 (-1.47) | 
+Next 20% | -0.15 (-0.90) | 0.07 (0.63) | 0.17 (1.87) | 0.18 (2.33) | 0.23 (3.22) | -0.38 (-1.78) | 0.18 (4.45) | 
+Most Underpriced (Bottom 20%) | 0.56 (3.27) | 0.68 (4.91) | 0.51 (5.02) | 0.33 (4.10) | 0.14 (2.04) | 0.41 (2.16) | 0.28 (3.67) | 
+Most Overpriced - Most Underpriced | -4.4 (-11.07) | -1.63 (-8.65) | -1.23 (-6.43) | -0.81 (-5.02) | -0.53 (-3.43) | -1.91 (-7.62) | -1.09 (-8.05) | 
+All Stocks | -0.69 (-6.09) | -0.12 (-1.56) | -0.00 (-0.01) | 0.05 (1.07) | 0.08 (1.86) | -0.78 (-5.50) |  |
+Souroe: Stamburgh, Yu and Yuan (2015)
+--- 图10 ---
+Stage 4: A New Norm (2020s)
+- The empirical challenges shift research norm from econometrics to machine learning.
+Latent factor model, i.e., modeling  $ \beta $:
+$$ \boldsymbol{R}_{i,t+1}^{e}=\boldsymbol{\beta}_{i,t}^{\prime}(\boldsymbol{c})\boldsymbol{F}_{t+1}+e_{i,t+1} $$
+• factors are latent in this framework
+- machine learning view:  $ \beta() $ maps a large information set to a small factor model
+--- 图11 ---
+
+--- 图12 ---
+[表]
+出处 | 公司间关联 | 
+Hou (2007) | 行业内关联（intra-industry effect） | 
+Cohen and Frazzini (2008) | 重要客户关联（supplier-customer effect） | 
+Cohen and Lou (2012) | 复杂公司关联（conglomerate lead-lag effect） | 
+Lee et al. (2019) | 科技关联（technological links effect） | 
+Parsons et al. (2020) | 地理关联（geographic lead-lag effect） | 
+Ali and Hirshleifer (2020) | 分析师共同覆盖关联（shared analyst coverage effect） |
+--- 图13 ---
+[表]
+ | 低关联收益率 | 中关联收益率 | 高关联收益率 | 高 - 低 | 
+小市值 | 0.96 | 1.37 | 1.57 | 0.61 | 
+(1.30) | (1.86) | (2.07) | (2.68) | 
+大市值 | 0.46 | 0.70 | 1.28 | 0.82 | 
+(0.74) | (1.14) | (1.86) | (2.26) | 
+平均 | 0.71 | 1.04 | 1.42 | 0.71 | 
+(1.08) | (1.59) | (2.05) | (2.6) |
+实证区间2003到2018。括号内为t-值。
+数据来源：刘洋溢，《准另类数据与因子投资》。该报告可从www.factorwar.com获取。
+--- 图14 ---

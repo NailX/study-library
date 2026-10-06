@@ -1,0 +1,283 @@
+# 假设不存在 α 前提下，哪些基金能获取真正 α ?
+
+来源：03_研究_基金研究
+链接：https://mp.weixin.qq.com/s/hUEIL7V_Gd6RTCZAWcmt9g
+
+最近工作上比较忙，有段时间没更新公众号了。趁今天休息整理下最近看的几篇关于基金alpha的paper，跟大家分享一下（本文部分内容参考浙商证券金融工程报告：《“运气”还是“实力”？——探秘基金经理alpha》）。关于基金的alpha，相关的报告文献已经很多，比如最早也是最著名的因子收益剥离模型Fama-French 3因子模型：
+
+这里Rit原是指股票i在t时刻收益率，也可以是投资组合或基金的t时刻收益率，本文主要分析基金的情况。Rmt是市场收益率，SMBt是（small minus big）小盘股相对大盘股超额收益率，HMLt（high minus low）是高估值股相对低估值股收益率，ai是剥离了上述三个因子收益率后的收益率，也被解读为基金的alpha，通常alpha越大，基金获取超额收益的能力越强。e是模型残差。
+随着越来越多beta因子加入模型，基金的收益率被剥离得越来越充分，alpha也越来越小。换句话说：基金的alpha，很多时候可能来自于某些未知的beta因子，并不是其真正的管理能力的体现。极端情况下，当足够多的beta因子加入模型后，基金收益率剥离后的alpha甚至可能是负。
+
+当然，实际中不可能找到所有能解释市场或基金收益率的beta因子，因此理论上基金还是有可能获得正alpha，以体现自身的优秀管理能力。只不过，这个alpha可能是真的alpha、也可能是由于某些beta因子。所以本文要探讨的问题就是：假设纳入模型的beta因子足够丰富，基金不存在alpha的前提下，还有哪些基金能获取真正alpha？
+
+一、问题提出
+
+首先理论上基金收益率应该服从以下“真实”数据生成过程：
+
+这里ai是基金i的风险调整后收益；W是纳入模型的已被发现的beta因子；Z是未纳入模型但是对解释基金收益很重要的beta因子；e 是模型残差。但实际中因为没有意识到或没有观察到Z 因素的存在，只能按照下述过程估计，这样势必导致alpha的有偏估计，alpha中可能蕴含某些beta因素：
+
+另一方面，由于模型没有纳入那些重要但未观察到的beta因子，残差e中也可能包含这些因子收益。而且，不能被解释的部分很可能是基金经理能力的体现，也有可能只是“运气”。比如基金在各种beta因子间轮换暴露，且能大概率抓住每期正收益的beta因子，基金收益率相对因子来说也会有较大正偏离；再比如基金重仓股由于某些原因（游资爆炒、行业政策刺激的影响等），在某几个交易日股票冲高，导致基金收益率相对因子来说有较大正偏离。总而言之，基金残差形成原因：（这里只讨论残差为正值的情形，即基金收益相对模型有正偏离）
+
+（1） 风险因子未找到；
+（2）“运气”好；单纯由于持仓股票的受到偶然因素刺激跳跃导致；
+（3）基金经理真实选股或beta选择能力；
+    第三类是我们真正想挖掘到的基金
+
+二、理论简介
+    如上所述，如果定价因子不能够很好解释基金收益率，那么alpha甚至 残差部分有很多“未知因子”的贡献，可能是基金经理发现的能够带来超额收益的“特异因子”，恰恰是实力的反应。这里要分两种情况来看：
+    1、R 方较高情形，即模型解释度较高。当模型中考虑的beta因子较多的时候会出现这种情况，alpha较小且不显著，残差蕴含的信息较少属于随机扰动的情况更多，由于其不可解释并且随机，但又确实是收益率的一部分，我们称之为“运气”；
+    2、R 方较低情形，即模型解释度较低。低于70%甚至低于60%，说明残差含有某种“不知名因子”。这种情景下基金收益率较高，不仅是alpha 高导致，也有残差的成分而且不可忽视。
+    本文后面将采用FF5因子以及基于Barra的40风格因子两套体系对基金收益进行剥离，纳入因子较丰富模型解释度整体较高（后面会看到，大多数基金在大多数时段的R^2均高于70%甚至80%），更符合第一种情形。因此这里构造统计检验：
+
+H0：alpha 来源于运气
+H1：alpha 不是运气
+然后通过构造alpha的分布，如果alpha大于95%置信区间，则拒绝原假设，认为该基金在对应区间内的alpha是实力。
+
+    
+
+三、bootstrap方法构造alpha（或alpha的T值）分布
+下面以FF5因子模型为例，来简单介绍如何通过bootstrap来构造alpha或Talpha（即alpha的T值，实际操作中我用的是Talpha）的分布完成统计检验，至于Barra40因子（10个风格、29个行业、1个市场）操作过程完全一样。采用bootstrap后构造的基金alpha分布更贴近正态分布，具体原理可参考《Can Mutual Fund “Stars” Really Pick Stocks New Evidence from a Bootstrap Analysis》。
+1、首先，利用Fama French五因子模型对每个基金i的在某个区间（t=1,2,3....n）的日收益率进行回归：
+
+得到回归系数betai、si、hi、ri、残差序列eit（t=1,2,3....n），以及alpha及其统计量Talpha。我们将其称为基金的“实力”；
+
+2、对每个基金i，从步骤（1）生成的残差序列ei中有放回的随机抽取与样本数（1,2,3.....t）相同的残差，生成伪时间序列ei_b，此处后缀b表示来自bootstrap。注意这里是有放回的重抽样，所以可能某些个残差eit会被多次抽到、某些个残差eit一次都抽不到；
+
+3、假设基金的选股能力为零（即alpha或Talpha=0），将新的残差序列eit_b, 带入步骤（1）中的公式，可得到基金i的收益率序列：
+
+4、对新生成的,ri_b，再利用Fama French五因子模型进行回归，得到新的alpha_b及Talpha_b。在步骤（3）的假设下，它们的真实值应该为0，得到的alpha_b及Talpha_b不为0是因为残差蕴含“不知名因子”。若得到一个正的alpha_b及Talpha_b，可能是因为bootstrap随机抽取时抽到了许多正残差；若得到一个负的alpha_b及Talpha_b，可能是因为bootstrap随机抽取时抽到了许多负残差；
+
+5、对所有基金都同样操作，N个基金将得到N个alpha_b及Talpha_b，将他们由大到小排列（由小到大也可，后面对应就行） ：
+
+6、重复步骤（2）至（5）1000次（这里bootstrap size=1000），将得到1000组排序：
+
+这里要特别注意的是，每一次bootstrap得到的最大alpha_b或Talpha_b，未必来自同一只基金。也就是说，第一次排序，最右边最大的alpha或Talpha可能来自基金A；第二次排序，最右边最大的alpha_b或Talpha_b可能来自基金B。以此类推，原文解释如下：
+
+这么做的目的，是保证每次选取来的最大alpha_b或Talpha_b是所有基金残差重抽样后得到的真正最大的alpha_b或Talpha_b；第二大的alpha_b或Talpha_b也是真正第二大的，而不是仅仅自己跟自己比。当然实际操作中，我发现这个排名基本比较稳定，也就是基金A如果一次bootstrap后的alpha_b或talpha_b排名某个位置，之后的bootstrap得到的alpha_b或talpha_b也基本是同样排名位置。
+
+7、利用以上1000组中大小排序相同位置的alpha_b或Talpha_b，构成对应位置的分布。至此，我们可以利用一支基金的原始alpha_b或Talpha_b ，以及其对应位置的alpha_b或Talpha_b分布，来探究该基金的alpha或Talpha是因为“运气”还是因为基金经理真实的选股“实力”。
+由于本文的假设是H0：alpha 来源于运气，因此如果发现原始原始alpha或Talpha统计量大于绝大部分通过bootstrap产生的alpha_b或Talpha_b分布的某个分位数如95%，那么得出结论：拒绝H0，基金的alpha或Talpha不完全是运气。
+
+四、数据及样本区间
+1、样本基金同《挖掘主动管理基金中的工具型选手》；
+2、数据区间为201601~201906；
+3、采用滚动窗口的形式，每个月底，根据过去60个交易日对样本基金的Talpha进行实力或运气的判断，每个基金一共得到42个实力/运气判定数据；
+4、FF5因子数据感谢川总及《因子动物园》平台提供，barra40因子我这里用的是同事根据东方证券的方法构造生成的因子收益序列；
+
+五、结果展示及一点思考
+由于我关心的是那些alpha为正的基金，他们的alpha究竟是实力还是运气，所以这里仅列出alphaIR（alpha平均/alpha标准差，兼顾alpha大小和稳定性）排名靠前的60只基金及其真实实力比例，同时也列出了每只基金的42期平均alpha，理论上我们希望买到那些alphaIR靠前的基金中，真实实力概率较高的基金。首先来看FF5因子模型得到的结果：
+
+下面是barra40因子模型的结果：
+
+对比上面两幅图，可以得到一些有意思的结论：
+
+1、FF5因子模型的解释度普遍低于barra40因子模型的解释度，可见纳入因子越多，模型解释度越高，这是废话；
+2、采用FF5因子模型，无论是平均alpha还是alphaIR普遍高于采用barra40因子模型，这个跟前面解释一致，纳入模型的因子越多基金越难获取稳定的alpha；
+3、barra40因子模型得到alpha实力概率越高于FF5因子模型，这说明经过更多的风险因子剥离后获取alpha更难，但如果确实能获取稳定alph的话，基金经理拥有真是实力的概率更高；同时也说明传统评价方法中，仅关注基金的alpha大小并不合适；
+4、alpha高的基金，未必实力占比高，而某些alpha靠后的基金确有较高实力占比。可能原因是某些alpha大的基金其实承担了模型未捕捉到的风险，而其他基金在残差中包括了这些风险因素，这些基金残差重抽样的时候又恰巧抽到了这些大参差，导致这些基金的alpha_b或Talpha_b很大，每次bootstrap都排到靠前位置，使得原Talpha大的基金不能超越这个分布95%分为；当然也可能基金经理知道这个因子并在选股的时候考虑进去了（比如财务造假因子，某些事件驱动因子，某些政治因素？），不过这个概率可能比较低；
+
+最后想说明一点，该方法只是提供了一个判断alpha或Talpha属于实力还是运气的方法，实际结果可能会跟所采用的因子模型有关。此外也有文献（如《《Luck Versus Skill in the Cross Section of Mutual Fund Returns》》）采用的方法是每次bootstrap后得到的alpha_b或Talpha_b不进行排序，这样每个基金的原始alpha或Talpha就是跟自己的alpha_b或Talpha_b比较，也会得到不同的结论（不过跟海通证券还有浙商证券的朋友讨论后，觉得还是排序后更好，也就是跟全行业所有基金选出来对应排名的分布比较，拒绝H0的难度更大更容易把alpha归为运气）。
+
+附录、部分python代码
+from pandas import *
+import numpy as np
+import statsmodels.api as sm
+
+def cal_alph(y,x):#计算原始alpha、Talpha、调整R^2及bootstrap alpha、Talpha x_intecpt = np.hstack((np.ones((len(y),1)),x))
+ model = sm.OLS(y, x_intecpt).fit()
+ params_raw = model.params[1:]
+ resid_raw = model.resid
+ alpha_raw = model.params[0]
+ Talpha_raw=model.pvalues[0]
+ resid_boot=np.random.choice(model.resid,size=len(model.resid))
+ y_boot=x.dot(model.params[1:])+resid_boot
+ model_boot = sm.OLS(y_boot, x_intecpt).fit()
+ alpha_boot = model_boot.params[0]
+ Talpha_boot = model_boot.pvalues[0]
+ return alpha_raw,Talpha_raw,alpha_boot,Talpha_boot,model.rsquared_adj
+
+def main_fun(factret,fundret,dateindex):
+ indexret=read_csv(factret)#读取因子收益率
+ fundret=read_csv(fundret)#读取基金收益率 dateindex=list(read_csv(dateindex)["date"]))#读取每个月底的序列 fundname = fundret.columns[1:]
+ date=list(fundret.iloc[:,0])
+ interval=60
+ bootsize=1000
+ 
+ numoffund=fundret.columns.size #first column is date
+ indexret_array=indexret.iloc[:,1:]
+ indexret_array=np.array(indexret_array)
+ fundret_array=fundret.iloc[:,1:]
+ fundret_array = np.array(fundret_array)
+
+ result_alpha=DataFrame(columns=fundname,index=dateindex)#储存alpha
+ result_adjR=DataFrame(columns=fundname,index=dateindex)#储存调整后R^2
+ result_Talpha=DataFrame(columns=fundname,index=dateindex)#储存Talpha result_Talpha_boot=np.zeros((len(dateindex),bootsize,numoffund-1))#储存bootstrap得到的Talpha finalresult_Talpha_boot=DataFrame(columns=range(numoffund-1),index=dateindex)#储存bootstrap得到的Talpha的95%分为 finalresult_fundscore=DataFrame(columns=fundname,index=dateindex)#储存最后实力得分
+
+ for i in range(len(dateindex)):
+ endindex = date.index(dateindex[i])+1
+ beginindex=endindex-interval
+ indexret_sub=indexret_array[beginindex:endindex, 0:]
+ for boot in range(bootsize):
+ for j in range(numoffund-1): #include date column
+ y=fundret_array[beginindex:endindex,j]
+ a,b,c,d,r=cal_alph(y,indexret_sub)
+ result_alpha.iloc[i,j] = a
+ result_Talpha.iloc[i,j] = b
+ result_Talpha_boot[i,boot,j]=d
+ result_adjR.iloc[i,j]=r
+ result_Talpha_boot[i,boot,:].sort()#from small to big
+
+ for i in range(len(dateindex)):
+ index_temp=np.argsort(result_Talpha.iloc[i,])
+ for j in range(numoffund - 1):
+ finalresult_Talpha_boot.iloc[i,j]=np.percentile(result_Talpha_boot[i,:,j],95)
+ for j in range(numoffund - 1):
+      if result_Talpha.iloc[i, j] > finalresult_Talpha_boot.iloc[i, index_temp[j]]:
+ finalresult_fundscore.iloc[i, j] =1
+ else:
+ finalresult_fundscore.iloc[i, j] =0
+ return finalresult_fundscore
+
+参考文献：
+
+1、Kosowski, Robert; Timmermann, Allan; Wermers, Russ; White, Hal：《Can Mutual Fund “Stars” Really Pick Stocks New Evidence from a Bootstrap Analysis》
+2、Eugene F. Fama and Kenneth R. French：《Luck Versus Skill in the Cross Section of Mutual Fund Returns》
+3、包赞：《“运气”还是“实力”？——探秘基金经理alpha》
+
+【图片文字】
+--- 图2 ---
+
+--- 图5 ---
+九号线
+--- 图9 ---
+$$ \begin{aligned}\left(\widetilde{t}_{\dot{\alpha}}^{1}\right)_{\max}\geq\left(\widetilde{t}_{\dot{\alpha}}^{1}\right)_{rank2}\geq&\left(\widetilde{t}_{\dot{\alpha}}^{1}\right)_{rank3}\cdots\geq\left(\widetilde{t}_{\dot{\alpha}}^{1}\right)_{rank(N-1)}\geq\left(\widetilde{t}_{\dot{\alpha}}^{1}\right)_{\min}\\ \left(\widetilde{t}_{\dot{\alpha}}^{2}\right)_{\max}\geq&\left(\widetilde{t}_{\dot{\alpha}}^{2}\right)_{rank2}\geq\left(\widetilde{t}_{\dot{\alpha}}^{2}\right)_{rank3}\cdots\geq\left(\widetilde{t}_{\dot{\alpha}}^{2}\right)_{rank(N-1)}\geq\left(\widetilde{t}_{\dot{\alpha}}^{2}\right)_{\min}\\ &\vdots\end{aligned} $$
+$$ \begin{aligned}&\left(\tilde{t}_{\tilde{\alpha}}^{999}\right)_{\max}\geq\left(\tilde{t}_{\tilde{\alpha}}^{999}\right)_{rank2}\geq\left(\tilde{t}_{\tilde{\alpha}}^{999}\right)_{rank3}\cdots\geq\left(\tilde{t}_{\tilde{\alpha}}^{999}\right)_{rank(N-1)}\geq\left(\tilde{t}_{\tilde{\alpha}}^{999}\right)_{\min}\\&\tilde{t}_{\tilde{\alpha}}^{1000}\right)_{\max}\geq\left(\tilde{t}_{\tilde{\alpha}}^{1000}\right)_{rank2}\geq\left(\tilde{t}_{\tilde{\alpha}}^{1000}\right)_{rank3}\cdots\geq\left(\tilde{t}_{\tilde{\alpha}}^{1000}\right)_{rank(N-1)}\geq\left(\tilde{t}_{\tilde{\alpha}}^{206 引号 }_{j\min}\right.\end{aligned} $$
+--- 图10 ---
+plement these data with investment objective and other fund information from the CDA-Spectrum
+mutual fund files obtained from Thomson Financial, Inc., of Rockville, Maryland. $ ^{17} $ We use Thom-
+son data since these investment objectives are more complete and consistent than the correspond-
+$ ^{16} $Of course, this maximum alpha can potentially be associated with a different fund during each bootstrap iteration, depending on the outcome of the draw from each fund's residuals.
+$ ^{17} $The Thomson database, and the technique for matching it with the CRSP database are described in Wermers (1999, 2000). These links are available from Wharton Research Data Services (WRDS).
+--- 图11 ---
+[表]
+国富中小盘 | 1.6833 | 0.07% | 0.88 | 
+泓德远见回报 | 1.6414 | 0.08% | 0.91 | 
+交银新成长 | 1.3251 | 0.08% | 0.82 | 
+华安科技动力 | 1.2963 | 0.06% | 0.92 | 
+兴全新视野 | 1.2695 | 0.04% | 0.81 | 
+安信价值精选 | 1.2686 | 0.07% | 0.9 | 
+交银阿尔法 | 1.2598 | 0.09% | 0.79 | 
+泓德泓业 | 1.2598 | 0.05% | 0.8 | 
+交银主题优选 | 1.2563 | 0.06% | 0.87 | 
+工银瑞信文体产业 | 1.2464 | 0.07% | 0.81 | 
+交银优势行业 | 1.2084 | 0.09% | 0.78 | 
+泰康新机遇 | 1.2052 | 0.03% | 0.86 | 
+国富弹性市值 | 1.1659 | 0.07% | 0.82 | 
+兴全趋势投资 | 1.1657 | 0.04% | 0.87 | 
+前海开源再融资主题精选 | 1.1522 | 0.08% | 0.81 | 
+东方红产业升级 | 1.1455 | 0.07% | 0.84 | 
+东方红普丰 | 1.1332 | 0.07% | 0.8 | 
+工银瑞信战略转型主题 | 1.1312 | 0.07% | 0.81 | 
+汇添富价值精选A | 1.1074 | 0.04% | 0.85 | 
+诺安研究精选 | 1.088 | 0.07% | 0.92 | 
+大成高新技术产业 | 1.0772 | 0.09% | 0.81 | 
+易方达中小盘 | 1.0636 | 0.10% | 0.71 | 
+泓德优选成长 | 1.0206 | 0.04% | 0.92 | 
+华安安信消费服务 | 0.9912 | 0.09% | 0.77 | 
+华安媒体互联网 | 0.9869 | 0.13% | 0.81 | 
+富国天合稳健优选 | 0.9649 | 0.06% | 0.82 | 
+易方达消费行业 | 0.957 | 0.11% | 0.68 | 
+东方红优势精选 | 0.955 | 0.06% | 0.8 | 
+鹏华新兴产业 | 0.9499 | 0.05% | 0.86 | 
+大成行业轮动 | 0.9453 | 0.06% | 0.87 | 
+景顺长城新兴成长 | 0.9398 | 0.10% | 0.74 | 
+华安升级主题 | 0.9376 | 0.09% | 0.78 | 
+泓德泓富A | 0.9273 | 0.06% | 0.5 | 
+中欧价值发现A | 0.9249 | 0.05% | 0.86 | 
+景顺长城鼎益 | 0.9151 | 0.09% | 0.73 | 
+中欧潜力价值A | 0.9127 | 0.05% | 0.87 | 
+鹏华策略优选 | 0.9111 | 0.07% | 0.82 | 
+中欧时代先锋A | 0.8798 | 0.09% | 0.85 | 
+诺德成长优势 | 0.8691 | 0.05% | 0.79 | 
+建信双利策略主题 | 0.8623 | 0.04% | 0.86 | 
+华泰柏瑞行业领先 | 0.8527 | 0.07% | 0.83 | 
+国投瑞银医疗保健行业 | 0.8477 | 0.07% | 0.78 | 
+东方红京东大数据 | 0.8429 | 0.05% | 0.82 | 
+景顺长城策略精选 | 0.8266 | 0.04% | 0.81 | 
+银华中小盘精选 | 0.8233 | 0.06% | 0.86 | 
+富国天益价值 | 0.8141 | 0.06% | 0.85 | 
+诺安主题精选 | 0.813 | 0.04% | 0.79 | 
+南方新优享A | 0.8049 | 0.05% | 0.85 | 
+汇添富蓝筹稳健 | 0.7944 | 0.05% | 0.7 | 
+南方优选成长A | 0.79 | 0.04% | 0.86 | 
+景顺长城动力平衡 | 0.7824 | 0.05% | 0.8 | 
+大成互联网思维 | 0.7805 | 0.05% | 0.85 | 
+建信大安全 | 0.7776 | 0.05% | 0.84 | 
+南方绩优成长A | 0.777 | 0.04% | 0.88 | 
+国投瑞银瑞盛 | 0.7662 | 0.05% | 0.74 | 
+工银瑞信消费服务 | 0.764 | 0.04% | 0.82 | 
+招商创业转型A | 0.7545 | 0.03% | 0.84 | 
+华安安顺 | 0.7544 | 0.03% | 0.9 | 
+东方红新动力 | 0.7468 | 0.05% | 0.83 | 
+南方高端装备A | 0.7461 | 0.04% | 0.88 |
+--- 图12 ---
+[表]
+农银汇理策略精选 | 0.5593 | 0.08% | 0.86 | 61.90% | 
+富国低碳新经济 | 0.5235 | 0.06% | 0.82 | 59.52% | 
+中欧时代先锋A | 0.5074 | 0.08% | 0.89 | 52.38% | 
+华安安信消费服务 | 0.5037 | 0.07% | 0.86 | 52.38% | 
+华安升级主题 | 0.4749 | 0.07% | 0.86 | 45.24% | 
+国投瑞银医疗保健行业 | 0.4405 | 0.05% | 0.87 | 52.38% | 
+前海开源事件驱动A | 0.4323 | 0.07% | 0.81 | 35.71% | 
+景顺长城新兴成长 | 0.4268 | 0.04% | 0.9 | 59.52% | 
+国投瑞银瑞盈 | 0.3991 | 0.05% | 0.78 | 42.86% | 
+广发制造业精选 | 0.3705 | 0.05% | 0.89 | 47.62% | 
+泓德远见回报 | 0.3679 | 0.04% | 0.94 | 33.33% | 
+华安媒体互联网 | 0.3660 | 0.07% | 0.87 | 57.14% | 
+大成高新技术产业 | 0.3458 | 0.04% | 0.88 | 40.48% | 
+国富中小盘 | 0.3453 | 0.03% | 0.92 | 38.10% | 
+景顺长城鼎益 | 0.3384 | 0.04% | 0.9 | 50.00% | 
+大成行业轮动 | 0.3253 | 0.04% | 0.91 | 40.48% | 
+兴全趋势投资 | 0.3073 | 0.02% | 0.91 | 33.33% | 
+易方达中小盘 | 0.3055 | 0.03% | 0.91 | 54.76% | 
+国富弹性市值 | 0.3025 | 0.02% | 0.91 | 47.62% | 
+华安大国新经济 | 0.3022 | 0.02% | 0.97 | 50.00% | 
+景顺长城能源基建 | 0.3010 | 0.02% | 0.83 | 38.10% | 
+南方优选价值A | 0.2979 | 0.03% | 0.9 | 45.24% | 
+博时裕隆 | 0.2933 | 0.03% | 0.89 | 45.24% | 
+泓德泓富A | 0.2851 | 0.06% | 0.5 | 54.76% | 
+交银新成长 | 0.2848 | 0.04% | 0.86 | 45.24% | 
+南方新优享A | 0.2801 | 0.02% | 0.92 | 45.24% | 
+大成优选 | 0.2786 | 0.02% | 0.91 | 42.86% | 
+诺安主题精选 | 0.2767 | 0.06% | 0.87 | 42.86% | 
+兴全合润分级 | 0.2728 | 0.03% | 0.92 | 52.38% | 
+农银汇理策略价值 | 0.2667 | 0.02% | 0.93 | 54.76% | 
+富国天合稳健优选 | 0.2652 | 0.03% | 0.87 | 52.38% | 
+嘉实医疗保健 | 0.2448 | 0.02% | 0.91 | 40.48% | 
+农银汇理平衡双利 | 0.2431 | 0.01% | 0.93 | 50.00% | 
+广发竞争优势 | 0.2341 | 0.03% | 0.89 | 57.14% | 
+华安动态灵活配置 | 0.2336 | 0.03% | 0.89 | 33.33% | 
+国投瑞银稳健增长 | 0.2271 | 0.03% | 0.83 | 42.86% | 
+大成中小盘 | 0.2179 | 0.04% | 0.87 | 59.52% | 
+诺德周期策略 | 0.2056 | 0.02% | 0.87 | 59.52% | 
+广发轮动配置 | 0.2010 | 0.03% | 0.84 | 47.62% | 
+华安智能装备主题 | 0.1963 | 0.02% | 0.92 | 42.86% | 
+工银瑞信战略转型主题 | 0.1923 | 0.02% | 0.9 | 59.52% | 
+景顺长城动力平衡 | 0.1922 | 0.02% | 0.89 | 45.24% | 
+鹏华策略优选 | 0.1895 | 0.02% | 0.89 | 57.14% | 
+南方创新经济 | 0.1850 | 0.01% | 0.92 | 50.00% | 
+国联安优选行业 | 0.1815 | 0.02% | 0.91 | 50.00% | 
+南方天元新产业 | 0.1807 | 0.01% | 0.94 | 52.38% | 
+东方红产业升级 | 0.1761 | 0.02% | 0.93 | 45.24% | 
+广发策略优选 | 0.1755 | 0.02% | 0.92 | 47.62% | 
+建信信息产业 | 0.1738 | 0.03% | 0.9 | 40.48% | 
+南方优选成长A | 0.1720 | 0.01% | 0.93 | 38.10% | 
+华安逆向策略 | 0.1710 | 0.02% | 0.91 | 59.52% | 
+华安科技动力 | 0.1688 | 0.01% | 0.94 | 59.52% | 
+易方达新经济 | 0.1686 | 0.02% | 0.93 | 45.24% | 
+富国宏观策略 | 0.1665 | 0.02% | 0.78 | 50.00% | 
+中海分红增利 | 0.1537 | 0.03% | 0.88 | 42.86% | 
+易方达国防军工 | 0.1514 | 0.02% | 0.95 | 35.71% | 
+汇丰晋信科技先锋 | 0.1437 | 0.02% | 0.93 | 45.24% | 
+广发内需增长 | 0.1423 | 0.02% | 0.85 | 45.24% | 
+汇添富盈筹稳健 | 0.1376 | 0.02% | 0.85 | 50.00% |

@@ -1,0 +1,262 @@
+# 参考点依赖与市场异象
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/EZL1TGbEwhaXzVl2KXAJuw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+前景理论中的一个重要组成部分是投资者的参考点依赖。本文介绍如何利用它改进异象、获得更高的超额收益。
+
+01
+参考点依赖
+
+今天我们还是来聊聊和行为金融学有关的问题，只不过不是我之前承诺过的《前景理论与股票收益 (II)》（别着急，会有的……）。但本文仍然和前景理论有关。
+
+前景理论的价值函数有一个重要的性质是收益（gains）和亏损（losses）是依照一个参考点来衡量的，这也被称作参考点依赖。比如，今天某投资者花了 50 块一股买了某股票，几天后该股票上涨到 55 块。那么对于他来说，评价这项投资的结果是每股赚了 5 块，即 55 超出基准 50 的部分，而这个 50 就是参考点。
+
+除此之外，价值函数的形状表明，收益和亏损部分给人的主观感受是不同的。具体来说，收益部分的价值曲线为凹函数，而亏损部分的价值曲线为凸函数，且人们厌恶损失，即亏损的痛苦大于同等幅度收益带来的快乐。这在投资中会有什么体验呢？
+
+首先以下图为例考察获利的情况。假如相对于参考点来说，当前股价上涨了 10 块。这时投资者面临一个问题：to be or not to be？Sorry，走错片场了！应该是 to 卖 or not to 卖？如果他不卖、继续持有，那么他的感受就是浮盈 10 块，相当于下图中第一象限上的 45% 斜线对应的位置；而如果他选择卖出获利，则其主观感受是价值函数上对应的点。由价值函数的性质可知，卖出获利带来的主观感受高于继续持有的感受。因此，非理性的投资者会选择卖出。这也是为什么，当人们获利时，往往厌恶风险。
+
+再来看看亏损的情况（下图）。假如相对于参考点来说，当前股价下跌了 10 块。Again，to 卖 or not to 卖？如果他不卖、继续持有，那么他的感受就是浮亏 10 块，相当于下图中第三象限上的斜线对应的位置；而如果他选择卖出把亏损坐实，则其主观感受是价值函数上对应的点。由价值函数的性质可知，卖出坐实亏损的主观感受要低（更痛苦）于继续持有的感受。因此，非理性的投资者会选择继续持有。这就是为什么，当人们面临亏损时，往往追求风险。
+
+上述投资者的行为也被称为投资者的处置效应（disposition effect）。那么，处置效应对资产定价有哪些暗示呢？从上面的分析不难看出，当人们扎堆卖出浮盈的股票时，就会对其价格形成打压，而造成该股票被低估，因此它的未来收益率更高；而当人们扎堆过度持有浮亏的股票时，就会对其价格形成支撑，而造成该股票被高估，因而其未来收益率则更低。此外，由于心理账户（mental accouting）的影响，人们倾向于孤立的看待在不同股票上的投资盈亏情况，这也会加深处置效应。
+
+如果我们能够准确判断每支股票当前所有投资者的平均盈亏状态，就可以利用上述现象发现 mispricing 的机会、并通过构建策略来获利。但显然，想要知道每个投资者在每个股票上的盈亏状态是不切实际的，但研究中仍然可以通过股票在过去一段时间的价格和成交量来估算平均成本。为此，学术界常常采用未实现盈利值（capital gain overhang，简称 CGO）这个变量。
+
+插播一句，国内的研报通常把它译作资本利得突出量，但我个人还是倾向使用未实现盈利值（这也是有“官方”出处的）。
+
+再插播一句，从上述以前景理论的价值函数的解读可知，CGO 和未来的收益率应该是呈正相关的，即浮盈的股票未来收益率高、浮亏的股票未来收益率低 —— 这是从理论得出的先验。而我看到的一些研究给出的判断则是“在多数投资者亏损时，由于惜售、补仓现象存在，股价很大可能反转，此时是买入的好时机；反之，多数投资者盈利则是卖出的时机。”—— 即 CGO 和未来收益率负相关。感觉突然就聊不下去了。
+
+无论实证结果是什么，我倾向于从理论引出先验观点，然后再去用实证数据验证，而非本末倒置。
+
+为了计算 CGO，就需要有个参考价格。对于参考价格（reference price），学术界提出了一些不同的计算方法，其中使用最广泛的是来自 Grinblatt and Han (2005) 的方法：
+
+上式中 RP_t 是 t 期的参考价格，它是 t – T 到 t – 1 期价格的加权平均，而权重和过去的换手率 V 有关。上式右侧括号中的项是价格 P_{t-n} 的权重，它代表了在 t – n 时以价格 P_{t-n} 购买的股票直到当前还没有被交易的概率。式中的 k 是一个 normalization constant。
+
+利用参考价格，就可以定义 t 时刻的未实现盈利值（CGO）：
+
+这个公式中，最特别的是使用了 t – 1 时刻而非 t 时刻的价格计算浮盈和浮亏（即价格和参考价格之差）。对此，Grinblatt and Han (2005) 给出的解释是为了避免 market microstructure effects。
+
+在实际应用 CGO 进行实证研究时，学术界通常采用周频价格和换手率数据进行计算。而众所周知，基于美股的 empirical asset pricing 研究通常是按月度进行 portfolio sort test 或 Fama-MacBeth regression 的。因此，在使用时可以选择每月最后一周的 CGO 当作该月的 CGO 值。
+
+接下来，我们就来看看如何利用参考点依赖来细化、改进市场中存在的著名异象。它们包括 PEAD、lottery-effect 和低风险异象。接下来的三节中就分别对这三方面的代表性论文进行解读。
+
+02
+CGO 与 PEAD
+
+盈余惯性（Post-Earnings-Announcement-Drift，简称 PEAD）最初由 Ball and Brown (1968) 发现。它指的是由于认知限制中的有限注意力（limited attention），人们对新的基本面信息反映不足，造成价格无法迅速对其反映到位，而是会在业绩公告之后继续漂移 —— 对于 good news，价格会向上继续漂移一段；对于 bad news，价格会向下继续漂移一段。
+
+换句话说，当出现 good news 时，因为投资者反应不足而使得价格没有涨到位，这造成资产的价格被低估；而当出现 bad news 时，因为投资者反应不足而使得价格没有跌到位，这造成资产的价格被高估。基于这个现象，利用 PEAD 作为变量就可以构造出一个异象。事实上，在 Daniel, Hirshleifer, and Sun (2020) 这个复合三因子模型中，PEAD 正是其中一个行为因子。
+
+回到 CGO，Frazzini (2016) 利用 CGO 进一步研究了 PEAD 异象。该文发现，投资者的浮盈或者浮亏，以及盈余公告的好消息或者坏消息可以叠加出不同的效果。如本文第一节所说的那样，对于浮盈的股票，投资者倾向卖出将收益收入囊中，这造成这些股票被低估；而对于浮亏的股票，投资者倾向于继续持有，这造成这些股票被高估。综合考虑 PEAD 和 CGO 的影响，就可以得到如下的四宫格：
+
+怎么样？有没有似曾相识的感觉？公众号之前多篇文章 —— 如预期差、基本面锚定反转 —— 都考察过不同现象叠加之后对异象的增强。利用 CGO 和 PEAD 也可以得到这样的结果。
+
+当投资者处于浮盈时，如果同时出现了正面的盈余公告，则处置效应和有限注意力会同向作用，造成资产的价格进一步被低估，未来的预期收益率更高；当投资者处于浮亏时，如果同时出现了负面的盈余公告，则处置效应和有限注意力也会同向作用，造成资产价格被进一步高估，未来预期收益率则更低。
+
+基于此，我们可以通过做过浮盈 + 盈余公告好消息的股票、同时做空浮亏 + 盈余公告坏消息的股票，从而捕获处置效应和有限注意力造成的双重 mispricing、获取更高的超额收益。Frazzini (2016) 在美股上验证了上述猜想。
+
+在上表中，在 Overhang Spread 下，bad news 组代表了浮亏 + 坏消息组，good news 组代表了浮盈 + 好消息组，L/S 是 long-short 对冲组合。不难看出，无论 holding periods 多长（表中 rolling period），浮亏 + 坏消息组的超额收益都显著为负，而浮盈 + 好消息组的超额收益都显著为正，而 L/S 代表的异象也是显著为证。举例来说，当持仓为 1 个月时，浮亏 + 坏消息组的预期收益为 -.98%（t-statistic -3.04）；浮盈 + 好消息组的预期收益为 1.11%（t-statistic 5.86）；而 L/S 异象的超额收益（月频 FF3 α！）为 2.077%（t-statistic 高达 5.45）。
+
+而另一方面，如果我们看 Negative Overhang Spread 组 —— 它们对应之前四宫格中 off 对角线的组，即处置效应和有限注意力的作用互相抵消，无法观察到显著的超额收益。具体来说，在 Negative Overhang Spread 下，bad news 组代表浮盈 + 坏消息，而 good news 组则代表浮亏 + 好消息。根据猜想，二者抵消后和未来收益率的关系是不明确的。实证结果支持这一假设。
+
+如果只考虑 PEAD 怎样呢？当然它也能获得超额收益（下图）。但是以 rolling period 为 1 个月为例，L/S 构建的 PEAD 异象的月超额收益为 1.152%，小于叠加了 CGO 之后的 2.077%。这意味着通过利用投资者的参考点依赖，Frazzini (2016) 一文有效的提升了 PEAD 异象。
+
+03
+CGO 与 Lottery-Effect
+
+Lottery-effect 想必对各位小伙伴也并不陌生。Barberis and Huang (2008) 研究发现资产收益率的偏度和未来预期收益率之间的负相关性，即收益率分布呈右偏（或正偏态）的股票的预期收益率往往更低。从收益率分布的形状来说，右偏的股票在右尾的高收益端令人充满无穷的遐想。这种特征和彩票收益的特征很类似，因此学术界也形象的把收益率分布呈右偏的股票称为“彩票股”。
+
+人们对彩票股的“痴迷”可以从前景理论的权重函数来解释，即投资者会放大尾部事件发生的概率，造成他们过度追逐收益率分布呈现右偏的资产、推高其价格，造成其未来收益率降低。而这正是股票截面收益率上大名鼎鼎的偏度异象 —— 彩票股（收益率右偏）未来的预期收益率更低。
+
+以此为出发点，An et al. (2020) 将 CGO 和 lottery-effect 相结合，研究了当人们处于浮盈、浮亏不同状态下对彩票股的偏好差异。他们的猜想是：当人们处于浮盈的时候，由于风险厌恶而不会太关注彩票股，因此这些股票和其他收益分布没有明显右偏的股票（“非彩票股”）的预期收益没有太大差异；而当人们处于浮亏的时候，由于追求风险故更希望通过彩票股回本，从而造成它们进一步被高估、未来的预期收益较非彩票股则更低。An et al. (2020) 通过对美股的研究证实了上述猜想。
+
+为了保证结果的稳健性，该文使用五个代理变量作为 lottery measures 来鉴别彩票股，它们是 Maxret、Jackpotp、Skewexp、Deathp 以及 Oscorep。下表给出了使用 CGO 和每一个 lottery measure 进行独立 double sort 的结果。在 double sort 中，CGO 将股票划分为 CGO1 到 CGO5 五组，其中 CGO1 为浮亏最多的组、CGO5 为浮盈最高的组；lottery measure 将股票划分为 P1 到 P5 组，其中 P1 组为 lottery measure 最低的组（即非彩票股）、P5 组为 lottery measure 最高的组（即彩票股）。根据 An et al. (2020) 的猜想，我们应该在 CGO1 组内观察到最显著的 lottery-effect 异象，即 P5 组（彩票股）的收益应显著低于 P1 组（非彩票股）。
+
+从上述结果中可见，无论采用哪个 lottery measure，CGO1 中 P5 – P1 都有显著的负超额收益。以 Maxret 为例，其 P5 – P1 组合的月频超额收益为 -1.38%（t-statistic 为 -5.35）。而当我们关注 CGO5（浮盈）条件下的结果时，lottery-effect 非但消失了，甚至是逆转了。当使用 Maxret、Jackpotp 以及 Oscorep 为 lottery measure 时，P5 组的收益率均超过了 P1 组，说明当投资者处于浮盈时，对彩票股不那么感兴趣，而反倒是非彩票股更有吸引力。这造成彩票股被低估、非彩票股被高估，并最终产生了浮盈下彩票股的收益率更高的现象。
+
+上表给出的是 double sort 的绝对收益结果。当考察 FF3 α 时，上述结果依然成立，没有发生实质变化。当然，我们关心的是通过利用参考点依赖，能否改进非条件的 lottery-effect。An et al. (2020) 中的下图给出了清晰的答案。
+
+该图给出了不同 lottery measure 下，在控制了 CGO 之后的条件 lottery-effect 异象和非条件 lottery-effect 异象的 FF3 α。毫无疑问，条件 lottery-effect 比非条件 lottery-effect 更加显著，能够获得更高的超额收益。
+
+04
+CGO 与 Low-Risk Anomaly
+
+本文通过 CGO 进一步研究的最后一个异象则是著名的低风险异象。该发现来自 Wang, Yan, and Yu (2017)，它研究了浮盈和浮亏时，投资者对风险和收益的不同态度。
+
+低风险异象（比如低波动、低特质性低波动异象、以及 betting against beta）想必小伙伴都很熟悉了。传统金融学理论指出高风险对应着高的预期收益，然而实证数据却显示风险和收益之间的关系却呈负相关，即风险高的股票收益率却更低，这便形成了著名的异象。
+
+Wang, Yan, and Yu (2017) 指出，当人们处于浮亏时，由于追求风险，往往指望通过高风险的股票来回本，造成它们被进一步高估，因此风险和预期收益率呈负相关；而当人们处于浮盈时，由于风险厌恶，往往会更加卖出高风险的股票，造成它们被进一步低估，因此风险和预期收益率呈正相关。而本文和 An et al. (2020) 也有异曲同工之妙。
+
+为了验证上述猜测，该文使用了六个常见的风险指标，包括 CAPM β、收益率波动率（RETVOL）、特质性波动率（IVOL）、现金流波动率（CFVOL）、公司年龄（AGE）以及分析师预期分歧（DISP），研究了浮盈和浮亏不同状态下，风险和收益率之间的关系。
+
+下表给出了使用 CGO 和每一个 risk measure 进行条件 double sort 的结果。由于是条件 double sort，首先是用 CGO 将股票划分为 CGO1 到 CGO5 五组，其中CGO1 为浮亏最多的组、CGO5 为浮盈最高的组；然后在每个 CGO 组中使用上述 risk measure 之一将股票划分为 P1 到 P5 组，其中 P1 组为 low risk 组、P5 组为 high risk 组。根据 Wang, Yan, and Yu (2017) 的猜想，我们应该在 CGO1 组内观察到最显著的低风险异象，而在 CGO5 组内观测到传统金融学理论支持的“高风险对应高收益”现象。
+
+从结果中可见，无论采用哪个 risk measure，CGO1 中 P5 – P1 都有显著的负超额收益。以 IVOL 为例，其 P5 – P1 组合的月频超额收益为 -1.924%（t-statistic 为 -6.00）。而当我们关注 CGO5（浮盈）条件下的结果时，低风险异象发生了逆转 —— P5 组（high risk）比 P1 组（low risk）有更高的收益。仍以 IVOL 为例，在 CGO5 组内，P5 – P1 的月超额收益为 .32%（t-statistic 为 1.58，虽不显著但也支持传统金融学理论）。除了绝对收益外，在 FF3 α 中也能看到类似的现象，证实了 Wang, Yan, and Yu (2017) 的猜想。
+
+最后来看看只考虑 risk measure 的情况。下表总结了不同 risk measure 下的低风险异象。考察它们的 CAPM α 或 FF3 α 可以看到，在大多数情况下低风险异象虽然显著，但它们都不如考虑 CGO 前提下条件的低风险异象。
+
+综合以上结果，我们可以说参考点依赖能够从一定程度上解释股市中风险和收益率负相关的现象，为人们理解这个长期存在与市场中的现象提供了新的思路。
+
+05
+结语
+
+以上三小节分别简要介绍了 Frazzini (2016)、An et al. (2020) 以及 Wang, Yan, and Yu (2017) 三篇经典论文的核心观点。它们都研究了如何利用参考点依赖改进异象，读完不禁令人发出啧啧声。
+
+这三篇论文之所以进入我的视野是源于我在《理性的非理性金融》一书中看到了关于它们的介绍。“三箭齐发”给我留下了非常深刻的印象，并引发了长时间的思考。本文第一节提到的关于 CGO 的译法（未实现盈利值）也来自该书。它的作者之一是清华大学五道口金融学院的余剑峰教授 —— 没错，我们都非常熟悉的 Stambaugh, Yu, and Yuan (20XX) 一系列金融学顶刊论文中的 Yu。BTW，这本书真的不错。
+
+当然，学习这些针对美股的优秀论文是为了更好的指导在 A 股上进行研究。因此，仅仅有“文献篇”是不够的，还需要有“实证篇”来看看这些发现在 A 股上是否依然成立。那么，上述基于参考点依赖对异象的研究在 A 股上表现如何呢？未来的《实证篇》见分晓。
+
+参考文献
+An, L., H. Wang, J. Wang, and J. Yu (2020). Lottery-related anomalies: The role of reference-dependent preferences. Management Science 66(1), 473 – 501.
+
+Ball, R. and P. Brown (1968). An empirical evaluation of accounting income numbers. Journal of Accounting Research 6(2), 159 – 178.
+
+Barberis, N. and M. Huang (2008). Stocks as lotteries: The implications of probability weighting for security prices. American Economic Review 98(5), 2066 – 2100.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors. Review of Financial Studies 33(4), 1673 – 1736.
+
+Frazzini, A. (2006). The disposition effect and underreaction to news. Journal of Finance 61(4), 2017 – 2046.
+
+Grinblatt, M. and B. Han (2005). Prospect theory, mental accounting, and momentum. Journal of Financial Economics 78(2), 311 – 339.
+
+Wang, H., J. Yan, and J. Yu (2017). Reference-dependent preferences and the risk-return trade-off. Journal of Financial Economics 123(2), 395 – 414.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+出处：Frazzini (2006)
+--- 图3 ---
+出处：Frazzini (2006)
+--- 图6 ---
+[表]
+ | 盈余：好消息 | 盈余：坏消息 | 
+浮盈 | 处置效应：低估\n有限注意力：低估\n综合效果：更加低估 | 处置效应：低估\n有限注意力：高估\n综合效果：不明确 | 
+浮亏 | 处置效应：高估\n有限注意力：低估\n综合效果：不明确 | 处置效应：高估\n有限注意力：高估\n综合效果：更加高估 |
+出处：Frazzini (2006); 整理：川总写量化
+--- 图7 ---
+Overhang Spread and Negative Overhang Spread Alphas
+This table reports Fama and French (1993) three-factor alphas for the overhang spread and the negative overhang spread. At the beginning of every calendar month, stocks are ranked in ascending order on the basis of their cumulative abnormal returns around the most recent earnings announcement date and the most recent capital gains overhang. The overhang spread is defined as a zero-cost portfolio that holds the top 20% of news stocks in the top (positive) overhang quintile and sells short the bottom 20% and news stocks in the bottom (negative) overhang quintile. The negative overhang spread is defined as a zero-cost portfolio that holds the top 20% of news stocks in the bottom (negative) overhang quintile and sells short bottom 20% and news stocks in the top (positive) overhang quintile. The residual overhang is obtained by regressing (cross-sectionally) the raw overhang on previous 12- and 36-month return, the previous 12-month average turnover, and the log of market capitalization at end of the previous month. Alphas are in monthly percent, t-statistics are shown below the coefficient estimates, and 5% statistical significance is indicated in the old. "Rolling period" is the holding period of the rolling strategy, in months.
+[表]
+Rolling Period | Overhang Spread | Negative Overhang Spread | Residual Overhang Spread | Negative Residual Overhang Spread | 
+Bad News | Good News | L/S | Bad News | Good News | L/S | Bad News | Good News | L/S | Bad News | Good News | L/S | 
+-1 | -0.980 (-3.04) | 1.110 (5.86) | 2.077 (5.45) | -0.453 (0.96) | 0.347 (-1.60) | 0.798 (1.84) | -1.010 (-3.09) | 1.144 (5.20) | 2.153 (5.10) | -0.595 (0.23) | 0.074 (-1.13) | 0.670 (1.58) | 
+-2 | -1.072 (-2.82) | 1.429 (7.39) | 2.486 (5.54) | -0.003 (-0.38) | -0.129 (-0.01) | -0.123 (-0.27) | -0.929 (-2.87) | 1.337 (6.15) | 2.266 (5.57) | -0.028 (-0.47) | -0.157 (-0.09) | -0.128 (-0.28) | 
+-3 | -1.129 (-3.51) | 1.304 (9.56) | 2.433 (6.60) | -0.245 (-0.57) | -0.152 (-1.61) | 0.092 (0.28) | -1.137 (-3.99) | 1.063 (7.02) | 2.201 (6.56) | -0.024 (-0.74) | -0.184 (-0.14) | -0.164 (-0.54) | 
+-6 | -0.777 (-2.62) | 0.954 (9.47) | 1.731 (5.38) | -0.025 (-0.99) | -0.234 (-0.21) | -0.209 (-0.84) | -0.712 (-2.81) | 0.841 (7.51) | 1.552 (5.54) | 0.070 (-1.10) | -0.238 (0.57) | -0.30 (-1.32) | 
+-12 | -0.439 (-2.63) | 0.548 (5.46) | 0.986 (3.79) | -0.032 (-0.49) | -0.108 (-0.28) | -0.076 (-0.38) | -0.416 (-2.84) | 0.501 (4.89) | 0.917 (4.05) | -0.031 (-0.69) | -0.133 (-0.27) | -0.10 (-0.56) |
+--- 图8 ---
+Post-Earnings Announcement Drift, Monthly Alphas 1980–2002
+At the beginning of every calendar month, stocks are ranked in ascending order on the basis of their cumulative abnormal returns on the most recent earnings announcement date. The daily abnormal returns are cumulated from the 2 days preceding the event date to 1 day after. Stocks are assigned to one of five equally weighted quintile portfolios. This table includes all available stocks and reports. The Fama and French (1993) three-factor alphas. The dependent variable is the monthly excess return of the Treasury bill rate from the rolling strategy. The explanatory variables are the monthly returns from Fama and French (1993) mimicking portfolios. L/S is the alpha of a zero-cost portfolio that holds the top 20% good news stocks and sells short the bottom 20% bad news stocks. Alphas are in monthly percent, t-statistics are shown below the coefficient estimates, and 5% statistical significance is indicated in bold. "Rolling period" is the holding period of the rolling strategy, in months.
+[表]
+Rolling Period | Earnings News Quintile | L/S | 
+1 (Bad) | 2 | 3 | 4 | 5 (Good) | 
++1 | -0.558 | -0.253 | 0.014 | 0.232 | 0.595 | 1.152 | 
+(-2.69) | (-1.84) | (0.11) | (1.82) | (3.20) | (8.17) | 
++2 | -0.512 | 0.044 | 0.137 | 0.215 | 0.657 | 1.169 | 
+(-2.07) | (0.32) | (1.04) | (1.75) | (3.91) | (7.11) | 
++3 | -0.624 | -0.070 | 0.080 | 0.221 | 0.618 | 1.242 | 
+(-3.22) | (-0.68) | (0.80) | (2.29) | (4.45) | (10.78) |
+الله: غزالي (2000)
+--- 图9 ---
+Table 2. Double-Sorted Portfolio Returns by the CGO of Grinblatt and Han (2005) and Lottery Proxies
+[表]
+Panel A: Excess return | 
+proxy | Maxret | Jackpotp | Skewexp | 
+CGO1 | CGO3 | CGO5 | C5-C1 | CGO1 | CGO3 | CGO5 | C5-C1 | CGO1 | CGO3 | CGO5 | C5-C1 | 
+1 | 1.04 | 0.64 | 0.51 |  | 0.80 | 0.59 | 0.60 |  | 0.77 | 0.77 | 0.94 |  | 
+3 | 0.59 | 0.48 | 0.81 |  | 0.58 | 0.41 | 1.13 |  | 0.58 | 0.64 | 0.96 |  | 
+5 | -0.34 | 0.12 | 1.05 |  | -0.37 | -0.12 | 1.29 |  | -0.03 | -0.19 | 0.89 |  | 
+P5-P1 | -1.38 | -0.52 | 0.54 | 1.92 | -1.16 | -0.71 | 0.69 | 1.86 | -0.80 | -0.96 | -0.05 | 0.75 | 
+t-Statistic | (-5.35) | (-2.31) | (2.30) | (7.50) | (-4.15) | (-2.16) | (2.30) | (7.36) | (-2.29) | (-2.74) | (-0.22) | (2.23) | 
+proxy | Deathp | Oscorep |  |  |  |  | 
+CGO1 | CGO3 | CGO5 | C5-C1 | CGO1 | CGO3 | CGO5 | C5-C1 |  |  |  |  | 
+1 | 0.89 | 0.53 | 0.78 |  | 0.66 | 0.48 | 0.63 |  |  |  |  |  | 
+3 | 0.79 | 0.53 | 0.81 |  | 0.58 | 0.40 | 0.71 |  |  |  |  |  | 
+5 | -0.04 | 0.57 | 1.02 |  | 0.04 | 0.40 | 1.16 |  |  |  |  |  | 
+P5-P1 | -0.93 | 0.04 | 0.24 | 1.16 | -0.62 | -0.08 | 0.53 | 1.15 |  |  |  |  | 
+t-Statistic | (-3.04) | (0.16) | (0.85) | (3.77) | (-2.81) | (-0.48) | (2.99) | (4.70) |  |  |  |  |
+此外，An et al (2020)
+--- 图10 ---
+Pfenein Three Factor A Values of Unconditional and Conditional Lottery Spreads
+出站：An at al (2020)
+--- 图11 ---
+Double-sorted portfolio returns.
+At the beginning of each month, we divide all NYSE, Amex, and Nasdaq common stocks with non-negative book equity and stock prices of at least $5 into five groups based on lagged capital gains overhang (CGO); then within each of the CGO groups, firms are further divided into five portfolios based on lagged risk proxies. CGO and risk proxies are defined as in Tables 1 and 2. The portfolio is then held for 1 month, and value-weighted excess returns are calculated. Monthly excess returns are reported in percentages. The sample period is from January 1964 to December 2014, except for DISPER, which is from January 1976 to December 2014. The t-statistics are calculated based on Newey and West (1987) adjusted standard errors and reported in parentheses.
+[表]
+Portfolio | CG01 | CG03 | CG05 | Diff-in-Diff | CG01 | CG03 | CG05 | Diff-in-Diff | 
+Proxy =  $ \beta $ | Proxy = RETVOL | 
+P1 | 0.596 | 0.494 | 0.545 |  | 0.679 | 0.480 | 0.584 |  | 
+P3 | 0.504 | 0.537 | 0.781 |  | 0.429 | 0.531 | 0.810 |  | 
+P5 | -0.046 | 0.378 | 0.885 |  | -0.383 | 0.417 | 1.184 |  | 
+P5 - P1 | -0.642 | -0.116 | 0.340 | 0.983 | -1.062 | -0.063 | 0.601 | 1.663 | 
+t-stat | (-2.31) | (-0.49) | (1.52) | (3.92) | (-2.84) | (-0.21) | (2.19) | (4.52) | 
+FF3- $ \alpha $ | -0.930 | -0.429 | 0.172 | 1.103 | -1.253 | -0.408 | 0.334 | 1.587 | 
+t-stat | (-4.28) | (-2.59) | (0.97) | (4.24) | (-4.41) | (-1.76) | (1.43) | (4.20) | 
+Proxy = IVOL | Proxy = CFVOL | 
+P1 | 0.875 | 0.477 | 0.669 |  | 0.742 | 0.598 | 0.699 |  | 
+P3 | 0.233 | 0.492 | 0.797 |  | 0.485 | 0.412 | 0.843 |  | 
+P5 | -1.050 | 0.072 | 0.989 |  | 0.274 | 0.306 | 0.936 |  | 
+P5 - P1 | -1.924 | -0.405 | 0.320 | 2.244 | -0.469 | -0.292 | 0.237 | 0.706 | 
+t-stat | (-6.00) | (-1.62) | (1.58) | (7.97) | (-2.00) | (-1.48) | (1.25) | (2.68) | 
+FF3- $ \alpha $ | -2.093 | -0.678 | 0.132 | 2.225 | -0.515 | -0.345 | 0.143 | 0.658 | 
+t-stat | (-8.48) | (-3.59) | (0.73) | (8.10) | (-2.47) | (-2.01) | (0.84) | (2.41) | 
+Proxy = 1/AGE | Proxy = DISPER | 
+P1 | 0.461 | 0.478 | 0.565 |  | 0.601 | 0.543 | 0.930 |  | 
+P3 | 0.199 | 0.466 | 0.913 |  | 0.458 | 0.707 | 0.829 |  | 
+P5 | -0.005 | 0.526 | 1.096 |  | -0.347 | 0.762 | 1.026 |  | 
+P5 - P1 | -0.466 | 0.048 | 0.531 | 0.997 | -0.948 | 0.219 | 0.095 | 1.043 | 
+t-stat | (-2.01) | (0.32) | (3.40) | (4.05) | (-2.66) | (0.90) | (0.41) | (3.12) | 
+FF3- $ \alpha $ | -0.473 | -0.046 | 0.430 | 0.903 | -1.490 | -0.234 | -0.284 | 1.207 | 
+t-stat | (-2.42) | (-0.33) | (2.93) | (3.43) | (-4.54) | (-1.07) | (-1.30) | (3.21) |
+Li ha: Wanso Yu
+--- 图12 ---
+[表]
+Portfolio | Proxy | 
+$ \beta $ | RETVOL | IVOL | CFVOL | 1/AGE | DISPER | 
+P1 | 0.491 | 0.483 | 0.507 | 0.514 | 0.478 | 0.627 | 
+P2 | 0.503 | 0.536 | 0.539 | 0.542 | 0.558 | 0.629 | 
+P3 | 0.515 | 0.534 | 0.561 | 0.627 | 0.527 | 0.634 | 
+P4 | 0.520 | 0.566 | 0.551 | 0.498 | 0.549 | 0.662 | 
+P5 | 0.471 | 0.465 | 0.046 | 0.467 | 0.559 | 0.533 | 
+P5 - P1 | -0.021 | -0.018 | -0.461 | -0.047 | 0.081 | -0.094 | 
+t-stat | (-0.08) | (-0.06) | (-1.75) | (-0.28) | (0.48) | (-0.42) | 
+CAPM- $ \alpha $ | -0.471 | -0.475 | -0.818 | -0.285 | -0.108 | -0.267 | 
+t-stat | (-2.06) | (-1.86) | (-3.44) | (-1.96) | (-0.69) | (-1.19) | 
+FF3- $ \alpha $ | -0.301 | -0.332 | -0.765 | -0.158 | 0.017 | -0.651 | 
+t-stat | (-1.80) | (-1.83) | (-4.63) | (-1.47) | (0.15) | (-3.65) |
+出处：Wang, Yan, and Yu (2017)
+--- 图13 ---
+非
+理性
+金融
+理性的
+王健
+余剑峰
+——
+著
+理性的非理性金融
+有限公司（以下简称上海）有限公司
+（以下简称上海）公司
+审阅银行对实体经济有什么影响？
+审阅金融机构的电子银行业务与民间信贷的�补什么关系？
+市场情緒与控價策辦藍有什么关系？
+業化指應策略者什么懲在風險？
+王健 尔剑峰若
+告诉你非理性金融现象的深层原因及政策干预背后的逻辑
+中信出版集团
+--- 图14 ---
+2

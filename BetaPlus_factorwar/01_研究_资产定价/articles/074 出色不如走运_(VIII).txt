@@ -1,0 +1,172 @@
+# 出色不如走运 (VIII)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/uUl4P6v1ea0zcGvG-Xqy5Q
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Kosowski et al. (2006)、Fama and French (2010) 以及 Harvey and Liu (2022)。
+
+01
+
+年初基金研究文献综述中曾提到，研究基金能否提供了显著的超额收益是该领域中最重要的问题。在这方面，最著名的两篇文章 Kosowski et al. (2006) 和 Fama and French (2010)（以下分别称 KTWW 和 FF）通过类似的方法（均采用 bootstrap），却得出了相反的结论。
+
+KTWW 认为有超过 10% 的基金不能被运气解释；而另一方面，FF 则表示这个比例不会超过 1%。面对如此的反差，究竟孰对孰错？又或者二者皆有所短？回顾两篇文章，KTWW 对每个基金独立进行 bootstrap，而 FF 则对基金收益率的 cross-section 进行 bootstrap 从而保留截面相关性。此外，前者考察的基金被要求有至少 60 个收益率的观测数据；而在后者中，这一要求被降低到 8 个。
+
+显然，最小数据量要求以及 bootstrap 做法的差异是造成二者出现截然不同结论的原因。从结果来看，KTWW 的方法过度拒绝原假设（原假设是所有基金都没有超额收益），使得在哪怕在所有基金都没有超额收益的情况下依然拒绝原假设。反观 FF 的做法，其会导致 bootstrapped 检验统计量分布呈现厚尾从而造成原假设难以被拒绝，因此哪怕存在能够取得超额收益的基金的情况下，该方法依然会接受原假设。
+
+既然二者都不完美，那么有没有可能在它们的基础上改进并得到更好的检验方法、从而更加有效地回答这个问题呢？这意味着我们既要在 bootstrap 时保留截面相关性，又要杜绝 bootstrapped 检验统计量分布呈现厚尾的问题。
+
+在这方面，Harvey and Liu (2022) 给出了答案。
+
+02
+
+本节首先介绍 FF 中检验统计量分布的厚尾现象。
+
+Bootstrap 是研究此类问题的一个常规手段。而我们知道，在实证窗口内，并不是所有基金在全部月份都有收益率数据，有的基金年限长，有些基金则年限短。在 KTWW 中，作者对每个基金利用其实际收益率序列分别采样；而在 FF 中，作者在实证窗口内的任何时点在 cross-section 采样，这意味着采样出来的一些基金可能是没有收益率数据的。
+
+这样做造成的后果是，对于任何一个基金来说，其在某个 bootstrapped 样本中的收益率观测数据量和其在实际样本中收益率的观测数据量很可能不同。有些基金会被 oversampled（bootstrapped 样本中观测数据 > 实际观测数据），一些基金则会被 undersampled（bootstrapped 样本中观测数据 < 实际观测数据）。FF 认为，保留 cross-section 相关性是更加重要的考量，所以上面的后果是可以接受的，此外被 oversampled 和被 undersampled 的基金的影响会相互抵消，因此不是什么太大的问题。此外，为了防止本来历史收益率数据就很短的基金在 bootstrapped 样本中缺少足够的数据，FF 要求只有当一个基金在 bootstrapped 样本中有不少于 8 个不同的收益率观测数据时，才被纳入分析。
+
+Harvey and Liu (2022) 通过实证分析指出，FF 口中的“不是什么太大的问题”恰恰就是问题所在。简单来说，问题可以归结为：对于任何基金，bootstrapped 样本中都会出现 undersampling 和 oversampling 的情况；但是对于那些收益率数据本来就很短的基金来说，undersampling 和 oversampling 的影响是不对称的，undersampling 的影响大到足以影响整个 bootstrapped 检验统计量的分布，即呈现厚尾。
+
+03
+
+为了定量分析 KTWW 和 FF 的问题，Harvey and Liu (2022) 设计了一个巧妙的 simulation design。之所以使用 simulation，是因为 Harvey and Liu (2022) 希望模拟 data generating process。在定量分析中用到的统计术语如下表所示。下面的介绍会重点关注两种方法的 test size。
+
+这里插一句，Harvey and Liu (2022) 的 simulation design 和 Harvey and Liu (2021) 异曲同工，它们都可以被视作 Harvey and Liu (2020) 里设计的 double bootstrap simulation 的基础。没看过 Harvey and Liu (2020, 2021) 的小伙伴，请参考《出色不如走运(V)》和《出色不如走运(VI)》。上述两篇推文对它们有详细介绍。三篇放在一起看一定会加深对这类 design 的理解。
+
+Simulation 一共分为五步，下面通过一个示例依次说明。
+
+第一步（下图左）和第二步（下图右）：
+
+假设实际数据中一共有 8 支基金和 15 期收益率，其中 4 支基金有全部 15 期数据，而其他基金的数据则不完整，实际收益率数据由  表示。在这些基金中，挑选拥有全部 15 期数据的基金进入下一步，将它们的收益率数据记为  。
+
+第三步（下图左）和第四步（下图右）：
+
+对  中的基金收益率数据在时序上 demean（因此它们都变成 zero-alpha），然后对这些基金（本示例中是 4），随机选择一定比例（记为  ）的基金，并通过人为指定的 IR 和每个基金各自的特质波动率计算  ，并将  赋予上面随机选出的那些基金。将上述操作后的数据记为  ，下标  表示第  次人为注入  后的数据。不难看出，在  中，  的基金维持了 zero-alpha，而剩下的  基金则被人为注入了  。接下来，对  进行 bootstrap，得到  。
+
+这里再插一句，个人认为，这里  应该记为  更好，因为上标  并不代表某次 bootstrap，而是代表“complete”一词，表示完整。本该出现的下标  代表着基于  的第  次 bootstrap，此外，  和第五步得到的  中的下标  是一样的，即为同一个 bootstrapped 样本，二者的区别仅仅是  中没有 missing data 的情况（这也正是上标 c = complete 的含义），而  中存在 missing data 的情况（马上下文就要解释）。
+
+第五步：
+
+根据设计，在上述第四步中得到的  不含任何 missing data（比如在本示例中，实际数据一共 15 期，  也一共 15 期，且 4 支基金均有全部 15 期数据）。在第五步中，为了模拟实际中一些基金收益率数据较少的情况（即存在 missing data），Harvey and Liu (2022) 按照原始数据  中实际的 missing data 情况对  进行了调整。比如，在本示例的原始数据  中，各有 25% 的基金缺少 1/3 和 2/3 期的数据。按照上述比例调整后，最后基于（每个）  得到了对应的  。由于示例中的  共有 4 支基金，因此在  中，1 支（4 的 25%）被调整为只有 5 期收益率数据，另外 1 支倍调整为只有 10 期收益率数据。
+
+从上述描述可知，通过给定  和  的范围，就可以得到大量的 bootstrapped 样本  ，并通过它们来分析 KTWW 和 FF。（除此之外，Harvey and Liu (2022) 还利用  并定义了另一个  作为分析的基础。）
+
+对于我们关注的 test size 来说（回顾一下本节一开始的那张统计术语表，test size 可以理解为 type I error rate），通过在 simulation 中设定  以及 IR = 0 即可保证 data generating process 满足原假设，即没有任何基金存在超额收益。之后，只要通过将 KTWW 和 FF 的方法应用于  样本就可以计算它们各自的 test size。为了清晰地展示两种方法的结果，Harvey and Liu (2022) 将它们的 test size 和事先指定的 significance level（即 desired level of test size）进行了比较 —— 离的越近越好。
+
+上图中，左图是 KTWW 的结果，右图是 FF 的结果；我们只需关注蓝色实线即可（它们是基于  样本的结果；红色虚线和黑色点划线是基于  和  的结果）。由定义可知，test size 是 type I error rate；我们希望某个方法的结果离给定的水平（10%）越接近越好。
+
+然而，KTWW 的 test size 明显高于 10% 的水平，说明它的 type I error rate 很高，即更有可能错误地拒绝原假设。因此 KTWW 是 oversized。反观 FF，其 test size 要明显低于 10% 的水平，说明其 type I error rate 更低，即更有可能接受原假设，因此 FF 是 undersized。上述结果翻译成“人话”就是：KTWW 的方法更容易拒绝原假设，即认为作为一个整体基金能够获得显著超额收益；而 FF 的方法更容易接受原假设，即认为作为一个整体基金无法获得显著超额收益。
+
+04
+
+至此，Harvey and Liu (2022) 定量分析了 KTWW 和 FF 的问题。基于他们的分析，我们可以猜测针对 FF 最直观的“改进”方法是提高基金最少收益率期数的约束（比如从 8 提升到和 KTWW 一样的 60 期），从而彻底杜绝 undersampling 问题对 bootstrapped 检验统计量分布的影响。不过这个约束的收紧意味着大量的基金将被排除在分析之外。
+
+为此，Harvey and Liu (2022) 提出了另一个改进方法：FF 阈值法。
+
+首先，考察所有至少有 12 期数据的基金。对于这些基金，分别进行 bootstrap 采样得到每个基金各自超额收益 t-statistic 的第一和第三四分位数（分别记为  和  ，我省略了代表基金的下标  ），因而有  。此外，令  表示阈值，并通过下式计算每个基金超额收益 t-statistic 的范围：
+
+  
+
+在得到每个基金的范围后，依照 FF 的方法进行 bootstrap。对于每个 bootstrapped 样本中的基金，如果其 bootstrapped t-statistic 不在上述范围之内，则从该样本中剔除掉该基金，并利用剩余的基金进行计算。这就是 FF 阈值法的核心思路。最后，Harvey and Liu (2022) 采用了他们设计的 simulation design 来确定阈值  。下图展示了当  时，FF 阈值法的 test size 以及 test power，它们较原始的 FF 方法均有明显的提升（例如 test size 较给定的 10% 水平已经非常接近）。
+
+以上就是对 Harvey and Liu (2022) 的简要介绍。当然，这篇文章中还有太多的细节和分析，值得反复阅读。（该文在 JF 官网上是 open access。）
+
+05
+
+Harvey and Liu (2022) 为回答基金 as a whole 是否提供了显著的超额收益提供了新的解决思路。
+
+虽然这次是站在基金而非异象视角，但该文无疑是金融学在应对多重假设检验问题时的又一力作，也是两位作者将他们的 research agenda 向前延伸的又一个里程碑。
+
+写到这里，本文本该自然地结束。但既然谈到了多重假设检验这个话题，我忍不住多唠叨两句。对于金融经济学，自 Cochrane 提出 zoo of factors 三问之后，多重假设检验的研究可以至少追溯到 Harvey, Liu, and Zhu (2016) 以及 Harvey (2017)。这些文章关注的问题是在多重假设检验问题下，有多少异象可能是虚假的，以及如何改进检验手段从而避免挖出虚假的协变量。
+
+尽管就结论闻言，这两篇文章的观点“不得”学界人心（毕竟没人愿意承认自己过去挖出来的东西是 p-hacking 出来的），但它们的计算是科学的、措辞是客观的。至此之后，学界也更加重视 p-hacking 问题，很多新的方法被提出；更多的 data/code sharing policy 被执行。
+
+然而大概从两年前，学界就之前挖出的异象到底能否被复制（能复制说明 p-hacking 问题不那么严重）的观点似乎发生了变化。这方面包括 Bryan Kelly 为作者之一撰写的 Is there a replication crisis in finance? 一文，还有另外一位就是我不想提但不得不提的 Andrew Chen。
+
+简单地说，Chen 的观点是学界的 p-hacking 问题远没有 Harvey and Liu 说的那么严重，仅仅靠 p-hacking 根本找不到这么多 in-sample 显著的异象，因此后者有些危言耸听。关于 Chen 和 Harvey and Liu 的“硬扛”，《出色不如走运(VI)》有过详细的介绍，此处不再赘述。我在那篇文章里表达出的观点依旧是中立的：
+
+“关于 p-hacking 问题有多严重，学术界以开放的心态来讨论它至关重要。从这个意义上说，本文介绍的 Chen (2021) 和 Harvey and Liu (2021) 没有谁对谁错，都是有益的讨论，让我们可以从不同的视角立体地审视这个问题。”
+
+可后来不经意间，发现 Chen 真的是铁了心地要和 Harvey 在这个问题上掰掰手腕。这不仅仅局限在发表学术论文这种正当途径，甚至还延伸到了在 twitter 上的人身攻击。以下两张截图是两人的对话，一来一回，高下立判。
+
+真的是看不下去。
+
+对于金融经济学来说，多重假设检验问题到底有多么严重？发表的异象有多少比例是虚假的？对于那些真实的异象来说，样本外的打折程度又是多少？如何在考虑 Type II error 的前提下确定 t-statistic 阈值？如何根据先验知识和所研究的数据特点确定合适的 t-statistic 阈值？等等。这些全都是至关重要的问题。Harvey and Liu 的多篇论文对上述问题均有正面回答。而从这些背后我们感受到的是持之以恒的研究和始终如一的态度。而 Chen 呢？
+
+这不禁让我想起了一句名言：
+
+"If you really want to do something, you will find a way. If you don't, you will find an excuse."
+
+在多重假设检验问题上，Harvey and Liu find a way. Chen, however, finds an excuse.
+
+参考文献
+Fama, E. F. and K. R. French (2010). Luck versus skill in the cross-section of mutual fund returns. Journal of Finance 65(5), 1915 – 1947.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance 75(5), 2503 – 2553.
+
+Harvey, C. R. and Y. Liu (2021). Uncovering the iceberg from its tip: A model of publication bias and p-hacking. Working paper.
+
+Harvey, C. R. and Y. Liu (2022). Luck versus skill in the cross section of mutual fund returns: Reexamining the evidence. Journal of Finance 77(3), 1921 – 1966.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Kosowski, R., A. Timmermann, R. Wermers, and H. White (2006). Can mutual fund “stars” really pick stocks? New evidence from a bootstrap analysis. Journal of Finance 61(6), 2551 – 2595.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Our analysis so far focuses on the implication of the FF approach at the und level. For a given fund, the FF bootstrapped t-statistic distribution is more fat-tailed compared to the distribution of actual returns for funds with a relatively short sample period (e.g.,  $ T \leq 24 $). This fund-level result is likely to affect FF's cross-sectional tests because the asymmetry in the bootstrapped -statistic distribution (between oversampling and undersampling) for funds with a short history cannot be offset by funds with a larger sample, leading to a fat-tailed bootstrapped distribution for the FF test statistics (e.g., the 95th percentile). $ ^{8} $ This intuition provides the basis for our analysis of test size and power below.
+处：Harvey and Liu (2022)
+--- 图3 ---
+Summary of Statistical Terminology
+This table provides a summary of statistical terms that we use in the context of testing fund outperformance.
+[表]
+Terms | Description | 
+Type I error | Assuming the null hypothesis of zero outperformance across all funds, the mistake of falsely rejecting the null and claiming outperformance for some funds. | 
+Size | Assuming the null hypothesis of zero outperformance across all funds, the actual rate of false rejections for a given approach or the probability of making a Type I error (falsely claiming fund outperformance). | 
+Significance level | The prespecified, desired level of size. | 
+Type II error | Assuming the alternative hypothesis that some funds outperform is true, the mistake of not rejecting the null and falsely claiming no outperformance. | 
+Power | Assuming the alternative hypothesis that some funds outperform is true, the actual rate of correctly identifying the existence of outperformers. | 
+Undersampling | In a cross-sectional bootstrap (sampling a common date across all funds), undersampling occurs when the bootstrap draws fewer observations than the actual number of historical observations for the fund. This can occur because the fund does not exist in some of the months that are drawn. We refer to this as the “missing-data” bootstrap. | 
+Oversampling | It is also possible that bootstrap could return more observations than the actual number of historical observations by oversampling months in which the fund was in existence. |
+--- 图4 ---
+15x8 (TxN) data matrix. Last four columns (funds) have complete data; of the first four funds, two have 5 observations and two have 10.
+出处：Harvey and Liu (2022)
+Keep last four funds that have complete data.
+--- 图5 ---
+出
+--- 图6 ---
+adjust number of observations for funds in  $ \mathcal{D}_{m}^{c} $ following the original data  $ \mathcal{D} $ (25% have observations, 25% have 10, and 50% have all 15). Therefore,  $ \mathcal{D}_{m,n}^{mis} $ has one fund with 5 observations, one with 10, and two with 15.
+出处：Harvey and Liu (2022)
+--- 图7 ---
+Panel (a):  $ IND_{1} $ (Comparison of KTWW's Test Size)
+Panel (a): CROSS $ _{1} $ (Comparison of FF's Test Size)
+Horn and Lin (2022)
+--- 图8 ---
+Figure 10. Results: Simulated test size and power for the thresholding-FF approach with  $ thres = 2.0 $, 2,876 funds. We report test size and test power at the 10% significance level for the thresholding-FF approach with the threshold parameter set to 2.0. Test size corresponds to setting p = 0. Test power corresponds to our baseline specification:  $ IR = 0.75 $ and p = 5%. (Color figure can be viewed at wileyonlinelibrary.com)
+处·Harvey and Lin (2022)
+--- 图9 ---
+@CliffordAsness is right, @camharvey's recent riposte against the many "no crisis" papers is way off. But it's much worse than what Asness is describing.
+Harvey+Liu flagrantly misrepresents the "easier targets," my JF and RAPS w/ @TomZ_Econ
+Please hear me out + retweet!
+--- 图10 ---
+Campbell Harvey @camharvey · 2h
+Replying to @achenfinance @CliffordAsness and @TomZ_Econ
+\have been very supportive of your research. We have similar objectives. "Flagrant" means "intentional" misrepresentation. You are accusing me of research misconduct. Earlier email exchange led to changes in my workin paper. We are seeking to improve it. Why Twitter not Zoom?
+--- 图11 ---

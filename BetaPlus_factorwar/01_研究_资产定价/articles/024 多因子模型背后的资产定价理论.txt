@@ -1,0 +1,158 @@
+# 多因子模型背后的资产定价理论
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/q55Nq8IXEAWfPJ8Z-sO7Qg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+资产定价理论保证了多因子模型和随机折现因子的等价性。实证研究应该在理论指引下展开。
+
+1900 年，法国小伙 Louis Bachelier 在他的博士论文《投机理论》（Théorie de la spéculation）中首次使用布朗运动分析股票和期权的价格（Bachelier 1900）。然而由于他的观点在当时太前卫，并没有受到足够的重视。最终，Bachelier 没有获得优秀论文，而金融学的发端也没能提前半个世纪。这不禁让人感慨，Bachelier 的小失落，金融学的大遗憾。直到半个世纪之后，Bachelier 的成果才被 Paul Samuelson 发现。
+
+时间终于来到上世纪 50 年代，金融学也进入了后来被 Merton Miller 称作是“The big bang of finance”的黄金年代。在这个时期，先是 Markowitz (1952) 提出了 Modern Portfolio Theory（mean-variance analysis），之后以 Sharpe (1964) 和 Lintner (1965) 为代表提出了 Capital Asset Pricing Model（见《CAPM 的一小段历史》）。同一时期，Fama (1965, 1970) 提出了 Efficient Markets Hypothesis。
+
+进入 70 年代后，金融学持续飞速发展。1973 年，Black and Scholes (1973) 以及 Merton (1973a) 同时提出了期权定价模型。同期，Merton (1973b) 提出了 Intertemporal CAPM（ICAPM），Ross (1976) 提出了 Arbitrage Pricing Theory（APT），它们将资产定价在 CAPM 的基础上进行了极大地扩展。此外，Lucas (1978) 和 Breeden (1979) 则奠定了 Consumption-based CAPM（CCAPM）的基础，CCAPM 被认为是最本质的资产定价模型。
+
+以上这些是关于资产定价（asset pricing）的革命性研究。
+
+从理论角度来说，研究资产定价有两条路可走：绝对定价（absolute pricing）和相对定价（relative pricing）。前者试图将资产的价格和它们暴露的宏观经济风险联系起来，例如 CCAPM、ICAPM 都是这方面的模型。反观后者，它们研究的目标是如何利用一系列已知价格的资产给其它资产定价，比如期权定价模型和 APT。
+
+无论是采用哪种 approach，不同的资产定价模型都可以被放入无套利定价公式框架（Cochrane 2005）：
+其中  是 price，  是 payoff，  是 stochastic discount factor（SDF）。早期的研究重点是研究 SDF 的性质以及理解到底是什么影响和决定 SDF。
+
+如今，在学界研究资产定价和业界实践资产定价的时候，更常见的是通过 beta pricing models，它研究的对象是资产的预期收益和资产对风险的暴露（beta）的关系，即我们熟悉的多因子模型。而这一研究风向的变化始于 Fama and French (1993) 的三因子模型（FF3）。毫无疑问，FF3 引领了我们这个时代的 empirical work。
+
+然而，这种看似跨度很大的研究转变是否意味着我们放弃了对 SDF 的研究，而转向了寻找哪些因子最 fit 实证数据，最应该被塞进多因子模型的 RHS 呢？答案是否定的。这是因为 FF3（和它的诸多继任者们）所代表的 beta pricing models 背后有着扎实的金融学理论，即 beta pricing models 和 SDF 是等价的。这种等价性才是我们如今能够通过多因子模型研究资产定价的保障。
+
+根据资产定价理论，SDF  和因子  满足关系  。由于  是通过协方差而非二阶矩计算的（协方差是 demean 后的二阶矩），因此为了方便推导可以在上述关系中把因子  做 demean 处理并把所有均值的信息都放在  里面，因而有  。此外，当研究的对象是超额收益时，利用  这个性质可将  任意缩放。所以，不失一般性使得通过缩放满足  。最终我们就得到了简化后的  和  的关系：  。因此，对于超额收益，有如下资产定价定理：
+
+其中  表示因子，  表示因子的预期超额收益，  为某资产  的超额收益。上述定理的含义是，当我们把资产预期超额收益表示成  乘以  的时候（即多因子模型），SDF 则可以表示为这些因子  的线性组合。此外，  就是资产超额收益  对因子  的多元回归系数。
+
+John Cochrane 对这种等价关系的评价是：
+
+“ An expected return beta model is equivalent to a discount factor that is a linear function of the factors in the beta model. This is an important and central result. It gives the connection between the discount factor formulation and the expected return-beta factor model formulation common in empirical work.
+
+”
+
+接下来就简单推导一下。
+
+由  可知  。利用  ，  ，  的表达式以及  可得： 
+将  挪到等式另一端： 
+为了让  出现在上式中，利用  ，并将该表达式代入上式并通过代数运算可得： 
+因此可以求出对应的因子预期超额收益  。以上就从 SDF 推出了对应的多因子模型；反之也可以通过给定的多因子模型反推出 SDF。
+
+当然，我们这里更关心的是  的表达式到底代表了什么。上述理论并未对因子  做任何限制，即因子可以是 state variables，也可以是 traded assets。为了建立和 FF3 这类实证模型的联系，我们关心的是因子  是 excess returns 时候的情况，  是什么。
+
+依然从  出发，两边同时乘  并求期望有： 
+由于  是 excess returns，因此  。结合上式，最终可推出：综合上述定理和推导，可以总结如下：通过 beta pricing model 中因子的某个线性组合就能够得到 SDF，而当因子  是 excess returns 时，它们的预期超额收益  等于  ，且模型中的  就是资产超额收益  和因子 excess returns 的多元回归系数。而这两点，恰恰就是 FF3 们所满足的。这就是为什么这些多因子模型非常吸引人并得到了非常广泛的应用。
+
+上述推导解释了以 FF3 为代表的多因子模型背后的资产定价理论。此外，作为 empirical work 的开端，Eugene Fama 和 Ken French 也通过对 FF3 的解读给后人树立了使用和检验多因子模型的典范。在这方面，不得不提的一篇重要程度不亚于 Fama and French (1993) 的论文是 Fama and French (1996)，它真正拉开了通过多因子模型对其他资产研究 relative pricing 的序幕。
+
+这篇文章的第一个重点是传递出这样一个态度，即尊重统计检验结果，但统计检验结果并不应该是挑选多因子模型的全部。举例来说，当以使用 size 和 BM 双重排序构造的 25 个 portfolios 作为 test assets 时，FF3 的 Gibbons, Ross and Shanken (1989) test 结果是 p-value = 0.004，即模型被拒绝了。这是否意味着它不是一个好模型呢？
+
+考察这些 test assets 的  可知，模型无法解释的是市值最小且估值最高的这一撮儿股票；对于其他绝大多数 test assets，它们的  都足够接近零。因此，不应轻易的根据 GRS test 结果来拒绝 FF3。对于 empirical work 来说，与统计检验结果相比，能否给实践提供足够指引是更为重要的准则。（前文《股票多因子模型的回归检验》的第 7 节，也强调了 Test is not everything.）
+
+当然，也许你和我一样会说，这 25 个组合是构造因子的 basis portfolios，能给它们定价是应该的。
+
+True!
+
+因此，该文的第二个重要之处是使用 FF3 给其他 anomalies 定价。为此，该文考虑了 Lakonishok, Shleifer and Vishny (1994) 通过 EP、CP 和 five-year sales 等构造的投资组合，以及 DeBondt and Thaler (1985) 的长期反转和 Jegadeesh and Titman (1993) 的中期动量。实证结果显示，绝大多数 test assets 在 FF3 下的联合 pricing errors 很小，通过了 GRS test。不过他们也欣然承认，FF3 无法解释动量效应。如今，检验对 test assets 的定价能力早已成为比较不同多因子模型时的必要手段（见《直观理解 GRS 和 MV Spanning》以及《Toward a better factor model》）。
+
+值得借鉴的另一点是二位作者如何看待 FF3，并以此传递出的研究因子时应有的纪律性。从因子的构造和实证结果来看，MKT、HML 和 SMB 三个因子能在很大程度上解释资产收益率的共同运动，因此 FF3 应被视作 APT 模型；不过有意思的是他们依然尝试从 ICAPM 的角度解释因子。以 HML 为例，Fama and French (1996) 把它看作 relative distress 这个 state variable 的 factor mimicking portfolio。
+
+这也许是 Eugene Fama 为了避免 beta pricing models 退化为纯粹的 empirical work 所坚守的态度。这种坚守也体现在了 Fama and French (1996) 一文的最后一段，两位作者再次强烈表达了希望能够搞清楚 HML 和 SMB 代表的 state variables 的愿景。
+
+FF3 之后，越来越多的多因子模型被提出（见《主流多因子模型巡礼》），它们都属于 empirical asset pricing 的范畴。而一旦把“empirical”一词加到“asset pricing”之前，就需要格外的谨慎。一方面，empirical work 可以让模型更加贴近实际数据，更好的指引投资实务；而另一方面，我们也应避免研究变成毫无意义的 ex post mean-variance optimization。
+
+从 Fama and French (1993, 1996) 中我们看到了早期实证资产定价研究的态度，也许这种对理论和实证之间平衡的极致追求就是对 empirical 一词最好的诠释。
+
+而本文希望传递出来的观点是，beta pricing models 背后从来都有严谨的资产定价理论（和 SDF 的等价性），而 empirical work 也从来都应该在理论的指引下展开。
+
+参考文献Bachelier, L. (1900). Théorie de la Spéculation. Paris: Gauthier-Villars.
+
+Breeden, D. T. (1979). An intertemporal asset pricing model with stochastic consumption and investment opportunities. Journal of Financial Economics 7(3), 265 – 296.
+
+Black, F. and M. Scholes (1973). The pricing of options and corporate liabilities. Journal of Political Economy 81(3), 637 – 654.
+
+Cochrane, J. H. (2005). Asset Pricing (Revised Edition). Princeton, NJ: Princeton University Press.
+
+DeBondt, W. F. M. and R. H. Thaler (1985). Does the stock market overreact? Journal of Finance 40(3), 793 – 805.
+
+Fama, E. F. (1965). The behavior of stock-market prices. Journal of Business 38(1), 34 – 105.
+
+Fama, E. F. (1970). Efficient capital markets: A review of theory and empirical work. Journal of Finance 25(2), 383 – 417.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (1996). Multifactor explanations of asset pricing anomalies. Journal of Finance 51(1), 55 – 84.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica 57(5), 1121 – 1152.
+
+Jegadeesh, N. and S. Titman (1993). Returns to buying winners and selling losers: Implications for stock market efficiency. Journal of Finance 48(1), 65 – 91.
+
+Lakonishok, J., A. Shleifer, and R. W. Vishny (1994). Contrarian investment, extrapolation, and risk. Journal of Finance 49(5), 1541 – 1578.
+
+Lintner, J. (1965). The valuation of risk assets and the selection of risky investments in stock portfolios and capital budgets. Review of Economics and Statistics 47, 13 – 37.
+
+Lucas, R. E. Jr. (1978). Asset prices in an exchange economy. Econometrica 46(6), 1429 – 1445.
+
+Markowitz, H. (1951). Portfolio Selection. Journal of Finance 7(1), 77 – 91.
+
+Merton, R. C. (1973a). Theory of Rational Option Pricing. The Bell Journal of Economics and Management Science 4(1), 141 – 183.
+
+Merton, R. C. (1973b). An intertemporal capital asset pricing model. Econometrica 41(5), 867 – 887.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341 – 360.
+
+Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk. Journal of Finance 19(3), 425 – 442.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+neurem: Given the model
+$$ m=1+[f-E(f)]^{\prime}b,\qquad0=E(m R^{e}), $$
+(
+one can find  $ \lambda $ such that
+$$ E(R^{e})=\beta^{\prime}\lambda, $$
+(6.)
+where  $ \beta $ are the multiple regression coefficients of excess returns  $ R^{e} $ on the factors. Conversely, given  $ \lambda $ in (6.8), we can find b such that (6.7) holds.
+出处：Cochrane (2005)
+--- 图3 ---
+THE JOURNAL OF FINANCE • VOL. LI, NO. 1 • MARCH 1996
+Multifactor Explanations of Asset Pricing Anomalies
+EUGENE F. FAMA and KENNETH R. FRENCH $ ^{*} $
+ABSTRACT
+Previous work shows that average returns on common stocks are related to firm characteristics like size, earnings/price, cash flow/price, book-to-market equity, past sales growth, long-term past return, and short-term past return. Because these patterns in average returns apparently are not explained by the CAPM, they are called anomalies. We find that, except for the continuation of short-term returns, the anomalies largely disappear in a three-factor model. Our results are consistent with rational ICAPM or APT asset pricing, but we also consider irrational pricing and data problems as possible explanations.
+--- 图4 ---
+Table I—Continued
+[表]
+ | Book-to-Market Equity (BE/ME) Quintiles | 
+Size | Low | 2 | 3 | 4 | High | Low | 2 | 3 | 4 | High | 
+ | Panel B: Regressions:  $ R_{i} - R_{f} = a_{i} + b_{i}(R_{M} - R_{f}) + s_{i}SMB + h_{i}HML + e_{t} $ | 
+ | a | t(a) | 
+Small | -0.45 | -0.16 | -0.05 | 0.04 | 0.02 | -4.19 | -2.04 | -0.82 | 0.69 | 0.29 | 
+ | -0.07 | -0.04 | 0.09 | 0.07 | 0.03 | -0.80 | -0.59 | 1.33 | 1.13 | 0.51 | 
+ | -0.08 | 0.04 | -0.00 | 0.06 | 0.07 | -1.07 | 0.47 | -0.06 | 0.88 | 0.89 | 
+ | 0.14 | -0.19 | -0.06 | 0.02 | 0.06 | 1.74 | -2.43 | -0.73 | 0.27 | 0.51 | 
+Big | 0.20 | -0.04 | -0.10 | -0.08 | -0.14 | 3.14 | -0.52 | -1.23 | -1.07 | -1.19 |
+处：Fama and French (1996)
+--- 图5 ---
+Why is relative distress a state variable of special hedging concern to investors? One possible explanation is linked to human capital, an important asset for most investors. Consider an investor with specialized human capital tied to a growth firm (or industry or technology). A negative shock to the firm's prospects probably does not reduce the value of the investor's human capital it may just mean that employment in the firm will expand less rapidly. In contrast, a negative shock to a distressed firm more likely implies a negative shock to the value of specialized human capital since employment in the firm is more likely to contract. Thus, workers with specialized human capital in distressed firms have an incentive to avoid holding their firms' stocks. I variation in distress is correlated across firms, workers in distressed firms have an incentive to avoid the stocks of all distressed firms. The result can be a state-variable risk premium in the expected returns of distressed stocks.
+出处：Fama and French (1996)
+--- 图6 ---
+Finally, there is an important note in our work. Our tests to date do not cleanly identify the two consumption-investment state variables of special hedging concern to investors that would provide a neat interpretation of our results in terms of Merton's (1973) ICAPM or Ross' (1976) APT. The results of Chan and Chen (1991) and Fama and French (1994, 1995) suggest that one of the state variables is related to relative distress. But this issue is far from closed, and multiple competing interpretations of our results remain viable.
+处：Fama and French (1996)
+--- 图7 ---

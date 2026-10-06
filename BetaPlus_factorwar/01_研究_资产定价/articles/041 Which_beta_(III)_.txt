@@ -1,0 +1,208 @@
+# Which beta (III) ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/PY-yP88khRz5Tmed7HYZ8A
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+若市场中不（持续）存在无风险套利机会，那么资产的预期收益由资产和因子的协方差（即  ）决定。
+
+最近我被 Stefan Nagel 圈粉。
+
+Stefan Nagel 何许人也？他是芝加哥大学的金融学教授，Journal of Finance 的执行主编，尤其擅长资产定价理论。我最近接连精读了他的两篇文章，它们均很好地补充了我对资产定价和因子投资的理解。因此本文和两周后的文章将会背靠背介绍这两篇文章。
+
+今天要说的是 Kozak, Nagel, and Santosh (2018)，标题是 Interpreting Factor Models（下称 KNS）。早在 2015 年，该文就出现在 AFA 年会上，后来 2017 年被 Journal of Finance 接收，2018 年见刊。该文是资产定价理论和实证数据的完美结合，加深了人们对 reduced-form factor models（即多因子模型）的理解。
+
+为了说明 KNS 的核心结论，先来定义一下无风险套利机会。该文将其定义为“trading strategies that earn extremely high Sharpe ratios”（即超高夏普率的交易策略）。这句话可以被更精确地解读为两点：（1）超高夏普率可以在短时内存在，但不是持续的现象；（2）超高夏普率策略无法产生巨大的价格冲击（can’t have large price impact）。和人们的认知相符，市场上难以存在同时不满足以上两点的无风险套利机会。
+
+假设市场中不存在上述定义的无风险套利机会，KNS 的两个核心结论（顺序分先后，但是同等重要）如下：
+
+1. 资产的预期超额收益由资产和因子的协方差（也就是我们常说的  ）决定，而这些因子和资产收益率的协方差矩阵密切相关。关于前半句话，根据定义，  是资产收益率对因子收益率的回归系数，而回归系数的分子就是二者的协方差[1]。这个结论给近年来的 covariance 和 firm characteristics 到底哪个能决定资产预期收益之争提供了非常重要的启发（这也是为什么本文的标题为 Which Beta (III) ?）。
+
+2. 尽管资产预期收益由  决定，但仅从这点出发，人们并不能区分因子背后是风险补偿解释还是错误定价解释。换句话说，哪怕资产的价格仅仅由非理性投资者持有的关于资产收益分布的失真信仰决定，资产的预期收益依然由资产和因子的协方差（  ）决定。
+
+由上述第一点可知，在 KNS 的研究视角下，多因子模型中的因子并非像 Fama and French (1993) 三因子（FF3）模型这样给定的 MKT、HML 以及 SMB 因子，而是从资产收益率的协方差矩阵出发，通过 PCA 构造的因子。为此，在实证研究中，KNS 选择了两组 test assets。第一组是 Novy-Marx and Velikov (2016) 一文提及的 15 个代表性异象的各自多、空组合（因此一共 30 个 test assets）；第二组是 FF3 使用的 size-B/M 双重排序构造的 25 个投资组合。
+
+看到这里有小伙伴可能会问，使用 PCA 构造的因子是否有足够的经济学含义。以 FF3 的 25 个 test assets 为例，对它们进行 PCA 运算，得到的第一主成分可以被理解为一个 level factor，正好对标 MKT，而第二、三主成分中 test assets 的权重如下图所示。
+
+从上面左图不难看出，test assets 的权重随着 size quartiles 逐渐降低（其中小市值组合的权重为正，大市值组合的权重为负），且每个 size 下不同 B/M 组合的权重很接近，这毫无疑问对应了 FF3 中的 SMB。另一方面，右图显示 test assets 的权重随 B/M quartiles 逐渐升高（其中高 B/M 组合权重为正，低 B/M 组合权重为负），且给定 B/M 下不同 size 组合的权重接近，这无疑对应了 FF3 的 HML。
+
+这个例子清晰的说明，当 test assets 中有很强的 factor structures，那么 PCA 是注定能够识别它们的。而在这个例子中，对于这 25 个 test assets 来说，利用前三个主成分构造的多因子模型就完全对标了 FF3。因此，像 FF3 这种人为构造的因子并无特殊性，而使用 PCA 构造的因子则更具一般性。
+
+对于给定的 test assets，PCA 虽然能够从它们的协方差矩阵中构造出因子，但人们真正关心的问题是，资产和这些因子的协方差（  ）能否决定资产的预期收益呢？KNS 通过资产定价理论分析表明，在市场中不存在无风险套利机会的假设下，上述问题的答案是肯定的。
+
+01
+
+假设共有  个资产，令  表示它们的超额收益，  表示它们的预期超额收益，  表示  的协方差矩阵。由于  是超额收益，因此存在随机折现因子（SDF）  使得  。根据 Hansen and Jagannathan (1991) 的研究，  可以表示为以下形式：
+
+由于  是超额收益，因此  可以被任意缩放。为方便推导，不妨令  ，由此可以推导出  的方差为： 
+
+换句话说，随机折现因子  的方差由通过  个资产构造的最大夏普率的平方（squared SR）决定。“  ”这个关系将在稍后的分析中发挥重要的作用。
+
+为了进一步分析，对资产的协方差矩阵  进行特征分解，得到  ，其中  是对角阵，对角线上的元素为特征值  ，而  的每一列为一个特征向量。KNS 进一步假设第一主成分是一个 level factor，而从第二主成分开始，它们都代表了由  个资产构造的某种 long-short portfolios。
+
+带着上述 PCA 分解，再来看  。由数学推导可知：
+
+其中第一项和 level factor 有关，我们主要来看第二项。第二项是剩余  个主成分求和，而它的大小取决于每一项中分子和分母的大小，其中分子是每个资产的预期收益和某个主成分的截面相关系数（的平方），而分母是该主成分对应的特征值。
+
+接下来，就是最重要的推断。
+
+大量实证数据表明，对资产收益率协方差矩做 PCA 分解时，特征值衰减的是非常快的。这意味着除了前几个主成分外，后面主成分的特征值非常小。如果资产的预期收益  和后面的主成分（higher order PCs）高度相关，由于它们的特征值（  ）很低，这将造成上式中的第二项很大，因而  很大。而从之前的推导可知，  等于  个资产构造的最大 squared SR，因此我们可以推出：
+
+如果资产的预期收益  和 higher order PCs 高度相关（而和前几个主成分不相关），则由  个资产构造的最大 squared SR 就会非常大，即市场中存在无风险套利的机会。
+
+由于市场中不存在无风险套利机会，因此反过来：
+
+在市场中不存在无风险套利机会（即最大 squared SR 是有限）的假设下，资产的预期收益就必须和前几个主成分高度相关。
+
+“ Since asset returns have substantial commonality, absence of near-arbitrage opportunities implies that the stochastic discount factor can be represented as a function of a few dominant sources of return variation.
+
+”
+
+利用本文开篇提到了两组 test assets，KNS 给出了上述结论的实证证据。如下图所示，对于这两组 test assets，如果这些资产的预期收益和更多的 higher order 主成分高度相关，则最大的 squared SR 是非常高的。例如，对于第一组 test assets，如果它们和前 10 个主成分都高度相关，则它们构造的最大 squared SR 将高达 6.0，这显然和真实情况不符，所以资产的预期收益只能和前几个主成分相关。
+
+前文的论述表明资产预期收益和前几个主成分高度相关，即对前几个主成分来说  很大。但从这个现象还无法直接推出资产和这些 PCA 因子的协方差（  ）能够解释资产的预期收益。因此，为了考察这一点，KNS 使用 PCA 构造的多因子模型，通过时序分析进行了实证研究。
+
+以 Novy-Marx and Velikov (2016) 中涉及的 15 个异象为例，下表展示了 PCA 因子模型的定价能力。对于绝大多数异象来说，随着因子个数的增加，异象的定价误差逐渐降低，说明资产和这些因子的  能够很好的解释它们的预期收益。
+
+综合前述所有模型推论和实证结果，我们可以得出结论：资产收益率波动的共性由若干个因子主宰，资产预期收益率和这些因子密切相关（  大），资产预期收益率的截面差异由资产和因子的协方差（  ）决定。在这个结论下，如果投资者想要获取例如低估值 vs 高估值或者赢家 vs 输家股票之间预期收益的差异，就必须要承担在相应因子上必要的暴露。
+
+尽管如此，上述结论也并非没有受到其他实证结果的冲击。在诸多实证挑战中，最有代表性的无疑还是要数“which beta”[2]之争。Daniel and Titman (1997) 研究了 FF3 并发现资产的预期收益由 size 和 B/M 这些 firm characteristics 决定，而非  决定[3]。放在 KNS 的理论框架下，由于主成分之间的是正交的，这意味着 Daniel and Titman (1997) 主张预期收益和 higher order PCs 相关。这显然和 KNS 的结论背道而驰。
+
+另一方面，仅看 KNS 自己的实证结果，以第一组 30 个 test assets 为例，它们构造的事后（ex post）最大 squared SR 高达 4.23，而前五个主成分构造的最大 squared SR 仅为 1.77。这两个数字之间巨大的鸿沟似乎也表明还有一些 higher order PCs 决定了预期收益。但事实真的如此吗？对于这一点，KNS 给出了至少在我看来合情合理的解释。而解释的关键就在于所谓高 squared SR 在跨越样本内外的可持续性。
+
+仍以 Novy-Marx and Velikov (2016) 的异象为例，如果将实证区间一分为二，前半部分为样本内（IS），后半部分为样本外（OOS），并绘制出他们在样本内外的夏普率（下图）。可以看到，在实证区间的后半段，几乎所有异象的夏普率都低于前半段。
+
+此外，利用上述划分，KNS 使用前半段样本内数据构造了主成分，并检验主成分所实现的最大 squared SR 在样本内外的差异，结果如下图所示。
+
+无论是针对哪一组 test assets，上述结果清晰的显示出：在样本内，夏普率随主成分数量单调递增，然而在样本外，夏普率随着主成分个数的增加却提升的非常缓慢（且对于给定个数的主成分，样本外夏普率比样本内低的多）。样本内外的差异表明，哪怕事后来看一些 higher order PCs 能够决定资产预期收益，它们也很难在样本外维系。这个结果从一定程度上回应了 Daniel and Titman (1997) 的发现。
+
+“ There are additional reasons to suspect that high ex-post SRs are not robust indicators of persistent near-arbitrage opportunities. Short-lived near-arbitrage opportunities might exist for a while before being recognized and eliminated by arbitrageurs. Data-snooping biases further overstate in-sample SRs.
+
+”
+
+02
+
+再回到 covariance 和 characteristics 之争。
+
+从行为金融学角度来说，人们认为 characteristics 而非 covariance 决定资产定价；这种“非理性”定价行为也被认为是和 covariance 正交的定价错误。
+
+然而，事实真的如此吗？
+
+为了从直觉上理解这个问题，我们用人们喜闻乐见的截面动量来说明。行为金融学认为动量背后的原因是定价错误，不能被资产和前几个主成分的 covariance（即  ）解释。如果这个结论是对的，它意味着动量必然和 higher order PCs 有关。然而实证数据显示，截面动量的多头和空头内的股票都有很强的共同运动。由于股票的共同运动很大程度上由前几个主成分解释，而非 higher order PCs，因此该观点和实证数据不符。
+
+在套利者看来，上述共同运动代表了某种他们不愿意去交易的系统性风险，也正因如此动量多空两头的收益率才有差异、动量才被定价。如果像行为金融学的看法那样，截面动量中的股票没有共同运动（即没有系统性风险），而是和 higher order PCs 有关（即是由特质性波动造成的），那么对套利者来说这将是获得无风险套利的绝佳机会，他们会充分套利，导致动量的收益不复存在。
+
+离开这个例子之前，最后需要澄清的一点是：动量背后本身的原因完全可以是来自行为金融学（上述讨论完全不否认这一点）；但我们希望这个例子强调的是，正如 KNS 研究的第二部分表明，即便资产的定价完全由非理性交易者驱动，它们的预期收益依然由（资产和因子的）协方差（  ）决定。
+
+为了得到定量的推断，KNS 在模型中考虑市场中存在理性交易者和情绪交易者。相较于前者，情绪交易者对资产的需求多了一个参数  。此外，考虑到现实世界中情绪交易者的实际约束（例如不能毫无限制的使用杠杆或者做空），因此在模型中，  满足  的约束。这个条件是 KNS 和早期类似的模型（例如 Daniel, Hirshleifer, and Subrahmanyam 2001）的最大差异。
+
+利用该模型，KNS 讨论了很多 implications。为了本文的紧凑性（以及少放点公式），我挑一点来阐述。
+
+在该模型下，资产收益率相对 CAPM 的偏离完全由情绪交易者推动。如果按照行为金融学的观点，那么应该是 characteristics 而非 covariance（  ）决定资产的预期收益。然而，模型显示，资产预期收益的截面波动越高，则这些波动中被前几个主成分解释的比例也越高（下图）。
+
+图中给出了两组 test assets 上的检验结果，其中竖直线表示了真实数据中 test assets 预期收益的截面波动（对于 FF3 的 25 个 test assets 是 0.17；另一组 30 个 test assets 是 0.47）。图中纵坐标是截面波动中被前两个（对于 FF3 的 test assets）和前三个（对于 30 个 test assets）主成分[4]能够解释的比例。结果显示，哪怕在这个价格由情绪交易者驱动的世界中，资产和前几个主成分的协方差依然能在很大程度上解释资产预期收益的截面差异，而如果不采用更进一步的分析，人们是无法区分背后的原因是风险补偿还是非理性驱动的定价错误。
+
+03
+
+以上是 KNS 中最核心的观点。该文还有其他一些很有价值的讨论，建议感兴趣的小伙伴去看原文。
+
+读完此文，我也不禁思考，它对近年来的 which beta 之争以及因子投资有怎样的意义。
+
+首先，大量实证结果表明对于常见的多因子模型来说，firm characteristics 似乎比 covariance 更能预测收益率。例如 Fama and French (2020) 的研究也发现用 firm characteristics 的动态模型比用  的静态模型的定价误差更低[5]。
+
+这些实证结果似乎和 KNS 相悖。但是一方面，这样的结果从一定程度上可以被前文讨论的样本内外的差异所解释。另外，在这个矛盾背后，我能想到的另一个合理解释就是，像诸如 SMB 和 HML 这些因子仅仅是构造 SDF 的一小部分（或者甚至不是组成 SDF 的成分），因而它们的定价能力本身就很微弱，所以哪怕被 characteristics based test 拒绝了，也不能说明 KNS 的结论有问题。
+
+从某种意义上来说，学术界的 covariance vs characteristics 之争可以理解为人们在找寻能够决定 mean-variance efficient frontier 组合的 characteristics[6]。而根据资产定价理论，一旦找到了该组合，那么资产的预期收益就由资产和它的协方差（  ）决定。
+
+第二点就是 KNS 的模型为近年来流行的行为金融学多因子模型提供了很好的理论支持。无论是 Stambaugh and Yuan (2017) 还是 Daniel, Hirshleifer, and Sun (2020)，它们虽然都是从行为金融学的角度提出因子，然而最后用来决定资产预期收益的依然是资产和因子的协方差（  ）。这些实证结果和 KNS 的模型相符。
+
+最后，资产预期收益率由协方差（  ）决定也给一直以来的  和  之争很大的启示。按照定义，  代表了无风险套利机会。无论是理论还是现实中，  是不持久的且无法造成大的价格冲击。而另一方面，KNS 的模型表明，真正能够决定资产预期收益率的，唯有  。
+
+Kozak, Nagel, and Santosh (2018)，相见恨晚。
+
+备注：
+[1] 见《FF3 们背后的资产定价理论》。
+[2] 见《Which beta?》和《Which beta (II)?》 。
+[3] 这篇文章 1997 年发表在 Journal of Finance 上，和 Fama and French (1996) 只相差 1 年，足见分量。
+[4] 除去第一个 level factor 之外的两个和三个主成分。
+[5] 见《A new norm?》。
+[6] 见《寻找 mean-variance frontier》。
+
+参考文献
+Daniel, K. D., D. A. Hirshleifer, and A. Subrahmanyam (2001). Overconfidence, arbitrage, and equilibrium asset pricing. Journal of Finance 56(3), 921 – 965.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors. Review of Financial Studies 33(4), 1673 – 1736.
+
+Daniel, K. D. and S. Titman (1997). Evidence on the characteristics of cross sectional variation in stock returns. Journal of Finance 52(1), 1 – 33.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (1996). Multifactor explanations of asset pricing anomalies. Journal of Finance 51(1), 55 – 84.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Hansen, L. P. and R. Jagannathan (1991). Implications of security market data for models of dynamic economies. Journal of Political Economy 99(2), 225 – 262.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Novy-Marx, R. and M. Velikov (2016). A taxonomy of anomalies and their trading costs. Review of Financial Studies 29(1), 104 – 147.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Figure 1. Eigenvectors. The figures plot eigenvector weights corresponding to the second (left and third (right) principal components of the 25 size-B/M portfolio returns. (Color figure can be viewed at wileyonlinelibrary.com))
+4. V. I. and Scotch (2019)
+--- 图3 ---
+Panel A: 30 anomaly portfolios (in excess of level factor)
+Panel B: $5 \times 5$ size-B/M portfolios (in excess of level factor)
+Figure 2. Hypothetical Sharpe ratios. The figures show hypothetical Sharpe ratios if expected returns line up with first K (high eigenvalue excluding PC1) principal components. Panel A uses 30 anomaly portfolios as test assets. Panel B focuses on 25 size-B/M portfolios. (Color figure can be viewed at wileyonlinelibrary.com)
+1 Ab. Venet, Nevel and Santock (2010)
+--- 图4 ---
+Explaining Anomalies with Principal Component Factors
+The sample period is July 1966 to December 2015. The anomaly long-short strategy daily returns are as defined in Novy-Marx and Velikov (2016). Average returns, factor-model alphas, and squared Sharpe ratios are reported in annualized terms. Mean returns and alphas are calculated for 15 long-short anomaly strategies. Maximum squared Sharpe ratios and principal component factors are extracted from returns on the 30 portfolios underlying the long and short sides of these strategies.
+[表]
+ | Mean Return | PC Factor-Model Alphas | 
+PC1 | PC1-2 | PC1-3 | PC1-4 | PC1-5 | 
+Size | 1.29 | 2.47 | 4.89 | 2.07 | 3.29 | 4.08 | 
+Gross Profitability | 4.56 | 3.96 | 2.33 | 3.37 | 4.33 | 2.48 | 
+Value | 5.71 | 6.28 | 6.63 | 3.80 | 0.97 | 1.16 | 
+ValProf | 8.45 | 9.45 | 8.02 | 6.34 | 5.33 | 4.43 | 
+Accruals | 4.63 | 4.57 | 3.94 | 3.98 | 4.25 | 4.39 | 
+Net Issuance (rebal.-A) | 9.06 | 10.30 | 6.55 | 6.87 | 5.31 | 4.87 | 
+Asset Growth | 4.31 | 5.31 | 3.42 | 2.07 | -0.64 | -0.27 | 
+Investment | 5.41 | 6.31 | 5.25 | 4.38 | 3.16 | 3.57 | 
+Piotroski&#x27;s F-score | 0.69 | 0.94 | -0.32 | 0.17 | 0.21 | 0.12 | 
+ValMomProf | 9.59 | 10.17 | -0.39 | -2.44 | -0.59 | -1.95 | 
+ValMom | 5.71 | 6.51 | -2.95 | -5.86 | -5.66 | -5.83 | 
+Idiosyncratic Volatility | 9.25 | 13.13 | 2.52 | 5.00 | 0.08 | -0.74 | 
+Momentum | 16.31 | 17.12 | -2.41 | -2.34 | 2.12 | 2.57 | 
+Long Run Reversals | 4.22 | 4.76 | 4.69 | 1.92 | -0.53 | -1.48 | 
+Beta Arbitrage | 7.12 | 8.87 | 1.85 | 1.57 | -1.00 | 1.23 |
+山外，
+--- 图5 ---
+Figure 4. In-sample and out-of-sample Sharpe ratios. The figure shows in-sample and out-of-sample Sharpe ratios of 15 anomaly long-short strategies. The sample period is split into two halves. In-sample Sharpe ratios are those in the first subperiod. Out-of-sample Sharpe ratios are those in the second subperiod. Sharpe ratios are annualized.
+山外·Kozok Nagel and Santosh (2018)
+--- 图6 ---
+Panel A: 30 anomaly portfolios (sample split)
+Kozak Nagel und Santosh (2018)
+Panel B: Fama-French 25 portfolios (sample spi
+--- 图7 ---
+Figure 7. Characteristics versus covariances. Cross-sectional variation in expected returns explained by the first two principal components for  $ 5 \times 5 $ size-B/M portfolios and three principal components for anomaly long and short portfolios. Portfolio returns are represented in excess of the level factor. Vertical lines depict in-sample estimates of the ratio of cross-sectional variation in expected returns and the squared market excess return for the two sets of portfolios. (Color figure can be viewed at wileyonlinelibrary.com)
+出处：Kozak Nagel and Santosh (2018)
+--- 图8 ---

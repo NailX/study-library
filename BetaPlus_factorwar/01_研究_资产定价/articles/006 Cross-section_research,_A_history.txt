@@ -1,0 +1,226 @@
+# Cross-section research, A history
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/qOR-ivh1te0UNx-Nuvg3gw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+从 CAPM 到机器学习下的新范式，本文简要梳理关于资产预期收益截面差异的研究路径。
+
+01
+
+Cross-section research（即研究不同资产预期收益的截面差异）的发端要追溯到上世纪 60 年代。在那之前，人们对于风险、预期收益以及二者的关系并无清晰的认识。而金融学无论是理论还是实证都处于萌芽阶段 —— 理论方面，尚无关于 cross-section 的模型；实证方面，尚无高质量的数据，且计算机算力也十分有限。
+
+一切都处于无序之中。
+
+直到 60 年代，Treynor (1962)，Sharpe (1964)，Lintner (1965) 以及 Mossin (1966) 分别独立提出了资本资产定价模型（CAPM）[1]，它是关于资产预期收益截面差异的第一个模型：
+
+CAPM 模型非常优雅，背后的金融学理论也很容易被人接受。Eugene Fama 曾对其高度评价到：
+
+“ The arrival of the CAPM was like the time after a thunderstorm, when the air suddenly clears. 
+
+”
+
+根据资产定价理论，随机折现因子 SDF 和 mean-variance efficient portfolio 是等价的[2]。因此 CAPM 的隐含假设就是市场组合是 mean-variance efficient portfolio。如果这个假设成立，那么市场组合就可以给其他任意资产定价。
+
+然而，理想很丰满，现实很骨感。CAPM 被统计检验拒绝了 —— 资产的预期收益并不和它们对市场组合的  大小成正比。在早期的检验中，最具代表性的要数 Black, Jensen and Scholes (1972)。 该文发现股票的超额收益  和市场  负相关。在这个基础上，他们提出了一个双因子模型；新模型中的第二个因子称为 zero-beta 因子：
+
+除此之外，在上世纪 80 年代前后，学者们陆续发现按照某种风格“打包”的股票能够战胜市场。这其中最值得一提的是 Basu (1977) 发现的 EP 效应和 Banz (1981) 发现的小市值效应。它们均无法被 CAPM 解释，因而也被称为异象（anomalies）。
+
+面对诸多无法被 CAPM 解释的异象，cross-section research 再一次陷入了无序之中。
+
+02
+
+直到 Fama and French (1993)。
+
+观察到价值和规模有助于解释股票预期收益的差异，Fama and French (1993) 在 CAPM 的基础上加入了 HML 和 SMB 两个因子，提出了三因子（FF3）模型：
+
+这篇文章以及它的“姊妹篇”Fama and French (1996) 拉开使用多因子模型进行实证资产定价研究的序幕。如果说 Fama and French (1993) 仅仅是使用三因子对同样通过 size 和 BM 双重排序构造的 25 个 portfolios 定价，因而难以令人信服，那么 Fama and French (1996) 则是利用三因子模型对其他 CAPM 无法解释的异象定价，例如通过 EP、CP 和 five-year sales 等构造的 portfolios，一举奠定了 FF3 的地位。
+
+自此，FF3 扛过了 CAPM 的大旗，成为了最家喻户晓的多因子定价模型。当然，这也让它成为众矢之的，各路学者纷纷研究能够拒绝 FF3 的异象。作为第一个实证多因子模型，FF3 能够解释的异象注定有限。在诸多异象之中，最令 FF3 尴尬的当属 Eugene Fama 自己的学生 Carhart 提出的动量（Carhart 1997）。Fama 对动量的评价是：
+
+“ The premier anomaly is momentum.
+
+”
+
+然而，动量仅仅是开始，远不是结束。在过去二十多年中，以 FF3 为基准，学术界提出了成百上千个形形色色的异象，构成了 zoo of anomalies（也就是 John Cochrane 口中的 zoo of factors）。造成这一现象的，主要有两个原因。第一个是 FF3 本身的定价能力有限，但学术界总以异象能够获得 FF3 无法解释的超额收益为提出异象的标准；第二个原因则是如今已经家喻户晓的 publication bias 导致的 p-hacking（Harvey 2017）[3]。对于后者，Harvey, Liu and Zhu (2016) 则呼吁研究异象时考虑多重假设检验问题，并将代表显著性的 t-statistic 的阈值从传统的 2.0 提升到了 3.0+。
+
+出于上述两个原因，大量所谓的异象仅仅是样本内虚假的产物。而学者们以获得更高 t-statistic 为目标进行的各种对数据的“精细处理”（data snooping）也加剧了这一问题。在一项听上去 mission impossible 的研究中，Hou, Xue and Zhang (2020) 惊人的复现了 452 个学术界提出的异象。利用他们的样本数据，其中 62% 个异象的 t-statistic 不足1.96；如果换成 2.78 的阈值，则有 82% 的异象不再显著。这些实证结果足以说明 p-hacking 问题的严重性，同时也为 Harvey, Liu and Zhu (2016) 的观点提供了依据：
+
+“ Most claimed research findings in financial economics are likely false.
+
+”
+
+此外，Linnainmaa and Roberts (2018) 花费了很大的经历构建了全新的样本外数据，并通过它们检验了源于会计数据的 36 个异象。实证结果表明，绝大部分异象在样本外失效，因而它们仅是 data snooping 的产物。尽管 replication crisis 是学术界目前的共识，但一项来自 AQR 的最新研究却提出了不同的看法：Jensen, Kelly and Pedersen (2021) 认为大量的异象是可以被复现的。
+
+面对诸多异象和构造异象的变量（firm characteristics），John Cochrane 在 AFA 主席演讲中提出了三个至关重要的问题（Cochrane 2011）：
+
+1. 哪些 characteristics 对解释预期收益提供了增量信息？
+
+2. 异象变量是否可以被用来构造一个新的因子来解释其他资产？
+
+3. 到底有多少因子是重要的？
+
+其中第一个问题是针对这样一个现象，即一篇学术论文通常只报告一个异象。由于诸多 firm characteristics 是相关的，因此哪怕确实存在异象，其中大部分可能都是相似的，唯有在控制了其它变量之后依然能对解释预期收益起作用的才是有用的。为此，Green, Hand and Zhang (2017) 使用 Fama and MacBeth (1973) regression 同时检验了 94 个异象，发现有用的变量少之又少[4]。
+
+不管怎样，上述诸多实证结果诉说着一个事实，即确实存在 FF3 无法解释的异象。学术界关于 cross-section 的研究又一次陷入了无序。
+
+03
+
+FF3 定价能力有限加之其无法解释的异象确实存在，学术界又一次站在了研究的十字路口。不过这一次的解决办法远不如 CAPM 被提出时的划时代和 FF3 被提出时的开创性，而是出奇的 straightforward —— 提出新的多因子模型，以能解释更多的异象为目标。
+
+自 2010 年之后，学术界先后针对美股提出了至少 5 个主流多因子模型。再加上 FF3 和 Carhart (1997)，一共有至少 7 个多因子模型[5]。
+
+在最近十年的实证研究中，虽然不同的检验方法被陆续提出，但评价这些多因子模型的核心依然是看谁能够解释更多的异象，或者谁的因子能构造出夏普率最高的 tangency portfolio。随着因子个数或者构造因子所使用的变量个数的增多，新提出的模型通常在样本内能够解释更多的异象。
+
+综合最近三年的实证结果，某些多因子模型确实“优于”其他模型。然而，实证研究中的一些问题却又给轰轰烈烈的因子模型大战按下了暂停键。比如，有些模型能够解释其他异象，却无法解释构造自己因子的 basis portfolios；有些模型中因子高的惊人的预期收益是以高换手率为代价，对实际投资用处很小[6]；有些模型从行为金融学出发，天生就无法解释一些异象……
+
+正当学界还在讨论哪个模型更好，以期建立新基准时，Fama and French (2020) 一文则打破了潜在的秩序[7]。上述所有的模型（包括 FF3，FF5）都是静态模型（static models），即资产对于因子的暴露是通过全样本内资产收益率对因子收益率做时序回归得到的，即每个股票对每个因子的暴露在全样本内是不变的。
+
+与之对应的，则是另一个家喻户晓的模型，即 Barra 模型。Barra 模型直接使用 firm characteristics 做因子暴露，然后每期通过截面回归计算当期因子的收益率。和静态模型相比，像 Barra 这样采用时变因子暴露的模型则被称为动态模型（dynamic models）。
+
+Fama and French (2020) 通过三个模型，比较了静态模型和动态模型的定价误差。这三个模型包括两个静态模型和一个动态模型。第一个静态模型就是传统的 FF5 这种；第二个静态模型是首先使用个股收益率对 firm characteristics 截面回归取代 portfolio sort 构造 factor mimicking portfolios，然后再通过全样本时序回归估计因子暴露；动态模型是直接用 firm characteristics 做因子暴露，截面回归计算因子收益率。
+
+实证结果显示，以资产定价误差来评判，动态模型的效果最好，其次是第二个静态模型，最后才是传统的静态模型。这意味着（1）使用时变的 firm characteristics 作为因子暴露比时序回归系数更优；（2）截面回归的因子收益率优于通过 portfolio sort 计算的因子收益率。
+
+毫无疑问，Fama and French (2020) 对传统的多因子模型提出了巨大的挑战，而如何得到更好的动态模型就成为了学术界关于 cross-section 研究在当下需要解决的难题。
+
+04
+
+虽然和学术界的传统模型相比，Barra 模型由于考虑了时变的因子暴露，看上去更先进。但是，有必要说明的是，Barra 模型的目标是解释股票收益率时序波动，而非股票预期收益的截面差异；此外，采用 firm characteristics 直接做因子暴露也是很粗糙的，且模型也可能存在遗漏变量/无关变量的问题。
+
+另一方面，越来越多的研究表明，firm characteristics 和股票收益率之间的关系是非线性的。而直接使用单个 firm characteristics 作为  无法考虑这种非线性。令问题更加棘手的是，人们并不清楚不同的 firm characteristics 之间有怎样的交互作用 —— 因此通过遍历交叉项来考虑是不切实际的。好消息是，在挖掘非线性关系方面，机器学习或大有可为。
+
+人们急需找到机器学习时代关于动态模型的研究范式。
+
+在这里，首先介绍一下 Bryan Kelly（Yale 少壮派教授且担任 AQR 的 Head of Machine Learning）对将机器学习在实证资产定价方面的应用的看法。Kelly 认为，机器学习虽然算法复杂，但是能够很好地应对过拟合的问题，且样本外的结果非常稳健，非常适合于实证资产定价。
+
+对于如何应用机器学习研究动态模型，Kelly 给出了一个研究框架，十分精彩：
+
+在这个框架中，因子被视为 latent factors（即不像传统模型那样，事先指定价值、盈利或动量等因子），机器学习建模的对象是资产对因子的暴露  ，而  是 firm characteristics 的线性或非线性函数，函数的具体形式和参数可以通过机器学习算法，以最小化资产的定价误差为目标函数来估计。一旦知道了  ，也就同时得到了因子收益率：
+
+在这个研究框架下，Kelly, Pruitt and Su (2019) 和 Gu, Kelly and Xiu (2021) 分别提出了 IPCA（工具变量 PCA）和 autoencoder 算法。前者视  为 firm characteristics 的线性函数；后者则采用 autoencoder 神经网络，将  视作 firm characteristics 的非线性函数。实证结果表明，利用机器学习算法构造的动态模型，不仅条件定价误差更低，哪怕是非条件定价误差（即像 Fama and French (2020) 的第二个静态模型那样）也比传统静态模型更小。
+
+近年来，学术界在利用机器学习进行实证资产定价方面取得了很多新的进展[8]，无论是研究多因子模型，还是研究它的另一面（即 SDF），机器学习均发挥了巨大的作用。这些研究无疑为 cross-section 打开了全新的大门。
+
+写到这里且又恰逢五月，我想起了 RFS 2020 年五月的特刊 New methods in the cross-section[9]，它所覆盖的三大趋势也和本文的梳理相契合。
+
+回顾过去半个世纪的相关研究，不禁让人感慨，学术研究也许就是这样，在无序中建立秩序，秩序又被新的问题打破并重新被建立，周而复始。而我们也在这个循环往复中不断加深对 cross-section 的理解和认知。
+
+最后，一图胜千言。
+
+备注：
+[1] 见《CAPM 的一小段历史》。
+[2] 见《寻找 Mean-Variance Frontier》。
+[3] 见《在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远》。
+[4] 见《解释股票截面预期收益差异的独立因子》。
+[5] 见《主流多因子模型巡礼》。
+[6] 见《Toward a better factor model》。
+[7] 见《A new norm?》。
+[8] 见《实证资产定价理论新进展》。
+[9] 见《出色不如走运(IV)?》。
+
+参考文献
+Banz, R. W. (1981). The relationship between return and market value of common stocks. Journal of Financial Economics 9(1), 3 – 18.
+
+Basu, S. (1977). Investment performance of common stocks in relation to their price–earnings ratios: A test of the effi­cient market hypothesis. Journal of Finance 32(3), 663 – 682.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Cochrane, J. H. (2011). Presidential address: Discount rates. Journal of Finance 66(4), 1047 – 1108.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors. Review of Financial Studies 33(4), 1673 – 1736.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (1996). Multifactor explanations of asset pricing anomalies. Journal of Finance 51(1), 55 – 84.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Green, J., J. R. M. Hand, and X. F. Zhang (2017). The characteristics that provide independent information about average U.S. monthly stock returns. Review of Financial Studies 30(12), 4389 – 4436.
+
+Gu, S., B. T. Kelly, and D. Xiu (2021). Autoencoder asset pricing models. Journal of Econometrics 222(1), 429 – 450.
+
+Harvey, C. R. (2017). Presidential Address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Hou, K., C. Xue, and L. Zhang (2020). Replicating anomalies. Review of Financial Studies 33(5), 2019 – 2133.
+
+Jensen, T. I., B. T. Kelly, and L. H. Pedersen (2021). Is there a replication crisis in finance? Working paper.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Linnainmaa, J. T. and M. R. Roberts (2018). The history of the cross-section of stock returns. Review of Financial Studies 31(7), 2606 – 2649.
+
+Lintner, J. (1965). The valuation of risk assets and the selection of risky investments in stock portfolios and capital budgets. Review of Economics and Statistics 47, 13 – 37.
+
+Mossin, J. (1966). Equilibrium in a capital asset market. Econometrica 34(4), 768 – 783.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics 108(1), 1 – 28.
+
+Sharpe, W. F. (1964). Capital asset prices: A theory of market equilibrium under conditions of risk. Journal of Finance 19(3), 425 – 442.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+Treynor, J. L. (1962). Toward a theory of market value of risky assets. Unpublished manuscript. “Rough Draft” dated by Treynor to the fall of 1962. A final version was published in 1999, in Asset Pricing and Portfolio Performance. R. A. Korajczyk (editor), London: Risk Books, 15 – 22.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+模型 | 出处 | 所含因子 | 
+Fama-French 三因子 | Fama and French (1993) | 市场、规模、价值 | 
+Carhart 四因子 | Carhart (1997) | 市场、规模、价值、动量 $ ^{①} $ | 
+Novy-Marx 四因子 | Novy-Marx (2013) | 市场、价值、动量、盈利 | 
+Fama-French 五因子 | Fama and French (2015) | 市场、规模、价值、盈利、投资 | 
+Hou-Xue-Zhang 四因子 | Hou et al. (2015) | 市场、规模、盈利、投资 | 
+Stambaugh-Yuan 四因子 | Stambaugh and Yuan (2017) | 市场、规模、管理、表现 | 
+Daniel-Hirshleifer-Sun 三因子 | Daniel et al. (2020) | 市场、长周期行为、短周期行为 |
+处：石川，刘洋溢，连祥斌《因子投资，主法上字
+--- 图3 ---
+$$ \boldsymbol{R}_{i,t+1}^{e}=\boldsymbol{\beta}_{i,t}\boldsymbol{F}_{t+1}+\boldsymbol{\epsilon}_{i,t+1} $$
+Latent factor formulation: The work goes into modeling  $ \beta $ (info about firm; and state)
+ML view:  $ \beta() $ maps a large info set to a small factor model  $ (\mathbb{R}^P \to \mathbb{R}^K, P \gg K) $
+Given $\beta()$, optimal factor estimate is $F_{t+1} = (\beta'_t \beta_t)^{-1} \beta'_t R_{t+1}^e$
+--- 图4 ---
+3 What Is Included in This Special Issue?
+3.1 Extracting information from both the cross-section and time series
+3.2 Replicating anomalies, multiple hypothesis testing, and transaction cos
+3.3 Machine-learning tools
+--- 图5 ---
+cross-section research path
+1950s, chaos
+$$ 1960\mathrm{s},\mathrm{C A P M}\mathrm{E}[R_{i}]-R_{f}=\beta_{i}(\mathrm{E}[R_{M}]-R_{f}) $$
+1980s, anomalies of CAPM (e.g., size, value), chaos again
+$$ \operatorname{E}[R_{i}]-R_{f}=\alpha_{i}+\beta_{i}(\operatorname{E}[R_{M}]-R_{f}) $$
+1990s, Fama-French three factor model
+$$ \mathrm{E}[R_{i}^{e}]=\beta_{i}(\mathrm{E}[R_{M}]-R_{f})+h_{i}\mathrm{E}[R_{HML}]+s_{i}\mathrm{E}[R_{SMB}] $$
+2000s, zoo of anomalies, chaos again
+$$ \mathrm{E}[R_{i}^{e}]=\alpha_{i}+\beta_{i}(\mathrm{E}[R_{M}]-R_{f})+h_{i}\mathrm{E}[R_{HML}]+s_{i}\mathrm{E}[R_{SMB}] $$
+2010s, prosperity of static models (e.g., FF5, q-factor model, etc)
+$$ \mathrm{E}[R_{i}^{e}]=\beta_{i}^{\prime}\lambda $$
+2020s, a new research norm in the era of machine learning dynamic models, modeling of beta
+$$ R_{i,t+1}^{e}=\beta_{i,t}^{\prime}F_{t+1}+e_{i,t+1} $$
+$ \beta() $ : linear/nonlinear func of firm characteristics;
+map a large info set to a small factor model
+--- 图6 ---

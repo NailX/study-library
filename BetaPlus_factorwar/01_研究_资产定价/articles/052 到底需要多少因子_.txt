@@ -1,0 +1,119 @@
+# 到底需要多少因子 ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/vfUsJ6jwdFkGav99auUKLA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+“How many of these factors are really important?” —— John Cochrane
+
+1
+
+2011 年，时任 AFA 主席的 John Cochrane 在他的主席演讲调侃了 zoo of factors，并提出了铿锵三问。其中第三个问题是：
+
+“How many of these factors are really important?”
+
+这个问题引发了关于随机贴现因子（SDF）是否有稀疏表达（sparsity）的大讨论。由资产定价理论可知，SDF 可以被表示为一系列资产的线性组合（Hansen and Richard 1987）：
+
+  
+
+式中  为随机贴现因子，  维向量  表示资产的超额收益率，  维向量  表示它们在 SDF 中的权重。理论上我们可以用个股作为资产来构造（span）SDF。但由于参数估计问题，常见的做法是使用投资组合（即因子）代替个股作为资产。因此，Cochrane 的第三个问题就可以重述为，  的表达式中到底需要多少个因子。
+
+关于这个问题，稀疏 vs. 不稀疏两派均有人支持：
+
+1. 认为 SDF 有稀疏表达的研究包括使用正则化（进行变量选择）或者降维技术来估计低维 SDF；
+
+2. 认为 SDF 没有稀疏表达的研究则指出，在估计 SDF 时应该考虑尽可能多的因子。
+
+以下两个小结分别简要阐述这两派的观点。本文最后会给出我的看法。
+
+2
+
+首先来看稀疏 SDF 的相关研究。
+
+为寻求低维 SDF，一个自然的想法就是在模型中稀疏性约束（sparsity constraint）。这可以通过加入  正则化来实现。这方面的研究包括 Feng, Giglio and Xiu (2020) 和 Freyberger, Neuhierl and Weber (2020)。这二者都通过 Lasso-style 回归进行变量选择，从而得到了稀疏的 SDF。
+
+以前者为例，下图展示了每个因子被模型选择的概率。该文的实证发现显示，在 120 多个候选因子中只有 17 个因子是有用的，而其他大多数因子则是冗余或无用的。
+
+类似地，后者也给出了稀疏 SDF 的实证结果。下图展示了在他们的实证区间内，每个因子被选中的情况。图中蓝色区域标识被选中。在 1990 到 2014 年之间，被选中的平均个数约为 14，和 Feng, Giglio and Xiu (2020) 在数量上十分接近。
+
+除了变量选择之外，另一个思路是降维（dimension reduction）。近年来诸多基于 PCA 及其变化的方法已经将这条研究线发挥的淋漓尽致。这其中一篇代表作是 Lettau and Pelger (2020)。该文认为传统 PCA 方法仅仅利用了收益率的二阶矩信息，丢失掉了原始因子和资产收益率在截面上的关系，即一阶矩信息。因此，它在 PCA 的 loss function 中加入了一阶矩信息，进而提出了 PR-PCA（risk premium PCA）估计量。
+
+实证分析表明，RP-PCA 在绝大多数情况下都优于 PCA，且可以将大量因子涵盖的信息聚合到 5 个低维主成分上。其中，第一主成分有非常高的方差和较为显著的平均收益，表现非常类似市场因子；第三主成分可视作价值因子；第五主成分近似于短期反转因子。而第二和第四主成分更偏重是诸多原始因子的组合。
+
+无论是变量选择还是降维，都可以产生 SDF 的稀疏表达。然而，一个必须要面对和回答的问题是，虽然不同方法给出的 SDF 都是低维的，但它们涵盖的原始因子却未必相同。事实上，颇有意思的是，上面提到的 Lettau and Pelger (2020) 和 Freyberger, Neuhierl and Weber (2020) 两篇文章都出自 2020 年 RFS 的特刊 New Methods for the Cross-Section of Returns。在特刊的导读中，两位编辑 Karolyi and Van Nieuwerburgh (2020) 也就如何寻找低维定价模型中的共性灵魂发问，激励学术界探寻不同模型导致不同因子这一现象背后的原因。
+
+3
+
+关于 SDF 的非稀疏表达，一篇值得一提的实证研究是 Kozak, Nagel and Santosh (2020)。当然，与其说这篇文章是明确立场，倒不如说它是在探究这个问题。（你马上就会知道为啥这么说。）
+
+该文首先使用 50 个基于公司特征构造的因子来估计 SDF，并通过同时加入  和  正则化挑选变量以及控制模型的复杂度。在下图所示结果中，颜色越亮（越发黄）的区域对应着越高的样本外预测性。图中的纵坐标表示模型纳入的因子的个数，横坐标表示  正则化的强度。结果清晰地显示出，黄色区域聚焦于模型包含足够多因子的情况，说明 SDF 并不稀疏。此外，伴随诸多因子被纳入 SDF 的是足够强的  正则化。二者缺一不可。
+
+不过有意思的是，该文并未放弃构造稀疏 SDF 的尝试。为此，三位作者首先对原始的 50 个因子使用 PCA，旨在通过统计手段在不损失预测信息的前提下构造简约模型。下图展示了以 50 个主成分作为因子并估计 SDF 的情况。和使用原始因子相比，此时亮黄色的区域覆盖了模型只纳入少数因子的情况。这意味着，只需要通过有限几个主成分就能够获得足够的样本外预测性，因而实现了稀疏的 SDF。但尽管如此，由于每个主成分都是所有原始因子的线性组合，因此该 SDF 表达依然隐含地纳入了众多因子的信息。
+
+上述结论也在 Bryzgalova, Huang and Julliard (2023) 中得到了进一步确认。该文以 51 个因子的超过 2 千万亿种排列组合所构造的模型为分析对象，发现不存在某个最优的模型，而是存在数百种可能的模型设定，给出了几乎相同的资产定价实证结果。更为重要的是，尽管它们的方法识别出一些对于构造 SDF 来说最重要的因子，但它们并不能完全描述 SDF。反之，SDF 在可观测的因子空间中密集（dense）的。它们的模型能够有效聚合不同因子所涵盖的关于 SDF 的带噪声信息。
+
+另外，谈到非稀疏 SDF，不得不提的另一个 research agenda 就是 Bryan Kelly 的“复杂度美德”系列文章。在最新的 Didisheim et al. (2023) 中，几位作者将复杂度美德推广到了截面定价模型。该文的结果显示，来自因子定价模型的样本外定价误差会随着因子数量的增加而减少。无疑，这种偏好复杂度的观点挑战了传统的 APT（Ross 1976），即少量的风险因子应该捕捉资产之间的风险和收益率的权衡。然而，用该文自己的话说，即使不存在套利且真实 SDF 存在，人们也能够在实证中持续地挖出新的、未被已有因子定价的因子（或异象），而将它们加到 SDF 中会持续改善样本外的表现。
+
+另外，鉴于 SDF 和 MVE 组合的等价性，该文的理论和实证结果对业界的启发是，随着纳入投资组合的因子个数的增多，其样本外的风险调整后收益会提高。也就是说，对投资者来说，最优的 MVE 组合是使用大量因子，从而提高样本外的夏普比率。此外，Kelly 他们的发现对于 zoo of factors 也有新的解读。即实证中的大量异象既不是令人头疼的难题，更不意味着学术界的 p-hacking 风气盛行（Jensen, Kelly and Pedersen 2023）。反之，它是在复杂的资产定价环境中的必然结果。
+
+4
+
+毫无疑问，估计 SDF 是实证资产定价中的最核心问题。因为一旦有了 SDF，通过资产和它的协方差就可以给资产定价。而关于这个问题，一个人的看法取决于他所持有的立场。站在业界的角度，我们关心的如何最大化样本外条件夏普比率。从这个立场出发，我个人认同 SDF 是非稀疏的，或者说我更倾向在估计 SDF 的时候使用更多的因子。
+
+为了给出进一步的说明，仍然回到 SDF 和 MVE 的等价性。在数据如此丰富的时代，用于构造真实 MVE 组合的因子可能会有很多，而每个低维模型都隐含了对 MVE（也即 SDF）所包含因子的先验。比如，最简单的 FF3 使用规模和价值两个因子，意味着该模型认为这两个组合在 MVE 组合/SDF 中这两个因子的权重非零。所以，我们必须客观的问自己是否有足够充分的先验认为并相信 SDF 只和少数几个因子有关。
+
+Baba-Yara, Boyer and Davis (2021) 从 MVE 组合夏普比率的角度比较了诸多使用传统和机器学习方法构造的低维实证模型，发现这些模型并不能解释彼此。该文通过贝叶斯统计发现当潜在的因子数非常大时，使用不同先验的模型（哪怕其中包含真实的模型）都注定无法为彼此定价。换句话说，在因子的高维数时代，从 pricing error 检验的角度出发，不存在最优的低维模型，所以这种 factor war 比较似乎是徒劳的（或者说 factor model "failure" 是注定的）。而如果以最大化夏普比率为目标，与其苦苦寻找低维 SDF，也许更应该想想如何利用好众多因子所包含的信息。
+
+参考文献
+Baba-Yara, F., B. Boyer, and C. Davis (2021). The factor model failure puzzle. Working paper.
+
+Bryzgalova, S., J. Huang, and C. Julliard (2023). Bayesian solutions for the factor zoo: We just ran two quadrillion models. Journal of Finance 78(1), 487-557.
+
+Didisheim, A., S. Ke, B. Kelly, and S. Malamud (2023). Complexity in factor pricing models. Tech. rep. Yale University.
+
+Hansen, L. P. and S. F. Richard (1987). The role of conditioning information in deducing testable restrictions implied by dynamic asset pricing models. Econometrica 55(3), 587-613.
+
+Feng, G., S. Giglio, and D. Xiu (2020). Taming the factor zoo: A test of new factors. Journal of Finance 75(3), 1327-1370.
+
+Freyberger, J., A. Neuhierl, and M. Weber (2020). Dissecting characteristics nonparametrically. Review of Financial Studies 33(5), 2326-2377.
+
+Jensen, T. I., B. Kelly, and L. H. Pedersen (2023). Is there a replication crisis in finance? Journal of Finance 78(5), 2465-2518.
+
+Karolyi, G. A. and S. Van Nieuwerburgh (2020). New methods for the cross-section of returns. Review of Financial Studies 33(5), 1879-1890.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Lettau, M., and M. Pelger (2020). Factors that fit the time series and cross-section of stock returns. Review of Financial Studies 33(5), 2274-2325.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341-360.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+Figure 4.1: Factor Selection Rate
+Note: Source: Feng et al. (2020). The figure shows, for each factor identified by the factor ID (on the X axis), in what fraction of the random seeds each factor is selected by a lasso regression of average returns onto factor covariances via 200 random cross-validations.
+--- 图3 ---
+figure 10
+elected characteristics in rolling selection: Nonlinear model
+the figure graphically shows over time which characteristics from the universe of 62 firm characteristics we discuss in Section A.1 of the Online Appendix are selected by the nonlinear adaptive group LASSO. The first election period is from January 1965 until December 1990. Subsequently, we roll forward the selection period by 1 year keeping the selection window constant. Shaded areas represent selected characteristics. The average number of selected characteristics is 14.13. The sample period is January 1965 to June 2014.
+--- 图4 ---
+4.2 Seeking common ground across methods
+The different dimension-reduction techniques often yield a modest number of factors (typically, below ten). Several papers published in this volume confirm this fact. But different methods appear to result in different factors. We offer that there would be great value for scholars in a better understanding of how the factors that result from the various methods differ from each other and why For example, one useful diagnostic would be to compute the (conditional correlation of the candidate SDFs that result from the different methods. Isolating their common component may also be fruitful.
+--- 图5 ---
+Hが·Kozak Nagel, and Santosh (2020)
+
+--- 图8 ---

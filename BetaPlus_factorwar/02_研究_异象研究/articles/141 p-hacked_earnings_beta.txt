@@ -1,0 +1,262 @@
+# p-hacked earnings beta
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/Wcy6ILgX6vvrdSfMq458IA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+此处故意不留任何信息，请阅读正文。
+
+01
+引言
+
+有日子没有用整篇推文介绍单篇学术论文了。
+
+但今天，有篇文章还是值得拿来说道说道。近日，会计学知名期刊 Review of Accounting Studies  刊载了一篇题为 Earnings Beta 的文章（Ellahie 2020）。
+
+众所周知，CAPM 使用 market beta 来描述资产的市场风险，但是 CAPM 并不好使，其中部分原因是 market beta 并不能很好的描述公司的基本面风险。Ellahie (2020) 认为 earnings beta 可以取代 market beta 的作用。Earnings beta 被定义为公司特有的 earnings 相对于市场整体 earnings 的敏感程度。
+
+以此为动机，该文研究了基本面风险和资产预期收益的关系，并以 earnings beta 作为 factor loading，通过常见的 portfolio sort test 和 regression test 进行了实证资产定价研究。结果表明 earnings beta 的 risk premium 显著大于零，在控制了常见的因子后依然能够为解释资产预期收益率的截面差异提供增量信息。
+
+然而这样一篇内容详实、实证丰富、行文流畅、为人们理解财务信息如何影响预期收益率开辟了新思路的论文却没有出现在金融学期刊，而是发表在会计学期刊。为什么？
+
+因为上面的“然而”并不成立。
+
+这篇文章读下来，必须肯定和认可作者在数据处理和实证检验方面做的大量细致的工作；该文的实证内容的丰富性在同类论文中名列前茅，且使用了一些最新的基于机器学习构造的多因子模型作为定价模型。但是，无论是其用来计算 earnings beta 的变量之多、还是实证检验结果的不一致性、以及作者对于矛盾结果讨论的轻描淡写，都给人强烈的 p-hacking 之感，很难想象它能发表在 RAS 这个级别的期刊上。
+
+本文就来介绍 Ellahie (2020)，只不过这次它不是作为正面的例子，而是作为 p-hacking 的反面教材。下文第二节将解读该文中定义的变量 —— 我将它称作 variable zoo；第三节将阐述该文中不一致的实证结果和十分苍白的解释；本文第四节是由此引发的思考。
+
+颇有意思的是，最近有不少 working paper 研究结果几年前就出现了，但辗转多年后都没能发在金融学期刊上而是摇身一变出现在会计学期刊上（比如，大名鼎鼎的那啥，对吧）。相较于金融学三大顶刊的影响因子，RAS 着实弱了不少（在会计学细分领域，RAS 大概排在第 4 的位子）。不知这是否预示着文章的 empirical findings 不那么靠谱。
+
+02
+Variable Zoo
+
+要想有足够抓眼球的结果，变量个数要保证。
+
+Ellahie (2020) 一文中考虑了 11 个 earnings 变量（每个变量最终衍生出一个 earnings beta） —— 总有一款是显著的。下面就来看看该文如何“合理地”让变量的个数翻倍、再翻倍。
+
+首先是最容易想到的，即历史的 earnings（realized earnings）数据，为了让公司之间可比，该文用 book value of equity 以及 market value 做了标准化，因此得到两个变量：realized ROE 和 realized earnings yield。
+
+So far so good.
+
+下面来看第一个变量翻倍的方法 —— 一阶差分。前述两个变量都是基于 earnings level 计算的；凭什么不能基于 earnings changes，即 earnings growth？“当然可以”。为此，该文还找出了参考文献 Penman (1991) 和 Penman and Zhang (2002) 来支持 earnings level 可能并不是最好的变量的说法，这让计算一阶差分变得“名正言顺”。
+
+在这个基础上，variable zoo 又加入了三个新成员：realized earnings growth、book-scaled realize earnings growth 和 price-scaled realized earnings growth（后两个分别用 book value 和 market value 标准化 earnings growth）。到现在，一共有了五个变量。（我好奇的问一下：要不要考虑二阶差分？其实前不久另一个会计学顶刊 Journal of Accounting and Economics 就刊载了一篇二阶差分的论文。）
+
+Hmm, not so good.
+
+马上来看第二个变量翻倍的方法 —— 把 realized earnings 换成 expected earnings，然后把上面的步骤重复一遍。谁说非要用历史 earnings，尤其考虑到历史 earnings 包含的信息不完整，为啥不能用未来预期 earnings？“当然可以”。
+
+当把 realized earnings 换成分析师一致预期之后，如法炮制，又可以得到五个 earnings 变量（两个 level 变量、三个 change 变量），它们是 expected ROE、expected earnings yield、earnings-scaled expectations shock、book-scaled expectations shock 以及 price-scaled expectations shock。
+
+OK！经过上述一番操作，一下从最初的 2 个变量变成 10 个。此外，该文指出它们都是短时间尺度的 earnings 变量，虽然它们和预期收益更相关（话外音就是这些就够了），但是由于基本面的估值模型需要考虑 infinite horizon 的 earnings，因此出于研究的完整性，又加入了第 11 个长时间尺度的 earnings 的变量。
+
+最终，variable zoo 一共包括了 11 个变量。不知道你是否被这么多的变量绕晕了。好在 Ellahie (2020) 的 introduction 部分还贴心的为读者进行了梳理（其中第四点对应那个长时间尺度的变量），只不过我看后唯一的感受就是 p-hacking。
+
+有了这 11 个变量，Ellahie (2020) 通过五年数据的滚动时序回归计算每个变量的 earnings beta，得到 11 个 earnings beta 变量。在时序回归中，作为解释变量的是市场整体的 earnings 变量（由所有公司的 earnings 变量加权得到）：
+
+根据 Ellahie (2020) 提出的假设，如果 earnings beta 能够代替 market beta 来更好的描述公司的（基本面）风险，那么 earnings beta 应该和公司的预期收益率正相关；从实证资产定价角度来说，earnings beta 的 risk premium 应该显著为正。
+
+结果如何呢？
+
+03
+实证结果
+
+Ellahie (2020) 这篇文章中的实证结果不可谓不丰富，该文同时考虑了 portfolio level 和 firm level 的实证分析，但让人纠结的是结果的不一致性以及作者对这些矛盾结果的苍白解释。
+
+在 portfolio level，首先是 regression test。这里面又分为好几组实证。第一组实证是使用 50 个投资组合作为 test assets，然后进行一波 cross-sectional regression test（在此处没有采用 Fama and MacBeth 1973 regression，而是先求了不同资产的平均收益率，然后只做了一次截面回归）。这 50 个投资组合分别是使用 size、book-to-price、earnings-to-price、asset growth 以及 long-term return reversal 为变量将股票排序分成 10 组构造的。回归结果如下（下表中第一个变量为 CAPM 中的 market beta，用来和其他 11 个 earnings beta 比较）。
+
+在 11 个 earnings beta 中，有三个的回归系数是负的（其中两个显著），这和理论所暗示的正相关不符。作为读者，在阅读到这里其实非常希望看到作者对结果的探讨。然而，Ellahie (2020) 仅表示这可能和 test assets 的选择有关，而且还把这个解释放在了 footnote 中。
+
+这么草率吗？
+
+为了解决 test assets 的问题，在第二组实证中，该文使用 Giglio and Xiu (2019) 提出的 three-pass regression estimator（具体介绍见这里）。该方法从 202 个作为 test assets 的投资组合中提取出六个主成分，然后使用它们估计这些 earnings beta 的 risk premium。结果如下。“好消息”是，这些 earnings beta 的 risk premium 全都是正的了。
+
+比较上面两个 regression test 结果，当使用不同的 test assets 时，earnings beta 的 risk premium 估计时而正，时而负；时而显著，时而不显著。不禁让人想起 Lewellen, Nagel, and Shanken (2010) 对使用 portfolios 作为 test assets 进行检验的抨击。遗憾的是，Ellahie (2020) 并没有对上述不一致的结果进行过多讨论。
+
+除了 regression test 之外，portfolio sort 自然也不能少。下图来自 Ellahie (2020) 的表 7，汇报了使用不同 earnings beta 排序构造多空对冲的投资组合 —— 做多 earnings beta 高的、做空 earnings beta 低的 —— 的绝对收益以及相对常见基准模型的超额收益。
+
+表中，VW excess returns 是多空对冲组合的绝对收益；在计算超额收益时，被选作基准的六因子模型是 Fama and French (2015) 五因子 + Carhart (1997) 的动量，另一个基准是 Kelly, Pruitt, and Su (2019) 使用 IPCA 构造的五因子模型。
+
+令人感到意外的是，在 11 个 earnings beta 中，有 7 个的收益率（无论是绝对收益还是超额收益）都是负的（尽管都并不显著），和理论相悖；仅有 4 个的收益率为正，其中仅有 2 个是显著的。这两个 beta 背后的变量都是通过“变量翻倍”的方法得到的。为什么要用 11 个变量？看到这里我们恍然大悟。
+
+当使用 three-pass regression 时，全部 11 个 earnings beta 的 risk premium 都是正的；然而这个结果却轻易的被 portfolio sort test 推翻了。如果说单看 portfolio sort 中不显著的负收益还不能说明问题，那么当把 portfolio sort 和前述的 regression test 之间的不一致性就不能不令人引起怀疑。毕竟，portfolio sort 只是一种无参数化的 regression。但该文似乎把不同方法下 Earnings beta 的 risk premium estimate 的巨大差异留给读者去体会。
+
+这么草率吗？
+
+除使用投资组合检验外，Ellahie (2020) 也使用个股收益率，通过 Fama and MacBeth (1973) regression 对 earnings beta 的 risk premium 进行了检验。得到的结果嘛，同样是有正有负，满满的不一致性。不一致性并不可怕，但没有对结果的不一致性进行深入的探讨却很可怕。该文的行为之中传递给读者这样一种（错误）信息：只需要采纳和理论一致且结果最显著的变量。
+
+最终，基于大量的 empirical test 以及 11 个变量的表现，Ellahie (2020) 得出了如下结论：
+
+1. Earnings beta 比起 market beta，对资产定价更有帮助；
+
+2. Earnings changes 比 earnings levels 更好使；
+
+3. Expected earnings 比 realized earnings 更有用；
+
+4. 用 market value 来 scaling 比用 book value 来 scaling，结果更显著。
+
+如果实证结果是另一番景象，大概只需要把上述几条中文字的顺序稍加改动。
+
+依照上述四点发现，在全部 11 个 earnings beta 里面，最显著的 earnings beta 是以 price-scaled expectations shock 作为 earinngs 变量计算的 beta，它是一个 earnings change，属于成长类指标。关于 earnings change 还有一块不得不提的研究就是 PEAD。
+
+一旦加入 PEAD，是否仅剩的几个 earnings beta 也无法获得显著的 risk premium 呢？由《Factor War 外传》的介绍可知，Hou, Xue, and Zhang (2015) 的 q-factor model 中的季度 ROE 和 PEAD 密切相关，那么如果 Ellahie (2020) 使用 q-factor model 作为定价模型，上述 earnings beta 还能否获得超额收益呢？又或者 Ellahie (2020) 使用了 q-factor model 但是因为不显著所以没有汇报呢？
+
+全是疑问。
+
+04
+思考
+
+公允的说，Ellahie (2020) 一文没有试图隐瞒 empirical test 的不一致性，而是汇报了所有的结果，这是它的优点；然而它通过各种测试、从不同的变量中找到了最显著的那个来支持提出的观点，而不去深入探讨其他不支持假设的结果，这不是 p-hacking 又是什么？我似乎看到了 Harvey (2017) 中所描绘的场景。
+
+自 Jegadeesh et al. (2019) 和 Fama and French (2020) 发表以来，我感觉检验 time series beta 的 risk premium 已经盖棺定论了，所以各种 earnings beta 的不一致结果并不令人意外。在面对这些不一致结果时，“为什么不一致？”而非“如何从不一致中挑出一个最好的？”才是更应该回答的问题。然而就是这么一篇论文，被发表在了 Review of Accounting Studies 上。
+
+近日，经济学顶刊 The American Economic Review 上刊载了一篇分析 p-hacking 的文章（Brodeur, Cook, and Heyes 2020）。该文分析了经济学领域 top 25 期刊（金融学三大顶刊赫然在列）中使用不同计量经济学方法进行经济学实证分析时的 p-hacking 问题。结论有三：（1）所有这些期刊上均有 p-hacking 问题；（2）审稿过程一定程度上减弱了 p-hacking 倾向；（3）随着时间的推移，这个问题有所改进。
+
+但无论如何，学术界在整改 p-hacking 的问题上还有很长的路要走，而 Ellahie (2020) 只是其中的一个缩影。对于看上去特别显著的 empirical asset pricing 结果，use with care。
+
+Earnings beta? Yes, p-hacked earnings beta.
+
+参考文献
+Brodeur, A., N. Cook, and A. Heyes (2020). Methods matter: p-hacking and publication bias in causal analysis in economics. The American Economic Review 110(11), 3634 – 3660.
+
+Carhart, M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Ellahie, A. (2020). Earnings beta. Review of Accounting Studies forthcoming.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607–636.
+
+Giglio, S. and D. Xiu (2019). Asset pricing with omitted factors. Working paper, Chicago Booth Research Paper No. 16-21.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Jegadeesh, N., J. Noh, K. Pukthuanthong, R. Roll, and J. Wang (2019). Empirical test of asset pricing models with individual assets: Resolving the errors-in-variables bias in risk premium estimation. Journal of Financial Economics 133(2), 273 – 298.
+
+Kelly, B., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Lewellen, J., S. Nagel, and J. Shanken (2010). A skeptical appraisal of asset pricing tests. Journal of Financial Economics 96(2), 175 – 194.
+
+Penman, S. (1991). An evaluation of accounting rate-of-return. Journal of Accounting, Auditing and Finance 6(2), 233 – 255.
+
+Penman, S., and X. Zhang (2002). Accounting conservatism, the quality of earnings, and stock returns. The Accounting Review 77(2), 237 – 264.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44ef0>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253785e0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图6 ---
+搞错了
+再来一次( $ 75^{\circ} $)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62b10>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925364d10>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图11 ---
+An obvious limitation of using realized earnings is that past earnings con-
+ncomplete information about expected earnings and hence potentially ab-
+expected returns. Inferring market expectations about future earnings from se-
+ide equity research analysts' forecasts could help. Further, to develop an estima-
+f expected return, it is important to estimate a forward-looking beta. Usir
+--- 图12 ---
+Each earnings series is regressed on an analogous earnings series at the aggregate level in backward-rolling five-year window estimations to provide time-varying earnings betas. Then I evaluate the relative cross-sectional pricing performance of these earnings betas in explaining one-month-ahead realized returns, as a proxy for expected returns. Understanding which earnings series delivers an earnings beta with consistent performance in cross-sectional pricing tests is important for researchers who are interested in using a valid measure of systematic risk in a variety of settings.
+出处：Ellahie (2020)
+--- 图14 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44db0>)
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15710>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a45350>)
+--- 图18 ---
+Table 4 Two-Stage Cross-Sectional Fencing Tests
+[表]
+ | (1) | (2) | (3) | (4) | (5) | 
+Beta Estimation Model: | $ \gamma_0 $ | $ t(\gamma_0) $ | $ \gamma_1 $ | $ t(\gamma_1) $ | Adj. R | 
+Market Beta | $ 1.076^{***} $ | (4.67) | -0.346 | (-1.64) | 8.5% | 
+Realized Earnings Growth Beta | $ 0.647^{***} $ | (17.69) | 0.026 | (1.51) | 1.6% | 
+Earnings-scaled Expectations Shock Beta | $ 0.637^{***} $ | (25.50) | $ 0.029^{***} $ | (4.11) | 6.9% | 
+Expected Long-Term Growth Beta | $ 0.635^{***} $ | (22.66) | $ 0.031^{**} $ | (2.22) | 6.6% | 
+Realized ROE Beta | $ 0.654^{***} $ | (15.98) | 0.028 | (1.02) | -0.1% | 
+Book-scaled Realized Earnings Growth Beta | $ 0.611^{***} $ | (13.59) | $ 0.067^{**} $ | (2.08) | 4.8% | 
+Expected ROE Beta | $ 0.901^{***} $ | (16.65) | $ -0.219^{***} $ | (-3.79) | 20.0% | 
+Book-scaled Expectations Shock Beta | $ 0.815^{***} $ | (8.08) | -0.140 | (-1.17) | 2.8% | 
+Realized Earnings Yield Beta | $ 0.619^{***} $ | (21.16) | $ 0.050^{***} $ | (3.83) | 13.5% | 
+Price-scaled Realized Earnings Growth Beta | $ 0.629^{***} $ | (23.51) | $ 0.033^{***} $ | (5.45) | 15.2% | 
+Expected Earnings Yield Beta | $ 0.939^{***} $ | (14.18) | $ -0.317^{***} $ | (-3.70) | 30.0% | 
+Price-scaled Expectations Shock Beta | $ 0.438^{***} $ | (8.55) | $ 0.218^{***} $ | (5.49) | 41.9% |
+--- 图19 ---
+Interestingly, even though expected ROE beta and expected earnings yield beta have negative and significant estimated risk premiums in Table 4, I find that several of the fitted excess returns for the 50 portfolios generated from these two approaches to estimate earnings beta are close to the average excess returns, as shown by the cluster of data points along the diagonal in Figure 1 (see Panels g and k). This visualization of the fit corroborates the  $ R^2 $ of 20% and 30% for expected ROE beta and expected earning yield beta, respectively. One potential explanation for the negative risk premiums could be that the pricing tests are weak and are sensitive to the selection of characteristics used to sort firms into portfolios. Therefore, conduct additional portfolio-level and firm-level pricing tests for robustness and find that these two betas have consistently positive risk premiums.
+出处：Ellahie (2020)
+--- 图20 ---
+[表]
+ | (1) | (2) | (3) | (4) | (5) | 
+Beta Estimation Model: | $ \gamma_0 $ | $ t(\gamma_0) $ | $ \gamma_1 $ | $ t(\gamma_1) $ | $ R^2 $ | 
+Market Beta | $ 0.839^{***} $ | (6.36) | 0.161 | (0.64) | 99.1% | 
+Realized Earnings Growth Beta | $ 0.839^{***} $ | (6.36) | 0.464 | (1.21) | 64.6% | 
+Earnings-scaled Expectations Shock Beta | $ 0.839^{***} $ | (6.36) | 0.485 | (1.48) | 67.3% | 
+Expected Long-Term Growth Beta | $ 0.804^{***} $ | (6.22) | 0.391 | (1.28) | 65.5% | 
+Realized ROE Beta | $ 0.839^{***} $ | (6.36) | 0.021 | (0.59) | 50.8% | 
+Book-scaled Realized Earnings Growth Beta | $ 0.839^{***} $ | (6.36) | 0.040 | (1.16) | 61.3% | 
+Expected ROE Beta | $ 0.839^{***} $ | (6.36) | $ 0.326^{**} $ | (2.07) | 53.1% | 
+Book-scaled Expectations Shock Beta | $ 0.839^{***} $ | (6.36) | $ 0.386^{**} $ | (2.20) | 58.4% | 
+Realized Earnings Yield Beta | $ 0.839^{***} $ | (6.36) | 0.058* | (1.67) | 52.4% | 
+Price-scaled Realized Earnings Growth Beta | $ 0.839^{***} $ | (6.36) | 0.034* | (1.81) | 59.0% | 
+Expected Earnings Yield Beta | $ 0.839^{***} $ | (6.36) | $ 0.461^{**} $ | (2.32) | 38.2% | 
+Price-scaled Expectations Shock Beta | $ 0.839^{***} $ | (6.36) | $ 0.487^{**} $ | (2.26) | 60.7% |
+--- 图21 ---
+[表]
+Panel A: Value-Weighted Average Excess Returns and Alphas for Factor-Mimicking Portfolios | 
+ | VW Excess Returns | Six-Factor Alpha | IPCA Five-Factor A | 
+ | (1) | (2) | (3) | (4) | (5) | (6) | 
+Factor-Mimicking Portfolio formed on: | $ r^{e} $ | $ t(r^{e}) $ | $ \alpha_{0} $ | $ t(\alpha_{0}) $ | $ \alpha_{0} $ | $ t(\alpha_{0}) $ | 
+1 Market Beta | -0.132 | (-0.52) | -0.098 | (-0.53) | -0.255 $ ^{*} $ | (-1.66) | 
+2 Realized Earnings Growth Beta | -0.138 | (-0.74) | -0.136 | (-0.77) | -0.116 | (-0.80) | 
+3 Earnings-scaled Expectations Shock Beta | -0.135 | (-0.65) | -0.089 | (-0.55) | -0.127 | (-0.77) | 
+4 Expected Long-Term Growth Beta | -0.111 | (-0.48) | -0.104 | (-0.54) | -0.158 | (-0.88) | 
+5 Realized ROE Beta | -0.092 | (-0.57) | -0.116 | (-0.75) | -0.012 | (-0.09) | 
+6 Book-scaled Realized Earnings Growth Beta | -0.136 | (-0.77) | -0.087 | (-0.52) | -0.175 | (-1.26) | 
+7 Expected ROE Beta | 0.184 | (1.42) | 0.173 | (1.45) | $ 0.273^{***} $ | (2.67) | 
+8 Book-scaled Expectations Shock Beta | 0.293 $ ^{*} $ | (1.90) | $ 0.294^{**} $ | (1.99) | $ 0.311^{**} $ | (2.56) | 
+9 Realized Earnings Yield Beta | -0.002 | (-0.01) | -0.078 | (-0.51) | 0.120 | (0.86) | 
+10 Price-scaled Realized Earnings Growth Beta | -0.070 | (-0.37) | -0.100 | (-0.56) | -0.016 | (-0.10) | 
+11 Expected Earnings Yield Beta | $ 0.434^{***} $ | (3.77) | $ 0.471^{***} $ | (4.13) | $ 0.359^{***} $ | (3.16) | 
+12 Price-scaled Expectations Shock Beta | $ 0.723^{***} $ | (4.05) | $ 0.488^{***} $ | (2.70) | $ 0.422^{***} $ | (2.96) | 
+出处：Ellahie (2020) |
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8d2b0>)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图24 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图26 ---

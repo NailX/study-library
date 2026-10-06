@@ -1,0 +1,185 @@
+# 寻找 Mean-Variance Frontier (II)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/GyN7K_uuNf-zopWWtA7tRA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+实证层面，我们也许永远找不到“最优”的 MVE 组合，但理论的突破和实证的推进对投资实务而言依然非常有益。
+
+Any asset pricing model is the same as the statement that there is some return on the mean-variance frontier.
+—— Cochrane (2005)
+
+01
+
+最近几年，机器学习在实证资产定价方面的应用愈加深入。学术界提出了很多利用机器学习方法构造的隐性多因子模型，例如 Kelly, Pruitt and Su (2019) 的 IPCA 模型、Chen, Pelger and Zhu (2019) 的深度学习模型、Kozak, Nagel and Santosh (2020) 的 PCA方法、Bryzgalova, Pelger and Zhu (2020) 的随机森林方法、以及 Gu, Kelly and Xiu (2021) 的 autoencoder 模型等。
+
+和传统的 Fama and French (1993, 2015) 以及 Hou, Xue and Zhang (2015) 模型相比，这些新方法没有强加 ad-hoc 稀疏性假设，而是选择直面协变量（公司特征）的高维数问题。实证结果显示，新模型均能获得传统模型无法解释的超额收益，且它们在样本外 span 出的最大夏普比率也远超传统模型。
+
+虽说每个新模型都能远胜传统模型，但我们并不清楚这些新模型之间又会是孰优孰劣。是否会有某个机器学习方法构造的模型会优于其他模型？回答这个问题的意义绝非“factor (model) war”的升级版，而是对理论和实证、对学界和业界都意义重大。
+
+直到 Baba-Yara, Boyer and Davis (2021) 出现。
+
+该文把传统模型和基于机器学习方法构造的新模型放在一起进行了比较。然而有意思的是，该文通过详尽的实证分析发现没有哪个新模型是“最优”的。正因如此，三位作者给论文的题目选为 The factor model failure puzzle（在更早先的版本中，该文的标题为 Evaluating the anomaly zookeepers）。
+
+那么出现上述现象背后的原因是什么呢？是机器学习领域中“没有免费的午餐”定理？又或者是什么其他的原因？Baba-Yara, Boyer and Davis (2021) 的创新之处在于不止进行了实证分析，而是通过理论模型解释了上述现象背后的原因。他们把这个现象称为 Impossibility result。
+
+02
+
+为了合理地比较不同的模型，我们首先来借助一些理论的指引。
+
+实证资产定价理论表明了（线性）随机贴现因子、多因子模型以及均值方差有效（MVE）投资组合之间的等价关系。此外，一旦我们找到 mean-variance frontier 上的一个组合，就可以用它构造一个单因子模型，并通过它来为其他任意资产定价（Roll 1977）：
+
+上述结果为我们比较不同的模型指明了方向。对于不同的模型，我们只需要利用它们的因子构造出各自的 MVE 投资组合，然后考察这些 MVE 组合是否能够为彼此定价。如果某个模型是“最优”模型，则意味着其他模型的 MVE 组合无法获得相较于该模型 MVE 组合的超额收益。
+
+当然，上述“只需要”背后隐含着巨大的实证挑战。这是因为我们在乎的是在样本外构造 MVE 组合，而非在样本内进行事后分析。对于后者，我们只需要使用   即可得到因子在各自 MVE 组合之中的权重。但是对事前进行样本外估计而言，如何防止过拟合、得到更合理的权重估计至关重要。为此，Baba-Yara, Boyer and Davis (2021) 使用了 Bryzgalova, Pelger and Zhu (2020) 的方法。该方法在估计权重时同时对协方差矩阵和预期收益率进行了收缩，是已有估计方法中比较稳健的代表。
+
+利用因子权重，就可以构造 MVE 组合；而一旦有了所有模型各自的 MVE 组合，接下来只需要令它们互为 test assets 和基准模型进行回归分析，求出每个 test assets 相对选定基准（即某个因子模型的 MVE 组合）的超额收益  ，最后再联合检验所有  是否为零。如果某个模型下，其他的  为零，则它就是“最优”的模型。
+
+03
+
+下面我们来看看参加 PK 的各路选手。
+
+首先是传统选手，包括 CAPM、FF3（Fama and French 1993）、FF6（Fama and French 2015 + Mom）、HXZ（Hou, Xue and Zhang 2015）、DMRS（Daniel et al. 2020 通过对冲后构造的因子，详见此处）以及 SY（Stambaugh and Yuan 2016）。至于通过机器学习方法构造的新模型，主要就是本文一开始提到的那些，不再赘述。下表总结了 Baba-Yara, Boyer and Davis (2021) 考察的全部模型以及每个模型所使用的用于估计 MVE 权重的方法。
+
+接下来看实证结果。该文考察的时间区间自 1963 到 2020，为了在样本外比较上述模型，该文样本内区间截止 Dec 1989；之后为样本外。下图展示了这些模型各自的 MVE 组合在样本内和样本外的相关系数。无论是样本内还是样本外，绝大多数 MVE 组合似乎都颇为不同（此处为本文第四节的讨论埋个伏笔）。
+
+此外，再来看看这些 MVE 组合在样本外的 CAPM-α 以及年化夏普比率。不出意外，基于机器学习方法、拥抱协变量高维数的新模型在样本外的风险收益特征均优于传统模型。在我看来，这个结果对业界有很大的意义：（1）虽然在本文一开始，我剧透了 factor model failure 这个结论，但是对业界而言关注的是最大化样本外投资组合的风险收益特征，因此这个结果表明在协变量的高维数时代，机器学习方法（如果用对的话）大有可为；（2）传统强加 ad-hoc 稀疏性假设的模型（比如 FF3、FF6）所代表的投资机会非常弱（体现在很低的 CAPM-α 以及年化夏普比率），所以对未来任何以它们为基准的显著实证结果都无需太兴奋。
+
+预热得差不多了，下面我们来看 Baba-Yara, Boyer and Davis (2021) 的 main results —— 是否有哪个模型的 MVE 组合能给其他 MVE 组合定价。为此，该文同时考察了无条件模型以及条件模型（即  是时变的）。以无条件模型为例，下图展示了样本内外 pricing errors 的检验结果（p-value）。其中，每一行模型的 MVE 组合是 test asset，每一列模型的 MVE 组合是基准，颜色越深说明 test asset 相对基准的超额收益越显著。
+
+因此，如果有某个模型是“最优”的话，那么我们应该能够看到某一列的颜色都是浅色。然而，事与愿违，以样本外为例，放眼望去是一片深紫色，说明哪怕以机器学习方法构造的模型，也没有哪个能为所有其他模型定价。进一步通过 GRS test 联合检验每个基准下的 pricing errors，对应的 F-statistic 都非常大，说明这些 pricing errors 不为零。
+
+以上结果说明，实证层面，尽管近年来新的模型层出不穷，但依然没有所谓的“最优”模型。面对这样的结果，人们不禁要问：为什么？
+
+04
+
+实证方面细致的工作无疑是 Baba-Yara, Boyer and Davis (2021) 一文的重要贡献，然而关于理论模型的讨论才是该文画龙点睛的一笔。
+
+由前文论述可知，站在 MVE 投资组合的视角，一个多因子模型可以被视为一个以因子为标的构造的 MVE 组合的权重向量。从理论上说，用于构造真实 MVE 组合的因子可能会有很多，而所有给定的多因子模型都带有某种程度的降维处理。比如，最简单的 FF3 使用市值和 Book-to-Market Ratio 构造因子。这意味着该模型认为这两个组合在 MVE 组合中的权重非零，而其他潜在因子的权重都为零（假设不考虑市场因子）。类似的，其他传统模型则是人为地选择了盈利、投资、动量等因子，并认为它们的 MVE 权重不为零；而机器学习方法则更多的通过数据驱动的方式来选择 firm characteristics（以及它们的交互作用）、构造因子，并决定因子在 MVE 组合中的权重。
+
+在这个视角下，不同的多因子模型可以被理解为对真实 MVE 组合中的权重施加了不同的先验（先验的差异造成了第三节展示的不同模型的 MVE 组合的相关系数并不高）。沿着这个思路，Baba-Yara, Boyer and Davis (2021) 提出了一个贝叶斯框架的理论模型，并发现当潜在的因子个数非常大时，使用不同先验的模型无法为彼此定价。此外，哪怕某个模型是真正的模型（即它的先验是正确的），另外一个使用不同先验的模型也注定能够产生该模型无法解释的超额收益。这就是本文一开始提到的 impossibility result。在协变量的高维数时代，不存在“最优”的模型 —— 对于给定的任意模型，总能找到能够获得其无法解释的超额收益的新模型。
+
+In other words, it is impossible to establish a dominant or best asset pricing model in a high dimensional world. Any model that claims dominance can invariably be dominated by a new model with a slight tweak.
+—— Baba-Yara, Boyer and Davis (2021)
+
+近年来，factor (model) war 愈演愈烈。而 Baba-Yara, Boyer and Davis (2021) 一文的实证结果和理论模型无疑给人们带来了全新的思考。至少对我来说，再看传统模型在那里 PK 来 PK 去实在是不痛不痒。对于业界实务来说，人们使用多因子模型降维是为了减少估计误差对 MVE 组合权重的影响。因此，回答更关键的问题，即应该使用何种的先验（回想一下《稀疏性幻觉》）以及如何更合理的使用机器学习方法构造因子以及计算它们的 MVE 权重，这些才是有价值的研究。
+
+期待 Baba-Yara, Boyer and Davis (2021) 早日见刊。
+
+参考文献
+Baba-Yara, F., B. Boyer, and C. Davis (2021). The factor model failure puzzle. Working paper.
+
+Bryzgalova, S., M. Pelger, and J. Zhu (2020). Forest through the trees: Building cross-sections of stock returns. Working paper.
+
+Chen, L., M. Pelger, and J. Zhu (2019). Deep learning in asset pricing. Working paper.
+
+Cochrane, J. H. (2005). Asset Pricing (Revised Edition). Princeton, NJ: Princeton University Press.
+
+Daniel, K., L. Mota, S. Rottke, and T. Santos (2020). The cross-section of risk and returns. Review of Financial Studies 33(5), 1927 – 1979.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Gu, S., B. T. Kelly, and D. Xiu (2021). Autoencoder asset pricing models. Journal of Econometrics 222(1), 429 – 450.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Roll, R. (1977). A critique of the asset pricing theory’s tests Part I: On past and potential testability of the theory. Journal of Financial Economics 4(2), 129 – 176.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+theorem: There is a single-beta representation with a return  $ R^{mv} $ as factor,
+$$ \begin{array}{r}{E(R^{i})=\gamma_{R^{m v}}+\beta_{i,R^{m v}}[E(R^{m v})-\gamma_{R^{m v}}],}\end{array} $$
+and only if  $ R^{mv} $ is mean-variance efficient and not the minimum-variance return
+出处：Cochrane (2005)
+--- 图3 ---
+Table 1: Zoo of Asset Pricing Models
+This table presents the list of initialisms and sources for the 15 asset pricing models we study. Section III details our implementation following the descriptions in each article as close as possible. For models where we depart meaningfully from the authors' description, we provide details and justifications for the departures. Each model consists of two parts: 1) a factor model,  $ f(Z_t) $, and 2) a vector of factor weights,  $ \hat{b} $, to collapse down the factors into a single mean-variance efficient (MVE) portfolio. CAPM denotes the Capital Asset Pricing Model of Sharpe (1964) and Lintner (1965). Linear characteristic-weighted portfolios are described in Subsection A. of Section III.
+[表]
+Initialism | Factor Method  $ f(Z_t) $ | MVE Collapse Method  $ b $ | 
+BPZ_F | Bryzgalova et al. (2020) forest | Bryzgalova et al. (2020) | 
+BPZ_L | linear characteristic-weighted portfolios | Bryzgalova et al. (2020) | 
+BSV | linear characteristic-weighted portfolios | Brandt et al. (2009) | 
+DGU | linear characteristic-weighted portfolios | DeMiguel et al. (2009) | 
+DMRS | Daniel et al. (2020) | Bryzgalova et al. (2020) | 
+D_F | Davis (2021) random forest | $ \hat{b} = 1 $ | 
+D_{NN} | Davis (2021) neural network | $ \hat{b} = 1 $ | 
+FF3 | Fama and French (1993) | Bryzgalova et al. (2020) | 
+FF6 | Fama and French (2015) with Carhart (1997) momentum | Bryzgalova et al. (2020) | 
+GKX | Gu et al. (2021) | Bryzgalova et al. (2020) | 
+HXZ | Hou et al. (2014) | Bryzgalova et al. (2020) | 
+KNS | linear characteristic-weighted portfolios | Kozak et al. (2020) | 
+KPS | Kelly et al. (2019) | Bryzgalova et al. (2020) | 
+SL | Sharpe (1964) and Lintner (1965) CAPM | $ \hat{b} = 1 $ | 
+SY | Stambaugh and Yuan (2016) | Bryzgalova et al. (2020) |
+--- 图4 ---
+Figure 1: Correlation of MVE Portfolios
+this heatmap represents the correlation matrix of the MVE portfolios from the 15 asset pricing models w
+udy (see Table 1). We report correlations for MVE portfolios rebalanced on the first trading day of th
+month. The in-sample (training) period is from July 1963 to December 1989, and the out-of-sample period
+on January 1990 to December 2020.
+--- 图5 ---
+Figure 2: Out-of-sample Dimson CAPM Alphas and Annualized Sharpe Ratios
+This figure reports the annualized Sharpe ratio and Dimson CAPM alphas for the 15 asset pricing models v study (see Table 1). Following Lewellen and Nagel (2006), we include lags of the regressor (Market portfolio on the right-hand side as described in Equation (48) to account for possible market micro-structure issues when using daily data. The result is for the out-of-sample period from January 1990 to December 2020.
+出处·Baba-Yara Bover and Davis (2021)
+--- 图6 ---
+gure 3: Unconditional Alpha p-values
+this figure reports the p-value of alphas (intercepts) from SDF spanning tests. Each p-value is from regressive MVE portfolio of the asset pricing model on the row on the MVE portfolio on the column. We reports for both the in-sample and out-of-sample periods.
+--- 图7 ---
+is table presents the results from SDF spanning tests of the form:  $ r_i = \alpha_{i,j} + \beta_{i,j} r_j + \varepsilon_j $ where  $ MVE $ portfolio  $ i $ is on the row and candidate model  $ j $ is on the column, each regression, we report the intercept ( $ \alpha_{i,j} $), the associated  $ t $-statistics (in parenthesis), and the  $ R $-squared ( $ R^2 $). We also report the Gibbons et al. (1989) (G) statistic and associated  $ p $-values from the formal test of whether or not the  $ \alpha_{i,j} $ across all  $ i $ portfolios for a single candidate  $ MVE $  $ j $ are jointly different from zero. These regressions by stacking all column tests for some  $ MVE $ portfolio  $ j $ into a Seemingly Unrelated Regression Equation (SURE) estimate as in Zellner (1962) (G). For the standard errors by date. Alternatively, we calculate  $ p $-values of the joint test using the bootstrap procedure discussed in section (V), with  $ p $-values  $ s_k $ sample period is from January 1990 to December 2020.
+[表]
+ | Rows: left-hand side portfolio, Columns: right-hand side portfolio | 
+(1) | (2) | (3) | (4) | (5) | (6) | (7) | (8) | (9) | (10) | (11) | (12) | (13) | (14) | (15) | 
+BPZ_F | BPZ_L | BSV | DGU | DMRS | DF | DNN | FF3 | FF6 | GKX | HXZ | KNS | KPS | SL | SY | 
+BPZ_F |  | $ 0.061^{***} $ | $ 0.126^{***} $ | $ 0.097^{***} $ | $ 0.144^{***} $ | $ 0.090^{***} $ | $ 0.049^{***} $ | $ 0.136^{***} $ | $ 0.150^{***} $ | $ 0.118^{***} $ | $ 0.165^{***} $ | $ 0.072^{***} $ | $ 0.042^{***} $ | $ 0.137^{***} $ | $ 0.158^{***} $ | 
+ | (5.048) | (9.580) | (8.541) | (10.944) | (9.579) | (4.177) | (11.434) | (11.331) | (10.786) | (12.900) | (5.805) | (3.607) | (11.346) | (12.357) | 
+BPZ_L | $ 0.147^{***} $ |  | $ 0.091^{***} $ | $ 0.135^{***} $ | $ 0.188^{***} $ | $ 0.186^{***} $ | $ 0.039^{***} $ | $ 0.197^{***} $ | $ 0.181^{***} $ | $ 0.198^{***} $ | $ 0.202^{***} $ | 0.000 | $ 0.102^{***} $ | $ 0.205^{***} $ | $ 0.200^{***} $ | 
+(13.148) |  | (10.302) | (14.990) | (15.388) | (15.470) | (5.086) | (16.434) | (15.477) | (16.080) | (16.268) | (0.057) | (9.198) | (16.527) | (16.550) | 
+BSV | $ 0.139^{***} $ | 0.013 |  | $ 0.139^{***} $ | $ 0.137^{***} $ | $ 0.155^{***} $ | $ 0.032^{***} $ | $ 0.152^{***} $ | $ 0.132^{***} $ | $ 0.159^{***} $ | $ 0.148^{***} $ | -0.002 | $ 0.100^{***} $ | $ 0.158^{***} $ | $ 0.164^{***} $ | 
+(11.342) | (1.479) |  | (11.329) | (11.470) | (12.428) | (3.195) | (12.621) | (11.564) | (12.774) | (12.115) | (-0.203) | (8.210) | (12.781) | (13.319) | 
+DGU | $ 0.033^{***} $ | $ -0.045^{***} $ | $ 0.072^{***} $ |  | $ 0.113^{***} $ | $ 0.089^{***} $ | -0.013 | $ 0.104^{***} $ | $ 0.103^{***} $ | $ 0.102^{***} $ | $ 0.122^{***} $ | $ -0.034^{***} $ | $ 0.042^{***} $ | $ 0.113^{***} $ | $ 0.109^{***} $ | 
+(2.907) | (-4.592) | (5.592) |  | (8.539) | (6.975) | (-1.091) | (7.907) | (7.748) | (7.792) | (9.420) | (-3.208) | (3.250) | (8.721) | (8.226) | 
+DMRS | $ 0.079^{***} $ | $ 0.044^{***} $ | $ 0.043^{***} $ | $ 0.093^{***} $ |  | $ 0.069^{***} $ | $ 0.055^{***} $ | $ 0.077^{***} $ | $ 0.054^{***} $ | $ 0.074^{***} $ | $ 0.063^{***} $ | $ 0.040^{***} $ | $ 0.087^{***} $ | $ 0.079^{***} $ | $ 0.082^{***} $ | 
+(5.966) | (3.296) | (3.337) | (7.133) |  | (5.402) | (4.167) | (6.255) | (4.623) | (5.873) | (5.124) | (3.014) | (6.548) | (6.316) | (6.422) | 
+DF | -0.016 | $ 0.040^{***} $ | $ 0.080^{***} $ | $ 0.066^{***} $ | $ 0.070^{***} $ |  | $ 0.061^{***} $ | $ 0.062^{***} $ | $ 0.083^{***} $ | $ 0.032^{***} $ | $ 0.105^{***} $ | $ 0.056^{***} $ | $ 0.045^{***} $ | $ 0.062^{***} $ | $ 0.100^{***} $ | 
+(-1.602) | (2.840) | (5.701) | (4.913) | (5.249) |  | (4.496) | (8.228) | (6.027) | (9.984) | (8.079) | (3.980) | (3.351) | (8.608) | (7.821) | 
+DNN | $ 0.156^{***} $ | $ 0.046^{***} $ | $ 0.119^{***} $ | $ 0.168^{***} $ | $ 0.214^{***} $ | $ 0.217^{***} $ |  | $ 0.228^{***} $ | $ 0.218^{***} $ | $ 0.229^{***} $ | $ 0.227^{***} $ | $ 0.039^{***} $ | $ 0.069^{***} $ | $ 0.232^{***} $ | $ 0.231^{***} $ | 
+(13.504) | (5.587) | (11.116) | (14.907) | (15.704) | (16.364) |  | (16.597) | (15.904) | (16.792) | (16.534) | (4.940) | (6.753) | (17.105) | (16.883) | 
+F3 | $ -0.024^{***} $ | -0.017* | -0.004 | 0.017* | 0.005 | $ -0.030^{***} $ | $ 0.023^{**} $ |  | 0.008 | $ -0.013^{***} $ | $ 0.033^{***} $ | -0.009 | $ 0.020^{**} $ | 0.005 | $ 0.033^{***} $ | 
+(-2.614) | (-1.719) | (-0.401) | (1.703) | (0.553) | (-5.484) | (2.283) |  | (0.810) | (-2.631) | (3.397) | (-0.906) | (1.967) | (0.817) | (3.508) | 
+F6 | $ 0.057^{***} $ | -0.004 | 0.002 | $ 0.051^{***} $ | $ 0.023^{**} $ | $ 0.050^{***} $ | $ 0.032^{***} $ | $ 0.048^{***} $ |  | $ 0.051^{***} $ | $ 0.032^{***} $ | -0.009 | $ 0.063^{***} $ | $ 0.052^{***} $ | $ 0.041^{***} $ | 
+(5.558) | (-0.362) | (0.189) | (4.812) | (2.560) | (4.901) | (3.066) | (4.909) |  | (5.050) | (3.325) | (-0.918) | (6.123) | (5.142) | (4.387) | 
+GKX | $ -0.025^{**} $ | $ 0.033^{**} $ | $ 0.060^{***} $ | $ 0.051^{***} $ | $ 0.041^{***} $ | $ -0.028^{***} $ | $ 0.065^{***} $ | $ 0.032^{***} $ | $ 0.054^{***} $ |  | $ 0.076^{***} $ | $ 0.051^{***} $ | $ 0.037^{***} $ | $ 0.031^{***} $ | $ 0.072^{***} $ | 
+(-2.109) | (2.281) | (4.160) | (3.631) | (2.976) | (-8.891) | (4.561) | (4.501) | (3.829) |  | (5.688) | (3.441) | (2.672) | (5.146) | (5.439) | 
+HXZ | $ 0.077^{***} $ | $ 0.047^{***} $ | $ 0.035^{***} $ | $ 0.068^{***} $ | $ 0.034^{***} $ | $ 0.067^{***} $ | $ 0.051^{***} $ | $ 0.057^{***} $ | $ 0.033^{***} $ | $ 0.061^{***} $ |  | $ 0.042^{***} $ | $ 0.059^{***} $ | $ 0.055^{***} $ | $ 0.037^{***} $ | 
+(8.329) | (4.857) | (3.722) | (7.381) | (3.801) | (7.358) | (5.297) | (6.233) | (3.890) | (6.780) |  | (4.329) | (6.203) | (6.013) | (4.618) | 
+KNS | $ 0.156^{***} $ | $ 0.004^{**} $ | $ 0.082^{***} $ | $ 0.142^{***} $ | $ 0.187^{***} $ | $ 0.193^{***} $ | $ 0.036^{***} $ | $ 0.199^{***} $ | $ 0.180^{***} $ | $ 0.202^{***} $ | $ 0.200^{***} $ |  | $ 0.105^{***} $ | $ 0.207^{***} $ | $ 0.206^{***} $ | 
+(13.666) | (2.255) | (10.394) | (14.777) | (15.523) | (15.912) | (5.035) | (16.521) | (15.684) | (16.468) | (16.271) |  | (9.525) | (16.854) | (16.698) | 
+KPS | $ 0.166^{***} $ | $ 0.132^{***} $ | $ 0.190^{***} $ | $ 0.207^{***} $ | $ 0.238^{***} $ | $ 0.221^{***} $ | $ 0.089^{***} $ | $ 0.237^{***} $ | $ 0.241^{***} $ | $ 0.232^{***} $ | $ 0.240^{***} $ | $ 0.133^{***} $ |  | $ 0.236^{***} $ | $ 0.240^{***} $ | 
+(14.261) | (11.093) | (14.565) | (16.013) | (17.401) | (16.825) | (8.712) | (17.558) | (17.710) | (17.299) | (17.709) | (11.057) |  | (17.505) | (17.713) | 
+SL | $ -0.028^{**} $ | $ 0.039^{***} $ | $ 0.030^{**} $ | $ 0.055^{***} $ | 0.012 | $ -0.044^{***} $ | $ 0.067^{***} $ | 0.006 | 0.023 | $ -0.021^{***} $ | $ 0.040^{***} $ | $ 0.050^{***} $ | 0.023* | 0.042*** | $ 0.042^{***} $ | 
+(-2.201) | (2.601) | (2.090) | (3.917) | (0.868) | (-6.136) | (4.788) | (0.706) | (1.639) | (-3.604) | (2.958) | (3.424) | (1.665) |  | (3.225) | 
+SY | $ 0.080^{***} $ | $ 0.057^{***} $ | $ 0.068^{***} $ | $ 0.051^{***} $ | $ 0.036^{***} $ | $ 0.071^{***} $ | $ 0.064^{***} $ | $ 0.054^{***} $ | 0.013 | $ 0.061^{***} $ | 0. |  |  |  |  |
+--- 图8 ---

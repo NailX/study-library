@@ -1,0 +1,169 @@
+# Farewell，ad-hoc 多因子模型
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/Rl6xlXrrpY4G8eYHouyUAA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+强加人为稀疏性假设的多因子模型注定会成为一段历史，但以它们为基础也会孕育出新的范式。
+
+1
+引言
+
+前文《稀疏性幻觉》曾抛出这样的观点，在以往被提出的、如今早已成为实证资产定价中占主导地位的诸多多因子模型都带有非常强的稀疏性假设。这背后的动机是绕过和收益率有关的协变量的高维数问题，从而用低维模型研究定价问题。
+
+然而，希望通过包含有限个因子的 ad-hoc 多因子模型来解释股票预期收益率或者 span 出更大的夏普比率平方，仅仅是一种稀疏性幻觉。虽然追求简约模型本身并无不妥，但这些历史上曾经辉煌一时的模型并非实证资产定价的未来，也终将退出历史的舞台。
+
+本文借 Cooper et al. (2021) 一文，从 APT 的角度针对上述观点再来做一番探讨。BTW，Review of Asset Pricing Studies 也是我经常推荐的期刊。
+
+2
+APT 与 PCA
+
+关于 APT（Ross 1976）的经济学动机，Cochrane (2005) 有如下描述：
+
+“Factor structure can imply factor pricing (APT). The APT suggests that one start with a statistical analysis of the covariance matrix of returns and find portfolios that characterize common movement.”
+
+这段话的意思就是，能够解释资产收益率共同运动的因子也应该是能够解释资产预期收益率截面差异的因子。在市场中不存在近似无风险套利机会这个假设下，Kozak, Nagel, and Santosh (2018) 同样论述了这一点（见《Which beta (III)?》）。这个经济学动机也正是最近几年利用 PCA 构造隐性因子模型备受关注的原因。这也是本节的题目为 APT 与 PCA 的原因。
+
+我们再从数学上简单看一下。假设资产的超额收益满足如下回归模型：
+
+  
+
+其中  是资产的超额收益，  是 demean 之后的因子（因子可以是 traded portfolios，即我们熟悉的 long/short portfolio returns，也可以是 nontraded portfolios）。由于在上式中对因子取值做了去均值处理，因此有  。
+
+接下来，令  表示随机贴现因子（SDF）。由于  表示超额收益，因此有  。对上面的回归模型两边同时乘以  并求期望可得：
+
+ 
+利用  ，将  替换上式中的  并做简单运算：
+
+ 
+
+定义  以及  ，上式最后变成我们熟悉的形式：
+
+  
+
+可以证明，当因子是 traded portfolio returns 时，  。
+
+在 APT 的推导中，隐含的假设是不同资产的  是相互独立的，即  ，且特质收益率的方差  是有界的。在这两个条件下，如果利用本节的回归模型计算不同资产超额收益率之间的协方差矩阵，则一个自然的结果就是这些解释资产预期收益率的因子同时也能解释资产的协方差矩阵。
+
+在这个结论下，APT 为我们比较不同 ad-hoc 多因子模型提供了一个天然的基准 —— 我们可以通过 PCA 分解资产的协方差矩阵，利用特征向量作为权重构造“统计”因子投资组合，以这些组合的收益率为因子构造一个基准的多因子模型。
+
+如果 ad-hoc 模型能够比较好的描述投资者在市场中面对的投资机会以及不同资产截面预期收益率的差异，则它们在资产定价方面的表现和上述基于 PCA 的基准模型之间不应该存在统计上显著的差异。以此为出发点，就能够评价不同的 ad-hoc 多因子模型。这也正是 Cooper et al. (2021) 的研究动机。
+
+3
+实证结果
+
+虽然理论很清晰，但是实证依然充满挑战，那就是基于哪个协方差矩阵构造基准模型。在这方面，使用个股是不现实的，所以只能取而代之使用常见的 sorted portfolios 作为资产。Cooper et al. (2021) 基于数据可得性等原因选择了 42 个常见的异象，并通过每个异象变量将股票分成 10 组（每月再平衡），一共得到了 420 个投资组合。以它们为资产计算协方差矩阵，Cooper et al. (2021) 构造了一个包含 6 个主成分的基准模型，记为 APT6。
+
+再来看看被评价的 ad-hoc 多因子模型。该文一共考虑了 7 个模型，都是人们非常熟悉的，见下表。
+
+为了比较来自 APT 的基准模型和上述 7 个 ad-hoc 模型，Cooper et al. (2021) 使用了很多常见的实证资产定价检验手段。本节介绍其中一个，即 time-series spanning test。以上述 420 个 sorted portfolios 作为 test assets，分别对这 8 个模型进行时序回归，计算每个 test asset 的 pricing error，并基于 pricing errors 进行检验。
+
+其中一个检验统计量是截面 R-squared，定义如下：
+
+  
+
+其中  是 test assets 的 pricing errors 在截面上的方差，  是这些资产的平均收益率在截面上的方差。由定义可知，  越大则说明模型解释资产预期收益率的能力越强。下表给出了检验结果（只需要看 Panel A 即可）。
+
+从 Panel A 可知，来自 APT 的基准模型的  高于任意一个 ad-hoc 模型的  。此外，  （请注意它不代表夏普比率平方）这一行展示了基准模型和单个 ad-hoc 模型的  之差，其下方括号内为对应的 p-value。从 Panel A 的结果可知，除了 HMXZ5 之外，其他 ad-hoc 模型和基准模型相比的差异均在 5% 的显著性水平以下。而 HMXZ5 和基准模型的差异的显著性水平是 10% 以下。另外让人惊讶的是 BS6 模型的  是负的。（Panel B 的稳健性检验给出了类似的结果。）
+
+面对以上实证结果，我们似乎还不能马上否定 ad-hoc 模型。其背后的原因有两个。首先，APT 模型是根据 420 个作为 test assets 的协方差矩阵构造的，它是一个纯粹的 in-sample test，它能解释更多的截面差异理所应当。第二，HMXZ5 这个最近两年出尽风头的模型（见 Hou et al 2019）和 APT 模型的差距在统计上并不是那么显著。不过值得一提的是，HMXZ5 虽然源自加强版的 q-theory model（见《从 Factor Zoo 到 Factor War，实证资产定价走向何方？》），但它也仅仅是事后的 in-sample 实证分析。
+
+为了排除顾虑，使用未被用于构造 APT 模型的 test assets 就显得格外重要。为此，Cooper et al. (2021) 使用了另外 8 个异象构造了 80 个 sorted portfolios 作为 test assets。结果如下。
+
+对于这 80 个 test assets 来说，基准模型 APT6 依然有不错的定价能力，其  为0.34（p-value = 0.000）。反观各种 ad-hoc 模型，C4、HXZ4 以及 BS6 的  均为负。其中表现最好的是 SY4。另外，虽然以定价能力差异来看，我们依然不能说 HMXZ5（此外这回还有 FF6）和基准模型的差异在统计上是显著的，但如果对照着  来看，HMXZ5 首先就没有表现出统计上显著的定价能力。另外，考虑到 HMXZ5 是 HXZ4 的拓展（仅仅加上了额外的预期投资增长因子），我们也无法忽视 HXZ4 和 HMXZ5 的巨大反差（  一正一负）。
+
+除本节介绍的实证结果之外，Cooper et al. (2021) 还考虑了其他很多稳健性检验，感兴趣的小伙伴请阅读原文。总体而言，来自 APT 的基准模型无论在 in-sample test 还是在 out-of-sample test 都表现出了更好的定价能力，因而优于各类 ad-hoc 模型。在诸多 ad-hoc 模型中，唯一能与其相比的是 HMXZ5，但其所代表的投资机会逊于 APT 模型。
+
+4
+结束语
+
+最近几年，实证资产定价的研究范式已从 ad-hoc 多因子模型转到隐性多因子模型，其中的代表作当属基于 PCA 方法的 Kelly, Pruitt, and Su (2019) 以及 Kozak, Nagel, and Santosh (2020)。（顺便一提，这两篇文章分别获得 2019 和 2020 JFE Fama-DFA best paper prize。）无论从对资产的定价能力，还是从构造的最大夏普比率平方来说，隐性因子模型都要优于 ad-hoc 多因子模型，一如 Cooper et al. (2021)。
+
+对于业界的投资实务来说，多因子模型的作用找到最能解释资产预期收益率差异（即最能代表投资机会）的因子，并最大化样本外的条件风险收益特征。而从实证资产定价来说，多因子模型的新范式应能够正面应对协变量（公司特征）的高维数问题，在摒弃稀疏性假设的前提下研究众多高度相关的协变量和资产收益率的关系。
+
+在可以预见的未来，无论是对业界还是学界的目标，曾经辉煌一时的 ad-hoc 多因子模型似乎都无法继续发挥太大的作用。虽然这些模型让多因子模型的概念深入人心，但随着理论和实证资产定价研究持续发展，终有那么一个时刻，我们要对它们说声拜拜。
+
+也许这个时刻已经到来。
+
+参考文献
+Barillas, F. and J. Shanken (2018). Comparing asset pricing models. Journal of Finance 73(2), 715 – 754.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Cochrane, J. H. (2005). Asset Pricing (Revised Edition). Princeton University Press.
+
+Cooper, I., L. Ma, P. Miao, and D. Philip (2021). Multifactor models and their consistency with the APT. Review of Asset Pricing Studies 11(2), 402 – 444.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2018). Choosing factors. Journal of Financial Economics 128(2), 234 – 252.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2019). Which factors? Review of Finance 21(1), 1 – 35.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2021). An augmented q-factor model with expected growth. Review of Finance 25(1), 1 – 41.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341 – 360.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+缩写 | 包含因子 | 出处 | 
+4 | 市场、规模、价值、截面动量 | Carhart (1997) | 
+Z4 | 市场、规模、投资、盈利 | Hou, Xue, and Zhang (2015) | 
+XZ5 | 市场、规模、投资、盈利、预期投资增长 | Hou et al. (2021) | 
+ | 市场、规模、价值、投资、盈利 | Fama and French (2015) | 
+6 | 市场、规模、价值、投资、盈利、截面动量 | Fama and French (2018) | 
+S6 | 市场、规模、价值、截面动量、投资、盈利 | Barillas and Shanken (2018) | 
+SY4 | 市场、规模、管理、表现 | Stambaugh and Yuan (2017) |
+1.  $ \rightarrow $  $ \rightarrow $  $ \rightarrow $  $ \rightarrow $  $ \rightarrow $  $ \rightarrow $
+--- 图3 ---
+Time-series tests for empirical models
+[表]
+ | APT6 | C4 | HXZ4 | HMXZ5 | FF5 | FF6 | BS6 | SY4 | 
+4. All deciles |  |  |  |  |  |  |  |  | 
+$ R_{C}^{2} $ | 0.50(0.000) | 0.14(0.007) | 0.14(0.016) | 0.22(0.004) | 0.04(0.127) | 0.21(0.002) | -0.41(0.990) | 0.18(0.007) | 
+$ R^{2} $ |  | 0.36(0.001) | 0.36(0.010) | 0.28(0.076) | 0.46(0.000) | 0.30(0.013) | 0.91(0.000) | 0.33(0.025) | 
+Ratio |  | 0.28 | 0.28 | 0.44 | 0.08 | 0.42 | NA | 0.36 | 
+3. Extreme deciles |  |  |  |  |  |  |  |  | 
+$ R_{C}^{2} $ | 0.58(0.000) | 0.18(0.004) | 0.25(0.001) | 0.32(0.001) | 0.11(0.030) | 0.29(0.000) | -0.28(0.945) | 0.25(0.002) | 
+$ SR^{2} $ |  | 0.40(0.001) | 0.33(0.014) | 0.25(0.103) | 0.47(0.001) | 0.29(0.019) | 0.86(0.000) | 0.33(0.027) | 
+Ratio |  | 0.31 | 0.43 | 0.55 | 0.19 | 0.50 | NA | 0.43 |
+This table reports the evaluation results for the empirical multifactor models. The empirical method is time-series regressions applied to each testing portfolio. The testing assets represent 420 portfolios associated with 42 portfolio sorts (panel A). See Table 1 for a description of the different portfolio sorts. In panel B, the testing assets are the extreme three deciles (on each leg) for each group.  $ R_{C}^{2} $ is the cross-sectional constrained  $ R^{2} $ and the numbers in parentheses represent the respective empirical p-values to test the null that the explanatory ratio is zero (obtained from a bootstrap simulation).  $ SR^{2} $ represents the difference in  $ R_{C}^{2} $ between the six-factor APT model (APT6) and each multifactor model, with the respective empirical p-values presented in parentheses. "Ratio" denotes the ratio of  $ R_{C}^{2} $ between a given empirical model and APT6. This measure is not computed for the BS6 model, as such model produces negative  $ R_{C}^{2} $ estimates. The multifactor models are the Carhart four-factor model (C4), Hou-Xue-Zhang four-factor model (HXZ4), Hou-Mo-Xue-Zhang five-factor model (HXZ5), Fama-French five-factor model (FF5), Fama-French six-factor model (FF6), Barillas-Shankersix-factor model (BS6), and the Stambaugh-Yuan four-factor model (SY4). The sample is 1973:01–2016:12.
+--- 图4 ---
+Table A.9: Time-series tests for empirical models with new portfolios 1
+This table reports the evaluation results for the empirical multifactor models by using new testing portfolios. The empirical method is time-series regressions applied to each testing portfolio. The testing assets represent 80 portfolios associated with eight portfolio sorts (Panel A). In Panel B, the testing assets are the extreme three deciles (on each leg) for each group.  $ R_{C}^{2} $ is the cross-sectional constrained  $ R^{2} $ and the numbers in parentheses represent the respective empirical p-values to test the null that the explanatory ratio is zero (obtained from a bootstrap simulation).  $ SR^{2} $ represents the difference in  $ R_{C}^{2} $ between the 6-factor APT model (APT6) and each multifactor model, with the respective empirical p-values presented in parenthesis. The multifactor models are the Carhart 4-factor model (C4), Hou–Xue–Zhang 4-factor model (HXZ4), Hou–Mo–Xue–Zhang 5-factor model (HMXZ5), Fama–French 5-factor model (FF5), Fama–French 6-factor model (FF6), Barillas–Shanken 6-factor model (BS6), and the Stambaugh–Yuan 4-factor model (SY4). The sample is 1973:01–2016:12
+[表]
+ | APT6 | C4 | HXZ4 | HMXZ5 | FF5 | FF6 | BS6 | SY4 | 
+Panel A: All deciles | 
+$ R_C^2 $ | 0.34 (0.000) | -0.29 (0.981) | -0.07 (0.512) | 0.14 (0.054) | 0.01 (0.319) | 0.14 (0.041) | -0.79 (0.997) | 0.21 (0.016) | 
+$ SR^2 $ |  | 0.63 (0.001) | 0.40 (0.024) | 0.20 (0.246) | 0.33 (0.018) | 0.20 (0.115) | 1.13 (0.000) | 0.13 (0.290) | 
+Panel B: Extreme deciles | 
+$ R_C^2 $ | 0.27 (0.004) | -0.44 (0.994) | -0.14 (0.712) | 0.07 (0.154) | -0.07 (0.622) | 0.08 (0.141) | -0.86 (0.996) | 0.19 (0.040) | 
+$ SR^2 $ |  | 0.71 (0.001) | 0.42 (0.036) | 0.20 (0.265) | 0.34 (0.028) | 0.19 (0.154) | 1.13 (0.001) | 0.09 (0.380) |
+U hk, Odi A, U co t (
+--- 图5 ---

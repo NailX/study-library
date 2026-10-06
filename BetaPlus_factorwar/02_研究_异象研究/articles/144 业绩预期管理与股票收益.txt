@@ -1,0 +1,370 @@
+# 业绩预期管理与股票收益
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/g_nK_cMln7EcJjggGXe4zg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+上市公司通过预期管理来战胜分析师预期，而这会导致股票收益率在业绩公告前后出现 V-shape 走势，与传统的 PEAD 现象不符。这背后的门道在哪呢？
+
+01
+引言
+
+2016 年 7 月 15 日，花旗集团（Citigroup, Inc.）披露了 2016 Q2 的 EPS 为 1.24 美元，较 2015 Q2 的 1.45 美元下降了 14.5%。
+
+然而，颇为耐人寻味的是，尽管盈利能力出现了明显的下滑，但是当年 7 月，花旗的股价并没有大跌，反而是在整月累计上涨了 3.35%。
+
+花旗是怎么做到的？
+
+仔细检查发现，虽然盈利同比下降，但分析师对于花旗 2016 Q2 EPS 的一致预期仅为 1.10 美元。由于实际 EPS 大幅战胜了一致预期，使得花旗的股价不跌反升。显然，战胜分析师预期的正作用打败了同比下降的负作用。事实上，花街的媒体也在当年 7 月对花旗的战胜分析师预期进行了大幅报道。比如 CNBC 的标题就是 Citigroup earnings handily top expectations。由于有限注意力和可得性启发，投资者显然更容易受到这种报道的影响。
+
+然而，这在回答第一个问题的同时又抛出了第二个问题：为什么分析师预期会如此离谱？是一贯如此还是分析师受到了某种“蛊惑”？我们可以从下面这张一致预期的时序图发现端倪。这张图惊人的显示出，分析师一致预期 EPS 在 2016 年 7 月 15 日之前的 100 天内持续下行，一路从 1.30 下降到 1.10。
+
+这张图似乎传递着，分析师受到了某种指引，导致他们持续的下调对花旗的预期。那么，到底发生了什么？在花旗披露 2016Q2 earnings 之前，华尔街的分析师和花旗的投资者关系部门进行了紧密的沟通，而沟通中得到的“关键”信息是花旗首席执行官 Michael Corbat 在同年 6 月 investor conference 上的一段 comments：
+
+“ The bank’s second-quarter profits where likely to be ‘roughly flat’ compared with the first quarter when Citigroup earned $1.10 a share.
+
+”
+
+由这段话可知，花旗 CEO 指出该公司二季度的盈利会和一季度差不多，而一季度 EPS 是 1.10。显然，1.10 是个很好的 anchor（锚定效应）！这也解释了为什么最后分析师一致预期停留在了 1.10。这个例子说明，上市公司可以在不违反 SEC 规定的前提下“影响”分析师的预期，从而达到某种目的。这种行为被称为上市公司的预期管理（expectations management）。
+
+至此，整个逻辑链终于真相大白。花旗的管理层在不违规的前提下影响了分析师的一致预期，使一致预期在其 earnings 发布前出现了下偏（downward bias）；而实际 earnings“漂亮地”战胜了分析师一致预期，导致花旗的股票在其盈利同比下降的前提下依然上涨。
+
+先别着急惊讶，铺垫还没完。
+
+02
+从 PEAD 说起
+
+花旗的实际 EPS 战胜分析师预期，这其实是 earnings surprise。而关于 earnings surprise 和股票未来收益率的关系，我们最熟悉的毫无疑问是 PEAD（Post-Earnings-Announcement-Drift）。需要背景知识的小伙伴请看《致敬经典：Ball and Brown (1968)》。
+
+PEAD 指出，由于有限注意力，盈利超预期的股票的价格未来会继续上涨一段；而盈利不及预期的股票的价格未来会继续下跌一段。谈到 PEAD，人们脑海中的图往往是下面这样的，且关注的也是业绩公告之后的 abnormal return 部分，因为这部分可以拿来做策略。但事实上，在这个图中另一个同样重要（且我认为是更重要）的是在业绩公告之前，有好（坏）消息的公司的 abnormal return 就已经在上涨（下跌）了。这说明 earnings number 包含了投资者对股价定价的部分信息，而这部分信息在公告之前就已经被 priced in 了。
+
+然而，再让我们回到刚才花旗的例子。按照传统 PEAD 的研究，既然花旗在 2016 年 7 月份打败了分析师预期，那么其 2016 年 6 月（即业绩公告之前）股价也应该上涨。但事实是，当年 6 月花旗股价下跌了 8.98%。再来看看同年 5 月，花旗股价微涨 0.63%。
+
+毫无疑问，花旗的股价并未如关于 PEAD 的研究所揭示的那样在业绩公告之前上升。如果把其 2016 年 5，6，7 三个月的收益率画出来，则如下图所示，是一个 V 字形。
+
+究竟是什么原因使得花旗的收益率和 PEAD 的研究结果反映的业绩超预期公司 abnormal return 在业绩公告之前持续上涨不吻合呢？这种 V-shape 是个别现象还是普遍现象，它对于实证资产定价又有什么启发？
+
+Johnson, Kim, and So (2020) 这篇 Review of Financial Studies forthcoming 的文章针对美股进行了详细的实证分析，回答了这个问题。该文的作者之一是 Eric So。公众号的老朋友对他应该并不陌生。他是年轻一代实证资产定价学者的代表，和 Charles Lee 合著了 Alphanomics 一书，他同样也是之前公众号介绍的预期差（Piotroski and So 2012）的作者之一。
+
+Johnson, Kim, and So (2020) 的核心观点是：将上市公司在截面上按是否倾向于进行预期管理来排序，则更倾向于进行预期管理的公司的股票在业绩公告月的收益率更高，且在业绩公告月之前的两个月的收益率更低，呈现 V-shape。
+
+03
+预期管理代理变量
+
+为了研究预期管理和股票收益率的关系，第一个难点是定量刻画预期管理。显然，这是一个无法被观测到的变量 —— 比如上市公司不会告诉人们它进行预期管理的主观愿望有多强烈，因此需要找合适的代理变量。
+
+Johnson, Kim, and So (2020) 从关注度（attention）、压力（pressure）以及相关性（relevance）三个角度提出了四个变量：
+
+关注度指的是上市公司的盈利消息受到投资者的关注程度：投资者关注越高的公司，进行预期管理的动机越强烈。为此，该文使用覆盖该公司的分析师数量以及机构投资者占比两个变量代表关注度。
+
+压力指的是上市公司出于无法维持高速增长的业绩压力，有进行业绩预期管理的动机。一般来说，如果上市公司过去几个季度盈利都很高，那么投资者非理性的过度外推（over-extrapolate）会导致对未来盈利的过高预期。由于持续高盈利难以维系，因此上市公司会进行预期管理。该文使用过去五年 seasonally adjusted sales growth 作为压力的代理变量。
+
+相关性指的是股价和 earnings 消息之间的关系。这也很好理解，如果任凭你把 earnings“调教”的非常好，股价也无动于衷，那么显然预期管理就没啥用。而对那些 earnings 一有风吹草动，股价就上蹿下跳的公司，预期管理则更重要。过往研究表明，solvent 公司和 distressed 公司相比，前者的股价和 earnings 关系更加密切。为此，Johnson, Kim, and So (2020) 使用 Altman (1968) 的 Altman Z-score 作为相关性的代理变量。
+
+从关注度、压力和相关性三个维度引出了四个变量，下一步自然就是想办法把它们“揉在一起”，变成一个综合变量，以反映上市公司预期管理的倾向（expectations management incentives，简称 EMI 变量）。为此，Johnson, Kim, and So (2020) 使用了主成分分析（PCA）。
+
+插一句，学术界在进行实证资产定价研究时使用 PCA 并不少见。比如 Baker and Wurgler (2006) 通过PCA 构建了一个投资者情绪综合指标，影响非常深远。
+
+Johnson, Kim, and So (2020) 对上述四个变量进行 PCA 并提取第一主成分构建了 EMI。通俗的说，EMI 就是这四个变量的某种线性组合，以尽可能地反映它们的波动。不过，该文也指出，文章的核心结论对 EMI 的构造方法来说非常稳健，因此也可以使用更简单的方法，比如将四个变量取平均。
+
+04
+实证结果
+
+有了 EMI，下面就来看看实证结果；而实证研究中最核心的方法自然是 portfolio sort。
+
+不过，Johnson, Kim, and So (2020) 和一般的实证资产定价研究以及 event study 都有些不同，这让它的 portfolio sort 有些特别，具体反映在两个地方。首先，预期管理属于 event study，因此不能每个月把所有股票拿来无脑排序，而是必须从它们中间挑出那些会发生 event 的股票来排序。这是该文和一般实证资产定价研究不同的地方。第二，传统 event study 研究事件发生前后，event 和收益率的同步关系。而本文关注的是预期管理对未来收益率的可预测性。因此，为了避免前视偏差，该文并没有使用实际的 earnings 日期来定义 event，而是使用了预测的 earnings 日期来定义 event。这是它和传统 event study 最大的不同。
+
+下面通过一个例子说明（下图）。
+
+假设现在是 2015 年 5 月底。从全部股票中挑出所有在当月进行了 earnings announcement 的公司，并（朴素）预测它们在一年后的 2016 年 5 月会如期发布下一财年同一季度的财报。使用截至 2015 年 5 月底的变量，利用 PCA 计算 EMI 指标，并将符合要求的公司根据 EMI 高低排序（EMI 越大说明预期管理动机越强），得到五组，研究这五组在 2016 年 5 月的收益率，考察 EMI 和收益率之间的关系。
+
+此外，由于 Johnson, Kim, and So (2020) 不仅关心 earnings announcement 月份的收益率，也关心它之前两个月（即检验 V-shape 猜想）。因此在上面这个例子中，利用 2015 年 5 月的 EMI 指标 sort 之后，他们也同样关心这五个投资组合在 2016 年 3 月和 4 月的收益率。这就是该文 portfolio sort 的核心逻辑。在整个实证期内，每个月平均有 850 个上市公司披露 earnings，因此按 EMI 排序得到的五个投资组合平均下来有 170 支股票。
+
+下面来看实证结果。
+
+我们关心两个问题：（1）EMI 高（低）的公司在明年 earnings announcement 月份的预期收益是否更高（低）；（2）EMI 高的公司在明年 earnings announcement 之前的两个月的收益率和发布月的收益率是否呈现 V-shape。
+
+先来看（1）。下表显示，无论是等权还是市值加权，EMI 高的公司，未来 earnings announcement 月份的预期收益都更高。且使用高 EMI 减去低 EMI 构造的对冲组合的 absolute return 非常显著（等权和市值加权下 t-值分别为 4.59 和 3.02），满足高于 3.0 阈值的标准（当然，根据最新的研究阈值已经被提高到 3.4 以上了……见《出色不如走运(IV)?》）。此外，Johnson, Kim, and So (2020) 也使用了 Fama and MacBeth (1973) regression，结果也没有改变，哪怕当他们控制了 Green, Hand, and Zhang (2017) 考虑的 94 个变量之后，EMI 依然能够预测股票未来的收益率。
+
+若将 absolute return 换成相对定价模型的超额收益，结果也并无不同（下表）。通过做多高 EMI 做空 EMI 的对冲组合（以及仅做多高 EMI 的纯多头组合）都可以获得定价模型无法解释的显著超额收益。
+
+看完了问题（1）的结果，再来看看问题（2）：是否有 V-shape。为了本文的紧凑型，此处就不贴表格了，感兴趣的小伙伴请阅读原文（SSRN 有下载）。此处就贴一张图，一图胜千言，妥妥 V-shape。（图中显示的是对冲组合在不同月份收益率的 V-shape；如果仅考察高 EMI 组的收益率，也能观察到 V-shape。）
+
+实证结果证实了猜想，即预期管理动机高的公司在未来的 earnings announcement 月份预期收益率更高（因为通过预期管理，它们更容易打败分析师预期），而 V-shape 则表明，这些公司在 announcement 月份之前的收益率往往跑输预期管理动机低的公司。从这两点出发，如果能够利用 V-shape，无疑可以构建更好的策略。
+
+为此，我们可以在每月末做多下个月要发布财报的，做空下下个月要发布财报的。如果 EMI 和收益率的关系以及 V-shape 成立，那么上述策略在高 EMI 的公司中应该能够获得更高的超额收益。实证结果证实了这一点（下表）。
+
+05
+分析师预期偏差与预期管理动机
+
+上一节看了预期管理和未来收益率的关系，本节再来看一些更深层次的思考。
+
+首先，预期管理动机高的公司在 announcement 月份预期收益更高的解释是实际 earnings 击败了分析师预期，即正向的 earnings surprise。那么，实际情况是这样么？下表统计了不同 EMI 组 EPS 变化（ΔEPS）和 earnings surprise（SURP 和 1(SURP>0)）的情况。
+
+不难看出，预期管理动机强的公司，ΔEPS 确实更低（这也说明了因为盈利无法维持，所以需要预期管理），而 SURP 以及 1(SURP>0) 则更高（SURP 是实际盈利和分析师预期之差；后者可以理解为 SURP > 0 的概率），说明这些公司通过预期管理“成功地”让分析师预期出现 downward bias，导致它们更容易战胜预期。
+
+通过回归分析，我们可以进一步考察管理层是如何影响分析师的。在下表的结果中，被解释变量共有四个：Guide 可以理解为管理层发布的业绩指引的频繁程度；Actual – Guide 为实际盈利和指引之间差异；Actual – Consensus 是实际盈利和一致预期的差异；Walk Down 则表示分析师下调一致预期。
+
+结果表明，在控制其他常见变量后，EMI 对上述四个被解释变量均有显著的预测性：EMI 高（预期管理动机高）的公司更愿意发布指引，它们的实际盈利也往往超过指引和一致预期，且分析师更容易对这些公司下调预期（因而正中下怀）。下图比较了高 EMI 和低 EMI 公司中，分析师预期的偏差。从左图中可以清晰的看到，在高 EMI 的公司中，由于受到上市公司预期管理的影响，分析师预期的偏差几乎随着 announcement 时间的临近单调下降。
+
+最后来看看管理层预期管理的动机。对于上市公司管理层来说，在公司经营中既要满足长期目标又要满足短期目标。对于短期目标，财务数据能否战胜分析师预期是很关键的评判标准，从这个角度可以提供预期管理动机的解释。
+
+除此之外，Johnson, Kim, and So (2020) 还提供了另外一个角度：insider trading。他们使用 Buy-Sell ratio（定义为 (B – S)/(B + S)，其中 B 和 S 为内幕交易的买入和卖出量）以及 Cohen, Malloy, and Pomorski (2012) 的投机交易指标进行了研究，发现在 earnings announcement 的前一个月，内幕交易的买量往往激增，而在 earnings announcement 当月或次月，内幕交易的卖量则远超过买量。
+
+上表中 Panel A 是使用 Buy-Sell ratio 的结果。在 announcement 前一个月（Pre-EA），EMI 最高的组中，该指标高达 36.38，说明显著的净买入！与之形成鲜明对比的是，在所有时间平均来看，内幕交易的卖出量是远超过买入的（该指标均值为 -55.16）。且该指标随着 EMI 单调上升，即预期管理动机高的公司更容易发生过度买入的内幕交易。Panel B 给出了投机指标的结果，其中 Opportunisitic 一栏表示的是被定义为投机交易的统计结果；Routine 一栏表示的是被定义为正常交易的统计结果。结果显示高 EMI 公司在 announcement 前一个月会出现更多的投机性买入，而在 announcement 之后的一个月会出现更多的投机性卖出。
+
+本节更深层次的分析无疑能帮助人们理解预期管理造成收益率的 V-shape 背后的原因。
+
+06
+结语
+
+Johnson, Kim, and So (2020) 一文中还有更多丰富的实证结果。篇幅所限就不一一展开了，感兴趣的朋友请阅读原文。
+
+Eric So 是我个人很喜欢的一个新生代实证资产定价学者。他在 Stanford 读的 PhD，其导师正是 Charles Lee。他的研究一贯关注的是 earnings 和以及分析师预期，在这方面发表了很多重磅论文，读来让人颇有启发。其中最具代表性的可能是一篇关于分析师在股市中作用的 survey（Kothari, So, and Verdi 2016）。
+
+作为市场的重要组成部分，分析师在市场中发挥了重要的作用，分析师预期和股票收益率之间也密切相关。在未来，我会介绍更多这方面的文献，和各位小伙伴一起搭建起相关的知识体系。
+
+最后，在本文结束之前说句题外话。五月末适逢公众号运营四周年。但今年我不打算写纪念软文了。去年底承诺了“今年憋大招”，目前看还算顺利，等大招憋出来再一并回顾写作的心路历程吧。虽然没有软文了，但对各位小伙伴给予公众号的一贯支持和鼓励的感激不变，也希望“大招”不会令各位失望。
+
+感谢阅读，全文完。
+
+参考文献
+Altman, E. I. (1968). Financial ratios, discriminant analysis and the prediction of corporate bankruptcy. Journal of Finance 23(4), 589 – 609.
+
+Baker, M. and J. Wurgler (2006). Investor sentiment and the cross-section of stock returns. Journal of Finance 61(4), 1645 – 1680.
+
+Ball, R. and P. Brown (1968). An empirical evaluation of accounting income numbers. Journal of Accounting Research 6(2), 159 – 178.
+
+Ball, R. and P. Brown (2019). Ball and Brown (1968) after fifty years. Pacific-Basin Finance Journal 53, 410 – 431.
+
+Cohen, L., C. Malloy, and L. Pomorski (2012). Decoding inside information. Journal of Finance 67(3), 1009 – 1043.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Green, J., J. R. M. Hand, and X. F. Zhang (2017). The characteristics that provide independent information about average U.S. monthly stock returns. Review of Financial Studies 30(12), 4389 – 4436.
+
+Johnson, T. L., J. Kim, and E. C. So (2020). Expectations management and stock returns. Review of Financial Studies forthcoming.
+
+Kothari, S. P., E. C. So, and R. Verdi (2016). Analysts’ forecasts and asset pricing: A survey. Annual Review of Financial Economics 8, 197 – 219.
+
+Piotroski, J. D. and E. C. So (2012). Identifying expectation errors in value/glamour strategies: A fundamental analysis approach. Review of Financial Studies 25(9), 2841 – 2875.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8d210>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8ee30>)
+--- 图6 ---
+Release
+NYSE: C)
+CITIGROUP REPORTS SECOND QUARTER 2016 EARNINGS PER SHARE OF $1.24
+RETURNED $1.5 BILLION OF CAPITAL TO COMMON SHAREHOLDERS; REPURCHASED 30 MILLION COMMON SHARES
+UTILIZED APPROXIMATELY S900 MILLION OF DEFERRED TAX ASSETS
+COMMON EQUITY TIER 1 CAPITAL RATIO OF 12.5%(1) SUPPLEMENTARY LEVERAGE RATIO OF 7.5%(2)
+BOOK VALUE PER SHARE OF $73.19
+TANGIBLE BOOK VALUE PER SHARE OF $63.53(3)
+York, July 15, 2016 — Citigroup Inc. today reported net income for the second quarter 2016 of $4.0 billion, or $1.24 per diluted share, on
+--- 图7 ---
+[表]
+Group in millions, except per share amounts) | 2Q&#x27;16 | 1Q&#x27;16 | 2Q&#x27;15 | 
+ported Revenues (GAAP) | $ 17,548 | $ 17,555 | $ 19,470 | 
+Impact of CVA / DVA | — | — | 312 | 
+adjusted Revenues | $ 17,548 | $ 17,555 | $ 19,158 | 
+impact of FX Translation | — | 35 | (537) | 
+adjusted Revenues in Constant Dollars | $ 17,548 | $ 17,590 | $ 18,621 | 
+ported Net Income (GAAP) | $ 3,998 | $ 3,501 | $ 4,846 | 
+impact of CVA / DVA | — | — | 196 | 
+adjusted Net Income | $ 3,998 | $ 3,501 | $ 4,650 | 
+Preferred Dividends | 322 | 210 | 202 | 
+adjusted Net Income to Common | $ 3,676 | $ 3,291 | $ 4,448 | 
+reported EPS (GAAP) | $ 1.24 | $ 1.10 | $ 1.51 | 
+Impact of CVA / DVA | — | — | 0.06 | 
+adjusted EPS | $ 1.24 | $ 1.10 | $ 1.45 | 
+average Assets (SB) | $ 1,807 | $ 1,778 | $ 1,840 | 
+adjusted ROA | 0.89% | 0.79% | 1.01% | 
+average TCE | $ 184,130 | $ 181,336 | $ 176,538 | 
+adjusted ROICE | 8.0% | 7.3% | 10.1% |
+--- 图8 ---
+
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8eac0>)
+--- 图11 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图12 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图13 ---
+Fig. 1. Replication of BB68 Fig. 1 for USA, all years (1971–2017) pooled.
+处：Ball and Brown (2019), period 1971 - 2017
+--- 图14 ---
+
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8e930>)
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925367790>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8e610>)
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a455d0>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366b60>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图23 ---
+Inputs measured:
+Prior year earnings
+announcement & EMI inputs
+observed in May 2015
+出处：Johnson, Kim, and So (2020)
+--- 图24 ---
+Panel A: Average Announcement Month Raw Returns
+[表]
+ | EMI Quintiles | 
+ | Q1 (Low) | Q2 | Q3 | Q4 | Q5 (High) | High - Low | 
+Equal-Weighted | 0.794\n(2.42) | 1.320\n(4.08) | 1.427\n(4.57) | 1.726\n(5.73) | 1.674\n(5.47) | 0.880\n(4.59) | 
+Value-Weighted | 0.957\n(3.42) | 1.115\n(3.44) | 1.325\n(4.16) | 1.545\n(6.21) | 1.599\n(5.97) | 0.643\n(3.02) |
+出处： Johnson, Kim, and So (2020)
+--- 图25 ---
+Table 3. Announcement-Month Portfolio Alphas
+Panel A: Equal-Weighted Alphas in Month M=T
+[表]
+ | ALPHA | MKTRF | SMB | HML | UMD | 
+Q5 (High) | 0.714(5.99) | 1.068(38.70) | 0.535(13.76) | 0.067(1.55) | -0.161(-6.22) | 
+Q4 | 0.771(7.62) | 1.011(43.14) | 0.754(22.84) | 0.221(6.02) | -0.178(-8.09) | 
+Q3 | 0.489(4.24) | 0.968(36.22) | 0.920(24.45) | 0.250(5.98) | -0.181(-7.22) | 
+Q2 | 0.422(3.18) | 0.983(31.93) | 0.885(20.40) | 0.176(3.64) | -0.238(-8.23) | 
+Q1 (Low) | -0.096(-0.64) | 0.972(28.06) | 0.886(18.16) | 0.206(3.79) | -0.250(-7.68) | 
+High - Low | 0.810(4.27) | 0.095(2.17) | -0.351(-5.67) | -0.139(-2.01) | 0.089(2.15) |
+出处： Johnson, Kim, and So (2020)
+Panel B: Value-Weighted Alphas in Month M=T
+[表]
+ | ALPHA | MKTRF | SMB | HML | UMD | 
+Q5 (High) | 0.666 | 0.980 | 0.064 | -0.210 | 0.031 | 
+(5.26) | (33.40) | (1.55) | (-4.57) | (1.11) | 
+Q4 | 0.627 | 0.886 | 0.213 | -0.020 | 0.032 | 
+(4.78) | (29.18) | (4.98) | (-0.41) | (1.11) | 
+Q3 | 0.287 | 1.010 | 0.395 | -0.195 | 0.134 | 
+(1.53) | (23.25) | (6.45) | (-2.87) | (3.28) | 
+Q2 | 0.062 | 1.097 | 0.150 | -0.201 | 0.087 | 
+(0.33) | (24.89) | (2.41) | (-2.91) | (2.10) | 
+Q1 (Low) | -0.046 | 0.976 | 0.206 | 0.161 | 0.013 | 
+(-0.28) | (25.30) | (3.79) | (2.67) | (0.35) | 
+High - Low | 0.713 | 0.004 | -0.142 | -0.371 | 0.018 | 
+t-statistic | (3.33) | (0.09) | (-2.03) | (-4.78) | (0.39) |
+--- 图26 ---
+Figure 3. Monthly Returns and t-statistics in Event-Time
+Panel A: Equal-Weighted Alphas and t-statistics by Month
+处：Johnson Kim and So (2020)
+Panel B: Value-Weighted Alphas and t-statistics by Month
+--- 图27 ---
+Table 5. Combined Strategy Alphas and Factor Loadings
+[表]
+Panel A: Long M = T, Short M = T - 1 Strategy | 
+ | ALPHA | MKTRF | SMB | HML | UMD | 
+Q5 (High) | 0.817 | -0.055 | -0.063 | 0.038 | 0.076 | 
+(5.12) | (-1.48) | (-1.20) | (0.66) | (2.20) | 
+Q4 | 0.573 | -0.042 | -0.070 | -0.090 | -0.046 | 
+(3.14) | (-0.98) | (-1.17) | (-1.36) | (-1.17) | 
+Q3 | 0.389 | -0.027 | 0.106 | -0.156 | 0.082 | 
+(1.53) | (-0.45) | (1.28) | (-1.69) | (1.49) | 
+Q2 | 0.238 | 0.067 | -0.023 | -0.128 | 0.126 | 
+(0.94) | (1.14) | (-0.28) | (-1.39) | (2.29) | 
+Q1 (Low) | -0.343 | -0.009 | 0.021 | 0.080 | 0.110 | 
+(-1.52) | (-0.16) | (0.28) | (0.97) | (2.23) | 
+High - Low | 1.160 | -0.046 | -0.083 | -0.041 | -0.033 | 
+t-statistic | (4.38) | (-0.75) | (-0.97) | (-0.43) | (-0.58) |
+出处： Johnson, Kim, and So (2020)
+--- 图28 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366750>)
+--- 图29 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a444a0>)
+--- 图30 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366250>)
+--- 图31 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a444a0>)
+--- 图32 ---
+Table 7. Earnings Metrics
+Panel A: Earnings Metrics by EMI Portfolios
+[表]
+ | Equal-Weighted | Value-Weighted | 
+ | $ \Delta EPS $ | $ SURP $ | $ 1(SURP>0) $ | ACC | $ \Delta EPS $ | $ SURP $ | $ 1(SURP>0) $ | ACC | 
+Q1 (Low) | 0.459 | -0.327 | 0.049 | -1.894 | 0.289 | -0.180 | 0.051 | -3.483 | 
+Q2 | -0.078 | -0.254 | 0.145 | -2.715 | -0.107 | -0.069 | 0.144 | -4.781 | 
+Q3 | -0.059 | -0.166 | 0.288 | -2.885 | 0.000 | -0.029 | 0.347 | -4.214 | 
+Q4 | -0.083 | -0.095 | 0.424 | -3.621 | -0.012 | -0.004 | 0.494 | -4.516 | 
+Q5 (High) | -0.219 | -0.013 | 0.514 | -4.722 | -0.055 | 0.059 | 0.580 | -5.964 | 
+High-Low | -0.678 | 0.327 | 0.465 | -2.829 | -0.344 | 0.246 | 0.529 | -2.481 | 
+p-value | (0.00) | (0.00) | (0.00) | (0.00) | (0.00) | (0.00) | (0.00) | (0.00) |
+出处： Johnson, Kim, and So (2020)
+--- 图33 ---
+Table 9. Communication with Investors and Analysts
+[表]
+ | GUIDE | Actual-Guide | Actual-Consensus | Walk Down | 
+EMI | $ 0.016^{{***}} $\n(6.95) | $ 0.016^{{***}} $\n(6.87) | $ 0.450^{{***}} $\n(4.12) | $ 0.458^{{***}} $\n(4.17) | $ 0.235^{{***}} $\n(3.03) | $ 0.234^{{***}} $\n(2.97) | $ 0.755^{{***}} $\n(3.76) | $ 0.504^{{**}} $\n(2.52) | 
+SIZE | $ 0.021^{{***}} $\n(10.18) | $ 0.021^{{***}} $\n(10.15) | $ -0.197^{{***}} $\n(-3.53) | $ -0.169^{{***}} $\n(-2.89) | $ -0.124^{{**}} $\n(-2.21) | $ -0.106^{{*}} $\n(-1.82) | $ -0.329^{{***}} $\n(-6.32) | $ -0.194^{{***}} $\n(-3.29) | 
+LBM | -0.003\n(-0.79) | -0.005\n(-1.32) | $ 2.705^{{***}} $\n(6.53) | $ 2.780^{{***}} $\n(6.37) | $ 3.825^{{***}} $\n(8.51) | $ 3.826^{{***}} $\n(8.16) | $ 1.021^{{***}} $\n(2.86) | -0.018\n(-0.05) | 
+MOMEN | - | -0.003\n(-1.55) | - | 0.084\n(0.68) | - | -0.020\n(-0.21) | - | $ -2.405^{{***}} $\n(-7.72) | 
+VLTY | - | $ -0.000^{{*}} $\n(-1.92) | - | 0.016\n(1.20) | - | 0.010\n(1.01) | - | $ 0.059^{{***}} $\n(3.01) | 
+$ R^{{2}} $(%) | 2.280 | 2.290 | 2.695 | 2.732 | 7.946 | 7.966 | 0.739 | 1.155 |
+出处： Johnson, Kim, and So (2020)
+--- 图34 ---
+Panel B: Weekly Scaled Analyst Bias (High EMI vs. Low EMI)
+处：Johnson, Kim, and So (2020)
+--- 图35 ---
+Table 10. Opportunistic Insider Trading
+[表]
+ | EMI Quintiles |  |  | 
+ | Q1 (Low) | Q2 | Q3 | Q4 | Q5 (High) | High - Low | t-stat | 
+Average | -12.37 | -21.17 | -29.95 | -43.34 | -55.16 | -42.79 | (-48.63) | 
+Ab. Pre-EA | 7.99 | 14.51 | 20.18 | 29.25 | 36.38 | 28.39 | (23.56) | 
+Ab. Post-EA | 2.93 | 3.22 | 3.48 | 5.80 | 6.98 | 4.05 | (5.63) | 
+Pre - Post | 5.06 | 11.29 | 16.70 | 23.45 | 29.40 | 24.33 | (20.24) |
+Panel B: Cohen et al. (2012) Opportunism Measure and EMI
+[表]
+ |  | EMI Quintiles | High - Low | t-stat | 
+ |  | Q1 (Low) | Q2 | Q3 | Q4 | Q5 (High) | 
+Opportunistic | All | -4.98 | -6.29 | -7.71 | -11.96 | -16.65 | -11.67 | (-18.75) | 
+ | Ab. M=T-1 | 1.31 | 2.54 | 3.04 | 5.19 | 7.30 | 5.99 | (11.84) | 
+ | Ab. M=T | 0.67 | 0.37 | 0.29 | -0.19 | -0.30 | -0.97 | (-2.12) | 
+ | Ab. M=T+1 | -1.97 | -2.90 | -3.31 | -4.97 | -6.96 | -4.99 | (-10.75) | 
+Routine | All | -1.17 | -2.14 | -3.44 | -6.52 | -10.63 | -9.46 | (-13.89) | 
+ | Ab. M=T-1 | 0.54 | 1.11 | 1.37 | 2.42 | 3.85 | 3.31 | (8.65) | 
+ | Ab. M=T | -0.15 | -0.15 | 0.43 | -0.13 | -1.01 | -0.86 | (-2.30) | 
+ | Ab. M=T+1 | -0.39 | -0.96 | -1.80 | -2.28 | -2.83 | -2.44 | (-6.72) | 
+Opp. - Rout. | All | -3.61 | -3.81 | -3.96 | -5.08 | -5.67 | -2.06 | (-3.27) | 
+ | Ab. M=T-1 | 0.70 | 1.25 | 1.34 | 2.54 | 3.21 | 2.52 | (5.45) | 
+ | Ab. M=T | 0.78 | 0.49 | 0.06 | -0.06 | 0.74 | -0.04 | (-0.09) | 
+ | Ab. M=T+1 | -1.48 | -1.74 | -1.40 | -2.48 | -3.95 | -2.47 | (-5.24) |
+出外：Johnson Kim
+--- 图36 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图37 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a0c0>)
+--- 图38 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253649a0>)
+--- 图39 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a0c0>)
+--- 图40 ---

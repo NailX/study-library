@@ -1,0 +1,79 @@
+[
+ {
+  "pos": 1,
+  "title": "【027】追寻因子的足迹：分类、构造与检验",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484028&idx=1&sn=6f23422ddf7c0e75173397beb7189a29&chksm=f995b3fecee23ae8d07889c467a5a592f6c805447e560e8a5dfd62422e17161cabe723fd7e7e#rd",
+  "chars": 9208,
+  "file": "001 【027】追寻因子的足迹：分类、构造与检验.txt"
+ },
+ {
+  "pos": 2,
+  "title": "【030】检验因子模型：Alpha, GRS 与 GMM",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484061&idx=1&sn=b836d7aa4d140ee6d2a2887dff882451&chksm=f995b31fcee23a09274a42f56c6741369ffc174821200597e3de9319257903145ff4f6358046#rd",
+  "chars": 2699,
+  "file": "002 【030】检验因子模型：Alpha, GRS 与 GMM.txt"
+ },
+ {
+  "pos": 3,
+  "title": "【040】Trend Factor in China ：中国版定价模型？",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484238&idx=1&sn=7672dd7520608abb52d18159fc5ebfc9&chksm=f995b2cccee23bdae0c1d3a862efb1f0c5d5c7ffc8901286d414406f208fc233fd8108db7a84#rd",
+  "chars": 6536,
+  "file": "003 【040】Trend Factor in China ：中国版定价模型？.txt"
+ },
+ {
+  "pos": 4,
+  "title": "【047】股票收益横截面：一部历史",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484403&idx=1&sn=42832a19417fde568dc916554252b3e9&chksm=f995b271cee23b67e5cf7fd86487c1981302bf3fae567cfeca463955b75848e745c981caeb47#rd",
+  "chars": 6022,
+  "file": "004 【047】股票收益横截面：一部历史.txt"
+ },
+ {
+  "pos": 5,
+  "title": "【049】Low Minus High 启示录",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484455&idx=1&sn=443c24813056f8d2ef61423cc5cf471d&chksm=f995b5a5cee23cb37d0737096f93332729405e2dd93c7d640153129d2298d8472b554ab24360#rd",
+  "chars": 4764,
+  "file": "005 【049】Low Minus High 启示录.txt"
+ },
+ {
+  "pos": 6,
+  "title": "【050】对冲：获取更纯粹的 CP",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484479&idx=1&sn=4401b50d1c24a37b17ffbb3bbda73351&chksm=f995b5bdcee23cab228167141cdd603f1415eee120a8963a600e7e03ea0c56701e27221878cd#rd",
+  "chars": 6706,
+  "file": "006 【050】对冲：获取更纯粹的 CP.txt"
+ },
+ {
+  "pos": 7,
+  "title": "【063】可复制的因子研究",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484885&idx=1&sn=8e42d803b5b99544651c01fc6398b5e4&chksm=f995b457cee23d41d979e5f2ae2516edc8c4393895f3897ef45a31370b97bb42e46e66507fde#rd",
+  "chars": 4664,
+  "file": "007 【063】可复制的因子研究.txt"
+ },
+ {
+  "pos": 8,
+  "title": "【064】所见即所得吗？",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484894&idx=1&sn=4954ad4ac8969dee79266051eee69f23&chksm=f995b45ccee23d4a9cf084d7ec9ce4c5b7e400ebb02c4ffdc78dd15a454f59c40c5a6df695a0#rd",
+  "chars": 4402,
+  "file": "008 【064】所见即所得吗？.txt"
+ },
+ {
+  "pos": 9,
+  "title": "因子模型简介",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484920&idx=1&sn=8231f48d2d17706aec66cb4a9472413d&chksm=f995b47acee23d6c5590aae8322e3661f074b58a1c1c477bbe2dcf0210be7809f6c2c3202571#rd",
+  "chars": 464,
+  "file": "009 因子模型简介.txt"
+ },
+ {
+  "pos": 10,
+  "title": "【094】基于回归斜率的因子溢价估计与因子模型",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485487&idx=1&sn=0acea5351a4c4ac18d5a5456aef763cc&chksm=f995b9adcee230bb94fc7ba9d5ce0c95f21dba1f5164f63c9c72827900cbb1b6d69702c252b2#rd",
+  "chars": 5469,
+  "file": "010 【094】基于回归斜率的因子溢价估计与因子模型.txt"
+ },
+ {
+  "pos": 11,
+  "title": "【103】Options: Factors, Models, and Factor Momentum",
+  "url": "http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485700&idx=1&sn=94e660e4181d50134615af4d3f5d222a&chksm=f995b886cee23190962d96d6e128f3d9cf12348a825a51146b5687702b5552101a174fb591b4#rd",
+  "chars": 7981,
+  "file": "011 【103】Options_ Factors, Models, and Factor Momentum.txt"
+ }
+]

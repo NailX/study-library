@@ -1,0 +1,176 @@
+# A new norm ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/3olcEO3mrTik3ELNIj8lNA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+自 Fama and French (1993) 以来，所有主流的多因子模型都是时序回归模型。然而，27 年后的今天，一场变革正悄然发生。
+
+00
+引言
+
+线性多因子模型假设资产的预期（超额）收益由资产对因子的暴露和因子的预期收益率决定，即它们满足如下关系：
+
+其中 E[R_i^e] 表示资产 i 的预期（超额）收益，β_i 为资产 i 的因子暴露向量，λ 表示因子预期收益向量，因子预期收益率也称为因子风险溢价（risk premium）。在关于多因子模型的研究中，一旦因子被确定，估计它们的 risk premium 就是最核心的问题（之一）。
+
+在这方面，学术界过去近 30 年的范式当属时间序列回归因子模型（time-series regression factor models）。
+
+01
+时序回归因子模型
+
+20 世纪 90 年代，Fama and French (1993) 三因子模型（以下称为 FF3）问世，取代 CAPM 成为资产定价的基准。对于股票市场而言，FF3 在市场因子的基础上加入了 SMB 和 HML 代表的规模和价值因子：
+
+由于是第一个多因子模型，Fama and French (1993) 对学术界之后在实证资产定价方面的研究影响十分深远。在这之后的近 30 年里，纵然有很多经典的多因子模型被提出 —— 包括 Carhart (1997) 四因子模型（它在 FF3 的基础上加入了截面动量），2015 年前后充满恨怨情仇的 Fama and French (2015) 五因子模型以及 Hou, Xue, and Zhang (2015) 的 q-factor model，以及 2018 年前后从行为金融学角度提出的 Stambaugh and Yuan (2017) 以及 Daniel, Hirshleifer, and Sun (2020) 模型，但它们无疑不是遵循了 FF3 的思路：
+
+1. 使用 portfolio sort 构建因子模拟投资组合，估计并检验因子的 risk premium；
+
+2. 使用资产收益率和因子收益率进行时序回归，检验多因子模型解释资产收益率的能力。
+
+由于在检验资产 pricing errors 的时候采用了时序回归（同时得到因子暴露 β 的估计以及 pricing error，即截距项），学术界把按上述方法构建的多因子模型称为时间序列回归因子模型。
+
+在上述第二步检验多因子模型的过程中，资产采用的是投资组合，而非个股。这么做的主要原因是，所有模型都是不完美的，只要使用足够多的 test assets 来检验模型，那么它们的 pricing errors 一定会显著不为零。这意味着使用个股作为资产的话，多因子模型一定会被拒绝（over-rejection）。
+
+在 FF3 使用的方法中，更值得思考的其实是第一步，即使用 portfolio sort 得到的投资组合作为因子投资组合，以其收益率的时序均值来估计并检验因子 risk premium。以 FF3 的 HML 因子为例，它使用市值和 book-to-market ratio（BM）进行 double sort 来构建因子投资组合：
+
+上式中，HML 就是通过 double sort 得到的价值因子投资组合，计算其收益率并在时序上取平均，以此检验价值因子的 risk premium。
+
+虽然 portfolio sort 简单直观，但通过它来构建因子模拟组合是粗糙的 —— 比如无法控制该组合在其他因子上的暴露。因此按照上述方法估计和检验因子的 risk premium 也存在改进空间。在这方面，学术界更加认可的方法是 Fama and MacBeth (1973) 提出的 two-pass regression。
+
+02
+截面回归因子模型
+
+Fama and MacBeth (1973) regression（下称 FM regression）是检验因子 risk premium 的常见方法。它是一个“两步法”：第一步通过时序回归确定资产的因子暴露，而第二步进行在每个时刻 t 进行截面回归确定 t 时刻的因子收益率。（需要背景知识的小伙伴请参考《多因子模型的回归检验》。）相对于 portfolio sort，截面多元回归的好处是，可以控制其他变量的影响，更准确的估计因子的 risk premium。
+
+在使用 FM regression 时，一个重要的前提的确定资产的因子暴露。由于真实因子暴露是未知的，因此第二步截面回归存在 errors-in-variables（EIV）问题。为了尽可能排除这个问题的影响，Fama and MacBeth (1973) 使用投资组合而非个股作为 test assets，通过时序回归得到它们的因子暴露，再进行截面回归。
+
+然而，Jegadeesh et al. (2019) 指出使用投资组合而非个股作为 test assets 是一种降维处理，投资组合会丢掉很多个股截面上的特征。如果待检验的因子和这些 test assets 的分组属性正交，用它们作为被解释变量进行 FM regression 则无法发现这些因子的 risk premium；该文提议使用个股作为资产来估计和检验因子 risk premium 并给出了解决 EIV 问题的办法。《Which Beta?》一文曾对此进行过详细介绍。
+
+从计量经济学的角度来说，使用个股作为资产进行截面回归、检验因子 risk premium 的时候，一个难题是 N > T（即资产的个数 N 通常超过时序期数 T）对于检验造成的挑战：
+
+“ When N is large and T is small, the asymptotic distribution of any traditional risk premium estimator provides a poor approximation to its finite-sample distribution, thus rendering the statistical inference problematic.
+
+”
+
+一篇最新发表于 Review of Financial Studies 上的文章 Raponi, Robotti, and Zaffaroni (2020) 提出了 N > T 情况下的 risk premium estimator，很好的应对了上述问题。（顺便一提，这篇文章的文献综述部分对于学术界提出的不同 risk premium estimators 进行了很好的梳理。）
+
+除了将他们的 estimator 用于 two-pass regression、检验因子 risk premium 外，该文同样探索了使用 firm characteristics vs 使用时序回归 β 作为因子暴露的差异。该文的结论是，比起时序回归 β，公司特征能够更好的解释股票预期收益率的截面差异，这一结论和 Chordia, Goyal, and Shanken (2015) 相同。
+
+“ We show that our large cross-sectional framework poses a serious challenge to common empirical findings regarding the validity of beta-pricing models. In the context of pricing models with Fama-French factors, firm characteristics are found to explain a much larger proportion of variation in estimated expected returns than betas.
+
+”
+
+梳理一下本节写到现在的逻辑。
+
+学术界倾向使用 FM regression 代替 portfolio sort 检验因子 risk premium；而在 FM regression 中应使用个股而非个股的投资组合作为 test assets（需要解决 EIV 以及 N > T 等问题）；当以个股为资产时，发现公司特征而非时序回归 β 作为因子暴露时，因子才被定价（显著的 risk premium）且公司特征（而非时序回归 β）能够解释个股预期收益率的截面差异。
+
+沿着这个逻辑，一类新的多因子模型应运而生，它就是以公司特征为因子暴露、通过截面回归计算因子 risk premium 的截面回归多因子模型（cross-section regression factor models）。那么，截面多因子模型是否比时序多因子模型更好呢？
+
+Fama and French (2020) 回答了这个问题（见前文《Which Beta (II)?》）。其核心结论是，比起传统的时序回归多因子模型，在采用截面回归多因子模型时，资产的 pricing errors 更接近零，说明后者比前者更优。此外，当采用截面回归多因子模型式，因子暴露应采用时变的公司特征，而非恒定的公司特征。
+
+此外，Fama and French (2020) 还研究了一个“四不像”模型，即使用截面回归计算因子 risk premium，得到因子收益率后再通过股票和因子收益率时序回归计算股票的因子暴露，以此取代公司特征。这个“四不像”模型的表现和时序回归模型类似，均不如截面回归模型。这说明截面回归模型优于时序模型的原因可能源于两点：（1）截面回归的因子收益率优于时序回归模型中通过 portfolio sort 计算的因子收益率；（2）使用时变公司特征作为因子暴露比时序回归 β 更优。
+
+关于上述第二点，我们可以从以下两点进行思考：（1）在使用个股进行时序回归计算因子暴露时，往往采用日频收益率数据。由于其噪声较大，因此因子暴露的估计会有较大误差，使得因子暴露在时序上不稳定。一旦发生这种情况，就会导致该因子的表现看上去就和随机因子一样，因此难以获得显著的 risk premium。（2）真实的因子暴露未知，公司特征相比于时序回归 β 是其更好的代理变量。
+
+03
+新范式 ？
+
+自从 Fama and French (1993) 三因子模型问世以来，学术界便采用了时序回归多因子模型这一传统。而 27 年后的今天，Eugene Fama 和 Kenneth French 又通过 Fama and French (2020) 一文打破了这个传统，引领了今后实证资产定价的研究方向。在 Review of Financial Studies 2020 年五月的特刊（Special issues: new methods in the cross-section）中，比较时序和截面两种多因子模型就是其包含的三个前沿方向之一。
+
+虽然 Fama and French (2020) 的结果更多的建立在纯粹的实证分析之上，但该文还是清晰地回答了学术界和业界都非常关心的问题：如何估计和检验因子 risk premium；如何选择因子暴露。从本文第二节提及的众多最新研究来看，使用 firm characteristics 作为因子暴露、使用截面回归来估计和检验因子 risk premium 在未来一定大有可为。
+
+提起最近十年来最重要的线性多因子模型，可能人们会首推 Fama and French (2015) 五因子模型。而 Hou, Xue, and Zhang (2015) 的 q-factor model 大概是唯一能够与之争锋的。（关于这两个模型的历史，见《q-factor model 一段往事》、《从 Factor Zoo 到 Factor War，实证资产定价走向何方?》。）
+
+2019 年，Hou et al. (2019) 在 Review of Finance 上以 Which factors? 为题对所有主流的时序多因子模型进行了比较。除本文第一节提到的模型外，参加对比的还包括他们自己在 q-factor model 基础上提出的 q5 模型（Hou et al. 2020）。
+
+一番比较下来，以异象投资组合的 pricing errors 来评价，q 和 q5 模型完胜，说明它们能够解释更多的异象（特别的是，FF5 在 q 和 q5 模型面前不堪一击）。Hou et al. (2019) 一文也获得了 2019 年 Spangle IQAM Best Paper Prize。这个成就也让 q 和 q5 模型着实扬眉吐气了一番，它似乎宣告了 q/q5 对于 FF5 的压倒性胜利。
+
+然而，正当我们认为风向已经发生了变化，并准备开始接纳 q/q5 代替 FF5 作为未来实证资产定价研究中的 benchmark 的时候，Fama and French (2020) 横空出世，直接“毙”了所有的时序多因子模型，指出以 firm characteristic 为因子暴露代理变量的截面多因子模型才是未来。
+
+你品，你细品。
+
+参考文献
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Chordia, T., A. Goyal, and J. A. Shanken (2015). Cross-sectional asset pricing with individual stocks: Betas versus characteristics. Working paper.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors. Review of Financial Studies 33(4), 1673 – 1736.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2019). Which factors? Review of Finance 21(1), 1 – 35.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2020). An augmented q-factor model with expected growth. Review of Finance forthcoming.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Jegadeesh, N., J. Noh, K. Pukthuanthong, R. Roll, and J. Wang (2019). Empirical tests of asset pricing models with individual assets: Resolving the errors-in-variables bias in risk premium estimation. Journal of Financial Economics 133(2), 273 – 298.
+
+Raponi, V., C. Robotti, and P. Zaffaroni (2020). Testing beta-pricing models using large cross-sections. Review of Financial Studies 33(6), 2796 – 2842.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270 – 1315.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bb50>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ade0>)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b1f0>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a448b0>)
+--- 图12 ---
+[表]
+BM | 
+High(高组) | Middle(中间组) | Low(低组) |
+值 Small（小市值）
+Big（大市值）
+[表]
+S/H | S/M | S/L | 
+B/H | B/M | B/L |
+市值分组依据：NYSE 中位数；
+BM 分组依据：NYSE 30% 和 70% 分位数。
+--- 图14 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253661b0>)
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ae30>)
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2b970>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366200>)
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2b970>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a45300>)
+--- 图22 ---

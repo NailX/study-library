@@ -1,0 +1,94 @@
+# 因子择时
+
+来源：04_研究_资产配置
+链接：https://mp.weixin.qq.com/s/QjXQ2ldPMHlkl8J1WkfJ0w
+
+作者：石川，清华大学学士、硕士，麻省理工学院博士；北京量信投资管理有限公司创始合伙人；著有《因子投资：方法与实践》、《Navigating the Factor Zoo》，译有《机器学习与资产定价》。
+封面来源：www.pexels.com
+未经授权，严禁转载。
+摘要：本文通过 Cui et al. (2025) 简要探讨因子择时。
+0之前两期文章的 topics 都出自 2024/25 年度中国量化投资白皮书中提到机构策略探索清单。今天，我们照旧从中找些灵感。在这份清单上，排名第四的不是别人，正是大名鼎鼎的因子择时。
+熟悉我的小伙伴都知道，长久以来，我对因子择时的观点是这样的：
+是这样的：
+是这样的：
+不过，今年 5 月，我听了一个题为《Breaks and Trends in Factor Premia》的报告。尽管我对因子择时的态度依旧保守，但我认为这个方法值得尝试。之所以“拖”到今天才介绍它，是因为这篇文章不久前才被挂到 SSRN（Cui et al. 2025）。
+1该文方法背后的直觉含义可以通过下面这个例子来解释。图中曲线是利用 B/M 构造的价值因子的累计收益曲线。（不过我插一句，这个图的走势我和认知中的美股上价值因子自 GFC 之后持续回撤了 10 年不太一致；anyway。）
+如果假设全局内该因子 risk premium 不变，那么得到的就是图中蓝色直线，而该直线的 slope 就是因子溢价的估计。然而，如果我们把估计的频率逐步提升，就会相继得到绿色和红色的动态因子溢价估计；它们表示不同时间的条件因子溢价。
+因此，估计的核心就是选择适当的时间尺度。一方面，我们希望在假设 risk premium 时变的前提下尽可能利用数据中的信息（即不同的 risk premium 确实反映了 structural breaks），而另一方面我们同样希望避免过拟合。而实现上述 trade-off 的方法就是正则化——该文提出了 Total-Variation Predictive Regression (TV-PR) estimator。
+2令  表示  期资产  的超额收益率；向量  表示  期资产  的因子值（经过标准化后的 firm characteristics）。那么，我们熟悉的两种做法其实代表了两种极端情况。
+第一种是假设全局内 risk premium 不变。此时，因子溢价可以通过下面这个 panel regression 来估计：
+注意此处  是不带下标  的，表示因子溢价不随时间变化。
+而另一种极端是我们熟悉的 Fama-MacBeth regression，即每期都来估计一个 :
+以 size、value 和 momentum 为例，下图展示了上述两种极端情况，其中 panel (a) 是恒定因子溢价的情况；而 panel (b) 则表示每期因子溢价都在变化。
+
+3Okay，接下来我们就来看看 TV-PR estimator。它的核心是一个 lasso type estimator，只不过把 sparsity 用在了识别因子溢价的 breaks 上面，具体的目标函数如下：
+上式中，第一项就是常见的 mse；而第二项是 TV-PR estimator 的核心，它衡量了时变因子溢价的 total variation，并通过 L1-norm 罚项的形式来控制过拟合（其中  是因子个数），控制识别出的因子溢价 breaks 数量；而第三项是在因子层面的 sparsity（用于 factor selection）。下图的例子说明了该 estimator 中两个罚项的作用。
+由第二项的形式可知，当  很小的时候（惩罚很低），模型会倾向于识别出更多的 breaks，即朝着 period-by-period Fama-MacBeth regression 来靠拢；而当  很大的时候（惩罚很高），模型会倾向于识别出更少的 breaks，即朝着恒定因子溢价靠拢。
+更多的关于该 estimator 的 statistical properties 的讨论请参考原文。我们接下来看看美股上的实证结果。
+4首先，下图展示了 2004-2023 年之间，常见美股因子上的因子溢价估计结果。
+其次，作者用一个例子表明了在不同 rolling window 下，识别出的 structural breaks 的稳健性。这一点对于后文使用 rolling window 来估计并进行因子择时（终于扣题了）至关重要。如果 breaks 确实反映了经济基本面的转变，那么在这些 breaks 附近进行估计时，应能较为一致地检测到 breaks 的出现。下图的结果表明了这一点。
+图中，Estimation 1 to 4 均能在 2010 年前后检测到一个显著的 break，并且伴随着风险溢价的上升（红色）。值得注意的是，即使样本期正好从事件发生期间开始（Estimations 4 and 5），该 break 依然能够被识别出来。这个结果表明，能否识别到 breaks 依赖于样本期是否覆盖了其发生的时点，且只要窗口覆盖范围足够靠近事件发生时点，检测的延迟就很小，进而为因子择时提供了及时的参考。
+下面顺理成章，来看看因子择时的结果。为此，作者首先考差了基于截面相对强弱的因子轮动策略，即做多因子溢价估计值最高的 5 个因子、同时做空估计值最低的 5 个因子。下图表明，结果在不同的超参数  取值下较为稳健，且都能战胜基于动量的因子选择（要知道因子动量在美股还是很 strong 的）。
+此外，作者也考察了单个因子以及单类别因子基于 risk premium 估计的时序择时，并和 buy-and-hold 来比较，结果如下。图中 45 度红色虚线表示两种策略的分界线：如果结果处于分界线之上则表明择时优于 buy-and-hold。可见，对于绝大部分单因子而言，基于该 estimator 的因子择时都战胜了 buy-and-hold；而如果以大类因子来考察，择时的优势则更加明显。
+Okay. 以上就是对该方法的简要介绍。希望它能为你的因子择时提供一些思路。
+而如果你问我？我的看法是因子注定会失效，structural breaks 也一定会出现。而是通过类似上述 estimator 进行时变估计，还是采用什么别的方法来应对，是我们每个人自己要做的功课。共勉。
+
+References
+Cui, L., G. Feng, J. Ma, and Y. Su (2025). Breaks and trends in factor premia. Working paper.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Make sense … but challenging
+因子 risk premium 并非常数，而是 time varying;
+因子 risk premium 反映了股票收益率中的共性部分，这部分和市场情绪以及宏观经济等密切相关；
+仅使用历史时序均值作为 risk premium 的估计，忽视了所有其他相关信息，是一种 naïve estimate；
+实证数据显示想要在 fee 后战胜基准（等权）非常困难。
+--- 图3 ---
+因子择时模型
+[表]
+因素 | 典型代理变量 | 含义 | 
+因子估值 | 价值价差（value spread） | 衡量因子的估值水平 | 
+因子动量 | 过去12个月累计收益率 | 衡量因子过去一段时间的表现 | 
+因子波动 | 因子收益率的波动率 | 衡量因子的风险水平 | 
+市场状态 | 市场情绪：波动性、流动性和趋势性 | 衡量市场所处的某一个状态 | 
+宏观环境 | 经济增长、通货膨胀、利率水平等 | 因子的宏观驱动因素 |
+出处：《因子投资：方法与实践》
+前三种模型属于数据驱动，更适合量化；后两种模型则不同。
+--- 图4 ---
+观点
+大量的 measurement errors（mean、std dev、corr）让样本外因子择时很难战胜简单多样化。
+--- 图5 ---
+Figure 1: Breaks and trends in factor premia, different TV strengths/smoothness levels
+Note: All curves are cumulative sums of (log)returns. Black: slope factor return ( $ f_t $); Red/green/blue: factor premium estimates ( $ \widehat{\gamma}_t $) under low/medium/high TV regularization strength, respectively. In each constant  $ \gamma $ segment, the cumulative sum is linear, indicating a trend. Higher TV regularization leads to fewer detected breaks and smoother estimated trends, and vice versa. This is an illustration with the value factor (BE/ME); see other factors and multi-factor results further below.
+--- 图6 ---
+Figure 2: Constant and Period-by-Period Factor Premia
+Note: The figure illustrates estimated premia for size, value, and momentum factors under two methodologies. Panel (a) shows constant factor premia ( $ \gamma $) from panel-pooled predictive regressions (Eq. (2)). Panel (b) depicts time-varying premia ( $ \hat{\gamma}_{t} $) obtained via period-by-period cross-sectional regressions (Eq. (3)).
+(a) Constant Factor Premia in (2)
+(b) Period-by-Period Factor Premia in (3)
+
+--- 图8 ---
+Note: This figure presents cumulative returns for six slope factors and their corresponding time-varying factor premia estimates, evaluated under varying regularization levels. Structural shifts in the data are highlighted through estimated breakpoints. Equation (1) is estimated using a sample spanning 2004-2023, a period marked by significant economic and financial changes.
+(a) Market Beta
+(c) Value
+(b) Size
+(e) Investment
+(d) Momentum
+(f) Profitability
+--- 图9 ---
+Note: This figure presents 10-year rolling estimates of the dynamic risk premium for the value factor proxied by the book-to-market ratio. To ensure time-series independence, estimates are computed with a one-year gap between windows. The regularization parameter is set at  $ \lambda = 0.05 $, balancing model flexibility and overfitting control.
+--- 图10 ---
+Note: This figure reports annualized Sharpe ratios for out-of-sample factor rotation strategies. We construct long-short portfolios using 61 slope factors, with time-varying premia estimated and portfolios rebalanced monthly. Strategy performance is analyzed under varying levels of fused penalty regularization and benchmarked against long-short portfolios based on momentum characteristics derived from cumulative past returns.
+--- 图11 ---
+Figure 8: Single Factor Timing Performance on Time-Varying Premia
+Note: This figure displays annualized Sharpe ratios for out-of-sample factor timing strategies versus buy-and-hold across 61 slope factors. Timing strategies, rebalanced monthly, adjust exposures based on the sign of estimated time-varying risk premia. For comparison, we report average Sharpe ratios across eight factor categories.
+(a) One Factor at a Time
+(b) Pooled by Factor Clusters
+--- 图12 ---
+因子失效并不可怕
+因子失效真的是过拟合吗？允许 structural break 出现，这并非因子挖掘中狭义的过拟合。主观投资同样受到风格切换影响，这并非量化投资独有的问题。
+贝叶斯方法论：在变化与错误中探索，学习，成长。人类认识世界的本质如此，从表层规律到深层规律的认识。
+--- 图13 ---

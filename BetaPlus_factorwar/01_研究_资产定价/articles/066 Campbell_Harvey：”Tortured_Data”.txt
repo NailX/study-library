@@ -1,0 +1,386 @@
+# Campbell Harvey：”Tortured Data”
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/6laIT5epxdLVuEEIQbbZ5g
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+If you torture the data long enough, it will confess.
+
+00
+引言
+
+“ If you torture the data long enough, it will confess.
+
+—— Ronald Coase, 1991 年诺贝尔经济学奖获得者
+”
+
+上面这句话的直白翻译是，如果你折磨数据足够长的时间，它们会招供的。它的隐含意思是，只要人们想尽办法去过拟合，总能得到希望的结论。
+
+这句话用来形容今天实证资产定价领域的研究风气十分贴切。
+
+近些年，Campbell Harvey 教授举起了呼吁学术界重视并消灭伪发现的大旗。无论是他著名的论文 Harvey, Liu, and Zhu (2016)，还是 2017 年他在 AFA 年会做的主席演讲（Harvey 2017，点击直达推文链接），还是即将刊发于 Journal of Finance 的最新文章 Harvey and Liu (2020)，都是关于实证资产定价领域伪发现的问题。
+
+而近日，在 Society of Financial Studies（SFS）协会 2020 年会上，Harvey 教授又应邀做了 keynote，题目就叫 Tortured Data —— 饱受折磨的数据。
+
+可能小伙伴们更熟悉 AFA，而 Society of Financial Studies 的来头同样不小，它是 Review of Financial Studies 背后的协会。据其官网介绍，以会议论文最终被金融领域三大顶刊录用比例来评判，SFS 年会是最佳的金融学会议。因此，在该会议上做 keynote 并再次呼吁伪发现问题，足见其重要性。
+
+今天这篇小文就来介绍一下 Harvey 教授的最新演讲。由于公众号之前在这方面做过一些积累，因此也会在行文中把相关内容串联起来。Harvey 教授指出，出现伪发现的原因包括以下几种：
+
+1. 数据挑选
+2. 责任下放
+3. 多重假设检验
+4. 方法多样性
+5. 数据操纵
+
+值得一提的是，Harvey 教授在演讲中不失诙谐的抨击了金融以及其他领域的一些伪发现，并同时“怼了”学术界和业界（不乏 big names）。所以，建议你看完本文也去看看他的演讲（参考文献最后有链接）。
+
+01
+数据挑选
+
+Harvey 教授通过两个例子说明了数据挑选的危害。
+
+首先遭到抨击的是来自一家知名投资管理公司在 2019 年写的一篇 white paper，题为 The overlooked persistence of active outperformance，非常 aggressive。它的意思就是主动管理人其实能持续的战胜市场，提供 α，但却被忽视了。
+
+一直以来，无论是 Michael Jensen 还是 John Bogle 都告诉我们，在美国市场中，平均来看，主动管理人 fee 后难以获得超额收益。然而，这篇 white paper 却抛出完全对立的观点。那么，到底是人们长久以来的看法错了，还是这篇文章有问题？
+
+经过仔细检查，不难发现产生上述分歧的原因。在这篇 white paper 的摘要中，有下面这句非常重要的话（下图，highlight 的部分），它的意思是“如果我们剔除市场中最差的 25% 主动管理策略，那么最好的四分之三战胜了市场。”
+
+漂亮！这“神”逻辑严丝合缝。按照这个逻辑推演一下，如果刨除后 50% 的话，剩余的战胜市场更多！Harvey 教授在演讲中非常幽默的抛出了他对这种 data selection 的反应。
+
+第二个例子来自下面这篇 2014 年的论文。作者不乏 Andrew Ang 这样的 big name，而且其中另一位作者是 Harvey 在 Duke 商学院的同事啊。这真是……
+
+这篇文章分析了 Norwegian Government Pension Fund 的表现，得出的结论是非常优异，只不过是在下面这个前提下：
+
+“ Abstracting from the financial crisis, we conclude that active management of both equity and fixed income has significantly contributed to the returns of the fund.
+
+”
+
+惊不惊喜？意不意外？它的意思是，如果我们选择性地遗忘金融危机，这个 fund 的表现非常不错！嗯，除了熊市之外，所有的牛市都非常不错。
+
+简单点评一下这两个例子背后的数据挑选危害。说到底，金融领域的研究属于“软”科学，即研究结果依赖于提出怎样的假设，如何挑选和处理数据，以及如何分析并解释结果。但刻意的遗漏掉一些数据来支持自己的观点，显然是错误的行为。
+
+02
+责任下放
+
+产生伪发现的第二个原因是责任下放，意思是在研究中我们“无脑”相信别人的分析结果，而不去试图仔细分析其是否为伪发现。
+
+对于这点，Harvey 举了他自己的一个例子。在他学术生涯早期的某天晚上 9 点，接到了来自高盛的电话，电话那头的人不是别人，而是大名鼎鼎的 Fischer Black（需要背景知识的小伙伴可看《Fischer Black》一文）。令他感到惊讶的是，在这通电话之前，二人从未见过面，因此他对于接到 Black 的来电感到困惑不已。
+
+不过，他的困惑很快就被揭开了。Black 开门见山“你 1989 年发表在 Journal of Financial Economics 上的文章有错误。”
+
+Black 指的是 Harvey (1989) 这篇论文。其中 Table 2（下图）汇报了一个时序回归模型对下期股票收益率的预测结果。其样本内的准确性高达 R-squared = 7.5%。Black 认为这么高的 R-squared 是 overfitting 造成的。
+
+震惊之余，Harvey 感到颇为无辜；他马上反驳了 Black 并指出在这个表中，自己仅仅是根据前人的模型来汇报了一个 test results，而且他也没有进行任何最大化 R-squared 的尝试，因此这个过程中不存在任何的数据操纵或者过拟合。
+
+然而，如今 Harvey 教授对这篇 1989 年的论文在样本外进行了复现（样本外数据从 1988 年到 2018 年），并得到了完全不同的答案。在样本外，预测回归模型中的一个重要解释变量（junk spread）的系数符号竟然发生了变化，且 R-squared 也下降到了 1.2% —— 并不显著。
+
+这种强烈的对比表明了他最初参照前人研究（因此是责任下放问题）的 test results（R-squared = 7.5%）根本不靠谱。这个例子说明，即便我们非常小心的规避“折磨数据”，但我们相信并依赖的他人的研究很可能早已是“折磨数据”之后的结果。
+
+怎么样？狠起来，先从自己开始反省。面对上述责任下放问题，Harvey 教授非常坦诚的说到：
+
+“ Looking back in time, this telephone call is ironic given my research agenda is to improve research practices in finance and to call out the data miners.
+
+”
+
+而“Black was right!”则是 Harvey 教授发自内心的感叹。我们仿佛能看到 Black 鬼魅的微笑了。
+
+03
+多重假设检验
+
+造成伪发现的第三个原因是多重假设检验（multiple hypothesis testing），它指的是使用同样的数据同时检验多个原假设。在实证资产定价研究中，所有的学者都使用 CRSP 和 Compustat 的数据来挖因子，因此总能找到样本内好使但虚假的发现。
+
+关于多重假设检验，公众号之前的《出色不如走运》系里文章已经反复讨论过了，感兴趣的小伙伴请查看相关推文（II、III、IV），此处不再赘述。
+
+在谈到多重假设检验的问题时，Harvey 教授把它形象的比喻为 The Garden of Forking Paths（小径分叉的花园） —— 这个标题也是阿根廷作家 Jorge Luis Borges 于 1941 年创作的短篇故事。假设我们手里有 20 个变量来构建策略，考虑下面两种情况：
+
+1. 从这 20 个变量中随机挑出的第 1 个就得到了非常好的回测结果；于是我们不再研究剩下 19 个，并声称没有过拟合、没有进行多重假设检验；
+
+2. 假设在另一个平行宇宙中，我们把全部 20 个变量试了个遍，才最终找到了第一种情况中的第一个变量，得到了很好的回测结果。这时我们认为，因为一共测了 20 个，因此这个很可能是因为运气，所以过拟合了，所以选择不相信它。
+
+紧接着问题来了：这两种情况到底有没有区别？第一种情况下找到的那个变量是否真的没有受到多重假设检验的影响？
+
+对于这个问题，Harvey 教授表示：Both findings need to be treated equally.
+
+这意味着，即便在第一种情况下，第一次就挑出的变量依然不能令人信服，它应和第二种情况同等对待。这也同样说明，变量或者策略的先验对于规避多重假设检验影响的重要性。这让我想到 Harvey (2017) 一文提出的贝叶斯后验 p-value，它无疑更有助于分析一个变量或者策略是否真的有效。关于贝叶斯后验 p-value，请见《在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远》。
+
+04
+方法多样性
+
+方法多样性和上一节的多重假设检验异曲同工；它指的是使用不同的方法来进行分析，并挑出最好的。
+
+“ If the researcher tries a large enough number of strategy configurations, a backtest can always be fit to any desired performance for a fixed sample length.
+
+—— Marcos Lopez de Prado
+”
+
+某日，一家著名的机构找到 Harvey 教授，请他评价一下该机构研发的股票月度收益率预测模型。在介绍这个模型之前，让我们先来酝酿一下情绪。回顾下本文第二节 Harvey (1989) 中的模型，它在 1988 年之前的 R-squared 是 7.5%（被 Black 质疑了），而在 1988 到 2018 之间的 R-squared 仅为 1.2%，其在整个窗口内的 R-squared 为 4%。它的效果是下面这样，符合我们的认知。
+
+再来看看这家著名机构的模型。它们预测了世界上 59 个国家市场的月频收益率；模型的特征如下图所示。
+
+划一下关键词：每个市场 200 个变量！多阶段统计分析！使用了众多不同的、最先进的机器学习算法！针对每个市场，经过两年 intensive data collection 找到了 200 个变量，用不同的机器学习算法去 fit……
+
+再来看看效果（一定要和 Harvey 1987 对比！）。用该机构自己的话：“处处精准”，“25 个最大经济体市场的 R-squared 为 0.96”，“所有 59 个市场的 R-squared 为 0.98”。
+
+在讲到这里时，Harvey 教授又来了一把 Harvey 式幽默。他指出最初看到这两个 R-squared 的时候以为对方默认省略了百分号，如果是那样的话，那么这个复杂模型和 Harvey (1987) 在样本外（1988 到 2018）的 R-squared = 1.2% 就差不多。
+
+但是他错了，没有百分号，真的是处处精准。
+
+到底有多精准？2008 年 10 月是金融危机时期的最大单月跌幅，高达 -35%。看看在 2008 年 9 月模型预测的下个月收益率是多少？没错，-35%！分毫不差！
+
+“小朋友，你是否有很多问号？”
+
+两个模型比较一下：
+
+当“足够多的变量”遇见“足够复杂的算法”，就碰撞出“精致的错误”。但更令人称奇的是，该模型不仅样本内处处精准，再来看看该机构给出的样本外结果，同样“非凡”。然而，后来经仔细检查发现，该模型建模时已经包含了所谓的样本外数据，即样本外并非真正的样本外。
+
+05
+数据操纵（p-hacking）
+
+导致伪发现的最后一个原因是 p-hacking，即为了追求超低 p-value 而进行的数据操纵。
+
+在发表偏差的影响下，学术界都在追求超低 p-value。Harvey, Liu, and Zhu (2016) 分析了 1963 年到 2012 年间发表在金融领域最顶级期刊上的 300 多个因子模型的 t-statistics（p-value 越低，t-statistic 越高）的分布，发现 t-statistic 取值在 2 到 2.57 的文章数和 t-statistic 取值在 2.57 到 3.14 的文章数十分接近。
+
+然而，t-statistic = 2.57 对应的 p-value 大概是 0.005；而 t-statistic = 3 对应的 p-value 则是 0.001。显然，找到 p-value = 0.001 的因子要比找到 p-value = 0.005 的因子要困难得多，但它们的文章数量却大致相当。这只能说明在顶级期刊发表文章时，学者们倾向于更低的 p-value。
+
+那么问题来了：哪那么容易找到这么多超低的 p-value？答案是：通过数据操纵去凑。
+
+而在 p-hacking 方面，金融界和医学界相比又是小巫见大巫。Harvey 教授在演讲中举了一个著名的例子。一篇来自 Cornell 大学、发表于医学界知名杂志 JAMA Pediatrics 上的论文指出，在苹果上贴上卡通贴纸，可以提高 8 至 11 岁儿童在苹果和饼干之间挑选苹果的概率。
+
+这篇论文的一作是 Brian Wansink，三作是 Collin Payne。接下来就看看这二位的表演。该文发表于 2012 年。回顾其研究进程，在 2008 年之前都没有什么确定性的结论，直到 Payne 发给 Wansink 的一封邮件中透露了所谓的“重大进展”：
+
+注意上面括号里的内容“with a bit more wizardry”，开魔法学校吗？它指的是，经过一些巧妙的加工，数据就能支持他们的结论。再来看看 2012 年 Wansink 的邮件：
+
+p-value 只有 0.06，还不够低，需要把数据再“搞一搞”，最好能让 p-value 到 0.05 以下。不过最终，他们也没能再进一步降低 p-value，在最终发表的版本中，p-value 仍为 0.06。令人欣慰的是，如此大胆的学术造假最终被发现，而该文也在 2017 年底被撤回。
+
+除了 p-hacking 之外，该文更大的问题是它声称使用的样本是 8 至 11 岁的儿童，但事实却并非如此……时至今日，Wansink 已有 18 篇论文被撤回，而他也早已因为学术不端而被 Cornell 扫地出门。
+
+从调查其学术不端中发现的一些资料可以看出，数据操纵以及 p-hacking 已经深深的扎根于这位世界著名营养学家的研究价值观……
+
+坦白的说，在 empirical analysis 中，任何人都会或多或少的进行一些数据的细分或者划分，而“数据细分”或者“数据划分”本身其实是中性的词语。但如果它的目的是为了 p-hacking，那么就很可能会造成伪发现。这是我们应该避免的。
+
+06
+结语
+
+以上五节介绍了产生伪发现的五个常见原因：数据挑选、责任下放、多重假设检验、方法多样性和 p-hacking。这些情况在量化投资中均会出现，正确的对待它们就显得尤为重要。
+
+对于做数据分析的人（包括我自己）来说，常常挂在嘴边的一句话是“Let the data speak”（让数据发声）。
+
+但事实是数据不会发声，而是进行数据分析的人通过数据发声。而在这背后，又有多少不同的动机、原因、理由来追求数据分析师希望看到的结论，或者希望讲述的故事呢？
+
+最后，让我用 Harvey 教授对投资者的建议结束本文：
+
+“ Investors need to be especially vigilant in this era of big data, large number of predictors, a plethora of methods, and the incentives to strategically manipulate the data to uncover a convenient “truth”.
+”
+
+写完本文，我不禁要给 Harvey 教授点赞。
+
+但更令我印象深刻的是，Fischer Black was right! Again!
+
+参考文献
+Harvey, C. R. (1989). Time-varying conditional covariances in tests of asset pricing models. Journal of Financial Economics 24(2), 289 – 317.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance forthcoming.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Harvey 教授演讲链接：https://iu.mediaspace.kaltura.com/media/1_b70bmzv3
+
+Harvey 教授演讲 slides：http://sfs.org/wp-content/uploads/2020/07/Tortured-Data.pdf
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图6 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图10 ---
+White Paper
+MARCH 2019
+NEUBERGER BERMAN
+The Overlooked Persistence of Active Outperformance
+JOSEPH V. AMATO
+President, Neuberger Berman
+Chief Investment Officer—Equities
+PETER D'ONOFRIO
+NIO
+vice President, Product Management
+ALESSANDRA RAGO
+ALESSAND
+A
+Associate, Corporate Development and Strategy
+--- 图11 ---
+Executive Summary
+When performance is examined through a lens that better reflects investor experience, active managers have been much more successful over the past decade than is commonly realized.
+Instead of comparing the performance of an index against an entire universe of active strategies, it's more appropriate to reframe the conversation to include only those managers in the top three quartiles of performance and thus eliminate a small cohort of poorly performing funds unlikely to attract significant investment flows. This comparison finds that approximately 84% of U.S. equity active managers have beaten the S&P 500 net of fees over the 20-year period ended December 2018.
+- Rolling returns—rather than the static measurement periods favored by passive's supporters—can offer a larger spectrum of performance over time while also better reflecting an investor's buying and selling behavior.
+Relative performance during recent bear markets suggests that active managers may provide investors with downside mitigation when indexes are in sharp decline.
+--- 图12 ---
+A TYPICAL PASSIVE ARGUMENT, RECONSIDERED—20 YEARS
+Percentage of Active Funds that Have Outperformed the Index after Fees, January 1999 through December 2018
+--- 图13 ---
+BREAKING NEWS
+TOP 3 QUARTILES BEAT ALL FUNDS
+17:22
+"A STUNNING RESULT", COMMENTED PROFESSOR CAMPBELL HARVEY
+--- 图14 ---
+Review of the Active Management of the Norwegian Government Pension Fund Global
+20 January, 2014
+Andrew Ang
+Ann F. Kaplan Professor of Business
+Columbia Business School
+Michael W. Brandt
+Kalman J. Cohen Professor of Business Administration,
+Fuqua School of Business, Duke University
+David F. Denison
+Former President and CEO of the Canada Pension Plan Investment Board
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44a90>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44a90>)
+--- 图19 ---
+Regressions of excess returns $ ^{a} $ for all NYSE common stocks (ranked by firm size) on the instrumental variables $ ^{b} $ based on monthly data from September 1941 to December 1987 (554 observations).
+$$ r_{j,t}=\delta_{0}+\delta_{1}x e w_{t-1}+\delta_{2}j a n_{t}+\delta_{3}x h\mathfrak{J}_{t-1}+\delta_{4}j u n k_{t-1}+\delta_{5}x d i v_{t-1}+\varepsilon_{t}. $$
+[表]
+Portfolio | $ \delta_0 $ | $ \delta_1 $ | $ \delta_2 $ | $ \delta_3 $ | $ \delta_4 $ | $ \delta_5 $ | In-sample  $ \bar{R}^{2} $ | Out-of-sample  $ \bar{R}^{2c} $ | 
+Decile 1 | -0.024 (0.009) | 0.142 (0.081) | 0.091 (0.018) | 6.746 (2.742) | 31.035 (12.167) | 5.316 (1.539) | 0.179 | 0.120 | 
+Decile 2 | -0.018 (0.007) | 0.114 (0.055) | 0.064 (0.013) | 7.692 (2.456) | 24.429 (8.688) | 4.333 (1.124) | 0.149 | 0.108 | 
+Decile 3 | -0.017 (0.006) | 0.104 (0.050) | 0.052 (0.011) | 7.561 (2.393) | 23.307 (7.971) | 4.237 (1.031) | 0.131 | 0.100 | 
+Decile 4 | -0.014 (0.006) | 0.100 (0.046) | 0.038 (0.010) | 8.251 (2.365) | 19.880 (7.344) | 3.926 (0.945) | 0.110 | 0.079 | 
+Decile 5 | -0.014 (0.006) | 0.072 (0.043) | 0.034 (0.009) | 9.008 (2.338) | 18.600 (6.802) | 4.018 (0.898) | 0.107 | 0.082 | 
+Decile 6 | -0.014 (0.005) | 0.059 (0.042) | 0.027 (0.009) | (8.310) (2.289) | (20.041) (6.437) | (4.057) (0.876) | 0.094 | 0.068 | 
+Decile 7 | -0.013 (0.005) | 0.046 (0.041) | 0.018 (0.008) | 8.554 (2.370) | 18.696 (6.536) | 4.086 (0.851) | 0.084 | 0.059 | 
+Decile 8 | -0.011 (0.005) | 0.019 (0.040) | 0.016 (0.008) | 8.818 (2.324) | 15.731 (6.143) | 3.750 (0.798) | 0.075 | 0.047 | 
+Decile 9 | -0.009 (0.005) | 0.010 (0.039) | 0.010 (0.007) | 9.059 (2.482) | 14.339 (6.060) | 3.997 (0.787) | 0.080 | 0.052 | 
+Decile 10 | -0.007 (0.004) | 0.005 (0.039) | 0.000 (0.007) | 7.749 (2.534) | 11.001 (5.487) | 3.562 (0.665) | 0.067 | 0.032 | 
+Val. weight | -0.009 (0.004) | 0.017 (0.038) | 0.007 (0.007) | 8.234 (2.436) | 12.797 (5.608) | 3.690 (0.703) | 0.075 | 0.044 |
+山北：Harvey (1900)
+--- 图20 ---
+Delegation: Market timing validation
+Table 5: Time Series Regression Coefficients, Original Data
+[表]
+ | Cons | EW NYSE | Jan | Term Prem | Junk Spread | Div Spread | IS  $ R^{2} $ | OOS | 
+Val. weight | -0.006 | 0.034 | -0.010 | 6.477 | 13.400 | 3.250 | 0.076 | 0.033 | 
+ |  |  |  |  | 1988-2018 Data |  |  |  | 
+Val. weight | 0.012 | 0.067 | -0.004 | 5.920 | -7.510 | 1.344 | 0.012 | -0.05 |
+Out of sample 1988-2018 fails
+$ R^{2} $ now only 1.2% and not significant
+One-step ahead  $ R^{2} $ now effectively zero
+--- 图21 ---
+
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253660c0>)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图24 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925364e50>)
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62a70>)
+--- 图26 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图27 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图28 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9afc0>)
+--- 图29 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15490>)
+--- 图30 ---
+
+--- 图31 ---
+How the model was built
+The “model is the product of over two years of intensive data collection and statistical research.”
+“We have gathered and tested roughly 200 monthly variables for each market going back to the 1990s. These variables (some of them highly proprietary) cover market, economic, demographic, and political trends.”
+"All told, the model trains on over 3 million data points."
+“Our statistical analysis is multi-stage and uses the most advanced machine learning algorithms.”
+--- 图32 ---
+
+--- 图33 ---
+
+--- 图34 ---
+GF model  $ R^{2}=0.98 $
+$$ \boldsymbol{R}^{2}=\boldsymbol{0} $$
+--- 图35 ---
+Multiplicity of Methods
+--- 图36 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图37 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925364a40>)
+--- 图38 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15490>)
+--- 图39 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44a40>)
+--- 图40 ---
+Figure 1. Distribution of reported t-statistics from factor studies, 1963 to 2012. Evidence from
+--- 图41 ---
+
+--- 图42 ---
+Payne email to Wansink: September 2008:
+'I have attached some initial results of the kid study to this message for your report. Do not despair. It looks like stickers on fruit may work (with it more wizardry)."
+--- 图43 ---
+[表]
+From: | Brian Wansink | 
+To: | David Just | 
+Cc: | Colin Payne; Sandra Cuellar | 
+Subject: | Can Branding Improve School Lunches? | 
+Date: | Saturday, January 7, 2012 7:17:42 AM | 
+Attachments: | Elmo Icon-AJPH - 1-7-12.doc | 
+ | AT100001.htm |
+Hi David,
+Here's the Elmo study we are going to spin off and submit.
+I think we start with the AJPH as a Brief (80 word abstract and 800 word paper),
+and go from there. I'll give Sandra a list of the journals and the priority order we
+should consider. Let's consider these two first:
+Brief -- American Journal of Public Health
+Research Letter – Archives of Pediatric and Adolescent Medicine
+One sticking point is that although the stickers increase apple selection by 71%, for some reason this is a p value of .06. It seems to me it should be lower. Do you want to take a look at it and see what you think. If you can get the data, and it needs some tweeting, it would be good to get that one value below .05.
+Best,
+Brian
+--- 图44 ---
+This article has been retracted and replaced View Notice
+Can Branding Improve School Lunches?
+Brian Wansink, PhD $ ^{1} $; David R. Just, PhD $ ^{1} $; Collin R. Payne, PhD $ ^{2} $
+Author Affiliations | Article Information
+Arch Pediatr Adolesc Med. 2012;166(10):967-968. doi:10.1001/archpediatrics.2012.999
+As school food services outsource more of their food preparation, the processed products they offer to schoolchildren are increasingly branded. There is legitimate concern that branding will make more indulgent foods even more attractive. $ ^{1-3} $ Conversely, a promising question is whether branding can be used to promote healthier eating. $ ^{4,5} $ Could branding more dramatically improve the attractiveness of less exciting—but healthier—foods?
+--- 图45 ---
+Professor Brian Wansink, Cornell:
+With field studies, hypotheses usually don't "come out" on the first data run. But instead of dropping the study, a person contributes more to science by figuring out when the hypo worked and when it didn't. This is Plan B. Perhaps your hypo worked during lunches but not dinners, or with small groups but not large groups. You don't change your hypothesis, but you figure out where it worked and where it didn't. Cool data contains cool discoveries.
+--- 图46 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62ac0>)
+--- 图47 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15490>)
+--- 图48 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a9d940>)
+--- 图49 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2ba10>)
+--- 图50 ---

@@ -1,0 +1,30 @@
+# Rational inattention: 宏观经济学、基金经理与 AI
+
+来源：微信公众号「因子投资」话题·基金（第41篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247486668&idx=1&sn=455d68dd90a7b1a3c8ed7df2ca2ac596&chksm=f995bd4ecee23458a3233798dc477e15f2a06c552cf7254cd0bc7f896ad078ab5f19bcc82b2d#rd
+
+【30 秒速览】 上周，rational inattention 框架的奠基人 Christopher Sims 离开了我们。大多数悼念文章聚焦于他在宏观经济学的贡献，但 rational inattention 这个框架不仅在宏观经济学中，在投资组合选择、基金管理和资产定价领域同样影响深远，却少有人提及。本文从 Sims 的原始思想出发，串联 KVV（2016）关于基金经理注意力分配的经典研究，以及 Abis 关于量化基金的扩展工作，最后落脚到一个我一直在想、但还没完全想清楚的问题：AI 对基金经理注意力的冲击，到底是什么性质的？1. Sims 的想法从哪里来Sims 的出发点很朴素：人的信息处理能力是有限的。但他不满足于把这当作一个行为假设，而是想把它做成一个严格的优化问题。
+他从通信工程借来了工具。就像计算机访问互联网的速度以比特每秒来度量，经济中的 agent 处理信息的能力也是有限的。Sims 把这个约束形式化为：agent 的行动只能依赖于通过有限 Shannon 容量信道所接收到的信息。在这个约束下做最优化——忽视什么，是理性选择的结果，不是粗心，也不是习惯。这就是 rational inattention（理性疏忽）。
+这里容易和另一个概念混淆：Mankiw 和 Reis（2002）的 rational inattentiveness。两者的核心区别在于，rational inattentiveness 里"偶尔才关注一次"是外生给定的行为模式；rational inattention 里"关注什么、忽视什么"是内生的最优化结果。前者描述习惯，后者描述选择。
+这个区别使得 rational inattention 的预测更加丰富：agent 面对的"噪声"的性质，会随着经济的动态特性系统性地变化。当通胀波动加剧时，agent 会理性地把更多带宽分配给追踪通胀，挤占其他决策的注意力——这是约束下的主动重新分配，不是"变粗心了"。
+2. 基金经理的注意力，应该如何分配但宏观经济学并非园长的研究领域，因此，更关注的仍是在金融市场、尤其是基金领域的作用。实证文献（Kacperczyk, Van Nieuwerburgh and Veldkamp, 2014）发现，基金经理的择时能力和选股能力并不固定，而是随经济周期起伏。在某些时期，有技能的基金经理更擅长把握市场方向；另一些时期，则更擅长甄别个股。这件事长期缺乏令人满意的解释——说能力在变，不过是重新描述了一遍现象。
+KVV（2016）则进一步给出了一个基于理性优化的解释，用的正是 Sims 的框架。
+他们的逻辑是：择时和选股，对应着对两类不同信号的学习——市场整体的 aggregate shocks，以及个股层面的 idiosyncratic shocks。基金经理的注意力有限，需要在两类任务之间分配。怎么分配，取决于哪类信号的信息价值更高。
+经济周期决定了这个答案。衰退期系统性风险上升，aggregate shocks 的波动变大，盯紧市场方向的信息回报更高；扩张期个股分化放大，专注选股的超额收益更丰厚。所以，聪明的基金经理会在衰退期更像宏观交易员，在牛市里更像选股高手——不是因为他们变成了不同的人，而是同一个理性 agent 在不同状态下做出了不同的最优注意力分配。这个预测也得到了数据的支持。
+3. 量化基金的兴起KVV 之后，一个自然的问题是：量化基金会怎样改变这幅图景？
+Abis (2020) 在她研究量化基金的文章早期版本里，对 KVV 的模型做了一个扩展：假设量化基金在处理个股信息时，有无穷的 attention capacity。这个假设有现实依据——量化基金用系统化的方式处理全市场数据，确实不需要在"研究哪只股票"这个问题上做太多取舍。
+但 Abis 的模型里，量化基金突破的只是容量约束，另一个约束并没有消失：灵活性。规则一旦固化，应对市场结构变化的能力反而不如传统主动基金。后者可以随时调整判断框架，前者需要重新设计策略。所以 Abis 框架的结论并不是"量化更强"，而是量化在个股选股容量上的优势，换来的是面对 aggregate shocks 时的脆弱性。
+4. AI 来了，有什么不同呢？关于 AI 对资产管理的冲击，最直觉的类比是：AI 就是 Abis 那个"无限容量"假设的现实版，只是更强。
+但这个类比让我有点不踏实。
+Abis 的量化基金突破的是个股截面的处理容量，但大语言模型可以同时处理宏观新闻、政策文本、另类数据，对 aggregate shocks 的处理能力也在扩展。也就是说，AI 可能在同时松动容量约束和灵活性约束，而不只是其中一个。如果真是这样，Abis 框架里"以灵活性换容量"的权衡，在 AI 驱动的基金里还成立吗？
+更让我想不清楚的是另一个问题：AI 真的把 rational inattention 这个框架给绕开了吗？
+乍看起来好像是——如果处理容量趋近无限，注意力还算稀缺资源吗？但仔细想，这个论断站不住脚。AI 扩展了容量，但并没有消灭成本结构：算力有成本，训练数据的选取有成本，模型架构的设计有成本。更根本的是，市场里真正 informative 的信号从来就不多，信号的信息价值是由经济基本面决定的，不是由处理能力决定的。
+所以更准确的说法可能是：AI 没有绕开 rational inattention，而是把框架里的稀缺资源，从"处理容量"换成了"informative 信号本身"。当所有人的容量约束都大幅放松之后，竞争的焦点就转移了——不再是谁处理得更快更多，而是谁能找到真正有信息含量的信号。这反而让 Sims 框架的核心逻辑更加清晰，而不是被绕开。
+当然，必须要说的是，我自己还没完全想清楚：如果 AI 真的同时松动了容量、类型和灵活性三个约束，KVV 意义上的"最优注意力分配"还是驱动超额收益的机制吗？还是需要一个全新的框架？我目前的直觉是，只要市场还是一个信息竞争的场所，informative 信号的稀缺性就是内生于竞争本身的：大家都用 AI 之后，这个稀缺性可能反而更紧绷。但这个直觉是否经得起严格的模型检验，我还没有把握。
+如果您有观察和想法，欢迎在评论区聊聊。
+谨以此文，纪念 Christopher Sims（1942–2026）。
+References:
+Abis, Simona. "Man vs. machine: Quantitative and discretionary equity management." SSRN Working Paper (2020).Kacperczyk, Marcin, Stijn Van Nieuwerburgh, and Laura Veldkamp. "Time‐varying fund manager skill." Journal of Finance 69.4 (2014): 1455-1484.
+Kacperczyk, Marcin, Stijn Van Nieuwerburgh, and Laura Veldkamp. "A rational theory of mutual funds' attention allocation." Econometrica 84.2 (2016): 571-626.
+Mankiw, N. Gregory, and Ricardo Reis. "Sticky information versus sticky prices: a proposal to replace the New Keynesian Phillips curve." Quarterly Journal of Economics 117.4 (2002): 1295-1328.
+Sims, Christopher A. "Implications of rational inattention." Journal of Monetary Economics 50.3 (2003): 665-690.

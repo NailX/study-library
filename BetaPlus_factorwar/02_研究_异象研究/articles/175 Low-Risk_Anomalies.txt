@@ -1,0 +1,408 @@
+# Low-Risk Anomalies
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/qNH1M-ThqkKhT1ZOSyR_sQ
+
+作者：石川，llanglli，刀疤连
+封面来源：https://www.pexels.com
+未经授权，严禁转载。
+
+摘
+要
+本文从发展历程、实证以及投资实务三方面详解 Low-Risk（类）异象。
+
+写在前面：在《因子投资：方法与实践》中，我们以特质性波动率为代表，阐述了 low-risk anomaly（见 5.3 节）。鉴于此类异象的普遍存在且饱受争议、以及其背后涵盖了众多不同的构造变量，因此有必要将它们进行一个系统的梳理。本文对 [因子动物园] 和本公众号关于此话题的多篇文章进行了整合和提炼。下面就让我们一起从发展历程、实证以及投资实务三方面再探 low-risk anomalies。
+
+目录
+1. 起源、发展、争议、归宿（?）
+   1.1 Idiosyncratic Volatility
+   1.2 Betting Against Beta
+      1.2.1 Is it there in the first place? (I)
+      1.2.2 Is it there in the first place? (II)
+      1.2.3 杠杆约束 vs 彩票偏好
+   1.3 归宿?
+2. 实证
+3. 投资实务
+
+   3.1 其他解释
+
+      3.1.1 委托代理问题
+      3.1.2 信息传播较慢
+      3.1.3 卖空限制
+      3.1.4 降低跟踪误差
+      3.1.5 相对财富偏差
+   3.2 其他构造变量
+
+      3.2.1 简单波动率
+      3.2.2 累计振幅
+      3.2.3 总偏度
+      3.2.4 特质性偏度
+      3.2.5 价格时滞
+   3.3 风险收益特征
+
+      3.3.1 收益不对称性
+      3.3.2 回撤保护
+      3.3.3 逆周期性
+      3.3.4 风险偏好
+   3.4 和常见风格因子的关系
+
+      3.4.1 市值因子
+      3.4.2 价值因子
+      3.4.3 质量因子
+      3.4.4 动量因子
+      3.4.5 久期因子
+4 结语
+
+1
+起源、发展、争议、归宿（?）
+
+自打被提出以来，low-risk anomalies 身上从来不缺乏争议；随着理论的发展和实证的深入，人们对于不同变量构造的 anomalies 的观点不但没有收敛，反倒是持续的交锋。发展脉络和思想碰撞的相互纠缠也使得本文注定无法像书中介绍主流因子那样把起源和解释一分为二。索性，我们就把它们融合在一起，分代表性变量并按照时间梳理异象背后的种种。
+
+Low-risk anomalies 并非某一个变量，而是代表了一大类变量，它又可以看成更广义下的 defensive factors / anomalies 大类下的一个子类（French and Gartner forthcoming）。而在层出不穷的构造变量之中，最知名也是最重要的要数 Ang et al. (2006) 的特质性波动率（Idiosyncratic Volatility，简称 IVOL）以及 Frazzini and Pedersen (2014) 的 Betting Against Beta（BAB）。然而，它们均饱受争议。让我们从 IVOL 说起。（本文第 3.2 节将会介绍其他构造变量。）
+
+1.1 Idiosyncratic Volatility
+
+股票的风险分为系统性风险和特质性风险两部分，后者可通过特质性波动率来衡量，其中特质性波动率可由资产收益率对定价模型回归的残差所计算的波动率来代表（实证中常用的定价模型包括 FF3 和 FF5）。传统金融理论认为特质性波动率可以通过分散化投资而被抵消，因此它和资产预期收益之间不应有什么关联。然而，Ang et al. (2006) 打破了这个观点。该文指出特质性波动率高的股票在未来预期收益率更低，即二者负相关。这篇文章自发表以来，即成为 JF 上的（最）高引文章之一，足见学术界对其的关注程度。三年后，Ang et al. (2009) 又在 JFE 上发文，通过来自美国和全球的更多实证结果证实上述实证结果的稳健性。
+
+Ang et al. (2006) 引发了学术界大讨论。而和该文观点相反的研究也不在少数。例如，Fu (2009) 提出特质性波动率和收益率之间存在正相关，并认为 Ang et al. (2006) 发现的负相关性源于一小撮高特质性波动率股票收益率的反转。此外，Anderson, Bianchi, and Goldberg (2015) 也对特质性波动率和预期收益率之间的负相关性提出了质疑之声。
+
+实证研究往往容易踏入 data snooping 的陷阱，所以出现相互矛盾的结果也并不令人意外。对于特质性波动率和预期收益率的关系，学术界的结论尚无定论，无论是正相关、负相关还是没有显著关系，都有研究结果所支持。但是，更多的结果还是发现特质性波动率和收益率之间的负相关。这个现象被称作特质性波动率之谜。
+
+为了破解特质性波动率之谜，Stambaugh, Yu, and Yuan (2015) 从套利不对称性（arbitrage asymmetry）的角度进行了研究，实证结果非常漂亮。该文把股票按照估值高低分成五组，并发现在最被高估的一组中，特质性波动率和收益率呈现负相关；而在最被低估的一组中，特质性波动率和收益率呈现正相关。接下来就是最精彩的部分：套利不对称性导致市场对最被高估的股票套利不充分，因此这一组内特质性波动率和收益率的负相关强于最被低估组内特质性波动率和收益率的正相关。这导致最终从截面上看，特质性波动率和收益率呈现负相关，即和 Ang et al. (2006) 发现相符的特质性波动率异象。下图展示了上文所描述的逻辑。
+
+除此之外， Liang and Tang (2018) 将 IVOL 拆解成不确定性和残差波动率两部分，并指出 IVOL 和收益率的负相关主要由前者造成，为理解 IVOL 之谜提供了新的视角。本文第二节将以 IVOL 为变量，针对 A 股进行 low-risk anomaly 实证分析。
+
+1.2 Betting Against Beta
+
+说到 low-risk anomalies，另一条不得不提的研究脉络当属 Betting Against Beta 系列。
+
+我们不妨从 Black CAPM 模型说起。1972 年，Black, Jensen, and Scholes (1972) 从实际市场数据中观察到证券市场线（SML）远比 CAPM 预测的要更平缓，这说明风险和收益的关系不能很好的满足 CAPM。Black, Jensen, and Scholes (1972) 从时间序列回归和截面回归两个维度实证了上述猜想，提出了新的 CAPM 模型。
+
+该文将股票按照其 market β 大小分成十组，并通过时序回归检验发现，在不同的历史时期，α 显著不为 0 且和 β 呈负相关：高 β 的股票往往有负 α。在此基础上，他们在 CAPM 中加入了另一个因子。该模型被后人称为 Black CAPM。
+
+在 Black CAPM 被提出的 40 年之后，来自 AQR 的 Frazzini and Pedersen (2014) 在 JFE 上发表了一篇题为 Betting Against Beta 的文章，从另外的角度解释了 α 和 β 之间的负相关。Frazzini and Pedersen（2014）指出杠杆约束是 BAB 形成的重要因素。利用 TED 衡量融资宽松程度，该文发现如果 TED 扩大，则融资比较轻松，未来 BAB 收益变现会变差；如果 TED 价差缩小，则融资难度变大，未来 BAB 表现会变好。此外，该文检验了不同杠杆约束程度如何影响投资者的偏好，发现约束较高的投资者（如共同基金和个人投资）会倾向于持有高 β 股票，而约束较少的投资者（如对冲基金、LBO 和伯克希尔）会更偏爱低 β 股票。令 ψ 来表示资金约束强弱程度，Frazzini and Pedersen (2014) 指出 α 和 β 的关系满足  。因此，他们通过做多低 β 的股票、做空高 β 的股票构造了 BAB 异象，获得了可观的超额收益（at least on paper）。
+
+除此之外，Blitz, Falkenstein, and van Vliet (2014) 从 CAPM 基本假设的角度讨论了杠杆约束。CAPM 假设投资者没有杠杆限制，每个投资者都追求单位风险下收益最大化（即切点组合），投资者可以通过资金的灵活借贷实现自己的目标收益水平。然而在实际情形中，杠杆是有约束的，借贷资金成本较高或者条款不允许加杠杆，导致投资者无法随意增加或降低杠杆水平。因此，投资者为了获得更高的收益，只能通过暴露更多的市场风险，追逐高 β 股票，导致其被高估。Blitz and van Vliet (2007) 则认为，同样由于使用杠杆限制或者害怕使用杠杆，致使聪明的投资者无法超配低 β 股票，导致这种异象难以消失。
+
+来自不同市场的实证结果均实证了 Frazzini and Pedersen (2014) 的猜想。由于低 β 早已深入人心，该文一经发表，便在学术界和业界产生了巨大的反响，它也自然而然的成为了 JFE 的高引文章之一。在业界，BAB 成为防御型投资策略的代表之一，得到了大量机构投资者的追捧。
+
+由于 BAB 和 CAPM 不符，因此它的存在是不亚于特质性波动率的另一个谜团。而正所谓“人红是非多”，BAB 自提出以来所受到的争议则要比 IVOL 多的多的多的多（重要的事情一不留神说了三遍）。多到什么程度？多到我必须从三个 subsections 来分别论述。
+
+到底是理论需要“修正”还是实证出了“纰漏”？尽管来自不同市场的 BAB 看上去非常充分，但是我们不禁仍然要问，BAB 是否真的存在？学界至少从两方面回答了这个问题，其一是从 BAB 内部直接击破，其二则是从风险和收益的角度出发重新解构 β。下面两个 subsections 先讨论以上两个视角，最后一个 subsection 讨论杠杆约束 vs 彩票偏好这两种 BAB 背后的潜在成因。
+
+1.2.1 Is it there in the first place? (I)
+
+前者的代表是 Novy-Marx and Velikov (2022)，该文以 Betting Against Betting Against Beta （BABAB）为题对 BAB 进行了抨击，指出 BAB 构造中存在三个异常之处，而这些异常造就了这个异象。这三个异常之处是：（1）构造组合时使用 rank weighting；（2）通过杠杆进行 β 对冲；（3）计算 β 时分别使用了不同的窗口来估计相关系数的标准差。
+
+Novy-Marx and Velikov (2022) 指出：关于（1），BAB 原文使用 rank 作为权重近似等价于等权，从而大大提升了小市值和微小市值股票在构造投资组合中起到的作用，而非像 Frazzini and Pedersen (2014) 所预期的那样赋予极端 β 取值股票更高的权重；关于（2），BAB 原文对低 β 多头进行了加杠杆，对高 β 空头进行了降杠杆，从而构造零 β 的对冲组合（市场中性组合），这种做法也在一定程度上和等权近似。结合上述两点，Novy-Marx and Velikov (2022) 认为 BAB 因子的构造方法造成其在超小市值公司上的权重过高且在盈利和投资因子上有很高的暴露。由于规模、盈利和投资三个因子在美股上已经被证明是有效的，因此 BAB 毫无疑问是沾了光，表现被大幅提升。
+
+关于（3），该文认为 Frazzini and Pedersen (2014) 在计算 β 时使用不同的时间窗口计算波动率和相关系数，这种估计方法是有偏的，从而它阴差阳错的支持了他们提出的理论。一旦修正这个偏差，该理论则不再成立。具体来说，Frazzini and Pedersen (2014) 分别使用 1 年和 5 年计算波动率和相关系数，简单的代数运算指出  和传统方法计算的 market β 之间的关系： 
+式中下标 1 和 5 分别代表一年和五年的滚动窗口，上标 i 表示资产。该关系式说明，  等价于传统方法得到的 β 乘以一个系数；即资产的  与市场的  之比。Novy-Marx and Velikov (2022) 通过实证研究发现当市场自身处于高波动时，资产的  和市场的  之间的弹性小于 1；反之，当市场自身处于低波动时，二者之间的弹性大于 1。这意味着当市场处于高波动时，  比传统 β 更低；而当市场处于低波动时，  比传统 β 更高。因此，使用  作为单一资产的 β，那么按照市值加权后得到的全市场 β 并不等于 1（其取值随时间波动，且时序均值略高于 1），说明  不够合理的证据。
+
+1.2.2 Is it there in the first place? (II)
+
+面对和经典 CAPM 模型背道而驰的 BAB，Bollerslev, Patton, and Quaedvlieg (2022) 指出，相比于波动本身，投资者更在意资产的下行风险，并据此将资产与市场因子的协方差进行了更细致的拆分，提出了 semibeta 的概念。不过对于拆 β 这件事儿，该文并非始作俑者。因此，在介绍它之前，让我们先 detour 一下，解读一篇更早的文章：Ang, Chen, and Xing (2006)。
+
+Ang, Chen, and Xing (2006) 的核心观点是，下行风险高的资产在投资者收益较低（从而边际效用最高）的时期，有最低的收益。因此，投资者需要风险补偿，因此下行风险高的资产有更高的预期收益。为计算下行风险，该文使用如下方法计算下行 β： 
+
+式中，  和  分别为资产和市场的超额收益，而  为样本期内的市场超额收益均值。换言之，下行 β 被定义为市场超额收益小于均值时的条件 β。用类似的方式，也可以计算的上行 β。实证结果显示，已实现下行 β 较高的股票，未来收益显著更高，即二者正相关，进而验证了下行风险对股票溢价的重要性。换句话说，如果能筛选出那些未来下行风险更大的股票，则有机会获得显著的超额收益。
+
+下面再让我们回到 Bollerslev, Patton, and Quaedvlieg (2022)。相比于 Ang, Chen, and Xing (2006)，该文同时考虑资产收益率和市场收益率的符号（而非仅仅 conditioning on 市场收益率的符号），从而对原始 β 进行了更加细致的切分。从协方差出发，同时考虑二者的符号，可以将原始协方差划分为四个部分（忽略均值）： 
+因此，根据 β 的定义，其可以被拆分为四个部分： 
+
+注意，上式中为了表述的方便，定义  以及  。这就是为什么上式中最后两项前面的符号为减号。逻辑上，与上/下行风险的分解一致，投资者厌恶下行风险，因而市场下跌时，  和  更容易被定价，且（1）  代表风险，因此应该有正溢价；（2）  代表着对冲资产（市场下行时有好的表现），因而应有负溢价。
+
+在实证方面，上述 semibetas 都是隐变量，不可直接观测，只能基于样本计算 realized semibetas。但根据 Bollerslev, Patton, and Quaedvlieg (2020) 的发现，已实现 semibetas 是真实 semibetas 的一致估计。实证结果证实了作者的猜想：（1）两个下行 β 显著被定价但方向不同（和预期的方向一致），而两个上行 β 则没有被定价；（2）平均 R-squared 较 CAPM 模型显著提升。在此基础上，该文最后构造了 Betting On and Against Semi-Betas 组合（BOASB）。顾名思义，它由两部分构成：（1）做多高  、做空低  标的；以及（2）做多低  、做空高  标的；第一部分是 On；第二部分是 Against。实证结果显示，BOASB 及其两个组成部分均能获得 FF5 无法解释的显著超额收益，然而 BAB 却不能。
+
+1.2.3 杠杆约束 vs 彩票偏好
+
+从前面的描述可知，Frazzini and Pedersen (2014) 认为 BAB 主要是由投资者的杠杆约束所驱动。Bali et al. (2017) 对此提出了不同的意见。故事要从 Bali, Cakici, and Whitelaw (2011) 提出的 MAX 效应说起。所谓 MAX，是指过去一段时间内股票的最大单日收益；MAX 越大的股票，未来收益显著更低。MAX 效应也被称为彩票偏好（lottery preference）。
+
+利用 MAX，Bali et al. (2017) 对 BAB 的原因提出了不同的看法。该文首先考察了 MAX 和 β 的双重排序分组，发现在每一个 MAX 分组中，BAB 的超额收益都不再显著。相反，MAX 效应在每一个 β 分组中却高度显著。此外平均 MAX 效应甚至比 MAX 单变量分组下还要显著。接着，Fama-MacBeth 回归结果显示，在考虑了 MAX 以及其他控制变量后，β 的溢价显著为正。最后，该文通过市值和 MAX 双重排序构造了 FMAX 因子，并比较了 FMAX 和 BAB 是否可以解释对方。结果显示，在 Carhart 四因子模型中加上 FMAX 可以解释 BAB ，但反过来 FMAX 因子却总能获得显著的负超额收益。综上，Bali et al. (2017) 认为，BAB 只是 MAX 效应的反映，彩票偏好而非杠杆约束才是 BAB 的合理解释。
+
+当然，AQR 天团可不会甘心被怼。Asness et al. (2020) 一文针锋相对地进行回应，认为 BAB 有效是因为 Betting Against Correlation（BAC）而非彩票偏好的原因。为了构建 BAC 因子，该文首先在每月末将股票按照波动率分为 5 组，然后在每组内进一步按照相关性分为两组，接着用与 BAB 相同的排序加权法构建多空两端，最后构建 β 中性多空组合。他们也用类似的方法构建了 Betting Against Volatility（BAV）。结果发现，BAC 和 BAV 都可以获得显著且稳健的超额收益。为了检验杠杆约束假说，Asness et al. (2020) 考察了保证金借款余额对 BAB 和 BAC 因子的影响。当事前的保证金借款较低，即杠杆约束较高时，BAB 和 BAC 因子的表现都显著更好。这是支持杠杆约束假说的有力证据。
+
+为了检验彩票偏好的影响，该文则引入了（经 GDP 标准化的）赌场的季度分红变化来表征博彩偏好。结果表明，它对 MAX 效应有显著影响，但对 BAB 因子却没有显著的影响。由这些结果可知，杠杆约束假说是 BAB 的合理解释之一，而关于彩票偏好假说，则没有一致的结论。
+
+1.3 归宿?
+
+就马上要介绍的文献而言，它似乎宣告了 low-risk anomalies 研究的终点。但是，对任何实证现象来说，恐怕都很难因为某个结果就下一个非常确切的结论，这就是本小节标题加问号的原因。下面就让我们来看看 low-risk anomalies 的终结之旅 —— Schneider, Wagner, and Zechner (2020)。
+
+Schneider, Wagner, and Zechner (2020) 指出，剩余协偏度是所有 low-risk anomalies（自然包括上面的 IVOL 和 BAB）的归宿。Again，在介绍它之前，一点点历史依然会很有帮助。
+
+早在上世纪 70 年代，Kraus and Litzenberger (1976) 便指出，由投资者递减的绝对风险厌恶可以推出效用函数的三阶导大于零 ，从而隐含着投资者对正偏度的偏好。Harvey and Siddique (2000) 进一步将上述观点表达为正式的模型，并指出偏度溢价为负。经过理论推导可知，资产的剩余协偏度同其 CAPM-α 负相关，其中剩余协偏度定义为资产的 CAPM-α 和市场组合超额收益平方的协方差。
+
+前述理论模型意味着，当投资者在意偏度时，CAPM-α 同剩余协偏度密切相关。因而，剩余协偏度可能是解释低风险异象的一个关键因素。但问题来了，我们需要的是事前无法获得的未来剩余协偏度。那么，该用什么变量来代表呢？一个自然的选择是隐含偏度。与隐含波动率类似，隐含偏度根据期权价格倒推而得。下面就轮到 Schneider, Wagner, and Zechner (2020) 出场。
+
+该文首先通过模拟分析检验了隐含偏度对预期的真实剩余协偏度的代表性。他们生成了 2000 家公司的数据，然后分别依据隐含偏度和预期已实现偏度将股票分为 10 组，并计算不同分组的平均剩余协偏度和 α。结果表明，基于两种偏度指标的结果高度相似，即隐含偏度对预期偏度有很强的代表性。实证方面，该文基于 1996 至 2014 年间的美股数据进行了实证分析。选择 1996 年开始是因为完整的期权数据从这一时间开始。结果显示，（1）各种 low-risk anomalies 均能获得显著的超额收益，但是它们的剩余协偏度均显著为负；（2）隐含偏度因子能够获得显著的超额收益，且与低风险一致，剩余协偏度为负；（3）将隐含偏度因子加入定价模型，low-risk anomalies 的超额收益不再显著。
+
+Schneider, Wagner, and Zechner (2020) 进一步利用主成分分析和回归分析，检验了隐含偏度因子和 low-risk anomalies 的关联。具体而言，他们首先提取了四个低风险异象的第一主成分，然后考察隐含偏度因子是否可以解释该主成分。结果显示，隐含偏度因子几乎可以完全解释该主成分。丰富的实证结果表明，隐含偏度因子可以解释低风险异象，并不仅仅是巧合，而的确是因为它同低风险异象的核心驱动因素有关，这也印证了前文的理论模型的寓意。
+
+对于 low-risk anomalies 而言，Schneider, Wagner, and Zechner (2020) 也许提供了一个可能终结其争论的答案：当考虑了剩余协偏度 / 隐含偏度后，低风险异象不再存在。当然，我们最终能否去除本节标题中的问号，不妨就留给时间去评判。
+
+2
+实证
+
+本节针对 A 股市场，以基于 FF3 无法解释的残差所计算的波动率来进行 IVOL 实证。实证区间为 2000 年 1 月至 2022 年 12 月。每月末将股票按照 IVOL 的取值从低到高分成 10 组，表 1 汇报了描述性统计。不难发现，IVOL 在十组截面上和总市值负相关；此外，IVOL 和年化波动率以及 market β 正相关，进而符合预期。除此之外不难发现，随着 IVOL 的增大，P/B 呈现单调上升，说明高波动的股票估值更高。最后，在盈利方面，前几组的 ROA 差异不大，但是最后高 IVOL 的几组 ROA 明显更低。因此 IVOL 和盈利因子也有一定的联系。本文第三章将阐述 low-risk anomalies 和常见风格因子的关系。
+
+表 1 描述性统计
+
+表 2 总结了 IVOL 单变量排序的检验结果。无论采用等权重（Panel A），还是采用市场加权（Panel B），这十个组合的平均收益率基本呈现单调递减，且 Low – High 构造的异象组合能够获得显著的月均超额收益。不过也不难发现，无论是在经济上还是在统计上，等权时的表现要比市值加权时显著得多。
+
+表 2 单变量 Portfolio Sort 检验结果
+
+接下来，表 3 和表 4 汇报了使用 IVOL 和市值进行双重排序的检验结果。无论采用等权重还是市值加权，在市值最低的三组中，IVOL 的 Low – High 组合均能获得显著的超额收益，不过低特质性波动率效应在大市值中却不显著，这和单变量排序中市值加权和等权结果差异相一致。不过，五个市值组平均来看，两种加权方法所构造的最终 Low – High 组合均能获得显著的超额收益，且月均收益率十分接近（0.70% vs 0.74%）。上述结果说明，通过和市值进行双重排序，基本上消除了市值的影响。
+
+表 3 特质性波动率和市值双重排序检验结果（等权）
+
+表 4 特质性波动率和市值双重排序检验结果（市值加权）
+
+3
+投资实务
+
+本节从投资实务的视角进一步阐述 low-risk anomalies，行文的重点聚焦于其他解释、不同构造变量、风险收益特征以及其和常见风格因子的关系四个方面。
+
+3.1 其他解释
+
+3.1.1 委托代理问题
+
+Blitz, Falkenstein, and van Vliet (2014) 认为，基金经理、证券分析师抑或是资管机构本身，都有动机为了自己的短期利益从而追逐高波动股票。例如，很多基金经理的激励机制是基本工资加业绩提成，后者就像是一个期权，基金经理可以通过挑选更高波动性的股票，使得自己的预期收入最大化。
+
+Hsu, Kudoh, and Yamada (2013) 从分析师的角度讨论了低风险异象。一方面，分析师预测的准确性会影响其薪水和前途，因此要保证预测的质量；另一方面，分析师也要维护好和客户的关系，导致预测可能出现偏差。分析师需要在这二者之间寻求一种平衡。对于盈利增长波动太低的股票，如果过于夸大盈利预测很容易被发现，进而影响到分析师的声誉。因此，分析师往往对盈利波动较大的股票过度乐观，导致投资者过度追求这些股票，这部分股票往往价格波动也较大，最后实现了较低的收益。
+
+3.1.2 信息传播较慢
+
+Ang et al. (2009) 从信息传播的角度对特质性波动率异象进行了解释。首先，特质性波动率较低的股票，分析师覆盖率较低，投资者无法快速获得高质量的分析师观点数据；其次，特质性波动率低的公司，价格时滞也大，对信息的反应较较慢。因此，由于特质性波动率低的股票信息传播较慢，市场会对这一风险进行补偿，因此具有溢价。
+
+3.1.3 卖空限制
+
+除了杠杆约束外，Blitz and van Vliet (2007) 同样指出卖空高波动股票的限制也是低风险异象的成因之一。首先，一些条款的存在，限制了卖空操作；其次，并不是所有股票都能卖空；最后，高昂的卖空成本直接侵蚀掉收益空间。总体来说，对卖空行为的限制会扭曲风险回报关系，这些限制阻止了套利者纠正高波动性股票虚高的价格。
+
+不过有意思的是，Blitz (2018) 巧妙地利用对冲基金数据，对杠杆约束和卖空限制进行了反思。因为对冲基金操作可以十分灵活和聪明，受到的约束也会少一些，因此有更少的限制来投资于低风险异象。然而，Blitz (2018) 却发现对冲基金依然喜欢高波动股，并没有参与利用低波动异象，这与 Frazzini and Pedersen（2014）的结论相反，也似乎与杠杆和卖空限制等角度的解释背道而驰。
+
+3.1.4 降低跟踪误差
+
+Baker, Bradley, and Wurgler (2011) 从业绩比较基准的角度，阐述了低风险异象为什么没有被消除。绝大多数共同基金都会选择一个股票指数作为比较基准，在评价一个基金经理时，投资者直接或间接都会关注跟踪误差，即基金表现和基准表现的协同程度。即使不考虑投资限制，超配低波动股票或者低配高波动股票，都有可能会增加跟踪误差，从而不利于基金经理的职业生涯。因此，固定比较基准的存在，使得基金经理没有动机去利用低风险异象，导致异象难以消失。
+
+3.1.5 相对财富偏差
+
+另外，Baker, Bradley, and Wurgler (2011) 还从社会心理学的角度讨论了低风险异象。各种社会学研究发现，人类社会充斥中比较和嫉妒，投资者的效用更多地取决于相对财富，而不是绝对财富。当风险收益关系预期为正时，低 β 股票和高 β 股票相对大盘的风险相似，因此投资者或基金经理会选择高 β 股票，导致其被高估。
+
+3.2 其他构造变量
+
+除了前面提到的 IVOL、BAB（BAC、BAV）、以及各种拆分后计算的 β，还有一些其他用来构造低风险异象的变量。表 5 对其中最典型的变量进行了总结。
+
+表 5 其他常见低风险异象构造变量
+
+3.2.1 简单波动率
+
+简单波动率又即总波动率，以用过去 T 个交易日收益率的标准差进行估计。Blitz and van Vliet (2007) 对此进行了讨论。其中，窗口 T 的选择可长可短，越短估计结果变动越剧烈，越长结果变动越平滑。
+
+3.2.2 累计振幅
+
+在 Barra 风险多因子因子模型中，累计振幅为波动因子的一部分，用来区分不同个股的价格波动范围宽窄。其计算方法为根据过去 T 期股票的累计超额收益序列计算其累计振幅。该变量衡量了个股价格波动的振动幅度。需要注意的是，Barra 在计算时采用的是过去 12 个月的月度数据（21 个交易日表示一个月），具体构造方法请见 Orr, Mashtaler, and Nagy (2012)。
+
+3.2.3 总偏度
+
+传统的金融学理论假设资产收益率服从正态分布，因此用均值和方差就能完全衡量其分布特征。但收益率不满足正态分布已经是公认的事实，因此收益率的高阶矩包含着有用的信息，其中最典型的便是收益率偏度（三阶矩），该指标也称为总偏度（Total Skewness）。总偏度在 Bali, Engle, and Murray (2016) 这本实证资产定价的宝书中有过详细讨论。由于投资者追求具有正偏度的股票，导致其价格容易被高估，预期收益率也因而较低。通过做空偏度大的股票，做多偏度小的股票，能获得显著超额收益。
+
+3.2.4 特质性偏度
+
+和特质性波动率类似，特质性偏度（Idiosyncratic Skewness）的计算中不考虑收益率中能被风险因子解释的部分，只考虑残差收益率的偏度。和 IVOL 一样，由于残差收益率可以依据不同的多因子模型得出，因此特质性偏度也可以有许多版本。例如，Boyer, Mitton, and Vorkink (2010) 使用 FF3 残差收益率计算特质性偏度。
+
+3.2.5 价格时滞
+
+价格时滞，顾名思义，衡量股票价格对市场信息的反应快慢。如果价格时滞较大，表明股票价格对市场信息的反应存在滞后，过去的市场收益能显著解释当前股票收益；相反，如果股票价格时滞较低，那么股票收益和市场收益变动同步性较高。Hou and Moskowitz (2005) 利用过去一年的周频收益率数据估计价格时滞。他们的实证结果表明，价格时滞高的股票，能获得显著的超额收益。
+
+3.3 风险收益特征
+
+3.3.1 收益不对称性
+
+绝大多数量价因子多头和空头的收益并不对称，空头组合获得的负向 α，往往显著高于多头组合的正向 α。作为量价因子的典型代表，基于美股的大量实证结果表明，低风险异象因子同样具有该特征，即空头部分贡献了更多的异象收益。在本文针对 A 股的实证中，我们使用了过去 22 年的数据，汇报的是每个组合减去 risk-free 的收益率，因此并没有直接比较多空两头的组合相对某个定价模型的 α。特此说明。
+
+3.3.2 回撤保护
+
+对于股票组合而言，防御性因子、可转债、趋势跟踪择时、目标波动控制模型等均是常见且有效的回撤保护器。本文介绍的低风险异象，是非常典型的防御类型异象，在股市回撤时也能发挥保护的作用。Hsu, Kudoh, and Yamada (2013) 针对美股统计了牛市、熊市和和振荡市中不同因子/异象的表现。其中，低风险异象在下跌市场中相对大盘表现优秀，配置该因子能减少组合的整体回撤。然而，有得必有失，在牛市和振荡行情中，低风险因子就没那么走运了，总是慢那么一拍。
+
+3.3.3 逆周期性
+
+低风险因子不仅能在市场下行时提供回撤保护，而且还具有逆周期特征。Ung and Luk (2016) 研究了不同因子在经济萧条和经济扩张时的表现。结果表明，低风险异象虽然在经济扩张时表现平平，但在经济收缩时异常亮眼，能起到雪中之炭的作用。
+
+3.3.4 风险偏好
+
+市场情绪是推动股市涨跌的重要因素。Ung and Luk (2016) 根据 VIX 指数将市场情绪划分为高亢、中性和绝望三种情形，并研究了低风险异象在不同市场情绪中的表现。当市场整体低迷惨淡时，投资者风险偏好较低，此时低风险异象的收益率却更高。
+
+3.4 和常见风格因子的关系
+
+无论是针对美股还是针对 A 股的实证都表明，低风险异象似乎与一些常见的风格因子（例如市值、价值、盈利等）有千丝万缕的联系。本节就来对这一点展开讨论。
+
+3.4.1 市值因子
+
+Hsu, Kudoh, and Yamada (2013) 以及 van Vliet（2018）均发现，波动水平和市值大小呈负相关关系。本文实证小节中根据 IVOL 分组的描述性统计也说明了二者的关联。此外，单变量排序结果显示，当使用市值加权后，异象的收益率较等权变低。Ang et al. (2006) 在检验特质性波动率的稳健性时，为了剔除掉小股票的影响，专门将研究范围缩小至纽约证券交易所的股票。结果发现，多空组合依然能获得显著为正的超额收益，因而建议无需过度担心小市值股票的干扰。
+
+3.4.2 价值因子
+
+价值因子是公认的定价因子之一。Hsu, Kudoh, and Yamada (2013) 按照波动率将股票分为十组，发现动态 E/P 和一致预期 E/P 均随波动率的上升而下降，表明高波动的股票往往估值较高，低波动的股票往往估值较低。
+
+Novy-Marx (2014) 将波动率对 BM 回归，发现两者没有明显的线性关系。然而，一旦他在将股票分为小盘成长、小盘价值、大盘成长和大盘价值四个类别，则发现低波动异象只在小盘成长股中有效。在控制估值和盈利后，小盘成长股中的低波动异象也不再显著。这背后的原因是最高波动组在估值和盈利上暴露非常极端，平均 BM 很低、平均盈利能力也显著为负。换句话说，异象之所以存在，是因为市值小、不盈利的成长股贡献，说明估值在解释异象时有重要作用。
+
+3.4.3 质量因子
+
+在 AQR 的因子分类体系里，高质量和低风险都属于防御类型，在市场大跌时能起到减少回撤的功效。在构建其 Quality-Mimus-Junk 质量因子（Asness, Frazzini, and Pedersen 2018）时，AQR 直接将市场 β 作为质量的因子的一部分。此外，Novy-Marx (2014) 指出，盈利能有效解释低风险异象。Fama and French（2016）的实证分析表明，包含盈利和投资因子的 FF5 模型能够解释低波动异象。不过，Blitz and Vidojevic (2017) 通过 Fama-MacBeth 回归进行横截面分析发现，在控制包括市值、估值、动量、盈利和投资因子之后，低风险异象依然存在。
+
+3.4.4 动量因子
+
+如果用涨幅定义动量，波动率定义风险，那么动量因子和波动因子的关系就是收益率一阶矩和二阶矩的关系。Ang et al. (2006) 曾猜想，动量可能是特质性波动率背后的驱动因素，因为过去表现差的输家组合，特质波动率往往较大。为了检验这个猜想，他们先按动量进行排序，再按特质性波动率排序，进行分层检验。然而检验结果表明，控制动量后依然无法解释低特质性波动率异象。虽然并不如所愿，但他们还是发现了一个有趣的现象，高波动输家组合收益要远低于高波动赢家组合，高波动较差的表现主要是输家股票贡献的。
+
+3.4.5 久期因子
+
+高股息低波动是目前国内已有的 smart beta 基金中非常流行的一类。这类基金具有类债券的特征，十分适合风险承受能力低的投资者。Chow et al. (2014) 对低波动多头组合收益率进行了分解，发现在久期因子上确实具有显著为正的暴露。之所以暴露在利率风险上，潜在的解释是低波动股票组合由于其波动较小，因而可以作为债券的替代品。Blitz, van der Grient, and van Vliet (2014) 在也表示，低波动策略确实会在利率风险中有暴露，在利率下行的环境中表现更好；如果对冲掉利率风险的影响，低波动策略表现并没有明显下降。
+
+4
+结语
+
+本文从发展历程、实证以及投资实务三个角度出发，全面解读了以 IVOL 和 BAB 为代表的低风险异象。如今，无论是用来配置还是用来对基金进行归因（Irvin, Kim, and Ren forthcoming），低风险异象似乎变得越来越重要。希望本文能够帮助读者厘清低风险异象的全貌。
+
+最后，由于构造变量众多，因此不同变量构造的异象也有着一定的差别。例如，Blitz and van Vliet (2007) 对比了波动率和市场 β 两个变量，发现前者的单调性更好，超额收益更高。Ang et al. (2006) 对比了简单波动率和特质性波动率的表现，发现无论是异象的超额收益率还是相对定价模型的 α，后者都比前者更高。此外，无论是 IVOL 还是 BAB，这两个最著名的低风险异象变量的表现直到今日也始终受到关注和挑战（见 Pyun 2021 以及 Han 2022）。大量的结果一次又一次地向我们传递着，在因子投资中，细节决定成败，而拥抱不断发展的金融学理论和践行严谨的实证分析始终都是我们最有力的武器。
+
+参考文献
+Anderson, R. M., S. W. Bianchi, and L. R. Goldberg (2015). In search of statistically valid risk factors. Quantitative Finance 15(3), 385 – 393.
+
+Ang, A., J. Chen, and Y. Xing (2006). Downside risk. Review of Financial Studies 19(4), 1191 – 1239.
+
+Ang, A., R. J. Hodrick, Y. Xing, and X. Zhang (2006). The cross-section of volatility and expected returns.Journal of Finance 61(1), 259 – 299.
+
+Ang, A., R. J. Hodrick, Y. Xing, and X. Zhang (2009). High idiosyncratic volatility and low returns: International and further U.S. evidence. Journal of Financial Economics 91(1), 1 – 23.
+
+Asness, C. S., A. Frazzini, N. J. Gormsen, and L. H. Pedersen (2020). Betting against correlation: Testing theories of low-risk effect. Journal of Financial Economics 135(3), 629 – 652.
+
+Asness, C. S., A. Frazzini, and L. H. Pedersen (2018). Quality minus junk. Review of Accounting Studies 24(1), 34 – 112.
+
+Baker, M., B. Bradley, and J. Wurgler (2011). Benchmarks as limits to arbitrage: Understanding the low-volatility anomaly. Financial Analysts Journal 67(1), 40 – 54.
+
+Bali, T. G., S. J. Brown, S. Murray and Y. Tang (2017). A lottery-demand-based explanation of the beta anomaly. Journal of Financial and Quantitative Analysis 52(6), 2369 – 2397.
+
+Bali, T. G., N. Cakici, and R. F. Whitelaw (2011). Maxing out: Stocks as lotteries and the cross-section of expected returns. Journal of Financial Economics 99(2), 427 – 446.
+
+Bali, T. G., R. F. Engle, and S. Murray (2016). Empirical Asset Pricing: The Cross Section of Stock Returns. Wiley.
+
+Black, F., M. C. Jensen, and M. Scholes (1972). The Capital Asset Pricing Model: Some Empirical Tests. In Studies in the Theory of Capital Markets. M. C. Jensen (editor), New York: Praeger, 79 – 121.
+
+Blitz, D. (2018). Are hedge funds on the other side of the low-volatility trade? Journal of Alternative Investments 21(1), 17 – 26.
+
+Blitz, D., E. Falkenstein, and P. van Vliet (2014). Explanations for the volatility effect: An overview based on the CAPM assumptions. Journal of Portfolio Management 40(3), 61 – 76.
+
+Blitz, D., B. van der Grient, and P. van Vliet (2014). Interest rate risk in low-volatility strategies. Working paper.
+
+Blitz, D. and P. van Vliet (2007). The volatility effect. Journal of Portfolio Management 34(1), 102 – 113.
+
+Blitz, D. and M. Vidojevic (2017). The profitability of low-volatility. Journal of Empirical Finance 43, 33 – 42.
+
+Chow, T. M., J. C. Hsu, L. L. Kuo, and F. Li (2014). A study of low-volatility portfolio construction methods. Journal of Portfolio Management 40(4), 89 – 105.
+
+Bollerslev, T., A. J. Patton, and R. Quaedvlieg (2020). Realized semcovariances. Econometrica 88(4), 1515 – 1551.
+
+Bollerslev, T., A. J. Patton, and R. Quaedvlieg (2022). Realized semibetas: Disentangling “good” and “bad” downside risks. Journal of Financial Economics 144(1), 227 – 246.
+
+Boyer, B. H., T. Mitton and K. Vorkink (2010). Expected idiosyncratic skewness. Review of Financial Studies 23(1), 169 – 202.
+
+Frazzini, A. and L. H. Pedersen (2014). Betting against beta. Journal of Financial Economics 111(1), 1 – 25.
+
+French, R. and N. Gartner (forthcoming). In search of a defensive equity factor. Journal of Portfolio Management.
+
+Fu, F. (2009). Idiosyncratic risk and the cross-section of expected stock returns. Journal of Financial Economics 91(1), 24 – 37.
+
+Han, X. (2022). Understanding the performance of components in betting against beta. Critical Finance Review 11(1), 1 – 36.
+
+Harvey, C. R. and A. Siddique (2000). Conditional skewness in asset pricing tests. Journal of Finance 55(3), 1263 – 1295.
+
+Hou, K. and T. J. Moskowitz (2005). Market frictions, price Delay, and the cross-section of expected returns. Review of Financial Studies 18(3), 981 – 1020.
+
+Hsu, J. C., H. Kudoh, and T. Yamada (2013). When sell-side analysts meet high-volatility stocks: An alternative explanation for the low-volatility puzzle. Journal of Investment Management 11(2), 28 – 46.
+
+Irvine, P., J. H. Kim, and J. Ren (forthcoming). The beta anomaly and mutual fund performance. Management Science.
+
+Kraus, A. and R. H. Litzenberger (1976). Skewness preference and the valuation of risk assets. Journal of Finance 31(4), 1085 – 1100.
+
+Liang, C. Y. C. and Z. Tang (2018). Idiosyncratic return volatility, uncertainty, and asset pricing implications. Working paper.
+
+Novy-Marx, R. (2014). Understanding defensive equity. Working paper.
+
+Novy-Marx, R. and M. Velikov (2022). Betting against betting against beta. Journal of Financial Economics 143(1), 80 – 106.
+
+Orr, D. J., I. Mashtaler, and A. Nagy (2012). The Barra China equity model (CNE5). MSCI BARRA.
+
+Pyun, C. (2021). Documenting the post-2000 decline in the idiosyncratic volatility effect. Critical Finance Review 10(3), 419 – 427.
+
+Schneider, P., C. Wagner, and J. Zechner (2020). Low-risk anomalies? Journal of Finance 75(5), 2673 – 2718.
+
+Stambaugh, R. F., J. Yu, and Y. Yuan (2015). Arbitrage asymmetry and the idiosyncratic volatility puzzle.Journal of Finance 70(5), 1903 – 1948.
+
+Ung, D. and P. Luk (2016). What is in your smart beta portfolio? A fundamental and macroeconomic analysis. Journal of Index Investing 7(1), 49 – 77.
+
+van Vliet, P. (2018). Low volatility needs little trading. Journal of Portfolio Management 44(3), 33 – 42.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+图 5.13 套利不对称性和特质性波动率之谜
+只处·石川、刘沣、连祥斌《因子投资·方法与实践》
+--- 图3 ---
+IVOL 单变量排序组合的描述性统计。实证区间为 2000/01/01 到 2022/12/31。
+[表]
+ | Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | 
+IVOL (%) | 21.44 | 25.66 | 28.19 | 30.27 | 32.22 | 34.18 | 36.30 | 38.78 | 42.03 | 48.20 | 
+总市值（亿元） | 257.34 | 132.79 | 107.3 | 99.52 | 89.33 | 88.04 | 81.52 | 78.71 | 74.15 | 74.38 | 
+市场  $ \beta $ | 1.01 | 1.07 | 1.09 | 1.11 | 1.12 | 1.14 | 1.15 | 1.17 | 1.18 | 1.19 | 
+年化波动率（%） | 34.48 | 38.47 | 40.66 | 42.50 | 44.22 | 46.03 | 47.95 | 50.23 | 53.08 | 58.52 | 
+P/B | 2.29 | 2.89 | 3.32 | 3.92 | 3.92 | 4.73 | 5.35 | 5.38 | 6.81 | 8.55 | 
+ROA (%) | 4.08 | 4.17 | 4.23 | 4.22 | 4.14 | 4.00 | 4.05 | 3.59 | 3.29 | 2.65 |
+出处：BetaPlus 小组；整理：川总写量化
+--- 图4 ---
+[表]
+2000/01/01 到 2022/12/31。 | 
+Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | Low-High | 
+Panel A: 等权重 | 
+1.47 | 1.45 | 1.47 | 1.38 | 1.29 | 1.20 | 1.25 | 1.19 | 0.92 | 0.51 | 0.96 | 
+2.40) | (2.33) | (2.31) | (2.20) | (2.08) | (1.88) | (1.93) | (1.84) | (1.38) | (0.78) | (4.13) | 
+Panel B: 市值加权 | 
+0.99 | 0.92 | 0.75 | 0.83 | 0.87 | 0.74 | 0.78 | 0.77 | 0.65 | 0.24 | 0.75 | 
+(1.78) | (1.63) | (1.27) | (1.44) | (1.52) | (1.23) | (1.30) | (1.16) | (0.97) | (0.35) | (1.98) |
+出处：BetaPlus 小组；整理：川总写量化
+--- 图5 ---
+IVOL 和市值双重排序的月均收益率（%），等权。括号内为经 Newey-West 整后的 t-statistics。实证区间为 2000/01/01 到 2022/12/31。
+[表]
+ | Low | 2 | 3 | 4 | High | Low-High | 
+Small | 2.34(3.45) | 2.14(3.11) | 2.04(2.98) | 2.14(3.00) | 1.53(2.17) | 0.81(4.13) | 
+2 | 1.74(2.74) | 1.73(2.61) | 1.45(2.20) | 1.40(2.10) | 0.79(1.16) | 0.95(4.72) | 
+3 | 1.52(2.34) | 1.31(2.05) | 1.09(1.72) | 1.08(1.59) | 0.54(0.81) | 0.98(5.37) | 
+4 | 0.84(1.35) | 1.09(1.73) | 0.87(1.41) | 0.84(1.32) | 0.45(0.70) | 0.39(1.44) | 
+Large | 0.85(1.40) | 0.68(1.16) | 0.70(1.16) | 0.67(1.06) | 0.47(0.67) | 0.38(1.14) | 
+平均 | 1.46(2.35) | 1.39(2.21) | 1.23(1.96) | 1.23(1.89) | 0.76(1.14) | 0.70(4.12) |
+--- 图6 ---
+West 调整后的 t-statistics。实证区间为 2000/01/01 到 2022/12/31。
+[表]
+ | Low | 2 | 3 | 4 | High | Low-High | 
+Small | 2.32(3.41) | 2.07(3.02) | 2.00(2.92) | 2.08(2.91) | 1.48(2.10) | 0.84(4.22) | 
+2 | 1.74(2.74) | 1.72(2.60) | 1.44(2.19) | 1.38(2.07) | 0.77(1.13) | 0.97(4.75) | 
+3 | 1.53(1.60) | 1.30(1.87) | 1.08(1.90) | 1.07(1.80) | 0.53(1.72) | 0.99(5.46) | 
+4 | 0.80(1.27) | 1.09(1.73) | 0.88(1.42) | 0.84(1.32) | 0.46(0.71) | 0.34(1.23) | 
+Large | 1.02(1.70) | 0.61(1.03) | 0.68(1.12) | 0.60(0.95) | 0.48(0.67) | 0.54(1.52) | 
+平均 | 1.48(2.39) | 1.36(2.17) | 1.22(1.95) | 1.19(1.85) | 0.74(1.12) | 0.74(4.13) |
+--- 图7 ---
+[表]
+变量 | 出处 | 
+简单波动率 | Blitz and van Vliet (2007) | 
+累计振幅 | Orr, Mashtaler, and Nagy (2012) | 
+总偏度 | Bali, Engle, and Murray (2016) | 
+特质性偏度 | Boyer, Mitton, and Vorkink (2010) | 
+价格时滞 | Hou and Moskowitz (2005) |
+整理：川总写量化
+--- 图8 ---

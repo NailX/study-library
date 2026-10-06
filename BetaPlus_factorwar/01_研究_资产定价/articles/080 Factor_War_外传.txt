@@ -1,0 +1,294 @@
+# Factor War 外传
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/UFOa3kKOIgSCufijTPTisw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Novy-Marx 又出来搞事情。无论你同意与否，他都成功敲响了 wake-up call。
+
+01
+引言
+
+自 Cochrane (2011) 的铿锵三问以及 Harvey (2017) 的大声疾呼之后，学界在 factor zoo 的问题上有所收敛，但却将战场引到了模型之间的比拼。近年来，学术界围绕哪家多因子模型更胜一筹展开了激烈的竞争。
+
+从 Barillas and Shanken (2018) 到 Fama and French (2018)，从 Hou et al. (2019, 2020) 到 Fama and French (2020)，各路神仙斗的不亦乐乎。需要背景知识的小伙伴请参考《从 Factor Zoo 到 Factor War：实证资产定价走向何方》以及《A New Norm ?》。
+
+一场轰轰烈烈的 factor war 丝毫没有要停歇的意思。而在这场变革中，一位资深学者也不甘寂寞，他就是凭借 gross profitability 盈利因子一举成名的 Robert Novy-Marx。
+
+最近几年，Novy-Marx 一直通过写作参与 factor war 这个话题。而他的很多 empirical findings，虽然不一定所有人都同意，也足够引起人们的重视：在 p-hacking 之风盛行的当下，多因子模型之间的 pk 到底产生了多少价值？
+
+今天这篇小文以《Factor War 外传》为题，围绕 Novy-Marx 的一些发现来再次审视 factor war 这个问题。我个人的观点是，无论你是否同意他的发现，Novy-Marx 都成功敲响了 wake-up call。
+
+02
+为什么 q-factor model 能解释动量 ?
+
+最近几年，Hou, Xue, and Zhang (2015) 基于 q-theory 提出的 q-factor model 可谓大放异彩。无论是以定价 anomalies 还是不同模型的因子之间相互解释而言，q-factor model 都吊打包括 Fama and French (1993, 2015) 三/五因子模型在内的诸多对手（关于不同模型的介绍，见《主流多因子模型巡礼》）。
+
+q-factor model 包括市场、规模、投资和盈利四个因子；其中后两者直接从 q-theory 推导而来。在 Hou, Xue, and Zhang (2015) 一文中，三位作者花了不少笔墨通过检验不同模型下异象的定价错误高低，并以此说明 q-factor model 的优秀。而其中一个令人印象深刻的结果是，q-factor model 能够轻而易举的解释动量。
+
+下图节选自该文的表 4，其中 R6-6 以及 R11-1 代表两个常见的（中期）动量异象。在 q-factor 模型下，这两个异象 abnormal return 的 t-值仅分别为 0.14 和 0.71。
+
+与其形成鲜明对比的是这两个异象在 Fama-French 模型上的 abnormal returns，它们的 t-值均超过 4.0。众所周知，由于无法被解释，动量一直是 Fama-French 三、五因子模型的“痛”，而这也是为什么 Eugene Fama 在 Fama and French (2018) 中将动量视作一个因子加入了模型，这才有了后来的 Fama-French 六因子模型之说（尽管如此，Fama 依然提倡谨慎地对待动量）。
+
+然而，动量异象在 q-factor model 之下神奇的消失了。更令人感到费解的是，Fama and French (2015) 五因子模型同样包含投资和盈利因子，但却对动量无能为力。那么为什么 q-factor model 能够解释动量？是否 q-theory 和股票的 price momentum 有什么瓜葛？对此，Novy-Marx (2018b) 给出了自己的看法：q-factor model 能够解释动量，仅仅是个美丽的错误。
+
+要搞清楚为什么 q-factor model 能够解释动量，就必须从理解它的因子出发，而这里起到关键作用的就是其中基于单季度 ROE 来构造的盈利因子。这也成为 Novy-Marx 抨击的对象。根据定义，Novy-Marx 将单季度 ROE 做了如下分解：
+
+式中 E 为当季的 earnings，B_{-1} 为滞后了一个季度的 book value，E_{-4} 为滞后 4 个季度的 earnings。根据上述分解，单季度 ROE 被分解成两部分：第一部分为 lagged-E/B，第二部分为 ΔE/B。如何理解这两个部分呢？不妨先来看一张图。
+
+上图显示了和单季度 ROE 有着千丝万缕关联的几个变量构造的异象投资组合的累计收益曲线。这些变量包括：PEAD（依照学术界定义、使用 SUE 构造）、ΔE/B、E/B 以及 lagged-E/B，其中 E/B 是每年 6 月末使用年报中的 earnings 和 book value 计算的盈利的低频分量。
+
+实证数据显示，PEAD 和 ΔE/B 收益率的相关性非常高（80.9%；且回归结果显示 ΔE/B 其实就是一个 PEAD 因子），而 E/B 和 lagged-E/B 收益率的相关性也非常高（89.9%）。回顾 Novy-Marx (2018b) 对单季度 ROE 的分解，并结合上述实证结果，Novy-Marx 认为单季度 ROE 中所包含的两项分别为低频盈利分量（lagged-E/B）和高频的 earnings innovation（ΔE/B）。
+
+而他认为这种混搭搞砸了一切。
+
+回归分析显示，单季度 ROE 之所以能够解释动量是因为其中的 ΔE/B 发挥了作用；由于 ΔE/B 是一个 PEAD 因子，PEAD 也应能够解释动量。这些结论在美股的实证分析中均得到了确认。然而，这却引出了另一个问题，为什么 PEAD 能够解释动量？
+
+对于这个问题，Novy-Marx (2018a) 也早有研究，该文的标题简洁的概括了他的观点：Fundamentally, momentum is fundamental momentum。他认为股价的动量是基本面动量的体现，其内在的核心是基本面的动量，而 PEAD 是基本面动量的一个很好的 measure，因此 PEAD 可以解释动量。
+
+基于上述结果，单季度 ROE 之所以能够解释动量，是因为其中的 ΔE/B 部分，而非低频盈利分量。这个结果似乎合情合理，它能够很好地回答为什么 Fama-French 的盈利因子对动量无能为力，因为他们的 RMW 盈利因子使用的年报数据，仅对应单季度 ROE 中的低频盈利分量，而不包含 earnings innovation 部分。
+
+除了动量外，另一个不能被 Fama-French 模型解释但却在 q-factor model 前面“败下阵来”的因子则是 Novy-Marx (2013) 自己提出的 gross profitability 盈利因子（以下记为 PMU）。该因子在 q-factor model 下的 abnormal return 的 t-值仅为 0.71。为此，Novy-Marx (2018b) 也对此进行了分（pi）析（pan）。
+
+Again，q-factor model 能够解释 PMU 也是一个错误。
+
+为了说明这一点，仍然将 ROE 拆成低频盈利 + 高频 earnings innovation 两部分，并通过不同的解释变量来解释 PMU。下表给出了实证结果。模型（3）-（5）显示加入了 ROE 之后，确实可以解释 PMU（α 的 t-值不超过 1.60）。然而在模型（6）和（7）中，当使用 lagged-E/B 和 ΔE/B 替代 ROE 时，结果却出乎意料 —— PMU 无法被解释，其 abnormal return 的 t-值在这两个模型设定下分别为 2.19 和 3.24。
+
+为什么会出现这种背离，即单季度 ROE 作为一个整体可以解释 PMU，但当把它拆开称为低频盈利 + 高频 earnings innovation 后却不再能解释 PMU 了呢？实证结果显示，单季度 ROE 中的低频分量很大程度上和 PMU 因子 co-vary（这很好理解，因为 PMU 也用的年报的数据），而单季度 ROE 中的高频 ΔE/B 自身有很高的溢价（它就是个 PEAD 嘛，它也是 ROE 高溢价的来源）。
+
+二者的共同作用导致单季度 ROE 和 PMU 有很强的相关性（来自低频分量），且 ROE 的高溢价（来自高频分量）又很大程度上解释了 PMU 的高溢价，二者叠加造成单季度 ROE 解释 PMU。一旦将二者的混搭拆开，变成两个单独的因子，由于 PMU 仅和低频分量高度相关、但低频分量没有什么溢价，因此 PMU 无法再被解释。综上所述，单季度 ROE 能够解释 PMU 只是个错误。
+
+结合上面的实证结果和讨论可知，虽然单季度 ROE 能够解释动量和 gross profitability，但发挥作用的均是其中的 earnings innovation 部分（前者的原因是价格动量由基本面动量驱动；后者的原因仅仅是混搭造成的错误），而非真正的低频盈利分量。
+
+因此，Novy-Marx 指出 q-factor model 中基于单季度 ROE 构造的因子并非盈利因子，而是一个 PEAD 因子（ΔE/B 背后的驱动原因是 PEAD），它和 q-theory 没什么关系。这挑战了 q-factor model 的根基。
+
+03
+Cost Matters
+
+相比于 Novy-Marx (2018b) 仅仅针对 q-factor model 来分析，他和两位合作者的另一篇新作（Detzel, Novy-Marx, and Velikov 2019）则讨论了所有常见的多因子模型。该文比较了下表中的模型。需要说明的是，这篇文章目前还没被挂在 SSRN 上，但从网上依然能找到一些颇有意思的结果。
+
+在研究多因子模型时，test assets 和 factor model 同样重要。一般来说，各种异象被用来当作 test assets（见《Which test assets ?》）。
+
+从资产定价的角度来说，在检验多因子模型时，无论异象和因子的收益率均不需要考虑交易成本（学术界也是这么做的）。然而，由于 p-hacking 的问题，大量挖出的异象都是虚假的，在样本外以及考虑了合理的交易成本后根本无法获得显著的超额收益。
+
+为此，不少学者主张考虑了成本之后的异象才对投资实务有价值。在这个背景下，一个关联的问题是，当 test assets 的收益率考虑了交易成本后，多因子模型中的 factor returns 是否也应该扣掉交易费用？显然，使用理论的 on paper 因子收益率检验扣除交易成本的异象收益率并不合理。因此，这个问题的答案应该是肯定的。Campbell Harvey 教授也强调过这一点。（顺便提一句：顺着这个思路，使用理论的因子收益率分析基金经理实际交易出来的策略的收益率，也会造成基金经理超额收益结果被低估，因此不够合理。）
+
+因此，任你一个多因子模型中的因子的理论收益率再高，由因子 span 得到的 tangency portfolio 的夏普率再大，若没有考虑交易成本也是白搭。正是在上述背景下，Detzel, Novy-Marx, and Velikov (2019) 一文分析了不同模型在考虑了交易成本之后的效果。结果嘛，至少在该文的样本中，Fama and French 依然笑到了最后；而 q-factor model 真是情何以堪。
+
+为了确保结果的客观性，我也查到了另外一篇文献（Chabi-Yo, Goncalves, and Loudis 2020），它也得到了类似的结果（仅看下图中 panel a 即可）。有意思的是，虽然 q-factor model（图中 q4）在考虑了成本后和 Fama-French 系列模型没啥差异，但是 q5（Hou et al. 2020）依然很优秀。
+
+不管怎样，本小节介绍问题为多因子模型的比较提出了新的挑战。在《因子投资：方法与实践》的第 4.4 节中，我们讨论了多因子模型的简约性问题，并指出随着模型复杂度的提升，模型总能解释越来越多的异象。当更高的交易成本伴随更复杂的因子（使用多个变量构造）或包含更多因子的模型而来时，人们就不得不考虑它的影响。而当考虑了交易成本之后，很多先前的认知和实证结果就会被打破。
+
+04
+思考
+
+本文的二、三小结以 Novy-Marx 和其合作者的两篇论文为背景，介绍了 factor war 的最新进展。除此之外，还有一个小插曲值得品味。在 Novy-Marx (2018b) 的脚注 1 中，他也对 q-factor model 的 ROE 因子是否存在使用未来数据也有质疑。这里的未来数据指的是在历史时点错误使用事后修正的数据。
+
+对美股而言，Compustat 有很多数据库（下图）。根据不同数据库的说明，Snaphot、Point-in-Time、Unrestated Quarterly 应不存在上述未来数据问题。但如果使用 Historical 数据库，由于它使用修正的数据覆盖原始数据，且不保留原始数据，因此就会出现上述问题。从官方介绍可知，不存在问题的数据库的季度数据仅能追溯到 1987 年。
+
+而另一方面，Hou, Xue, and Zhang (2015) 的实证区间从 1972 年开始。这意味着其仅能使用 Historical 数据库，因此也就难逃修正造成的未来数据的问题，一如 Novy-Marx (2018b) 指出的那样。
+
+前文《q-factor model 往事》曾介绍过 q-factor model 诞生背后的种种，也提到了 Novy-Marx 在其中发挥的微妙作用。因此，实在不理解为什么他对 q-factor model 这么大“意见”。当然，我们关心的也不是他和 q-factor model 的恩怨情仇，而是从这些实证研究中到底能够获得怎样的启发。
+
+作为本文的结尾，下面就简要谈谈对 factor war 的思考（特别感谢 [因子动物园] 园长和我进行的深入探讨）。
+
+首先来说 Novy-Marx (2018b) 对单季度 ROE 的拆解以及实证结果。无论人们是否同意他的做法，该文的结果都在呼吁不应该仅仅因为一个模型能够解释更多的异象就简单粗暴的理解它更好。如果从模型提出的机制出发，它不应该能解释某个异象（比如 Daniel, Hirshleifer, and Sun 2020 三因子模型从原理上就不应该解释 size，而它也确实无法解释 size）但实证结果却矛盾，那么就值得深思。
+
+而这其实也引出了更一般的问题，即多因子模型的评价很大程度上取决于 test assets 的选择。而使用各种异象作为 test assets 也并非最合理的处理方式（见《Which test assets ?》）。当评价结果非常依赖 test assets 而 test assets 本身又没有定论时，以此为判定依据的 factor war 就没有价值。
+
+抛开 test assets 不说，如果以 tangency portfolio 的夏普率来评判，那就要考虑本文第三节提到的问题：cost matters。在这个问题上，学界显然也还有很长的路要走。而 Fama and French (2018) 也曾呼吁，以最大化 tangency portfolio 夏普率来挑选因子实在是本末倒置。
+
+除了上述几点，[因子动物园] 园长还补充了 Bryzgalova, Huang, and Julliard (2020) 一文，对 factor war 提出了新的见解。该文基于 51 个因子的所有可能组合，构造了 2.25 × 10^15 个模型（对，10 的 15 次方……），然后使用贝叶斯方法发现概率最大的 1000 个模型的概率之和非常低，即真实模型的分布相当离散。如果有相对占优的模型，参照一般的统计规律，不同模型为真的概率应该是幂律变化的，但候选因子模型的表现显然并非如此。这似乎意味着 factor war 可能永远没有答案，而我们也不应在这个问题上纠结下去。
+
+以上就是对 factor war 的探讨。
+
+在本文结束之前，再来广而告之一下。
+
+本周《因子投资：方法与实践》的配套网站 www.factorwar.com 将针对 A 股上新 Novy-Marx 四因子模型以及 q-factor model 的因子收益率数据，供各位参考。按照惯例，会同时提供忠于原文的经典版和算法更直接的极简版。感兴趣的小伙伴可移步 https://www.factorwar.com/data/factor-models/ 下载。未来我们还会陆续提供其他模型的收益率数据。
+
+参考文献
+Barillas, F. and J. Shanken (2018). Comparing asset pricing models. Journal of Finance 73(2), 715 – 754.
+
+Bryzgalova, S., J. Huang, and C. Julliard (2020). Bayesian solutions for the factor zoo: We just run two quadrillion models. Working paper.
+
+Chabi-Yo, F., A. S. Goncalves, and J. Loudis (2020). An intertemporal risk factor model. Working paper.
+
+Cochrane, J. H. (2011). Presidential address: Discount rates. Journal of Finance 66(4), 1047 – 1108.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors.Review of Financial Studies 33(4), 1673 – 1736.
+
+Detzel, A., R. Novy-Marx, and M. Velikov (2019). Model selection with transaction costs. Working paper.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2018). Choosing factors. Journal of Financial Economics 128(2), 234 – 252.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models.Review of Financial Studies 33(5), 1891 – 1926.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics.Journal of Finance 72(4), 1399 – 1440.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2019). Which factors? Review of Finance 21(1), 1 – 35.
+
+Hou, K. H. Mo, C. Xue, and L. Zhang (2020). An augmented q-factor model with expected growth. Review of Finance forthcoming.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics 108(1), 1 – 28.
+
+Novy-Marx, R. (2018a). Fundamentally, momentum is fundamental momentum. Working paper.
+
+Novy-Marx, R. (2018b). How can a q-theoretic model price momentum? Working paper.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aa20>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8dfd0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ae30>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8eac0>)
+--- 图6 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ae30>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图10 ---
+significant anomalies in the broad cross section: Pricing errors and tests of overall performance
+[表]
+SUE-1 | SUE-6 | Abr-1 | Abr-6 | RE-1 | RE-6 | R6-6 | R11-1 | I-Mom | B/M | 
+CF | 0.45 | 0.24 | 0.73 | 0.30 | 0.89 | 0.60 | 0.85 | 1.18 | 0.51 | 0.70 | 
+0.50 | 0.27 | 0.76 | 0.31 | 1.02 | 0.71 | 0.92 | 1.29 | 0.58 | 0.75 | 
+0.55 | 0.39 | 0.84 | 0.38 | 1.20 | 0.94 | 1.12 | 1.52 | 0.68 | 0.01 | 
+0.34 | 0.18 | 0.62 | 0.19 | 0.56 | 0.37 | 0.06 | 0.09 | -0.18 | -0.01 | 
+0.16 | 0.02 | 0.64 | 0.26 | 0.12 | 0.03 | 0.24 | 0.24 | 0.00 | 0.21 | 
+3.59 | 2.17 | 5.50 | 3.11 | 3.43 | 2.58 | 3.17 | 3.52 | 2.33 | 2.88 | 
+4.26 | 2.68 | 5.84 | 3.33 | 4.13 | 3.28 | 3.63 | 4.18 | 2.68 | 3.05 | 
+F | 4.50 | 3.62 | 5.93 | 3.89 | 4.81 | 4.52 | 4.47 | 4.99 | 3.25 | 0.04 | 
+2.62 | 1.69 | 4.37 | 2.06 | 2.56 | 2.15 | 0.51 | 0.67 | -1.11 | -0.06 | 
+1.12 | 0.18 | 4.07 | 2.18 | 0.43 | 0.14 | 0.71 | 0.54 | 0.01 | 1.15 | 
+FF | 0.16 | 0.11 | 0.13 | 0.08 | 0.19 | 0.14 | 0.17 | 0.21 | 0.16 | 0.22 | 
+0.17 | 0.13 | 0.16 | 0.11 | 0.27 | 0.23 | 0.19 | 0.26 | 0.15 | 0.07 | 
+C|q| | 0.11 | 0.09 | 0.12 | 0.08 | 0.11 | 0.09 | 0.10 | 0.13 | 0.06 | 0.06 | 
+0.05 | 0.07 | 0.13 | 0.07 | 0.10 | 0.11 | 0.08 | 0.13 | 0.13 | 0.08 | 
+0.00 | 0.00 | 0.00 | 0.01 | 0.04 | 0.21 | 0.00 | 0.00 | 0.09 | 0.04 | 
+FF | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.09 | 0.19 | 
+C | 0.00 | 0.00 | 0.00 | 0.01 | 0.16 | 0.12 | 0.00 | 0.00 | 0.45 | 0.29 | 
+q | 0.42 | 0.04 | 0.00 | 0.02 | 0.46 | 0.08 | 0.00 | 0.01 | 0.03 | 0.35 |
+出处：Hou Xue and Zhang (2015)
+--- 图11 ---
+How can a q-theoretic model price momentum?
+Robert Novy-Marx $ ^{*} $
+Abstract
+The answer, of course, is that it can't. Hou, Xue, and Zhang's (2014) empirical model does price portfolios sorted on prior year's performance, but for reasons outside of q-theory—it does so by including a fundamental momentum factor, i.e., a factor based on momentum in firm fundamentals. The ROE factor, which does all the work
+--- 图13 ---
+1. Comparison of earnings innovation and PEAD factors. The figure shows the value of a dollar, net of financing costs, invested at the end of the first quarter of 1974 in the ROE factor, rebalanced monthly on the basis of the most recently announced quarterly earnings-to-book, and similarly constructed factors based on standardized unexpected earnings PEAD), earnings innovations-to-book (ΔROE), lagged earnings-to-book (lag-ROE), and a lower frequency earnings-to-book strategy based on annual return-on-equity, which is only rebalanced once a year, at the end of June (E/B). To facilitate comparison factor are scaled to match the sample average volatility of the ROE factor, 10.4%. The start date is determined by the availability of the quarterly Compustat data, and the requirement of at least six observations of year-over-year changes to quarterly earnings for the scaling of the earnings surprise variable.
+--- 图14 ---
+t
+Pricing gross profitability with the conflated factor
+This table presents results of time-series regressions of the form:
+$$ \begin{array}{r l r}{\mathrm{P M U}_{t}}&{{}=}&{\alpha+\beta^{\prime}\mathbf{X}_{t}+\varepsilon_{t},}\end{array} $$
+where  $ PMU_{t} $ is the monthly excess returns to the profitable-minus-unprofitable factor, constructed using the same methodology used to form the Fama and French HML factor, but on the basis of gross profitability (revenues minus cost of goods sold, scaled by assets) instead of book-to-market. The explanatory factors are the returns to various combinations of the Fama and French factors (MKT, SMB, and HML), an asset growth factor (AG), and the ROE, lag-ROE, and  $ \Delta ROE $ factors. PMU excludes financial firms (those with one digit SIC codes of 6; results including financials provided in the appendix). The sample covers July 1973 through December 2013, with the start date determined by the availability of quarterly Compustat data.
+[表]
+ | (1) | (2) | (3) | (4) | (5) | (6) | (7) | 
+$ \alpha $ | 0.28[2.62] | 0.40[3.84] | 0.10[0.99] | 0.17[1.60] | 0.12[1.21] | 0.22[2.19] | 0.30[3.24] | 
+$ \beta_{MKT} $ |  | -0.02[-1.02] |  | -0.01[-0.24] | 0.01[0.25] | 0.01[0.54] | 0.01[0.56] | 
+$ \beta_{SMB} $ |  | -0.02[-0.72] |  | 0.14[3.96] | 0.10[2.99] | 0.18[5.59] | 0.15[4.99] | 
+$ \beta_{HML} $ |  | -0.27[-7.40] |  |  | -0.23[-6.91] |  | -0.31[-9.83] | 
+$ \beta_{AG} $ |  |  |  | -0.34[-6.15] |  | -0.30[-5.57] |  | 
+$ \beta_{ROE} $ |  |  | 0.27[8.11] | 0.30[8.38] | 0.33[9.32] |  |  | 
+$ \beta_{lag-ROE} $ |  |  |  |  |  | 0.50[11.5] | 0.60[15.0] | 
+$ \beta_{\Delta ROE} $ |  |  |  |  |  | 0.11[2.76] | 0.02[0.51] | 
+$ adj.-R^{2} $ |  | 9.92 | 11.8 | 22.1 | 23.6 | 30.5 | 38.4 |
+li hi, hi...
+
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253677e0>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b240>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a9d940>)
+--- 图20 ---
+[表]
+Factor | Sorting signal | Rebalancing | Construction | Models that employ the factor | 
+FF5 | FF6 | HXZ4 | BS6 | FF5c | FF | 
+SMB | Market capitalization | annual | 2x3 | x | x |  | x | x | x | 
+HML | Book-to-market | annual | 2x3 | x | x |  |  | x | x | 
+RMW | Accruals operating profitability | annual | 2x3 | x | x |  |  |  |  | 
+CMA | Growth in book assets | annual | 2x3 | x | x |  |  | x | x | 
+IOM | Prior year&#x27;s stock performance, excluding most recent month month | monthly | 2x3 |  | x |  | x |  |  | 
+AE | Market capitalization | monthly | 2x3x3 |  |  | x |  |  |  | 
+A | Growth in book assets | monthly | 2x3x3 |  |  | x | x |  |  | 
+ROE | Quarterly returns-on-equity | monthly | 2x3x3 |  |  | x | x |  |  | 
+iHML(m) | Book-to-market | monthly | 2x3 |  |  |  | x |  |  | 
+RMWc | Cash operating profitability | annual | 2x3 |  |  |  |  | x | x |
+出处：Detzel Now-Marx and Velikov (2019)
+--- 图21 ---
+出处：Detzel Nowy and Velikow
+--- 图22 ---
+Panel B: Out-of-sample bootstrap results
+[表]
+ |  | Probability (%) that the row model performs at least as well as the column model |  | 
+ | Mean- $ SR^{{2}} $ | FF5 | FF6 | HXZ4 | BS6 | FF5_C | FF6_C | Best | 
+FF5 | 0.62 |  | 46.3 | 75.1 | 67.9 | 2.0 | 6.2 | 0.9 | 
+FF6 | 0.64 | 70.2 |  | 77.5 | 74.6 | 6.0 | 2.3 | 1.3 | 
+HXZ4 | 0.46 | 24.9 | 22.5 |  | 34.2 | 4.5 | 4.7 | 2.4 | 
+BS6 | 0.50 | 32.1 | 25.4 | 65.9 |  | 5.6 | 3.8 | 2.4 | 
+FF5_C | 1.05 | 98.1 | 94.0 | 95.5 | 94.4 |  | 58.2 | 54.8 | 
+FF6_C | 1.03 | 93.8 | 97.8 | 95.3 | 96.2 | 65.6 |  | 60.1 |
+ble 5: Bootstrapped net-of-costs maximum squared Sharpe ratios For each model we consider, the first column presents average net-of-costs maximum squared Sharpe ratios,  $ SR^2(f) $ on 100,000 in-sample (iS) or out-of-sample (OS) simulation runs. IS and OS simulations split the 552 sample months of our sample period, January 1972 through December 2017, into 76 adjacent pairs: months (1, 2), (3, 4), ... (551, 552). A simulation run draws a random sample with replacement of 276 pairs. The IS simulation run chooses a month randomly from each pair in the run. We calculate IS  $ SR^2(f) $ on that sample of months and then apply the corresponding portfolio weights in the unused months of the simulation pairs to produce the corresponding OS estimate of the Sharpe ratio for the IS tangency portfolio. The six columns labeled by model names, "FF5" to "FF6C", present the percentage of bootstrap simulations in which the squared Sharpe ratio of the model defined by the row heading is greater than or equal to that of the model defined by the column heading. The last column, "Best", presents the percentage of bootstrap simulation runs in which the model specified by the row heading has the highest squared Sharpe ratio among all models in the run. Panel A presents IS results and Panel B presents OS results. The sample period is January 1972 through December 2017.  $ Les^3 $
+出处：Detzel, Novy-Marx, and Velikov (2019)
+--- 图23 ---
+(a) Tangency Portfolio Sharpe Ratios
+(b)  $ \Sigma\alpha^{2} / \Sigma\alpha_{ICAPM}^{2} $
+Figure 1
+Main Results from Comparing Factor Models
+These graphs summarize the main results from our factor model comparison. Panel (a) displays (in- and out-of-sample) maximum (gross and net of trading costs) sharpe ratios constructed using the ICAPM factors or using factors from other prominent factor models, which are described at the beginning of Section 3. Panel (b) displays averages of relative pricing errors,  $ \Sigma\alpha^{2}/\Sigma\alpha_{ICAPM}^{2} $, across deciles formed on 158 anomalies (from Chen and Zimmermann (2020)) and across the different groups of testing assets recommended in Lewellen, Nagel, and Shanken (2010) (single stocks, industry portfolios, correlation-clustered portfolios, and bond portfolios). Further details are provided in Sections 3 and 4.
+出处：Chabi-Yo Goncalves and Loudis (2020)
+--- 图24 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62de0>)
+--- 图26 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8fd30>)
+--- 图27 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15490>)
+--- 图28 ---
+This construction also introduces a look-ahead bias into the factor, because quarterly earnings in compustat include revisions, and thus not necessarily the earnings that were actually announced. This bias ill tend to inflate the returns to the ROE factor, as stocks bought on the basis of future positive revisions ill tend to perform strongly on the revision date. Quantifying the magnitude of this bias is beyond the scop of this paper, but could be addressed simply by lagging quarterly earnings sufficiently from the recorded earnings announcement dates.
+处：Novy-Marx (2018b)
+--- 图29 ---
+[表]
+Compustat® Historical: Historical annual and quarterly restated North American data. Annual data available from 1950 and quarterly data from 1962 | 
+Compustat Snapshot: A backtest database containing non-North American fundamental financial data. Compustat Snapshot includes originally reported data, restated data and multi-restated data with history back to 1987 for annual data and 1996 for interim data | 
+Compustat® Corporate Tracker: Corporate actions database which tracks mergers, acquisitions, CUSIP, ticker and name changes back to 1966 | 
+Compustat® ExecuComp: Provides annual data from 1992 forward on the top five executive officers within a company. This database, representing the S&P 1500, contains more than 31,000 executives and includes more than 100 different compensation items | 
+Compustat® Point-in-Time: North American monthly historical quarterly fundamental data, includes a 20-quarter rolling history for a particular month from 1987 forward | 
+Compustat® Unrestated Quarterly: Standardized quarterly unrestated income statement and balance sheet data from 1987, accompanied by the quarterly restated equivalents | 
+Compustat® Preliminary History: Annual and quarterly preliminary North American company data from 1987 | 
+Compustat® Industry Specific: Financial, statistical and market information on Airline, Healthcare Facilities, Homebuilding, Managed Care (HMO), Mining, Oil & Gas, Exploration & Production, Oil & Gas Refining & Marketing, and Retail industries |
+--- 图30 ---
+2. Factors
+Monthly returns, dividends, and prices are from the Center for Research in Security Prices (CRSP), and accounting information is from the Compustat Annual and Quarterly Fundamental Files. The sample is from January 1972 to December 2012. The starting date is restricted by the availability of quarterly earnings announcement dates, as well as quarterly book equity data. Financial firms and firms with negative book equity are excluded.
+出处：Hou, Xue, and Zhang (2015)
+--- 图31 ---

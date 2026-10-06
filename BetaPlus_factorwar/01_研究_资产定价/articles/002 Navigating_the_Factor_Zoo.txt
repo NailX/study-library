@@ -1,0 +1,148 @@
+# Navigating the Factor Zoo
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/cvtel7UxVbCbjVEytBOpOw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+这是一个量化私募间非典型的 collaborative effort。
+
+The Question
+
+2011 年，时任 AFA 主席的 John Cochrane 在他的主席演讲中首次提出 zoo of factors 这个提法，并提出铿锵三问：
+
+1. Which characteristics really provide independent information about average returns? Which are subsumed by others?
+
+2. Does each new anomaly variable also correspond to a new factor formed on those same anomalies?
+
+3. How many of these new factors are really important?
+
+至此以后，factor zoo 深入人心。根据 Google Scholar Citation 的统计结果，2011 到 2023 年的 13 年间 AFA 主席演讲（按照惯例，AFA 主席演讲会被发表在 Journal of Finance 上）的 citation 次数如下图所示。Cochrane 的演讲独一档的存在，紧随其后的是 Cam Harvey 的 p-hacking —— 也是一个和 factor zoo 密切相关的话题。（抱歉，我选择性地对 Zingales 的 Does Finance Benefit Society“视而不见”。它当然非常重要，但和本文的主题并不相关。）
+
+另一方面，如今的实证资产定价和从其中衍生出来的因子投资已然进入了协变量的高维数时代，而我们对于哪些因子是股票 cross-section 的核心驱动力的理解也在与时俱进。例如，在 Barra 刚刚推出的全新中国股票因子模型中，加入了股票拥挤度因子、机器学习因子等。在这样的背景下，回答 Cochrane 的问题就显得格外重要。
+
+The Answer
+
+如果说《因子投资：方法与实践》系统阐述了多因子模型框架下的研究方法，但它并没有对不同维度的因子进行详细的说明。而我和“麦教授”（Michael Zhang）以及卢涛博士合著的 Navigating the Factor Zoo 则是为了弥补这个 gap 而做出的尝试。
+
+在内容上，全书第一章从资产定价理论出发勾勒了因子投资的整体框架，然后第 2 到 11 章分别从以下方面介绍了学界研究和业界实践中最重要的大类因子：Quantamentals、Statistical Moments、Market Beta、Technical Analysis、Microstructure and Liquidity、Tail Risk、Behavioral Finance、Option Information、Uncertainty 以及 Alternative Data。最后，第 12 章以客观的视角阐述了机器学习在因子投资中能够发挥的作用（了解我的小伙伴一定知道，我在这方面的看法是倡导在资产定价理论的指导下使用机器学习，正如 Nagel 和很多学界大佬所强调的那样）。
+
+而在写作风格上，除了学术文献应有的严谨，本书还穿插了很多量化投资领域的有趣科普。例如：
+
+又如：
+
+除此之外，本书的另一个特点是随书而来的一个 GitHub 开源项目 —— FIRE（Factor Investing Research Engine）。《因子投资》被很多读者“吐槽”的地方是没有提供代码 —— 尽管 www.factorwar.com 上提供了数据（而且五年后的今天还在持续更新！）。而这本 Navigating the Factor Zoo 的配套项目也算是弥补了我个人的一点遗憾。希望透过它，可以和各位小伙伴一起共同推进量化投资的边界。
+
+以上是关于这本新书的简要介绍。和当年为《因子投资》所写的介绍相比，这似乎很不“川总写量化”。这是因为，我想把更多的笔墨留给创作这本新书背后的故事。
+
+The Motivation
+
+差不多是一年前的这个时候（2024 年 1 月），作为我清华和 MIT 双料师兄的麦教授找到我，和我谈起了这个 project，并邀请我加入他和卢博士一起，完成这本书的创作。
+
+当时，这本书已有雏形。相较于最终出版的版本，当时的初稿的完成度大概是现在的 40%。但面对他们两位的热情邀请，我最初还是有些犹豫。原因是我不想也不能 take 他们二人的 credits。另一方面，他们二人除了学界的身份之外，更是执掌和管理着超量子基金。
+
+你知道，私募和私募之间通常是没有什么交（he）流（zuo）的。原因，你懂的。
+
+因此，从各个角度而言，我似乎都有充分的理由来婉拒这份好意（那么也就不会有今天这篇推文）。而另一方面，我又有足够的动机来接受这个邀请，并在我的价值观下为这个 project 竭尽全力。而这个动机也和我写公众号的初衷如出一辙 —— 普及科学的定量化思维。（BTW，掐指一算，公众号也已经写了 9 年，我想我有资格郑重的陈述自己的心路历程。）
+
+就国内市场的量化投资而言，高速发展的阶段是 2016 到 2020 这几年，量化私募的管理规模上升了一个数量级、超过 1 万亿。伴随而来的，是资金和人才的涌入。毫无疑问，这些对于量化行业的飞速发展提供了客观的条件。然而，人们对于量化的理性认知并没有和行业的飞速发展相匹配。这也导致了一些无端的猜疑和不必要的误解。然而，量化并非黑箱，也不是牛鬼蛇神。
+
+量化首先是一种方法论。
+
+定量研究是所有课题深入到一定程度之后的必经之路。人们在投资活动中积累了大量的经验，这些经验被抽象归纳，形成可以称之为科学的投资学。量化投资的核心是对投资实践经验的抽象与归纳，它已经发展成为基于现代科学方法的理论体系和研究方式。擅长各种精确计量的量化投资的兴起只不过是一个学科变得更为成熟的必由之路。无论接受与否，投资领域的“工业化大生产”时代已然来临。
+
+当然，量化又不局限于方法论。
+
+北京大学王汉生教授曾经在科普统计学的时候，说过这样一句话“我们在产品的设计上，怎么样既能把在预测过程中的相对优势表达出来，同时又容忍不确定性的存在。这是个大问题。”这句话引起了我的共鸣，我认为这就是量化投资的目标，即如何更好的预测资产的预期收益并同时控制它们的风险，也就是不确定性。为了实现这个目标，靠的是数量化的思维以及工程化的体系。前者让我们通过统计手段结合金融学先验来进行预测和估计，后者让我们把理论分析落地到投资实践，二者缺一不可。量化投资是数量化思维和工程化体系的结合。
+
+这是我一贯的看法，也是我希望透过完成这本书 —— 哦，对了，这本书还有个副标题，叫做 The Science of Quantitative Investing —— 所传递的观点。最终，我加入了这个 project，并和两位优秀的 co-authors 一起，在初稿的基础上又历经半年的修改（部分章节甚至是推翻了重写），最终把它打磨成了现在的样子。这本书也得到了学界和业界前辈的认可，在此表示由衷的感谢。
+
+在此，我也要向麦教授和卢博士两位 co-authors 表示感谢。不仅仅感谢他们当初的邀请，更感谢他们在整个写作过程中所体现出的专业度。在写作过程中，我们三人配合默契，形成了一条有序而高效的流水线。这种以普及知识为唯一目标的 collective spirit 让我享受其中，也受益匪浅，正如麦教授所说：
+
+This book is a testament to the collective spirit and dedication of all those who have been involved.
+
+以上就是我和这本书的故事。
+
+最后，关于这本书的精彩照片以及更多介绍（包括我们三人都在的读者群），感兴趣的小伙伴请参考这篇介绍：
+
+https://mp.weixin.qq.com/s/sOVVnacrOZ79GVfzFoFMIA
+
+期待有机会和你在因子投资的道路上携手前行。
+
+Last but not least, 新春将至，祝各位小伙伴因子选得好，模型跑得稳，蛇年一起‘量化’幸福。
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+
+--- 图2 ---
+Navigating the Factor Zoo
+The Science of Quantitative Investing
+Bridging the gap between theoretical asset pricing and industry practices in factors and factor investing, Zhang et al. provides a comprehensive treatment of factors, along with industry insights on practical factor development.
+NAVIGATING THE FACTOR ZOO
+The Science of Quantitative Investing
+Michael Zhang, Tao Lu and Chuan Shi
+--- 图3 ---
+1 Factor Investing
+2 Quantamentals
+3 Statistical Moments as Factors
+4 Market Beta
+5 Technical Analysis Factors
+6 Microstructure and Liquidity
+7 Tail Risk
+8 Behavioral Finance
+9 Option Information
+10 Uncertainty
+11 Alternative Data
+12 Machine Learning in Factor Investing
+--- 图4 ---
+1.4.2. The factor Zoo
+Factor ETFs and custom indices are based on broad concepts like value, size, momentum, volatility, quality etc. They are sometimes termed "styles" instead of "factors" since each of them is composed of many variables (or attributes) or a combination/formula of variables. For example, value consists of various fundamental variables from financial statements or balance sheets like book-to-price ratio, earnings-to-price ratio, book values, sales, earnings, cashflow, etc., and some extended calculations like free cashflow which involves sales revenue, operating costs, taxes, and operating capital in the calculation. These variables are equivocally included as factors in the industry. With multiple styles and many variables within styles, together with ongoing unrelenting efforts to discover new factors, the rate of factor production becomes so fast and out-of-control that many of them become redundant or replicates of others. Professor John Cochrane, a famous financial economist, describes this phenomenon as the "factor zoo".
+"Factor Zoo" by John Cochrane
+John Cochrane was formerly a professor of economics and finance at the University of Chicago. He serves full-time as the Rose-Marie and Jack Anderson Senior Fellow at the Hoover Institution at Stanford University. His book, Asset Pricing, is the standard textbook for graduate courses on asset pricing in finance. It earned him the TIAA-CREF Institute Paul A. Samuelson Award.
+Cochrane was active in the media and contributed to the debate on the financial crisis during 2008. His blog The Grumpy Economist humorously commented on the issues which drew criticism from Paul Krugman, who won the Nobel Memorial Prize in Economic Sciences in 2008, leading Cochrane to write a response on his website. The response was later published in The Wall Street Journal.
+In his 2011 presidential address to the American Finance Association, Cochrane coined the term zoo of factors. This was to describe the uncontrolled explosive growth of factors in the industry in a humorous way, which is how the term factor zoo came.
+Cochrane is the son-in-law of the famous financial economist Eugene Fama, who won the Nobel Memorial Prize in Economic Sciences in 2013 and is one of the most prominent figures in asset pricing literature.
+--- 图5 ---
+exploration of implied volatility surfaces. Implied volatility, a key parameter derived from options pricing models such as the Black-Scholes-Merton model, reflects the market's expectations of future volatility. By analyzing implied volatility surfaces across different strikes and maturities, quantitative researchers can uncover valuable insights into market sentiment, risk perceptions, and potential mispricing, thereby informing their investment decisions. Additionally, we will discuss stochastic processes, including models incorporating jump processes to quantify jumps, providing yet another avenue for the development of factors.
+The Black-Scholes-Merton model
+The Black-Scholes-Merton model, developed by Fischer Black, Myron Scholes, and Robert C. Merton in the early 1970s, had a profound impact on the financial market. Their collaborative efforts built upon the research of Paul Samuelson and Robert C. Merton on stochastic calculus and option pricing theory. The Black-Scholes model was introduced by Fischer Black and Myron Scholes in their paper "The Pricing of Options and Corporate Liabilities" in 1973 (Black and Scholes 1973). Concurrently, Robert Merton developed a similar model and presented his results in "Theory of Rational Option Pricing" in the same year (Merton 1973). Merton's contributions included the extension of the Black-Scholes model to incorporate dividends and the application of a continuous-time finance framework.
+It is ironic that when Black and Scholes first submitted such a powerful and original work, it was considered so unconventional and got rejected by the Journal of Finance, the Review of Economics and Statistics, and the Journal of Political Economy (JPE). As of right now, the Journal of Finance considers the rejection one of its biggest mistakes. It was not until two very famous American economists, Merton Miller and Eugene Fama, suggested JPE take another look at the work that this influential paper was eventually published in JPE in 1973.
+The model’s influence extended beyond academia. The model became widely adopted by financial
+--- 图6 ---
+This book delivers a rigorous and stimulating discussion of fundamental questions. What does a human know that a machine learning algorithm cannot possibly know and vice versa? When does a serious investor know enough to act and when does the irreducible uncertainty lead to caution? This book offers a deeply insightful window into the modern frontier, and how to think about balancing sophisticated algorithms with practical challenges at the edges.
+Shane Greenstein, PhD
+Professor
+Harvard Business School
+Factor investing is the cornerstone of active portfolio management. For both students and investment professionals, this book provides a comprehensive analysis of the foundations of factor investing as well as practical implementation. Importantly, the authors detail not just the investment opportunities but also the risks. Recommended.
+Campbell Harvey, PhD
+Professor
+Duke University
+information technology has transformed most areas of finance, including driving the growth of quantitative investing. This book provides a survey of the different kinds of data and factors behind this trend. The book's overview of the science, art, technology, and techniques helps the reader comprehensively understand the current knowledge frontier while pointing out future directions for research and practice.
+Terrence Hendershott, PhD
+Professor
+University of California, Berkeley
+It is instantly clear that the authors combine deep academic knowledge with a wealth of practical market experience. What really sets this book apart, however, is that they are not just telling you what used to work in the past, but try to look to the future – what new methods and ways of thinking will deepen our understanding of financial markets.
+Turly Nevmyvaka, PhD
+Managing Director, Head of Machine Learning Research.
+Morgan Stanley
+vory Tower meets Wall Street - Tapping into their wealth of knowledge and experience as both academics and hedge fund managers, the authors cover a multitude of factors that affect returns in the financial market. Packed with academic rigor and practical relevance, this is an important and compelling read.
+Michael Saunders, PhD
+Professor
+Stanford University
+A well-curated exploration of factor investing, systematically charting a map of important sources of financial returns. It is a solid treatment of how certainty can be generated from the uncertain financial world and an essential read for practitioners and students seeking a deeper understanding of quantitative investing.
+Feng Zhu, PhD
+Professor
+
+--- 图8 ---

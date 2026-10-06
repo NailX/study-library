@@ -1,0 +1,115 @@
+# Harry Markowitz
+
+来源：04_研究_资产配置
+链接：https://mp.weixin.qq.com/s/DmB22oncRpYfwnNcFOyAYQ
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+谨以此文纪念 Harry Markowitz。
+
+美国当地时间 2023 年 6 月 22 日，现代投资组合理论发明者、诺贝尔经济学奖获奖者 Harry Markowitz 去世，享年 95 岁。
+
+不夸张地说，在上世纪 50 年代，Markowitz 的研究可谓从无到有，他以一己之力将数量化分析方法应用于金融市场，并开创性地提出现代投资组合理论（mean-variance 有效前沿），让人们对于金融市场的分析从 DCF 转向同时关注 return 和 risk。
+
+直到今天，资产配置依然是投资中（最）重要的课题（之一）。而从事量化投资的小伙伴也无不对 mean-variance portfolio allocation 以及由此衍生出来的其他配置方法如数家珍（见《浅析资产配置的几种方法》）。
+
+本文就来简要回顾一下 Markowitz 学术发现背后的心路历程。本文前半部分的历史叙述参考罗闻全教授的 In Pursuit of the Perfect Portfolio 一书中关于 Markowitz 的章节（Lo and Foerster 2021），第三节是我个人的思考。
+
+1
+命中注定
+
+正如所有不凡人生都有一些传奇色彩，Markowitz 也不例外。
+
+1950 年，就像所有迷茫的 Ph.D. candidates 一样，正在芝加哥大学攻读博士学位的 Markowitz 坐在他导师 Marschak 的办公室外，等待和他探讨博士论文选题。与此同时，同样等在门外的是一位股票经纪人。也许是为了打发时间，这个青涩的、投资经营为零的博士生和这位经纪人闲聊了起来。而正是这个契机改变了一切。
+
+当日稍晚的时候，Markowitz 对导师说“门外这个人建议我研究股票市场。您觉着如何？” Marschak 思考后告诉他这是一个值得尝试的方向。于是，这次阴差阳错的闲聊便拉开了 Markowitz 的研究之路，他致力于将数学和统计学方法应用于股票市场。
+
+这便是第一个命中注定的时刻。然而，传奇色彩远不止于此。
+
+在上世纪 50 年代，别说是金融学，就连定量研究在股票市场中几乎都是闻所未闻。因此，可供 Markowitz 参考的文献寥寥无几。彼时，经由导师牵线搭桥，时任商学院院长的 Marshall Ketchum 给 Markowitz 推荐了几本帮他了解股票投资的专著，其中包括 Graham 和 Dodd 的、如今家喻户晓的 Security Analysis。不过对 Markowitz 影响最大的则要数 John Burr Williams 的 The Theory of Investment Value。也正是它极大推动了 Markowitz 的研究。
+
+1950 年的某天下午，当 Markowitz 在芝加哥大学商学院图书馆中啃着 Williams 的这本著作时，一丝灵光乍现诞生了。Markowitz 发现 Williams 的理论中忽视了股票收益率之间的相关性，此外该理论假设投资者只关心预期收益率而不关心风险。在这个假设下，投资者只需购买预期收益率最高的单支股票来构建投资组合即可，而不需要同时持有多支股票。
+
+这样的推论让 Markowitz 十分不解，因为这和业界的共识不符。在 Ketchum 给 Markowitz 的资料中，还有一份来自 Wiesenberger 的 Survey，它显示投资者非常在乎多样化（diversification）并且通过买入公募基金来达到同时持有一揽子（而绝非单支）股票的目的。理论和实践的矛盾让 Markowitz 意识到，Williams 的理论中缺失了一个重要的因素，即投资者对投资组合整体风险的关注。
+
+为了确定投资组合的风险，Markowitz 进一步意识到，Williams 忽视股票收益率之间的相关性也是错误的。因为股票的收益率之间是相关的，而非独立的。因此，仅仅知道单一股票的风险是不够的，而且还要知道它们的相关性。Markowitz 事后回忆道，这个想法是他学术生涯的第一个 aha moment。每当有人问他“你是否意识到这会为你带来诺贝尔奖”时，他总是回答说“当然不！但是我意识到这会给我带来一个博士学位。”
+
+这便是第二个命中注定的时刻。
+
+2
+现代投资组合理论的诞生
+
+由于良好的数学和统计学训练，通过标准差刻画单一股票风险，通过相关系数和标准差来计算投资组合的风险对于 Markowitz 似乎就是水到渠成一般。
+
+在第二个命中注定时刻的那天下午，Markowitz 在草稿纸上画出了也许是世界上第一个 mean-variance 有效前沿。只不过当时他把预期收益率放在了横坐标，将风险放在了纵坐标，因此有效前沿如下图所示（摘自其 1952 年发表在 JF 上的文章），即对于给定的预期收益率，该组合风险最低；或者对于给定的风险，该组合的预期收益率最高。
+
+1952 年，Markowitz 以 Portfolio Selection 为题将其研究成果发表在 Journal of Finance 上，这甚至比他获得博士学位还要早了两年。这篇文章通篇数学公式，并配合恰当的图例，这对于当年的 JF 来说，是十足的异类。然而在如今看来，正是它拉开了定量研究的序幕，Markowitz 也被称为现代投资组合之父。
+
+不过有意思的是，无论是金融学的发端还是 Markowitz 的历史功绩背后，都不乏一些逸闻趣事，向世人传递着属于那个时代的温情。
+
+在 Markowitz 博士论文答辩之前，他认为自己不会遇到什么麻烦。然而，在答辩仅仅进行了五分钟之后，Milton Friedman 便打断他说“Harry，你的论文不属于经济学范畴，我们不能给你经济学博士学位。”可以想象，在之后的一个半小时中，Markowitz 是在怎样的纠结中度过。不过最终的结果并没有像 Friedman 描述的那样“残酷”。在他答辩之后，学术委员会只进行了 5 分钟的讨论便达成了共识：“Congratulations Dr. Markowitz”。Friedman 后来告诉 Markowitz，就学术成果而言，他足以获得博士学位，只不过即使在 50 年后，Friedman 依然坚持自己的看法，即他的研究并不属于经济学。也许正是在那个时刻，作为新兴学科的金融学悄然发轫。
+
+如今，提到现代投资组合理论，人们会首推 Markowitz (1952)；而 Markowitz 也被认为是现代投资组合理论之父。然而无巧不成书，似乎是注定再添加一笔传奇色彩，早在十二年前的 1940，现代投资组合理论的雏形就被一位意大利统计学家 de Finett 提出了。在其论文中，de Finetti 在保险精算问题中使用了 mean-variance analysis 但是并没有试图解决最优化问题。然而由于语言壁垒（论文是意大利语而非英语）以及研究的并非是金融投资问题，他的发现并没有得到足够的重视。此外，在 Markowitz (1952) 发表后三个月，来自英国的 A. D. Roy 在 Econometrica 上也发表了类似的发现。
+
+Markowitz 在事后谈到这些早期或者同期的发现时表现的十分淡然（比如他用“De Finetti Scoops Markowitz”评价了 de Finetti 的文章）。也许和其他大佬一样，追求真相的快感远远高于个人所获得的荣誉。
+
+3
+未竟的事业
+
+如今，mean-variance 投资组合理论历经了 70 余载，而资产配置也早已成为投资中最重要的课题。
+
+现代投资组合理论虽然在数学上十分优雅，但是在实践中，由于需要估计的参数误差很大（包括预期收益率非常难以估计，且协方差的逆运算也有很多实操的坑），因此其在业界往往被吐槽。不过，质疑也好，吐槽也罢，本节还是让我们客观的来评价一下 mean-variance 最优化。
+
+让我们从一个简单的实证说起。
+
+我以 BetaPlus 小组针对 A 股市场构造的 Fama-French 五因子为待配置的标的（数据可在 www.factorwar.com 下载）。假设历史数据计算的  和  就是真实的  和  ，而下图中蓝线是根据该  和  计算而来的有效前沿。接下来，假设这五个组合的收益率满足 multivariate normal（参数为上述  和  ），并生成模拟样本。对于每次模拟，使用模拟样本计算  和  ，并使用它们计算投资组合的最优权重  。得到最优权重  之后，将其代入到真实的参数  和  中，便得到了图中的绿线（一共考虑了 50 组模拟，因此一共有 50 条绿色曲线）。
+
+由于真实的参数是  和  ，而我们计算最优权重使用的是  和  ，因此每个模拟中的绿色有效前沿都要比蓝色曲线差。它们的差异表明了参数估计误差对实际投资组合的影响。这往往就是人们抱怨 mean-variance 最优化的原因。
+
+然而，另一个更重要的因素是，资产的预期收益率（以及协方差）不满足平稳性（e.g.，结构性变化）。和参数估计不准确相比（参数估计准确性可以通过更多的历史样本来提高），DGP 变化导致的参数变化对于 mean-variance 最优化在样本外的表现影响更大。
+
+在 Markowitz (1952) 中，下面这两段话其实非常重要。Markowitz 在文章中将资产配置过程分为两个步骤，第一步是对  和  的估计，第二步才是构造 mean-variance 最优组合。尽管第一步不是他关注的，但下面这段话还是反映出他的观点，即仅仅使用历史数据来估计未来的  和  是不够的，而一些包含其他信息的 judgment 是必要的。
+
+这自然而然的就让我想到了 Black-Litterman 这个贝叶斯框架下的资产配置利器。该模型通过市场均衡状态出发确定预期收益率的先验，并结合投资者的主观判断（以此捕捉 DGP 的变化）形成预期收益率的后验。将其作为未来预期收益率的估计代入到 mean-variance 最优化问题中，往往能够获得比直接使用历史数据更好的结果。
+
+此外，由于 mean-variance 最优化中协方差需要估计的参数太多，Markowitz 也尝试提出一种简化模型来实现 portfolio selection。而正是这个契机成就了 Sharpe 的研究，造就了后来家喻户晓的 CAPM。
+
+另一方面，考虑到事前估计  和  十分困难，人们又通过合理假设来规避掉某些需要估计的参数，并相继提出了很多其他的资产配置方法，如 minimum variance、maximum diversification 以及 risk parity 等。这些模型均对实践中的资产配置产生了深远的影响，而它们都源自 Markowitz 的现代投资组合理论。
+
+和那个年代的许多大佬一样，Markowitz 作为奠基者之一见证了金融学从 0 到 1。而他也是当之无愧的现代投资组合理论之父。
+
+谨以此文纪念 Harry Markowitz。
+
+参考文献
+Lo, A. W. and S. R. Foerster (2021). In Pursuit of the Perfect Portfolio: The Stories, Voices, and Key Insights of the Pioneers Who Shaped the Way We Invest. Princeton University Press.
+
+Markowitz, H. (1952). Portfolio selection. Journal of Finance 7(1), 77 – 91.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+Harry Markowitz, Nobel-Winning Pioneer of Modern Portfolio Theory, Dies at 95
+He overturned the traditional approach to buying stocks by examining the relationship between risk and reward.
+Harry M. Markowitz in 2012. His breakthrough research upended the standard thinking on investing and soon permeated all aspects of money management.
+--- 图3 ---
+FIG. 1
+--- 图4 ---
+
+--- 图5 ---
+[表]
+To use the E-V rule in the selection of securities we must have procedures for finding reasonable  $ \mu_{i} $ and  $ \sigma_{ij} $. These procedures, I believe, should combine statistical techniques and the judgment of practical men. My feeling is that the statistical computations should be used to arrive at a tentative set of  $ \mu_{i} $ and  $ \sigma_{ij} $. Judgment should then be used in increasing or decreasing some of these  $ \mu_{i} $ and  $ \sigma_{ij} $ on the basis of factors or nuances not taken into account by the formal computations. Using this revised set of  $ \mu_{i} $ and  $ \sigma_{ij} $, the set of efficient E, V combinations could be computed, the investor could select the combination he preferred, and the portfolio which gave rise to this E, V combination could be found. | 
+One suggestion as to tentative  $ \mu_{i} $,  $ \sigma_{ij} $ is to use the observed  $ \mu_{i} $,  $ \sigma_{ij} $ for some period of the past. I believe that better methods, which take into account more information, can be found. I believe that what is needed is essentially a “probabilistic” reformulation of security analysis. I will not pursue this subject here, for this is “another story.” It is a story of which I have read only the first page of the first chapter. |
+--- 图6 ---

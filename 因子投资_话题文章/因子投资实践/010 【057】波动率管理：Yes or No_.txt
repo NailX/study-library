@@ -1,0 +1,119 @@
+# 【057】波动率管理：Yes or No?
+
+来源：微信公众号「因子投资」话题·因子投资实践（第10篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484677&idx=1&sn=9ba3612087a9c2989b9999392e054953&chksm=f995b487cee23d916371795c2af015886ba6b06989b3ab1676e9aebb0e5eb1f83e75f2db9644#rd
+
+本文是技术因子专题的第 007 篇文章，也是因子动物园的第 057 篇独立原创研究。
+
+未经授权，禁止转载！
+
+【30 秒速览】波动率管理在近年备受重视，有学者支持，也有学者反对。本文对相关研究进行简要梳理。
+目录：
+01. 简介
+02. 波动率管理的价值03. VMP 的问题：实证证据04. VMP 的问题：理论视角05. 结语1. 简介基于资产波动率来进行仓位管理和配置，在实践中由来已久。趋势交易中大名鼎鼎的海龟交易法便根据 ATR 倒数来确定仓位，而风险平价更是直接依据资产的波动率倒数来确定资产权重（当然，后续更加正式化的方法中，波动率倒数被换做了对组合协方差的贡献）。而在学术界，Moskowitz, Ooi, and Pedersen (2012)（MOP (2012)) 在关于时间序列动量的研究中引入了波动率管理，Barroso and Santa-Clara (2015) 又将该方法引入了横截面动量用以应对动量崩溃（momentum crash）。在上述所有场景中，波动率管理下的策略，表现都显著优于原始策略，这使得其备受关注。对于波动率管理的系统性进行系统性的研究，也就成为了极富价值且非常急迫的问题。
+事实上，不同学者对此持不同意见。而且如同此前的几篇文章，即便发表在顶刊的研究，也对此多有争议。本文将梳理相关的讨论，帮助您更好地理解相关研究。
+
+2. 波动率管理的价值率先登场的是正方选手：Moreira and Muir (2017)（MM (2017)）。这篇发表在 JF 的文章对波动率管理的价值进行了仔细的研究。他们的工作分为两个主要部分。首先，他们以包括市场组合在内的九个主要因子和货币套息交易（currency carry trade）为代表，通过实证研究，研究了波动率管理的价值。其次，他们构建了一个理论模型，给出了波动率管理策略 alpha 的理论表达式和性质。具体而言，他们在实证研究中，以经典的 Fama-French 五因子、动量，BAB，加上 Hou, Xue, Zhang (2015) q-factor 模型中的 ROE 和 IA（投资），以及货币套息交易因子共十个因子为研究对象，分析了波动率管理策略和原始因子的表现。以 表示因子 f 在 t 月的超额收益，则波动率管理组合（VMP）的收益可表示为：其中， 为 t 月因子的已实现方差，c 为一个标准化系数，通常选择 c 使得 同 有相同的无条件波动率，以更纯粹地比较波动率管理的影响。MM (2017) 接着对每一个因子考察了其 VMP 组合相对原始因子的 alpha 。表 1 展示了相关结果，其中 alpha 为年化数据。表 1 ：单因子 VMP 组合表现分析.数据来源：MM (2017), Table 1.根据表 1 可得到以下观察：除规模（SMB）因子外，各个因子的 VMP 组合相对原始因子都有正的 alpha ，且除 HML 和 CMA 外都非常显著（alpha 系数下括号里的是标准误）。
+考虑到同样很小的均方误差，其 appraisal ratio (AR, 表示承担单位非系统性风险获得的预期收益) 非常可观，从而 Sharpe ratio 得到了极大的改善。以动量因子为例，年化 。
+关于上述第二点，还可以从另一个角度来理解，即考察投资者效用的变化比例：即加入 VMP 组合使得投资者效用能得到多大比例的提升。以市场组合为例，VMP 因子可以使投资者效用上升高达 65%。右边的式子看起来是否很熟悉？回忆一下 GRS 检验，将 看做由 K 个基准因子构成的有着事后最大 Sharpe ratio 组合的 SR，而 表示 K + N 个资产构成的有着事后最大 Sharpe ratio 的组合的 SR（参见直观理解 GRS 和 MV Spanning）。因此，这一分析事实上便是 spanning test，即考察原始因子是否可以张成 VMP 因子。或者说，VMP 因子和原始因子的某个组合，是否显著优于原始因子。
+请记住此处考察的是 VMP 跟原始因子的组合，这一点很重要，也是后来 MM (2017) 被怼的第一个点。
+他们接着考察了多因子组合，并得到了类似的结果，此处不再赘述。而图 1 则展示了美股市场因子及其 VMP 组合的累计净值。从图中可以非常清楚地看到，在大萧条时期，市场因子暴跌，但 VMP 组合的表现则较为稳定。这促使作者们思考 VMP 组合的优异表现是否同其在衰退期间的表现有重要关联。图 1 ：美股市场因子及其 VMP 组合的累计净值图.数据来源：MM (2017), Figure 3.MM (2017) 为此分析了 VMP 组合的 beta 在经济繁荣与衰退期间是否有何显著的差别。由于几乎所有因子都在经济衰退时表现更差（从而获得正的风险溢价！），因此，如果在经济衰退期有显著更小的 beta ，那么策略理应获得更好的表现。表 2 证实了这一点。各个因子的 VMP 组合的 beta 都在经济衰退期间更低，且除 RMW 外都非常显著。这表明衰退期间更低的暴露的确是 VMP 组合的重要 alpha 来源。表 2 ：VMP 组合的衰退 beta.数据来源：MM (2017), Table 3.MM (2017) 还对比了 VMP 与经典的低风险异象。表 3 展示了控制了因子风险平价组合后的多因子 VMP 组合 alpha，其结果几乎没受影响，这表明 VMP 与横截面低风险异象是截然不同的。表 3 ：控制因子风险平价组合后的多因子 VMP 组合表现.数据来源：MM (2017), Table 6.除此之外，MM (2017) 还做了不少稳健性分析。他们指出，控制了因子的共同波动（用不同因子协方差矩阵的第一主成分来代表）后，VMP 组合的表现总体仍是相似的。而交易费用、持仓期限等对组合表现影响也有限。除了实证研究，MM (2017) 也从理论上对 VMP 组合的超额收益来源进行了非常优雅的考察。假定基础因子的总价值组合服从经典的几何布朗运动：其中， 为布朗运动。相应地，VMP 组合的价值服从下述过程：由于 及 ，因此，，而 alpha 为：基于上述 alpha 表达式，可以得到两个结论：
+首先，alpha 同因子/资产的风险价格与风险的 comovement 有关。
+其次，理论上，c 可以取任何值，c 越大，则相应的 alpha 水平也越大。
+非常漂亮的理论结果。但很不幸，这一点也被怼了。
+
+3. VMP 的问题：实证证据MM (2017) 的分析非常漂亮。但事实真的是这样吗？Cederburg et al. (2019)（COWY (2019)）从实证角度对此提出了质疑。具体而言，他们从两个角度进行了仔细的考察：首先，MM (2017) 只考察了 9 个股票因子和货币套息交易，我们并不能排除 VMP 刚好只对这一小部分因子有效。因此，COWY (2019) 增加了大量样本并对 VMP 组合的表现进行了重新考察。
+其次，他们指出，MM (2017) 通过 spanning test 发现的显著 alpha 并不能用于交易实践，因为投资者在事前并不能知道该如何在原始因子和 VMP 组合之间最优地分配权重。因此，他们构建了一个可实施的交易策略，并考察了其表现。
+COWY (2019) 首先复制了 MM (2017) 关于 9 个股票因子的研究，并得到了非常相似的结果。然后，他们借鉴 借鉴 McLean and Pontiff (2016) 加入了 94 个异象，将样本拓展至 103 个异象/因子进行分析。表 4 显示，不管是单变量回归，还是额外控制 Fama-French 三因子后，都有大量因子的 VMP 组合可以获得显著的 alpha。其中特别值得注意的是动量类因子，9 个因子全部显著。这些结果与 MM (2017) 以及更早的相关研究一致。表 4 ：基于 103 个异象/因子的 Spanning Test 结果. 数据来源：COWY (2019), Table 4.但 COWY (2019) 指出，上述 spanning test 隐含的交易策略在实践中并不可真正实施，因为投资者无法在事前知道原始因子、 VMP 组合和无风险资产的最优权重。因此，他们构建了一个可执行的实时组合策略，并比较了其绩效损失。具体而言，他们基于 120 月的滚动窗宽进行训练，得到权重，然后根据该权重进行投资。表 5 展示了相关的结果。可见，从 Sharpe ratio 的角度看：首先，9 个因子中，只有动量、ROE 和 BAB 三个因子的实时组合策略表现优于原始因子（方括号中为 p-value）。
+其次，同理论上的最优组合相比，有 5 个因子的实时组合策略表现显著更差。
+从组合确定性等价的角度看，结果也大体一致。因此，VMP 组合可能能提升部分因子的表现，但只是一小部分。特别地，考虑到 ROE 跟动量有着密切的关联，我们可以认为，VMP 主要对动量类因子有效。从这个角度看，Barroso and Santa-Clara (2015) 的发现，也刚好是个巧合。表 5 ：实时可执行的组合策略的表现分析. 数据来源：COWY (2019), Table 5.最后，COWY (2019) 的另一个有趣研究是，他们利用结构断点模型检验了 VMP 组合对原始因子的时间序列回归中是否存在断点。如果存在断点，则意味着在不同时期，VMP 组合的 beta 有着显著的差异，此时使用全样本回归来检验组合 alpha 便是不合适的。他们的结果非常惊人：103 个异象/因子全部存在断点，其中大部分异象/因子存在 2 个或 3 个断点。这进一步表明表 1 展示的 MM (2017) 的 alpha 分析不一定是严谨的结论。
+
+4. VMP 的可能问题：理论视角COWY (2019) 从实证角度讨论了 VMP 的问题。而 Guo and Liu (2019)（GL (2019)）则从理论角度探讨了 VMP 的问题。他们的研究基于一个很基础的观察。由于 VMP 往往会利用杠杆，尤其是当波动率变化特别大时，因此，在某些时候，VMP 组合可能会加非常高的杠杆。GL (2019) 用一个非常简单的例子引出了他们的论点。考虑一个极端的情形，一个 VMP 组合加了 30 倍杠杆，那么，只要基础资产下跌 3% 时，VMP 组合投资者就将亏损 105%，通俗地说就是爆仓了。但根据 MM (2017) 的理论模型，投资者爆仓是不可能的。因此，GL (2019) 指出调整系数 c 其实并不能任意选择。GL (2019) 接着指出，这是因为 MM (2017) 使用了错误的收益率。他们指出，MM (2017) 的定义方法在连续时间模型下是 ok 的，但实证研究中考察的是月度数据，此时如果仍然按照连续时间框架下的定义，则可能会有很大的误差。特别地，正确的方法是使用几何平均收益（geometric mean, GM）而非算术平均收益。具体而言，若用 来表示 VMP 组合的价值，其中， 仍然是基础因子的总价值，而 是 VMP 组合投资与基础资产的权重。此时用 更容易表示 VMP 组合的价值过程：因此：因此，GL (2019) 指出，VMP 组合的 Sharpe ratio 其实跟 c 是负相关的。考虑到 ，他们进一步给出了 VMP 组合 alpha 的表达式：请原谅我们给出如此冗长的计算过程。基于详细推导，会更容易理解同 MM (2017) 的差异。言归正传，第一项跟 MM (2017) 一致，但多出了两项，特别地，其中第二项表明，c 对 alpha 有负的影响。因此，c 对 alpha 的总体影响并不明确。换言之，我们并不能从理论上证明 VMP 组合有正的 alpha ，这同 MM (2017) 的结论截然不同。在此基础上，他们进一步利用模拟分析研究了 VMP 组合的表现，并指出 VMP 组合难以获取稳健的 alpha 。
+
+5. 结语波动率管理在近年颇受重视。作为集大成者，MM (2017) 站台波动率管理，并给出了支持 VMP 组合有显著 alpha 的理论和实证证据。但并非所有学者都认同这一点。COWY (2019) 从实证角度提出了反对，他们认可 MM (2017) 的 spanning test 结果，但指出该检验蕴含的 alpha 无法在实践中获取，而真正可执行的策略，表现提升并不显著，基本只对动量类因子显著。GL (2019) 则从理论角度表达了反对意见。他们认为 MM (2017) 使用了错误的收益率，因而得到了 VMP 组合 alpha 的错误表达式。修正该错误之后，并不能从理论上证明 VMP 组合有正的 alpha（更不要说显著了）。两篇研究都指出，VMP 组合的 alpha 可能来自模型的错误设定。VMP 组合对原始因子有动态暴露（COWY (2019) 表明所有因子的 VMP 组合对其原始因子的回归都存在结构性断点），基于固定暴露的假设取分析 VMP 组合的表现，可能得到具有误导性的结论。
+除此之外，Liu, Tang, and Zhou (2019) 也认为波动率管理难以获取显著的 alpha 。而 Chi et al. (2019) 指出，与 MM (2017) 重点研究的美股不同，A 股市场中股票收益同过去的波动率正相关，因而 VMP 在 A 股表现不佳。总体而言，我们丝毫不怀疑波动率管理的潜在价值，但如何更好地认识其对收益来源和对投资组合的帮助，仍需要更多的研究。如果本文能在这方面对您有所帮助，那我们就很开心了。全文完。本文仅为分享，图表来自于相关文章，版权归原作者和期刊所有。本文公式在原文基础上略有改动，增加了推导细节，以便于您理解。References:Bali, Turan G., Robert F. Engle, and Scott Murray. "Empirical Asset Pricing: The Cross-Section of Stock Returns." John Wiley & Sons, 2016.
+Cederburg, Scott, Michael S. O’Doherty, Fiefei Wng, and Xuemin Sterling Yan. "On The Performance of Volatility-Managed Portfolios." Journal of Financial Economics, Forthcoming (2019).
+Chi, Yeguang, Xiao Qiao, Sibo Yan, and Binbin Deng. "Volatility and Returns: Evidence from China." Available at SSRN 3430143 (2019).
+Guo, Shuxin, and Qiang Liu. "Volatility-Managed Portfolios: True Market-Timing with a False Theory." Available at SSRN 3385377 (2019).
+Liu, Fang, Xiaoxiao Tang, and Guofu Zhou. "Volatility-Managed Portfolio: Does It Really Work?." The Journal of Portfolio Management 46.1 (2019): 38-51.
+Moreira, Alan, and Tyler Muir. "Volatility-Mmanaged Portfolios." Journal of Finance 72.4 (2017): 1611-1644.
+
+题图：Mountains, from pexel.com.
+
+【图片文字】
+--- 图2 ---
+[表]
+Panel B: Alphas Controlling for Fama-French Three Factors | 
+$ \alpha $ ( $ \alpha $) | 5.45 (1.56) | -0.33 (0.89) | 2.66 (1.02) | 10.52 (1.60) | 3.18 (0.83) | -0.01 (0.68) | 2.54 (1.65) | 5.76 (0.97) | 1.14 (0.69) | 5.63 (0.97) |
+--- 图3 ---
+【折线图】累计表现(1930-2010,对数纵轴10^-1~10^5)。实线Buy and hold(买入持有)期末≈5×10^3;虚线Volatility managed(波动率管理)期末≈3×10^4。结论:1940年后波动率管理策略始终跑赢买入持有,80余年累计收益显著更高。
+--- 图4 ---
+Recession Betas by Factor
+In this table, we regress each scaled factor on the original factor and we include recession dummies  $ 1_{rec,t} $ using NBER recessions, which we interact with the original factors;  $ f_t^\alpha = \alpha_0 + \alpha_1 1_{rec,t} + \beta_0 f_t + \beta_1 1_{rec,t} \times f_t + \varepsilon_t $. This gives the relative beta of the scaled factor conditional on recessions compared to the unconditional estimate. Standard errors are in parentheses and adjust for heteroskedasticity. We find that  $ \beta_1 < 0 $, so that betas for each factor are relatively lower in recessions.
+[表]
+ | (1)\nMkt $ ^{a} $ | (2)\nHML $ ^{a} $ | (3)\nMom $ ^{a} $ | (4)\nRMW $ ^{a} $ | (5)\nCMA $ ^{a} $ | (6)\nFX $ ^{a} $ | (7)\nROE $ ^{a} $ | (8)\nIA $ ^{a} $ | 
+fktRF | 0.83\n(0.08) |  |  |  |  |  |  |  | 
+fktRF  $ \times $ 1rec | -0.51\n(0.10) |  |  |  |  |  |  |  | 
+ML |  | 0.73\n(0.06) |  |  |  |  |  |  | 
+FL  $ \times $ 1rec |  | -0.43\n(0.11) |  |  |  |  |  |  | 
+n |  |  | 0.74\n(0.06) |  |  |  |  |  | 
+$ \times $ 1rec |  |  | -0.53\n(0.08) |  |  |  |  |  | 
+1rec |  |  |  | 0.63\n(0.10) |  |  |  |  | 
+ |  |  |  | -0.08\n(0.13) |  |  |  |  | 
+ec |  |  |  |  | 0.77\n(0.06) |  |  |  | 
+ |  |  |  |  | -0.41\n(0.07) |  |  |  | 
+vec |  |  |  |  |  | 0.73\n(0.09) |  |  | 
+ |  |  |  |  |  | -0.26\n(0.15) |  |  | 
+: |  |  |  |  |  |  | 0.74\n(0.08) |  | 
+ |  |  |  |  |  |  | -0.42\n(0.11) |  | 
+ons | 1,065 | 1,065 | 1,060 | 621 | 621 | 362 | 575 | 570 | 
+ |  | 0.27 | 0.29 | 0.38 | 0.49 | 0.51 | 0.43 | 0.4 |
+--- 图5 ---
+Time-Series Alphas Controlling for Risk Parity Factors
+In this table, we run time-series regressions of each volatility-managed factor on the nonmanaged factor plus a risk parity factor based on Asness, Frazzini, and Pedersen (2012). The risk parity factor is given by  $ RP_{t+1} = b_t^t \, f_{t+1} $, where  $ b_{t,t} = \frac{1/\sigma_t^t}{\sum_i 1/\sigma_t^t} $ and  $ f $ is a vector of pricing factors. Volatility is measured on a rolling three-year basis following Asness, Frazzini, and Pedersen (2012). We construct this risk parity portfolio for various combinations of factors. We then regress our volatility-managed MVE portfolios from Table II on both the static MVE portfolio and the risk parity portfolio formed using the same factors,  $ f $, that make up the MVE portfolio. We find that our alpha are unchanged from those found in the main text. In the last column, we report the alpha for the volatility-managed betting-against-beta (BAB) portfolio to show that our time-series volatility timing is different from cross-sectional low-risk anomalies and that in fact both can be combined together. Standard errors are in parentheses and adjust for heteroskedasticity. All factors are annualized in percent per year by multiplying monthly factors by 12.
+[表]
+ | (1)\nMkt | (2)\nFF3 | (3)\nFF3 Mom | (4)\nFF5 | (5)\nFF5 Mom | (6)\nHXZ | (7)\nHXZ Mom | (8)\nBAB $ ^{{e}} $ | 
+Alpha ( $ \alpha $) | 4.86 | 5.00 | 4.09 | 1.32 | 1.97 | 2.03 | 2.38 | 5.67 | 
+ | (1.56) | (1.00) | (0.57) | (0.31) | (0.40) | (0.32) | (0.44) | (0.98) | 
+V | 1,065 | 1,065 | 1,060 | 621 | 621 | 575 | 575 | 996 | 
+$ R^{{2}} $ | 0.37 | 0.23 | 0.26 | 0.42 | 0.40 | 0.50 | 0.44 | 0.33 | 
+RMSE | 51.39 | 34.30 | 20.25 | 8.279 | 9.108 | 8.497 | 9.455 | 29.73 |
+--- 图6 ---
+[表]
+Sample (1) | Total (2) | Univariate regressions | Additional controls for Fama-French (1993) factors | 
+$ \alpha > 0 $ [Signif.] (3) | $ \alpha < 0 $ [Signif.] (4) | $ \alpha > 0 $ [Signif.] (5) | $ \alpha < 0 $ [Signif.] (6) | 
+Panel A: Combined sample | 
+All trading strategies | 103 | 77 [23] | 26 [3] | 70 [21] | 33 [3] | 
+Panel B: By category | 
+Factors | 9 | 8 [5] | 1 [0] | 7 [6] | 2 [0] | 
+Anomaly portfolios | 94 | 69 [18] | 25 [3] | 63 [15] | 31 [3] | 
+Panel C: By trading strategy type | 
+Accruals | 10 | 8 [3] | 2 [0] | 6 [0] | 4 [0] | 
+Intangibles | 10 | 6 [1] | 4 [0] | 5 [0] | 5 [0] | 
+Investment | 11 | 7 [1] | 4 [1] | 5 [1] | 6 [1] | 
+Market | 1 | 1 [1] | 0 [0] | 1 [1] | 0 [0] | 
+Momentum | 9 | 9 [9] | 0 [0] | 9 [9] | 0 [0] | 
+Profitability | 22 | 19 [2] | 3 [0] | 19 [4] | 3 [0] | 
+Trading | 21 | 14 [4] | 7 [1] | 14 [4] | 7 [2] | 
+Value | 19 | 13 [2] | 6 [1] | 11 [2] | 8 [0] |
+--- 图7 ---
+[表]
+ | Factor | 
+ | MKT(1) | SMB(2) | HML(3) | MOM(4) | RMW(5) | CMA(6) | ROE(7) | IA(8) | BAB(9) | 
+Panel A: Real-time combination strategies | 
+Sharpe ratio |  |  |  |  |  |  |  |  |  | 
+[S1] Combination strategy (real time) | 0.42 | 0.14 | 0.38 | 0.92 | 0.44 | 0.52 | 1.13 | 0.70 | 1.09 | 
+[S2] Original factor (real time) | 0.46 | 0.19 | 0.43 | 0.49 | 0.31 | 0.56 | 0.78 | 0.68 | 0.79 | 
+Difference, [S1]–[S2] | -0.04 | -0.06 | -0.06 | 0.44 | 0.13 | -0.03 | 0.36 | 0.02 | 0.30 | 
+ | [0.64] | [0.37] | [0.41] | [0.00] | [0.53] | [0.20] | [0.00] | [0.74] | [0.00] | 
+[S3] Combination strategy (ex post optimal) | 0.53 | 0.26 | 0.50 | 0.99 | 0.58 | 0.64 | 1.21 | 0.73 | 1.11 | 
+Difference, [S1]–[S3] | -0.11 | -0.12 | -0.12 | -0.07 | -0.14 | -0.11 | -0.07 | -0.03 | -0.01 | 
+ | [0.01] | [0.14] | [0.08] | [0.07] | [0.37] | [0.00] | [0.20] | [0.41] | [0.73] | 
+ER (%) |  |  |  |  |  |  |  |  |  | 
+[S1] Combination strategy (real time) | 1.56 | 0.00 | 1.41 | 8.47 | 1.96 | 2.74 | 12.25 | 4.19 | 10.81 | 
+[S2] Original factor (real time) | 1.75 | 0.38 | 1.61 | 2.29 | 0.91 | 3.09 | 5.44 | 3.68 | 6.21 | 
+Difference, [S1]–[S2] | -0.19 | -0.37 | -0.20 | 6.18 | 1.04 | -0.35 | 6.81 | 0.51 | 4.61 | 
+ | [0.83] | [0.27] | [0.73] | [0.00] | [0.57] | [0.21] | [0.00] | [0.60] | [0.00] | 
+[S3] Combination strategy (ex post optimal) | 2.79 | 0.67 | 2.47 | 9.87 | 3.42 | 4.04 | 14.55 | 5.36 | 12.31 | 
+Difference, [S1]–[S3] | -1.23 | -0.66 | -1.06 | -1.40 | -1.46 | -1.30 | -2.30 | -1.17 | -1.41 | 
+ | [0.01] | [0.13] | [0.10] | [0.07] | [0.39] | [0.03] | [0.15] | [0.25] | [0.30] |

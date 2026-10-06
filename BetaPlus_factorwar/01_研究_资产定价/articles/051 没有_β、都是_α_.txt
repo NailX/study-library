@@ -1,0 +1,245 @@
+# 没有 β、都是 α ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/u-ma7E2ichGQ0Fj1mwlyrg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Not Really !
+
+01
+
+金融学会议的每篇论文通常都有一个 discussant，负责对论文提出建设性意见。在金融学顶会上，discussant 的发言比原报告更加精彩的情况也并不罕见。而如果当 discussant 是 Bryan Kelly 时，上述情形就几乎一定会出现。
+
+近日，Kelly 又“火力全开”了（对了，我老早之前又被 Kelly 圈粉了）。
+
+02
+
+在前不久的 NBER SI 2022 的 Asset Pricing Session 中，Lopez-Lira and Roussanov (2022) 汇报了一篇题为 Do common factors really explain the cross-section of stock returns? 的文章。文章的结论非常抓人眼球，他们拒绝了 APT：
+
+他们是怎么得出这样的结论呢？分三步：
+
+1. 从 APT 出发，解释预期收益的因子应该和资产收益率的 COV 矩阵有关，因此 Lopez-Lira and Roussanov (2022) 使用日收益率并通过 PCA 构造了隐性风险因子；
+
+2. 该文进而基于大量公司特征并使用 Random Forest 构造了 test assets；
+
+3. 最后，该文利用 test assets 构造了关于隐性因子中性（即无暴露）的投资组合，获得了显著的超额收益，因此他们拒绝了 APT。
+
+上述逻辑似乎看上去没有什么毛病。而如果这个结论成立，那就意味着“没有  ，都是  ”。有意思的是，这并不是两位作者第一次汇报这项研究。然而“不幸的是”，这回等待着他们的是 Bryan Kelly。
+
+03
+
+本节我们就跟着 Kelly 的 slides 看看这篇论文的实证结果和结论到底有什么问题。
+
+Kelly 首先用三页 slides 总结了该文的结果（如下）。这部分没啥可说的，我也不多做 comment。
+
+接下来就是关键的，Kelly 开始讨论该文的结论。首先，他指出所有人（尤其是研究资产定价的人）都知道，我们总能找到 benchmark model 无法解释的 test assets 从而拒绝 benchmark model，所以这并不新鲜。但是，拒绝 APT 这个表述是不准确的，可以说拒绝了某个多因子模型，但是不能说拒绝了 APT。此外，在 Lopez-Lira and Roussanov (2022) 的实证结果中，最令他担忧的并非 benchmark model 无法解释 test assets 的预期收益率，而是通过 PCA 构造的这个 benchmark model 里面的因子的 risk premium 全都是零。
+
+下表展示了 Lopez-Lira and Roussanov (2022) 中因子的 risk premium。
+
+在 Kelly 看来，factor risk premium 都是零（if true）才是 real main result。可惜的是，这个 if 要打一个大大的问号。之前大量的实证结果已经表明，很多能够解释资产共同运动的因子的 risk premium 都显著不为零。难道是那些文章错了吗？还是这篇文章的 PCA 实证有什么问题？对此，Kelly 认为该文的因子存在 inconsistent conditioning information 问题（这绝对是 Kelly 这个 discussion 的 WOW moment）。
+
+04
+
+结合下面这张 slide 来理解一下 inconsistent conditioning。由资产定价理论可知，资产的条件预期收益率由资产和 SDF 的条件协方差决定（下图中的公式）。而在 Lopez-Lira and Roussanov (2022) 一文中，用来预测预期收益率（即构造 test assets）的 information set 是大量的公司特征，反观用来计算隐性因子的信息仅仅是日收益率。这就是不一致性所在。
+
+单纯利用日收益率并通过 PCA 来构造隐性因子，这是得到 factor risk premium 为零这个错误结论的直接原因。具体而言，这里面存在两个问题：（1）估计因子溢价时存在大量误差；（2）公司特征中涵盖了大量预测未来  （对，这里关注的是  ，而不是预期收益率）的预测信息，如果仅仅使用日收益率则完全忽视了它们。
+
+关于第一点，感兴趣的小伙伴可以找一些 random matrix theory（RMT）的资料看看（比如 Lettau and Pelger 2020）。简单的说就是基于日收益率的 PCA 很难准确估计因子的 risk premium。下面是我做的一个小实验，在实验中假设已知收益率的 data generating process 并利用样本数据估计 30 个资产的 COV 矩阵。由于 DGP 已知，因此 population COV 矩阵已知，这允许我们计算样本 COV 矩阵和 population COV 矩阵的误差。下图的横坐标表示 sample size，纵坐标表示估计误差（通过对 10000 个 simulation 结果取均值计算）。可以看到，对于仅仅 30 个资产的 COV 矩阵的估计，需要  这个量级的 sample size 才能准确估计。
+
+更关键的是，上面这个还仅仅是 COV 矩阵的估计误差，而非基于样本 COV 矩阵进行 PCA 分析的误差。RMT 的相关研究表明，当 sample size 有限的时候，基于样本 COV 进行 PCA 得到的特征向量和总体特征向量之间的夹角在 80 度以上（几乎垂直了）。PCA 了个寂寞。
+
+另外，Kelly 关于第一点的讨论也让我想起了 Bryzgalova, Huang, and Julliard (2020) 的 Bayesian estimator，而估计误差正是她们提出 Bayesian estimator 的动机。感兴趣的小伙伴请参考《Bayesian Two-Pass Regression》。
+
+对于第二个问题，Kelly, Moskowitz, and Pruitt (2021) 指出，公司特征能够有效预测未来的beta，因此仅仅基于日收益率会丢失掉大量的信息。关于如何解决 inconsistent conditioning 问题，Kelly 建议参考他和合作者提出的 IPCA 方法（Kelly, Pruitt, and Su 2019）。
+
+最后，Kelly 对该文的结论进行了总结。在他看来，声称拒绝了 APT 为时尚早（且是错误的），而该文最大的问题 —— 正如上面所述 —— 是 risk factor 的 risk premium 为零。对于任何一篇实证资产定价研究来说，这样的结果应该是一个 red flag，它表明 latent factor estimator 并没有想象的那么美好。
+
+05
+
+如果 Lopez-Lira and Roussanov (2022) 的实证结果没问题，那么它意味着人们可以找到并利用解释预期收益而和资产波动无关的因子，即“全是  ，没有  ”，这将和 Kozak, Nagel, and Santosh (2018) 基于“市场中不存在近似无风险套利机会”这一假设得出的结论相左，也和过去几十年大量的实证结果相矛盾。
+
+最后，Kelly 以“Extremely thought provoking paper! I learned a lot.” 结束了他的讨论。和 Lopez-Lira and Roussanov (2022) 这篇文章相比，Kelly 的观点无疑更加精彩，而大佬之间思维的碰撞和毫不敷衍的深刻讨论也正是推动金融学发展的驱动力。
+
+Kelly rocks!
+
+参考文献
+Bryzgalova, S., J. Huang, and C. Julliard (2020). Bayesian solutions for the factor zoo: We just run two quadrillion models. Working paper.
+
+Kelly, T. B., T. J. Moskowitz, and S. Pruitt (2021). Understanding momentum and reversal. Journal of Financial Economics 140(3), 726 – 743.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Lopez-Lira, A. and N. Roussanov (2022). Do common factors really explain the cross-section of stock returns? Working paper.
+
+Lettau, M. and M. Pelger (2020). Estimating latent asset-pricing factors.Journal of Econometrics 218(1), 1 – 31.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Of course, the classic APT does not contemplate such a trade-off. Kozak, Nagel, and Santosh (2018) argue that commonality in terms of time-series comovement of returns with factors is necessary in the absence of arbitrage opportunities (or infinite Sharpe ratios). In fact, priced risk factors should be the high-order principal components, i.e. the ones corresponding to the largest eigenvalues of the covariance matrix of returns. Thus, giving up on the time-series fit in order to improve on the cross-section makes the resulting factors difficult to interpret. Our findings reflect this
+difficulty: we show that stock expected returns that are functions of characteristics are not correlated to the largest common factors in the sense of driving the time-series variation of returns. Uncomfortably, these factors are not useful for explaining cross-sectional differences in mean returns, in sharp opposition to APT's main prediction.
+山外·Lopez-Lira and Roussanov (2022)
+--- 图3 ---
+One-Slide Summary
+1. Estimate latent factors. These factors
+Explain notable time series variation in stock returns
+Have roughly zero average return (price of risk)
+2. Build formidable test asset
+Long-short spread built from ML return forecasts + neutral to latent factors
+▶ Main Result: Test asset has highly significant average returns with zero risk exposure
+Conclusion: "We overwhelmingly reject APT's main theoretical prediction that the zero-beta portfolios' excess returns and Sharpe ratios should be zero."
+--- 图4 ---
+Element 1: Estimate Stock Return Conditional Latent Factor
+$$ r_{i,t+1}^{e}=\beta_{i,t}^{\prime}f_{t+1}+\epsilon_{i,t+1} $$
+Estimate monthly  $ \beta_{i,t} $ from PCA of daily stock return panel in 1-year window through t
+▶ Recover monthly factor from cross-section regression
+▶ Prominent discussion of method contribution
+“Realized PCA,” Ait-Sahalia and Xiu (JASA 2019)
+Conditional latent factor model of stock returns, Ait-Sahalia, Kalnina, and Xiu (JoE 2020)
+More on this later (?)
+Main output:
+► A set of monthly latent factor returns,  $ F_{t} $
+These serve as benchmark for test assets
+--- 图5 ---
+Element 2: Building Test Assets
+$$ \mu_{i,t}=E_{t}[r_{i,t+1}^{e}]=RandomForest(Characteristics_{i,t}) $$
+From  $ \mu_{i,t} $, build a killer test asset
+Long high  $ \mu $, short low  $ \mu $
+▶ Neutral to all factors
+▶ Call the return on this portfolio  $ ML_{t} $
+(1) analyzed in Gu et. al (2020) with significant alpha to FF
+Main output:
+$ ML_{t} $ to serve as test asset for evaluating risk factors  $ F_{t} $
+--- 图6 ---
+thinking About Authors' Conclusion
+▶ Found another test asset with significant alpha to a risk model?
+Interesting, but won't surprise anyone in this room
+More economically interesting is question of degree
+What fraction of assets' average returns due to risk exposure?
+Real main result: "Risk" factors carry zero risk premium
+▶ Huge if true, but is it plausible?
+If true, then  $ \underline{\text{all expected returns}} $ on  $ \underline{\text{all assets}} $ are  $ \underline{\text{all alpha}} $
+We know of (many) factors with significant risk premium and reasonably strong ability to explain stock covariances. Must square this
+What are potential problems with the factors in this paper?
+Incomplete conditioning information
+--- 图7 ---
+scriptive Statistics of the Latent Factors: 1974–2014
+[表]
+Panel A: Value-Weighted Zero-Cost Portfolios | 
+ | Factor 1 | Factor 2 | Factor 3 | Factor 4 | Factor 5 | 
+Mean | -0.04 | -0.01 | 0.07 | -0.11 | 0.09 | 
+t-statistic | -0.23 | -0.10 | 1.01 | -1.23 | 1.04 | 
+Std. dev | 3.50 | 2.43 | 1.64 | 1.96 | 1.97 | 
+Sharpe ratio | -0.04 | -0.02 | 0.16 | -0.19 | 0.16 |
+处：Lopez-Lira and Roussanov (2022)
+--- 图8 ---
+Inconsistent Conditioning
+$ \underline{\text{In this paper:}} $
+Large set of stock-level characteristics
+Daily stock returns
+Implications:
+Puts conditional cov (betas) at disadvantage with weaker conditioning set
+Sets factors up for failure
+Connor and Korajczyk series: Early failures of return PC's as factors
+--- 图9 ---
+Some questions (and how to investigate):
+1. Do high frequency covariances provide sufficient conditioning information?
+N >> T: Random matrix theory tells us what to expect for given N, T
+Simulation
+2. Does depriving betas of stock characteristics impede their measurement?
+Cov $ (R_{i,t+1}, M_{t+1}|\mathcal{I}_t) $ is forecast of future realized interaction  $ R_{i,t+1}M_{t+1} $ using info 2
+Diagnostic Test: Does  $ I_{t} $ exhaust the predictability of  $ R_{i,t+1}M_{t+1} $?
+--- 图10 ---
+
+--- 图11 ---
+Inconsistent Conditioning #2: Diagnostic Test
+Do PCA Beta Exhaust Predictability of Future Betas?
+[表]
+Characteristic | Realized beta | 
+One-month | Three-month | Six-month | Twelve-month |  | 
+Assets | $ -0.28^{***} $ | $ -0.31^{***} $ | $ -0.33^{***} $ | $ -0.32^{***} $ |  | 
+Assets-to-market | $ 0.10^{**} $ | $ 0.14^{***} $ | $ 0.14^{***} $ | $ 0.14^{***} $ |  | 
+Bid-ask spread | $ 0.08^{***} $ | $ 0.05^{**} $ | $ 0.03^{*} $ | 0.02 |  | 
+Book-to-market | -0.02 | -0.02 | 0.01 | 0.03 |  | 
+Capital intensity | 0.02 | 0.01 | 0.01 | 0.01 |  | 
+Capital turnover | $ 0.21^{***} $ | $ 0.18^{***} $ | $ 0.14^{***} $ | $ 0.11^{***} $ |  | 
+Cash-flow-to-book | -0.01 | -0.01 | -0.01 | -0.01 |  | 
+Cash-to-short-term-ins. | 0.01 | 0.01 | 0.02 | 0.02 |  | 
+Earnings-to-price | 0.02 | 0.01 | 0.00 | 0.01 |  | 
+FF3 ldo. vol | $ 0.07^{***} $ | $ 0.08^{***} $ | $ 0.08^{***} $ | $ 0.07^{***} $ |  | 
+Fixed costs-of-sales | $ 0.12^{***} $ | $ 0.11^{***} $ | $ 0.11^{***} $ | $ 0.11^{***} $ |  | 
+Gross profitability | $ -0.05^{*} $ | $ -0.05^{**} $ | $ -0.05^{*} $ | -0.04 |  | 
+Intermedal mem | -0.02 | -0.02 | $ -0.02^{*} $ | $ -0.03^{*} $ |  | 
+Investment | -0.01 | 0.00 | 0.01 | 0.02 |  | 
+Leverage | 0.03 | 0.04* | $ 0.04^{**} $ | $ 0.05^{***} $ |  | 
+Long-term reversal | $ 0.11^{***} $ | $ 0.11^{***} $ | $ 0.10^{***} $ | $ 0.08^{***} $ |  | 
+Market beta | $ 0.77^{***} $ | $ 0.76^{***} $ | $ 0.75^{***} $ | $ 0.72^{***} $ |  | 
+Market cap | $ 0.83^{***} $ | $ 0.81^{***} $ | $ 0.81^{***} $ | $ 0.80^{***} $ |  | 
+Momentum | $ 0.23^{***} $ | $ 0.23^{***} $ | $ 0.23^{***} $ | $ 0.29^{***} $ |  | 
+Net operating assets | $ -0.03^{*} $ | $ -0.03^{*} $ | -0.02 | -0.02 |  | 
+Operating accruals | 0.01 | 0.01* | 0.01* | 0.02** |  | 
+Operating leverage | $ -0.17^{***} $ | $ -0.16^{***} $ | $ -0.13^{***} $ | $ -0.10^{***} $ |  | 
+PPE-chg-to-Assets-chg | $ -0.03^{**} $ | $ -0.02^{**} $ | $ -0.02^{**} $ | -0.01 |  | 
+Price rel. Szwk high | $ -0.20^{***} $ | $ -0.18^{***} $ | $ -0.16^{***} $ | $ -0.14^{***} $ |  | 
+Price-to-cost-margin | -0.01 | -0.01 | -0.01 | -0.01 |  | 
+Profit margin | 0.01 | 0.01 | 0.01 | -0.00 |  | 
+Return on NOA | $ -0.04^{**} $ | $ -0.05^{***} $ | $ -0.05^{***} $ | $ -0.05^{***} $ |  | 
+Return on assets | $ -0.13^{***} $ | $ -0.16^{***} $ | $ -0.17^{***} $ | $ -0.17^{***} $ |  | 
+Return on equity | $ 0.05^{*} $ | $ 0.08^{***} $ | $ 0.09^{***} $ | $ 0.10^{***} $ |  | 
+SGA-to-sales | $ -0.13^{***} $ | $ -0.11^{***} $ | $ -0.10^{***} $ | $ -0.12^{***} $ |  | 
+Sales-to-assets | $ 0.03^{**} $ | $ 0.04^{**} $ | $ 0.04^{**} $ | $ 0.04^{**} $ |  | 
+Sales-to-price | 0.06 | 0.06 | $ 0.07^{*} $ | $ 0.08^{*} $ |  | 
+Short-term reversal | $ 0.03^{**} $ | $ 0.04^{***} $ | $ 0.05^{***} $ | $ 0.04^{***} $ |  | 
+Tobin&#x27;s Q | 0.01 | 0.01 | 0.03 | 0.05 |  | 
+Turnover | $ 0.42^{***} $ | $ 0.41^{***} $ | $ 0.40^{***} $ | $ 0.38^{***} $ |  | 
+Unexplained volume | 0.01 | 0.01 | 0.00 | -0.00 |  | 
+Constant | $ 0.77^{***} $ | $ 0.78^{***} $ | $ 0.79^{***} $ | $ 0.78^{***} $ |  | 
+$ R^{2} $ (%) | 7.78 | 17.53 | 22.76 | 25.55 |  |
+► Characteristics strongly predict future realized betas,  $ R^{2} \approx 25\% $
+Answer: No.
+After controlling for recent high frequency betas
+Also true for other FF5 betas
+Also true for latent factor betas
+ $ R^{2} \approx 45\% $
+Source: Kelly. Pruitt, Moskowitz (JFE 2021)
+--- 图12 ---
+How To Approach Problem With Consistent Conditioning?
+CA: Kelly, Pruitt, and Su (2019)
+$$ r_{t+1}^{e}=\underbrace{z_{i,t}^{\prime}\Gamma_{\alpha}}_{\alpha_{i,t}}+\underbrace{z_{i,t}^{\prime}\Gamma_{\beta}}_{\beta_{i,t}}f_{t+1}+\epsilon_{i,t+1} $$
+Motivation: Model to admit possibility that characteristics line up with average returns because they proxy for risk factor loadings
+If “characteristic/expected return” relationship driven by compensation for factor risk, IPCA will identify the corresponding latent factors and betas
+If no such factors exist, characteristic effect ascribed to an intercept
+Other points to consider:
+This is a true decomposition: Sum of expected returns from  $ \alpha $ and  $ \beta $ elements identical to direct forecast of  $ r_{i,t+1}^{e} $ using  $ z_{i,t} $
+IPCA uses linear model for  $ \alpha $ and  $ \beta $. Prefer trees? Nonlinear IPCA available (Gu et al., 2021)
+--- 图13 ---
+Revisiting Conclusion
+“We overwhelmingly reject APT’s main theoretical prediction that the zero-beta portfolios and Sharpe ratios should be zero.”
+Clearly, there is  $ \alpha $
+ML portfolio has alpha to any reasonable risk model (including IPCA)
+▶ A question of degree. Main puzzle in this paper is  $ \underline{\text{factor risk premium}} $
+The paper finds zero factor risk premium
+If true, all expected returns are alpha
+Yet literature documents factors with
+Meaningfully high Sharpe ratios
+▶ High time series  $ R^{2} $ for many test assets
+▶ Large fraction of expected returns explained by factor risk for most assets
+▶ Zero risk premium is red flag that latent factor estimator is struggling. In this case,
+Econometric theory says when $N \approx 2000$ and $T \approx 250$, beta estimate is mostly noise
+Betas will benefit from supplemental conditioning information
+--- 图14 ---

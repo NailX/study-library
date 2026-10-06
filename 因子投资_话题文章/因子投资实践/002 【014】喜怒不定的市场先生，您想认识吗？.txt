@@ -1,0 +1,90 @@
+# 【014】喜怒不定的市场先生，您想认识吗？
+
+来源：微信公众号「因子投资」话题·因子投资实践（第2篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247483844&idx=1&sn=8cd40e310519b716d90a79cc54919196&chksm=f995b046cee23950ebe9adc306a951d4d7f382fb7263a3cd3cc19ce7957d0e22f0aca8811dba#rd
+
+这是 smart beta 专题的第 002 篇文章，也是因子动物园的第 014 篇文章。
+【30秒速览】市场先生的喜怒不定，带给了很多投资者困扰，也给了很多有心的投资者额外的收益。有很多学者前仆后继地进行着关于市场整体层面的投资者情绪的研究，其中，Baker, and Wurgler (2006) 可谓是集大成者，他们通过对已有研究的总结，创造性地构建了综合性的投资者情绪指标，并取得了不错的实证结果。Huang, Jiang, Tu, and Zhou (2015) 则从计量方法上对此进行了进一步的完善，并大幅提升了本就不错的效果。Stambaugh 和两位中国学者 Yu 和 Yuan ，也对此做出了颇多贡献。
+
+本文思维导图。数据来源：因子动物园。
+
+01 喜怒不定的市场先生
+
+很多学者和投资者都发现，资产价格可以在基本面没有明显变化的情况下剧烈波动，也可能长期持续偏离其长期估值。这些现象正是市场先生喜怒不定的表现。从资产定价理论的角度来看，正如前文讨论过的股利贴现模型所隐含的，折现率的变化，会推动资产价格的剧烈波动。而投资者情绪的波动，正是影响所有资产折现率的重要因素之一。
+
+因此，如果能有效探究、判定市场情绪，不仅可以避免可能的大额损失，甚至有机会跟上风口而大幅获利。那么，问题来了，市场先生的情绪是有迹可循的吗？该怎么研判投资者情绪呢？
+
+至少很多学者坚信投资者情绪是可以分析预判的，并为此做出了很多努力。
+
+02 观察投资者情绪的角度
+
+逻辑上并不存在反映投资者情绪的单一指标，因此，早期的研究往往会从某一角度切入，并据此构建相应的指标。在这些研究的基础上，Baker, and Wurgler (2006) 可谓博采众家之长的集大成之作。
+
+这篇雄文依据已有研究，构建了 6 个分项指标，用以分析投资者情绪。
+首先是封闭式基金折价幅度。基本面量化的领军人物之一 Charles Lee 和行为金融学大师 Richard Thaler 等人在他们 1991 年的经典研究中指出封闭式基金往往存在大幅度的折价，且折价率波动非常剧烈。他们进一步指出，传统的假说，包括代理成本、资产的非流动性、资本利得的税收负债都不能很好地解释该异象，相反，投资者情绪能较好地解释这一现象。特别地，他们观察到不同基金的折价率变化高度同步，且当折价率降低时，小盘股表现变好，而大盘股表现变差。
+Lemmon, and Portniaguina (2006) 就投资者情绪对小盘股溢价的影响这一问题进行了进一步的探索。他们没有利用市场交易价格隐含的投资者情绪数据，转而利用密歇根大学消费者信心指数和美国咨商会的消费者信心指数这两类基于调查的消费者情绪数据作为投资者情绪的代表，并指出自 1977 年以来，投资者情绪对小盘股溢价有着显著的负面影响。
+第二个指标是纽交所股票的换手率，或者更一般的，市场流动性。Baker, and Stein (2004) 指出，换手率可以作为投资者情绪的表征之一。特别地，在存在卖空约束的市场上，换手率的提升主要来自非理性的投资者，因此会额外推高价格，并压低股票未来收益。
+此外，新股的表现也包含着重要的信息。正如 Ritter (1991) 所指出的，IPO 市场很好地反映了投资者周期性的乐观情绪。新股上市后 3 年期间，总体上大幅跑输整体市场，而在市场成交活跃时上市的新股，其跑输幅度最为厉害。因此，一段时间内 IPO 的新股数目、新股 IPO 当日的涨跌幅、成交量等数据，蕴含着关于投资者情绪的重要信息，Baker, and Wurgler (2006) 选择了前两者，作为第三和第四个指标。
+而企业的融资决策选择也蕴含着非常丰富的信息。企业往往会在市场高涨之时尽可能通过股权融资，而在市场低迷时更多采用债权融资。因此，近期的股权和债券融资总额中，股权融资的份额，也是一个很有价值的投资者情绪指标。
+最后一个指标是股利溢价，即发放股利的公司和不分红的公司的账面市值比（Book-to-market ratio）的对数差。传统上，发放股利，尤其是高分红的公司，往往是大市值且增长较缓慢的公司。而成长股则往往较少发放分红。因此，该溢价也可反映投资者情绪。
+
+03 综合性的指标
+
+接下来是一个更重要的问题，如何基于这些不同维度的指标，构建一个综合性的投资者情绪指标。Baker, and Wurgler (2006) 的做法很有意思。他们指出，这 6 项情绪指标都是从实用角度出发，利用市场隐含的信息所构建，因此，它们天然可能具有较高的相关性。因此，可以借用统计学中的主成分分析方法，提取这几项指标的第一主成分，来代表它们的综合信息。
+通常认为，乐观的投资者会更偏好上市时间短、市值小、增长快的投机性股票，而保守的投资者则相反。因此，在投资者情绪高涨时，前者表现会更好，反之，增长缓慢的大市值老旧股票会有更佳表现。Baker, and Wurgler (2006) 通过 double sorting （双重排序）方法对这一问题进行了研究，其结果如下图所示。每幅图表示按照投资者情绪和相应特征进行 double sorting 后的分层组合的表现，在每一时期，将全部样本股按照给定特征分为 10 组，分别统计每一分层组合情绪高涨和低迷时期之后的表现，并用实体柱体和空心柱体展示在图中。
+
+图 1 ：Double sorting：基于投资者情绪和特定风格. 
+数据来源：因子动物园，Baker, and Wurgler (2006).
+从上图中有两项发现。首先，在情绪低迷期后，股票的表现总体上会更好。其次，投资者情绪确实会影响不同风格特征股票接下来的表现。
+进一步，作者通过严谨的回归分析来检验投资者情绪对基于这些风格特征的多空组合的收益是否有显著影响。结果显示，无论是单独的投资者情绪，还是控制了 Fama-French 三因子及动量后，投资者情绪的影响都是显著的。
+
+04 其他方法及进一步的证据
+
+Baker, and Wurgler (2007) 进一步对已有的投资者情绪衡量方法进行了综述。除了 Baker, and Wurgler (2006) 采用的 6 个维度，他们还讨论了基于调查数据的投资者情绪指标、投资者心情、不熟练的散户投资者的交易行为、共同基金的资金流等可能可以反映投资者情绪的指标。
+其他研究则在 Baker, and Wurgler (2006) 的基础上进行了更多的拓展， Baker 和 Wurgler 两位大神自己，以及 Stambaugh 、Yu 和 Yuan 等人对此贡献颇多。
+首先，Yu, and Yuan (2011) 指出，在投资者情绪高涨时期，情绪化的投资者参与度大大提高，这使得理性投资者的风险收益权衡被打破，从而使得当投资者情绪低迷时，股票预期收益与方差正相关，但在情绪高涨时期，这种便相关性就消失了。此外，他们还指出，收益与当期波动率变化的负相关性，在情绪低迷时期显著得多。
+其次，Stambaugh, Yu, and Yuan (2012) 指出，诸多投资异象在投资者情绪高涨时期要更为显著。换言之，基于投资异象的多空组合，在情绪高涨时期，有着更显著的超额收益。而这部分超额收益，主要来自空头端，投资者情绪对多头端并没有显著的影响。Stambaugh, Yu, and Yuan (2014) 则通过大量的模拟研究，提供了更多的证据。
+最后，Baker, Wurgler, and Yuan (2012) 提取了波动率溢价、IPO 数量的对数、IPO当日的收益率和换手率 4 个指标的第一主成分（与 Baker, and Wurgler (2006) 稍有不同的是，该文只用了 4 个指标，且其中包含新加入的波动率溢价），据此构建了 6 个发达国家股市的投资者情绪指标，并进一步构建起全球投资者情绪指标。他们指出，全球性的投资者情绪是国家市场收益的反向预测指标，而国家层面的投资者情绪指标，则是该国市场内股票收益的反向预测指标。当投资者情绪高涨时，那些难以估值且套利成本高昂的股票，未来收益要低得多。
+
+05 BW (2006) 是最终章吗？
+
+如前文所述，Baker, and Wurgler (2006) 开创性地构建了表征投资者情绪的综合性指标，并取得了不错的实证效果。那么，这就是衡量投资者情绪的方法的最终答案了吗？
+Huang, Jiang, Tu, and Zhou (2015) 提出了不同意见。他们指出，虽然 Baker, and Wurgler (2006) 选取的每一维度都是投资者情绪某一方面的反映，且主成分分析方法的确可以最大化地提取多个相关变量中的信息。但问题也恰恰出在主成分分析方法上。该方法关心的是一组变量的变化中所蕴含的共同信息，而这些信息并不一定都与我们感兴趣的被解释变量有关。
+相应地，他们指出，通过利用偏最小二乘回归方法（partial least squares regression），通过 2 个步骤，可以更有效地提取不同维度中的信息，并有效过滤掉其中的无关信息。实证研究也表明，无论是按照行业，还是按照规模、价值和动量等风格对股票进行分组，新的投资者情绪指标都比 Baker, and Wurgler (2006) 有更强的解释力。
+
+06结语市场先生的喜怒不定，带给了很多投资者困扰，也给了很多有心的投资者额外的收益。有很多学者前仆后继地进行着关于市场整体层面的投资者情绪的研究，其中，Baker, and Wurgler (2006) 可谓是集大成者，他们通过对已有研究的总结，创造性地构建了综合性的投资者情绪指标，并取得了不错的实证结果。Huang, Jiang, Tu, and Zhou (2015) 则从计量方法上对此进行了进一步的完善，并大幅提升了本就不错的效果。Stambaugh 和两位中国学者 Yu 和 Yuan ，也对此做出了颇多贡献。
+诚然，已有研究已取得了长足的进步，但我们对市场先生的情绪的认知，仍不是那么地清晰。后续的挑战仍然不小。但好在，站在这些大牛前辈们的肩膀上，我们完全有机会看得更远、更清晰。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：
+Arif, Salman, and Charles MC Lee. "Aggregate Investment and Investor Sentiment." Review of Financial Studies 27.11 (2014): 3241-3279.
+Baker, Malcolm, and Jeffrey Wurgler. "The Equity Share in New Issues and Aggregate Stock Returns." Journal of Finance 55.5 (2000): 2219-2257.
+Baker, Malcolm, and Jeffrey Wurgler. "Investor Sentiment and the Cross‐section of Stock Returns." Journal of Finance 61.4 (2006): 1645-1680.
+Baker, Malcolm, and Jeffrey Wurgler. "Investor Sentiment in the Stock Market." Journal of Economic Perspectives 21.2 (2007): 129-152.
+Baker, Malcolm, Jeffrey Wurgler, and Yu Yuan. "Global, Local, and Contagious Investor Sentiment." Journal of Financial Economics 104.2 (2012): 272-287.
+Baker, Malcolm, and Jeremy C. Stein. "Market Liquidity as a Sentiment Indicator." Journal of Financial Markets 7.3 (2004): 271-299.
+DeLong, J. Bradford, Andrei Shleifer, Lawrence H. Summers, and Robert J. Waldmann. "Noise Trader Risk in Financial Markets." Journal of Political Economy, 98.4 (1990): 703–738.
+Ho, Chienwei, and Chi-Hsiou Hung. "Investor Sentiment as Conditioning Information in Asset Pricing." Journal of Banking and Finance 33.5 (2009): 892-903.
+Huang, D., F. Jiang, J. Tu, and G. Zhou. "Investor Sentiment Aligned: A Powerful Predictor of Stock Returns." Review of Financial Studies, 28.3 (2015): 791–837. 
+Lamont, Owen A. "Investment Plans and Stock Returns." Journal of Finance 55.6 (2000): 2719-2745.
+Lee, Charles MC, Andrei Shleifer, and Richard H. Thaler. "Investor Sentiment and the Closed‐end Fund Puzzle." Journal of Finance 46.1 (1991): 75-109.
+Lee, Charles MC, James Myers, and Bhaskaran Swaminathan. "What is the Intrinsic Value of the Dow?" Journal of Finance 54.5 (1999): 1693-1741.
+Lemmon, Michael, and Evgenia Portniaguina. "Consumer Confidence and Asset Prices: Some Empirical Evidence." Review of Financial Studies 19.4 (2006): 1499-1529.
+Ritter, Jay R. "The Long‐run Performance of Initial Public Offerings." Journal of Finance 46.1 (1991): 3-27.
+Shiller, Robert J., Stanley Fischer, and Benjamin M. Friedman. "Stock Prices and Social Dynamics." Brookings Papers on Economic Activity 1984.2 (1984): 457-510.
+Stambaugh, Robert F., Jianfeng Yu, and Yu Yuan. "The Long of It: Odds that Investor Sentiment Spuriously Predicts Anomaly Returns." Journal of Financial Economics 114.3 (2014): 613-619.
+Stambaugh, Robert F., Jianfeng Yu, and Yu Yuan. "The Short of It: Investor Sentiment and Anomalies." Journal of Financial Economics 104.2 (2012): 288-302.
+Yu, Jianfeng, and Yu Yuan. "Investor Sentiment and the Mean–variance Relation." Journal of Financial Economics 100.2 (2011): 367-381.
+Yuan, Yu. "Market-wide Attention, Trading, and Stock Returns." Journal of Financial Economics 116.3 (2015): 548-564.
+
+【图片文字】
+--- 图2 ---
+
+--- 图3 ---
+Figure 2. Two-way sorts: Future returns by sentiment index and firm characteristics, 1963–2001. For each month, we form 10 portfolios according to the NYSE breakpoints of firm size (ME), age, total risk, earnings-book ratio for profitable firms (E/BE), dividend-book ratio for payers (D/BE), fixed assets (PPE/A), research and development (RD/A), book-to-market ratio (BE/ME), external finance over assets (EF/A), and sales growth (GS). We also calculate portfolio returns for unprofitable, nonpaying, zero-PP&E, and zero-R&D firms. The solid bars are returns following positive SENTIMENT $ ^{1} $ periods, and the clear bars are returns following negative sentiment periods. The dashed line is the average across both periods and the solid line is the difference. SENTIMENT $ ^{1} $ is positive for 1968–1970, 1972, 1979–1987, 1994, 1996–1997, and 1995.
+--- 图4 ---
+
+--- 图5 ---
+觉得6就点 ✓+ 关注
+还有更6的

@@ -1,0 +1,178 @@
+# 股票收益横截面：一部历史
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/ANyEMPXkw7Sz-I8hhJFgCg
+
+本文是因子选择专题的第 003 篇，也是因子动物园的第 047 篇独立原创研究。【未经授权，禁止转载！】欢迎私信公众号后台或动物园园长获取转载授权。
+
+【30 秒速览】异象的优异表现来自数据挖掘还是的确有理可循，是实证资产定价领域的一个重要问题，也吸引了诸多业界投资者的关注。本文对相关的两项经典研究进行了梳理。异象在样本外的表现普遍弱于样本内，但这并不表明这些异象是数据挖掘的结果。已有研究远远未解决异象的成因和持续性问题。我们也会一直关注相关研究的进展，并仔细考虑基于 A 股市场的实证研究。
+目录
+01. 简介02. 发表的影响
+03. 另一种检验方法04. 一点评论
+05. 结语
+
+01 简介
+过去数十年间，学者们发现了多达几百个异象/因子，这些异象在其研究期间都高度显著。如此之多的显著异象显得不合理论和逻辑（即便如 HHRZ (2018) 这样支持较多公司特征对股票收益有显著影响的研究，其发现的显著特征也仅有 30 个，参见【045】Which Characteristics?），因此，不断有学者就“这些‘异象’是否真的显著”这一问题从不同角度进行探讨。这一主题的典型研究方法是对比大量异象的样本内和样本外表现。McLean and Pontiff (2016) 和 Linnainmaa and Roberts (2018) 这两项研究可谓是个中翘楚。二者也分别发表在顶刊 JF 和 RFS 。
+
+02 发表的影响
+典型的样本外测试集是以提出因子的文章的研究期限或因子发表为界划分样本内外。McLean and Pontiff (2016) 正是遵循这样的思路，将每个因子的历史分为 3 段，样本内、正式发表前的样本外时期和正式发表后的时期。他们研究了多达 97 个异象在发表前后的表现。由于涉及的公司特征多种多样，两位作者也针对性地对不同异象采用了不同的因子构建方法。具体如下表所示：
+不同异象的构建方法。数据来源：因子动物园，根据 McLean and Pontiff (2016) 整理。表 1 给出了 97 个异象的基本统计说明。这些异象平均发表于 2000 年，且几乎都来自金融和会计期刊。97 个异象在样本内都久经考验，样本内观测期平均长达 323 个月（约 27 年），而文章发表前的样本外观察期和发表后的样本长度相比之下要短不少，平均为 56 个月和 156 个月。当然，更为重要的自然是收益表现。97 个异象的样本内月均收益为 0.58% ，非常得显著，而在发表前的样本外期间，月均收益下降至 0.40% ，而在发表后，月均收益则进一步下滑至 0.26% 。此外，颇为有趣的是，有 12 个异象在作者们复制的样本内测试中就不显著，因此，作者们只留下了 85 个样本内显著的异象。
+
+表 1 ：97 个异象的基本统计说明.数据来源: McLean and Pontiff (2016), Table 1.作者们发现，在样本外，因子表现平均下滑了 26% ，这代表着统计误差导致的业绩下滑的上限。而在发表后，因子表现平均下滑了 58% ，扣除 26% 的统计误差的潜在影响，发表本身使得因子业绩大幅下降了 32% 之多。为了更精细地考察样本外和发表对因子表现的影响，作者构建了下述回归模型：
+其中，Rit 为异象 i 在 t 月的收益，两个 dummy variables 分别代表发表前的样本外时期和发表后时期。此外，由于上述模型的被解释变量是收益水平，一个直观的想法是，样本内表现越显著的因子，在样本外受影响的程度可能会更大。因此，作者也考察了加入 dummy 和因子样本内收益均值及 t 统计量的交互项的模型。为了控制因子间的时变相关性的影响，作者使用了可行广义最小二乘（FGLS）方法来估计。表 2 展示了不同模型的估计系数和标准误。可见，结果总体上符合预期。在样本外和发表后，异象的表现都有显著的下滑。且样本内收益越高、越显著的因子，平均收益下降得也越厉害。
+
+表 2 ：回归检验结果.数据来源: McLean and Pontiff (2016), Table 2.
+
+03 另一种检验方法
+与 McLean and Pontiff (2016) 类似，Linnainmaa and Roberts (2018) 也对异象的样本外表现进行了仔细研究。但他们的研究有三个重要的不同之处。首先，他们使用了更长期的数据，最早可追溯至 1926 年。其次，他们关心的核心问题不是公开发表文章对因子表现的影响，而是探寻因子的样本内表现是否来自数据挖掘。基于其目的和更长的数据样本，他们同样将全部数据划分为 3 个部分：样本内，事后的样本外时期（post-sample periods），以及事前的样本外时期（pre-sample periods）。举个简单的例子，假设提出异象 A 的文章研究的是 1963 至 2000 年的数据，则事后的样本外为 2000 年之后，而事前的样本外时期则包括 1926 至 1962 年。最后，由于数据等方面的限制，他们覆盖的异象要少一些，重点考察了 36 个异象。表 3 给出了作者研究的 36 个异象。这些异象包括盈利能力、盈利质量、估值、投融资及其他复合因子。
+
+表 3 ：36 个异象的说明.数据来源: Linnainmaa and Roberts (2018), Table 4.两位作者发现，36 个异象中，有 28 个在事前的样本外时期没有显著的超额收益，而 CAPM alpha 和 FF3 因子 alpha 不显著的异象也分别有 28 个和 20 个之多。这不大可能是因为统计误差所致，毕竟，对于大部分异象，事前的样本外时期长达 37 年之久。他们发现，能在两段样本外期间都显著的异象很少，主要集中在会计收益（accounting returns）和财务困境风险（distress risk）两类因子。而投融资因子的表现非常有趣。在事前样本外阶段，实物投资和股权融资因子非常显著，但它们在事后样本外期间不显著。相反，基于利润表的收益指标（例如，销售和利润）和总融资在事后样本外期间显著，但在事前阶段不显著。作者们指出，这一转变其实是可以理解的，因为相关研究表明，自 20 世纪下半叶以来，伴随着经济从投资驱动向服务型经济的转变，无形资产越发重要，而无形资产的大部分会被费用化计入研发成本等利润表科目，从而使得利润表项目对于股票定价更加重要。此外，随着利率的不断走低，企业融资也相应经历了从股权融资为主到更偏好债权融资的范式转变。当然，前述是关于具体异象的一些讨论，更为重要的自然是异象在样本内外的总体表现差异。首先，考虑到过拟合问题也可能通过异象收益的标准误影响其显著性（t 统计量），作者考虑了下述回归模型：
+其中，anomaly_{it} 为异象 i 在 t 月的收益，\bar{r}_{it} 为异象 i 的平均收益，针对样本内、事前和事后区间分别估计。In-sample 和 Post-sample 分别为样本内和事后样本外区间的 dummy variable ，而 μ 代表时间固定效应。结果表明，事后样本外期间的波动率（年化 9.19%）高于样本内（8.78%）。其次，作者们更仔细地考虑了异象在不同时期的相关性。为此，他们借鉴 McLean and Pontiff (2016)，考察了下述形式的模型：
+其中，in−sampleIndex_{i,t} 为除异象 i 以外，t 月处在样本内的全部异象的平均收益，post−sampleIndex_{i,t}  同理。表 4 的 Panel A 展示了上述回归的结果。主效应显示，样本内的异象同同期其他的样本内异象高度相关（样本内指数的回归为 0.74，t 统计量高达 33.98），但同样本外的异象相关性则较低（回归系数仅 0.08）。而考虑交互项后，样本外的情况则相反：同同期样本外的异象高度相关（回归系数为 0.08 + 0.46 = 0.55（此处有四舍五入的原因）），而同样本内的异象则不太相关（回归系数为 0.74 - 0.53 = 0.22）。Panel B 则展示了基于样本内与事前样本外阶段的回归结果。总体结果非常相似。
+
+表 4 ：回归检验结果。数据来源: Linnainmaa and Roberts (2018), Table 9.上述结果表明异象的确与处在相同阶段的其他异象有着密切的关联。McLean and Pontiff 将此归因于异象可能的共同来源，例如投资者情绪。而 Linnainmaa and Roberts (2018) 指出，另一种可能的解释是样本内的因子结构延续到了样本外，而机构投资者的交易活动将因子之间的相关性进一步推至高于因子结构所隐含的水平。
+
+04 一点评论
+首先，这两篇文章可谓是因子样本内外表现差异这一主题的代表作。两篇文章都很精彩，各自也还有不少本文未介绍的研究内容，非常推荐您仔细阅读原文。其次，这两项研究各有所长。McLean and Pontiff (2016) 胜在全面和方法论的创新，Linnainmaa and Roberts (2018) 则胜在加入完整的事前样本，从而可以更有效地控制交易者行为等因素对事后样本外结果的可能影响。再者，二者虽然都发表于顶刊，但也不是尽善尽美的。McLean and Pontiff (2016) 对于几乎所有异象都采用了等权方法来配置权重，但我们知道，小盘股对很多因子的表现有着显著的影响，且影响程度是时变的。如果能报告基于市值加权的结果，说服力可能会更强。而 Linnainmaa and Roberts (2018) 覆盖的异象数量和种类都要少很多，尤为重要的是，他们完全忽略了交易摩擦类（流动性、波动率）和动量类因子（中期动量、短期反转等）这些基于价量的因子。要知道，不少研究都表明，在多数股票市场中，这两个异象是最显著的。最后，由于大多数我们熟知的因子，最早都来自基于美股的研究，我们可能很难准确定义因子在 A 股的样本内外表现。值得一提的是规模因子（size）。Liu et al. (2019) 对 A 股市场的规模和价值因子进行了研究。我们早前关于规模因子的实证研究【024】规模因子：消失还是周期？指出，在他们的样本内（2000 - 2016），简单的（基于单变量 10 分组的）规模因子表现的确不错，但在样本外（2017 - 2018），规模因子崩盘了。这大概也应证了 McLean and Pontiff (2016) 基于美股的研究结果。
+
+05 结语
+异象的优异表现来自数据挖掘还是的确有理可循，是实证资产定价领域的一个重要问题，也吸引了诸多业界投资者的关注。对比样本内外的表现，是一个非常经典而重要的研究方法。McLean and Pontiff (2016) 和 Linnainmaa and Roberts (2018) 就从此角度切入，进行了深入的研究。他们指出异象在样本外的表现确实远逊于样本内，即便扣除了统计偏差的可能影响，结果仍然如此。此外，样本期的选择对因子表现的确有影响。但他们也指出，并不能就此认为这是数据挖掘的结果。诸多作者选择了自 1963 年开始的样本内测试期，主要是为了确保数据的准确性和一致性，而非刻意优化因子的表现。他们还发现，同一阶段（样本内或样本外）的异象的收益存在紧密的相关性，但两项研究为此提出了不同的解释。这也是值得进一步探索的一个重要问题。
+此外，A 股市场的因子样本内外表现差异可能更加引人关注。由于学术研究中，基于 A 股市场的原创因子很少，因此，这方面的准确研究并不容易。但作为个案，今年正式发表于 JFE 的 Liu et al. (2019) 研究的规模因子，在其样本外遭遇了崩盘，可谓是一个典型而有趣的案例了。虽然目前学界已有一些初步的成果，但远远未解决异象的成因和持续性问题。我们也会一直关注相关研究的进展，并仔细考虑基于 A 股市场的实证研究工作。
+最后应有彩蛋：本文题目由 Linnainmaa and Roberts (2018) 的 'The History of the Cross-Section of Stock Returns.' 略作修改。另外，本文更多是对比两项研究，并讨论在该领域的研究方法和未来可以进一步推动的工作，对于具体的研究成果，其实略去了很多。川总一年前的文章未知风险，错误定价，还是数据迁就？更详细介绍了 Linnainmaa and Roberts (2018) ，相当得精彩，推荐给您。全文完。感谢您的阅读。
+本文仅为分享，不代表任何投资建议。文章图表直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+历史推荐
+
+文章索引：因子投资小册子
+
+研究方法论：【027】追寻因子的足迹：分类、构造与检验
+因子选择：【045】Which Characteristics?
+
+机器学习：【041】机器学习驱动的基本面量化投资
+搞事情小组：搞事情深度研究| 异质波动率之谜
+故事分享：真实故事| 艰难的 2019，我是如何赚到 1000 万和 200% 的
+实证研究：【043】基本面动量在 A 股
+
+另类因子：【034】外部融资越多，股票收益就越低吗？
+
+投资因子：【031】投资效应：Factor War 前传
+低风险因子：【018】低风险异象靠谱吗？解释与批判
+动量因子：【010】横截面动量那些事
+
+参考文献：Bali, Turan G., Robert F. Engle, and Scott Murray. "Empirical Asset Pricing: The Cross Section of Stock Returns." John Wiley & Sons, 2016.Linnainmaa, Juhani T., and Michael R. Roberts. "The History of the Cross-Section of Stock Returns." Review of Financial Studies 31.7 (2018): 2606-2649.McLean, R. David, and Jeffrey Pontiff. "Does Academic Research Destroy Stock Return Predictability?." Journal of Finance 71.1 (2016): 5-32.
+
+题图：Road Near Brown Field, from pexels.com.
+
+【图片文字】
+--- 图2 ---
+[表]
+类型 | 说明 | 组合方式 | 权重 | 数(1) | 
+连续型 | 特征为连续变量，数值越高股票预期收益越高或越低 | 选取排名前20%和后20%的股票构建多空组合 | 等权 | 81 | 
+散型 | 0-1变量，表明股票是否属于某种类型（比如一些事件型因子） | 属于给定类型的股票为多头，其余为空头 | 等权 | 16 |
+--- 图3 ---
+[表]
+number of predictor portfolios | 85 | 
+predictors portfolios with t-statistic > 1.5 | 6 | 
+lean publication year | 2 | 
+median publication year | 2 | 
+predictors from finance journals | 0 | 
+predictors from accounting journals | 0 | 
+predictors from economics journals | 0 | 
+Lean portfolio return in-sample | 0.4 | 
+standard deviation of mean in-sample portfolio return | 0.6 | 
+Lean observations in-sample | 5 | 
+Lean portfolio return out-of-sample | 0.2 | 
+standard deviation of mean out-of-sample portfolio return | 0.5 | 
+Lean observations out-of-sample | 15 | 
+Lean portfolio return post-publication | 0 | 
+standard deviation of mean post-publication portfolio return | 0.5 | 
+Lean observations post-publication | 15 |
+--- 图4 ---
+Rit =  $ \alpha_i + \beta_1 $ PostSampleDummyit
++  $ \beta_2 $ PostPublicationDummyit +  $ \epsilon $
+--- 图5 ---
+[表]
+Variables | (1) | (2) | (3) | (4) | 
+Post-Sample (S) | $ -0.150^{{***}} $ | $ -0.180^{{**}} $ | 0.157 | 0.067 | 
+ | (0.077) | (0.085) | (0.103) | (0.112) | 
+Post-Publication (P) | $ -0.337^{{***}} $ | $ -0.387^{{***}} $ | -0.002 | -0.120 | 
+ | (0.090) | (0.097) | (0.078) | (0.11) | 
+$ \times $ Mean |  |  | $ -0.532^{{***}} $ |  | 
+ |  |  | (0.221) |  | 
+$ \times $ Mean |  |  | $ -0.548^{{***}} $ |  | 
+ |  |  | (0.178) |  | 
+$ \times $ t-statistic |  |  |  | -0.0 | 
+ |  |  |  | (0.0) | 
+$ \times $ t-statistic |  |  |  | -0.0 | 
+ |  |  |  | (0.0) | 
+edictor FE? | Yes | Yes | Yes | Y | 
+observations | 51,851 | 45,465 | 51,851 | 51,851 | 
+edictors (N) | 97 | 85 | 97 | 97 | 
+all : S = P | 0.024 | 0.021 |  |  | 
+all : P = -1  $ \times $ (mean) | 0.000 | 0.000 |  |  | 
+all : S = -1  $ \times $ (mean) | 0.000 | 0.000 |  |  |
+--- 图6 ---
+[表]
+Category | No. | Anomaly | Original study | sample | 
+Profitability | 1 | Gross profitability | Novy-Marx (2013) | 1963–2010 | 
+2 | Operating profitability $ ^{{*}} $ | Fama and French (2015) | 1963–2011 | 
+3 | Return on assets $ ^{{*}} $ | Haugen and Baker (1996) | 1979–1999 | 
+4 | Return on equity $ ^{{*}} $ | Haugen and Baker (1996) | 1979–1999 | 
+5 | Profit margin | Soliman (2008) | 1984–2000 | 
+6 | Change in asset turnover | Soliman (2008) | 1984–2000 | 
+Earnings quality | 7 | Accruals $ ^{{*}} $ | Sloan (1996) | 1962–1999 | 
+8 | Net operating assets | Hirshleifer, Hou, Teoh, and Zhang (2004) | 1964–2000 | 
+9 | Net working capital changes | Soliman (2008) | 1984–2000 | 
+Valuation | 10 | Book-to-market | Fama and French (1992) | 1963–1999 | 
+11 | Cash flow / price | Lakonishok, Shleifer, and Vishny (1994) | 1968–1999 | 
+12 | Earnings / price | Basu (1977) | 1957–1977 | 
+13 | Enterprise multiple $ ^{{*}} $ | Loughran and Wellman (2011) | 1963–2000 | 
+14 | Sales / price | Barbee, Mukherji, and Raines (1996) | 1979–1999 | 
+Investment and growth | 15 | Asset growth | Cooper, Gulen, and Schill (2008) | 1968–2000 | 
+16 | Growth in inventory | Thomas and Zhang (2002) | 1970–1999 | 
+17 | Sales growth | Lakonishok, Shleifer, and Vishny (1994) | 1968–1999 | 
+18 | Sustainable growth | Lockwood and Prombut (2010) | 1964–2000 | 
+19 | Adjusted CAPX growth $ ^{{*}} $ | Abarbanell and Bushee (1998) | 1974–1999 | 
+20 | Growth in sales – inventory | Abarbanell and Bushee (1998) | 1974–1999 | 
+21 | Investment growth rate $ ^{{*}} $ | Xing (2008) | 1964–2000 | 
+22 | Abnormal capital investment $ ^{{*}} $ | Titman, Wei, and Xie (2004) | 1973–1999 | 
+23 | Investment to capital $ ^{{*}} $ | Xing (2008) | 1964–2000 | 
+24 | Investment-to-assets | Lyandres, Sun, and Zhang (2008) | 1970–2000 | 
+Financing | 25 | Debt issuance $ ^{{*}} $ | Spiess and Affleck-Graves (1999) | 1975–1999 | 
+26 | Leverage | Bhandari (1988) | 1948–1977 | 
+27 | One-year share issuance | Pontiff and Woodgate (2008) | 1970–2000 | 
+28 | Five-year share issuance | Daniel and Titman (2006) | 1968–2000 | 
+29 | Total external financing $ ^{{*}} $ | Bradshaw, Richardson, and Sloan (2006) | 1971–2000 | 
+Distress | 30 | O-score | Dichev (1998) | 1981–1999 | 
+31 | z-score $ ^{{*}} $ | Dichev (1998) | 1981–1999 | 
+32 | Distress risk | Campbell, Hilscher, and Szilagyi (2008) | 1963–2000 | 
+Other | 33 | Industry concentration | Hou and Robinson (2006) | 1951–2000 | 
+Composite anomalies | 34 | Piotroski&#x27;s F-score | Piotroski (2000) | 1976–1999 | 
+35 | M/B and accruals $ ^{{*}} $ | Bartov and Kim (2004) | 1981–2000 | 
+36 | QMJ: Profitability | Asness, Frazzini, and Pedersen (2013) | 1956–2001 |
+--- 图8 ---
+$$ \begin{aligned}omaly_{i,t}&=a+b_{1}in-sample Index_{-i,t}\\&\quad+b_{2}post-sample Index_{-i,t}+b_{3}post_{i,t}\\&\quad+post_{i,t}(b_{4}in-sample Index_{-i,t}\\&\quad+b_{5}post-sample Index_{-i,t})+e_{i,t}\end{aligned} $$
+--- 图9 ---
+[表]
+Regression | t-value | 
+Regression 1: In-sample versus post-sample anomalies | 
+Intercept | 0.05 | 4.54 | 
+Main effects |  |  | 
+In-sample index $ _{-i,t} $ | 0.74 | 33.98 | 
+Post-sample index $ _{-i,t} $ | 0.08 | 7.46 | 
+Post $ _{i,t} $ | -0.06 | -2.23 | 
+Interactions |  |  | 
+Post $ _{i,t} $  $ \times $ In-sample index $ _{-i,t} $ | -0.53 | -13.74 | 
+Post $ _{i,t} $  $ \times $ Post-sample index $ _{-i,t} $ | 0.46 | 11.19 | 
+Adjusted  $ R^{2} $ |  | 17.9% | 
+ |  | 15,152 | 
+Regression 2: In-sample versus pre-sample anomalies | 
+Intercept | 0.07 | 4.35 | 
+Main effects |  |  | 
+In-sample index $ _{-i,t} $ | 0.74 | 28.90 | 
+Pre-sample index $ _{-i,t} $ | 0.07 | 3.42 | 
+Pre $ _{i,t} $ | -0.04 | -2.09 | 
+Interactions |  |  | 
+Pre $ _{i,t} $  $ \times $ In-sample index $ _{-i,t} $ | -0.69 | -22.72 | 
+Pre $ _{i,t} $  $ \times $ Pre-sample index $ _{-i,t} $ | 0.48 | 13.60 | 
+Adjusted  $ R^{2} $ |  | 9.3% | 
+ |  | 13,650 |

@@ -1,0 +1,286 @@
+# 加强版反转
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/L2jXcM8n3Mm7JJ1D2U3yRQ
+
+摘
+要
+将基本面变化从收益率中剥离，针对过度反应和流动性冲击构建加强反转策略。一旦预期差修正，该条件反转异象能获得比非条件反转异象更高的超额收益。
+
+川总按：我曾在《写在公众号运营三周年之际》中画了一个饼，提出和几位志同道合小伙伴一起对 A 股做有意思、有深度的实证研究。这几位小伙伴就是 [Chihiro Quantitative Research] 及 [因子动物园] 公众号背后的主创刀疤连和 llang lli。我们都以“使用严谨的科学手段进行高质量实证分析”为愿景，于是一拍即合，并为这个组合起了个名字叫“搞事情因子小组”，今后合作的文章也会用它署名，并不定期同时发布于 CQR、因子动物园和本公众号。本文就是搞事情小组的第一篇文章 —— 加强版反转。
+
+1
+引言
+
+短期反转异象（short-term reversal anomaly，STR）大概是 A 股上最显著的异象之一。反转异象意味着前期大涨的股票在未来有更低的条件预期收益率；而前期大跌的股票在未来有更高的条件预期收益率。
+
+由于很难做空的限制，如果想交易反转异象就意味着只能从多头入手，即买入前期超跌的股票。显然这是一种逆趋势而为的操作，需要克服很大的恐惧。
+
+股票的超跌存在以下几个原因：
+
+1. 投资者对信息的过度反应（Lehmann 1990）；
+
+2. 噪音交易者导致的瞬时流动性冲击（Grossman and Miller 1988，Jegadeesh and Titman 1995）；
+
+3. 股票基本面及未来预期严重恶化。
+
+来看下面两个例子。以下两支股票均出现了大跌。然而第一支股票在大跌之后强势反弹，又回到了距离前期高点不远的位置。但我们在第二支股票上并没有观察到期盼中的反弹。究其原因，两张图右下角圈出来的部分说明了它们的差异 —— 第二支股票的基本面出现了巨大的负面变化。
+
+上面这两个“cherry picking”的例子说明：由于基本面恶化造成的大幅下跌难以反转；因此要想逆势通过做多来更好的交易反转异象，应该把基本面的部分从收益率中剥离出去，而仅针对过度反应和瞬时流动性冲击部分来选择超跌的股票。
+
+从股票收益率中剥离掉基本面的部分，从而提升反转异象的效果，就是本文探讨和实证的重点。我们把这个改进的反转异象称为加强版反转。
+
+2
+加强版反转
+
+如何从收益率中剥离基本面的信息呢？
+
+学术界在这方面的一个尝试来自 Da, Liu, and Schaumburg (2013)。该文提出使用如下模型计算残差收益率来构建反转策略：
+
+上式中，r_{t+1} 为股票的收益率、u_t 为均衡状态下的条件预期收益率、CF_{t+1} 则代表最新的 cash flow news。Da, Liu, and Schaumburg (2013) 将和现金流有关的新息从股票收益率中减去，以此排除基本面变化对于收益率的影响，以期捕捉由于过度反应和流动性冲击造成的非理性下跌。
+
+为了定量计算 CF_{t+1} 的影响，Da, Liu, and Schaumburg (2013) 使用了基于分析师预期修正的计算方法。然而 Zhu, Sun, and Chen (2019) 指出，上述残差计算方法存在两个问题：
+
+1. 股票价格对于基本面消息的吸收是缓慢的（Hong, Lim, and Stein 2007，Choi and Sias 2012），因此仅考虑最新的基本面信息是不够的，还应考虑过去一段时间的；
+
+2. 分析师并不能覆盖全部股票，因此使用分析师预期修正无法对全市场的股票进行实证分析。
+
+为改进上述第一点，Zhu, Sun, and Chen (2019) 将残差收益率的模型调整为包含过去一段时间窗口内 CF 的变化：
+
+而为了在上述基础上继续改进第二点，他们使用 Piotroski (2000) 的 F-Score 代替 cash flow news 作为基本面信息的代理变量。Choi and Sias (2012) 指出，随着价格对基本面信息的逐步吸收，F-Score 对于基本面驱动的未来收益率变化预测能力是提升的，因此使用 F-Score 隐含的收益率就可以代替上式右侧中的最后一项：
+
+在 Da, Liu, and Schaumburg (2013) 一文中，三位作者通过实证研究发现，无论选择哪个 empirical asset pricing 定价模型计算u_t，改进后反转异象的效果非常健壮，因此 u_t 的影响有限。考虑到这一点，最终我们可以把上式进一步简化为：
+
+非条件的反转异象说明，未来收益率和过去短期的已实现收益率呈现负相关；而 Piotroski (2000) 的研究表明 F-Score 和未来收益率呈现正相关。结合上面两点，过去短期收益率和 F-Score 对于未来收益率的联合作用如下表所示。
+
+这意味着我们可以通过做多基本面好的 Past Loser（r 低但 F-score 高）、做空基本面差的 Past Winner（r 高但 F-score 低）来提升反转策略的效果，获取超额收益。
+
+上述这种处理方式，实际上是寻找市场和基本面之间的预期差，它在某种程度上和 Piotroski and So (2012) 有异曲同工之妙（见《寻找股票市场中的预期差》）。Piotroski and So (2012) 使用P/B 和 F-Score 作为市场和基本面的代理变量，寻找存在预期差的股票；而上述反转策略使用过去短期的涨跌幅替换 P/B，和 F-Score 一起寻找存在预期差的股票。
+
+Past Loser + High F-Score 的组合是被相对低估的股票，而 Past Winner + Low F-Score 的组合是被相对高估的股票；通过做多被低估的、做空被高估的获得超额收益。
+
+Zhu, Sun, and Chen (2019) 将这个剔除了基本面信息的反转异象称为基本面锚定反转（Fundamental-anchored reversal），也就是本文标题中的加强版反转。
+
+下面针对全 A 股对这个加强版反转进行实证分析。
+
+3
+基于 A 股的实证
+
+在对 A 股的实证中按 point-in-time 原则剔除 ST、停牌股、次新股（上市不足 252 个交易日）、以及银行和非银金融的股票（按中信一级行业分类）。实证期从 2005 年 1 月 1 日至 2018 年 12 月 31 日。数据来源是 Wind 和 Tushare。
+
+在计算反转指标时，采用学术界和业界中常见的过去一个月收益率作为指标；在计算 F-Score 时，考虑到 A 股市场的特点，使用最新可得的年报和季报的数据来更新基本面信息。每月末调仓。
+
+3.1 F-Score 基本数据
+
+根据 Piotroski (2000)，F-Score 通过 9 个指标给股票的基本面打分。这 9 个指标从盈利能力、资本结构及偿债能力、运营效率三个维度衡量一个公司的内在价值。这些指标以及它们的打分方式如下；9 个指标打分的总分取值范围从 0 到 9，分数越高说明基本面越好。
+
+依据 F-Score 的计算方式，基本面极差的公司得分在 0 附近，而基本面很强的公司得分在 9 附近。我们预期全 A 股上市公司的 F-Score 呈现出倒 U 形状。跨期的平均数据也证实了这一点。
+
+为了应对 F-Score 得分分布不均的问题，Piotroski (2000) 按照 F-Score 将公司分成三大类：0 到 3 分为 Low 组、4 到 6 分之间为 Middle 组、7 到 9 分之间为 High 组。下图展示了 Low、Middle、High 三组（每月末调仓）的投资组合在实证期内的走势（Panel A 为等权；Panel B 为市值加权）。作为比较，图中基准为 Wind 全 A 指数。由于等权在小市值上的倾斜，即便是 Low 组也跑赢了基准，但在市值加权的组合中难以观察到上述现象。
+
+3.2 反转基础数据
+
+采用最近一个月收益率为因子，将股票分成五档：Loser、P2、P3、P4、Winner。其中 Loser 对应着过去一个月累计跌幅最大的一组；Winner 对应过去一个月累计涨幅最高的一组。同样采用每月末调仓构建，上述五个投资组合在回测期内的净值走势如下图所示（Panel A 为等权；Panel B 为市值加权）。
+
+以上的 Loser 和 Winner 组就是非条件反转异象在 A 股上的效果。有意思的是，在市值加权情况下，P4 组的效果要优于 Loser、P2 以及 P3 组，反转效应的单调性受到了一定的破坏。
+
+下面来看看 F-Score + Reversal 的组合。
+
+3.3 加强版反转（F-Score + Reversal）
+
+依照本文第二节的思路，使用过去一个月的收益率和 F-Score 构建加强版反转。为此，使用这两个因子做 double sorting，将全部股票分成 5 × 3 一共 15 个投资组合，如下图所示。
+
+在实证期内，每月末调仓，将满足条件的股票放入对应的组合。这 15 个投资组合的净值走势如下图所示（Panel A 为等权；Panel B 为市值加权）。
+
+3.4 回归分析
+
+对这 15 个组合的月收益率均值进行检验，结果如下表所示（Panel A 为等权、Panel B 为按市值加权）。下表中，括号内的数字为经 Newey and West (1987) 调整后的 t-statistics。此外，受到 Stein (2009) 的启发，Zhu, Sun, and Chen (2019) 提出通过做多 Loser/High 并同时做空 Winner/Low 得到 Fundamental-anchored reversal (FAR)，即基本面锚定反转（加强版反转）；以及通过做多 Loser/Low 并同时做空 Winner/High 得到 Fundamental-unanchored reversal (FUR)，即未经基本面锚定的反转。下表中也包括了对 FAR 和 FUR 的检验结果。为了对比，表中同样列出了非条件多、空对冲（即 Loser - Winner）反转异象的检验结果。
+
+结果显示，当等权配置时，在控制反转或 F-Score 因子后，另一个因子仍具有很好的单调性；加强版反转异象的月平均收益率为 2.10%（t-statistic 高达 6.85），超过非条件反转异象的 1.51%（t-statistic 为 5.01），而未经基本面锚定，即不具备预期差的反转只能获得 0.94% 的月收益率。
+
+采用市值加权后，反转的整体效果减弱（说明反转在小市值上有很高的暴露），但仍然能观察到加强版反转异象要优于非条件反转异象。在等权和市值加权两种配置方法下，FAR 和 FUR 两个投资组合在实证期内的累积净值曲线如下图所示。
+
+接下来，我们看看上述 15 个组合以及三种多、空对冲后的反转异象能否获得主流因子模型无法解释的超额收益。为此，考虑 Fama and French (1993) 三因子、Carhart (1997) 四因子、以及 Fama and French (2015) 五因子模型。
+
+Fama and French (1993) 三因子模型 α 检验结果：
+
+Carhart (1997) 四因子模型 α 检验结果：
+
+Fama and French (2015) 五因子模型 α 检验结果：
+
+无论采用哪个多因子模型，上述 15 个投资组合以及 3 个多空对冲反转异象的定性表现和 raw return 的表现基本一致。不管看哪一个 panel，从左下角（Winner/Low）到右上角（Loser/High）基本呈现出显著负收益到显著正收益的趋势，说明有基本面支撑的超跌可以在未来获得更高的条件收益（反转），而基本面很差的大涨在未来会出现更低的条件收益（反转）。由此，FAR 组合的超额收益显著的高于非条件的 Loser – Winner 组合，而没有基本面锚定的 FUR 组合则无法获得这些多因子模型不能解释的超额收益。
+
+值得一提的是，当采用市值加权时，上述定性的结论虽然依然成立，但定量的反转效果却打了不小的折扣。毫无疑问，反转更多的出现在小市值的股票当中，而市值加权避免了对于小市值的过度暴露。在实际交易中，为了依靠加强版反转获得更高的超额收益，应考虑在满足换手率、流动性等必要的约束条件下，适当将反转组合向小市值倾斜。
+
+4
+结语
+
+短期反转是股票市场上的一个显著异象。它不仅仅在 A 股上显著，在美股上亦是如此。在美股上讨论动量的 Jegadeesh and Titman (1993) 在计算动量因子时就特意把最近一个月剔除，其背后的原因正是一个月收益率的反转。而 Jegadeesh 虽然因研究动量成名，但他其实早在动量之前就在 Journal of Finance 上发表过关于反转的研究（Jegadeesh 1990）。
+
+在 A 股中，很多报告也对反转它进行了研究和改进。由于非条件的反转异象本身已经十分显著，任何通过增加复杂度的“改进”得到的条件反转异象都会在样本内有更好的效果。然而，没有经济学或金融学依据作为先验的改进终究难以令人信服。
+
+本文使用 F-Score 作为代理变量，将基本面变化造成的影响从收益率中剥离出去。得益于此，我们可以准确定位超跌的根本原因，并针对过度反应和流动性冲击的部分构建加强反转策略。另一方面，价格的涨跌和基本面的强弱也会形成预期差；一旦预期差修正，这个通过基本面锚定的加强版反转异象就能获得比非条件反转异象更高的超额收益。
+
+这是一个值得肯定的尝试，希望它能给各位一些启发。
+
+对了，本文第一节中的两支股票，第一支是 Amazon，第二支是百度。
+
+参考文献
+Carhart, M. M. (1997). On persistence in mutual fund performance. The Journal of Finance, Vol. 52(1), 57 – 82.
+
+Choi, N. Y. and R. W. Sias (2012). Why does financial strength forecast stock returns? Evidence from subsequent demand by institutional investors. Review of Financial Studies, Vol. 25(5), 1550 – 1587.
+
+Da, Z., Q. Liu, and E. Schaumburg (2013). A close look at the short-term return reversal. Management Science, Vol. 60(3), 658 – 674.
+
+Fama, E. F. and K. R. French (1993). Common Risk Factors in the Returns on Stocks and Bonds. Journal of Financial Economics, Vol. 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A Five-Factor Asset Pricing Model. Journal of Financial Economics, Vol. 116(1), 1 – 22.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, Return, and Equilibrium: Empirical Tests. The Journal of Political Economy, Vol. 81(3), 607 – 636.
+
+Grossman, S. J. and M. H. Miller (1988). Liquidity and market structure. The Journal of Finance, Vol. 43(3), 617 – 633.
+
+Hong, H., T. Lim, and J. C. Stein (2007). Bad news travels slowly: size, analyst coverage, and the profitability of momentum strategies. The Journal of Finance, Vol. 55(1), 265 – 295.
+
+Jegadeesh, N. (1990). Evidence of predictable behavior of security returns. The Journal of Finance, Vol. 45(3), 881 – 898.
+
+Jegadeesh, N. and S. Titman (1993). Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency. The Journal of Finance, Vol. 48(1), 65 – 91.
+
+Jegadeesh, N. and S. Titman (1995). Short-horizon return reversals and the bid-ask spread. Journal of Financial Intermediation, Vol. 4(2), 116 – 132.
+
+Lehmann, B. N. (1990). Fads, martingales, and market efficiency. The Quarterly Journal of Economics, Vol. 105(1), 1 – 28.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica, Vol. 55(3), 703 – 708.
+
+Piotroski, J. D. (2000). Value investing: the use of historical financial statement information to separate winners from losers. Journal of Accounting Research, Vol. 38, 1 – 41.
+
+Piotroski, J. D. and E. C. So (2012). Identifying expectation errors in value/glamour strategies: a fundamental analysis approach. Review of Financial Studies, Vol. 25(9), 2841 – 2875.
+
+Stein, J. C. (2009). Presidential address: Sophisticated investors and market efficiency. The Journal of Finance, Vol. 64(4), 1517 – 1548.
+
+Zhu, Z., L. Sun, and M. Chen (2019). Fundamental strength and short-term return reversal. Journal of Empirical Finance, Vol. 52, 22 – 39.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+【图片文字】
+--- 图1 ---
+深度实证
+--- 图2 ---
+[表]
+财务 | 2019Q1 | 2018 | 
+每股收益 | 7.24 | 20.68 | 
+每股净资产 | 98.39 | 88.69 | 
+ROE | 7.74% | 28.27% | 
+ROA | 2.09% | 6.85% | 
+销售毛利率 | 43.18% | 40.25% | 
+销售净利率 | 5.96% | 4.33% | 
+资产负债率 | 72.82% | 73.22% | 
+ | 2019Q1 | 同比 | 
+营业总收入 | 597.00 | 16.96% | 
+营业利润 | 44.20亿 | 129.37% | 
+净利润 | 35.61亿 | 118.60% |
+--- 图3 ---
+[表]
+财务 | 2019Q1 | 2018 | 
+每股收益 | -1.46 | 114.58 | 
+每股净资产 | 695.12 | 679.40 | 
+ROE | -0.20% | 5.73% | 
+ROA | -0.11% | 10.04% | 
+销售毛利率 | 38.49% | 49.41% | 
+销售净利率 | -1.37% | 22.08% | 
+资产负债率 | 42.60% | 40.94% | 
+ | 2019Q1 | 同比 | 
+营业总收入 | 35.83亿 | 15.38% | 
+营业利润 | -1.39亿 | -120.49 | 
+净利润 | -4856 | -104.89 |
+--- 图8 ---
+[表]
+组合 | 过去一段收益率 | F-Score | 综合效果 | 
+Past Loser + High F-Score | Positive | Positive | Positive | 
+Past Loser + Low F-Score | Positive | Negative | Ambiguous | 
+Past Winner + High F-Score | Negative | Positive | Ambiguous | 
+Past Winner + Low F-Score | Negative | Negative | Negative |
+--- 图9 ---
+[表]
+ | 指标 | 实证中计算方法 | 打分方式 | 
+盈利能力 | 资产收益率 | 单季度净利润(不含少数股东损益) / 总资产 | 大于零得 1 分，否则 0 分 | 
+资产收益率变化 | 最新报告期资产收益率 - 上年同期资产收益率 | 上升得 1 分，否则 0 分 | 
+经营活动现金流净额比总资产 | 单季度经营活动现金净流量 / 总资产 | 大于零得 1 分，否则 0 分 | 
+应计利润 | (单季度营业利润 - 单季度经营活动现金净流量) / 总资产 | 小于零得 1 分，否则 0 分 | 
+资本结构及偿债能力 | 长期负债率变化 | 最新报告期长期负债率 - 上年同期长期负债率 | 下降得 1 分，否则 0 分 | 
+流动比率变化 | 最新报告期流动比率 - 上年同期流动比率 | 上升得 1 分，否则 0 分 | 
+股票增发 | 过去一年没有增发或者配售新股 | 没有增发得 1 分，否则 0 分 | 
+运营效率 | 毛利率变化 | 最新报告期资产毛利率 - 上年同期资产毛利率 | 上升得 1 分，否则 0 分 | 
+资产周转率变化 | 最新报告期资产周转率 - 上年同期资产周转率 | 上升得 1 分，否则 0 分 |
+出处：搞事情因子小组
+--- 图10 ---
+数据来源：tushare，搞事情因子小组。F-Score 参考 Piotroski (2000)，利用季度数据计算，由9个基本面指标合成。
+--- 图11 ---
+Panel A: FSCORE等权重组合
+Panel B: FSCORE市值加权组合
+数据来源：wind，tushare，搞事情因子小组。F-Score 参考 Piotroski (2000)，利用季度数据计算，由 9 个基本面指标合成。其中，F-Score 取值 0 - 3 归为低得分组，取值 4 - 6 归为中等得分组，取值 7 - 9 归为高得分组。Panel A 为等权重组合。Panel B 为市值加权组合。组合按月度频率进行再平衡：MTT 为 wind 2023 年度归母净利润加权平均值。
+--- 图12 ---
+Panel A: 反转因子等权重组合
+Panel B：反转因子市值加权组合
+数据来源：wind，tushare，搞事情因子小组。反转因子即一月动量因子，用个股过去一个月收益率表示。在每月月末，按照反转因子将股票分为5组，最小组为loser组合，最大组为winner组合，Panel A为等权重配置。Panel B为市值加权配置：MKT为wind，A指数
+--- 图13 ---
+[表]
+F-Score | 
+ | Low (0 - 3) | Middle (4 - 6) | High (7 - 9) | 
+Loser | Loser / Low | Loser / Middle | Loser / High | 
+P2 | P2 / Low | P2 / Middle | P2 / High | 
+P3 | P3 / Low | P3 / Middle | P3 / High | 
+P4 | P4 / Low | P4 / Middle | P4 / High | 
+Winner | Winner / Low | Winner / Middle | Winner / High |
+--- 图14 ---
+Panel A: Reversal + Fscore 等权重组合
+Panel B: Reversal + Fscore 市值加权组合
+数据来源：wind，tushare，搞事情因子小组。反转因子即一月动量因子，用个股过去一个月收益率表示。在每月月末，按照反转因子将股票分为5组，最小组为loser组合，最大组为winner组合；F-Score参考Piotroski (2000)，利用季度数据计算，由9个基本面指标合成，其中，FSCORE取值0-3归为低得分组，取值4-6归为中等得分组，取值7-9归为高得分组。将5个反转因子分组和3个F-Score分组取交集，一共获得15个组合。Panel A 为等权重组合，Panel B 为市值加权组合，组合按月度频率进行再平衡；MKT为
+--- 图15 ---
+月频 Raw return 均值 (%)
+[表]
+Panel A: 等权 | Panel B: 市值加权 | 
+ | Low | Middle | High |  | Low | Middle | High | 
+Loser | 1.95(2.07) | 2.37(2.58) | 2.45(2.61) | Loser | 1.53(1.71) | 1.68(2.01) | 1.59(1.82) | 
+P2 | 2.02(2.04) | 2.27(2.40) | 2.29(2.49) | P2 | 1.23(1.31) | 1.52(1.89) | 1.76(2.13) | 
+P3 | 1.84(1.87) | 2.12(2.22) | 2.22(2.30) | P3 | 1.23(1.28) | 1.38(1.52) | 1.68(1.74) | 
+P4 | 1.25(1.33) | 1.65(1.76) | 2.06(2.11) | P4 | 1.16(1.30) | 1.57(1.84) | 1.92(2.01) | 
+Winner | 0.34(0.35) | 0.84(0.90) | 1.01(1.08) | Winner | 0.48(0.48) | 0.97(0.98) | 0.93(0.89) | 
+Loser/High - Winner/Low (FAR) | 2.10(6.85) | Loser/High - Winner/Low (FAR) | 1.11(2.32) | 
+Loser/Low - Winner/High (FUR) | 0.94(2.25) | Loser/Low - Winner/High (FUR) | 0.61(1.01) | 
+Loser - Winner | 1.51(5.01) | Loser - Winner | 0.78(1.77) |
+--- 图16 ---
+Panel A: FAR和FUR等权重组合
+Panel B: FAR和FUR市值加权组合
+数据来源：wind，tushare，搞事情因子小组。仿照 Stein (2009) 构造两个多空组合，FAR (fundamental-anchored reversal)，做多高得分输家组合，做空低得分赢家组合；FUR (fundamental-unanchored reversal) 做多低得分输家组合，做空高得分赢家组合。Panel 为等权重组合 Panel B 为市值加权组合，组合按月度频率进行再平衡。
+--- 图17 ---
+月频 Fama and French (1993) 三因子  $ \alpha $ 均值 (%)
+[表]
+Panel A: 等权 | Panel B: 市值加权 | 
+ | Low | Middle | High |  | Low | Middle | High | 
+Loser | -0.11(-0.55) | 0.45(2.91) | 0.63(3.05) | Loser | 0.17(0.62) | 0.28(1.26) | 0.27(0.90) | 
+P2 | 0.00(0.00) | 0.36(3.11) | 0.53(3.50) | P2 | -0.26(-1.00) | 0.26(1.32) | 0.50(2.01) | 
+P3 | -0.74(-0.56) | 0.27(2.72) | 0.52(3.24) | P3 | -0.16(-0.68) | -0.03(-0.20) | 0.36(1.02) | 
+P4 | -0.51(-3.78) | -0.03(-0.27) | 0.50(3.41) | P4 | -0.18(-0.68) | 0.50(2.62) | 0.95(3.47) | 
+Winner | -1.09(-6.35) | -0.57(-3.42) | -0.16(-0.69) | Winner | -0.44(-1.52) | 0.09(0.37) | 0.18(0.54) | 
+Loser/High - Winner/Low (FAR) |  |  | 1.52(5.13) | Loser/High - Winner/Low (FAR) |  |  | 0.52(1.15) | 
+Loser/Low - Winner/High (FUR) |  |  | -0.15(-0.42) | Loser/Low - Winner/High (FUR) |  |  | -0.20(-0.39) | 
+Loser - Winner |  |  | 0.74(2.86) | Loser - Winner |  |  | 0.09(0.26) |
+--- 图18 ---
+[表]
+Panel A: 等权 | Panel B: 市值加权 | 
+ | Low | Middle | High |  | Low | Middle | High | 
+Loser | -0.08(-0.40) | 0.44(2.92) | 0.61(2.95) | Loser | 0.14(0.49) | 0.25(1.14) | 0.20(0.71) | 
+P2 | 0.05(0.35) | 0.38(3.14) | 0.53(3.57) | P2 | -0.23(-0.86) | 0.28(1.41) | 0.46(1.82) | 
+P3 | -0.02(-0.16) | 0.31(3.17) | 0.51(3.03) | P3 | -0.16(-0.67) | -0.02(-0.11) | 0.34(0.95) | 
+P4 | -0.46(-3.43) | -0.01(-0.06) | 0.51(3.45) | P4 | -0.16(-0.64) | 0.54(2.79) | 0.92(3.36) | 
+Winner | -1.07(-6.26) | -0.59(-3.78) | -0.18(-0.85) | Winner | -0.42(-1.45) | 0.06(0.27) | 0.16(0.47) | 
+Loser/High - Winner/Low (FAR) |  |  | 1.48(5.05) | Loser/High - Winner/Low (FAR) |  |  | 0.43(0.96) | 
+Loser/Low - Winner/High (FUR) |  |  | -0.10(-0.31) | Loser/Low - Winner/High (FUR) |  |  | -0.22(-0.42) | 
+Loser - Winner |  |  | 0.76(3.07) | Loser - Winner |  |  | 0.08(0.21) |
+
+--- 图20 ---
+分享量化理论和实证心得
+☐
+免责声明：
+文章内容不可视为投资意见。资本市场有风险，入市投资需谨慎。

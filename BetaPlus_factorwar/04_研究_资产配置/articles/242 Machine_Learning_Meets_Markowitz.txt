@@ -1,0 +1,76 @@
+# Machine Learning Meets Markowitz
+
+来源：04_研究_资产配置
+链接：https://mp.weixin.qq.com/s/Y5wIqQ6qt8jGakc-yoKSfg
+
+作者：石川，著有《因子投资：方法与实践》、《Navigating the Factor Zoo》，译有《机器学习与资产定价》。
+封面来源：www.pexels.com
+未经授权，严禁转载。
+摘要： 预测不是脱离投资者的实际约束而存在的；预测的价值，要体现在最终投资组合的构造中。
+0谈到资产配置，最自然的工作流莫过于 predict-then-optimize 这个 two-stage paradigm：
+第一步，预测 expected returns、估计协方差矩阵；第二步，把它们放入优化器，根据投资者的目标和约束求最优组合。这套范式存在了很多年。某种意义上说，它是 Markowitz 思想最自然的工程化表达：先形成对未来的 beliefs，再根据这些 beliefs 做 portfolio choice。直到今天，绝大多数实务工作流和相当一部分学术研究，依然大体沿着这条线展开。
+然而，一个值得思考并且也一直伴随这个范式存在的问题是：prediction 和 optimization 这两步，是否应该彼此独立。
+传统 two-stage framework 的核心优点，在于分工清晰。Stage 1 是一个统计问题：给定诸多 covariates，如何尽可能准确地预测收益率？常见目标函数是 MSE、cross-sectional 、排序能力（例如 IC）等等；Stage 2 是一个决策问题：给定预测收益、协方差矩阵和各种约束，如何求出投资组合？
+单看这两步，各自都很合理。问题在于，前一步眼中的“好预测”，和后一步眼中的“好组合”，未必是一回事。
+为什么？
+因为在 prediction 那一步里，模型通常不会区分横截面上不同股票预测误差的重要性。换句话说，对于模型的 loss 而言，它们往往差不多同样重要。假设我们把某只永远不会进入组合的股票的预测误差从 0.02 降到 0.01，和把某只未来更有可能重仓股票的预测误差从 0.02 降到 0.01，在 MSE 里贡献差不多。然而，在 portfolio construction 里，这两类误差的经济后果截然不同。
+对最终几乎不会进组合的资产，预测得再准，经济价值可能也很有限；对最终会被大幅配置的资产，哪怕很小的预测偏差，也可能显著改变组合结果；而一旦 long-only、持仓上限、风险暴露、交易成本这些现实约束进入问题，什么是“重要资产”，又会进一步变化。所以，问题并不在于 prediction 错了，而在于：statistical objective 和 investment objective 之间，可能存在 mismatch。
+在这一背景下，一种新的配置方式逐渐进入人们的视野。
+1这个 mismatch 最容易被忽略的地方在于，我们太习惯把 prediction 当成一个 investor-free 的对象：仿佛只要模型足够好，它就应该给所有投资者同一组 expected returns；至于后面怎么配，那是优化器的事。
+但现实是否真的如此？
+一个高风险偏好的投资者，愿意把仓位集中在少数标的上；一个低风险偏好的投资者，则可能更在意稳健和分散；一个 long-only 的机构，根本吃不到 short leg 上的 on-paper alpha；一个交易成本敏感的管理人，也会天然抵触高换手率的 signal。
+在这些情况下，什么是好的预测，注定和投资者息息相关。对资产配置而言，好的预测未必是平均意义下误差最小的预测，而是最能支持最终组合决策的预测。
+这就是为什么，近几年机器学习在 portfolio optimization 里的一个重要方向，不再满足于 predict-then-optimize，而是开始尝试把决策本身写回 learning process。
+Lee et al. (2024) 介绍了这种新近的研究趋势。不过我稍微唠叨一句：该文同时提到了 decision-focused learning 和 end-to-end (E2E) learning，但两者的边界严格说并不总是特别清晰。本文不想纠结命名，因为它们其实在强调的同一件事：
+当最终目标是做决策时，模型训练就不该只盯着 prediction error，而应该让 downstream portfolio choice 反过来 guide 前面的 learning process。
+2沿着这个思路，Wang et al. (2026) 的 working paper Machine Learning Meets Markowitz 提供了一个非常系统的 E2E 实现框架。更重要的是，它试图回答一个非常具体的问题：
+当配置的最终目标是形成一个满足约束、反映偏好、能够实施的投资组合时，前端的 return prediction 应该如何被后端的 portfolio construction 所塑造？
+为了说明 objective mismatch 确实可能存在，作者先给了一个非常直观的例子。
+他们考虑了 4 个资产：其中 1、2 是低风险的大盘股，3、4 是高风险的小盘成长股。假设收益率分别由两个 characteristics 驱动，一个更偏 earnings yield，另一个更偏 growth。此时，如果我们使用一个统一的线性模型去拟合所有资产，就会得到一个在整体 MSE 意义下最优的预测函数。但问题在于，整体 MSE 最优，并不等于 investor-specific portfolio outcome 最优。
+作者随后在 OLS 估计的基础上只做了很小的扰动：一个版本略微提高 earnings yield 的权重、降低 growth 的权重；另一个版本则反过来，略微提高 growth 的权重、降低 earnings yield 的权重。前者可以理解为更“偏向大盘股”，后者则更“偏向小盘成长股”。
+有意思的地方就在这里：尽管这两个修改后的预测函数在统计拟合上都不如原始 OLS，但当它们被送进均值—方差优化器之后，得到的 realized utility 却更高。具体来说：
+对风险厌恶程度较高的投资者，偏向大盘股的预测函数更优；对风险偏好更高的投资者，偏向小盘成长股的预测函数更优。这个直观的例子表明：在预测层面上略差一点的模型，完全有可能在组合层面上更好。这背后的原因并不神秘：不同投资者最终会在不同资产上下注，而这些资产的预测精度，对最终 utility 的影响显然并不对称。全局统计意义上的最优，并不会自动等同于投资者心中投资组合意义上的最优。
+3那么，Wang et al. (2026) 的 E2E framework 到底是如何实现这一点的：让 portfolio objective 反过来 guide prediction model？直观地说，它把 optimization problem 本身嵌入到训练过程中。
+在传统 two-stage framework 下，我们通常先训练一个模型，得到 predicted returns ，然后再把它送入优化器，求得最优组合权重 .
+但在这个过程中，模型参数  的更新只来自 prediction loss，比如 MSE。换句话说，梯度在 prediction stage 就停住了；后面的 portfolio optimizer 并不会告诉前面的模型：哪些预测误差真正重要，哪些其实无关痛痒。
+而在 Wang et al. (2026) 的框架里，模型最终不是为了让 prediction loss 最小，而是为了让 portfolio decision 对应的 realized task loss 最优。因此，参数更新要通过下面这条链条传回去：
+这正是该文中公式 (6) 的含义。它写成数学形式是：
+这个公式看起来有点 intimidating，但本质上是 chain rule：
+最右边那一项  表示：最终的 portfolio objective 对权重变化有多敏感；中间那一项  表示：如果 predicted returns 变化一点点，最优权重会如何变化；最左边那一项  则是普通机器学习里最熟悉的部分：prediction 对模型参数的偏导数。真正困难的是中间这一项。因为它要求我们回答一个问题：如果 optimization problem 的输入——也就是 predicted returns——发生微小变化，那么它的最优解会如何变化？在均值—方差优化里，权重本来就是 predicted returns 的函数；只不过在传统框架里，我们通常只使用这个函数，却不去追问它对输入的局部敏感性。
+这个框架能够跑通的关键，是把该优化问题视为一个可微的 layer。技术上，作者借助的是 differentiable convex optimization 的工具：把优化问题的 KKT 条件写出来，再利用 implicit function theorem 去求最优解对输入参数的导数。
+从直觉上看，这意味着什么？
+意味着模型的 learning process 不再只受“预测是否更接近真实收益”的驱动，而是开始受“这种预测变化是否真的会改善最终组合”的驱动。也正因为如此，组合构造中的约束、风险偏好和交易摩擦，才第一次真正进入模型训练过程。
+4上面的讨论如果只停留在方法层面，它仍然只是一个逻辑上颇有吸引力的 framework。更重要的问题是：在真实的配置问题中，它是否真的能够带来增益？
+Wang et al. (2026) 给出了这方面的证据。作者使用的是中国 A 股 2010–2023 年的日频数据，并将这一 E2E framework 与传统的 two-stage approach 进行比较。本文选取两个最能体现其方法论意义的方面：long-only restriction 与 transaction costs。
+先看 long-only 的情形。这一部分之所以重要，并不只是因为 long-only 是一个常见约束；更因为它直接触及了一个经常被忽略的问题：许多 statistical alpha，尤其是在 long-short 设定下看起来很漂亮的 alpha，并不一定都能在现实中被投资者真正获得。
+原因很简单。很多机构难以做空；即便可以，shorting 也往往伴随着额外的成本、约束和执行难度。于是，一个在 long-short 组合上表现很强的 prediction model，并不必然对应一个在 long-only 现实约束下同样有效的配置工具。
+也正是在这个意义上，long-only 并不只是“多加一个限制”而已。它实际上改变了这样一个问题：模型究竟应该把预测精度放在什么地方。
+Wang et al. (2026) 的结果表明，在 long-only 约束下，他们的 framework 相比传统的 two-stage，确实能够带来更好的组合表现。以文中表现最好的 NN3 为例，新框架下的 long-only high-risk portfolio，其年化收益率从 40.0% 提升到 43.6%，Sharpe ratio 则从 1.94 提升到 2.14。从总体上说，作者报告的结果也显示，在 long-only 场景下，E2E 相较 two-stage 存在稳定且统计显著的改善。
+这部分结果的直观含义其实并不复杂。既然投资者无法利用 short side，那么一个“擅长识别应被做空资产”的 prediction model，即便在统计上很优秀，其经济价值也会被大幅压缩。反过来，一个训练过程已经内生考虑了 long-only 约束的模型，自然更有可能把学习能力集中在那些真正会进入投资组合、并在组合中承担较大权重的资产之上。
+从这个角度看，long-only 的结果其实是在再次说明前文那个判断：好的预测不是抽象意义下的好预测，而是给定约束下对投资组合真正有用的预测。
+如果说 long-only 约束体现的是“可投资集合”的现实边界，那么 transaction costs 体现的，则是“组合从 paper portfolio 走向真实 implementation”的摩擦。
+这一点在机器学习做资产配置时尤其重要。因为许多 prediction model，特别是以高频更新特征或复杂非线性结构为基础的模型，很容易生成高换手率的信号。这一点其实并不新鲜。近年来机器学习在 empirical asset pricing 中的一个常见现象，就是模型往往伴随着较高的 turnover，见 Avramov, Cheng and Metzker (2023)。单从 prediction accuracy 的角度看，这未必有问题；但只要进入真实交易，事情就完全不同了。一个经常调仓、频繁追逐短期噪声的 signal，即便 gross return 很漂亮，net return 也可能很难看。
+传统 two-stage approach 当然也不是完全无视这一点。常见做法是：前面照常用 MSE 训练 prediction model，后面再在 portfolio optimization 中额外加入 transaction cost penalty。这样做比完全不考虑交易成本当然要现实得多，但它仍然保留了一个根本问题：前面的模型并不会显式考虑交易成本。
+换句话说，在这种框架下，后端优化器可以努力压低 portfolio turnover，但它无法改变前端 signal 本身的形成机制。模型仍然可能一如既往地偏好那些高换手、短周期、implementation 不友好的特征；优化器做的，只是在事后尽量“补救”。
+而这恰恰是 E2E framework 能够发挥作用的地方之一。因为一旦 transaction costs 被写入最终任务目标，它就不只是 optimizer 的问题，而会直接进入模型训练本身。模型会开始学习：哪些看似有预测力的变化，最终在扣除交易成本之后其实并不值得。
+Wang et al. (2026) 的结果清楚地体现了这一点。随着交易成本从低到高逐步上升，传统 two-stage framework 的净收益明显恶化，到了较高成本水平时，部分组合的 net Sharpe ratio 甚至小于零。相比之下，E2E framework 虽然同样会受到成本冲击，但整体表现要稳健得多；在若干高成本设定下，它依然能够维持显著为正的净表现。
+但我觉得更值得关注的，并不只是收益率本身，而是作者进一步展示的 turnover 分解。在传统框架下，随着 transaction cost penalty 加大，portfolio turnover 确实会下降；这一点不奇怪，因为优化器会被迫少交易。但与此同时，signal turnover 往往并没有明显下降。原因也很直接：前端 prediction model 的训练目标没变，它并没有学会“少折腾”。
+而在 E2E framework 下，情况不一样。随着交易成本上升，不仅 portfolio turnover 会下降，signal turnover 本身也会下降。这个现象说明模型不是在后端被动适应成本，而是在前端形成 signal 的阶段就已经开始 internalize implementation frictions 了。
+换句话说，在 two-stage approach 中，transaction cost 只是事后施加在组合上的惩罚项；而在 E2E framework 中，它开始变成 signal formation problem 的一部分。
+这也是我觉得这篇 paper 最有说服力的地方之一。很多关于“机器学习可以优化配置”的表述，最后都容易停留在 gross performance 或者 on-paper efficiency 上；但投资里真正需要关心的，恰恰是这些 implementation frictions。而当一个框架能够把 frictions 真正写回 learning process 时，它才不仅仅是在改善 prediction，而是在重新定义“什么样的预测值得被学习”。
+5结束本文之前，我想强调的是，这并不是一个“旧范式错了，新范式赢了”的故事。
+Predict-then-optimize 之所以长期成为资产配置中的标准范式，不是偶然。它的优点非常清楚：分工明确、实现简单、可解释性强，而且在很多问题上完全够用。对不少实务场景而言，把 prediction 和 portfolio construction 清晰拆开，仍然是一个非常合理、也非常高效的做法。
+从这个意义上说，E2E learning 并不构成一种轻松的替代。它的实现更复杂，对优化问题的结构有要求，对可微性的处理更敏感，训练成本也更高。更不用说，它的表现仍然会依赖于具体市场、约束设定、成本结构和模型规格。
+它的意义，在于提醒我们重新正视一个问题：如果配置的最终目标本来就是形成投资组合，那么前端的 prediction，到底应该学会什么？是去追求一个在平均意义下尽可能小的 prediction error？还是在给定投资者偏好、持仓约束与交易 frictions 的前提下，去学习那些真正能够改善 portfolio outcome 的信号？
+Machine Learning Meets Markowitz 一文的价值，不在于它已经为所有配置问题给出了最终答案，而在于提醒我们重新审视 prediction 与 decision 之间原本被默认掉的联系。组合构造不再只是 prediction 之后的“下游步骤”；相反，它会反过来决定：什么样的 signal 才真正有经济价值，而模型又应该怎样学习。
+预测不是脱离投资者实际约束而存在的；预测的价值，要体现在最终投资组合的构造之中。
+
+References
+Avramov, D., S. Cheng, and L. Metzker (2023). Machine learning vs. economic restrictions: Evidence from stock return predictability. Management Science 69(5), 2587-2619.Lee, Y., J. H. Kim, W. C. Kim, and F. J. Fabozzi (2024). An overview of machine learning for portfolio optimization. Journal of Portfolio Management 51(2), 131-148.Wang, Y., H. Gao, C. R. Harvey, Y. Liu, and X. Tao (2026). Machine Learning Meets Markowitz. Working paper.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---

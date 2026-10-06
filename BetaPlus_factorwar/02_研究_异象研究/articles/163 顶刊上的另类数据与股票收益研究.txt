@@ -1,0 +1,241 @@
+# 顶刊上的另类数据与股票收益研究
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/GalCtl9DtneouNpcUbK_7A
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+另类数据的实证资产定价应用（也许）还有很长的路要走。
+
+01
+引言
+
+一年前的今天，我写了一篇《另类数据的前景和陷阱》，抛砖引玉讨论了对另类数据的看法。而近年来，学术界在将另类数据引入实证资产定价方面也干得热火朝天，很多研究被发表在顶级期刊上。本文就对一些我印象比较深刻的（包括好的印象、中立的印象以及不那么好的印象）研究成果进行梳理。
+
+按照所使用的另类数据类别，研究成果大体上可以被四类：Crowdsourced data，Textual data，Trading account data 以及各种 Lead-lag effect（最后这一种也往往被视作准另类数据）。下文将依次说明。
+
+在本文的最后，我们也不妨来“上个价值”。最近两年，一个非常强烈的感受是在顶刊上发表实证文章越来越难（哦，除非你是 Editor 的朋友，正如坊间流传的 JFE = Journal of Friends of Editor；越来越多的实证文章 —— 不限于使用了另类数据的 —— 感觉能发到顶刊上只是因为是大佬写的）。而如果要问有什么方法让在顶刊发文变得稍微容易那么一丁点，使用另类数据一定是个不错选择。
+
+但另类数据集通常要么不是公开的，要么涉及十分繁杂的数据处理；且一些数据集本身的可靠性和数据质量也存疑。这些问题的存在使得另类数据更有可能成为孕育 p-hacking 的温床，削弱研究的可复制性和稳健性。本文的最后就对此进行一些探讨。
+
+02
+Crowdsourced data
+
+第一类另类数据是 crowdsourced data，代表作是 Green et al. (2019) 和 Da, Huang and Jin (2021)，均发表在 JFE 上。在我看来 crowdsourced data 的一大问题是数据的生成（采集）过程是否 unbiased，能否很好的代表总体。
+
+Green et al. (2019) 使用 Glassdoor.com 数据研究了员工对雇主的评价与股票收益率之间的关系（[因子动物园] 的文章《乌合之众 or 群众的智慧：员工评价与股票收益》对该文进行了详细介绍），发现评分变化高低能够预测股票的预期收益。在《另类数据的前景和陷阱》一文中，曾经介绍过该文，并对 Glassdoor.com 数据可能存在的问题进行了讨论。
+
+Da, Huang and Jin (2021) 则使用了 Forcerank App 上散户对股票的周度评分，研究了投资者过度外推信仰和未来股票收益率之间的负相关。然而，受制于数据限制，该文的样本仅从 2016/2 到 2017/12，涉及不到 300 支股票和将将 1000 个用户。虽然实证研究本身没有任何问题（solid，且作者给出了理论模型来支持实证结果）且作者也强调了这些用户无法代表所有交易这些股票的投资者，但我们还是对该研究在多大程度上能够推广到全市场的所有股票存有疑问。
+
+而“雪上加霜”的是，当我试图访问 Forcerank 一探究竟时，发现它已经停止运营了。
+
+03
+Textual Data
+
+随着机器学习算法的普及，对文本数据的研究早已成为了学术界的“必争之地”。近年来，通过分析上市公司财报中的文本信息来研究股票收益率的研究也屡见不鲜，其中最有代表性的一篇当属发表在 JF 上的 Lazy Prices（Cohen, Malloy and Nguyen (2020)）。
+
+该文分析了美股上市公司季报和年报中的文本措辞变化是否和股票收益率有关。正如其标题揭示的那样，该文发现改动越少的公司未来的预期收益越高。通过做多改动少的公司、做空改动多的公司，该投资组合可以获得超过 20% 的年化超额收益。这篇文章的精彩之处在于对背后机制的讨论。
+
+Cohen, Malloy and Nguyen (2020) 发现财报中措辞变动背后的原因通常是以下几种：more negative sentiment、higher uncertainty、more litigiousness 以及 CEO/CFO changes。这些原因往往意味着公司的运营面临更高的风险和不确定性。
+
+除此之外，该文更进一步揭示了财报中的哪些 sections 发生的措辞变化最为关键，为后续进一步的深入研究奠定了很好的基础。其中一个值得多唠叨两句的 section 是美股年报中的 Item 1A：Risk Factors。
+
+之所以单提它，是因为它让我想起了另一篇利用 Natural Language Processing 研究财报的文章，而该文研究的对象恰好就是年报中的 Risk Factors 一节（Lopez-Lira (2020)）。顺便一提，Lopez-Lira (2020) 尚未被发表，还是一篇 working paper。
+
+Lopez-Lira (2020) 使用 Latent Dirichlet Allocation（LDA）从 Risk Factors 一节提取出 25 个 risk topics。通过进一步分析发现其中有一些可以代表不同公司面临的系统性风险，且这些系统性风险因子（risk topics）中有一些是被定价的；基于这些因子构造的多因子模型的定价能力不亚于传统的 Fama-French 三/五因子模型。感兴趣的小伙伴不妨找来一读。
+
+04
+Trading account data
+
+下一类另类数据是利用散户投资者（retail investors）的交易数据，研究成果有助于 retail investors 纠正错误的交易习惯。这类数据通常是非公开的，相关的代表论文包括 Barber and Odean (2000)、Boehmer, Jones and Zhang (2008)、Kaniel, Saar and Titman (2008)、Kelley and Tetlock (2013) 以及 Barrot, Kaniel and Sraer (2016)。
+
+其中，Barber and Odean (2000) 所用的包含约 78,000 个账户的交易数据集非常有名（被称为 Odean dataset），它在后来针对 retail investors 以及行为金融学的相关研究中得到了广泛的应用。
+
+比如 An (2016) 这篇发表在 RFS 上的文章。该文受 Ben-David and Hirshleifer (2012) 启发，进一步研究了 V-shaped selling pressure，即高浮盈和高浮亏都会面临更大的抛压，因而这些股票未来的预期收益率更高。该文在此猜想上提出了新的变量来代替传统的 CGO（CGO 见《参考点依赖与市场异象》）。虽然该文的实证中使用收益率和交易量来构造变量，但是在 promote 研究动机的环节，它使用了 Odean 数据集的真实交易数据来证实了猜想的正确性。
+
+使用账户交易数据的最大问题在于数据集是非公开的。这使得相关研究难以被复现或扩展。本节第一段罗列的那些论文均存在这个问题。不过，这个问题在一篇 JF forthcoming 的文章（Boehmer et al. (2021)）中得到了有效的改善。和上述研究不同的是，Boehmer et al. (2021) 并没有使用账户数据，而是通过算法从所有交易数据中有效识别出散户的交易数据。因此该文的发现更具代表性，且该识别算法也会有更广泛的应用价值。
+
+05
+Lead-lag effect
+
+最后一类常见的（准）另类数据是各种“花式”动量，即各种领先-滞后关系（lead-lag effect）。这可能是最具应用前景的另类数据之一。下表展示了发表在顶刊上的各种 lead-lag effects。公众号前文《获取 α 的新思路：科技关联度》对 Lee et al. (2019) 做过详细介绍（这里插一句：McLemore et al. (2021) 把科技关联度应用到了公募基金表现的研究中，也颇有意思）；[因子动物园] 的《关联度动量的秘密：分析师共同覆盖》对 Parsons, Sabbatucci and Titman (2020) 的地理动量以及 Ali and Hirshleifer (2020) 的分析师共同覆盖做过解读。
+
+细心的小伙伴也许注意到了，在上表中的各种 lead-lag effects 中，唯独分析师共同覆盖被用红色标出了，说明它有某种特殊之处。Ali and Hirshleifer (2020) 在提出它的同时，顺便也“敲打”了一下其他常见的关系。他们发现，一旦控制了分析师共同覆盖，其他关系变无法获得显著超额收益了；而反过来，其他关系无法解释分析师共同覆盖的超额收益。综合二者，他们指出分析师共同覆盖才是各种 lead-lag effects 背后的原因。
+
+下表总结了分析师共同覆盖在 A 股上的实证结果：在小市值、大市值以及全市场，均存在分析师共同覆盖效应。
+
+总结一下，各种企业间关联的收益来源是投资者对企业间关联信息的注意力不足，导致反应不足。此外，企业间关联效应也对公司未来基本面的变化有预测能力。这类数据大多公开可得，因此具备进一步系统研究的基础，且实证结果表明在 A 股上具备应用前景。
+
+离开本节之前，另一篇值得一提的文章是 Gofman, Segal and Wu (2020)。该文研究了 production networks 和股票收益的关系，发现上游公司的技术进步会使得下游公司的现有资产价值降低，且上游公司和下游客户在 network 中的距离越远，其预期收益越高。这个研究为将产业链知识图谱应用于资产定价提供了新思路。
+
+06
+我们需要什么样的研究 ?
+
+以上 2 – 5 节简要梳理了一些代表性的将另类数据应用于实证资产定价的研究。很多研究在刚被提出的时候确实很吸引人，但随着时间的推移，当我们掌握了越来越多的研究“套路”后，总是忍不住发问：我们到底需要什么样的研究？
+
+我想可以从两个角度回答这个问题。首先，面对另类数据，人们并不需要“投机取巧”挖出来的 new anomalies。另类数据的真正价值是人们通过新数据，从新视角理解哪些系统性风险能够驱动资产收益率的变化。
+
+其次就是强调学术研究的可复制性。这让我想起 Harvey (2019) 在 Critical Finance Review 这个新期刊上的大声疾呼。这个期刊倒是很符合本文的主题；和金融学领域的其他期刊相比，CFR 足够另类。在其官网主页赫然写着期刊宗旨：Not just replicability, but actual replication!
+
+在 2010 年 Campbell Harvey 身为 JF editor 的时候，他联合了 RFS 以及 JFE 的 editors，希望敦促顶刊（以及其他期刊）采纳数据和代码共享原则。Harvey 的提议在期刊编辑和金融学 big names 之间得到了讨论，至于结果……
+
+“ The initiative failed.
+
+”
+
+其中最主要的反对之声在于这么做的成本太高。此外，学术界“朴素”地认为不共享数据或代码并未造成什么严重的后果。
+
+“ By far the most important pushback was the cost imposed on authors. … Indeed, there were powerful testimonials from top academics about their nightmarish experiences in sharing data. Many believed we did not have a problem. Why impose a costly ‘fix’ to something that was not broken?
+
+”
+
+对于另类数据来说，可复制性无疑面临更大挑战。然而正如 [因子动物园] 的文章《可复制的因子研究》阐释的那样，有两个原因使得因子研究的可复制性非常重要：
+
+1. 可复制性可以确保后续研究有良好的基础，而不至于在错误的问题上越陷越深；
+
+2. 实证资产定价的研究方法相对标准化，因此不同研究者重复造轮子的工作，是一种巨大的浪费。
+
+除了这两点，强调可复制性也能够提高论文的质量，减少金融学研究中诸如 p-hacking、HARKing 等行为不端（见《Campbell Harvey: Tortured Data》）。
+
+对于另类数据以及其他实证资产定价研究来说，虽然共享数据和代码有很大的代价且困难重重，但是正如 Harvey (2019) 所主张的那样，它带来的好处远远超过其代价。
+
+可复制性永远是学术研究的唯一生命力；而另类数据的实证资产定价应用也还有很长的路要走。
+
+参考文献
+Ali, U. and D. Hirshleifer (2020). Shared analyst coverage: Unifying momentum spillover effects. Journal of Financial Economics 136(3), 649 – 675.
+
+An, L. (2016). Asset pricing when traders sell extreme winners and losers. Review of Financial Studies 29(3), 823 – 861.
+
+Barber, B. M. and T. Odean (2000). Trading is hazardous to your wealth: The common stock investment performance of individual investors. Journal of Finance 55(2), 773 – 806.
+
+Barrot, J.-N., R. Kaniel, and D. Sraer (2016). Are retail traders compensated for providing liquidity?Journal of Financial Economics 120(1), 146 – 168.
+
+Ben-David, I. and D. Hirshleifer (2012). Are investors really reluctant to realize their losses? Trading responses to past returns and the disposition effect. Review of Financial Studies 25(8), 2485 – 532.
+
+Boehmer, E., C. M. Jones, and X. Zhang (2008). Which shorts are informed? Journal of Finance 63(2), 491 – 527.
+
+Boehmer, E., C. M. Jones, X. Zhang, and X. Zhang (2021). Tracking retail investor activity. Journal of Finance forthcoming.
+
+Cohen, L. and A. Frazzini (2008). Economic links and predictable returns. Journal of Finance 63(4), 1977 – 2011.
+
+Cohen, L. and D. Lou (2012). Complicated firms. Journal of Financial Economics 104(2), 383 – 400.
+
+Cohen, L., C. Malloy, and Q. Nguyen (2020). Lazy prices. Journal of Finance 75(3), 1371 – 1415.
+
+Da, Z., X. Huang, and L. Jin (2021). Extrapolative beliefs in the cross-section: What can we learn from the crowds? Journal of Financial Economics forthcoming.
+
+Gofman, M., G. Segal, and Y. Wu (2020). Production networks and stock returns: The role of vertical creative destruction. Review of Financial Studies 33(12), 5856 – 5905.
+
+Green, T. C., R. Huang, Q. Wen, and D. Zhou (2019). Crowdsourced employer reviews and stock returns. Journal of Financial Economics 134(1), 236 – 251.
+
+Harvey, C. R. (2019). Editorial: Replication in financial economics. Critical Finance Review 8(1-2), 1 – 9.
+
+Hou, K. (2007). Industry information diffusion and the lead-lag effect in stock returns. Review of Financial Studies 20(4), 1113 – 1138.
+
+Kaniel, R., G. Saar, and S. Titman (2008). Individual investor trading and stock returns. Journal of Finance 63(1), 273 – 310.
+
+Kelley, E. K. and P. C. Tetlock (2013). How wise are crowds? Insights from retail orders and stock returns. Journal of Finance 68(3), 1229 – 1265.
+
+Lee, C. M. C., S. Teng, R. Wang, and R. Zhang (2019). Technological links and predictable returns.Journal of Financial Economics 132(3), 76 – 96.
+
+Lopez-Lira, A. (2020). Risk factors that matter: Textual analysis of risk disclosures for the cross-section of returns. Available at: https://ssrn.com/abstract=3313663.
+
+McLemore, P., R. Sias, C. Wan, and H. Z. Yuksel (2021). Active technological similarity and mutual fund performance. Journal of Financial and Quantitative Analysis forthcoming.
+
+Parsons, C. A., R. Sabbatucci, and S. Titman (2020). Geographic lead-lag effects. Review of Financial Studies 33(10), 4721 – 4770.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+Thank You
+We want to thank the Forcerank community for all you have done for the platform - we truly appreciate the time and dedication you gave to our app each week. In order to maintain our focus on the Estimize platform, we've decided to shutdown Forcerank. Feel free to reach out to  $ \underline{\text{help@estimate.com}} $ if you have questions or if you'd simply like to speak with us!
+- The Estimize Team
+--- 图3 ---
+Potential Mechanism
+This table explores the potential mechanism behind our results. We regress our similarity measure on a host of characteristics describing the document in question. Sim_Simple, the dependent variable, is multiplied by 100. Sentiment of Change is the number of negative words in Change normalized by the number of words in Change, where Change is computed as the number of additions, deletions, and other changes identified from the function "diff" in Unix/Linux or the function "Track Changes" in Microsoft Word. Uncertainty of Change and Litigiousness of Change are the number of words categorized as uncertainty and litigiousness, respectively, normalized by the size of Change. Change CEO and Change CFO are indicator variables equal to 1 if the 10-K or 10-Q mentions a change in CEO or CFO, respectively. Sentiment category identifiers (e.g., negative, uncertainty, and litigious) come from Loughran and McDonald's (2011). Master Dictionary. All regressions include firm and month fixed effects. Standard errors are clustered at the firm level. t-Statistics are reported below the estimates. Statistical significance at the 1%, 5%, and 10% levels is indicated by ***, **, and *, respectively.
+[表]
+ | (1) | (2) | Sim_Simple(3) | (4) | (5) | 
+Sentiment of Change | $ -2.49^{***}(-37.83) $ |  |  |  |  | 
+Uncertainty of Change |  | $ -3.57^{***}(-34.15) $ |  |  |  | 
+Litigiousness of Change |  |  | $ -0.12^{**}(-2.11) $ |  |  | 
+Change CEO |  |  |  | $ -0.01^{***}(-7.10) $ |  | 
+Change CFO |  |  |  |  | $ -0.01^{***}(-5.75) $ | 
+Cons | $ 0.18^{***}(28.52) $ | $ 0.19^{***}(17.40) $ | $ 0.18^{***}(17.25) $ | $ 0.18^{***}(17.31) $ | $ 0.18^{***}(17.29) $ | 
+Firm fixed effects | Yes | Yes | Yes | Yes | Yes | 
+Time fixed effects | Yes | Yes | Yes | Yes | Yes | 
+$ R^{2} $ | 0.06 | 0.07 | 0.07 | 0.07 | 0.06 | 
+N | 338,138 | 338,138 | 338,138 | 338,138 | 338,138 |
+出处：Cohen Mallow and Nouren (2020)
+--- 图4 ---
+[表]
+文献 | 效应 | 
+Hou (2007) | 行业动量（intra-industry effect） | 
+Cohen and Frazzini (2008) | 重要客户动量（supplier-customer effect） | 
+Cohen and Lou (2012) | 复杂公司动量（conglomerate lead-lag effect） | 
+Lee et al. (2019) | 科技关联度（technological links） | 
+Parsons, Sabbatucci and Titman (2020) | 地理动量（geographic lead-lag effect） | 
+Ali and Hirshleifer (2020) | 分析师共同覆盖（shared analyst coverage） |
+整理：川总写量化
+--- 图5 ---
+This table reports the mean returns and alphas of CF momentum, industry momentum, geographic momentum, customer momentum, supplier industry momentum, customer industry momentum, complicated firm momentum, and technology momentum factors. The calculation of these factors is described in Section 3.1. The sample includes common stocks listed on NYSE, Amex, and NYSE Mkt. The sample period for customer momentum factor is from January 1984 to June 2006 due to the availability of data on customer-supplier links. The sample period for customer and supplier industry momentum factors is from July 1986 to December 2015 due to the availability of historical NAICS codes. The sample period for technological momentum factor is from January 1984 to June 2012 due to the availability of Morgan et al. (2017) patent data. The sample period for all other tests is from January 1984 to December 2015. Market, size, value, momentum, and short-term reversal factors are from Ken French's website. In Panel A, 4-factor + CF momentum factor alpha is the alpha from the time-series regression of portfolio returns on MKT, SMB, HML, UMD, and CF momentum factors. In Panel A, 5-factor + CF momentum factor alpha is the alpha from the time-series regression of portfolio returns on MKT, SMB, HML, UMD, and CF momentum factors. The dependent variable in the regression series in Panel B is the return of the CF momentum factor. The dependent variable in the regression series in Panel B is the return of the CF momentum factor. The corresponding data are from the cross-asset momentum factor from the corresponding data. Column 2 of Panel B reports the alpha of the CF momentum factor from regressions of its return on the MKT, the MKT, the M
+[表]
+ | Mean return | 4-factor alpha | 5-factor alpha | 4-factor + CF momentum factor alpha | 5-factor + CF momentum factor alpha | 
+ | (1) | (2) | (3) | (4) | (5) | 
+CF momentum factor | 1.33 | 1.38 | 1.68 |  |  | 
+ | (4.70) | (4.65) | (9.67) |  |  | 
+industry momentum factor | 0.64 | 0.64 | 0.85 | -0.24 | -0.04 | 
+ | (3.06) | (2.92) | (5.13) | (-2.06) | (-0.27) | 
+Geographic momentum factor | 0.31 | 0.31 | 0.43 | -0.23 | -0.23 | 
+ | (2.23) | (2.47) | (3.91) | (-2.46) | (-2.34) | 
+Customer momentum factor | 1.15 | 0.97 | 1.29 | 0.43 | 0.74 | 
+ | (3.44) | (2.47) | (3.62) | (1.09) | (1.79) | 
+Supplier industry momentum factor | 0.58 | 0.55 | 0.71 | -0.26 | -0.12 | 
+ | (2.54) | (2.24) | (3.98) | (-1.73) | (-0.79) | 
+Customer industry momentum factor | 0.40 | 0.45 | 0.62 | -0.42 | -0.10 | 
+ | (1.73) | (1.94) | (3.84) | (-2.86) | (-0.71) | 
+Complicated firm momentum factor | 0.42 | 0.40 | 0.54 | -0.18 | 0.02 | 
+ | (2.56) | (2.25) | (4.38) | (-1.41) | (0.17) | 
+Technology momentum factor | 0.55 | 0.50 | 0.72 | -0.52 | -0.60 | 
+ | (2.06) | (1.89) | (3.24) | (-2.90) | (-2.82) | 
+Panel B |  |  |  |  |  | 
+ | 4-factor + Alpha of CF momentum factor (1) | 5-factor + Alpha of CF momentum factor (2) | Incremental alpha of CF momentum factor (3) |  |  | 
+industry momentum factor | 0.65 | 1.10 | 1.48 |  |  | 
+ | (3.77) | (6.92) | (5.41) |  |  | 
+Geographic momentum factor | 0.87 | 1.31 | 1.22 |  |  | 
+ | (4.53) | (9.94) | (5.95) |  |  | 
+Customer momentum factor | 1.11 | 2.24 | 1.21 |  |  | 
+ | (3.07) | (10.82) | (5.65) |  |  | 
+Supplier industry momentum factor | 0.80 | 1.26 | 1.21 |  |  | 
+ | (4.02) | (7.86) | (5.59) |  |  | 
+Customer industry momentum factor | 0.90 | 1.29 | 1.20 |  |  | 
+ | (4.66) | (8.12) | (5.62) |  |  | 
+Complicated firm momentum factor | 0.87 | 1.41 | 1.11 |  |  | 
+ | (4.46) | (8.99) | (5.27) |  |  | 
+Technology momentum factor | 1.05 | 1.51 | 1.08 |  |  | 
+ | (5.03) | (10.37) | (5.76) |  |  | 
+Combined momentum factor | 0.62 | 0.90 |  |  |  | 
+ | (4.85) | (6.93) |  |  |  |
+--- 图6 ---
+[表]
+ | low | middle | high | high - 1 | 
+small | 0.96(1.30) | 1.37(1.86) | 1.57(2.07) | 0.61(2.68) | 
+big | 0.46(0.74) | 0.70(1.14) | 1.28(1.86) | 0.82(2.26) | 
+平均 | 0.71(1.08) | 1.04(1.59) | 1.42(2.05) | 0.71(2.68) |
+出处：刘洋溢《准另类数据与因子投资》；available at www.factorwat.com
+--- 图7 ---
+I would argue that, if implemented efficiently, the benefits of a data and code-sharing policy outweigh the costs. Such a policy has many benefits.  $ \underline{\text{First, the trust in our research is supported by a strong replication culture.}} $ Currently, the field of finance's weak or nonexistent policy is inconsistent with the broad trends in economics and other areas of science. $ ^{22} $ If we aspire to develop ideas that influence policy makers, our results will be discounted without a strong replication policy.  $ \underline{\text{Second, we increase the cost of the difficult-to-observe soft misconduct}} $ Researchers will think twice before p-hacking a result when their code and data are available.  $ \underline{\text{Third, research will become more efficient.}} $ Researchers will easily be able to calibrate their own programs to current published work, and it will no longer be necessary to reinvent the wheel for mechanical, but time costly, exercises that have been published before.
+L4b · Hatoro (2010)
+--- 图8 ---

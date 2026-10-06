@@ -1,0 +1,288 @@
+# 价值因子已死 ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/vp9_CNDZ0hPywm58LxZPkQ
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+来自 RA 和 AQR 的分析表明，价值因子中结构性 α 并未消失，其糟糕的表现可以归结于全市场范围内的估值泡沫。
+
+01
+引言
+
+自 2007 年 global financial crisis（GFC）之后，以 Book-to-Market Ratio（BM）为代表变量构建的（系统性）价值因子经历了长达 13 年的低迷期（最大回撤已达 50%），且仍然不见转机。面对这种情况，有人坚守信仰，有人幸灾乐祸，但无论怀着何种心态，都不得不抛出一个合理的疑问：价值因子已死？
+
+Well, the short answer is: NO。
+
+如果你有时间，也感兴趣，下面我们就一起看一些分析和数据。
+
+在关于价值因子是否已死这个问题上，之前因因子择时而大打口水战的 AQR 和 Research Affiliates（简称 RA）却惊人的一致。他们都基于严谨的数据分析低迷的原因，并抨击了市场中流行的各种叙事性（narrative）解释。
+
+在诸多叙事性解释中，最吸引人的要数技术革命催生了以 MAGFAN（Microsoft、Apple、Google、Facebook、Amazon、Netflix）为代表一批盈利能力超强的科技公司，使得传统的实体价值企业被远远抛下。下表统计了上述六家公司的估值和盈利能力（以 Fama-French 五因子模型中使用的营业利润与账面价值之比表示）与 NYSE 不同分位数之间的关系。除 Google 外，其他五家的盈利能力都稳健的超过了中位数。
+
+从估值的角度，除 Google 外的其他公司的 B/P（book-to-market）均在 NYSE 的 30% 分位数之下，因此按惯例会被放在 High-Minus-Low（价值因子）的空头；若以 E/P（earnings-to-price）来划分，则 Microsoft、Amazon 和 Netflix 也在 30% 分位数之下。然而，在过去几年中，大量的资金争相涌入这些公司，使得时至今日，除了沙特阿美之外，Microsoft、Apple、Amazon、Google 以及 Facebook 恰恰成为全世界市值最大的五个上市公司。以它们为代表的科技公司的股价的攀升对价值因子的衰败起到了推波助澜的作用，这个叙事性解释听上去合情合理、引人入胜。
+
+但别着急，看完下面的分析后，也许我们会对这个观点有更客观、冷静的认识。在回答价值因子是否已死之前，先来看看其最近 13 年的暗淡表现到底有多么不可能。
+
+02
+有多不可能？
+
+从 2007 年开始，HML 因子已经低迷了 13 年，最大回撤已达 50%。人们不禁要问，如果 HML 因子的收益分布没有发生变化，那么出现 50% 的回撤到底有多么不可能？
+
+利用 1963 年到 2006 年的数据，通过自助法（bootstrap），Arnott et al. (2020) 对上述问题进行了检验。通过一百万次模拟，他们得到了 HML 因子最大回撤的分布（下图）—— 回忆一下《一个策略的自白》一文，该文也倡导了不应仅使用最大回撤的点估计来评判策略（或因子）。从结果可以看到，50% 的最大回撤处于该分布的 5.2% 分位数。所以，虽然 50% 的最大回撤很大，但它依然不是不可能。
+
+此外，值得说明的是，依上述模拟计算出的 5.2% 的分位数其实是低估了不低于 50% 的最大回撤出现的可能性。这是因为模拟中仅使用了 2007 年之前的数据来进行 bootstrap，而特意跳过了 2007 之后的 13 年。但如果 HML 的分布未发生变化的话，这么做其实是对其分布中最差的样本（最近 13 年）采样不足，从而造成低估。
+
+03
+“泡沫”+ 盈利 + 个股估值均值回复
+
+接下来就看看是什么原因促成了价值因子的惨淡表现。
+
+为了回答这个问题，来自 Research Affiliates 的 Arnott et al. (2020) 将任意投资组合的收益率分成了三部分。解释这个分解模型需要用到如下变量。
+
+基于上面的变量，一个投资组合的收益率可以被分解为以下三部分（推导见 Arnott et al. 2020）：
+
+这三部分可以理解为短期估值的变化（“估值泡沫”），盈利以及投资组合中个股估值水平的均值回复。将 HML 套入到该式中（HML 是通过做过价值股、做空成长股构建的投资组合），则第一项代表多空两头相对估值的变化，第二项代表多空两头盈利的差异，第三项则代表价值股和成长股因估值均值回复而发生的迁移（migration）。
+
+先说第三项，因为它可能不太容易理解，它由 Fama and French (2007) 提出。他们研究了 HML 的多空组合中的股票因估值的均值回复而在多、空两头之间的迁移（即彼时的价值股可能在此时变成了成长股，反之），并认为这种迁移贡献了价值因子收益率中很大的一部分。
+
+Arnott et al. (2020) 指出，在上述三部分中的后两项是结构性 α（structural alpha），而第一项“估值泡沫”是非结构性部分，其长期来看应该是平稳的，即多空两头的相对估值应在一个区间内波动。在此基础上，该文研究了价值因子收益率中的上述三部分在 2007 年前后的表现，结果如下。
+
+上表中，Panel A 和 B 分别为 2007 前后的情况。最后两列为收益率中盈利和估值均值回复两部分，可见这二者虽然在 2007 之后都比之前减弱了一些，但也并无显著变化。虽然这二者贡献的结构性 α 从 2007 年之前的每年平均 6.0% 下降到 1.1%，但也难以支持价值因子已经出现结构性问题这样的观点。
+
+与结构性 α 表现不同的是第一项，即“估值泡沫”（价值和成长多空两头相对估值的变化）的影响。在 2007 年之前，其均值为 0.2%，很好的说明了它是收益率中的非结构成分，且长期来看在一个稳定的区间内波动。而在 2007 年之后，这部分为每年平均 -6.6%，“估值泡沫”凭借一己之力造成了 HML 因子过去 13 年的惨淡表现。
+
+这一项的负收益说明价值因子中多空两头的相对估值在持续的被拉大，即价值股变得越来越便宜，而成长股变得越来越昂贵。那么，时至今日，这个“估值泡沫”到底有多大？它是全市场的普遍行为，还是由本文第一节中提及的那些科技巨头或者别的公司带来的呢？
+
+04
+贵的更贵、便宜的更便宜？
+
+来自 AQR 的 Israel, Laursen, and Richardson (2020) 一文系统性的分析了“贵的更贵、便宜的更便宜？”这个问题。且 Cliff Asness 借用上述实证结果（以及该文的题目）写了一篇小文 Asness (2020)，介绍了他同事的研究结果。
+
+简单总结一下，Israel, Laursen, and Richardson (2020) 使用不同的估值指标，包括市净率、市盈率、市销率等计算了 HML 中价值和成长两头的估值价差（value spread）—— 价差越大说明成长股相对价值股越贵，即“估值泡沫”越大，并在超过 50 年的回测中系统性的排除了各种看上去非常贵的股票，以此来分析“估值泡沫”的大小和原因。结论是，“估值泡沫”是美股全市场范围的普遍现象。
+
+下面来看一些数据（配图出自 Asness 2020）。
+
+首先来看全市场范围内的“估值泡沫”；用来衡量价值和成长相对估值的指标是最常见的 P/B（下图）。不难看出，如今的 value spread 已经超过了 2000 年的 tech bubble 以及 2007 年的 GFC，处于历史最高位，即 100% 分位数。
+
+当然，P/B（或者它的倒数，book-to-market）这几年也没少被人诟病，认为它没有考虑无形资产，因此在经济转型中早已无法客观反应一个公司的估值。这造成上述基于 P/B 计算的 value spread 结果可能难以令人信服。为此，AQR 还考虑了其他常见的估值指标，如 P/E、P/S。下表中 P/S 尚未做行业中性处理，因此可暂时忽略（后面会给出行业中性的结果）。以 P/E 来衡量，value spread 依然处于历史高位，说明全市场中的“估值泡沫”非常严重。
+
+看完了全市场，接下来就一起看看 AQR 如何系统性的剔除掉我们最关心的那些股票（包括 MAGFAN）在内。注意上面这段话中，“系统性”是非常重要的。如果仅是带着后见之明来剔除个别公司的话，这样的实证结果就没多少意义。只有“系统性”才能保证在整个超过 50 年的实证期内按照一致的逻辑剔除公司，这样得到的实证结果才有意义。
+
+首先剔除 Technology、Media 以及 Telecom 三个行业。得到的 value spread 如下，结论并没有发生变化，当前的“估值泡沫”虽然不及 GFC 时期，但依然是历史高点（99.8% 分位数），且还在持续上升，说明即便剔除了上述三个行业，“估值泡沫”依然严峻。
+
+如果系统性地剔除超大市值（mega-caps）会怎样呢？我们关心的 MAGFAN 均在这之列。剔除超大市值公司后，value spread 如下图所示，当前的分位数是 99.6%，结论不变。此外，如果把市值最大的直接换成“最贵”的，即系统性的剔除 P/B 最高的 10% 的股票，也不改变上述结论。这些结果表明当前的“估值泡沫”不仅仅是由超大市值公司或“最贵的”公司造成的。
+
+在上述结果中，无论是否系统性地剔除了一些股票，都没有做行业中性。下面就来看一组做了行业中性之后的实证分析结果。首先还是全市场范围内的 value spread。无论是使用 P/B、P/E 还是 P/S，进行行业中性后，结论都没有发生任何变化，“估值泡沫”依然处于历史高位。
+
+最后再来看看行业中性后，系统性地移除各类股票后的 value spread。且为了结果的稳健性，使用 P/B、P/E 以及 P/S 组成综合估值指标来计算 HML 的 value spread。结果见下表所示。无论是否系统性地剔除人们在各种叙事性解释中关心的那些股票，“估值泡沫”均处于历史的峰值。
+
+本节到此处为止的实证结果说明“估值泡沫”是一个全市场的现象，而非某些股票造成的。
+
+面对如此大的 value spread，到底是贵的更贵了，还是便宜的更便宜了，还是两者都有？在构造 HML 因子时，除了使用 30% 和 70% 分位数选出成长和价值股外，剩下未被选出的被视作估值不高不低的中间组（middle）。因此，可以通过计算 low 组和 middle 组的 value spread 来考察贵的是否更贵了，并通过计算 middle 和 high 组的 value spread 来考察便宜的是否更便宜了。
+
+结果（下图）显示，虽然这两个 spreads 均是除以历史高位（这也说明了“估值泡沫”是整个全市场的现象），但显然更加突出的是 middle 和 high 组之间的 spread，即便宜的更便宜了（图中绿线）。
+
+那么“便宜的更便宜了”背后是否有合理的解释呢？此处人们关心的同样是价值因子中的结构性 α 是否发生了变化。AQR 从盈利和杠杆的角度分析了价值股和成长股之间，在这两个角度上的 spread，发现它们均属于历史的正常水平，而其中关于盈利的分析结果也和 Arnott et al. 2020 中对于收益率第二部分的分析结论是一致的。这说明“便宜的更便宜了”背后并无合理的解释。
+
+05
+What's Next？
+
+总结一下，从 Research Affiliates 和 AQR 关于价值因子的最新研究中可以得出以下结论：
+
+1. 价值因子的惨淡表现并非完全不可能；
+2. 价值因子中的结构性 α 并没有发生显著变化；
+3. 其糟糕的表现是由于“估值泡沫”造成的；
+4. 该泡沫的程度已达历史峰值，超过 tech bubble 和 GFC；
+5. 该泡沫是全市场范围内的现象，而非归结于某类个别的股票。
+
+当然，分析了一大堆仅仅是对关于价值因子是否已死的各种猜测进行了回击，而无论是 RA 还是 AQR 都没有回答（也无法回答）价值因子的苦日子什么时候会到头。
+
+从投资实践（以及学术界）的角度来看，以 book-to-market 为变量构建的价值因子最被人诟病的是它已经过时了，无法准确反映公司的估值。（比如中国版三因子模型就用 EP 代替了 BM，不过那是另外一个 story，等过一阵我们再好好聊一聊它。）学术界和业界也为此绞尽脑针，提出了很多改进 BM 的方法，公众号之前也通过《Book-to-Market 整容记：哪家 BM 比较强？》一文进行了梳理和实证。关于价值因子，在未来持续检验其结构性 α 是否失效的同时，尝试其他改进方法一定会是有益的研究方向。
+
+其实，在最近十年，价值因子的“失效”代表了一种现象，即因子在样本外失效的风险（具体不同的原因见《因子样本外表现为什么变差？》）。任何因子都会遇到这个问题。而价值因子只不过是因为它被研究的最透彻（因 Fama and French 三因子一战成名）、过去的表现最稳健（value and momentum everywhere）、且最近十年的表现最差这些综合的原因而被推到了聚光灯下。
+
+在这种情况下，无论对该因子抱有何种感情色彩，都应该通过科学的数据分析来剖析其表现背后的原因，而非沉迷于各种叙事性解释。在面对价值因子的表现时，来自 RA、AQR 以及其他很多研究机构的严谨分析无疑在这方面树立了好的标杆，值得借鉴。
+
+而对于价值因子，其估值泡沫也终有破灭的那一天。
+
+参考文献
+Arnott, R. D., C. R. Harvey, V. Kalesnik, and J. T. Linnainmaa (2020). Reports of value’s death may be greatly exaggerated. Research Affiliates, LLC.
+
+Asness, C. S. (2020). Is (systematic) value investing dead? AQR Capital Management, LLC.
+
+Fama, E. F. and K. R. French (2007). The anatomy of value and growth stock returns. Financial Analyst Journal 63(6), 44 – 54.
+
+Israel, R., K. Laursen, and S. Richardson (2020). Is (systematic) value investing dead? AQR Capital Management, LLC.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b240>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62f20>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图6 ---
+[表]
+股票 | 营业利润 (百万美元) | 净利润 (百万美元) | 账面价值 (百万美元) | 2018/12/31 总市值 (百万美元) | B/P | E/P | 营业利润 / 账面价值 | 
+Microsoft | 35,058 | 16,571 | 82,718 | 779,674 | 0.106 | 0.021 | 42.38% | 
+Apple | 70,898 | 59,531 | 107,147 | 746,079 | 0.154 | 0.080 | 66.17% | 
+Google | 26,321 | 30,736 | 177,628 | 312,696 | 0.568 | 0.098 | 14.82% | 
+Facebook | 24,913 | 22,112 | 84,127 | 376,725 | 0.223 | 0.059 | 29.61% | 
+Amazon | 12,421 | 10,073 | 43,549 | 737,467 | 0.059 | 0.014 | 28.52% | 
+Netflix | 1,605 | 1,211 | 5,239 | 116,860 | 0.045 | 0.010 | 30.64% | 
+2019 年 6 月 NYSE 30% 分位数 | 0.332 | 0.046 | 17.33% | 
+2019 年 6 月 NYSE 中位数 | 0.538 | 0.063 | 24.17% | 
+2019 年 6 月 NYSE 70% 分位数 | 0.813 | 0.088 | 33.55% |
+enneth French 在每个 t 年的 6 月使用当时可得的截至 t－1 年 12 月 31 日的最新年报数据更新 NYSE 分位数。其网站上当前最新的数据分位数数据是 2019 年 6 月统计的，使用的是财年截止日期不晚于 2018/12/31 的最新年报数据；在和市值有关的指标中（比如 B/P），市值使用的是 2018/12/31 的总市值。
+为了使表中考虑的六个公司和 Kenneth French 统计的分位数具有可比性，因此我们按照上述说明选取数据。这些公司在2018年12月31日之前的最新完整财报分别为：
+Microsoft：2017年报，截止日期2018/06/30，披露日期2018/08/03
+Apple：2018年报，截止日期2018/09/29，披露日期2018/11/05
+Google：2018年报，截止日期2018/12/31，披露日期2019/02/05
+facebook:2018年报，截止日期2018/12/31，披露日期2019/01/31
+Amazon：2018年报，截止日期2018/12/31，披露日期2019/02/01
+Netflix：2018年报，截止日期2018/12/31，披露日期2019/01/29
+财务数据来源：Choice
+分位数数据来源：Kenneth French 网站
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aed0>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253671f0>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253664d0>)
+--- 图11 ---
+Source: Research Affiliates, LLC, using CRSP/Compustat data.
+此处：Arnott et al (2020)
+--- 图12 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图13 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图14 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aed0>)
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bd30>)
+--- 图16 ---
+[表]
+量 | 说明 | 
+t | t-1 时刻构建的投资组合在 t-1 到 t 之间的收益率 | 
+t-1 | t-1 时刻构建的投资组合在 t-1 到 t 之间的股息 | 
+t-1 | t-1 时刻构建的投资组合在 t-1 时刻的市值（通过所包含股票的市值加权计算，下同） | 
+t-1 | t-1 时刻构建的投资组合在 t-1 时刻的账面价值（通过所包含股票的账面价值加权计算，下同） | 
+t-1 | t-1 时刻构建的投资组合在 t 时刻的市值 | 
+t-1 | t-1 时刻构建的投资组合在 t 时刻的账面价值 | 
+t+1 | t 时刻构建的投资组合在 t 时刻的市值 | 
+B_{t+1} | t 时刻构建的投资组合在 t 时刻的账面价值 |
+--- 图17 ---
+$$ \begin{array}{rcl}+r_{t})&=&{\left\lfloor\log\left(\overline{B_{t+}}\right)-\log\left(\overline{B_{t-1}}\right)\right\rfloor}}\\&&\\&&+{\left[\log\left(\frac{B_{t-}}{B_{t-1}}\right)+\log\left(1+\right.\right.}\\&&\\&&\left.+\left[\log\left(\frac{M_{t-}}{B_{t-}}\right)-\log\left(\frac{M_{t}}{B_{t+}}\right.\right.\right.}\\&\end{array} $$
+--- 图18 ---
+Table 3. Value Return Decomposition, United States, Jul 1963-Mar 2020
+[表]
+Size | Valuation | Total Return | Revaluation Alpha | Structural Alpha | Profitability | Migration | 
+Panel A. Return Decomposition, Jul 1963-Jun 2007 | 
+Small | Growth | 8.4% | 1.2% | 7.2% | 17.9% | -10.8% | 
+Neutral | 14.4% | 1.3% | 13.1% | 9.1% | 4.0% | 
+Value | 16.8% | 1.3% | 15.5% | 0.3% | 15.3% | 
+Big | Value-Growth | 8.5% | 0.1% | 8.4% | -17.7% | 26.0% | 
+Growth | 9.3% | 1.2% | 8.2% | 15.2% | -7.0% | 
+Neutral | 11.1% | 1.0% | 10.1% | 10.7% | -0.5% | 
+Value | 13.2% | 1.4% | 11.7% | 6.4% | 5.4% | 
+Average | Value-Growth | 3.8% | 0.3% | 3.5% | -8.8% | 12.4% | 
+HML | 6.1% | 0.2% | 6.0% | -13.2% | 19.2% | 
+Panel B. Return Decomposition, Jul 2007-Mar 2020 | 
+Small | Value-Growth | -4.1% | -4.5% | 0.4% | -22.8% | 23.2% | 
+Big | Value-Growth | -6.8% | -8.6% | 1.8% | -9.0% | 10.8% | 
+Average | HML | -5.4% | -6.6% | 1.1% | -15.9% | 17.0% | 
+Panel C. Full-Span Return Decomposition, Jul 1963-Mar 2020 | 
+Small | Value-Growth | 5.6% | -1.0% | 6.6% | -18.8% | 25.4% | 
+Big | Value-Growth | 1.4% | -1.8% | 3.2% | -8.9% | 12.0% | 
+Average | HML | 3.5% | -1.4% | 4.9% | -13.8% | 18.7% |
+Source: Research Affiliates, LLC, using CRSP/Compustat data.
+Δk · Arnott et al (2020)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15490>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图23 ---
+Price-to-Book Spread, Academic Style
+December 31, 1967 – March 31, 2020
+source: AQR, CRSP, XPressFeed. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix
+--- 图24 ---
+Various Value Spreads, Academic Style December 31, 1967 – March 31, 2020 $ ^{*} $
+[表]
+Value Spread Measure | Current Percentile | (Current - Median) / (Max - Median) | Current STD Event | 
+Price-to-Book | 100% | 100% | +4.5 | 
+Price-to-Sales | 83% | 21% | +0.7 | 
+Price-to-Earnings (trailing) | 100% | 100% | +4.7 | 
+Price-to-Earnings (forecast) | 99% | 82% | +3.9 | 
+Composite | 100% | 92% | +4.3 |
+Forecasted Price-to-Earnings starts January 31, 1976.
+Source: AQR, CRSP, XPressFeed. "Composite" is a combination of the four value measures in this table. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix.
+44. Asness (2020)
+--- 图25 ---
+Price-to-Book Spread, Academic Style, Excluding Technology, Media and Telecom Stocks December 31, 1967 – March 31, 2020
+source: AQR, CRSP, XPressFeed. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix
+At a time (2020)
+--- 图26 ---
+Price-to-Book Spread, Academic Style, Excluding the 5% Largest Stocks December 31, 1967 – March 31, 2020
+source: AQR, CRSP, XPressFeed. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix.
+--- 图27 ---
+December 31, 1967 – March 31, 2020
+Source: AQR, CRSP, XPressFeed. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix.
+Various Value Spreads, Academic Style, Industry-Neutral December 31, 1967 – March 31, 2020 $ ^{*} $
+[表]
+Value Spread Measure | Current Percentile | (Current – Median) / (Max – Median) | Current STD Event | 
+Price-to-Book | 100% | $ 98^{{**}} $ | +4.0 | 
+Price-to-Sales | 99% | 71% | +2.8 | 
+Price-to-Earnings (trailing) | 100% | 88% | +4.1 | 
+Price-to-Earnings (forecast) | 100% | 100% | $ 6.8^{{***}} $ | 
+Composite | 100% | 100% | +5.0 |
+Forecasted Price-to-Earnings starts January 31, 1976.
+* You see 100th percentile but only 98% of maximum above median because it wasn't really quite the 100th percentile, it just rounded to that.
+The forecasted price-to-earnings spread also really exploded today when measured intra-industry. That very well might be 100% correct – and directionally all the valuation spreads shoot up recently so again the direction is likely spot on – though I do worry that some of it may be due to asynchronous updating of future earnings estimates during the COVID-19 crisis (that would be coincidental as I can't see why this would systematically happen faster for expensive than cheap stocks within the same industry, but it's certainly possible). Our results are not at all dominated by this one of four measures, so I mention this only for completeness.
+Source: AQR, CRSP, XPressFeed. "Composite" is a combination of the four value measures in this table. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix.
+出处：Asness (2020)
+--- 图28 ---
+Composite Value Spreads, Academic Style, Industry-Neutral
+December 31, 1967 – March 31, 2020 $ ^{*} $
+[表]
+What&#x27;s Removed | Current Percentile | (Current – Median) / (Max – Median) | Current STD Event | 
+Nothing Removed | 100% | 100% | +5.0 | 
+Remove Tech / Telecom / Media Industries | 100% | 100% | +5.4 | 
+Remove 5% Mega-Caps $ ^{{**}} $ | 100% | 100% | +5.6 | 
+Remove 10% Most Expensive Stocks $ ^{{***}} $ | 100% | 100% | +4.3 |
+Forecasted Price-to-Earnings starts January 31, 1976.
+$ ^{*} $ If instead we remove the 10% highest sales (instead of market-capitalization) stocks within each industry you get 100%/100%/+5.0 Dominating sales in your industry is possibly a better measure of the monopoly effects many worry about. Yet it changes nothing.
+For removing the 5% mega-caps and 10% most expensive stocks we do it within each industry here. If the industry contains so few stocks that 5% or 10% doesn't round to at least 1 stock, we still remove the largest cap or most expensive single stock.
+Source: AQR, CRSP, XPressFeed. "Composite" is a combination of the four value measures in this table. Please see Appendix for more detail on data and assumptions. For illustrative purposes only and not representative of any portfolio that AQR currently manages. Hypothetical data has inherent limitations, some of which are disclosed in the Appendix.
+出处：Asness(2020)
+
+--- 图30 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aed0>)
+--- 图31 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62a70>)
+--- 图32 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图33 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b62a70>)
+--- 图34 ---

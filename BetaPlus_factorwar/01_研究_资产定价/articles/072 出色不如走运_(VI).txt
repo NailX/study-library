@@ -1,0 +1,270 @@
+# 出色不如走运 (VI)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/p3xl23lyz2FgLfg-YpgbKA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文带你了解学术界关于 p-hacking 问题是否严重的最新思辨。
+
+01
+p-hacking
+
+没想到这么快就续上了《出色不如走运》系列[1]。
+
+自 2016 年以来，以 Cam Harvey 和 Yan Liu 为代表的一批学者开始呼吁应在金融研究中重视 p-hacking 问题带来的伪发现（见 Harvey (2017), Harvey, Liu, and Zhu (2016), Harvey and Liu (2020, 2021a) 以及 Chordia, Goyal, and Saretto (2020) 等）。这些文章的观点是，由于 p-hacking 问题，很多样本内显著的异象（或因子，本文统称为异象）都是虚假的。
+
+此外，Hou, Xue, and Zhang (2020) 复现了 452 个异象，发现 65% 的异象的 t-statistics 在 2.0 以下，并不显著；而如果考虑多重假设检验问题，该比例甚至上升至 82%。该实证结果支持了大部分异象是虚假的这一观点。
+
+然而，当学术界逐渐接受并重视这个问题的时候（例如 Journal of Finance 以及 Review of Financial Studies 都有各自的 code-sharing policy），在最近一年有一些最新的文章却提出了不同的看法，认为发表的诸多异象有足够的可信度。这其中的代表要数来自 AQR 的这篇 Jensen, Kelly, and Pedersen (2021).
+
+该文一顿操作猛如虎之后，提出了和 Hou, Xue, and Zhang (2020) 完全不同的观点，认为有将近 85% 的异象可以被复现，从而说明学术发表很靠谱。但是仔细阅读可知，虽然 Jensen, Kelly, and Pedersen (2021) 提出了 empirical Bayesian 方法来检验异象，但其可复现比例的巨大提升却来自于该文使用了和 Hou, Xue, and Zhang (2020) 不同的数据和方法来构造异象，这个操作几乎就把可复现的比例翻了一倍（但这难道不是一种 p-hacking？）。
+
+除了 AQR 的这篇文章之外，Chen and Zimmermann (2020) 也提出了类似的看法，认为大部分异象的样本内检验结果是可信的。该文研究了异象在样本外预期收益相对样本内的收缩系数（shrinkage factor）。一般来说，如果这个系数很高，那就说明样本内过拟合的问题更严重。但 Chen and Zimmermann (2020) 的研究表明，这个收缩系数仅为 12%。这意味着，如果一个异象样本内年化收益是 10%，那么它样本外的年化收益是  。
+
+另外值得一提的是，Chen and Zimmermann (2020) 认为该文的一大亮点是和像 McLean and Pontiff (2016) 使用真正样本外研究不同，他们仅仅使用了样本内的数据进行的分析并得出了上述结论：Our adjustment uses only in-sample data and provides sharper inferences than out-of-sample tests. 看到这个，我不禁想起了上期推文刚刚介绍的 Martin and Nagel (2019) 所提出的 high-dimensional investor learning 问题造成的样本内虚假的显著性，所以就只能呵呵了。
+
+OK！如果以上对部分文献的梳理足以引起了你的兴趣，那么接下来我们就要上“正餐”了。本文真正要介绍的是 Chen (2021) 和 Harvey and Liu (2021b)。
+
+Chen (2021) 通过 thought experiments 指出 p-hacking alone 根本无法解释学术界发现的诸多非常显著的异象（例如那些 t-statistics 超过 6.0 或者 8.0 的），并通过他的模型得出了一系列令人震惊的推论（先卖个关子，本文第二节再讨论），间接指出对于 p-hacking 的担忧可能被 Cam Harvey 和 Yan Liu 夸大了。Harvey and Liu (2021b) 则对 Chen (2021) 的诸多推论以及 Chen and Zimmermann (2020) 所提出的 12% 的收缩系数逐一进行了回应。
+
+在介绍这两篇文章之前，我们不妨先来思考一下，当人们谈及 p-hacking 的时候，到底关心的是什么。无论是学术界还是业界，大家共同的认知是所有异象预期收益联合为零这个原假设一定会被拒绝，即人们都认可有一部分异象是显著的。因此，研究 p-hacking 时，从来就不担心仅靠 p-hacking 无法解释特别显著的真实的异象。事实上，Cam Harvey 和 Yan Liu 的一系列文章也从没表示出类似的观点，而是关注于以下这两个真正需要被回答的问题：
+
+1. 在 p-hacking 以及 publication bias 的影响下，有多少比例的异象是真实的？人们认同 p-hacking alone 无法解释 t-statistics 超过 6.0 或者 8.0 的异象，但也知道它会造成很多 t-statistics 为 2.0 或者 3.0 的异象。而所有异象中，到底有多少是真实的？
+
+2. 对于通过检验的异象（即被认为是真实的），它们样本外收益率的收缩系数是多少？
+
+这两个问题才是研究 p-hacking 时应该回答的问题。当然，回答这些问题并不容易，而基于不同的假设可能会得到千差万别的结论。以下两节就来分别解读 Chen (2021) 和 Harvey and Liu (2021b)，并把判断留给各位小伙伴。本文最后一节会给出思考。
+
+02
+质疑
+
+Chen (2021) 是 Journal of Finance forthcoming.
+
+该文的推论是基于一个假设和一个核心公式。它的假设是所有异象的 t-statistics 都满足标准正态分布，即所有异象的原假设都是预期收益为零。BTW，这个假设按照学术界的术语被称作 ensemble null。此外，对于每个异象，取决于其 t-statistic 的高低，它都有一定的概率被观测到（即被发表出来）。只不过这个概率分布在 Chen (2021) 中是抽象的，该文的结论不依赖于具体的分布。
+
+在上述设定下，Chen (2021) 的核心公式如下：
+
+式中  是尝试的异象的个数（强调：包括发表的和没有发表的），  是标准正态分布随机变量，  是给定的 t-statistic 阈值。该式的含义是为了观测到  个 t-statistic 绝对值不低于  的异象，所需要尝试的异象的个数的下限。利用这个式子和实际异象的数据，Chen (2021) 得到了一系列推论。下表就是该文最重要的结果。
+
+首先，该表的最上面部分给出了标准正态分布下  大于不同  取值的概率。中间部分和最下面部分分别使用了两组不同的异象数据，统计了其中超过各  的异象的个数，然后就利用前述核心公式计算了  的下限。
+
+以他们自己的异象数据为例，在 210 个异象中 t-statistics 超过 6.0 的共有 26 个，结合  ，能够推出  的下限为  。该数值的中文含义是，为了找到 26 个 t-statistics 超过 6.0 的异象，学术界至少要尝试 130 亿个异象。如果倾全美所有经济学教授和经济学家之力，大家不吃不喝每天挖异象，那么要挖 451 年。显然，这是不可能的，因此 Chen (2021) 指出仅靠 p-hacking 自身是无法造成这么显著的结果的。另外，从上表中还可以推断出，未发表和发表的异象个数之比高达  。最后，该文还研究了不同 t-statistics 异象的发表概率。在该模型下，t-statistic = 8.0 的异象被发表的概率是 t-statistic = 2.5 的异象被发表的概率的  倍。下表汇总了 Chen (2021) 的三点推论（第三节中将会和 Harvey and Liu (2021a) 做对比）。
+
+毫无疑问，模型给出的这些数据足够令人震惊，也完全不符合认知。正因如此，Chen (2021) 总结到，靠 p-hacking 本身，学术界是不可能发表出这么多特别显著的异象的，异象背后一定有风险补偿或错误定价等合理的原因。
+
+Well, true!
+
+上述观点确实没有问题，相信你我都会同意。但再仔细思考一下，两个问题也同时浮出水面：（1）在 Chen (2021) 利用 ensemble null 假设得出了一些匪夷所思的推论，这是否恰恰意味着这个假设本身就有待商榷？（2）谁也没说仅靠 p-hacking 本身就能产生所有显著的异象，而正如本文第一节强调的，我们关心的是 p-hacking 造成了多大比例的虚假异象，以及对真实异象，它们样本外的预期收益应该打多少折扣（shrinkage factor）？
+
+对于（1），问题的核心在于在标准正态分布下，特别高的  发生的概率微乎其微。当它作为分母时，计算出的  自然也就是天文数字。但是 ensemble null 这个假设合理吗？如果它被其他更合理的假设所取代，那么上述三个定量的推论是否会发生变化呢？
+
+对于（2），Chen (2021) 的 thought experiments 仅仅是传递出仅靠 p-hacking 无法产生大量 t-statistics 非常高的异象（but we all knew it！），而没有正面回答那两个真正需要回答的问题。
+
+（所以，这篇文章 Journal of Finance forthcoming 还挺让我意外的。）
+
+03
+回应
+
+再来看看 Harvey and Liu (2021b) 对 Chen (2021) 的回应。
+
+Harvey and Liu (2021b) 和 Chen (2021) 的两点区别是：（1）该文没有使用 ensemble null 假设，而是借鉴基金研究使用了一个更合理的假设，在这个假设下该文得到了和 Chen (2021) 完全不同的推论；（2）该文回答了第一节提到的关于 p-hacking 的两个核心问题。
+
+在基金研究中，比起 ensemble null，另一种常见假设是 bi-modal mean 分布（Barras, Scaillet, and Wermers (2010), Harvey and Liu (2018)），即假设所有基金的超额收益来自两个分布：其中绝大部分来自均值为零的分布，而一小撮来自均值大于零的分布。放到异象上，这对应的就是假设绝大部分异象是虚假的，因此它们预期收益来自均值为零的分布，而一小撮异象是真实的，它们的预期收益来自均值非零的分布。
+
+“ The bi-modal mean (alpha) distribution generates a mixture distribution for t-statistics, where low t-statistics are likely drawn from the zero-mean distribution and very large t-statistics are almost surely drawn from the non-zero mean distribution.
+
+”
+
+虽然研究异象能够借鉴基金研究的分布，但这二者之间还有另一个巨大的差异。对基金的超额收益进行检验和推断时，不存在观测不到的基金造成的影响；但对异象的超额收益检验和推断时，除去被发表的异象，还需要考虑因为不够显著而被学者们放弃的异象以及虽然显著但因为 publication bias 而未能发表的异象。这二者和被发表的异象一起，构成了总共被尝试的异象。
+
+Harvey and Liu (2021b) 在模型中使用参数  来表示总共被尝试的异象的个数。由于他们使用了 bi-modal mean 分布，因此假设  比例的异象的预期收益大于零。有小伙伴会问，对于这部分异象，如何确定其分布的参数？对此，Harvey and Liu (2021b) 使用了 bootstrap 方法[2]。
+
+另一方面，为了直接对发表过程建模，他们假设异象发表的概率为：
+
+其中  和  为大于零的常数。这个函数满足随异象的 t-statistic 单调递增，且当 t-statistic 趋于无穷大时，该概率趋于 0.5。这可以被认为是个合理的假设，因为哪怕是再高的 t-statistic 也无法保证异象能够被发表（比如异象没有任何 economic sense）。
+
+以上  就构成了 Harvey and Liu (2021b) 模型中的全部参数。和 Chen (2021) 相比，该模型有以下几点不同（优势）：
+
+1. 通过  考虑了所有被尝试过的异象，而非仅仅关注于被发表的异象（Chen (2021) 的 thought experiments 是基于被发表的异象）；
+
+2. 通过  （和 bootstrap），使用 bi-modal mean 取代 ensemble null 假设，更符合人们对异象数据的认知；
+
+3. 利用  和  定量描绘了异象发表过程。
+
+有了模型，接下来就是通过模型来模拟（simulation）异象被发表的过程，并根据真实被发表的异象的数据来对模型的参数  进行校准（calibration）。
+
+先来说模拟。由于  代表所有被尝试的异象（包括发表的和没有发表的），因此需要一个巨大的异象池并从中抽取  个。为此，Harvey and Liu (2021b) 同时使用了 Chen and Zimmermann (2020) 中提及的 156 个被发表的异象和 Yan and Zheng (2017) 通过纯 data-mining 生成的 18,000+ 个异象作为候选的异象池。
+
+模拟的第一步是从上述合并异象池中生成  个异象。值得说明的是，由于被发表的异象一定是被试过的，因此在每次模拟中，那 156 个被发表的异象都会出现在  个异象中；剩余  个异象则从 Yan and Zheng (2017) 的池子中随机抽取。令  表示  阶矩阵，储存 156 个异象的  期收益率序列；  表示  阶矩阵，储存剩余异象的收益率序列；最后  表示第  次模拟中生成的  个异象的收益率序列矩阵。
+
+模拟的第二步是利用 bi-modal mean 模型计算异象 t-statistics。首先，使用  计算全部异象的 t-statistics 绝对值，保留绝对值最高的  个异象，并把剩余  个异象的收益率在时序上去均值。如此操作后得到的  阶收益率序列矩阵记为  。然而，这波操作仅仅保证了原假设成立（  的异象为真，  的异象为假）。由于样本分布和总体分布会有差异，因此 Harvey and Liu (2021b) 对每一个  又进行了一层 bootstrap，以此来模拟实际的收益率序列。对  的第  次 bootstrap 得到的收益率序列记为  。
+
+模拟的第三步是确定哪些异象被发表。对于每个  ，计算其中每个异象的 t-statistic 并使用  的公式计算其被发表的概率  。对每个异象，随机生成一个在 0 和 1 之间均匀分布的变量，若它的取值小于  则认为异象被发表，反之则没有被发表。令  代表矩阵  中最终被发表的异象的个数；令  储存所有被发表异象的收益率序列。
+
+OK！希望上面的介绍足够清楚了……
+
+如果还没有，下面通过一个图例来加深理解。图中红色框出来的部分代表了模拟中的第一步；蓝色框出来的部分代表模拟的第三步；次对角线上的两张图代表了模拟的第二步。
+
+为了便于理解，图例中假设  ，且被发表的异象是 3 个（绿色部分是它们的收益率时序）；此外，从 Yan and Zheng (2017) 中随机抽取了 5 个（深蓝色表示它们的收益率时序），这就构成了第一步的  。图例第二步中假设  ，因此有 2 个异象是真的。计算这 8 个异象的 t-statistics 并选择绝对值最高的两个（维持了绿色和蓝色，即假设一个来自发表的异象，另一个来自 Yan and Zheng (2017)），把其余异象收益率在时序上去均值（青色），得到  。紧接着对它进行下一层 bootstrap，得到 bootstrapped 样本  。观察上图中左下方的那副图可知，它的时间戳已经是被打乱的了（代表 bootstrapped 样本）。最后，在模拟的第三步，根据发表概率确定哪些异象被发表。图例中假设两个真实的异象被发表，其余的异象未被发表。
+
+说完了模拟，接下来就要说参数校准。对于任何一组给定的参数  ，通过上述双层的 bootstrap，都可以模拟出一些被发表的异象。然而，哪组参数才是正确的呢？这就要看在哪组参数下，模拟产生的被发表的异象的某些统计指标更加符合实际被发表的异象的统计指标。为此，Harvey and Liu (2021b) 选择了实际被发表异象的 t-statistics 的五个分位数（5th，10th，50th，90th，95th）以及显著的异象的个数作为校准的统计指标。
+
+需要说明的是，在 156 个异象中，仅有 132 个异象的 t-statistics 高于 2.0。因此，前述 t-statistics 的五个分位数是使用者 132 个异象计算的，且显著异象的个数也是 132 而非 156。最终校准的目标是选择合适的参数，使得模拟生成的指标和真实的指标之间的误差平方的加权平均最小：
+
+其中  表示利用  中发表的异象收益率序列计算的 t-statistics 分位数，  表示利用 132 个异象计算的 t-statistics 分位数；  （前面介绍过）是  中储存的发表的异象的个数，而 132 是真实的被发表的异象的个数。
+
+由前述对模拟的说明，该模拟过程其实是双层的 bootstrap：（1）第一层是生成不同的  个异象的样本；（2）第二层是对于每组  （即  ），通过 bootstrap 生成收益率序列并决定哪些被发表，即得到  。因此，对于任何一组给定的参数  ，最终都有  个模拟，而目标函数是它们的均值。此外，由于进行了多次模拟，因此能够方便的计算每个指标（上述 5 个分位数以及发表的异象的个数）的标准差。在目标函数中，  和  分别等于标准差的倒数，以此来决定不同指标在目标函数中的权重。
+
+有了目标函数，Harvey and Liu (2021b) 给每个参数选了范围，然后进行了大规模的 search。不过也许接下来的结果让你意想不到，那就是这个问题本身是未识别的（not identified），换句话说，它的最优参数不唯一。该文正文部分汇报的三组参数  如下图所示。在这三组参数下，模拟得到的五个 t-statistics 分位数和发表异象个数都和实际值较好地吻合。
+
+可以看到，在这三组参数中，  分别等于 1000，2000 和 5000。而这个问题之所以是未识别的，原因恰恰是我们观察到的只有被发表的异象，而真正的  （学术界到底尝试了多少个异象）永远是未知的。这是在研究 p-hacking 问题时注定无法逃避的现实。而至于  可能的取值范围，坦白说也确实取决于研究者的经验和对实证数据的理解。
+
+在 Harvey and Liu (2021b) 的这三组参数中，有一些间接的证据更加支持第三组参数（即  ）。例如在前两组参数中，  （真实异象的比例）分别为 29% 和 12%。如果说 12% 还姑且 OK，那么 29% 则显得太高了。而在第三组参数中，  仅为 6%。另一方面，下图绘制了三组参数下，不同 t-statistics 被发表的概率。在前两组参数下，t-statistic = 2.0 的异象被发表的概率高达 30% 以上，这似乎无法和“内卷”时代发表金融学论文的难度相匹配。在第三组参数下，这个概率降低了一半，仅有不到 15%。
+
+无论如何，不妨将选择哪组参数留给各位读者。在本节的最后，我仅以第三组参数（  ）为例，介绍一些模型的推论。在这组参数下：
+
+1. 5% false discovery rate（FDR）下的 t-statistics 阈值为 3.0（这个数值和 Harvey, Liu, and Zhu (2016) 一致）；
+
+2. 在所有被发表的异象中，真实异象的比例为 62%（他们正面回答了第一节讨论的 p-hacking 研究关心的第一点）；
+
+3. 在所有被发表的异象中，样本外平均收益的收缩系数为 36%；如果仅考虑 t-statistics 在 2.0 到 5.0 之间的异象，该系数上升到 53%（他们正面回答了第一节讨论的 p-hacking 研究关心的第二点）。作为对比，无论是 36% 还是 53% 都远超过 Chen and Zimmermann (2020) 所主张的 12%。
+
+最后的最后，再来回顾一下 Chen (2021) 的三个推论，即为了获得特别显著异象所需要的尝试的次数，未发表和发表异象之比，t-statistic = 8.0 和 t-statistic = 2.5 异象发表的概率之比。在 Harvey and Liu (2021b) 的模型中，这三个推论的结果如何呢？下表总结了在三组不同的参数下三个推论的结果，留给小伙伴们去评判。
+
+04
+思考
+
+文章最后，我想不妨借助 Harvey and Liu (2021b) 关于未发表异象的推论为引子，对 p-hacking 问题进行一些思考。
+
+由于对发表过程进行了建模，Harvey and Liu (2021b) 能够对未发表的异象进行推论，这方面的结果也颇有价值。具体来说，他们考虑了 false publication rate 和 false non-publication rate。前者的定义是所有虚假异象中，被错误地发表的异象的比例；后者定义是所有真实异象中，没有被发表的异象的比例。在第三组参数下，前者为 1.12%，后者为 72.93%。我想讨论一下前者。
+
+乍一看 1.12% 似乎很低，但通过计算并非如此。由于  ，  ，因此所有的虚假异象共有  个。而这其中 1.12% 即  个被发表了。正是因为这些被发表的虚假异象，造成了我们今日看到的 p-hacking 问题；而识别这些被发表的虚假异象 —— 而非去主张 p-hacking 本身无法解释 t-statistics 很高的异象（它当然不能！） —— 才是人们通过研究 p-hacking 应该要解决的问题。
+
+谈到 p-hacking，其他学科对它的重视其实由来已久（Ioannidis (2005)），而金融学对它的重视算是比较晚的了。但好消息是，经过过去 5 年的发展，人们已经意识到这个问题并通过各种手段（考虑多重假设检验惩罚，提高发表论文的标准，使用同样的数据集在顶刊上发文相互建设性的“硬怼”等）来降低 p-hacking 的影响。
+
+关于 p-hacking 问题有多严重，学术界以开放的心态来讨论它至关重要。从这个意义上说，本文介绍的 Chen (2021) 和 Harvey and Liu (2021b) 没有谁对谁错，都是有益的讨论，让我们可以从不同的视角立体地审视这个问题。
+
+而 Harvey and Liu (2021b) 所表明的一点就是，因为 lack of identification，对 p-hacking 的研究确实存在主观的一面。这也是最近一些文章得到相反结论的原因。与其深究各种（存在问题的）Bayesian 方法，不如承认这个计量上的系统问题，并通过合理的主观判断得到令人信服的结论。
+
+无论学者们在这个问题上持怎样不同的立场，关于 p-hacking 的思辨还远没有走到终点。而如果你要问我，基于最新的研究，是否可以转变观点并认为被发表的异象大多能站得住脚？
+
+我的回答是：Not so fast!
+
+备注：
+[1] 见《在追求 p-value 的道路上狂奔，却在科学的道路上渐行渐远》、《出色不如走运?》、《出色不如走运 (II)?》、《出色不如走运 (III)?》、《出色不如走运 (IV)?》和《出色不如走运 (V)?》。
+
+[2] 他们使用了 Harvey and Liu (2020) 所提出的两步 bootstrap 法中的第一步 bootstrap。关于这篇文章的介绍，见《出色不如走运 (V)?》。
+
+参考文献
+Barras, L., O. Scaillet, and R. Wermers (2010). False discoveries in mutual fund performance: Measuring luck in estimated alphas. Journal of Finance 65(1), 179 – 216.
+
+Chen, A. Y. (2021). The limits of p-hacking: Some thought experiments. Journal of Finance forthcoming.
+
+Chen, A. Y. and T. Zimmermann (2020). Publication bias and the cross-section of stock returns. Review of Asset Pricing Studies 10(2), 249 – 289.
+
+Chordia, T., A. Goyal, and A. Saretto (2020). Anomalies and false rejections. Review of Financial Studies 33(5), 2134 – 2179.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Harvey, C. R. and Y. Liu (2018). Detecting repeatable performance. Review of Financial Studies 31(7), 2499 – 2552.
+
+Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance 75(5), 2503 – 2553.
+
+Harvey, C. R. and Y. Liu (2021a). Lucky factors. Journal of Financial Economics 141(2), 413 – 435.
+
+Harvey, C. R. and Y. Liu (2021b). Uncovering the iceberg from its tip: A model of publication bias and p-hacking. Working paper.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Hou, K., C. Xue, and L. Zhang (2020). Replicating anomalies. Review of Financial Studies 33(5), 2019 – 2133.
+
+Ioannidis, J. P. A. (2005). Why most published research findings are false. PLoS Medicine 2(8), 696 – 701.
+
+Jensen, T. I., B. Kelly, and L. H. Pedersen (2021). Is there a replication crisis in finance? Working paper.
+
+McLean, R. D. and J. Pontiff (2016). Does academic research destroy stock return predictability? Journal of Finance 71(1), 5 – 32.
+
+Martin, I. and S. Nagel (2019). Market efficiency in the age of big data. Working paper.
+
+Yan, X. and L. Zheng (2017). Fundamental analysis and the cross-section of stock returns: A data-mining approach. Review of Financial Studies 30(4), 1382 – 1423.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+
+--- 图3 ---
+An Absurd Amount of p-Hacking
+I compute lower bounds on the amount of $p$-hacking (equation (4)). The expected number of $p$-hacking attempts implied by a given $t$-statistic minimum $\bar{t}$ is the number of observed $|t_i|$ that exceed $\bar{t}$ divided by the implied probability from a standard normal (Pr($|Z| > \bar{t}$)). “Minimum years of hacking” assumes that 10,000 researchers generate eight $t$-statistics per day. The Chen and Zimmermann (2020a) data use open-source reproductions of 210 cross-sectional predictors with code and data available at https://sites.google.com/site/chenandrewy/open-source-ap. And 90% confidence intervals use a clustered bootstrap that preserves correlations within each month. Harvey-Liu-Zhu (2013)-implied data simulate their estimated model. Generating the dozens of observed $t$-statistics that exceed 6.0 would require, at minimum, hundreds of years of $p$-hacking.
+[表]
+ | t-Statistic Minimum  $ \bar{t} $ | 
+ | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 
+Pr(|Z| >  $ \bar{t} $) | 0.0455 | 2.7E-03 | 6.3E-05 | 5.7E-07 | 2.0E-09 | 2.6E-12 | 1.3E-15 | 
+Chen-Zimmermann (2020) Data | 
+Num Obs |t_i| >  $ \bar{t} $ | 189 | 130 | 77 | 44 | 26 | 17 | 12 | 
+90% CI | [156, 184] | [108, 148] | [65, 109] | [37, 72] | [22, 47] | [14, 28] | [8, 19] | 
+Min Attempts E(N) | 4.2E+03 | 4.8E+04 | 1.2E+06 | 7.7E+07 | 1.3E+10 | 6.6E+12 | 9.0E+15 | 
+Min Years of Hacking | 1.4E-04 | 1.6E-03 | 0.042 | 2.6 | 451 | 2.27E+05 | 3.08E+08 | 
+Harvey, Liu, and Zhu (2016)-Implied Data | 
+Num Obs |t_i| >  $ \bar{t} $ | 311 | 214 | 128 | 77 | 47 | 28 | 17 | 
+Min Attempts E(N) | 6.8E+03 | 7.9E+04 | 2.0E+06 | 1.3E+08 | 2.4E+10 | 1.1E+13 | 1.3E+16 |
+--- 图4 ---
+[表]
+为了获得特别显著异象需尝试的个数 | $ 10^{{10}} $ 到  $ 10^{{15}} $ | 
+未发表和发表异象之比 | $ 10^{{14}} $:1 | 
+$ t $-statistic = 8.0 和  $ t $-statistic = 2.5 异象发表概率之比 | $ 10^{{10}} $ 这个量级 | 
+出处：Chen (2021)；整理：川总写量化 |
+--- 图5 ---
+For simplicity, we assume CZ include 3 anomalies and 5 anomalies are randomly chosen from YZ.
+The bootstrapped data will have non-zero means for the initially demeaned data and will alter the means of the untransformed data.
+出处：Harvey and Li (2021)
+$p_{0}$ is assumed to be 25%, so two anomalies are chosen and kept intact; the remaining ones are demeaned.
+The two highlighted columns constitute observed anomalies; the remaining ones are tried but unpublished.
+--- 图6 ---
+Specification 1:  $ N_{0}=1,000,p_{0} $ [Prob(t-stat=2.0)=0.35, Prob(t-stat=5.0)=0.45]
+[表]
+ | Matched moments | 
+ | No. of factors | p(5) | p(10) | p(50) | p(90) | p(95) | 
+Data | 132.00 | 2.16 | 2.48 | 4.21 | 8.76 | 12.15 | 
+Model (mean) | 129.29 | 2.22 | 2.45 | 4.32 | 7.78 | 9.88 | 
+Model (stdev.) | 11.87 | 0.11 | 0.17 | 0.29 | 0.56 | 1.22 |
+Specification II:  $ N_{0}=2,000, p_{0}=0.12, \gamma_{1}=0.75, \gamma_{2}=0.33 $
+$$ [\mathrm{P r o b}(t\mathrm{-}\mathrm{s t a t}=2.0)=0.30,\mathrm{P r o b}(t\mathrm{-}\mathrm{s t a t}=5.0)=0.40] $$
+[表]
+ | Matched moments | 
+ | No. of factors | p(5) | p(10) | p(50) | p(90) | p(95) | 
+Data | 132.00 | 2.16 | 2.48 | 4.21 | 8.76 | 12.15 | 
+Model (mean) | 123.91 | 2.16 | 2.38 | 5.08 | 8.22 | 10.15 | 
+Model (stdev.) | 16.49 | 0.10 | 0.27 | 0.49 | 0.62 | 1.27 |
+Specification III: N₀ = 5,000, p₀ = 0.06, γ₁ = 0.21, γ₂ = 0.28
+$$ [\mathrm{P r o b}(t\mathrm{-}\mathrm{s t a t}=2.0)=0.15,\;\mathrm{P r o b}(t\mathrm{-}\mathrm{s t a t}=5.0)=0.25 $$
+[表]
+ | Matched moments | 
+ | No. of factors | p(5) | p(10) | p(50) | p(90) | p(95) | 
+Data | 132.00 | 2.16 | 2.48 | 4.21 | 8.76 | 12.15 | 
+Model (mean) | 129.56 | 2.11 | 2.27 | 5.10 | 8.25 | 10.03 | 
+Model (stdev.) | 29.16 | 0.06 | 0.12 | 0.94 | 0.68 | 1.13 |
+出处：Harvey and Liu (2021b)
+--- 图7 ---
+The information I probability function
+We plot the estimated publication probability corresponding to a t-statistic in the range of 2.0 and 8.0. Three publication probability functions correspond to $N = 1,000$, $N = 2,000$, and $N = 5,000$, where $N$ is the total number of strategies tried (including unpublished strategies).
+--- 图8 ---
+[表]
+ | Chen (2021) | Harvey and Liu (2021b) | 
+为了获得特别显著异象需尝试的个数 | $ 10^{{10}} $ 到  $ 10^{{15}} $ | 1000 ~ 5000 | 
+未发表和发表异象之比 | $ 10^{{14}} $ : 1 | 7 : 1 ~ 37 : 1 | 
+t-statistic = 8.0 和 t-statistic = 2.5 异象发表概率之比 | $ 10^{{10}} $ 这个量级 | 1.3 ~ 2.1 |
+出处：Chen (2021) 以及 Harvey and Liu (2021b)；整理：川总写量化
+--- 图9 ---

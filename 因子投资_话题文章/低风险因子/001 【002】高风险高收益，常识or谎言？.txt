@@ -1,0 +1,169 @@
+# 【002】高风险高收益，常识or谎言？
+
+来源：微信公众号「因子投资」话题·低风险因子（第1篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247483714&idx=1&sn=54c8f17a7f82b774021e1369785e6725&chksm=f995b0c0cee239d6858ea77e346f2ac46905076c03ed832ca58d0035677d5b4ffc2117bd7c86#rd
+
+【30秒速览】“低风险低收益，高风险高收益”，大概是众所周知的常识。但真的是这样吗？也许您也曾对此有过疑惑，那就对了，学术圈一帮机智如您的大佬们，也都对此颇有疑虑，并亲自出马做了诸多检验，指出事实或许没有那么简单，高风险并不总意味着高收益，甚至常常相反。
+
+01低风险异象
+
+无论是大到人生重要的抉择，还是小到股票投资理财，人们都坚定不移一个信念：冒的风险越大，得到的回报越多；勇敢搏上一把，香车美女应有尽有。
+
+也许正因为如此，许多专家或者大佬，喜欢推荐热门股票，它们往往有着很高的换手率，近期波动也较大，看起来非常具有吸引力，让人恨不得马上冲进去，压上全部身家。
+
+然鹅，高风险真的能带来高收益吗？至少在股票市场不是这样。研究者们并没在股票市场发现风险和收益成正比的证据，恰恰相反，风险较小的股票未来收益较高，风险较大的股票未来收益反而低不少，这和传统资产定价理论矛盾，因此被称为低风险异象(low-risk anomaly)。
+
+02经典理论
+
+上世纪六十年代，Sharpe、Lintner、Treynor和Mossin等学者，在Markowitz均值方差理论的基础上，提出了资本资产定价模型(CAPM)，探讨资产风险和预期收益率之间的关系，是现代资产定价理论的基础。
+
+经典的CAPM可以用下式表达，即一个股票相对于无风险收益率的超额收益，等于市场超额收益乘以贝塔。贝塔用来反映股票相对整体市场的敏感程度，贝塔大于1表明股票相对市场收益波动较大，小于1表明相对市场收益波动较小，市场本身的贝塔则等于1。每个股票的贝塔不一样，是常见的风险衡量指标。
+
+换言之，股票预期收益率和风险呈明显的正向关系，随着贝塔的上升，预期收益率也随之增加。根据传统金融学理论，如果想要获得可观的回报，就必须选择贝塔较大的股票，暴露更多的系统风险。也因此，贝塔是最常用的风险指标。
+
+03背道而驰
+
+经典CAPM无论是理论上，还是直觉上，看起来都无懈可击，但实证结果却背道而驰。在Fama和French (1992) 两位大神的论文中，按照股票贝塔从低到高分为10组，并统计每组股票的月平均收益。结果发现，贝塔和股票收益之间的关系并没有像预想那样，从第1组到第10组并没有单调上升，而是呈现非常平坦的关系，并且第10组收益最低，第1组收益最高，和理论模型完全不符。
+
+表1：贝塔分组表现
+
+资料来源：Fama和French (1992)   
+
+除了贝塔，另外一个常用的风险度量指标是波动率，常用收益率的历史标准差估计。Blitz和van Vliet (2007) 利用1985到2006富时发达国家指数成分股（包括日本、美国和欧洲等市场）数据，计算每支股票过去三年的历史波动率，并从小到大分为10组。
+
+从分组结果来看，收益率单调性并不明显，波动率最低组明显高于均值，波动率最高组远远低于均值，最低和最高收益率之差为5.9%；而已实现波动率和夏普比率的单调性规律却非常突出，低波动率组合显著优于高波动；CAPM回归结果表明，低波动率组合实现β为0.56，阿尔法收益率为年化4%，而高波动组合对应为1.58和-8%，此结论显然也和CAPM相悖。
+
+表2：历史波动率分组表现
+
+资料来源：Blitz和van Vliet (2007)
+
+04无处不在的低风险异象
+
+低风险异象是数据挖掘而来还是符合经济学直觉？从目前的文献来看，该异象在形形色色股票因子里，属于稳健性较好的一小波，像一个幽灵，在不同时间区间、不同市场环境、不同经济周期、不同国家和不同资产中广泛存在。
+
+特别地，除了贝塔，波动率也是十分常用且易于理解的风险指标。而结合CAPM定价模型，异质波动率也经常被用于刻画股票的非系统性风险。按照经典理论，异质波动率应不包含关于股票未来收益的信息，但Ang、Hodrick、Xing和Zhang (2006) 利用美国股票数据进行的实证研究表明，低异质波动率股票有着显著的超额收益。且进一步的稳健分析指出，无论在哪个子区间，牛市或者熊市，经济扩张或萧条，异质波动率对股票收益都有很好的区分能力，高波动组合相对低波动组合表现差得多。
+
+表3：异质波动率分组在不同时间段的表现
+
+资料来源：Ang、Hodrick、Xing和Zhang (2006)
+
+为了检验异质波动率效应的普适性，Ang、Hodrick、Xing和Zhang (2009) 将研究拓展到了23个MSCI发达国家指数成分股。研究结果表明，无论是在美国还是其他国家，异质波动率和股票超额收益存在较强的负相关关系，不同国家的异质波动率表现具有同步性特征。
+
+AQR两位大神Frazzini和Pedersen (2012) 在多个资产类型里定义了贝塔因子，包括不同国家或地区的股票市场、不同国家股票指数、外汇市场、美国国债、全球各国国债、美国公司债、信用债指数和商品等。结果发现贝塔因子具有很好的普适性，在绝大多数资产中单调性明显，多空组合能获得显著的风险调整后收益。
+
+图1：贝塔因子在不同资产的表现
+
+资料来源：Frazzini和Pedersen (2012)
+
+05不只是贝塔和波动率
+
+讨论低风险异象的文献比较多，除了上文提及的贝塔和（异质）波动率等常见指标，也有不少新的衡量指标被用于检验低风险异象，下表列出了一些典型的代表。这些指标分别从不同角度衡量股票风险，既有共同的基因，又各自别具一格。在后续的系列文章中，我们也将进行细致的对比。
+
+表4：不同的低风险因子列表
+
+资料来源：因子动物园
+
+06结语
+
+因子投资是一个庞杂的研究方向，光因子类型的划分就有多种方案，同一类型又有多个不同计算公式的子因子，形成了庞大的因子动物园。低风险异象是动物园里面让人有点琢磨不透的成员，高风险的股票是魔鬼并不会带来高收益，低风险的股票是天使却能带来惊喜。
+
+作为低风险异象的第一篇，本文对此异象的基本含义和表现进行了基本介绍，后续的内容则会更加精彩，涉及低风险因子的定义和计算、异象的特征和解释、与其他因子的关联以及A股港股的实证分析等方方面面，而在广泛覆盖的同时，也会注重对关键细节的精细剖析。您是否也跟我们一样，期待着了解更多呢？
+
+参考文献：
+
+Asness, C. S., Frazzini, A., Gormsen, N. J., & Pedersen, L. H. (2016). Betting Against Correlation: Testing Theories of the Low-Risk Effect. Social Science Research Network,.
+Ang, A., Chen, J., & Xing, Y. (2006). Downside risk. Review of Financial Studies, 19(4), 1191-1239.
+Ang, A., Hodrick, R. J., Xing, Y., & Zhang, X. (2006). The Cross-Section of Volatility and Expected Returns. Journal of Finance, 61(1), 259-299.
+Ang, A., Hodrick, R. J., Xing, Y., & Zhang, X. (2009). High Idiosyncratic Volatility and Low Returns: International and Further U.S. Evidence. Journal of Financial Economics, 91(1), 1-23.
+Bali, T. G., Cakici, N., & Whitelaw, R. F. (2011). Maxing Out: Stocks as Lotteries and the Cross-Section of Expected Returns. Journal of Financial Economics, 99(2), 427-446.
+Blitz, D., & Van Vliet, P. (2007). The Volatility Effect: Lower Risk Without Lower Return. ERIM report series research in management Erasmus Research Institute of Management,.
+Boyer, B. H., Mitton, T., & Vorkink, K. (2010). Expected Idiosyncratic Skewness. Review of Financial Studies, 23(1), 169-202.
+Barberis, N., & Huang, M. (2008). Stocks as Lotteries: the Implications of Probability Weighting for Security Prices. The American Economic Review, 98(5), 2066-2100.
+Fama, E. F., & French, K. R. (1992). The Cross‐Section of Expected Stock Returns. Journal of Finance, 47(2), 427-465.
+Frazzini, A., & Pedersen, L. H. (2014). Betting Against Beta. Journal of Financial Economics, 111(1), 1-25.
+Harvey, C. R., & Siddique, A. R. (2000). Conditional Skewness in Asset Pricing Tests. Journal of Finance, 55(3), 1263-1295.
+Hou, K., & Moskowitz, T. J. (2005). Market Frictions, Price Delay, and the Cross-Section of Expected Returns. Review of Financial Studies, 18(3), 981-1020.
+Kelly, B. T., & Jiang, H. (2014). Tail Risk and Asset Prices. Review of Financial Studies, 27(10), 2841-2871.
+Orr, D. J., Mashtaler, I., & Nagy, A. (2012). The Barra China Equity Model (CNE5). MSCI BARRA.
+刘富兵. (2015). 如何将阿尔法因子转化为超额收. 国泰君安.
+朱剑涛. (2015). 投机、交易行为与股票收益（上）. 东方证券.
+
+【图片文字】
+--- 图3 ---
+June of year $t$ (t = 1963-1990) using all NYSE stocks on CRSP. All NYSE, AMEX, and NASDAQ stocks that meet CRSP-COMPUSTAT data requirements are allocated to the 10 size portfolios using the NYSE breakpoints. Each decile is subdivided into $10\beta$ portfolios using pre-ranking $\beta$s of individual stocks, estimated with 2 to 5 years of month returns (as available) ending in June of year $t$. We use only NYSE stocks that meet the CRSP-COMPUSTAT requirements to establish the $\beta$ breakpoints. The equal-weighted monthly returns on the resulting 100 portfolios are calculated for July of year $t$ to June of year $t+1$.
+The post-ranking  $ \beta $s use the full (July 1963 to December 1990) sample of post-ranking returns for each portfolio. Pre- and post-ranking  $ \beta $s (here and in all other tables) are the sum of the slopes from a regression of monthly returns the current and prior month's returns on the value-weighted portfolio of NYSE, AMEX, and (after 1972) NASDAQ stock. The average return is the time-series average of the monthly equal-weighted portfolio returns, in percent. The average of a portfolio is the time-series average of monthly averages of ln(ME) for stocks in the portfolio at the end of June of year, with ME denominated in millions of dollars.
+The average number of stocks per month for the size-$\beta$ portfolios in the smallest size decile varies from 70 to 177. average number of stocks for the size-$\beta$ portfolios in size deciles 2 and 3 is between 15 and 41, and the average number the largest 7 size deciles is between 11 and 22.
+The All column shows statistics for equal-weighted size-decile (ME) portfolios. The All row shows statistics equal-weighted portfolios of the stocks in each  $ \beta $ group.
+[表]
+ | All | Low- $ \beta $ | $ \beta $-2 | $ \beta $-3 | $ \beta $-4 | $ \beta $-5 | $ \beta $-6 | $ \beta $-7 | $ \beta $-8 | $ \beta $-9 | High | 
+Panel A: Average Monthly Returns (in Percent) | 
+All | 1.25 | 1.34 | 1.29 | 1.36 | 1.31 | 1.33 | 1.28 | 1.24 | 1.21 | 1.25 | 1.1 | 
+Small-ME | 1.52 | 1.71 | 1.57 | 1.79 | 1.61 | 1.50 | 1.50 | 1.37 | 1.63 | 1.50 | 1.4 | 
+ME-2 | 1.29 | 1.25 | 1.42 | 1.36 | 1.39 | 1.65 | 1.61 | 1.37 | 1.31 | 1.34 | 1.1 | 
+ME-3 | 1.24 | 1.12 | 1.31 | 1.17 | 1.70 | 1.29 | 1.10 | 1.31 | 1.36 | 1.26 | 0.7 | 
+ME-4 | 1.25 | 1.27 | 1.13 | 1.54 | 1.06 | 1.34 | 1.06 | 1.41 | 1.17 | 1.35 | 0.9 | 
+ME-5 | 1.29 | 1.34 | 1.42 | 1.39 | 1.48 | 1.42 | 1.18 | 1.13 | 1.27 | 1.18 | 1.0 | 
+ME-6 | 1.17 | 1.08 | 1.53 | 1.27 | 1.15 | 1.20 | 1.21 | 1.18 | 1.04 | 1.07 | 1.0 | 
+ME-7 | 1.07 | 0.95 | 1.21 | 1.26 | 1.09 | 1.18 | 1.11 | 1.24 | 0.62 | 1.32 | 0.7 | 
+ME-8 | 1.10 | 1.09 | 1.05 | 1.37 | 1.20 | 1.27 | 0.98 | 1.18 | 1.02 | 1.01 | 0.9 | 
+ME-9 | 0.95 | 0.98 | 0.88 | 1.02 | 1.14 | 1.07 | 1.23 | 0.94 | 0.82 | 0.88 | 0.5 | 
+Large-ME | 0.89 | 1.01 | 0.93 | 1.10 | 0.94 | 0.93 | 0.89 | 1.03 | 0.71 | 0.74 | 0.5 |
+--- 图4 ---
+[表]
+ | Panel A: Decile portfolios based on historical return volatility | 
+ | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D1-10 | 
+cess return | 7.3% | 7.1% | 8.0% | 6.2% | 5.0% | 5.6% | 5.6% | 7.2% | 3.4% | 1.4% | 5.9% | 
+ndard deviation | 10.1% | 12.6% | 13.6% | 14.0% | 14.0% | 15.1% | 16.5% | 17.7% | 20.4% | 27.5% | 23.7% | 
+pe ratio | 0.72 | 0.57 | 0.59 | 0.44 | 0.36 | 0.37 | 0.34 | 0.41 | 0.17 | 0.05 | 0 | 
+(ue) | 2.2 | 1.6 | 2.0 | 0.8 | -0.6 | -0.5 | -1.1 | 0.2 | -2.8 | -2.7 | - | 
+ | 0.56 | 0.75 | 0.84 | 0.90 | 0.90 | 0.98 | 1.07 | 1.13 | 1.29 | 1.58 | -1.02 | 
+ | 4.0% | 2.6% | 3.0% | 0.9% | -0.4% | -0.3% | -0.7% | 0.4% | -4.3% | -8.0% | 12.0% | 
+ | 3.1 | 2.2 | 2.6 | 1.0 | -0.4 | -0.3 | -1.0 | 0.4 | -2.9 | -2.6 | 3.0 |
+Panel B: Risk analysis of portfolios based on historical volatility
+[表]
+ | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D1-10 | U | 
+ | -1.1% | -0.7% | -0.3% | -0.3% | -0.4% | -0.2% | 0.2% | 0.5% | 0.6% | 1.4% | -2.5% | 0. | 
+ | 1.8% | 1.2% | 0.9% | 0.5% | 0.4% | 0.2% | -0.4% | -0.5% | -1.5% | -2.9% | 4.8% | 0. | 
+ | -26% | -32% | -33% | -36% | -46% | -41% | -40% | -43% | -67% | -86% | - | -3 |
+--- 图5 ---
+The Idiosyncratic Volatility Effect over Different Subsamples
+The table reports Fama and French (1993) alphas, with robust Newey–West (1987) t-statistics in square brackets. The column “5-1” refers to the difference in FF-3 alphas between portfolio 5 and portfolio 1. We rank stocks into quintile portfolios of idiosyncratic volatility, relative to FF-3, using the 1/0/1 strategy described in Section II.A and examine robustness over different sample periods. The stable and volatile periods refer to the months with the lowest and highest 20% absolute value of the market return, respectively. The full sample period is July 1963 to December 2000.
+[表]
+ | Ranking on Idiosyncratic Volatility |  | 
+Subperiod | 1 Low | 2 | 3 | 4 | 5 High | 5-1 | 
+Jul 1963–Dec 1970 | 0.06 | 0.03 | 0.09 | -0.36 | -0.94 | -1.00 | 
+ | [1.23] | [0.42] | [0.73] | [-2.18] | [-5.81] | [-5.62] | 
+Jan 1971–Dec 1980 | -0.24 | 0.32 | 0.19 | 0.03 | -1.02 | -0.77 | 
+ | [-2.53] | [3.20] | [1.55] | [0.21] | [-5.80] | [-3.14] | 
+Jan 1981–Dec 1990 | 0.15 | 0.08 | -0.16 | -0.66 | -2.08 | -2.23 | 
+ | [2.14] | [1.07] | [-1.25] | [-4.82] | [-10.1] | [-9.39] | 
+Jan 1991–Dec 2000 | 0.16 | -0.01 | 0.14 | -0.48 | -1.39 | -1.55 | 
+ | [1.34] | [-0.08] | [0.77] | [-2.41] | [-3.31] | [-3.19] | 
+NBER Expansions | 0.06 | 0.02 | 0.08 | -0.33 | -1.19 | -1.25 | 
+ | [1.26] | [0.25] | [1.01] | [-3.18] | [-7.07] | [-6.55] | 
+NBER Recessions | -0.10 | 0.64 | -0.01 | -0.34 | -1.88 | -1.79 | 
+ | [-0.65] | [3.58] | [-0.04] | [-1.32] | [-3.32] | [-2.63] | 
+Stable Periods | 0.05 | -0.02 | -0.11 | -0.62 | -1.66 | -1.71 | 
+ | [0.44] | [-0.25] | [-1.07] | [-4.06] | [-6.56] | [-4.75] | 
+Volatile Periods | -0.04 | 0.24 | 0.32 | 0.18 | -0.93 | -0.89 | 
+ | [-0.29] | [1.69] | [2.32] | [0.55] | [-2.40] | [-2.02] |
+--- 图6 ---
+2. Betting against beta (BAB) Sharpe ratios by asset class. This figures shows annualized Sharpe ratios of BAB factors across asset classes. To con
+--- 图7 ---
+[表]
+因子名 | 参考文献 | 
+简单波动率 | Blitz和van Vliet(2007) | 
+特质波动率 | Ang、Hodrick、Xing和Zhang (2006, 2009) | 
+特异度 | 朱剑涛 (2015) | 
+离散度 | 刘富兵 (2015) | 
+累计振幅 | Orr, Mashtaler和Nagy(2012) | 
+贝塔 | Frazzini和Pedersen (2014) | 
+下行贝塔 | Ang, Chen和Xing (2006) | 
+偏度 | Barberis和Huang (2008); | 
+协偏度 | Harvey和Siddique (2000) | 
+特质偏度 | Boyer, Mitton和Vorkink (2009) | 
+价格时滞 | Hou和Moskowitz (2005) | 
+系统风险变动因子 | Ang、Hodrick、Xing和Zhang (2006) | 
+最大收益率 (MAX) | Bali, Cakici和Whitelaw (2011) | 
+尾部风险 (Tail Risk) | Kelly和Jiang (2014) | 
+大盘相关性 | Asness、Frazzini、Gormsen和Pedersen(2018) |

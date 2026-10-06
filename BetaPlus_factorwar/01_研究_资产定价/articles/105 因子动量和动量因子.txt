@@ -1,0 +1,378 @@
+# 因子动量和动量因子
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/z7yi9HeJFslUIlbdNVrZsw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Ehsani and Linnainmaa (2022) 是 post Fama-French 时代一篇难得的实证佳作。
+
+0
+
+很久没有介绍实证研究了。因为即便是大佬在另类数据的加持下发表在 top 3 上的那些，也并无太多惊艳。但今天是个例外，我想深度解读 Ehsani and Linnainmaa (2022)，并利用 A 股数据做一些相似的实证。
+
+Ehsani and Linnainmaa (2022) 研究的是一个纯粹且重要的问题：截面动量（momentum）。更确切地说，该文研究了因子动量和（个股的）动量因子之间的关联。在我看来，这篇文章是 post Fama-French 时代一篇难得的实证佳作。这一点从它能被发表在 Journal of Finance 上就足以说明。在刚刚结束的 AFA 2023 年会上，该文被评为 2022 DFA Distinguished Paper。
+
+如同是 Fama-French 多因子模型的“心结”一样，个股上的截面动量（即 Carhart 1997 发现的 UMD 因子）也是实证资产定价绕不过去的坎儿。其在实证资产定价中的特殊地位可以由下面这句话精彩地概括：不包含动量因子的多因子模型无法解释动量因子，而加入动量因子后，模型解释力的提升也仅仅体现在能够解释动量因子（Fama and French 2016）。
+
+面对无处不在的动量（Asness, Moskowitz and Pedersen 2013），Ehsani and Linnainmaa (2022) 以因子动量（factor momentum）为切入点，针对因子动量和个股动量，回答了以下问题：
+
+问题一：因子收益率在时序上是否有自相关性？
+
+问题二：因子满足何种条件时，更容易出现自相关性？
+
+问题三：利用自相关性、基于因子历史收益率构造的因子动量策略（注意，它类似于 UMD，是以因子组合为 assets 的截面动量策略）和个股截面动量因子（即 UMD）有什么关系？谁是因？谁又是果？
+
+问题四：因子动量能否解释个股残差动量？
+
+问题五：如何理解 UMD 因子和其他因子时序无关的实证现象？
+
+下面就通过 5 个小节介绍 Ehsani and Linnainmaa (2022) 在上述五个问题中的实证结果。此外，在问题一、三以及五中会辅以基于 A 股的实证。数据来自 BetaPlus 小组。
+
+1
+
+因子收益率存在时序自相关性是之后以因子为 assets 构造因子动量的基础，且自相关性应普遍存在于常见的因子之中，否则故意挑那些“好使”的因子来构造就有 data snooping 问题。为此，在实证的一开始，Ehsani and Linnainmaa (2022) 考察了美股以及全球市场中常见因子收益率的自相关性。他们以过去 12 个月的历史收益率的正负构造了自变量：当收益率为正时，自变量取值为 1，反之为 0。
+
+在时序回归中，用下个月的收益率对当月的自变量进行回归（且包含截距项）。在该回归模型中，截距项代表了过去 12 个月的历史收益率为负时，下个月的条件月均收益率；而自变量的回归系数则表示当过去 12 个月的历史收益率为正 vs. 过去 12 个月历史收益率为负时，下个月条件月均收益率的差值。
+
+由下表中的结果（以美股中的因子为例）可知，除了动量外，其他常见因子自变量的回归系数均为正，且绝大多数在 5% 或 10% 的显著性水平下显著，说明因子收益率的自相关性是普遍存在的，这为后面构造因子动量奠定了基础。
+
+类似的，来看一下 A 股的实证结果。BetaPlus 小组依上表构造了除 Net share issues 之外的其他因子（共 14 个），实证区间为 2000 年 1 月到 2023 年 1 月。由于计算历史收益率需要用掉 12 期数据，因此以下回归结果是基于 2001 年 1 月到 2023 年 1 月的数据（本文其他 A 股实证结果的实证区间类似）。
+
+从上述结果来看，基于 A 股的结果和基于美股的并不是那么一致。这体现在并非绝大多数因子自变量的回归系数显著为正。考虑到中美两个市场的差异以及个股动量效应在 A 股长期来看并不显著这样一个经验事实，上述结果并不意外。不过颇有意思的是，如果将定义自变量的历史收益率换成过去 7 至 12 个月的累计收益率（而非 1 到 12 个月），则回归结果（下表）反而更加贴近美股。
+
+上述实证结果背后的含义不在本文的讨论范围之内。但是在下文针对 A 股的实证中，会同时虑两个版本（即基于过去 12 个月收益率构造的因子动量，以及基于过去 7 – 12 个月收益率构造的因子动量）。
+
+2
+
+接下来，Ehsani and Linnainmaa (2022) 基于 Kozak, Nagel and Santosh (2018) 的由情绪驱动的投资者理论模型讨论了因子收益率存在时序自相关性的原因。具体的推导，感兴趣的小伙伴请参考论文原文，这里直接说结论：
+
+1. 投资者情绪存在很强的持续性，因而造成了因子收益率的自相关性；
+
+2. 越是那些和股票协方差矩阵关系密切的因子，即更能解释资产收益率共同运动的因子，其收益率的自相关性越强。
+
+上述结论和 Kozak, Nagel and Santosh (2018) 利用“市场中不应持续存在近似无风险的套利机会”这个假设对多因子模型给出的启示相同：虽然市场中存在套利者，但是出于对系统性风险的规避，他们不会对那些能够解释资产共同运动的因子充分套利，从而留下了收益率的自相关性。
+
+上述理论模型对于实证的启示是，当基于个股收益率的协方差矩阵、通过 PCA 构造隐性因子（即主成分因子）时，利用高特征值（即波动更大）的那些隐性因子所构造的因子动量要比基于低特征值（即波动更低，从而更有可能被充分套利）的隐性因子的因子动量要显著。
+
+为了验证这一点，Ehsani and Linnainmaa (2022) 使用了 Kozak, Nagel and Santosh (2020) 一文中涉及的 47 个风格因子，并通过 PCA 将它们转化为 47 个主成分，并按照其对应特征值从高到底分成五组：（1）PC1 – PC10；（2）PC11 – PC20；（3）PC21 – PC30；（4）PC31 – PC40；以及（5）PC41 – PC47。通过使用五组分别构造因子动量，Ehsani and Linnainmaa (2022) 证实了理论模型的推论。
+
+以原文 Table III Panel A 为例（上表），它汇报了整个实证区间以及前后各半个实证区间内，通过上述五组主成分组合构造的因子动量策略的月均收益率及其 t-statistics。以 PC1 – PC10（即特征值最大的 10 个主成分）为例，在构造因子动量时，在 t 期，根据这 10 个组合过去 12 个月份收益率的正负为依据，做多收益率为正的 PCs 并做空收益率为负的 PCs，以此构造因子动量的多空组合。在 full sample 中，该因子动量组合月均收益率 t-statistic 高达 7.07；这个数值在前后各半个实证区间内变为 8.49 和 2.60（a side note：即便是因子动量，也无法逃脱因更多研究被发表以及被更多人来交易而逐渐变弱这样一个事实）。
+
+上述结果显示，无论在哪个实证窗口内，基于更高特征值的主成分因子所构造的因子动量都相对来说更加显著（经济上和统计上均如此）。此外，该表的 Panels B 和 C 比较了高特征值和低特征值构造的因子动量相互检验的结果，结果显示前者的因子动量无法被后者解释。
+
+3
+
+实证的第三部分研究的是人们最关心的因子动量和个股上的动量因子之间的关系。
+
+由 APT 可知，个股收益率在理论上可以分解为因子收益率的线性组合。以此为基础， Ehsani and Linnainmaa (2022) 通过数学推导将个股动量的预期收益率拆解成为四个部分，其中第一部分（也是最重要的一部分）正是由因子收益率的时序自相关性的高低决定。
+
+上述拆解表明，因子动量（部分甚至很大部分）驱动了个股的动量因子。因此，实证上可以预期加入因子动量的多因子模型能够解释个股动量。实证结果如下表所示。在实证中，作为被检验资产的除了个股动量（表中 Winners – Losers 之外，还有根据该变量排序构造的 10 个 sorted portfolios）；作为多因子模型的包括 FF5，FF5 + UMD 因子（对，你没看错，在 FF5 中加上 UMD 因子只为了额外解释个股动量）；FF5 + 基于常见因子的因子动量（FF5 +   ）以及 FF5 + 基于前 10 个主成分因子的因子动量（FF5 +   ）。
+
+作为解读，让我们关注 Winners – Losers 这一行。其 FF5-α 的 t-statistic 为 4.91（显然 FF5 对个股动量无能为力）。当把 UMD 因子加入 FF5 之后，t-statistic 降为 2.43（依然存在 α 应是由于回归方程左侧个股动量和右侧 UMD 因子构造方式不完全一致所致）。最后，当把因子动量（无论是基于常见因子，还是基于主成分因子）加入 FF5 之后，个股动量均无法获得显著的超额收益。当使用常见因子时，其超额收益的 t-statistic 为 0.99；而当使用主成分因子时，其 t-statistic 仅为 0.09。上述结果表明，因子动量能够解释个股动量。
+
+那么反过来，加入了个股动量 UMD 因子的多因子模型能否解释因子动量呢？下表给出了解答。请注意，在以下实证中，两位作者除了标准的 UMD 因子（表中记为 Standard momentum）外，还考察了各种版本的花式 UMD 因子（例如 Industry-adjusted momentum 是经过行业收益率调整之后的 UMD，等）。然而，无论使用哪个版本的 UMD（甚至是全部版本一起上），其和 FF5 一起构造的多因子模型均无法解释因子动量（考察标出来的两列 α）。当使用常见因子构造因子动量时，其超额收益的 t-statistic 在不同版本模型下均在 4.0 以上；而当使用主成分因子构造因子动量时，除中期动量版本的 UMD 外，因子动量超额收益 t-statistic 在其他模型下均在 5.0 以上。因此，个股动量无法解释因子动量。
+
+下面来看看 A 股的结果。回顾第一节，我们针对 A 股构造了常见的 14 个因子，除去动量本身外，我们使用剩余 13 个因子构造因子动量（即在每一期，回看过去一段时间的历史收益率，然后做多历史收益率为正的因子，做空历史收益率为负的因子，以此构造因子动量）。在本节实证中，以 FF5 为基础（FF5 数据来自 BetaPlus 小组针对 A 股构造并维护的数据，见 www.factorwar.com），先后加上 UMD 因子和因子动量作为多因子模型，即 FF5 +UMD 和 FF5 + Factor Mom。当使用 FF5 + Factor Mom 作为多因子模型时，考察 UMD 因子能否获得超额收益。结果显示，UMD 月均超额收益的 t-statistic 为 1.416，并不显著，和美股一致。不过有意思的是，当使用 FF5 + UMD 作为多因子模型给因子动量定价时，后者的超额收益的 t-statistic 也仅为 1.551，也并不显著，这和美股的结果并不一致。
+
+以上结果是通过遵循原文的方式，即使用过去 12 个月收益率为依据构造因子动量。作为参考，下面再来看看如果使用过去 7 – 12 个月的收益率为依据构造因子动量会发生什么。在这个设定下，A 股上呈现出和美股一致的结果：UMD 相对 FF5 + 因子动量的超额收益 t-statistic 仅为 1.405；而因子动量相对 FF5 + UMD 的超额收益 t-statistic 高达 3.304。因此，因子动量能够解释个股动量，反之则不然。
+
+由于本节介绍的内容是 Ehsani and Linnainmaa (2022) 的 main results，因此两位作者也进行了相当充分的稳健性检验，其中之一就是因子动量对具体哪些因子以及因子的个数是否敏感。以 14 个美股因子为例，该文考察了因子个数从 1 变化到 14 的情况（1 就相当于是单因子根据动量择时；14 相当于所有因子一起上）；当因子的个数在 1 到 14 之间时，他们则考察了从所有因子中选出目标数目个因子的全部排列组合，计算每个排列组合构造的因子动量，并将它们的均值作为该个数下的结果。下图展示了因子动量相对于 FF5 的超额收益的 t-statistic 如何随因子个数变化。从图中可以看出，t-statistic 随因子的个数增加，且持续显著。
+
+我也对 A 股进行了同样的实证。下图展示了两种构造因子动量的方法。当使用和美股一样的方法时（即根据过去 12 个月的收益率），当因子的个数不少于 4 时，因子动量就能获得相对 FF5 的显著超额收益；而当使用过去 7 – 12 个月收益率时，当因子不少于 2 个时，即可获得相对 FF5 的显著超额收益。此外，第二种方法的超额收益持续优于第一种方法。
+
+4
+
+本节来看看残差动量。这虽然不是 Ehsani and Linnainmaa (2022) 的 main results，但却是我格外感兴趣的一个内容，因为我一直对残差动量持怀疑态度（见《残差动量——有理有据还是数据挖掘》）。Ehsani and Linnainmaa (2022) 的研究表明，残差动量是遗漏变量造成的。
+
+为了从直觉上理解，举个最简单的例子。假设个股收益率和两个因子有关，而分析者只观测到其中一个因子，而把另一个因子当作特质性收益率的一部分。在这种情况下，即便个股特质性收益率满足 IID，那个被遗漏的因子的动量也会被错误地视为残差动量。
+
+Ehsani and Linnainmaa (2022) 通过模拟和实际数据证实了上述猜想。在模拟中，他们假设资产收益率由 10 个因子决定，并考虑了两个情景：（1）10 个因子的自相关性相似，且对资产收益率波动的解释大小也相似；（2）10 个因子中第一个因子解释资产的波动是其他每个因子的 5 倍，且第一个因子的收益率在时序上是不相关的（所以第一个因子可以理解为市场因子）。在每个情境中，他们分别考虑已知 N 个因子（N 取值 1 到 10）的情况，只要 N < 10，就说明计算残差动量时遗漏了 10 – N 个因子。
+
+下表展示了模拟的结果，其中 Symmetric Factors 表示情景一；Uncorrelated Market Factor 表示情景二。以情景一为例，在计算残差动量时，遗漏的变量越多（即 Number of Known Factors 越小），残差动量的 t-statistic 则越大。当模型不存在遗漏变量时，残差动量也随之消失。此外，表中另一个非常重要的结果是，在情景二中，个股动量的 t-statistic 为 4.68（表格最下方），而当把市场因子剔除后计算残差动量时，其 t-statistic 则上升到 5.62（表格第一行）。这是因为，当剔除掉这个没有自相关的市场因子后，资产收益率的剩余部分更好地捕捉了被遗漏的那 9 个因子的自相关性，从而造成残差动量相比于包含市场因子计算的个股动量更加显著。
+
+基于实际数据的实证结果又如何呢？下表中分别考察了原始的 UMD 以及基于 CAPM、FF3 和 FF5 计算的残差动量。观察 Average Return 那一列，不难发现基于 CAPM 的残差动量要比原始 UMD 更加显著，这背后的原因恰恰就是上一自然段最后所指出的。再来看控制了因子动量后的结果，无论是以常见因子构造因子动量，还是以主成分因子构造动量，基于 CAPM、FF3 以及 FF5 的残差动量均不再显著。而这一结果在使用主成分因子构造因子动量时尤其精彩（三个版本的残差动量的 t-statistics 分别为 -0.38、0.04 以及 -0.03）。这一结果的含义是，尽管人们不知道 FF5 中到底遗漏了哪些因子，但可以推断这些被遗漏因子和这 10 个主成分因子密切相关。
+
+5
+
+现在，让我们来看实证的最后一块拼图。
+
+本文开篇曾提到 FF5 无法解释动量（UMD）因子。事实上，任何一个不包含动量因子的 ad-hoc 简约多因子模型似乎都很难解释动量。这背后的原因是动量因子和其他因子在时序上的非条件相关性很低。然而，这一经验事实低估了 UMD 和其他因子的关系。
+
+举例来说，假如规模（Size）因子在过去表现很好，那么人们在构造 UMD 因子时也会做多小市值的股票而做空大市值的股票。由于 Size 和 UMD 都做多小市值的股票且做空大市值的股票，因此可以预期它们的收益率在下一期是正相关的。反之，如果 Size 表现很差，那么 UMD 则会做多大市值的股票而做空小市值的股票，因此这两者下一期则很有可能负相关。同样的机制可以被用于分析 UMD 和其他别的因子之间的关系：当一个因子在过去一段时间表现很好，那么它和 UMD 在未来就更有可能正相关，反之则负相关。这个分析表明，如果以任意给定因子过去一段时间的表现为条件，来考察 UMD 和该因子的条件相关性，那么将会得到不同的答案。
+
+下表给出了实证结果。其中  表示 UMD 和给定因子的非条件相关系数；  表示当给定因子过去 12 个月收益率为正时，它和 UMD 的相关系数；  表示当给定因子过去 12 个月收益率为负时，它和 UMD 的相关系数。结果清晰的展示出，虽然非条件相关性不高，但一旦分别考察  和  ，结果则完全不同。以美股因子为例，除了反转外，其他所有因子的  均大于零，而所有因子的  均小于零。此外，两位作者还对  进行了统计检验，对于所有因子而言，原假设均能被拒绝。
+
+针对 A 股的实证结果如下。虽不如美股那么明显，但也在很大程度上是一致的。这些结果均表明，UMD 因子和其他因子之间并非无关，而是它和其他因子时变的条件相关性让它显得和这些因子非条件无关，从而也就造成了非条件时序回归时其他因子无法解释它的谜团。
+
+6
+
+以上就是我对 Ehsani and Linnainmaa (2022) 的解读。
+
+虽然前面五个小节已经分别回答了本文一开始列出的五个问题，但是在最后还是让我再把它们放在一起总结一下：
+
+问题一：因子收益率是否有时序自相关性？
+回答一：绝大多数因子的收益率存在自相关性。
+
+问题二：因子满足何种条件时，更容易出现自相关性？
+回答二：和个股收益率协方差矩阵更相关的因子，自相关性更强。
+
+问题三：利用自相关性、基于因子历史收益率构造的因子动量策略（注意，它类似于 UMD，是以因子组合为 assets 的截面动量策略）和个股截面动量因子（即 UMD）有什么关系？谁是因？谁又是果？
+回答三：因子动量能够解释个股动量（及其各种变化版本），但个股动量（及其各种版本）无法解释因子动量。个股动量效应背后的驱动（之一）是因子动量。
+
+问题四：因子动量能否解释个股残差动量？
+回答四：残差动量是多因子模型中存在遗漏变量所致，仅仅是被遗漏的因子的动量。一旦不存在模型设定偏误，残差动量消失。
+
+问题五：如何理解 UMD 因子和其他因子时序无关的实证现象？
+回答五：当控制了历史收益率之后，UMD 因子和其他因子有很强的正相关或负相关。UMD 因子和其他因子时变的条件相关性使其看上去和其他因子非条件无关。
+
+这篇文章的实证之细致、结果之丰富、推论之重要，无一不令人拍案叫绝。它无愧于 Journal of Finance，也值得每一个研究和使用动量的小伙伴仔细品味，相信你一定会有收获。
+
+Ehsani and Linnainmaa (2022) 于 2019 年 2 月投稿，历时两年，2021 年3 月被接收，2022 年最终见刊。然而，一切等待都值得。
+
+参考文献
+Asness, C. S., T. J. Moskowitz, and L. H. Pedersen (2013). Value and momentum everywhere. Journal of Finance 68(3), 929 – 985.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Ehsani, S. and J. T. Linnainmaa (2022). Factor momentum and the momentum factor. Journal of Finance 77(3), 1877 – 1919.
+
+Fama, E. F. and K. R. French (2016). Dissecting anomalies with a five-factor model. Review of Financial Studies 29(1), 69 – 103.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+Average Factor Returns Conditional on Their Own Past Returns
+This table reports estimates from regressions in which the dependent variable is a factor's month return and the independent variable takes the value of one if the factor's average return over the prior year is positive and zero otherwise. We estimate these regressions using pooled data (first row) and separately for each anomaly (remaining rows). The pooled data exclude the two momentum factors. In the pooled regression, we cluster standard errors by month. Table I reports the factor start dates. The sample ends in December 2019.
+[表]
+Anomaly | Intercept | Slope | 
+$ \hat{\alpha} $ | $ t(\hat{\alpha}) $ | $ \hat{\beta} $ | $ t(\hat{\beta}) $ | 
+Pooled | 0.06 | 0.72 | 0.45 | 4 | 
+U.S. Factors | 
+Size | -0.10 | -0.62 | 0.58 | 5 | 
+Value | 0.04 | 0.20 | 0.41 | 3 | 
+Profitability | 0.04 | 0.22 | 0.34 | 2 | 
+Investment | 0.12 | 0.97 | 0.24 | - | 
+Momentum | 0.72 | 2.70 | -0.09 | - | 
+Accruals | 0.15 | 1.18 | 0.10 | - | 
+Betting against beta | -0.22 | -0.63 | 1.32 | - | 
+Cash flow to price | 0.13 | 0.78 | 0.24 | - | 
+Earnings to price | 0.10 | 0.62 | 0.30 | - | 
+Liquidity | 0.16 | 0.74 | 0.36 | - | 
+Long-term reversals | -0.25 | -1.66 | 0.76 | - | 
+Net share issues | 0.17 | 1.32 | 0.09 | - | 
+Quality minus junk | 0.09 | 0.65 | 0.43 | - | 
+Residual variance | -0.46 | -1.64 | 1.06 | - | 
+Short-term reversals | 0.49 | 1.43 | 0.01 | - | 
+Global Factors | 
+Size | -0.06 | -0.39 | 0.28 | - | 
+Value | 0.04 | 0.15 | 0.47 | - | 
+Profitability | 0.14 | 1.03 | 0.26 | - | 
+Investment | -0.06 | -0.41 | 0.38 | - | 
+Momentum | 0.67 | 1.77 | 0.02 | - | 
+Betting against beta | 0.19 | 0.58 | 0.84 | - | 
+Quality minus junk | 0.39 | 1.76 | 0.12 | - |
+山 44. Ebsoni and Linnoinmee (2022)
+--- 图3 ---
+[表]
+ | a (%) | t(a) | $ \beta $ (%) | t( $ \beta $) | 
+Size | 0.622 | 0.731 | 1.192 | 1.201 | 
+Value | 0.194 | 0.220 | 0.844 | 0.817 | 
+Profitability | -0.296 | -0.443 | 0.970 | 1.126 | 
+Investment | -0.446 | -1.237 | -0.474 | -0.745 | 
+Momentum | -0.844 | -1.304 | 1.782 | 2.126 | 
+Accruals | 0.273 | 0.695 | -0.001 | -0.001 | 
+Betting against beta | 0.432 | 0.596 | -0.024 | -0.026 | 
+Cash flow to price | 0.037 | 0.082 | 0.553 | 0.923 | 
+Earnings to price | -0.171 | -0.267 | 0.743 | 0.870 | 
+Liquidity | -0.296 | -0.467 | 1.510 | 1.877 | 
+Long-term reversal | 0.954 | 1.281 | -0.342 | -0.396 | 
+Quality minus junk | -0.501 | -0.870 | 1.361 | 1.778 | 
+Residual variance | 0.101 | 0.136 | 1.207 | 1.374 | 
+Short-term reversal | 0.377 | 0.506 | 1.055 | 1.176 |
+--- 图4 ---
+[表]
+ | a (%) | t(a) | $ \beta $ (%) | t( $ \beta $) | 
+Size | -0.224 | -0.299 | 2.580 | 2.811 | 
+Value | -0.217 | -0.275 | 1.545 | 1.593 | 
+Profitability | -1.134 | -1.736 | 2.398 | 2.826 | 
+Investment | -0.767 | -2.069 | 0.472 | 0.762 | 
+Momentum | -0.727 | -1.152 | 1.647 | 1.987 | 
+Accruals | 0.228 | 0.581 | 0.074 | 0.146 | 
+Betting against beta | -0.668 | -0.975 | 1.798 | 2.039 | 
+Cash flow to price | -0.277 | -0.605 | 1.080 | 1.803 | 
+Earnings to price | -1.013 | -1.637 | 2.317 | 2.761 | 
+Liquidity | -0.598 | -0.974 | 2.061 | 2.601 | 
+Long-term reversal | -0.160 | -0.251 | 1.316 | 1.669 | 
+Quality minus junk | -0.697 | -1.224 | 1.730 | 2.271 | 
+Residual variance | 0.151 | 0.214 | 1.187 | 1.390 | 
+Short-term reversal | 0.747 | 1.071 | 0.556 | 0.640 |
+--- 图5 ---
+tame ni
+Factor Momentum in High- and Low-Eigenvalue Factors
+This table reports estimates from time-series regressions in which the dependent variable is the return on factor momentum. We construct factor momentum strategies from the 47 factors listed in Table A.II using either the individual factors or the PC extracted from these factors. We compute the factor PC momentum strategy's month  $ t + 1 $ return in five steps: (i) compute eigenvectors from the correlation matrix of daily factor returns from July 1963 up to the end of month  $ t $; (ii) compute monthly returns for PC factors up to month  $ t + 1 $ using these eigenvectors; (iii) demean and lever up or down all PC factors so that their average returns up to month  $ t $ are zero and their time series variances match that of the average original factor up to month  $ t $; (iv) take long positions in the PC factors with positive average returns from month  $ t - 11 $ to  $ t $ and short positions in factors with negative average returns; and (v) compute the return on the resulting strategy in month  $ t + 1 $. This strategy's returns are out of sample relative to the computation of the eigenvectors in step (i). We similarly lever individual factor returns so that when we compute the month  $ t + 1 $ return on the strategy that trades these factors, these factors' variances up to month  $ t $ are equal to the average factor's variance up to month  $ t $. Panel A reports monthly average returns and  $ t $-values for momentum strategies that trade subsets of PC factors ordered by eigenvalues. Panels B and C report estimates from regressions that explain the returns of momentum strategies with each other. The two intercepts correspond to the first and second halves of the sample. The sample begins in July 1973 and ends in December 2019. The first half runs from July 1973 through September 1996 and the second half from October 1996 through December 2019.
+Panel A: Factor Momentum in Subsets of PC Factors Ordered by Eigenvalues
+[表]
+Set of PCs | Full Sample | First Half | Second Half | 
+$ \bar{r} $ | $ t(\bar{r}) $ | $ \bar{r} $ | $ t(\bar{r}) $ | $ \bar{r} $ | $ t $ | 
+1-10 | 0.19 | 7.07 | 0.27 | 8.49 | 0.11 | 2 | 
+11-20 | 0.13 | 5.23 | 0.20 | 6.13 | 0.05 | 1 | 
+21-30 | 0.10 | 5.02 | 0.18 | 7.93 | 0.02 | 0 | 
+31-40 | 0.10 | 4.05 | 0.16 | 5.07 | 0.04 | 1 | 
+41-47 | 0.07 | 2.51 | 0.09 | 2.71 | 0.06 | 1 |
+山外，Florence
+--- 图6 ---
+[表]
+Decile | Asset Pricing Model | 
+FF5  $ \hat{\alpha} $ | FF5 + UMD | FF5 + FMOM $ _{ind.} $ | FF5 + FMOM $ _{PC1-10} $ | 
+$ \hat{\alpha} $ | $ \hat{b}_{umd} $ | $ \hat{\alpha} $ | $ \hat{b}_{fmom} $ | $ \hat{\alpha} $ | $ \hat{b}_{fmom} $ | 
+Losers | -0.75 | -0.10 | -0.93 | -0.04 | -2.46 | -0.02 | -3.65 | 
+(-4.05) | (-0.94) | (-36.59) | (-0.28) | (-20.06) | (-0.09) | (-12.95) | 
+-0.35 | 0.13 | -0.70 | 0.16 | -1.78 | 0.18 | -2.66 | 
+(-2.74) | (2.08) | (-46.76) | (1.54) | (-21.26) | (1.36) | (-14.05) | 
+-0.20 | 0.18 | -0.54 | 0.17 | -1.30 | 0.20 | -2.06 | 
+(-1.90) | (2.92) | (-38.35) | (1.93) | (-17.78) | (1.83) | (-13.16) | 
+-0.16 | 0.07 | -0.33 | 0.12 | -0.95 | 0.16 | -1.43 | 
+(-1.93) | (1.20) | (-22.77) | (1.69) | (-16.70) | (1.93) | (-11.67) | 
+-0.16 | -0.04 | -0.17 | -0.02 | -0.47 | 0.02 | -0.78 | 
+(-2.45) | (-0.65) | (-12.30) | (-0.39) | (-9.07) | (0.22) | (-7.49) | 
+-0.13 | -0.09 | -0.05 | -0.07 | -0.22 | -0.05 | -0.41 | 
+(-2.05) | (-1.46) | (-3.52) | (-1.02) | (-4.26) | (-0.65) | (-3.90) | 
+-0.12 | -0.16 | 0.07 | -0.14 | 0.09 | -0.12 | 0.06 | 
+(-1.94) | (-2.72) | (4.73) | (-2.32) | (1.83) | (-1.70) | (0.58) | 
+0.04 | -0.11 | 0.22 | -0.09 | 0.44 | -0.10 | 0.69 | 
+(0.62) | (-2.05) | (16.96) | (-1.34) | (8.42) | (-1.44) | (6.68) | 
+0.08 | -0.14 | 0.33 | -0.11 | 0.66 | -0.14 | 0.94 | 
+(1.08) | (-2.46) | (23.85) | (-1.45) | (11.04) | (-1.61) | (7.56) | 
+Vinners | 0.57 | 0.17 | 0.57 | 0.16 | 1.42 | 0.01 | 2.38 | 
+(4.82) | (2.32) | (32.93) | (1.60) | (17.21) | (0.05) | (14.26) | 
+Vinners | 1.33 | 0.27 | 1.51 | 0.20 | 3.88 | 0.02 | 6.03 | 
+- Losers | (4.91) | (2.43) | (56.81) | (0.99) | (23.13) | (0.09) | (15.84) | 
+N | 666 | 666 |  | 666 |  | 558 |  | 
+Avg.  $ |\hat{\alpha}| $ | 0.26 | 0.12 |  | 0.11 |  | 0.10 |  | 
+GRS F-value | 4.24 | 3.10 |  | 2.33 |  | 1.30 |  | 
+GRS p-value | 0.00% | 0.04% |  | 1.06% |  | 20.29% |  |
+山外：Ebsonji and Linnoinmee (2022)
+--- 图7 ---
+table v— continued
+Panel C: Regressions of Factor Momentum on Individual Stock Momentum Strategies
+[表]
+Dependent Variable | 
+Individual Stock | Momentum in Individual Factors | Momentum in PC Factors 1-10 | 
+Momentum, UMD $ ^{*} $ | $ \hat{\alpha} $ | UMD $ ^{*} $ | $ \hat{\alpha} $ | UMD $ ^{*} $ | FF | 
+Standard momentum | 0.15 (4.44) | 0.20 (24.72) | 0.13 (5.53) | 0.09 (17.52) |  | 
+Industry-adjusted momentum | 0.16 (4.07) | 0.26 (17.63) | 0.13 (5.17) | 0.12 (12.68) |  | 
+Industry momentum | 0.19 (4.88) | 0.15 (18.83) | 0.14 (5.88) | 0.07 (15.51) |  | 
+Intermediate momentum | 0.16 (4.15) | 0.23 (17.72) | 0.13 (4.95) | 0.10 (12.64) |  | 
+Harper ratio momentum | 0.14 (4.20) | 0.23 (25.45) | 0.11 (5.17) | 0.11 (19.74) |  | 
+All of above | 0.14 (4.30) | - | 0.12 (5.32) | - | - |
+100000000000
+--- 图8 ---
+[表]
+ | UMD | Factor Mom | 
+FF5 + UMD |  | 0.52%\n(1.551) | 
+FF5 + Factor Mom | 0.49%\n(1.416) |  |
+出处：BetaPlus 小组，www.factorwar.com
+--- 图9 ---
+[表]
+ | UMD | Factor Mom | 
+FF5 + UMD |  | 1.23% (3.304) | 
+FF5 + Factor Mom | 0.54% (1.405) |  |
+出处：BetaPlus 小组，www.factorwar.com
+--- 图10 ---
+Figure 2. Individual stock momentum versus factor momentum as a function of the number of factors. We form all subsets of the 14 U.S. factors (blue lines) or 20 U.S. and global factors (black lines) listed in Table I and form time-series factor momentum strategies that trade these factors. A time-series factor momentum strategy is long factors with positive returns over one prior year and short those with negative returns. The thick line represents the factor momentum strategy's average  $ t(\hat{\alpha}) $ from the Fama-French five-factor model regression, the thin line represents UMD's average  $ t(\hat{\alpha}) $ from a regression that augments the five-factor model with the factor momentum strategy, and the dashed line denotes UMD's  $ t(\hat{\alpha}) $ from the Fama-French five-factor model regression. The circles denote the combinations with the highest t-values in the two universes of factors. The shaded region indicates t-values below 1.96.
+--- 图11 ---
+www.factorwar.com
+--- 图12 ---
+[表]
+ | Symmetric Factors | Uncorrelated Market Factor | 
+Number of Known Factors | Residual Momentum | Factor Momentum | Residual Momentum | Factor Momentum | 
+ | 5.65 | 1.55 | 5.62 | -0.02 | 
+ | 5.28 | 2.23 | 5.21 | 0.84 | 
+ | 4.86 | 2.72 | 4.82 | 1.40 | 
+ | 4.45 | 3.14 | 4.38 | 2.00 | 
+ | 4.01 | 3.49 | 3.94 | 2.40 | 
+ | 3.52 | 3.85 | 3.42 | 2.80 | 
+ | 2.97 | 4.16 | 2.91 | 3.20 | 
+ | 2.33 | 4.44 | 2.26 | 3.00 | 
+ | 1.51 | 4.69 | 1.42 | 3.00 | 
+0 | 0.00 | 4.95 | -0.01 | 4.00 | 
+Individualock momentum | 6.01 |  | 4.68 |  |
+--- 图13 ---
+Residual Momentum versus Factor Momentum: Actual Data
+This table reports average returns and alphas for UMD-style individual stock momentum strategies. The strategy in the first row sorts stocks by their raw returns from month  $ t - 12 $ to  $ t - 2 $. The strategies in the other rows sort stocks by their estimated residuals based on the CAPM or the Fama-French three- or five-factor model. The independent variable is a factor momentum strategy that trades either the 20 off-the-shelf factors or the first then high-eigenvalue PC factors. The strategy in the first row, which is the same as the standard UMD, trades the same stocks as in the residual momentum strategies. t-Values are in parentheses. Except for the last column, the sample begins in July 1967 and ends in December 2019. In the last two columns, the sample begins in July 1973.
+[表]
+Sorting Variable | Average Return | Control for Factor Momentum | 
+Individual Factors | PC Factors 1-10 | 
+$ \hat{\alpha} $ | $ \hat{b}_{fmom} $ | $ \hat{\alpha} $ | $ \hat{b}_{fmom} $ | 
+Raw returns | 0.45 | -0.19 | 1.96 | -0.29 | 3.69 | 
+(2.88) | (-1.45) | (19.16) | (-2.04) | (17.18) | 
+CAPM residuals | 0.58 | 0.08 | 1.53 | -0.05 | 3.08 | 
+(4.29) | (0.67) | (16.68) | (-0.38) | (16.58) | 
+FF3 residuals | 0.44 | 0.15 | 0.90 | 0.00 | 2.09 | 
+(3.83) | (1.35) | (10.27) | (0.04) | (11.92) | 
+FF5 residuals | 0.37 | 0.17 | 0.63 | 0.00 | 1.72 | 
+(3.39) | (1.52) | (7.32) | (-0.03) | (10.13) |
+--- 图14 ---
+Unconditional and Conditional Correlations with the Momentum Factor
+This table reports correlations between UMD and factor returns:  $ \rho $ is UMD's unconditional correlation with the factor,  $ \rho^+ $ is the correlation conditional on the factor's return over the prior year being positive, and  $ \rho^- $ is the correlation conditional on the prior-year return being negative. The first row takes the average of all 20 factors or averages of factors with positive or negative returns over the prior year. The z-value in the last column is from a test that the conditional correlations are equal. This test uses Fisher (1915) z-transformation,  $ 1/\sqrt{\frac{1}{N^+-3}+\frac{1}{N^--3}}(\tanh^{-1}(\hat{\rho}^+)-\tanh^{-1}(\hat{\rho}^-))\sim N(0,1) $, where  $ \tanh^{-1}(x)=\frac{1}{2}\frac{\ln(1+x)}{\ln(1-x)} $ and where  $ N^+ $ and  $ N^- $ are the number of observations used to estimate  $ \rho^+ $ and  $ \rho^- $, respectively.
+[表]
+Factor | Unconditional Correlation | Conditional Correlations | $ H_{0} $:  $ \hat{\rho}^{+} = \hat{\rho} $ | 
+$ \hat{\rho} $ | $ \hat{\rho}^{+} $ | $ \hat{\rho}^{-} $ | z-Value | 
+Pooled | 0.04 | 0.45 | -0.51 | 18.37 | 
+U.S. Factors | 
+Size | -0.04 | 0.16 | -0.39 | 7.20 | 
+Value | -0.20 | 0.17 | -0.58 | 10.45 | 
+Profitability | 0.11 | 0.46 | -0.41 | 11.22 | 
+Investment | -0.03 | 0.19 | -0.37 | 7.13 | 
+Accruals | 0.13 | 0.30 | -0.15 | 5.46 | 
+Betting against beta | 0.18 | 0.41 | -0.22 | 6.70 | 
+Cash flow to price | -0.13 | 0.23 | -0.59 | 11.38 | 
+Earnings to price | -0.17 | 0.20 | -0.61 | 11.50 | 
+Liquidity | -0.03 | 0.03 | -0.14 | 2.15 | 
+Long-term reversals | -0.09 | 0.10 | -0.43 | 7.02 | 
+Net share issues | 0.11 | 0.36 | -0.42 | 10.44 | 
+Quality minus junk | 0.28 | 0.46 | -0.41 | 11.00 | 
+Residual variance | 0.21 | 0.67 | -0.56 | 18.44 | 
+Short-term reversals | -0.30 | -0.39 | -0.19 | -2.28 | 
+Global Factors | 
+Size | 0.07 | 0.09 | 0.05 | 0.35 | 
+Value | -0.16 | 0.15 | -0.48 | 5.81 | 
+Profitability | 0.27 | 0.33 | -0.02 | 2.60 | 
+Investment | 0.06 | 0.40 | -0.43 | 7.99 | 
+Betting against beta | 0.22 | 0.24 | 0.15 | 0.73 | 
+Quality minus junk | 0.42 | 0.48 | -0.17 | 4.87 |
+山外·Ehsani and Linneiness (2000)
+--- 图15 ---
+[表]
+Size | -0.262 | -0.004 | -0.808 | 6.507 | 
+Value | -0.441 | -0.286 | -0.722 | 3.745 | 
+Profitability | 0.358 | 0.552 | 0.014 | 1.769 | 
+Investment | -0.269 | 0.330 | -0.482 | 3.703 | 
+Accruals | -0.074 | 0.161 | -0.328 | 2.224 | 
+Betting against beta | 0.096 | 0.218 | -0.090 | 1.155 | 
+Cash flow to price | 0.108 | 0.202 | 0.013 | 0.701 | 
+Earnings to price | 0.232 | 0.575 | -0.227 | 2.973 | 
+Liquidity | -0.220 | 0.132 | -0.682 | 5.312 | 
+Long-term reversal | -0.278 | -0.070 | -0.622 | 3.393 | 
+Quality minus junk | 0.373 | 0.661 | 0.088 | 1.823 | 
+Residual variance | -0.138 | 0.146 | -0.609 | 4.171 | 
+Short-term reversal | -0.213 | -0.351 | -0.006 | -1.644 |
+--- 图16 ---

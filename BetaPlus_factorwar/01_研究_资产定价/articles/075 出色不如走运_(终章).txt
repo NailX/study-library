@@ -1,0 +1,114 @@
+# 出色不如走运 (终章)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/aJIOWe6oyDgjeKjV6eqO7Q
+
+作者：石川，清华大学学士、硕士，麻省理工学院博士；北京量信投资管理有限公司创始合伙人；著有《因子投资：方法与实践》、《Navigating the Factor Zoo》，译有《机器学习与资产定价》。
+封面来源：www.pexels.com
+未经授权，严禁转载。
+摘要： 如何调和学术界关于因子显著性 t-cutoff 的争议？Harvey, Sancetta and Zhao (2025) 会给你一些启发。但真正的答案取决于你心中的先验。
+0《出色不如走运》系列已经写了 8 篇（外加这篇串联）。它们都仅仅围绕一个问题：代表显著因子的 -cutoff 到底是多少？
+在 single hypothesis testing 下，-cutoff = 2.0 就够了。然而在 multiple hypothesis testing 下，为了更好的控制 type 1 error，这个 cutoff 往往要提升。But to how much? And Why?
+这个问题在未来一定还会有更多的讨论 —— 无论是学界还是业界；但是时候在公众号上为这个话题暂时画上个句号了（因为加上今天这篇，我认为已经讨论的足够充分了）。
+1在检验因子/异象收益率时，-值永远绕不过去：当 -值超过多少阈值（称为 -cutoff），就可以认为因子是显著的？过去几年实证资产定价的争论 —— 以 Harvey vs. Chen/Kelly 为代表 —— 看似在讨论“金融有没有 replication crisis”这个抽象的 statement，其实是在探讨一个更具体的问题：
+当我们同时检验了成百上千个因子时（multiple hypothesis testing），到底该用什么 -cutoff 来判断“显著”？
+对于这个问题，Harvey 教授给出的建议是 2.0 并不够，而是要把 -cutoff 提到 3.0 以上（Harvey, Liu and Zhu 2016）。在这个建议下，学术界过往提出的很多因子都只是 false discoveries 而已。
+另一方面，以 Chen/Kelly 为代表的一批新近文章则认为，replication crisis 并没那么严重，并进一步推翻了 Harvey 的观点，转而强调绝大多数已发表因子都是 true factors。
+于是，问题就来了：
+同样面对成百上千个 t-值，为什么有人觉得需要大幅上调阈值，有人却觉得几乎不用调？What's going on？
+关于这个矛盾，Harvey 的最新论文 Harvey, Sancetta and Zhao (2025) 试图复现并解释分歧来源，从而调和不同的观点。更为重要的是，该文在更少假设下给出了仍然成立的结论 —— -cutoff 至少要超过 3.0。
+Now, let's get into it.
+2To set the stage, HSZ2025 关注 false discovery rate (FDR)。令  表示是 false discoveries 个数， 表示 discoveries 总数，则 FDR 定义为
+
+当待检验的因子（hypotheses）个数足够大且 under general conditions：
+
+其中  表示拒绝原假设（null）的 -cutoff；而上式中第二个等式来自贝叶斯定理。
+因此，在检验因子时，控制 FDR 就是在控制  —— 它衡量的是根据 t-值绝对值超过 -cutoff 条件下原假设的概率。由于 null 表示因子是虚假的，所以错误地拒绝 null 意味着 false discovery。换言之，我们的目标就是选择合适的 -cutoff  来控制错误拒绝原假设的概率。
+根据上式，计算 FDR 需要三个部分：
+,,.其中，第一个是 null 下 -值的分布；第二个是  为真的概率；而第三个是  的无条件概率。Chen (2025) 给出了上面三个数值的答案，从而得出了关于 FDR 的 implication。
+考虑使用 242 个变量（241 个财务报表变量和市场收益率）通过简单算子而构造的 29,314 个随机因子。使用随机因子而非发表出来的因子可以排除 publication bias 的影响。假设 -cutoff 为 2.0，即我们认为 -值绝对值超过 2.0 就是真实因子。在这些因子中，。换言之，在超过 29K 个随机产生的因子中， 的超过 9.5K 个。
+此外，Chen (2025) 估计得出 （这不是本文的重点，感兴趣的小伙伴请阅读原论文）。因而有：
+
+基于上式，该文推断出 FDR as low as 0.09，即 9.5K 个因子中，超过九成因子是真实的，而 false discoveries 不足一成。
+Wait a minute! 你有理由疑问，上面的式子中明明还缺了一项，怎么就得到 FDR = 0.09 了？Yes，缺的这一项正是 。而如果你把 FDR = 0.09 代入式子反推，很容易得出 。Yes，这就是当 null 满足 standard normal 时， 的概率。
+而 HSZ2025 一文的核心之一恰恰就是指出  这个分布不是 standard normal。
+3Chen（2025）认为，-值在 null 下服从标准正态这一假设可以用自助法（bootstrap）来验证，正如 Chen（2021）所展示的那样，即 bootstrap 得到的 -值分布与标准正态几乎无法区分，如下图所示（下图是 HSZ2025 复现的）。
+
+从图中可以看到，大量 bootstrap samples 平均后，-值的均值（左图红色虚线）非常接近 0，而标准差（右图红色虚线）非常接近 1，和标准正态分布无异（两图中的蓝色实线）。
+然而，上述这种观点误解了两件事：一是 bootstrap 应该如何被正确使用；二是它忽略了因子本身的相关性如何改变我们对 null 下的 -值分布与显著性的判断。
+大量实证表明，因子之间存在很高的截面相关性。假设因子收益率满足以下回归模型：
+
+其中  表示市场因子，而  表示一个 common latent component，而  表示异质收益率。为了便于讨论，我们进一步假设因子和市场因子正交化过了（即上述公式中 ），因而有：
+
+其中  和  服从均值为 0 的正态分布，且因子收益率  的方差为 ，而其中异质性收益率部分的方差为 。
+Okay，now，一旦有了样本数据，我们就可以计算因子  的 -值:
+
+式中， 表示时间序列的期数，而为了简化讨论，分母中用了 population 的标准差。在原假设下，即 ：
+
+很容易证明，上述 -值的无条件分布就是标准的正态分布 。这是因为， 和  的均值都是 0，所以  的均值是 0；而  和  的波动构成了因子收益率的波动（且二者相互独立），所以  的标准差是 1。
+然而，HSZ2025 指出，计算 FDR 的关键不是 -值的无条件分布，而是 conditioning on realized  时，-值的条件分布：
+
+这个推导也非常 straightforward（只需要把  中的  视为一个常数，因此没有 randomness）。
+和无条件概率相比， 的均值（是正还是负）取决于在既有样本中的已实现 ，而方差（ 还是 ）则取决于  和  之比。
+直觉上来看，在给定共同冲击  的条件下，-值在横截面上的离散程度，受到每个因子的 loading  的符号的影响。如果所有  都同号，那么所有  会朝同一个方向移动，导致横截面方差小于 1；相反，如果不同因子的  符号不一致，有些统计量向左移、有些向右移，横截面方差就会大于 1。此时整体均值可能仍接近 0，但分布会更分散。
+不同  的条件均值在横截面上分散开来，会带来一个“方差效应”：当这些均值分散得很开时， 整体更离散、尾部更厚，从而更容易出现 over-rejection（把本来 null 为真的错判为显著）；反过来，当这些均值都挤在一起时，t-值的横截面波动降低，又可能导致 under-rejection。
+诸多 multiple hypothesis testing 的经典文献都强调过：这种由潜在依赖结构带来的共同偏移与方差膨胀，会系统性影响 -值的经验均值和经验方差。
+HSZ2025 指出，当使用 bootstrap 的时候，不同 bootstrap 样本下的均值偏离和方差缩放会相互抵消，这导致了我们看到的 bootstrap -值非常接近标准的正态分布。然而，如果我们再次回看 bootstrap 结果（为了方便，下图），但这次不看代表均值的虚线，而是看每一次 bootstrap 样本：
+
+那么便不难发现，在一个给定的 bootstrap 样本中，-值的均值都很有可能偏离 0（或正或负），而标准差都很有可能偏离 1（或高或低）。而 HSZ2025 的观点是：
+我们不该拿 bootstrap 平均后的“平行世界”来当作零分布；真正相关的是：在我们手头这个唯一样本的 realized dependence 之下，t-值的条件（经验）零分布是什么。
+无条件 null 用边际分布  控制的其实是单次检验；而条件（经验） 则在给定样本实现的依赖结构下刻画零分布，从而用来校准多重检验的 FDR 与 -cutoff。
+This changes everything.
+在 29K 因子数据中，经验方差大于 1。因此，如果还用 2.0 的 -cutoff 评判因子，则会抬高显著因子的数量，增加 false discoveries。
+4为解决“零假设下并非标准正态”的问题，HSZ2025 提出可以利用大量 -值所包含的信息，更精确地估计条件零分布，即在给定样本中已实现的依赖结构条件下，检验统计量的经验条件分布。
+作为解决方案，HSZ2025 借鉴 Efron（2007）推荐两种做法：（a）匹配估计量（matching estimator）与（b）极大似然估计（MLE）。匹配估计量先对全部 -值的总体分布做一个平滑密度估计，然后在 0 附近用二次曲线去近似其对数密度，最后把这条曲线与正态分布的对数密度对齐，从而估计经验零分布的参数。MLE 方法则假设零假设下的 -值服从正态分布，并在数据的中间区域（假定几乎不含真因子）对截断后的似然函数做极大化，以此估计经验零分布的参数。
+以 29K 个因子为例，下图展示了经验条件分布和标准正态分布的差异。
+
+而当我们用条件分布代替  来计算  时，得到的 -cutoff 相较于 2.0 也会被大大提升，造成真实因子个数的大幅下降（下表）。
+
+5以上阐述了 HSZ2025 的核心。此外，该文还在 FDR 基础上提出了  FDR 的概念：
+
+与 FDR 同时考虑所有 -值超过 t-cutoff 的因子中的 false discovery 不同，LFDR 衡量的是单一因子 —— 比如新发现的一个因子 —— 为 false discovery 的概率。
+HSZ2025 强调：我们往往只能观察到研究者最终“端上桌”的那一个结果，因此并不能像 Efron 那类经验零分布方法一样，利用大量 t-值去反推 null 的条件分布。于是，在“单一被报告统计量”的信息约束下，零假设分布只能退回到无条件渐近正确的标准正态  —— 这是这种设定里最可行的基准。
+但这并不意味着多重检验问题消失了：研究者在后台可能尝试了很多规格、很多变量组合，最后才挑出这个“最显著”的 t-值。也正因为我们不知道他到底试了多少次，HSZ2025 转而主张控制 LFDR（给定  的“这个因子是假的”的概率），并用贝叶斯推导出 LFDR 的下界，从而在不需要知道检验次数的情况下，仍能反推出“为了控制多重检验风险，t-值至少要多大”。在他们的校准下，因子研究里合理的门槛大致落在 。
+关于 LFDR，和 Harvey 在 2017 AFA 主席演讲中提出的 Bayesianized p-value 无异（Harvey 2017），本文不再赘述。
+6从 Harvey and Liu (2020) 用  刻画 null 的 bimodal mean 分布；再到 HSZ2025 的经验条件分布，都传达了一个事实，那就是 -cutoff 的取值以及 FDR 的计算离不开合理的先验。
+此外，HSZ 2025 给我的最大启发是：它把关于因子显著性的讨论拉回到三个不可回避的现实约束：
+因子相关性让 Null 下的 -值分布偏离标准正态分布，而这会系统性影响 FDR 推断；我们永远只看到发表端，存在 sample selection bias；在 lack of identification（因为我们永远不知道被尝试的因子的个数）的世界里，最科学的姿势不是假装客观，而是透明地阐明假设、报告敏感性、并用可辩护的先验完成决策。所以，看完这篇之后，能不能就此相信“已发表因子大多站得住脚”？
+我的回答依然是那句：Not so fast。
+而如果你追问，-cutoff 到底应该是多少，我想，答案就在每个人的心中。
+References
+Chen, A. Y. (2021). The limits of p-hacking: Some thought experiments. Journal of Finance 76(5), 2447-2480.Chen, A. Y. (2025). Most claimed statistical findings in cross-sectional return predictability are likely true. Journal of Finance: Insights forthcoming.Efron, B. (2007). Size, power and false discovery rates. Annals of Statistics 35, 1351-1377.Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399-1440.Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance 75(5), 2503-2553.Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5-68.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Figure 1: The Inadequacy of the Bootstrap Method. The Fama and French (2010) bootstrap is applied to demeaned, equal-weighted returns from the 29,314-factor dataset to replicate the results in Chen (2025). For each bootstrap replication (x-axis), the figure shows a dot representing the mean (left panel) and the standard deviation (right panel) of the 29,314 t-statistics in that replication. For reference, the mean (left panel) and standard deviation (right panel) of the standard normal distribution are indicated by a horizontal blue line. The average of the t-statistics (left panel) and the square root of the average variance (right panel) across the 1,000 bootstrap replications are indicated by a horizontal dashed red line.
+--- 图3 ---
+Figure 1: The Inadequacy of the Bootstrap Method. The Fama and French (2010) bootstrap is applied to demeaned, equal-weighted returns from the 29,314-factor dataset to replicate the results in Chen (2025). For each bootstrap replication (x-axis), the figure shows a dot representing the mean (left panel) and the standard deviation (right panel) of the 29,314 t-statistics in that replication. For reference, the mean (left panel) and standard deviation (right panel) of the standard normal distribution are indicated by a horizontal blue line. The average of the t-statistics (left panel) and the square root of the average variance (right panel) across the 1,000 bootstrap replications are indicated by a horizontal dashed red line.
+--- 图4 ---
+Figure 2: Density Plot of t-statistics for Factor Returns. The histogram of the t-statistics for the 29,314 factors is plotted, with the top two subplots computed from equal-weighted returns and the bottom two subplots computed from value-weighted returns. The right two subplots present t-statistics from raw returns, while the left two subplots show t-statistics each orthogonalized with respect to the market return. The dashed blue line depicts the estimated null distribution of the t-statistics, the solid black line shows the approximation to the center of the density obtained by multiplying the estimated null density by  $ \mathbb{P}(H_0) $, where all the quantities are estimated by the MLE method. For reference, the standard normal density is shown as a dotted red line.
+--- 图5 ---
+weighted raw returns (EW) and ex market returns (EW-xMKT) in the upper panel, and value-weighted raw returns (VW) and ex market returns (VW-xMKT) in the lower panel. The rows “$\mathbb{P}(H_1)$ (Storey)” and “$\mathbb{P}(H_1)$ (Matching/MLE)” present the estimated proportion of true alternative hypotheses using the Storey or the Matching/MLE methods, respectively. The rows “$\mu$” and “$\sigma$” report estimates of the mean and standard deviation of the $t$-statistics under the null for the matching and MLE estimators. For the other methods, they are set to 0 and 1. The “N rejected” row displays the number of factors rejected out of 29,314 total using the cutoffs specified in the “Cutoff (left)” and “Cutoff (right)” rows.
+[表]
+ | EW | EW-xMKT | 
+ | $ \mathcal{N}(0,1) $ | Matching | MLE | $ \mathcal{N}(0,1) $ | Matching | MLE | 
+$ \mathbb{P}(H_1) $ (Storey) | 0.41 | 0.10 | 0.14 | 0.47 | 0.07 | 0.12 | 
+$ \mathbb{P}(H_1) $ (Matching/MLE) | NA | 0.09 | 0.15 | NA | 0.05 | 0.13 | 
+$ \mu $ | 0.00 | -0.08 | -0.26 | 0.00 | 0.03 | -0.20 | 
+$ \sigma $ | 1.00 | 1.62 | 1.52 | 1.00 | 1.89 | 1.75 | 
+Cutoff (left) | -2.26 | -4.70 | -4.48 | -2.16 | -5.51 | -5.16 | 
+Cutoff (right) | 2.26 | 4.55 | 3.97 | 2.16 | 5.57 | 4.75 | 
+N rejected | 8264 | 2308 | 2754 | 9599 | 1919 | 2393 | 
+ | VW | VW-xMKT | 
+$ \mathbb{P}(H_1) $ (Storey) | 0.12 | 0.04 | 0.05 | 0.24 | 0.04 | 0.05 | 
+$ \mathbb{P}(H_1) $ (Matching/MLE) | NA | 0.05 | 0.06 | NA | 0.05 | 0.06 | 
+$ \mu $ | 0.00 | -0.17 | -0.18 | 0.00 | -0.15 | -0.15 | 
+$ \sigma $ | 1.00 | 1.09 | 1.08 | 1.00 | 1.31 | 1.29 | 
+Cutoff (left) | -3.32 | -4.08 | -4.00 | -2.89 | -5.06 | -4.97 | 
+Cutoff (right) | 3.32 | 3.73 | 3.64 | 2.89 | 4.76 | 4.66 | 
+N rejected |  |  |  |  |  |  |
+--- 图6 ---

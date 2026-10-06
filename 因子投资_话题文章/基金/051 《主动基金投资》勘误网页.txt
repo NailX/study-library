@@ -1,0 +1,15 @@
+# 《主动基金投资》勘误网页
+
+来源：微信公众号「因子投资」话题·基金（第51篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247486773&idx=1&sn=291d01d0785ddef1f98d0246601926f2&chksm=f995bcb7cee235a11d845583d8ba201c8e6c710273e4359d2d8d1bb9100d0f3d85fa0787e8f3#rd
+
+由于写作周期较长，书中难免疏漏。为此，我们在配套网站中建立了一个《主动基金投资》的勘误页面（https://www.factorwar.com/typos3/，点击文末阅读原文可跳转） ，一旦发现问题，我们会在该页面发布勘误信息并在随后加印时更新。大家可关注该勘误网页。如有发现尚未收录、更新的问题，还请联系、告知我们，非常感谢。当前已发现一处问题。勘误页面如下：
+
+【图片文字】
+--- 图1 ---
+BetaPlus
+专注于多因子模型和异象研究
+首页 书籍介绍 ✓ 数据 ✓ 研究 ✓ 勘误 ✓ 小册子 ✓ Cochrane (2005) ✓ 关于我们 ✓
+本页面不定期更新发布《主动基金投资》的勘误及补充说明。
+以下勘误出现在第一次印刷中：
+P20，脚注2缺失了动量因子。正确表述应为：为估计基金i的四因子Alpha，利用过去T月的数据构造如下回归模型： $ R_{i,t}^{e} = a_i + \beta_{i,\mathrm{MKT}}\mathrm{MKT}_t + \beta_{i,\mathrm{SMB}}\mathrm{SMB}_t + \beta_{i,\mathrm{HML}}\mathrm{HML}_t + \beta_{i,\mathrm{UMD}}\mathrm{UMD}_t + \varepsilon_{i,t} $，其中， $ R_{i,t}^{e} $为基金i在t月的超额收益率。然后计算t月的因子模型调整后收益率： $ \hat{\alpha}_{i,t} = \mathcal{E}_{i,t}^-\left(\hat{\beta}_{i,\mathrm{MKT}}\mathrm{MKT}_t + \hat{\beta}_{i,\mathrm{SMB}}\mathrm{SMB}_t + \hat{\beta}_{i,\mathrm{HML}}\mathrm{HML}_t + \hat{\beta}_{i,\mathrm{UMD}}\mathrm{UMD}_t\right) = \hat{a}_i + \hat{\epsilon}_{i,t} $。

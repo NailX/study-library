@@ -1,0 +1,286 @@
+# Risk-Return Tradeoffs (I)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/h4G62VY-5cR3XPpv_CIgwA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+隐性多因子模型如何成为研究资产定价的重要范式？且听 Kelly and Xiu (2023) 娓娓道来。
+
+上期公众号介绍了 Giglio and Xiu (2021) 提出的 three-pass estimator。它在 Fama-MacBeth regression 的基础上加入了 PCA，是近年来通过 PCA 研究隐性因子模型的代表之一。
+
+在隐性因子模型中，因子暴露和因子都是不可观测的，而是需要通过统计手段估计得到（因此按照 FF 方法构造的 HML 就不是隐性因子）。在这方面，对（大量）资产的协方差矩阵进行 PCA 就是最重要的工具之一，而这背后的理论基础正是源自 APT。这样得到的因子也被称为统计因子（statistical factors）。
+
+当然，如果仅仅是从资产的协方差矩阵出发，那么能够利用的信息将会十分有限（即只用了收益率信息）。为了利用到更多的信息（例如 firm characteristics），可以将因子暴露直接建模为特征的函数，即  。这就是 Bryan Kelly 等人提出的 Instrument-PCA（IPCA）模型。在数学上，它近似等价于对使用这些特征构造的一大堆 managed portfolios 的收益率的协方差矩阵进行 PCA，因此和直接对资产协方差矩阵进行 PCA 有异曲同工之妙。不过工具变量（那些 characteristics）的引入使该模型成为条件因子模型，因此能够更好地刻画资产收益率的时变性。
+
+铺垫了这么多，是因为今天我想翻译一下 Kelly and Xiu (2023) 的第四章（Risk-Return Tradeoffs）—— 对，我把第三章跳过去了。第四章中涉及的最重要两篇文章就是 Giglio and Xiu (2021) 以及 Kelly et al. (2019) 的 IPCA 模型。此外，由于原著的第四章内容过于丰富，本文只覆盖到其中的 4.3 节。后面的三小节将会在后续推文中介绍。
+
+再次感谢王熙和刘洋溢对内容的反馈。本翻译仅供学习交流使用，禁止一切商业行为，未经授权，禁止转载。
+
+最后，祝各位中秋、国庆节快乐。
+
+以下是正文部分。
+
+上一章主要关注于监督预测模型而没有考虑风险和收益率之间的权衡，因此它们并不是资产定价模型。本章将通过无监督和半监督学习方法提出因子定价模型，它们明确地考虑了风险和收益率之间的权衡问题。
+
+4.1 套利定价理论基础
+
+Ross (1976) 的套利定价理论（APT）为数据驱动的和基于机器学习的因子模型分析奠定了基础。它表明，通过部分模型设定 —— 本质上只需假设线性因子结构，因子数量固定，以及无套利这一基础的经济假设 —— 我们便能方便地通过研究因子组合来学习资产定价模型，并了解收益率中哪部分是可以分散化的，而哪部分则不能。换句话说，APT 为关于风险与收益率权衡的实证分析提供了一个蓝图，而无需使用者了解导致资产定价因子背后的机制。因此，我们可以利用机器学习方法进行隐性因子分析，从而得出关于实证资产定价现象的全新见解。
+
+我们还推荐读者参阅 Giglio et al. (2022a) 关于收益率因子模型的综述。在这篇综述中，几位作者依照因子是否是可观测的、  值是否是可观测的或两者都是不可被观测这几条标准将文献分类。针对可观测的因子或  ，学者们已经提出了很多时序和截面回归方法。在本章中，我们聚焦于一个更具挑战性的情况，即因子和  都是隐性的（或最多只是部分可观测的），以便能够深入探讨一些机器学习因子建模的技术细节。
+
+4.2 无条件因子模型
+
+Ross (1976) 的 APT 是以如下这个统计因子模型为前提：
+
+  
+
+其中  维向量  表示单个资产的超额收益  ，  维矩阵  表示这些资产对  个隐性因子  的暴露，  的非零均值  则可以被理解为因子的风险溢价（译者注：即因子收益率，这一结论成立的充分条件是因子可以被交易），最后  维向量  则表示均值为零的随机扰动。
+
+另外，  维截距向量  表示定价误差。它们是资产预期收益率中无法被对风险因子的暴露所解释的部分。Ross (1976) 的 APT 以及其后继者们（例如 Huberman 1982, Ingersoll 1984, Chamberlain and Rothschild 1983）指出，无近似套利条件等价于
+
+  
+
+上式意味着，承担特质性风险的补偿并不会随着投资范围的扩大而激增（译者注：根据原著脚注的说明，  代表  ，其意思为随着样本量趋于无穷大，  的增长率不会超过  的某个固定的倍数。此外，在后文中，原著使用  表示  以及  两个条件同时满足）。
+
+4.2.1 使用 PCA 估计因子
+
+受 APT 的启发，Chamberlain and Rothschild (1983)，Connor and Korajczyk (1986) 以及 Connor and Korajczyk (1988) 均主张，当因子和因子暴露均无法观测时，使用主成分分析（PCA）作为因子模型的估计方法。为此，一个等价但更方便的处理方法是对去均值之后的收益率  进行奇异值分解（SVD）：
+
+  
+
+其中  、  以及  分别表示  的前  个奇异值，以及左、右奇异向量，  为  中因子个数的任意一致估计量（例如 Bai and Ng 2002），  为残差矩阵，  表示其元素均为  的  维向量。通过上述奇异值分解可以得到因子变化  和风险暴露  的估计值
+
+  
+
+上述因子估计值是标准化的，因而满足  。类似的，我们也可以将  标准化，使其满足  。在隐性因子模型中，存在一个基本的不确定性，即旋转因子并同时反向旋转因子暴露不改变数据生成过程。因此，因子及其暴露的可识别性仅限于一个可逆的线性变换（即旋转）。鉴于此，不同的标准化会产生等价的因子和因子暴露估计量，它们之间可以通过某种旋转而相互转换。在所有因子都是普遍性的假设下，即  ，Bai (2003) 证明了 PCA 估计的一致性并推导出它们在该假设下的渐近分布。
+
+Connor and Korajczyk (1988) 最早使用大约 1500 支股票研究了隐性因子模型的表现。他们发现，尽管基于 PCA 的因子模型比起 CAPM 模型更能解释样本中的风险和收益率，但它依然会产生很大且显著的定价误差。一般来说，无条件因子模型很难描述个股级别的数据。基于该研究以及其他相关研究，无条件隐性因子模型（及其通过 PCA 的估计）自 Connor and Korajczyk (1988) 之后便淡出了人们的视线。Kelly et al. (2019) 利用最新的数据也证实了上述发现。他们显示，在横跨 1962—2014 年的 CRSP 股票面板数据中，PCA 在估计个股风险溢价方面极不稳健。
+
+近年来，利用 PCA 对收益率因子建模再次回到了人们的视线之中。这个现象在很大程度上源于这样一个事实：尽管 PCA 在描述个股股票面板数据时效果不理想，但它在对投资组合的面板数据建模方面取得了巨大的成功。例如，Kelly et al. (2019), Kozak et al. (2018) 以及 Pukthuanthong et al. (2019) 均表明，通过 PCA 分析异象投资组合的面板数据而得到的因子模型能够对这些很好地为这些组合定价，表现为经济意义很小的定价误差。这些分析是建立在 Geweke and Zhou (1996) 的早期工作之上，他们使用 Gibbs 抽样法从投资组合级别数据中提取隐性因子。
+
+对于隐性因子模型而言，由于该模型的不确定性（译者注：即可以通过旋转得到等价的模型），它的一个潜在的缺点是人们难以解释估计出的因子。然而，当我们关注的对象不受旋转影响时，使用隐性因子模型就会变得非常方便。下面我们就来看这样一个例子。
+
+4.2.2 风险溢价的三步法估计量
+
+因子的风险溢价等于均衡状态下投资者因暴露于该因子的风险而要求的补偿。许多理论经济模型是基于一些不可交易因子（即因子本身并非某个投资组合），如消费、GDP 增长、通货膨胀、流动性和气候风险等，来开发的。为了估计一个不可交易因子的风险溢价，我们需要构建一个模拟该因子的投资组合并估计其预期收益率。为了便于阐述，假设某个不可交易因子  与资产的截面关系如下：
+
+  
+
+其中  是测量误差且  。在这个模型中，  的风险溢价为  。由于  往往是源自某些经济理论，因此它的模拟组合和风险溢价可能在经济上是可解释的。此外，尽管  、  以及  的可识别性仅限于可逆的线性变换（旋转），但  以及  却不受旋转的影响，因而是可以被识别的。为了理解这一点，由 Bai and Ng (2002) 可知存在矩阵  使得   （对任意  ）。如果我们利用  表示  和  的数据生成过程，那么  的风险溢价可以表示为  ，且  对  的暴露变为  ，然而模拟组合的因子突变以及  的风险溢价却不受上述旋转的影响，即  以及  。
+
+通过将 Fama-MacBeth 回归与 PCA 相结合，Giglio and Xiu (2021) 提出一个三步法估计量来对  进行推断。该估计量的第一步是使用 PCA 并根据式 (4.4) 估计因子和暴露。第二步通过 Fama-MacBeth 回归求解隐性因子的风险溢价：
+
+  
+
+第三步则是计算  对隐性因子的暴露：
+
+  
+
+最终，  的风险溢价估计量为  。
+
+Giglio and Xiu (2021) 进一步给出了该估计量的渐近性质。他们对基于 PCA 结果的 Fama-MacBeth 回归的渐近分析为风险溢价、随机贴现因子（Giglio et al. 2021b）以及  （Giglio et al. 2021a）等变量进行统计推断铺平了道路，这些变量均是人们使用隐性因子模型进行资产定价时的重要研究对象。
+
+三步法估计量和基于 PCA 回归的模拟投资组合密切相关。后者是使用  对  的主成分回归以构造其因子模拟投资组合，并通过计算其平均收益率而得到  的风险溢价。使用主成分而非  中的原始资产是一种正则化形式。这种观点鼓励人们在构造模拟投资组合时，采用机器学习中的其他正则化方法，如岭回归和 LASSO 回归。
+
+在实证研究方面，表 4.1 汇总了使用不同方法对若干不可交易因子的风险溢价估计，其中包括 Ludvigson and Ng (2010) 中的工业生产增长的 AR(1) 冲击（IP），以及 279 个宏观金融变量的前三个主成分的 VAR(1) 冲击，Pástor and Stambaugh (2003) 的流动性因子，He et al. (2017) 的中介资本因子，Novy-Marx (2014) 的四个气象因子，以及 Malloy et al. (2009) 的一个综合消费因子。
+
+表格中的结果清晰展示了传统两步法回归中存在的两个问题：遗漏变量偏误以及测量误差偏误。两步法估计量依赖于研究者选择哪些基准因子作为控制变量。然而，就这方面而言，经济理论往往无法提供足够的指引。遗漏控制变量通常会导致风险溢价估计量出现偏误。以流动性和中介资本因子为例，对于前者而言，当使用单变量的两步法回归时，其风险溢价估计值为每月 226 个基点，而一旦使用 FF3 因子作为控制变量，其风险溢价则变为 57 个基点；类似地，对于后者而言，两种情况下的风险溢价分别为 101 和 43 个基点。
+
+式 (4.5) 也可用来分析噪声因子（  ）和弱因子（  很小）这两类特殊情况，它们的存在往往会影响两步法回归中关于因子溢价的推断（这种现象最初由 Kan and Zhang (1999) 提出）。例如，来自 Novy-Marx (2014) 的四个因子看上去确实能够在常规预测回归检验中预测收益率，但它们与股票市场的经济联系似乎无关。尽管如此，使用 FF3 为控制变量的两步法回归显示其中三个因子都有显著的风险溢价。宏观因子（例如上述主成分或消费增长）也属于弱因子。三步法能够解决遗漏变量偏差和测量误差问题，这是因为它的第一步估计了隐性因子，并在第二步将它们作为截面回归时的控制变量，最后在第三步通过时序回归来消除测量误差。得益于这种稳健性，表 4.1 最后两列展示的估计值（译者注：来自三步法估计量）似乎更具经济合理性。
+
+4.2.3 PCA 延伸
+
+虽然 PCA 是发现因子的最常见方法，但也还存在其他一些具备独特特点的拓展。例如，Giglio et al. (2021a) 采用矩阵补全来估计因子模型，以应对不平衡面板收益率数据的问题。假设  是一个  维矩阵，当且仅当  不缺失时，  中的第  个元素等于  。矩阵补全算法解决了以下凸优化问题：
+
+  
+
+其中  表示哈达玛乘积（译者注：即两个形状一样的矩阵中相同位置的元素相乘），  且  表示  的第  大的奇异值，  则是一个调优参数。通过惩罚  奇异值的  范数，该算法试图仅使用非缺失的元素来找到  的一个低秩近似。所估计的  是具有低秩结构的  的完整矩阵，对它进行奇异值分解便能够获得隐性因子以及因子暴露。
+
+标准 PCA 实现方法是对去均值后的超额收益矩阵  进行奇异值分解。该处理方法通过收益率的样本中心二阶矩来估计隐性因子和  值。Lettau and Pelger (2020b) 指出，PCA 仅使用二阶矩的信息导致了因子模型的估计值并非是有效的（译者注：即估计量的方差并非最小）。资产定价理论暗示了资产预期收益率和因子暴露  之间的关系（例如，基于无条件的欧拉方程 (1.2)）。因此，他们认为，更加重视收益数据一阶矩中包含的因子暴露信息能够提高 PCA 估计量的整体性能。基于该想法，他们提出了“风险溢价 PCA”（RP-PCA）估计量，该估计量通过对非中心化的收益率二阶矩应用 PCA 而得到，即  ，其中  是调优参数。Connor and Korajczyk (1988) 同样使用了非中心化的 PCA，但仅限于   的情况，而标准的 PCA 则对应着  的情况。
+
+Lettau and Pelger (2020a) 建立了 RP-PCA 的渐近理论，并指出在没有定价误差且因子是普遍存在的情况下，它比 PCA 估计量更有效。虽然标准 PCA 方法对定价误差的存在并不敏感，但由于定价误差存在时资产预期收益率不再和因子暴露一一对应，因此该误差可能会导致 RP-PCA 估计量出现偏移。我们猜测，如果施加了无近似套利的经济约束 (4.2)，该偏移则是可以渐近忽略的，因为在这种情况下  足够小，从而不会对因子及因子暴露的渐近估计产生偏差。
+
+Giglio et al. (2021b) 指出一个因子的强度取决于测试资产的选择。如果所有的测试资产都是对市场暴露为零的多空对冲组合，那么即便是市场因子也会被认为是一个弱因子。为了解决风险溢价估计中的弱因子问题，该文提出了一个基于监督 PCA 来选择检验资产的方法（如第 3.5.2 节所述）。此外，这个方法可以被用来检测随机贴现因子模型中的缺失因子。
+
+4.2.4 有哪些因子？
+
+人们为了解释股票预期收益率截面差异，已经找到了数百个潜在的候选因子。然而，其中很多因子在控制了其他因子之后便对资产定价而言没有增量的解释力，因而是冗余的。有些因子甚至自身就是完全无用的，没有任何解释力。
+
+机器学习方法可以通过降维和变量选择来解决冗余和无用因子问题。例如，通过将平均收益率对因子协方差进行 LASSO 回归可以获得一个简约的因子集，它们能够在截面上很好地为资产定价。与此同时，错误选择也是难以避免的：过度拟合可能导致选出无用的因子；相对解释力较弱的因子可能被遗漏；冗余的因子也有可能被选出从而取代真正的因子。Feng et al. (2020) 的发现（图 4.1）显示，在交叉验证时采用不同的随机种子（即随机将样本数据分割为多个子集）会对 LASSO 回归的结果产生重大的影响。
+
+Feng et al. (2020) 将 Chernozhukov et al. (2018) 的双机器学习框架和两步法横截面回归相结合，提出了一个能够识别与资产定价密切相关的因子的方法，并同时给出了其估计量的渐近分布。通过该分布，他们可以对这些因子进行推断。
+
+在实证方面，Feng et al. (2020) 递归地使用他们的推断方法，以此区分文献中介绍的有用因子和无用及冗余因子。他们的实证发现显示，如果从 1994 年开始逐年应用他们的方法，那么在 120 多个候选因子中只有 17 个因子是有用的，而其他大多数因子则是冗余或无用的。
+
+另有文献从模型不确定性和模型平均的角度考虑因子模型的选择问题，相关的研究包括 Avramov et al. (2023) 和 Chib et al. (2023)。Avramov et al. (2023) 认为，关于夏普比率取值的先验观点将左右因子和预测变量的选择。总体上，贝叶斯所考虑到的模型不确定性是未来金融机器学习领域中一个有趣的研究方向。
+
+4.3 条件因子模型
+
+前一节重点关注了欧拉方程 (1.2) 的无条件版本（通过空集代替信息集  ，或去掉条件），即因子暴露和风险价格都是静态的，不随时间变化。通常，当我们改变条件信息集时，因子也会随之而改变，这是因为资产的条件矩会发生变化。我们不能完全否定如下这种情况，即当我们去掉条件时，资产的因子暴露和预期收益率不会发生变化 —— 在这种特殊情况下，条件和无条件模型是相同的。然而，实证研究表明资产的协方差在时间序列中是高度可预测的，并且大量的证据表明资产的预期收益率也是可预测的。换句话说，我们可以排除“条件静态”（译者注：因子暴露和风险价格不随给定信息集而变化）这一特殊情况。
+
+是选择条件还是无条件模型？这是在研究收益率因子模型时要考虑的问题。我们的观点是，研究者都应尽可能努力构建一个有效的条件模型。条件模型往往目标远大 —— 它们描述了资产价格的状态依赖性，从而更精细地捕捉了市场的行为。然而，提出条件模型的要求也更高，它需要研究者提供相关数据来总结当前的条件。这种条件信息集涉及的方面可能非常广泛，并且可能需要更丰富的参数化模型来捕捉微妙的条件行为。当相关的条件信息不可用时，使用简单的无条件模型，研究者在无需了解详细的市场动态的情况下便能够理解基本的资产行为。因此，早期关于收益率因子分析的文献大多使用了无条件模型（如前一节所述）。在本节中，我们将讨论的重点放在条件模型的构建上。
+
+与式 (4.1) 类似，向量形式的条件隐性因子模型为
+
+  
+
+其中因子暴露和定价误差均随条件信息集  变化。
+
+4.3.1 IPCA
+
+如不加入额外的约束，模型则会因为式 (4.7) 右侧的自由度太高而无法被识别。Kelly et al. (2019) 利用工具变量主成分分析（IPCA）将因子暴露（以及资产的定价错误）和观测变量联系在一起，取得了一定的进展。IPCA 模型的形式为：
+
+  
+
+其中  矩阵  表示  个资产在L个可观测特征（“工具变量”）的取值。  维向量  表示隐性因子。Harvey and Ferson (1999) 以及近期的 Gagliardini et al. (2016) 也通过可观测变量的时变函数为因子暴露建模，但他们的因子是完全可观测的。
+
+IPCA 模型的核心是其对  的设定。首先最重要的是，时变的工具变量直接将条件性引入到条件因子暴露中。更为根本的是，纳入工具变量允许多因子模型受到更多数据的影响，这与仅从收益率数据估算因子结构的无条件隐性因子方法（如 PCA）有所不同。此外，将因子暴露锚定到可观察的变量上，使得我们在识别多因子模型时通过数据部分替代未识别的参数。
+
+模型中  维矩阵  将潜在大量的公司特征（  维）映射到少数几个风险因子（  维）的暴露上。当估计  时，我们的目标是寻找公司特征的少数几个线性组合，以使它们尽可能地代表隐性的因子暴露结构。为了更好地理解这一点，试想一下  是一个  维的单位矩阵的情况。这时，容易证明  包含了  个隐性因子（它们的收益率正比于  ）且特征决定了资产对这些因子的暴露值。这不禁让人想起 Rosenberg (1974) 以及 MSCI Barra 多因子模型（Barra 模型是业界一个常用的风险因子模型）。在 Barra 模型中，  包括了几十个公司特征和行业指标。当特征  的数量很大时，自由参数的数量等于因子实现值的数量  ，或  ，这通常比样本数要多。Barra 模型中的因子存在显著的冗余（少量的主成分能够捕获了它们的大部分共同变化），这表明它的过度参数化以及非有效性。
+
+IPCA 通过对特征空间降维来解决这个问题。如果许多公司特征都关于股票风险敞口提供了带噪声的信号，那么将它们聚合成线性组合能够在剥离出信号的同时一并抵消掉噪声。
+
+资产风格迁移问题，例如股票从小市值变成大市值或者从成长股变为价值股，对使用简单的时间序列方法研究个股条件预期收益率模型提出了极大的挑战。对此，常规的解决方法是构造一些投资组合，每个组合中的资产在特定公司特征上的平均值在时序上相对稳定。然而，如果我们需要用多个公司特征来准确描述资产时，上述方法就变得不切实际。IPCA 的解决方案是将因子暴露（  ）视为影响股票风险和收益率的公司特征的函数。IPCA 通过资产的因子暴露来跟踪资产风格迁移，而因子暴露又由公司特征而确定。这使得模型能够根据特征的取值来识别资产，不再需要研究者手动将资产划分到不同的投资组合。因此，该模型无需通过构造特设（ad-hoc）的投资组合便能够处理高维度的资产体系（即个股）。
+
+最后，式 (4.8) 所示的 IPCA 设定还考虑了这样一种可能，即（公司）特征代表  而非  。传统的资产定价模型假设资产之间的预期收益率差异仅仅是归因于其风险敞口的差异。然而，一旦  维系数向量  不为零，则意味着股票层面的特征能够以一种和风险暴露对应之外的方式来预测收益率（译者注：即预测风险暴露之外的超额收益率）。IPCA 在控制住公司特征对因子暴露的作用的前提下，以尽可能解释资产预期收益率截面差异为目标，通过公司特征的线性函数（  ）来估计  。如果特征和资产平均收益率的关系与特征与风险因子暴露之间的关系存在差异（译者注：即预期收益不仅仅由对风险因子的暴露决定），IPCA 便会得到一个非零的估计  ，从而识别出错误定价（即因持有资产而获得的与资产系统性风险敞口无关的额外补偿）。
+
+表 4.2 将使用不同数量隐性因子的 IPCA 模型（面板A）与文献中的其他主要多因子模型进行了比较。第一组比较模型包括预先指定的可观察因子，并逐一使用资产进行时间序列回归这一传统方法进行估计。K=1 表示 CAPM 模型，K=3 表示包括市场、SMB 以及 HML 的 Fama and French (1993) 三因子模型（以下简称“FF3”），K=4 表示 Carhart (1997，“FFC4”) 模型，它在 FF3 模型中加入了动量因子 MOM，K=5 代表 Fama and French (2015，“FF5”) 五因子模型，它在 FF3 模型中加入了盈利 RMW 和投资 CMA 因子，K=6（“FFC6”）则在 FF5 之上加入了动量 MOM 因子。在表 4.2 的结果中，所有 IPCA 模型都是在施加  的约束下而估计得到，且所有时序回归中都没有包含截距项。
+
+表 4.2 报告了基于同期因子已实现收益率计算的总体  、预测性  （用因子收益率均值代替已实现值）以及每个模型中所需估计参数的数量（  ）。我们同时汇报了模型对个股以及基于特征构造的投资组合的定价表现。表中的统计数据是样本内的计算结果。当考虑股票时，基于可观察因子的模型的总体  略高于 IPCA 模型。然而，为了实现这一点，基于可观察因子的模型所需要估计的参数数量远远超过 IPCA 模型。在这个包含 11452 支股票、37 个工具变量和 599 个月的样本中，可观察因子模型所需估计的参数是 IPCA 模型的 18 倍（  ）。换言之，IPCA 模型与主流多因子模型在刻画个股系统性风险方面的表现十分接近，而 IPCA 模型将需要估计的参数个数减少了将近 95%。与此同时，IPCA 模型比可观测因子模型提供了关于股票风险补偿更加准确的刻画，一如预测性  所表明的那样。对于基于特征构造的投资组合而言，无论是总体  还是预测性  ，IPCA 模型都优于可观测因子模型。
+
+图 4.2 比较了两类模型对 37 个基于特征构造的“异象”投资组合的平均定价误差。在左侧的子图中，纵坐标是这些异象组合相对于 FFC6 模型的超额收益率  ，横坐标是其原始的平均收益率，可以看到它们和 45 度线相重叠（译者注：说明 FFC6 无法解释这些异象）。图中实心正方形表示 t-statistic 超过 2.0 的  ，空心圆圈表示不显著的  。当使用 FFC6 作为定价模型时，有 29 个特征投资组合获得了显著的  。这些  围绕着 45 度线排列，表明它们的平均收益率无法被 FFC6 模型中的可观测因子解释。右侧的子图展示了包含五个隐性因子的 IPCA 模型的情况。此时，仅有 4 个特征投资组合的条件  显著不为零（但经济意义很小）。基于上述结果，我们可以得出如下结论：相对于具有可观察因子的资产定价模型而言，包含隐性因子的 IPCA 模型对一系列股票投资组合的定价效果更好。
+
+上述 IPCA 框架已被应用于多种市场的截面资产定价问题之中，包括国际股票（Langlois 2021; Windmueller 2022）、公司债券（Kelly et al. forthcoming）、股票指数期权（Büchner and Kelly 2022）、特定单一股票期权（Goyal and Saretto 2022）以及货币（Bybee et al. 2023a）市场。此外，它还被用来分析价格趋势信号的盈利能力（Kelly et al. 2021）以及叙事资产定价模型（Bybee et al. forthcoming）。
+
+参考文献
+Avramov, D., S. Cheng, L. Metzker, and S. Voigt (2023). Integrating factor models. Journal of Finance 78(3), 1593–1646.
+
+Bai, J. (2003). Inferential theory for factor models of large dimensions. Econometrica 71(1), 135–171.
+
+Bai, J. and S. Ng (2002). Determining the number of factors in approximate factor models. Econometrica 70(1), 191–221.
+
+Büchner, M. and B. T. Kelly (2022). A factor model for option returns. Journal of Financial Economics 143(3), 1140–1161.
+
+Bybee, L., B. T. Kelly, and Y. Su. (forthcoming). Narrative asset pricing: Interpretable systematic risk factors from news text. Review of Financial Studies.
+
+Chamberlain, G. and M. Rothschild (1983). Arbitrage, factor structure, and mean-variance analysis on large asset markets. Econometrica 51(5), 1281–1304.
+
+Chernozhukov, V., D. Chetverikov, M. Demirer, E. Duflo, C. Hansen, W. K. Newey, and J. Robins (2018). Double/debiased machine learning for treatment and structure parameters. The Econometrics Journal 21(1), C1–C68.
+
+Chib, S., L. Zhao, and G. Zhou (2023). Winners from winners: A tale of risk factors. Management Science.
+
+Connor, G. and R. A. Korajczyk (1986). Performance measurement with the arbitrage pricing theory: A new framework for analysis. Journal of Financial Economics 15(3), 373–394.
+
+Connor, G. and R. A. Korajczyk (1988). Risk and return in an equilibrium APT: Application of a new test methodology. Journal of Financial Economics 21(2), 255–289.
+
+Feng, G., S. Giglio, and D. Xiu (2020). Taming the factor zoo: A test of new factors. Journal of Finance 75(3), 1327–1370.
+
+Gagliardini, P., E. Ossola, and O. Scaillet (2016). Time-varying risk premium in large cross-sectional equity data sets. Econometrica 84(3), 985–1046.
+
+Geweke, J. and G. Zhou (1996). Measuring the pricing error of the arbitrage pricing theory. Review of Financial Studies 9(2), 557–587.
+
+Giglio, S., B. T. Kelly, and D. Xiu (2022a). Factor models, machine learning, and asset pricing. Annual Review of Financial Economics 14, 1–32.
+
+Giglio, S., Y. Liao, and D. Xiu (2021a). Thousands of alpha tests. Review of Financial Studies 34(7), 3456–3496.
+
+Giglio, S. and D. Xiu (2021). Asset pricing with omitted factors. Journal of Political Economy 129(7), 1947–1990.
+
+Giglio, S., D. Xiu, and D. Zhang (2021b). Test assets and weak factors. Tech. rep. Yale University and University of Chicago.
+
+Goyal, A. and A. Saretto (2022). Are equity option returns abnormal? IPCA says No. Working paper.
+
+Harvey, C. R. and W. E. Ferson (1999). Conditioning variables and the cross-section of stock returns. Journal of Finance 54(4), 1325–1360.
+
+He, Z., B. T. Kelly, and A. Manela (2017). Intermediary asset pricing: New evidence from many asset classes. Journal of Financial Economics 126(1), 1–35.
+
+Huberman, G. (1982). A simple approach to arbitrage pricing theory. Journal of Economic Theory 28(1), 183–191.
+
+Ingersoll, J. E. (1984). Some results in the theory of arbitrage pricing. Journal of Finance 39(4), 1021–1039.
+
+Kelly, B. T., T. Moskowitz, and S. Pruitt (2021). Understanding momentum and reversal. Journal of Financial Economics 140(3),726–743.
+
+Kelly, B. T., D. Palhares, and S. Pruitt (forthcoming). Modeling corporate bond returns. Journal of Finance.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501–524.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183–1223.
+
+Lettau, M. and M. Pelger (2020a). Estimating latent asset-pricing factors. Journal of Econometrics 218, 1–31.
+
+Lettau, M. and M. Pelger (2020b). Factors that fit the time series and cross-section of stock returns. Review of Financial Studies 33(5), 2274–2325.
+
+Ludvigson, S. C. and S. Ng (2010). A factor analysis of bond risk premia”. In: Handbook of Empirical Economics and Finance. Ed. By A. Ulah and D. E. A. Giles. Vol. 1. Chapman and Hall, Boca Raton, FL. Chap. 12. 313–372.
+
+Malloy, C. J., T. J. Moskowitz, and A. Vissing-Jorgensen (2009). Longrun stockholder consumption risk and asset returns. Journal of Finance 64(6), 2427–2479.
+
+Novy-Marx, R. (2014). Predicting anomaly performance with politics, the weather, global warming, sunspots, and the stars. Journal of Financial Economics 112(2), 137–146.
+
+Pástor, L. and R. F. Stambaugh (2003). Liquidity risk and expected stock returns. Journal of Political Economy 111(3), 642–685.
+
+Pukthuanthong, K., R. Roll, and A. Subrahmanyam (2019). A protocol for factor identification. Review of Financial Studies 32(4), 1573–1607.
+
+Rosenberg, B. (1974). Extra-market components of covariance in security returns. Journal of Financial and Quantitative Analysis 9(2), 263–274.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341–360.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+Factors | Two-pass w/o controls | Two-pass w/ FF3 | Three-pass Regressive | 
+Liquidity | $ 2.26^{{**}} $ | (0.90) | 0.57 | (0.68) | $ 0.37^{{**}} $ | (0.16) | 
+Interm. Cap. | $ 1.01^{{**}} $ | (0.45) | 0.43 | (0.45) | $ 0.60^{{**}} $ | (0.31) | 
+NY temp. | -319.01 | (255.73) | $ -277.96^{{**}} $ | (124.08) | -0.69 | (13.90) | 
+Global temp. | -6.65 | (4.85) | -3.33 | (2.07) | 0.05 | (0.21) | 
+El Niño | $ 56.85^{{***}} $ | (17.42) | $ -15.34^{{**}} $ | (7.11) | 0.41 | (0.82) | 
+Sunspots | -409.37 | (937.73) | $ 882.89^{{**}} $ | (405.40) | 4.01 | (35.63) | 
+IP growth | $ -0.36^{{***}} $ | (0.14) | $ -0.14^{{**}} $ | (0.05) | $ -0.01^{{*}} $ | (0.00) | 
+Macro PC1 | $ 84.90^{{***}} $ | (24.76) | $ 39.96^{{***}} $ | (13.57) | $ 3.26^{{**}} $ | (1.58) | 
+Macro PC2 | 9.35 | (15.93) | $ 23.91^{{***}} $ | (8.97) | -0.88 | (1.27) | 
+Macro PC3 | -5.94 | (14.30) | $ -31.24^{{***}} $ | (9.74) | -1.25 | (1.51) | 
+Cons. growth | $ 0.26^{{*}} $ | (0.16) | 0.07 | (0.05) | 0.00 | (0.01) |
+Table 4.1: Three-Pass Regression: Empirical Results
+Note: For each factor, the table reports estimates of risk premia in percentage points per month using different methods, with the restriction that the zero-beta rate is equal to the observed T-bill rate: two versions of the two-pass cross-sectional regression, using no control factors in the model and using the Fama-French three factors, respectively; the three-pass estimator using 7 latent factors. The test assets comprise of 647 portfolios sorted by various characteristics (from Table B1 of Giglio and Xiu, 2021).
+--- 图3 ---
+Figure 4.1: Factor Selection Rate
+Note: Source: Feng et al. (2020). The figure shows, for each factor identified by the factor ID (on the X axis), in what fraction of the random seeds each factor is selected by a lasso regression of average returns onto factor covariances via 200 random cross-validations.
+--- 图4 ---
+[表]
+Test Assets | Statistic | K | 
+1 | 3 | 4 | 5 | 6 | 
+Panel A: IPCA | 
+Stocks | Total  $ R^{{2}} $ | 14.9 | 17.6 | 18.2 | 18.7 | 19 | 
+Pred.  $ R^{{2}} $ | 0.36 | 0.43 | 0.43 | 0.70 | 0.70 | 
+$ N_{{p}} $ | 636 | 1908 | 2544 | 3180 | 3816 | 
+Portfolios | Total  $ R^{{2}} $ | 90.3 | 97.1 | 98.0 | 98.4 | 98.8 | 
+Pred.  $ R^{{2}} $ | 2.01 | 2.10 | 2.13 | 2.41 | 2.39 | 
+$ N_{{p}} $ | 636 | 1908 | 2544 | 3180 | 3816 | 
+Panel B: Observable Factors | 
+Stocks | Total  $ R^{{2}} $ | 11.9 | 18.9 | 20.9 | 21.9 | 23.7 | 
+Pred.  $ R^{{2}} $ | 0.31 | 0.29 | 0.28 | 0.29 | 0.23 | 
+$ N_{{p}} $ | 11452 | 34356 | 45808 | 57260 | 68712 | 
+Portfolios | Total  $ R^{{2}} $ | 65.6 | 85.1 | 87.5 | 86.4 | 88.6 | 
+Pred.  $ R^{{2}} $ | 1.67 | 2.07 | 1.98 | 2.06 | 1.96 | 
+$ N_{{p}} $ | 37 | 111 | 148 | 185 | 222 |
+Table 4.2: IPCA Comparison with Other Factor Models
+Note: The table reports total and predictive  $ R^2 $ in percent and number of estimated parameters ( $ N_p $) for the restricted ( $ \Gamma_\alpha = \mathbf{0} $) IPCA model (Panel A) and for observable factor models with static loadings (Panel B). Observable factor model specifications are CAPM, FF3, FFC4, FF5, and FFC6 in the  $ K = 1, 3, 4, 5, 6 $ columns, respectively (from Table 2 of Kelly et al., 2020b).
+h h v n v v (0000)
+--- 图5 ---
+Figure 4.2: Alphas of Characteristic-Managed Portfolios
+Note: The left and right panels report alphas for characteristic-managed portfolios relative to the FFC6 model and the IPCA five-factor model. Alphas are plotted against portfolios' raw average excess returns. Alphas with t-statistics in excess of 2.0 are shown with filled squares, while insignificant alphas are shown with unfilled circles (from Figure 1 of Kelly et al., 2020b).
+此外，Kelly and Yin (2022)
+--- 图6 ---

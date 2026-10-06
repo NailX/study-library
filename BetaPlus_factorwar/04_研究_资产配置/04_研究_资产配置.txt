@@ -1,0 +1,51 @@
+# 资产配置 – BetaPlus
+
+来源：https://www.factorwar.com/research/asset-allocation/
+
+### 资产配置理论
+
+资产配置的源起、中兴和未来
+Harry Markowitz
+浅析资产配置的几种方法
+Ledoit and Wolf 的协方差矩阵收缩之旅
+当因子投资遇到资产配置
+如何分配资金 ? 组合优化的是是非非
+主动管理：从学术走向实践的因子投资方法论
+资产配置与因子配置：可以团圆吗 ?
+因子配置与跨资产动量 ? 经济周期说了算
+Black-Litterman 模型 —— 贝叶斯框架下的资产配置利器
+东边不亮西边亮：双动量在资产配置中的应用
+简单多样化，资产配置的优秀基准
+配置风险收益还是配置噪声 ?
+基于下行风险的投资组合管理
+Machine Learning Meets Markowitz
+再谈风险平价
+AlphaGlass
+
+### Smart Beta
+
+Smart Beta：已经发生的未来 ?
+\alpha vs \beta：你的 \alpha，大家的 \beta
+混合 or 整合：因子投资与 Smart Beta 实践
+牛市因子和熊市因子
+当因子投资遇到资产配置
+
+### Barra 多因子模型
+
+正确理解 Barra 的纯因子模型
+Barra 因子模型截面回归求解
+Barra 因子模型中的风险调整
+Barra 协方差矩阵的 Eigenfactor 调整
+协方差矩阵的 Newey-West 调整
+风险模型的边界
+
+### 因子择时
+
+因子动量在 A 股
+因子择时
+你家因子便宜吗 ? 基于 value spread 的因子择时研究
+还在对着一阶矩做因子择时 ? 不妨试试二阶矩
+基于 Risk Parity + Black-Litterman 的因子择时
+
+免责声明
+本网站所含内容由 BetaPlus 小组基于公开信息而提供。入市有风险，投资需谨慎。在任何情况下，本网站中的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，BetaPlus 小组不对任何人因使用本网站的任何内容所引致的任何损失负任何责任。本网站中内容所表述的意见不代表 BetaPlus 小组成员所属机构观点。

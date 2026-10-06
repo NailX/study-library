@@ -1,0 +1,196 @@
+# 利用收益率时序信息改进 SDF 估计
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/M7O_LQz9BqVnTFa0oFJGBA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+实证结果显示，因子收益率的时序信息可以改进 SDF 估计。
+
+温馨提示：为更好的阅读本文的内容，建议先熟悉《实证资产定价理论新进展》的第 5 节（估计 SDF）、《FF3 们背后的资产定价理论》、《Which Beta (III)?》以及《寻找 Mean-Variance Frontier》。
+
+“ The cross-section and time series of stock returns contains a wealth of information about the stochastic discount factor (SDF).
+”
+
+2020 年 5 月，Review of Financial Studies 推出了题为 New Methods in the Cross-Section 的专刊。两位专刊编辑也特地写了一篇同名[1]文章（Karolyi and Nieuwerburgh 2020）介绍这期专刊。而上面这句话就出自该文摘要的第一句。
+
+它传递出了相当多的信息量。
+
+首先，人们之所以关心 SDF，是因为它和 mean-variance efficient frontier 是等价的[2]；后者决定了最大夏普率，而最大化样本外（条件）夏普率一直都是人们的目标。所以对 SDF 的估计无疑对这方面有很大的启发。在上面这句英文中，和本文最相关的关键词是 time series，即股票收益率的时序信息。
+
+最近两年，在利用股票平均收益截面（cross-section）信息估计 SDF（或者 SDF 的等价物 —— 多因子模型[3]）方面出现了很多佳作，其中颇具代表性的见刊的文章包括 2019 和 2020 年分别获得 Journal of Financial Economics Fama-DFA best paper award 的雄文Kelly, Pruitt, and Su (2019) 和 Kozak, Nagel, and Santosh (2020)[4]。不过，利用收益率时序信息来改进 SDF 估计方面的研究则寥若晨星。
+
+你问为什么，因为时序收益率难预测啊！
+
+我们来理一理。根据 Hansen and Jagannathan (1991)，SDF 和个股 excess return 满足如下关系：
+
+其中  是 SDF，且由于  表示超额收益，因此满足  。如果从上式出发，则意味着想要更好的估计 SDF，就需要对个股收益率进行时序预测。但这无疑是很困难的。因此，有必要把上式进行简化。
+
+大量实证研究表明，股票的收益率和各种公司特征（firm characteristics）相关，因此可以利用有限个公司特征把上式中的  ——  期 SDF 对股票的 loading 向量 —— 转化为如下的形式：
+ 
+
+其中  是  阶矩阵，代表  个股票在  个公司特征上的取值，而 SDF 的表达式转化为：
+
+由上述对  的假设可知，  和  满足  。看到这里就一目了然了，  （  阶向量）代表了  个 managed portfolios 的收益率 —— 每个组合都是以  的某一行（即原始  的某一列，即某个公司特征）为权重的多空组合。而在上式中，  是 SDF 对这些组合的 loading 向量。
+
+通过这个变化，我们把 SDF 和  个基于公司特征构造的投资组合 —— 因子！—— 联系起来了。由资产定价原理可知，  期 SDF 的最优权重为：
+
+其中，  为因子的协方差矩阵。那么，我们是否距离利用时序信息更接近了呢？在上述最优解中，为了更好的估计 SDF，需要估计时变的因子预期收益率。这件事儿又有另一个令人兴奋的名字：因子择时。
+
+但是因子择时何其容易？尤其当因子的个数  很大的时候。是否还有办法从缩减因子个数的角度把问题进一步简化呢？好消息是，答案是肯定的。我们请出第二个武器：Kozak, Nagel, and Santosh (2018)[5]。
+
+Kozak, Nagel, and Santosh (2018) 的研究表明，在不存在无风险套利机会的假设下，那些能够解释资产共同运动（即协方差矩阵）的因子同样能够解释资产的预期超额收益。在这个结论下，只需要把上述因子理解成资产，然后对它们的协方差矩阵做 PCA。由于前几个主成分极大的解释了这些因子的共同运动，因此它们也将解释因子的预期收益。在这个假设下，对 SDF 的估计可以进一步简化为：
+
+  
+
+其中  表示由若干主成分构成的投资组合的收益率向量，而 SDF 最优权重为：
+
+  
+
+将其带回 SDF 的表达式，就可以得到利用了时序信息的 SDF 估计：
+
+  
+
+我们来回顾一下上述两步走，来看看是怎么得到的最终的 SDF 的估计。第一步把股票收益率转化为因子的收益率（每个因子组合是按照 firm characteristic 构造的 managed portfolio），并指出通过对因子收益率择时在理论上可以更好的估计 SDF；而第二步中将上述因子视作资产，进一步通过 PCA 将需要估计的时变收益率个数从  个因子转化成比  小的多的有限个主成分的个数，使得择时成为可能。
+
+上述推论意味着，一旦能够比较准确地预测  ，就可以利用时序信息更好的估计 SDF。
+
+那么实证结果是否支持这个猜想呢？Haddad, Kozak, and Santosh (2020) 这篇发表在本文开篇提到的 RFS 专刊上的论文给出了肯定的答案。在实证中，该文利用美股中常见的 50 个因子为出发点。通过 PCA 发现，前 10 个主成分就可以解释将近 75% 的波动。
+
+在接下来的实证中，他们最终选择了前 5 个主成分。再加之市场组合，一共六个“资产”。它们的收益率就对应了最终 SDF 表达式中的  。为了预测它们，该文使用了一个最为基本的 predictor —— BM spread。由于每个主成分组合仅仅是原始 50 个因子的线性组合，因此只需要先计算原始因子的 BM spread 再按特征向量为权重计算每个主成分的 BM spread。实证数据表明，BM spread 在样本外预测  的效果很不错。
+
+另一方面，下图给出了利用 BM spread 预测不同主成分在样本内外的效果（因为一共有 50 个原始因子，因此一共有 50 个主成分）。不难看出，实证结果显示样本外的预测效果仅仅对前几个主成分有效。但这并不影响，因为图中灰色虚线（右轴）显示了每个主成分解释的方差的比例，可见前几个主成分极大解释了原始因子资产的共同运动。这个实证结果完美的符合 Kozak, Nagel, and Santosh (2018) 的结论，即只有前几个主成分（最能解释波动的那些）才有用。
+
+我很欣赏的是，Haddad, Kozak, and Santosh (2020) 并没有试图用更多的变量或更复杂的模型，而是仅仅用了 BM[6]，来预测  。由资产定价理论可知，SDF 的最优参数  同时是 mean-variance efficient portfolio 的权重，因此可以通过夏普率来判断时序信息是否对估计 SDF 提供了增量贡献。
+
+为此，Haddad, Kozak, and Santosh (2020) 考虑了以下五种不同的处理方式：
+
+Factor investing：不择时，用 unconditional 估计；
+Market timing：仅对市场因子择时，对五个主成分不择时；
+Factor timing：同时对市场和五个主成分因子择时；
+Anomaly timing：对市场不择时，对五个主成分择时；
+Pure anom. timing：市场权重设为 0，主成分因子权重由 conditional 预期相对 unconditional 预期的偏离决定。
+
+这五个处理方式的样本内外夏普率如下表所示。以样本外夏普率为例，最好的结果是 anomaly timing 和 factor timing 两种，这说明利用对因子择时是有益的（能够增大夏普率）。不过有意思的是，anomaly timing 战胜了 factor timing 则说明，虽然对因子择时是有益的，但是对（美股）市场择时（似乎）是徒劳的。
+
+除了从夏普率角度来评估，我们自然也关心对 SDF 的估计。由 Hansen and Jagannathan (1991) bond[7]可知，任何资产的夏普率的上限由  决定。在我们的设定下，由于  ，所以任何资产夏普率的上限为  。因此，通过考察 SDF 的条件方差的大小，就可以判断利用时序信息是否改进了 SDF 估计。
+
+作为比较，Campbell and Cochrane (1999) 对 SDF 方差的估计为 0 到 1.2 之间。而 Haddad, Kozak, and Santosh (2020) 的估计远远高于这个区间，也高于不进行因子择时的结果（下图）。结果显示，若不进行因子择时，  的估计为 1.67，而若只进行市场择时，这个数值仅仅上升至 1.71。而一旦加入因子择时，   则高达 2.96。
+
+进一步的，下图显示了  如何随时间波动。当考虑因子择时后，  的波动范围较仅考虑市场择时要大得多。这说明如果不考虑因子择时，将会丢失掉很多 SDF 的信息。
+
+最后，该文还研究了 SDF 方差和宏观经济之间的关系（下图）。不过，几位作者也强调，这部分研究是偏实证性质的。人们不应急于从回归系数的正负中盲目得出因果推断，而是应该以这些客观存在的实证数据为起点，更好的研究 SDF 和股票预期收益的截面差异。
+
+以上就是 Haddad, Kozak, and Santosh (2020) 一文的核心结果。其实，这篇文章的标题正是 Factor Timing —— 因子择时。然而，我没有选择因子择时作为这篇小文的标题。其原因是，这四个字实在是太火，我怕一些小伙伴会被这个标题吸引进来，但在看完后却留下一句“这不是我想要的”。正如当初我看完这个这篇论文的标题就激动的读下去，但却发现它的内容 —— 虽然够硬核 —— 但是并不是你我心中想象的那种因子择时（RFS 毕竟不是 JPM……），你懂的。
+
+Anyway，Campbell Harvey 曾说过，因子择时这件事儿虽然非常难，但却是值得研究。因此，虽然是从估计 SDF 入手，但考虑到 SDF 和 mean-variance efficient frontier 以及多因子模型的等价性，该文的实证结果以及通过 PCA 的处理方式依然能给我们启发。
+
+最后，再忍不住吐槽一句：也许不久的将来，我们就能看到有人把 A 股的数据套在相似的方法中，然后摇身一变成为另一篇（次）顶刊论文也不一定，就像最近刚被 JFE 接收的某篇（还是卖个关子吧）。
+
+备注：
+[1] 不完全一样，论文的名字是 New methods for the cross-section of returns，专刊标题是 New methods in the cross-section。
+[2] 见《寻找 Mean-Variance Frontier》。
+[3] 见《FF3 们背后的资产定价理论》。
+[4] 忍不住吐个槽，这两篇真是 JFE 这两年在资产定价方面的扛把子，其它的大部分……
+[5] 见《Which Beta (III) ?》。
+[6] 当然，我们仅仅看到了发表出来的版本。
+[7] 见《寻找 Mean-Variance Frontier》。
+
+参考文献
+Campbell, J. Y. and J. H. Cochrane (1999). By force of habit: A consumption-based explanation of aggregate stock market behavior. Journal of Political Economy 107(2), 205 – 251.
+
+Karolyi, G. A. and S. V. Nieuwerburgh (2020). New methods for the cross-section of returns. Review of Financial Studies 33(5), 1879 – 1890.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models.Journal of Finance 73(3), 1183 – 1223.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Haddad, V., S. Kozak, and S. Santosh (2020). Factor timing. Review of Financial Studies 33(5), 1980 – 2018.
+
+Hansen, L. P. and R. Jagannathan (1991). Implications of security market data for models of dynamic economics. Journal of Political Economy 99(2), 225 – 262.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Table 1
+Percentage of variance explained by anomaly PCs
+[表]
+ | PC1 | PC2 | PC3 | PC4 | PC5 | PC6 | PC7 | PC8 | PC9 | PC10 | 
+% var. explained | 25.8 | 12.4 | 10.3 | 6.7 | 4.8 | 4.0 | 3.6 | 2.8 | 2.2 | 2.1 | 
+Cumulative | 25.8 | 38.3 | 48.5 | 55.2 | 60.0 | 64.0 | 67.6 | 70.4 | 72.6 | 74.7 |
+This table reports the percentage of variance explained by each PC of the fifty anomaly strategies.
+出处：Haddad, Kozak, and Santosh (2020)
+--- 图3 ---
+Predicting dominant equity components with BE/ME ratios
+[表]
+ | MKT | PC1 | PC2 | PC3 | PC4 | PC5 | 
+Own bm | 0.76 | 4.32 | 1.62 | 1.80 | 4.86 | 1.56 | 
+(1.24) | (4.31) | (1.81) | (2.01) | (3.74) | (0.78) | 
+bias | 0.68 | 0.36 | 0.16 | 0.18 | 0.10 | 0.08 | 
+p-value | .35 | .00 | .10 | .07 | .00 | .48 | 
+$ R^{2} $ | 0.29 | 3.96 | 0.74 | 0.56 | 3.59 | 0.50 | 
+$ NOS $  $ R^{2} $ | 1.00 | 4.82 | 0.97 | 0.47 | 3.52 | 0.55 | 
+$ ROS $  $ R^{2} $ critical values | 
+90th | 0.44 | 0.49 | 0.29 | 0.21 | 0.71 | 0.59 | 
+95th | 0.68 | 0.97 | 0.48 | 0.37 | 1.19 | 0.96 | 
+99th | 1.35 | 1.73 | 0.87 | 0.84 | 1.95 | 1.71 |
+We report results from predictive regressions of excess market returns and five PCs of long-short anomaly returns. The market is forecasted using the log of the aggregate book-to-market ratio. The anomaly PCs are forecasted using a restricted linear combination of anomalies' log book-to-market ratios with weights given by the corresponding eigenvector of pooled long-short strategy returns. The first row shows the coefficient estimate. The second row shows asymptotic t-statistics estimated using the method of Newey and West (1987). The third and fourth rows show the bias and p-value from a parametric bootstrap. The fifth and sixth rows show the n-sample and out-of-sample monthly  $ R^{2} $. The last three rows give critical values of the OOS  $ R^{2} $ based on the placebo test in Kelly and Pruitt (2013).
+出外：Hodded Vozk and Sontsch (2020)
+--- 图4 ---
+gure 1
+redictability of equity PCs with own bm ratios
+the plot shows the in-sample (IS) and out-of-sample monthly $R^{2}$ of predicting each PC of anomaly portfol
+turns with its own $bm$ ratio. The dotted gray line (using the right axis) represents the fraction of total varian-
+explained by each PC.
+--- 图5 ---
+Performance of various portfolio strategies
+[表]
+ | Factor investing | Market timing | Factor timing | Anomaly timing | Pure anom. timing | 
+IS Sharpe ratio | 1.27 | 1.23 | 1.19 | 1.19 | 0.71 | 
+OOS Sharpe ratio | 0.76 | 0.63 | 0.87 | 0.96 | 0.77 | 
+IS inf. ratio | — | -0.17 | 0.36 | 0.37 | 0.35 | 
+OOS inf. ratio | — | -0.64 | 0.42 | 0.60 | 0.59 | 
+Expected utility | 1.66 | 1.69 | 2.96 | 2.92 | 1.26 |
+The table reports the unconditional Sharpe ratio, information ratio, and average mean-variance utility of five strategies: (1) a static factor investing strategy, based on unconditional estimates of  $ \mathbb{E}[Z_t] $; (2) a market timing strategy, which uses forecasts of the market return based on Table 2 but sets expected returns on the PC equal to unconditional values; (3) a full factor timing strategy including predictability of the PCs and the market; (4) an anomaly timing strategy, which uses forecasts of the PCs based on Table 2 but sets expected returns on the market to a unconditional value; and (5) a pure anomaly timing strategy, which sets the weight on the market to zero and invests in anomalies proportional to the deviation of their forecast to its unconditional average,  $ \mathbb{E}_t\left[Z_{t+1}\right]-\mathbb{E}[Z_t] $. All strategies assume a homoscedastic conditional covariance matrix, estimated as the covariance of forecast residuals. Information ratios are calculated relative to the static strategy. Out-of-sample (OOS) values are based on split-sample analysis with all parameters estimated using the first half of the data.
+146.11117110.1(000
+--- 图6 ---
+riance of the SDF
+[表]
+ | Factor investing | Market timing | Factor timing | 
+$ \varepsilon [\mathrm{var}_{t}(m_{t+1})] $ | 1.67 | 1.71 | 2.96 | 
+$ t_{d} [\mathrm{var}_{t}(m_{t+1})] $ | — | 0.29 | 2.17 |
+We report the average conditional variance of the SDF and its standard deviation constructed under various set of assumptions. "Factor timing" is our full estimate, which takes into account variation in the means of the PC and the market. "Factor investing" imposes the assumption of no factor timing: conditional means are replaced by their unconditional counterpart. "Market timing" only allows for variation in the mean of the market return.
+Sk · Heddad Kozak and Sanrosh (2020)
+--- 图7 ---
+igure 2
+Conditional variance of SDFs
+This figure plots the conditional variance of the SDF, constructed in two ways. The solid blue line represents the factor timing" construction, which allows for variation in the means of the PCs and the market. The red dashed line represents a "market timing" estimate that ignores predictability of the anomaly factors. The aggregate market forecast using aggregate dividend/price, 10-year smoothed earnings/price, realized volatility, term premium corporate spread, cay (Lettau and Ludvigson 2001), gross domestic product (GDP) growth, and sentiment (Baker and Wurgler 2006).
+--- 图8 ---
+SDF variance and macroeconomics variables
+[表]
+ | Factor timing | Market timing | 
+D/P | -0.01 | (0.03) | 0.22 | (2.86) | 
+GDP growth | -0.37 | (1.60) | -0.34 | (4.93) | 
+Market volatility | 0.44 | (2.48) | 0.30 | (5.37) | 
+Sentiment | -0.15 | (0.60) | -0.25 | (3.35) | 
+Common idio. volatility | 0.49 | (2.19) | -0.07 | (0.97) | 
+Ray | -0.42 | (1.79) | 0.23 | (3.00) | 
+Term premium | -0.53 | (2.36) | 0.24 | (3.35) | 
+Inflation | 0.75 | (3.26) | 0.01 | (0.08) |
+We report univariate regression coefficients and absolute t-statistics from regressions of estimated SDF variance on various macroeconomic variables. Factor timing uses the SDF variance shown in Figure 2. Market timing uses SDF variance assuming the anomaly returns are not predictable and sets the conditional expected market return to the fitted value from a multivariate regression of market returns on the aggregate dividend/price ratio, realized market volatility, term spread, corporate bond yield spread,  $ c_{ay} $ (Lettau and Ludvigson 2001), GDP growth, and aggregate sentiment (Baker and Wurgler 2006). Common idiosyncratic volatility is orthogonalized to market volatility (Herskovic et al. 2016).
+--- 图9 ---

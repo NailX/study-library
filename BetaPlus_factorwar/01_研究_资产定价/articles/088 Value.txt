@@ -1,0 +1,315 @@
+# Value
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/vooNbJljmSNx02Mr1pMwOg
+
+作者：石川，llanglli，刀疤连；www.factorwar.com
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文从因子起源、因子成因、因子实证以及因子投资实务四方面详解大名鼎鼎的价值因子。
+
+0
+引言
+
+在《因子投资：方法与实践》一书的第三章，我们对市场中常见的 6 个风格因子进行了详述，包括规模、价值、动量、盈利、投资以及换手率因子。对每个因子，均从起源、成因以实证三个视角进行了介绍，让每个因子变得鲜活和丰满。
+
+后来，从读者的反馈中，我们感到还有一个视角对于上述三个维度是必要且有益的补充，那就从投资实务角度讨论因子（例如，投资中应使用哪个变量构造因子，因子在近年的表现如何）。由于这个视角对于在投资实践中使用该因子至关重要，因此我们决定给每个因子加上这一节。
+
+因为不知道书是否以及什么时候再版，所以不妨先通过公众号实现这个愿景。在本期以及未来不定期的文章中，我们将分别从“1 XX因子起源”、“2 XX因子成因”、“3 XX因子实证”和“4 XX因子投资实务”四节来逐一介绍这 6 个因子。其中前三节将节选《因子投资：方法与实践》的内容，而“4 XX因子投资实务”则是全新的。
+
+考虑到公众号的阅读体验，我们对节选的部分会进行一定的内容重新组织（一些合适的内容将被移到第 4 节），排版也会做一定的处理。如果有朝一日《因子投资：方法与实践》再版，这些公众号的铺垫将会成为现成的素材。
+
+今天就先来说说大名鼎鼎的价值因子。
+
+1
+价值因子起源
+
+价值因子的含义简单而明确：相比估值较高的股票，那些估值较低的股票有着更高的预期收益率。关于价值因子的研究也起自 20 世纪 80 年代，并由 Fama and French (1993) 发扬光大，而以账面市值比（Book-to-Market Ratio，简称 BM）为变量构建的价值因子也正式确立为系统性的因子。
+
+关于价值因子，Stattman (1980) 是最早的相关研究之一，它发现 BM 较高的公司，股票预期收益也显著更高。除 BM 之外，其他一些估值指标也被拿来研究和股票预期收益率之间的关系。Basu (1983) 指出盈利市值比（Earnings-to-Price Ratio，EP）有助于解释股票收益，而 Jaffe, Keim, and Westerfield (1989) 基于 1951 至 1986 年间的长期数据进一步研究确认EP 对股票未来收益有显著的正面影响。
+
+Bhandari (1988) 则发现杠杆率较高的企业有着显著的超额收益。而作为集大成者，Fama and French (1992) 的结论稍有不同，他们基于排序法和 Fama-MacBeth 回归的研究指出，单独来看 BM 和 EP 都有显著为正的风险溢价，但当同时控制它们和规模后 EP 不再显著，表明 EP 的风险溢价可能只是其同规模和 BM 的相关性带来的虚假效应。
+
+Fama and French (1995) 提供了支持 BM 同股票未来收益相关的进一步证据，发现较高的 BM 预示着持续较差的盈利表现，而较低的 BM 则预示着持续较好的未来盈利。Fama and French (1992) 基于可比性等原则剔除了金融企业，但 Barber and Lyon (1997) 的研究发现同样的关系对金融企业也成立。
+
+价值因子在其他市场的实证证据也非常丰富。Aras and Yilmaz (2008) 和 Cakici, Fabozzi, and Tan (2013) 分别检验了 12 和 18 个新兴市场并发现了显著的价值效应。Fama and French (2012, 2017) 表明在北美、欧洲和亚太地区都存在显著的价值效应，且在日本之外的区域，价值效应随着股票市值增大而变弱。Asness, Moskowitz, and Pedersen (2013) 则更进一步，研究了 8 个不同的国家和股票、债券、商品及外汇等不同资产，并指出在不同国家、不同资产中广泛而持久地存在显著的价值效应。
+
+2
+价值因子成因
+
+2.1 风险解释
+
+关于价值因子的成因，也可以分为系统性风险补偿和投资者行为偏差两类。前者中最为人熟知的一类解释大概是财务困境风险假说。Griffin and Lemmon (2002) 发现在财务困境风险较高的企业中，高、低 BM 股票组合的收益差异是在其他股票中的两倍，表明价值因子可能与财务困境风险有关，即高BM 很可能反映着更高的财务困境风险。Peterkort and Nielsen (2005) 也确认了 BM 应该代表着某种系统性财务风险，发现在没有负债的企业中 BM 对股票未来收益没有显著影响；而在净资产为负的企业中，BM 对股票收益的影响反而是负的。
+
+Zhang (2005) 则认为企业在不景气时期难以削减在位资产，使得在位资产的风险大于增长期权，因而高 BM 企业需要更高的回报。而 Hahn and Lee (2006) 则认为 BM 反映了与商业周期有关的风险：高 BM 企业对期限利差有着更大的暴露，因此获得更高的预期收益。此外，Lewellen (1999) 通过假设 Fama-French 三因子模型中的因子暴露为 BM 的线性函数，将 BM 的预测能力分解为与风险相关和与风险无关的两个部分，并指出风险是其解释力的重要来源之一。
+
+2.2 行为金融学解释
+
+在使用行为金融学解释价值因子方面，Lakonishok, Shleifer, and Vishny (1994) 无疑是最重要的研究之一。这篇经典研究认为投资者倾向于将过去的表现简单外推来评估企业前景，从而会对过去盈利不佳的企业过度悲观，这便导致了价值效应。Ali, Hwang, and Trombley (2003) 指出 BM 在面临更大套利限制（例如特异性波动率和交易费用更高，投资者群体更不专业）的股票中表现更为显著。
+
+Daniel and Titman (2006) 发现，由于相对于无形信息，投资者只给予了有形信息过少的关注，因而股票未来收益同其无形收益高度负相关，而 BM 刚好能较好地预测无形收益，从而对股票未来收益有显著的预测能力。Jiang (2010) 则进一步指出，机构投资者倾向于买入有正面无形信息的股票，使得无形收益的均值回复在有更多机构投资者的股票中更加显著，因而 BM 也在这类股票中表现更好。Chan, Lakonishok, and Sougiannis (2001) 和 Daniel, Hirshleifer, and Subrahmanyam (2001) 也利用与 Daniel and Titman (2006) 类似的研究方法发现研发费用对 BM 的表现有显著影响。
+
+3
+价值因子实证
+
+3.1 描述性统计
+
+本节延续学术界的传统，使用 BM 进行 A 股市场的价值因子实证分析。在计算 BM 时，分子为归股东权益合计（不含少数股东权益），分母为总市值。在实证期内，在剔除黑名单及异常数据之后，BM 变量的数据覆盖度如下图所示。
+
+以 BM 作为排序变量，每月末将股票按照 BM 取值从低到高分成 10 组，记为 Low、2、……、9 以及 High 组。表 1 展示了 10 个投资组合在整个实证期内（2000/01/01 至 2019/12/31）的描述性统计。观察表中的数据不难发现，这 10 组的市值呈现 U 形，即无论是低 BM 组（Low）还是高 BM 组（High）的平均市值较其他组都更高。此外，10 个投资组合的平均 ROA 呈现出单调递减的趋势，即低 BM 组的 ROA 更高、而高 BM 组的 ROA 最低。
+
+表 1. 描述性统计
+
+3.2 Portfolio Sort Test
+
+表 2 汇总了以 BM 单变量排序的检验结果，表中汇报了不同投资组合的月均收益率以及该收益率的 t-statistic。无论是采用等权重（Panel A），还是以市值为权重（Panel B）构建这些投资组合，它们的收益率均呈现出了较好的单调性。下面考察由做多高 BM 组、做空低 BM 组（即 High–Low 组合）构成的价值因子的收益率。当采用等权重时，价值因子的月均收益率为 0.99%（t-statistic = 3.08）；当采用市值加权时，价值因子的月均收益率为 0.88%（t-statistic = 2.09）。由于等权重相对市值加权来说，在小市值上有额外的暴露，因此等权重时价值因子的月均收益率高于市值加权时的结果也就不足为奇了。
+
+表 2. 单变量 Portfolio Sort 检验结果
+
+最后来看使用 BM 和市值进行双重排序的检验结果（表 3 和表 4 分别汇报等权和市值加权的结果）。无论采用等权重还是市值加权，都可以从结果中观察到相同的结论。以等权重为例，表 3 中的行 Small、2、3、4 以及 Large 为使用市值从小到大分成的五档；列 Low、2、3、4 以及 High 为通过 BM 从小到大划分的五档；最后一行平均则是五个市值档的简单平均。
+
+表 3. BM 和市值双重排序检验结果（等权重）
+
+表 4. BM 和市值双重排序检验结果（市值加权）
+
+由结果可知，在按市值划分得到的每一个档内，BM 均有较好的区分度和单调性。此外，每档的 High–Low 投资组合的月均收益率的显著性随着市值的增加而降低：在 Small 档内，High–Low 组合的月均收益率的 t-statistic 高达 4.76，而在 Large 档内，High–Low 组合的月均收益率不再显著（t-statistic 仅为 1.22）。虽然五组平均来看，最终的价值因子的月均收益率为 0.69%（t-statistic = 2.89），仍然非常显著，但是 High–Low 组合月均收益率的显著性随市值增大而降低的结果无疑表明了，BM 在大市值的股票中解释股票预期收益率截面差异的能力较差，该结论在等权重和市值加权下均成立。这一结论和 Asness, et al. (2015) 针对美股的实证结果一致。
+
+4
+价值因子投资实务
+
+虽然价值因子历史悠久，且诸多证据支持价值因子溢价在长期内非常显著，然而以 BM 构造的价值因子在近年来还是遭遇到不少挑战。例如，在 Fama and French (2015) 提出五因子模型时，两位作者承认盈利和投资两因子的加入使得价值因子变得冗余。
+
+此外，在美股市场中，价值因子自 2008 年全球金融危机之后表现的非常差，与同期不断创下历史新高的股指相比相形见绌，因而饱受质疑。即便在 A 股市场中，以 BM 为代表的价值因子在 2018 年之后的表现只能用步履艰难来形容。
+
+意识到最近二十年来价值因子溢价较之前的下降，Fama and French (2021) 针对美股将 1963 到 2019 年的实证区间分成了 1963 - 1991 和 1991 - 2019 前后两半，并检验了两个子区间内价值因子溢价是否相等。实证结果显示，尽管在后半区间内价值因子溢价确实低于前一半区间（约为 HML 被提出的实证区间），但月频价值因子超额收益率的巨大波动使得他们无法拒绝前后两区间内价值因子溢价相等的原假设。
+
+另一方面，对于传统价值因子近年来的惨淡表现，因子投资实务界显然有足够的理由更加忧虑。人们不禁发问“价值因子是否已死？”“有没有能够代替 BM 的、更好的构造价值因子的方法？”
+
+4.1 失效解谜
+
+对于第一个问题，美国著名的两大对冲基金 AQR 和 Research Affiliates 都基于严谨的数据分析讨论了价值因子低迷的原因，并抨击了坊间流行的各种叙事性解释（Arnott et al. 2021 以及 Israel, Laursen, and Richardson 2021）。
+
+为了回答这个问题，Arnott et al. (2021) 将任意投资组合的收益率分成了三部分，分别为短期估值的变化（“估值泡沫”）、盈利、以及个股估值水平的均值回复。将以 BM 为变量构造的价值因子套入到该式中，则第一项代表多空两头相对估值的变化，第二项代表多空两头盈利的差异，第三项则代表价值股和成长股因估值均值回归而发生的迁移。
+
+Arnott et al. (2021) 认为上述三部分中的后两项是结构性  ，而第一项“估值泡沫”是非结构性部分，其长期来看应该是平稳的，即多空两头的相对估值应在一个区间内波动。在此基础上，该文研究了价值因子收益率中的上述三部分在金融危机前后的表现。实证结果显示，结构性部分并无显著变化。
+
+与结构性  表现不同的是第一项，即“估值泡沫”（价值和成长多空两头相对估值的变化）的影响。在 金融危机之前，而在金融危机之后，这部分为每年平均 -6.6%。上述结果表明，“估值泡沫”凭借一己之力造成了价值因子的惨淡表现。
+
+第一项的负收益说明价值因子中多空两头的相对估值在持续的被拉大，即价值股变得越来越便宜，而成长股变得越来越昂贵。那么时至今日，这个“估值泡沫”到底有多大？它是全市场的普遍行为，还只是聚焦于一小部分公司（比如科技巨头）中的行为呢？
+
+Israel, Laursen, and Richardson (2021) 使用不同的估值指标，包括市净率、市盈率、市销率等计算了价值因子中价值和成长两头的估值价差 —— 价差越大说明成长股相对价值股越贵，即“估值泡沫”越大，并在超过 50 年的回测中系统性的排除了各种看上去非常贵的股票，以此来分析“估值泡沫”的大小和原因。结论是，“估值泡沫”是美股全市场范围内的普遍现象。
+
+面对如此大的估值价差，该文进一步分析并回答了到底是贵的更贵了，还是便宜的更便宜了，还是两者都有？结论是便宜的更便宜了。那么这背后是否有合理的解释呢？此处人们关心的同样是价值因子中的结构性  是否发生了变化。Israel, Laursen, and Richardson (2021) 从盈利和杠杆的角度分析了价值股和成长股在这两个角度上的“价差”，发现它们均属于历史的正常水平，而其中关于盈利的分析结果也和 Arnott et al. (2021) 中类似的分析结果一致。这说明“便宜的更便宜了”背后并无合理的解释。
+
+4.2 改造价值因子
+
+Arnott et al. (2021) 和 Israel, Laursen, and Richardson (2021) 的研究对关于价值因子是否已死的各种猜测进行了有力的抨击。不过遗憾的是，依然没有人知道传统价值因子的苦日子何时会结束。这也自然的引出了前述的第二个问题，即如果不“坐以待毙”，那么有没有更合理的构造价值因子的方式。
+
+关于这个问题，Asness, et al. (2015) 这篇题为 Fact, fiction, and value investing 的文章给出了一些有益的实证结果，对因子投资很有帮助。该文指出，比起单一以 BM 为依据来区分低估值和高估值的股票，使用多变量构造复合价值因子能获得更稳健的结果。以美股市场为例，该文使用 BM、EP、CF/P、D/P 以及过去 5 年累计收益率为变量检验了价值因子（下图）。在跨越不同的历史实证区间时，复合价值因子的表现更加稳定，体现出了通过复合变量来屏蔽单一变量的噪声的目的。
+
+除此之外，Liu, Stambaugh, and Yuan (2019) 针对 A 股的实证结果显示，相比 BM，EP 的效果更好，因此以 EP 代替 BM 构造了价值因子，并提出了中国版的三/四因子模型。不过值得一提的是，该文在实证中出于对壳价值污染的考虑，剔除了市值最低的 30% 的股票。由第 3 节的实证结果可知，BM 在小市值中的作用要远远高于在大市值中的作用。因此剔除市值最低的 30% 的股股票会进一步削弱 BM 的显著性。所以，以壳污染为由剔除小市值股票的做法是否足够合理还有待进一步的探讨。
+
+从投资实践的角度来看，以 BM 为变量构建的价值因子被人诟病的是它已经过时了，无法准确反映公司的估值（比如，使用 book value 忽略了公司的无形资产）。为此，学术界和业界绞尽脑汁儿，从金融学和会计学原理出发，提出了很多改进 BM 的方法（表 5），取得了一些不错的成果。
+
+表 5. 改进的 BM 变量
+
+Liu, Shi, and Lian (2019) 对这些改进后的 BM 变量进行了综述，并在 A 股上进行了实证研究（例如，下表显示了不同 BM 变量的 portfolio sort 检验结果）。通过 portfolio sort、spanning test 以及 Fama-MacBeth 回归，发现通过 R&D 以及 SG&A 增强后的 BM 能够在控制了 BM 之后，依然对解释股票收益率的截面差异提供增量信息。
+
+表 6. 不同 BM 变量的 portfolio sort 检验结果
+
+4.3 企业价值估值指标
+
+在衡量企业的估值高低时，权益类指标用得最多，即 PE、PB 和 PCF 等。这类指标从股东的角度，将当前市值和属于股东的权益、利润或现金流进行比较。然而还有一类指标，同时从股东和债权人的角度出发，将企业总价值和属于股东债权人的权益、利润进行比较，这类指标被称为企业价值类估值指标。
+
+简单来说，企业价值指的是，如果以后要完全获取一家公司的所有现金流，那么应该支付多少钱。Loughran and Wellman (2011) 用如下公式计算企业价值：权益市值加上有息负债，再减去现金。基于此，该文构建了企业价值估值指标：企业价值 / EBITDA。实证结果显示，该指标和 BM 表现类似，但能提供一些增量信息。它在 Carhart (1997) 四因子模型下能获得月均 0.16% 的超额收益（t-statistic 为 2.39），在 Hou, Xue, and Zhang (2015) 四因子模型下能获得月均 0.35% 的超额收益（t-statistic 为 3.0）。
+
+在业界，企业价值估值指标也有应用，其中最出名的就是 Greenblatt (2010) 的神奇公式。Greenblatt 是华尔街的明星基金经理，1985 年以 700 万美元创建了 Gotham Capital。自 1985 年成立至 2005 年的二十年间，公司资产规模从 700 万美元增长到 8.3 亿美元，年均回报率高达 40%；即便是经历了 2008 年的金融危机，Gotham Capital 的资产管理规模依然维持在 9 亿美元的水平，年化收益率仍高达 30%。神奇公式通过盈利和估值两个维度来挑选股票，而其中估值指标用的是 EBIT / 企业价值，与 Loughran and Wellman (2011) 类似。
+
+4.4 小结
+
+以 BM 为代表而构造的价值因子在最近十年的疲软人尽皆知。4.2 和 4.3 节的介绍为在投资实践中如何改造它提供了一些思路。但也许更重要的是，我们需要接受一个事实，即在资产定价和因子投资应用中，投资者的学习问题会不可避免的导致数据无法满足平稳性假设，造成因子的预期收益发生变化。
+
+价值因子的“失效”代表了一种现象，即因子在样本外失效的风险。任何因子都会遇到这个问题。而价值因子只不过是因为它被研究的最透彻，过去的表现最稳健，且最近十年的表现最差这些综合的原因而被推到了聚光灯下。
+
+越是在这种情况下，通过科学的数据分析来回答正确的问题，才越是应有的态度。
+
+参考文献
+Ali, A., L.-S. Hwang, and M. A. Trombley (2003). Arbitrage risk and the book-to-market anomaly. Journal of Financial Economics 69(2), 355 – 373.
+
+Aras, G. and M. K. Yilmaz (2008). Price-earnings ratio, dividend yield, and market-to-book ratio to predict return on stock market: Evidence from the emerging markets. Journal of Global Business and Technology 4(1), 18 – 30.
+
+Arnott, R. D., C. R. Harvey, V. Kalesnik, and J. T. Linnainmaa (2021). Reports of value’s death may be greatly exaggerated. Financial Analysts Journal 77(1), 44 – 67.
+
+Asness, C. S., A. Frazzini, R. Israel, and T. Moskowitz (2015). Fact, fiction, and value investing. Journal of Portfolio Management 42(1), 34 – 52.
+
+Asness, C. S., T. J. Moskowitz, and L. H. Pedersen (2013). Value and momentum everywhere. Journal of Finance 68(3), 929 – 985.
+
+Ball, R., J. Gerakos, J. T. Linnainmaa, and V. Nikolaev (2020). Earnings, retained earnings, and book-to-market in the cross section of expected returns. Journal of Financial Economics 135(1), 231 – 254.
+
+Barber, B. M. and J. D. Lyon (1997). Firm size, book-to-market ratio, and security returns: A holdout sample of financial firms. Journal of Finance 52(2), 875 – 883.
+
+Basu, S. (1983). The relationship between earnings’ yield, market value and return for NYSE common stocks: Further evidence. Journal of Financial Economics 12(1), 129 – 156.
+
+Bhandari, L. C. (1988). Debt/equity ratio and expected common stock returns: Empirical evidence. Journal of Finance 43(2), 507 – 528.
+
+Cakici, N., F. J. Fabozzi, and S. Tan (2013). Size, value, and momentum in emerging market stock returns. Emerging Markets Review 16, 46 – 65.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Chan, L. K. C., J. Lakonishok, and T. Sougiannis (2001). The stock market valuation of research and development expenditures. Journal of Finance 56(6), 2431 – 2456.
+
+Daniel, K. D., D. A. Hirshleifer, and A. Subrahmanyam (2001). Overconfidence, arbitrage, and equilibrium asset pricing. Journal of Finance 56(3), 921 – 965.
+
+Daniel, K. D. and S. Titman (2006). Market reactions to tangible and intangible information. Journal of Finance 61(4), 1605 – 1643.
+
+Hahn, J. and H. Lee (2006). Yield spreads as alternative risk factors for size and book-to-market. Journal of Financial and Quantitative Analysis 41(2), 245 – 269.
+
+Fama, E. F. and K. R. French (1992). The cross-section of expected stock returns. Journal of Finance 47(2), 427 – 465.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (1995). Size and book-to-market factors in earnings and returns. Journal of Finance 50(1), 131 – 155.
+
+Fama, E. F. and K. R. French (2012). Size, value, and momentum in international stock returns. Journal of Financial Economics 105(3), 457 – 472.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 - 22.
+
+Fama, E. F. and K. R. French (2017). International tests of a five-factor asset pricing model. Journal of Financial Economics 123(3), 441 – 463.
+
+Fama, E. F. and K. R. French (2021). The value premium. Review of Asset Pricing Studies 11(1), 105 – 121.
+
+Greenblatt, J. (2010). The little book that still beats the market. John Wiley & Sons.
+
+Griffin, J. M. and M. L. Lemmon (2002). Book-to-market equity, distress risk, and stock returns. Journal of Finance 57(5), 2317 – 2336.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Israel, R., K. Laursen, and S. Richardson (2021). Is (systematic) value investing dead? Journal of Portfolio Management 47(2), 38 – 62.
+
+Jaffe, J., D. B. Keim, and R. Westerfield (1989). Earnings yields, market values, and stock returns. Journal of Finance 44(1), 135 – 148.
+
+Jiang, H. (2010). Institutional investors, intangible information, and the book-to-market effect. Journal of Financial Economics 96(1), 98 – 126.
+
+Lakonishok, J., A. Shleifer, and R. W. Vishny (1994). Contrarian investment, extrapolation, and risk. Journal of Finance 49(5), 1541 – 1578.
+
+Lewellen, J. (1999). The time-series relations among expected return, risk, and book-to-market. Journal of Financial Economics 54(1), 5 – 43.
+
+Liu, J., R. F. Stambaugh, and Y. Yuan (2019). Size and value in China. Journal of Financial Economics 134(1), 48 – 69.
+
+Liu, Y., C. Shi, and X. Lian (2019). Refined book-to-market ratio and the cross-section of stock returns in China. Working paper.
+
+Loughran, T. and J. W. Wellman (2011). New evidence on the relation between the enterprise multiple and average stock returns. Journal of Financial and Quantitative Analysis 46(6), 1629 – 1650.
+
+Mohanram, P. S. (2005). Separating winners from losers among low-book-to-market stocks using financial statement analysis. Review of Accounting Studies 10(2-3), 133 – 170.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica 5(3), 703 – 708.
+
+Penman, S. H., S. A. Richardson, and I. Tuna (2007). The book-to-price effect in stock returns: Accounting for leverage. Journal of Accounting Research 45(2), 427 – 467.
+
+Peterkort, R. F. and J. F. Nielsen (2005). Is the book-to-market ratio a measure of risk? Journal of Financial Research 28(4), 487 – 502.
+
+Stattman, D. (1980). Book values and stock returns. The Chicago MBA: A Journal of Selected Papers 4(1), 25 – 45.
+
+Zhang, L. (2005). The value premium. Journal of Finance 60(1), 67 – 103.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+《因子投资，方法与实践》 图317
+--- 图3 ---
+[表]
+ | Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | 
+BM | 0.12 | 0.19 | 0.23 | 0.27 | 0.32 | 0.36 | 0.41 | 0.48 | 0.56 | 0.74 | 
+市值（亿元） | 107.63 | 83.89 | 83.55 | 83.39 | 85.88 | 88.71 | 97.06 | 109.04 | 138.89 | 232.41 | 
+市场 $ \beta $ | 1.06 | 1.13 | 1.14 | 1.15 | 1.16 | 1.16 | 1.16 | 1.16 | 1.15 | 1.12 | 
+年化波动率 | 49.5% | 49.1% | 48.0% | 47.1% | 46.4% | 45.5% | 44.7% | 43.9% | 42.7% | 40.2% | 
+P/B | 10.13 | 6.22 | 4.95 | 4.17 | 3.61 | 3.15 | 2.76 | 2.40 | 2.02 | 1.55 | 
+ROA | 5.59% | 4.94% | 4.47% | 4.11% | 3.91% | 3.72% | 3.51% | 3.14% | 2.74% | 2.20% |
+--- 图4 ---
+Panel A: 等权重
+[表]
+Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | High-Low | 
+0.70 | 1.04 | 1.07 | 1.30 | 1.36 | 1.50 | 1.58 | 1.63 | 1.59 | 1.68 | 0.99 | 
+1.02) | (1.49) | (1.54) | (1.82) | (1.89) | (2.09) | (2.14) | (2.21) | (2.13) | (2.26) | (3.08) | 
+Panel B: 市值加权 | 
+Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | High-Low | 
+0.57 | 0.53 | 0.57 | 0.72 | 0.94 | 0.90 | 1.08 | 1.32 | 1.21 | 1.44 | 0.88 | 
+(0.87) | (0.79) | (0.89) | (1.08) | (1.38) | (1.51) | (1.61) | (1.89) | (1.70) | (2.05) | (2.09) |
+括号内为经 Newey-West 调整的 t-值。
+（外·《因子投资·方法与实践》，表317
+--- 图5 ---
+[表]
+ | Low | 2 | 3 | 4 | High | High-Low | 
+Small | 1.42 | 2.02 | 2.27 | 2.24 | 2.35 | 0.93 | 
+(1.81) | (2.60) | (2.94) | (2.87) | (3.03) | (4.76) | 
+2 | 0.92 | 1.16 | 1.52 | 1.74 | 1.74 | 0.82 | 
+(1.27) | (1.57) | (2.02) | (2.31) | (2.32) | (3.38) | 
+3 | 0.90 | 1.08 | 1.08 | 1.36 | 1.45 | 0.56 | 
+(1.20) | (1.51) | (1.51) | (1.81) | (1.91) | (2.12) | 
+4 | 0.69 | 0.84 | 0.98 | 1.24 | 1.36 | 0.68 | 
+(1.02) | (1.24) | (1.37) | (1.65) | (1.79) | (2.07) | 
+Large | 0.76 | 0.61 | 0.95 | 1.13 | 1.21 | 0.45 | 
+(1.15) | (0.90) | (1.34) | (1.59) | (1.70) | (1.22) | 
+平均 | 0.94 | 1.14 | 1.36 | 1.54 | 1.62 | 0.69 | 
+(1.34) | (1.63) | (1.90) | (2.10) | (2.20) | (2.89) |
+山外，《田子投次，方过上定时》
+--- 图6 ---
+[表]
+ | Low | 2 | 3 | 4 | High | High-Lo | 
+mall | 1.32 | 1.98 | 2.21 | 2.20 | 2.32 | 1.00 | 
+(1.69) | (2.55) | (2.87) | (2.82) | (2.99) | (4.98) | 
+2 | 0.91 | 1.15 | 1.51 | 1.74 | 1.73 | 0.82 | 
+(1.24) | (1.56) | (2.01) | (2.30) | (2.31) | (3.39) | 
+3 | 0.91 | 1.08 | 1.07 | 1.35 | 1.44 | 0.53 | 
+(1.21) | (1.51) | (1.49) | (1.78) | (1.89) | (2.01) | 
+4 | 0.69 | 0.85 | 0.96 | 1.26 | 1.36 | 0.66 | 
+(1.03) | (1.26) | (1.35) | (1.67) | (1.79) | (2.04) | 
+Large | 0.62 | 0.51 | 0.87 | 1.22 | 1.30 | 0.68 | 
+(0.96) | (0.76) | (1.24) | (1.70) | (1.81) | (1.78) | 
+平均 | 0.89 | 1.11 | 1.32 | 1.55 | 1.63 | 0.74 | 
+(1.28) | (1.60) | (1.86) | (2.11) | (2.22) | (3.11) |
+号内为经 Newey-West 调整的 t-值。
+✦
+--- 图7 ---
+[表]
+ | B/M | E/P | CF/P | D/P | 5-Year Return | Composite | 
+1951-1960 | 0.28 | 1.16 | 0.82 | 0.08 | -0.83 | 0.51 | 
+1961-1970 | 0.78 | 1.02 | 0.86 | 0.34 | 0.77 | 0.85 | 
+1971-1980 | 0.51 | 0.33 | 0.54 | -0.11 | 0.37 | 0.35 | 
+1981-1990 | 0.44 | 0.29 | 0.26 | 0.48 | 0.04 | 0.37 | 
+1991-2000 | 0.01 | 0.39 | 0.03 | -0.15 | 0.74 | 0.20 | 
+2001-2014 | 0.28 | 0.39 | 0.45 | 0.30 | 0.29 | 0.45 | 
+Highest | Lowest |  |  |  |  |  |
+处：Asness, et al. (2015)
+--- 图8 ---
+[表]
+Paper | Description | Modified BM measure | 
+Chan, Lakonishok and Sougiannis (2001) | Augment BM with R&D | R&D adjusted BM | 
+Mohanram (2005) | Augment BM with R&D and SG&A | R&D and SG&A adjusted BM | 
+Penman, Richardson and Tuna (2007) | Focus on operating activities related BM by eliminating leverage impact | Enterprise book-to-market | 
+Ball et al. (2020) | Decompose book value into retained earnings and contributed capital | Retained earnings-to-market\nContributed capital-to-market |
+--- 图9 ---
+This table reports monthly average (excess) returns (%) and the CAPM–αs (%) of the long/short portfolios of different BM measures. These measures include the standard BM measure updated annually (MRA), standard BM measure updated quarterly (MRQ), retained earnings-to-market ratio (RE), contributed capital-to-market ratio (CC), enterprise book-to-market ratio based on net operating assets (NOA), R&D expense adjusted BM (R&D), R&D plus SG&A expenses adjusted BM (R&G+SG&A). To construct a factor, we first sort stocks into deciles based on the given BM measure, then build a long/short dollar-neutral portfolio by going long the top decile and simultaneously going short the bottom decile. Panel A gives the results under value weighting, while Panel B presents the results under equal weighting. The numbers in the parentheses underneath the returns are the Newey and West (1987) adjusted t-statistics. The dataset ranges from January 1st, 2000 to December 31st, 2018.
+[表]
+Panel A: Value weighting | Panel B: Equal weighting | 
+ | Average return | CAPM- \alpha |  | Average return | CAPM- \alpha | 
+MRA | 1.03(2.42) | .98(2.47) | MRA | .86(2.65) | .81(2.76) | 
+MRQ | 1.24(3.02) | 1.20(3.13) | MRQ | 1.13(3.51) | 1.10(3.65) | 
+RE | .68(1.87) | .79(2.25) | RE | .41(1.65) | .44(1.82) | 
+CC | 1.00(2.39) | .96(2.41) | CC | 1.07(3.15) | 1.00(3.17) | 
+NOA | .78(2.10) | .79(2.21) | NOA | .77(2.33) | .72(2.37) | 
+R&D | 1.22(3.15) | 1.19(3.25) | R&D | 1.13(3.55) | 1.10(3.65) | 
+&D+SG&A | 1.27(3.20) | 1.26(3.29) | R&D+SG&A | 1.24(3.90) | 1.22(4.05) |
+--- 图10 ---

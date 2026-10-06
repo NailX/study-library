@@ -1,0 +1,163 @@
+# Augmented Fama-MacBeth Regression (II)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/ufZj-u9hUf7pRE-VtbsN2w
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+加强版 Fama-MacBeth Regression 是研究 non-tradable/tradable factor 的利器。
+
+1
+
+因子有 tradable factors 和 non-tradable factors 之分。对于前者而言，常见的做法是直接用公司特征构造 managed portfolios；而对于后者，Fama-MacBeth two-pass regression 往往是首选，即在第一步中在时序上用资产（超额）收益率对因子取值回归来估计  ，第二步中每期在截面上用资产（超额）收益率对  回归估计因子溢价。不过由于遗漏变量和测量误差的问题，FM regression 得到的溢价估计往往并不准确。
+
+为了解决这个困境，前文《Augmented Fama-MacBeth Regression》介绍了 Bybee, Kelly and Su (forthcoming) 如何估计 non-tradable factors 的溢价。该文提出了 Fama-MacBeth regression + IPCA + Sparsity + OOS SR based tuning 框架。今天我们来看看这个系列的第二弹。
+
+PS：当时那篇文章的标题是 Enhanced Fama-MacBeth Regression。不过后来留言中有小伙伴用了 augmented 一词无疑更加贴切，所以我也就顺势改一下这个系列的标题。
+
+今天这篇文章要介绍的是 Giglio and Xiu (2021)。需要说明的是，该文提出的 three-pass estimator 既可以用于 non-tradable factors 也可以用于 tradable factors。本文最后会用 A 股的一系列动量因子（tradable factors）做简单实证。
+
+2
+
+对传统的 two-pass estimator 而言，遗漏变量（模型中遗漏了重要的解释变量）是最重要的问题之一。遗漏变量问题导致因子溢价的估计存在偏差且偏差的方向可正可负。以下面这个简单的模型为例，假设  和  、  满足如下线性回归模型：
+
+  
+
+假设模型遗漏了  。令  对  回归，并通过 OLS 估计。计量经济学知识指出，  的回归系数的偏差如下：
+
+  
+
+式中  是真实模型中  对  的回归系数，  是  对  的回归系数。上式说明，  的偏差由  和  共同决定，它的符号受这两部分的影响。遗漏变量的存在使得因子溢价的估计有偏（biased），即遗漏变量偏差（omitted variable bias）。
+
+回到 two-pass estimator。遗漏变量问题的存在意味着，当我们进行第二步截面回归时，目标因子溢价的估计取决于模型中是否含有遗漏变量。因此，当使用不同的控制变量时（例如 FF3 的三因子，或其他常见的风险因子），目标因子的溢价估计值往往会出现很大的差异。（思细级恐一下，如果有人通过控制变量来控制目标因子溢价估计的显著性甚至是符号，是不是很可怕。）
+
+3
+
+从上面分析可知，如果想要准确估计因子溢价，就必须想办法应对遗漏变量问题。Giglio and Xiu (2021) 通过隐性因子模型框架并利用线性多因子模型的旋转不变性巧妙的解决了这个问题。下面就让我们来上点 math 并辅以直觉解释。
+
+考虑资产超额收益率  满足如下（隐性）多因子模型（假设因子个数为  ）：
+
+  
+
+其中  是因子的溢价、  是因子的 innovations（满足  ），  为随机扰动（满足  ，  ），  为因子暴露。（插一句，通常我们用非零均值的  表示因子并用  表示因子溢价。上述表示只不过是将  拆成了  和 innovation 两部分。）
+
+Giglio and Xiu (2021) 的目标是通过隐性多因子模型 (1) 来估计任意因子（特别是 non-tradable 因子）的溢价。令  表示  个可观测因子（tradable 或者 non-tradable）的取值，并假设  和隐性因子  满足如下关系：
+
+  
+
+其中  为  对隐性因子  的暴露，  表示测量误差（if any；BTW，Giglio and Xiu 2021 的方法也可以应对度量误差问题，但本文未做介绍），  （对于 non-tradable 因子而言）表示和其溢价无关的常数项。
+
+我们的目标是通过 (1) 和 (2) 来估计  的因子溢价，在上述模型下，其因子溢价为
+
+  
+
+即  的因子溢价由  对隐性因子的暴露和隐性因子的溢价决定。也许有的小伙伴可能会问，式 (2) 中并没有出现隐性因子的溢价  ，那么  应如何理解呢？这里的直觉解释（这部分特别感谢修老师的点拨）是，  的因子溢价是对风险的补偿，而  的风险由其对隐性因子的暴露，即  决定，因此  的风险补偿（即  ）是  。一般而言，  不一定出现在  的表达式 (2) 里。比如，如果  本身是 non-tradable 因子，例如 GDP growth，它的 DGP 应该由和 GDP 相关的东西驱动，而不应该有其风险溢价（其风险溢价可通过构造其 mimicking portfolio，即对于该因子有一个单位的暴露，对于任何别的因子无暴露的投资组合）来确定；只有当  是 tradable 因子时，其风险溢价才应出现在其 DGP 里。
+
+Okay！再回到我们的论述。
+
+依上述说明，我们只要知道  和  ，就可以通过  计算  的因子溢价。然而，不要忘了，在隐性因子模型中，因子  是不可观测的，因而无论  还是  都是不可识别的。那么，是否意味着我们走到死胡同呢？答案是否定的。因为我们可以绕过分别计算  和  而直接估计  。
+
+之所以能够实现上述计算的关键是线性多因子模型的旋转不变性（rotation invariance）。它指的是，哪怕  无法观测，但只要我们能够观测到  的某个满秩旋转（full-rank rotation），那么就可以直接估计出  。
+
+在数学上，假设我们观测到  的某个满秩旋转  （  为  维满秩方阵，注意，这里并不要求  是可观测的，只要能观测到  即可）。为了理解旋转不变形，将式 (1) 和 (2) 改写为
+
+  
+
+  
+
+接下来，定义  ，  以及  。利用新定义的三个变量，我们可以通过旋转后的因子  来改写 (1) 和 (2)
+
+  
+
+  
+
+由 (3) 和 (4) 可知，只要  可观测，那么我们就可以通过  对  时序回归得到  ；并通过截面回归得到  （i.e., 把 test assets 的平均收益率对它们对  的暴露进行截面回归）。一旦有了  以及  ，利用旋转不变性就能最终得到我们关心的因子溢价  ：
+
+  
+
+在隐性多因子模型下，一旦有了  ，就可以利用旋转不变性得到  。为了得到  ，一个自然而然的选择是使用 PCA。只要隐性因子足够强（可以理解为因子与股票有较强的截面相关性），PCA 总可以复原对因子空间的某个旋转变换（Bai 2003）。基于此假设，我们就可以利用 PCA 得到  ，从而实现整个方法论的闭环。
+
+4
+
+本节正式陈述 Giglio and Xiu (2021) 提出的因子溢价估计量。由于他们在 two-pass 的基础上加上了 PCA，因此该估计量是一个 three-pass estimator，也被称为 PCA-augmented FM regression estimator。为了介绍数学公式，定义如下：
+
+ ： 维超额收益率矩阵（  是资产个数，  是期数）；
+ ： 维因子矩阵（  是隐性因子个数）；
+ ： 维目标因子矩阵（  是待估计因子个数）；
+ ： 维随机扰动矩阵；
+ ： 维测量误差矩阵。
+
+此外，定义  ，  、  、  以及  分别为上述矩阵的时序去均值版本。利用上述变量，three-pass estimator 的三步骤如下：
+
+Step 1, PCA：
+
+对矩阵  进行 PCA，得到
+
+  
+
+其中  表示前  个特征值最大的特征向量；  表示将这些特征向量按列聚合。
+
+Step 2, Cross-sectional regression：
+
+将  个资产的收益率时序均值（向量记为  ，注意它和 demean 之后的  不是一回事儿）对第一步得到的  截面回归，得到隐性因子的溢价估计
+
+  
+
+Step 3, Time-series regression：
+
+将目标因子  对通过 PCA 得到的隐性因子进行时序回归，得到因子暴露
+
+  
+
+最后，利用第二步和第三步分别得到的  和  计算因子溢价  。以上就是关于 three-pass estimator 的介绍。关于该估计量更多的说明、数学推导以及渐近性质，请参考论文原文。
+
+5
+
+在实证中，为了使用该估计量，我们需要选定用于第一步 PCA 以及第二步截面回归的 test assets。这里一般选择 managed portfolios 比个股要更好（因为对 managed portfolios 做 PCA 要比对个股做稳定的多）。在 Giglio and Xiu (2021) 的实证研究中，二位作者使用了来自不同大类资产的 647 个投资组合作为 test assets。
+
+在本节的简单实证中，我使用 BetaPlus 小组基于常见协变量、针对 A 股构造的 150 个投资组合作为 test assets（实证周期是 2006/01/01 到 2021/05/31；实证中选择前 10 个主成分）。而对于待估计溢价的因子  ，则选择了一系列动量因子，包括总收益动量、52 周高点距离、动量加速度、特质性动量、累计异常收益率、阿尔法动量、左尾动量以及相似动量。
+
+由于这些都是 traded factors，因此通过 portfolio sort 构造因子投资组合便可以估计它们的溢价。但是由于如此构造的组合难以避免在其他风险因子上有暴露，因此因子溢价的估计在所难免受到这方面的影响。这便给了我足够的动机来应用 three-pass estimator 来考察是否会得到不一样的结果。
+
+下表给出了两种估计方法给出的因子溢价。结果显示，在 52 周高点距离、特质性动量以及累计异常收益率三个因子上，两种方法的因子溢价符号是相反的，表明需要进一步的分析。
+
+当然，three-pass estimator 更大的价值在于分析 non-tradable 因子。鉴于时间和精力，本文并没有进行相应的实证。感兴趣的小伙伴可以自己试一试。毕竟从经济理论出发，资产的预期收益率和大量 non-tradable 因子有关。而无论是本文介绍的 Giglio and Xiu (2021) 还是本系列上一篇的 Bybee, Kelly and Su (forthcoming) 都值得在实践中尝试。最后，对这两篇文章的介绍还让我想起更早的一篇推文《Bayesian Two-Pass Regression》。它们都是 two-pass estimator 的有益拓展。
+
+参考文献
+Bai, J. (2003). Inferential theory for factor models of large dimensions. Econometrica 71(1), 135–171.
+
+Bybee, L., B. T. Kelly, and Y. Su (forthcoming). Narrative asset pricing: Interpretable systematic risk factors from news text. Review of Financial Studies.
+
+Giglio, S. and D. Xiu (2021). Asset pricing with omitted factors. Journal of Political Economy 129(7), 1947–1990.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+The methodology we propose in this paper combines this insight with well-known result from the econometric literature on latent factor e.g., Bai 2003): that if the factors in  $ v_{t} $ are sufficiently strong, PCA consistently recovers a rotation of the factor space; that is,  $ \hat{v}_{t} = H v_{t} $ for some observable matrix H.
+处：Giglio and Xiu (2021)
+--- 图3 ---
+不同动量因子的月均收益率（%），实证区间 2006/01/01 到 2021/05/31。
+[表]
+ | Three-pass estimator | Portfolio Sort | 
+总收益动量 | 0.32 | 0.21 | 
+52周高点距离 | 0.23 | -0.06 | 
+动量加速度 | -0.58 | -0.36 | 
+特质性动量 | 0.15 | -0.16 | 
+累计异常收益率 | -0.18 | 0.36 | 
+阿尔法动量 | 0.13 | 0.22 | 
+左尾动量 | 0.01 | 0.06 | 
+相似动量 | -0.56 | -0.43 |
+--- 图4 ---

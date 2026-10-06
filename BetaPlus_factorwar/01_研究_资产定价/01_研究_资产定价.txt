@@ -1,0 +1,177 @@
+# 资产定价 – BetaPlus
+
+来源：https://www.factorwar.com/research/asset-pricing/
+
+### 概论与综述
+
+统一视角下的因子投资
+Navigating the Factor Zoo
+理解资产价格
+Anomalies, Factors, and Multi-Factor Models
+学术界、管理人、投资者视角下的因子投资
+Cross-section research, A history
+实证资产定价理论新进展
+实证资产定价：拓展研究
+数据驱动的投资思想史
+资产定价中的实证挑战 (I)
+资产定价中的实证挑战 (II)
+资产定价中的实证挑战 (III)
+资产定价中的实证挑战 (IV)
+资产定价中的实证挑战 (V)
+
+### 机器学习与资产定价
+
+机器学习与资产定价
+因子投资的高维数时代
+机器学习与资产定价: Facts and Fictions
+Financial Machine Learning
+The Virtues of Complex Models
+Risk-Return Tradeoffs (I)
+Risk-Return Tradeoffs (II)
+PCA 的源起、中兴和未来
+PCA 之前
+
+### 资产定价理论和模型检验
+
+多因子模型背后的资产定价理论
+寻找 Mean-Variance Frontier
+寻找 Mean-Variance Frontier (II)
+在什么情况下，因子 Span SDF (I)
+多因子模型的回归检验
+Generalized Method of Moments
+多因子回归检验中的 Newey-West 调整
+检验因子模型：Alpha，GRS 与 GMM
+直观理解 GRS 和 MV Spanning
+Bayesian Two-Pass Regression
+Augmented Fama-MacBeth Regression
+Augmented Fama-MacBeth Regression (II)
+Toward a better factor model
+Toward a better factor model (II)
+A new norm ?
+Which beta ?
+Which beta (II) ?
+Which beta (III) ?
+Which test assets ?
+Which characteristics ?
+False In-Sample Predictability ?
+Farewell，ad-hoc 多因子模型
+利用收益率时序信息改进 SDF 估计
+追寻因子的足迹：分类、构造与检验
+因子投资中的无监督学习
+所见即所得吗 ?
+基于回归斜率的因子溢价估计与因子模型
+没有 β、都是 α ?
+到底需要多少因子 ?
+Portfolio Sort 的源起、中兴和未来
+从股票截面数据到股息期限结构
+
+### CAPM 和多因子模型
+
+CAPM 的一小段历史
+BAB vs BABAB
+低 β 在 A 股：证券市场线是平坦的吗 ?
+Low Minus High 启示录
+致敬 Stephen Ross：从 APT 到多因子模型
+主流多因子模型巡礼
+中国版 Fama-French 三因子模型
+q-factor model 往事
+一个加入行为因子的复合模型
+一个混合四因子模型
+稀疏性幻觉
+
+### 研究生态
+
+在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远
+Campbell Harvey：”Tortured Data”
+多重假设检验的源起、中兴和未来
+出色不如走运 (II)
+出色不如走运 (III)
+出色不如走运 (IV)
+出色不如走运 (V)
+出色不如走运 (VI)
+出色不如走运 (VII)
+出色不如走运 (VIII)
+出色不如走运 (终章)
+因子动物园的另一面：如何估计异象的先验概率
+可复制的因子研究
+遗漏因子、缺失数据与多重检验
+常见多重假设检验方法及其实证 (I)
+Factor War 外传
+Being Honest with Backtest Reporting
+Missing Financial Data
+更有效的信息聚合方法 ?
+另类数据与分析师盈利预测
+
+### 资产需求体系
+
+因子模型：不仅是资产收益的问题
+股票市场是高度竞争的吗 ?
+
+### 宏观经济与资产定价
+
+Not All Inflation Created Equal：通胀与资产定价
+
+### 价值因子
+
+Value
+历史悠久的 BM 依然优异吗 ?
+细节是魔鬼：你会如何定义 HML ?
+Book-to-Market 整容记：哪家 BM 比较强 ?
+价值因子已死 ?
+价值因子已死 ? 争论与启示
+
+### 规模因子
+
+规模因子：消失还是周期 ?
+
+### 盈利和投资因子
+
+盈利溢价 101 (上)
+盈利溢价 101 (下)
+投资效应：Factor War 前传
+从 Factor Zoo 到 Factor War，实证资产定价走向何方 ?
+盈利与投资因子：历史分野与模式转变
+Notes on 盈利与投资因子
+
+### 质量因子
+
+The Quality Premium
+Which score ?
+质量增长：巴菲特与贵州茅台
+
+### 动量因子
+
+Momentum
+因子动量和动量因子
+分域研究
+强者恒强，弱者越弱：就是这么简单靠谱
+动量是如何炼成的 ? 风险溢价 or 行为偏差
+动量 ? 超乎您想象
+大破动量危机：批判与拓展
+不孤独的动量：因子拼图
+止损的价值：对冲动量崩溃
+动量新解与改进
+动量 Plus（上）
+动量 Plus（中）
+短期反转：地表最强因子与新五因子模型
+Trend Factor in China ：中国版定价模型
+What predicts momentum ?
+
+### 学术巨匠
+
+Eugene Fama —— 一段 50 年的传奇
+Q&A with Eugene Fama
+Fischer Black
+Kahneman 和 Tversky, 传奇友谊和不朽发现
+Richard Thaler，经济学的新参者
+
+ 
+
+ 
+
+免责声明
+本网站所含内容由 BetaPlus 小组基于公开信息而提供。入市有风险，投资需谨慎。在任何情况下，本网站中的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，BetaPlus 小组不对任何人因使用本网站的任何内容所引致的任何损失负任何责任。本网站中内容所表述的意见不代表 BetaPlus 小组成员所属机构观点。
+
+© 2026 Factorwar. All rights reserved.
+
+京ICP备17020789号-2

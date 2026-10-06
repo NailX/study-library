@@ -1,0 +1,308 @@
+# Momentum
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/wxMai6rMNEo1-F3RnTxllA
+
+作者：石川，llanglli，刀疤连；www.factorwar.com
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文从因子起源、因子成因、因子实证以及因子投资实务四方面详解（截面）动量因子。
+
+写在前面：本文的写作动机已在《Value》一文中解释过。本文在《因子投资：方法与实践》第 3.5 节动量因子的基础上（有删改），补充了从动量因子投资实务角度的阐述。此外，和书中相比，本文第三节中针对 A 股的实证数据已更新至 2021 年 12 月 31 日。
+
+1
+动量因子起源
+
+截面动量因子（后文简称动量因子）是一个颇受争议的因子。实证资产定价领域的代表人物 Eugene Fama 一贯旗帜鲜明地反对将动量视作一个系统性因子。但另一方面，该因子又实实在在地存在于不同国家及不同大类资产中。其受关注的程度大概只有前面介绍的规模和价值因子能与之相提并论。动量因子背后反映的是股票间的相对强弱趋势会延续，“强者恒强，弱者恒弱”；通常通过做多过去一段时间表现最好的股票（称为赢家组合）、同时做空这段时间表现最差的股票（称为输家组合）来构建动量因子。
+
+动量因子源自 Jegadeesh and Titman (1993) 提出的动量效应。在每月月末，依据过去 J 个月的股票总收益率排序，将股票分为 10 组，按照等权重方式做多收益率最高的一组股票，同时做空收益率最低的一组股票，并持有 K 个月。为了规避路径依赖对结果的影响，该文构建了 K 个子策略，每个子策略的起点相隔一月，最后再取 K 个组合的收益均值代表动量效应。实证结果显示，无论是多空组合还是纯多头组合，都可以获取显著且稳健的超额收益。受该文启发，Carhart (1997) 在 Fama and French (1993) 三因子模型的基础上加入了动量因子，该模型后来被称为 Carhart 四因子模型。
+
+Jegadeesh and Titman (2001) 利用样本外数据进一步检验了动量效应，以此回应了那些认为 Jegadeesh and Titman (1993) 是数据挖掘结果的批判。Rouwenhorst (1998, 1999) 在12 个欧洲国家市场和 20 个新兴市场发现了显著的动量效应，上述发现为支持动量存在于其他市场中提供了有力的证据。De Groot et al. (2012) 指出在新兴市场同样有着显著的动量效应，而 Asness, Moskowitz and Pedersen (2013) 更是提供了动量效应在全球多个市场广泛存在的证据。与上述研究成鲜明对比的是，在日本和中国 A 股市场中，动量效应的表现惨不忍睹。
+
+除了个股动量，行业动量也非常显著（Moskowitz and Grinblatt 1999）。此外，在债券、大宗商品和外汇等资产中也存在动量效应。举例来说，Jostova et al. (2013) 研究了公司债市场的动量效应，Narayan, Ahmed and Narayan (2015) 讨论了商品期货市场的动量效应，而 Menkhoff et al. (2012) 和 Orlov (2016) 表明外汇市场同样存在显著的动量效应。
+
+2
+动量因子成因
+
+2.1 风险解释
+
+关于动量的成因，一部分学者将其归因于系统性风险敞口。具体来说，动态风险敞口假说认为赢家组合和输家组合有着不同的、时变的系统性风险暴露。因此，多空对冲构建的动量因子组合有着时变的系统性风险敞口，需要获得风险溢价补偿。
+
+Geczy and Samonov (2016) 利用长达近 200 年的美股数据研究发现，在一个市场状态的初期，动量组合对于当前的市场状态有着负的暴露，从而导致该时期的大幅损失，这意味着动量组合需要获得更高的收益来弥补相关的风险。Daniel and Moskowitz (2016) 将此形象地描述为“动量崩溃”（momentum crashes），并指出这一尾部风险正是动量的风险溢价来源。Liu and Zhang (2008) 指出赢家组合对产出增长率因子有着更高的短期暴露，这可以较好地解释动量效应。他们发现额外的因子暴露主要来自赢家组合，而输家组合的因子暴露则在不同时期保持稳定。
+
+Chordia and Shivakumar (2002) 和 Antoniou, Lam and Paudyal (2007) 则认为经济周期有助于解释动量效应。Yin and Wei (2020) 基于中国市场数据发现，总体盈利的不稳定性有助于解释动量因子的表现。但也有学者并不认可这类解释。Griffin, Ji and Martin (2003) 和 Ji, Martin and Yao (2017) 反对使用宏观经济变量解释动量效应。
+
+2.2 行为金融学解释
+
+除风险补偿外，更多的学者认为投资者行为偏差能更好地解释动量效应。Daniel, Hirshleifer, and Subrahmanyam (1998) 的经典研究认为，投资者对其私有信息的过度自信及有偏的业绩自我归因会造成动量效应。Hur and Singh (2016) 进一步指出反应不足是主要原因。
+
+其次，Grinblatt and Han (2005) 认为投资者心理账户的存在导致了处置效应，拉大了股票价格与其基本面价值之间的差异，进而导致了动量效应。他们发现，在控制了未实现盈利值（capital gain overhang）后，动量效应不再显著。
+
+第三类解释是推定预期偏差，即投资者通过将当前数据外推来得到对未来表现的预期，而这一朴素估计是有偏的。Barberis et al. (2015) 构建了部分投资者有推定预期的 X-CAPM 模型，用以解释资产预期收益的截面差异。
+
+知情交易也是一种有趣的解释。Chen and Zhao (2012) 发现，在知情交易概率较大的股票中，动量表现优异；反之，在知情交易概率较小的股票中，股价则没有明显的持续性。最后，市场情绪也是另一类重要的解释（Stambaugh, Yu and Yuan 2012）。Li and Yeh (2011) 基于中国 A 股市场的数据，指出空头组合蕴含的市场情绪越强烈，动量效应就越显著。Antoniou, Doukas and Subrahmanyam (2013) 等也提供了市场情绪对动量效应有显著影响的证据。
+
+3
+动量因子实证
+
+熟悉 A 股市场的朋友可能有这样的体会，无论使用哪个时间周期计算动量都无法发现显著的动量效应，更多时候表现出的是反转效应。本节依照学术界的常规做法定义变量、检验动量因子。变量定义方法为：在 t 月末使用 t – 12 到 t – 1 月之间 11 个月的累计收益率作为动量指标。这么做的目的是排除短期反转对动量造成的影响。举例来说，假如现在是 2019 年 1 月末，依照上述方法将使用 2018 年 1 月末到 2018 年 12 月末（即 2018 年 2月到 12 月）这 11 个月内的累计收益率计算动量。为了研究动量因子，本文使用的实证区间为 2000 年 1 月至 2021 年 12 月。
+
+每月末将股票按照动量变量的取值从低到高分成 10 组，表 1 汇报了描述性统计。不难发现，前 8 组的总市值差异并不大，但第 9 组和 High 组的总市值显著增加。和书中结果（书中的实证区间终点为 2019 年 12 月 31 日）相比，在加入了 2020 和 2021 两年的数据后，High 组的平均市值进一步增大，从书中的 169.1 亿元上升至 190.9 亿元，这和过去两年的抱团不无关系。除此之外很有意思的是，10 组的 ROA 呈现出单调递增，且 High 组的 P/B 也要高于其他组。
+
+表 1 描述性统计
+
+表 2 总结了单变量排序和双重排序的检验结果。首先来看单变量排序，无论采用等权重（Panel A），还是采用市场加权（Panel B）构建这些投资组合，它们的收益率几乎毫无单调性可言。当采用等权重时，10 个投资组合的月均收益率呈现出倒 U 字形；当采用市值加权时，二者之间则更加无序。无论等权重还是市值加权，由做多赢家组合（High 组）和做空输家组合（Low 组）构成的动量因子的月均收益率都不显著。
+
+表 2 单变量 Portfolio Sort 检验结果
+
+接下来，关注动量和市值进行双重排序的检验结果。表 3 和表 4 分别给出了等权和市值加权的结果。无论采用等权重还是市值加权，在按市值分组得到的 Small 和 2 这两组中，赢家组的收益率低于输家组的收益率；而在 3 到 Large 三组中，赢家组合的收益率高于输家组合的收益率。综合这两点可以看出，动量效应仅微弱地存在于 A 股的大市值股票中，而对于小市值的股票则更多地表现出反转。
+
+表 3 动量和市值双重排序检验结果（等权重）
+
+表 4 动量和市值双重排序检验结果（市值加权）
+
+将五组平均后得到动量因子。当采用等权重时，动量因子的月均收益率为 0.13%（t-statistic = 0.61）；当采用市值加权时，动量因子的月均收益率为 0.14%（t-statistic = 0.67）。这两个结果均非常不显著，说明以学术界中的常见方法构建的动量效应并不存在于 A 股市场中。
+
+4
+动量因子投资实务
+
+4.1 改进
+
+虽然有如此多的理论和实证支持动量效应，但仍有不少学者提出了质疑和批判。其一，有研究认为动量的收益其实来自对其他经典风险因子的暴露。例如，Novy-Marx (2015) 认为价格动量效应来自盈余动量，一旦控制盈余动量，价格动量便不再显著。其二，空头端对动量收益的贡献较大，但由于在实践中卖空并不容易，因此动量因子对实际因子投资的作用有限。其三，动量因子往往伴随很高的换手率，因此其纸面收益难以很好地转化为实际交易盈利。
+
+针对批判，一些改进的动量因子也陆续被“挖掘”了出来，并且或多或少占了下面几个理由中的一个或多个：要么比原始动量因子风险收益特征更优，要么组合收益更加亮眼，要么能避免动量崩溃，要么故事更加动人。本节介绍其中的一些。
+
+4.1.1 价格高点距离
+
+Jegadeesh and Titman (1993) 在定义动量指标时，用的过去 J 个月（如 12 个月）的累计收益，即锚点是 J 个月前的价格。George and Hwang (2004) 将锚点替换为过去 52 周最高价，即当前最新价与最高点的距离作为新的动量因子。该文的实证结果表明，价格高点距离指标包含了传统动量指标的信息，是一个更可靠更有效的动量指标。
+
+4.1.2 残差动量
+
+残差动量由个股的残差收益率计算，定义为个股收益率中无法被给定多因子模型解释的部分。Blitz, Huij and Martens (2011) 的研究发现残差动量可获得非常显著的收益，且不再有动量崩溃的烦恼。其背后的原因在于求解残差的过程剥离了传统动量因子对系统性风险因子的敞口，从而可以获得更加稳健的收益。Lin (2020) 发现残差动量在 A 股市场同样有效。虽然实证结果看似支持残差动量存在于 A 股市场这一结论，但其背后的原因需要进一步探索。与之类似的还有阿尔法动量，感兴趣的读者请参考 Hühn and Scholz (2018)。
+
+4.1.3 加速度动量
+
+对于一支股票来说，在所有的信息里面，价格是投资者最容易获取的，这也是技术分析盛行的一个重要原因。对于处于上涨（下跌）趋势的股票，如果价格走势加速上涨（下跌），则更容易吸引投资者的注意。鉴于此，Chen and Yu (2014) 设计了一个加速动量指标，用来衡量价格上涨（下跌）的速度。在构造因子时，该文用价格对时序的期数以及期数的平方项回归，并取平方项的系数为加速度动量指标。实证结果显示，加速度动量能在原始动量和 52 周最高价点距离指标的基础上带来增量。
+
+4.1.4 左尾动量
+
+从收益率的分布来看，左侧代表损失和风险，也存在动量效应，即左侧收益率越大的公司未来表现越好，左侧收益率越小的公司未来表现越差。Atilgan et al. (2020) 认为，投资者对尾部风险或者坏消息往往反应不足，导致尾部动量得以持续，尤其是散户占比较大大公司，这一效应更加明显。从该文实证结果上来看，左尾动量非常显著，其市值加权组合能在控制了 Carhart 四因子后依然获得显著的超额收益。从计算上来看，尾部动量指标既像是风险指标，也像是收益率指标，但剔除常见的风险异象影响后，左尾动量依然显著，表明左尾动量含有独特的信息。
+
+4.1.5 其他考量
+
+除了上述几种计算方法之外，为了降低传统动量的尾部风险，还有几篇文献值得一提。首先，Daniel and Moskowitz (2016) 指出基于对动量策略均值和波动率预测的动态动量策略，可以将静态动量策略的夏普比率提升一倍。类似地，Barroso and Santa-Clara (2015) 发现，通过引入目标波动率进行仓位管理也可以显著提升动量组合的表现。
+
+另外一个思路是从买方投资者视角。特别地，投资者的偏好对于股票的表现既有好处、也有弊端。好处在于，当关注的投资者不是那么多时，机构投资者的抱团可以带动趋势，触发大行情；但反过来，当越来越多的机构都持有一支股票，机构间的竞争将加剧，股票的趋势便随时可能逆转。直观上看，此时动量便可能变得危险。依照上述猜测，Hoberg, Kumar and Prabhala (2020) 为每支股票构建了其买方竞争度指标。无论是从截面还是时序角度来看，买方竞争度都对动量的表现有显著为负的预测能力。
+
+4.2 企业间关联
+
+4.2.1 领先滞后关系
+
+上一节提到的改造都是每支股票自身的收益率或价格出发。还有另一种获得动量溢价的思路是通过不同公司之间收益率的领先滞后关系（也称作企业间关联）。作为准另类数据的代表，它可以被视为对传统动量的延伸。表 5 展示了最为典型和广为人知的领先滞后关系。
+
+表 5 典型公司间领先滞后关系
+
+上述文章从不同角度揭示了不同公司的收益率间存在的关联。这些企业间关联造成的超额收益的来源是投资者对关联信息的有限注意力所导致的反应不足。企业间关联效应也对公司未来基本面的变化有预测能力。这类数据大多公开可得，因此具备进一步系统研究的基础，且实证结果表明在 A 股上具备应用前景。有意思的是，Ali and Hirshleifer (2020) 发现，一旦控制了分析师共同覆盖，其他关系便无法获得显著超额收益了；而反过来，其他关系无法解释分析师共同覆盖的超额收益。
+
+除此之外，Huang et al. (2021) 研究表明各种企业间关联的收益率均和信息离散度有关。当领先企业的信息是小量、多次出现时，投资者的有限注意力问题更严重，因此通过领先滞后关系获得的超额收益更高；当领先企业的信息十分显著且离散时，市场对领先企业的关联影响反应更充分，因而无法通过领先滞后关系获得超额收益。该文使用信息离散度和领先滞后关系双重排序，发现在信息最连续的组内观察到最显著的超额收益。
+
+4.2.2 相似动量
+
+除了上述所列的动量效应溢出的渠道之外，He, Wang and Yu (2021) 一文为公司间的关联提供了另外一个思路，即从相似股票的角度定义动量。相似股票能影响股票未来的表现背后主要基于三个逻辑：（1）投资者认为相似的股票会有相似的表现，所以投资者会用与某支股票相似的股票过去的收益来推断其未来表现；（2）如果一支股票过去表现好，但是投资者错过了这支股票，那么投资者会找相似的但还没有较大涨幅的股票，也就是说，和表现优秀的股票相似的股票需求会增加；（3）如果投资者在某一类股票中赚到了钱，思维会有路径依赖，之后的投资依然会寻找相似的股票进行投资。
+
+构造相似动量因子的核心是定义相似的股票。为此，我们可以为每支股票计算其与其他股票的距离，该距离定义为 5 个特征（价格、市值、账面价值比、营业利润率和总资产增长率）的欧式距离。然后，对于每支股票，距离最小的 50 支股票即为相似股票，相似动量即为这 50 支股票过去一个月的市值加权平均收益率。实证结果表明，相似动量多空组合在控制了 Fama-French 六因子之后依然能够获得显著的超额收益。由于六因子中包含动量因子，因此相似动量提供了原始截面动量因子没有的增量信息。
+
+4.3 改进动量的简单实证
+
+针对 4.1 节提到的改进方法以及相似动量，连长的文章《动量 Plus（上）》给出了相应的实证。本节节选其中一些（并将实证区间延长至 2021/12/31），感兴趣的小伙伴请参考连长的雄文。数据处理方式参见《因子投资：方法与实践》的 3.1 节。
+
+表 6 展示了不同定义下改进动量因子的月均收益率（%），其中 Panel A 为等权重的情况，Panel B 为市值加权的情况。等权重下，绝大多数针对美股市场提出的改进动量因子（High – Low）依然在 A 股水土不服，其中只有特质动量和左尾动量因子获得正收益，但统计上均不显著。当采用市值加权时，情况较等权时进一步“恶化”。
+
+表 6 改进动量月均收益率（2005/1/1 至 2021/12/31）
+
+从上述检验结果可以看到，无论怎么改进，动量类因子在 A 股市场效果都难有作为，这符合人们的认知。不过我们也注意到，自 2017 年以来，动量类因子似乎有“抬头”之势，尤其是在大市值的股票中。这个现象可能和投资者结构有关。由于 A 股长期以来散户占据主导，散户更容易追涨杀跌，对各种信息反应过度，这直接导致了反转效应。随着外资不断流入，公募基金规模不断壮大，社保和养老基金等也不断涌入，机构投资者的占比越来越高，散户投资者占比相应越来越少，反应过度逐渐得到修正，甚至出现反应不足，进而出现动量效应。
+
+表 7 展示了改进后的动量因子在 2017 年之后的月均收益率（%）。较更长实证区间而言，2017 之后确实出现无论是等权还是市值加权，大部分因子获得了正收益，但依然并不显著。（如果进一步按市值分层，在大市值上做实证分析也许会有不同的结果。）
+
+表 7 改进动量月均收益率（2017/1/1 至 2021/12/31）
+
+作为量价因子的代表，动量因子在美股有多“给力”，在 A 股就有多“憋屈”。这背后的原因着实值得深挖。从前文对动量因子背后成因来看，行为金融学给出了诸多方面的解释，因此动量一定和投资人的行为偏差、交易行为以及市场整体的投资者结构有着千丝万缕的联系。
+
+顺着这个逻辑，我们就不难理解为什么同一个因子（或异象）会在不同市场中表现出截然不同的实证结果。当出现这种情况时，探寻背后内在原因，而非照搬不同的改进就显得格外重要。这也是我们对特质动量在 A 股一直持怀疑态度的原因。各种方式计算的动量因子之间相似或相左的实证结果也为 A 股中的动量效应增添了诸多不确定性。这些问题将促使人们持续研究动量，而厘清一个因子背后有效或无效的根源正是实证研究的乐趣所在。
+
+参考文献
+Ali, U. and D. Hirshleifer (2020). Shared analyst coverage: Unifying momentum spillover effects. Journal of Financial Economics 136(3), 649 – 675.
+
+Antoniou, A., H. Y. T. Lam, and K. Paudyal (2007). Profitability of momentum strategies in international markets: The role of business cycle variables and behavioural biases. Journal of Banking & Finance 31(3), 955 – 972.
+
+Antoniou, C., J. A. Doukas, and A. Subrahmanyam (2013). Cognitive dissonance, sentiment, and momentum. Journal of Financial and Quantitative Analysis 48(1), 245 – 275.
+
+Asness, C. S., T. J. Moskowitz, and L. H. Pedersen (2013). Value and momentum everywhere. Journal of Finance 68(3), 929 – 985.
+
+Atilgan, Y., T. G. Bali, K. O. Demirtas, and A. D. Gunaydin (2020). Left-tail momentum: Underreaction to bad news, costly arbitrage and equity returns. Journal of Financial Economics 135(3), 725 – 753.
+
+Bali, T. G., Cakici, N., & Whitelaw, R. F. (2011). Maxing out: Stocks as lotteries and the cross-section of expected returns. Journal of Financial Economics 99(2), 427 – 446.
+
+Barberis, N., R. Greenwood, L. Jin, and A. Shleifer (2015). X-CAPM: An extrapolative capital asset pricing model. Journal of Financial Economics 115(1), 1 - 24.
+
+Barroso, P. and P. Santa-Clara (2015). Momentum has its moments. Journal of Financial Economics 116(1), 111 – 120.
+
+Blitz, D., J. Huij, and M. Martens (2011). Residual momentum. Journal of Empirical Finance 18(3), 506 – 521.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Chen, L.-W. and H.-Y. Yu (2014). Investor Attention, Visual Price Pattern, and Momentum Investing. Working paper.
+
+Chen, Y. and H. Zhao (2012). Informed trading, information uncertainty, and price momentum. Journal of Banking & Finance 36(7), 2095 – 2109.
+
+Chordia, T. and L. Shivakumar (2002). Momentum, business cycle, and time-varying expected returns. Journal of Finance 57(2), 985 – 1019.
+
+Cohen, L. and A. Frazzini (2008). Economic links and predictable returns. Journal of Finance 63(4), 1977 – 2011.
+
+Cohen, L. and D. Lou (2012). Complicated firms. Journal of Financial Economics 104(2), 383 – 400.
+
+Daniel, K. D., D. A. Hirshleifer, and A. Subrahmanyam (1998). Investor psychology and security market under- and overreactions. Journal of Finance 53(6), 1839 – 1885.
+
+Daniel, K. D. and T. J. Moskowitz (2016). Momentum crashes. Journal of Financial Economics 122(2), 221 – 247.
+
+De Groot, W., J. Pang, and L. Swinkels (2012). The cross-section of stock returns in frontier emerging markets. Journal of Empirical Finance 19(5), 796 – 818.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Geczy, C. C. and M. Samonov (2016). Two centuries of price-return momentum. Financial Analysts Journal 72(5), 32 – 56.
+
+George, T. J. and C. Y. Hwang (2004). The 52‐week high and momentum investing. Journal of Finance 59(5), 2145 – 2176.
+
+Griffin, J. M., X. Ji, and J. S. Martin (2003). Momentum investing and business cycle risk: Evidence from pole to pole. Journal of Finance 58(6), 2515 – 2547.
+
+Grinblatt, M. and B. Han (2005). Prospect theory, mental accounting, and momentum. Journal of Financial Economics 78(2), 311 – 339.
+
+He, W., Y. Wang, and J. Yu (2021). Similar Stocks. Working paper.
+
+Hoberg, G., N. Kumar, and N. Prabhala (2020). Buy-Side competition and momentum profits. Review of Financial Studies forthcoming.
+
+Hou, K. (2007). Industry information diffusion and the lead-lag effect in stock returns. Review of Financial Studies 20(4), 1113 – 1138.
+
+Huang, S., C. M. C. Lee, Y. Song, and H. Xiang (2021). A frog in every pan: Information discreteness and the lead-lag returns puzzle. Journal of Financial Economics forthcoming.
+
+Hur, J. and V. Singh (2016). Reexamining momentum profits: Underreaction or overreaction to firm-specific information? Review of Quantitative Finance and Accounting 46(2), 261 – 289.
+
+Hühn, H. L. and H. Scholz (2018). Alpha momentum and price momentum. International Journal of Financial Studies 6(2), 49.
+
+Jacobs, H., T. Regele, and M. Weber (2015). Expected skewness and momentum. Working paper.
+
+Jegadeesh, N. and S. Titman (1993). Returns to buying winners and selling losers: Implications for stock market efficiency. Journal of Finance 48(1), 65 – 91.
+
+Jegadeesh, N. and S. Titman (2001). Profitability of momentum strategies: An evaluation of alternative explanations.Journal of Finance 56(2), 699 – 720.
+
+Ji, X., J. S. Martin, and Y. Yao (2017). Macroeconomic risk and seasonality in momentum profits. Journal of Financial Markets 36, 76 – 90.
+
+Jostova, G., S. Nikolova, A. Philipov, and C. W. Stahel (2013). Momentum in corporate bond returns. Review of Financial Studies 26(7), 1649 – 1693.
+
+Kishore, R., M. W. Brandt, P. Santa-Clara, and M. Venkatachalam (2008). Earnings announcements are full of surprises. Working paper.
+
+Lee, C. M. C., S. Teng, R. Wang, and R. Zhang (2019). Technological links and predictable returns. Journal of Financial Economics 132(3), 76 – 96.
+
+Li, C.-A. and C.-C. Yeh (2011). Investor psychological and behavioral bias: Do high sentiment and momentum exist in the China stock market? Review of Pacific Basin Financial Markets and Policies 14(03), 429 – 448.
+
+Lin, Q. (2020). Idiosyncratic momentum and the cross-section of stock returns: Further evidence. European Financial Management 26(3), 579 – 627.
+
+Liu, L. X. and L. Zhang (2008). Momentum profits, factor pricing, and macroeconomic risk. Review of Financial Studies 21(6), 2417 – 2448.
+
+Menkhoff, L., L. Sarno, M. Schmeling, and A. Schrimpf (2012). Currency momentum strategies. Journal of Financial Economics 106(3), 660 – 684.
+
+Narayan, P. K., H. A. Ahmed, and S. Narayan (2015). Do momentum-based trading strategies work in the commodity futures markets? Journal of Futures Markets 35(9), 868 – 891.
+
+Novy-Marx, R. (2015). Fundamentally, momentum is fundamental momentum. NBER Working Paper No. 20984.
+
+Orlov, V. (2016). Currency momentum, carry trade, and market illiquidity. Journal of Banking & Finance 67, 1 – 11.
+
+Parsons, C. A., R. Sabbatucci, and S. Titman (2020). Geographic lead-lag effects. Review of Financial Studies 33(10), 4721 – 4770.
+
+Rouwenhorst, K. G. (1998). International momentum strategies. Journal of Finance 53(1), 267 – 284.
+
+Rouwenhorst, K. G. (1999). Local return factors and turnover in emerging stock markets. Journal of Finance 54(4), 1439 – 1464.
+
+Stambaugh, R. F., J. Yu, and Y. Yuan (2012). The short of it: Investor sentiment and anomalies. Journal of Financial Economics 104(2), 288 – 302.
+
+Yin, L. and Y. Wei (2020). Aggregate profit instability and time variations in momentum returns: Evidence from China. Pacific-Basin Finance Journal 60, 101276.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+ | Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | 
+动量 | -27% | -15% | -7% | 0% | 6% | 13% | 22% | 33% | 51% | 94% | 
+总市值（亿元） | 107.8 | 113.3 | 107.3 | 103.8 | 102.3 | 109.0 | 124.2 | 131.9 | 155.7 | 190.9 | 
+市场 $ \beta $ | 1.17 | 1.15 | 1.14 | 1.14 | 1.13 | 1.12 | 1.12 | 1.11 | 1.10 | 1.08 | 
+年化波动率 | 45.47% | 43.91% | 43.49% | 43.65% | 44.01% | 44.50% | 45.20% | 46.20% | 47.49% | 50.04% | 
+P/B | 3.93 | 4.12 | 3.79 | 4.43 | 3.94 | 4.69 | 4.69 | 5.46 | 5.97 | 9.18 | 
+ROA | 2.32% | 2.87% | 3.08% | 3.29% | 3.38% | 3.68% | 3.95% | 4.49% | 5.02% | 6.08% |
+1. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+--- 图3 ---
+[表]
+Low | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | High | High - Low | 
+Panel A: 等权重 | 
+1.13 | 1.34 | 1.44 | 1.46 | 1.54 | 1.40 | 1.34 | 1.31 | 1.26 | 1.13 | 0.01 | 
+(1.65) | (1.97) | (2.11) | (2.14) | (2.34) | (2.16) | (2.07) | (2.02) | (1.99) | (1.83) | (0.02) | 
+Panel B: 市值加权 | 
+0.75 | 0.81 | 0.82 | 0.53 | 0.99 | 0.73 | 0.72 | 0.96 | 0.76 | 0.96 | 0.22 | 
+(1.15) | (1.23) | (1.32) | (0.86) | (1.58) | (1.20) | (1.31) | (1.74) | (1.38) | (1.61) | (0.53) |
+出处：BetaPlus 小组；整理：川总写量化
+--- 图4 ---
+等权时，动量和市值双重排序的月均收益率（%）。括号内为经 Newey-West 调整后的 t-statistics。实证区间为 2000/01/01 到 2021/12/31。
+[表]
+ | Low | 2 | 3 | 4 | High | High - Low | 
+Small | 1.97(2.83) | 2.29(3.08) | 2.27(3.16) | 1.96(2.66) | 1.74(2.40) | -0.23(-0.96) | 
+2 | 1.47(2.08) | 1.52(2.16) | 1.60(2.39) | 1.57(2.33) | 1.40(2.10) | -0.07(-0.31) | 
+3 | 1.13(1.62) | 1.30(1.89) | 1.26(1.91) | 1.19(1.79) | 1.17(1.73) | 0.04(0.16) | 
+4 | 0.80(1.20) | 0.90(1.33) | 0.87(1.37) | 0.89(1.37) | 1.19(1.88) | 0.40(1.57) | 
+large | 0.31(0.46) | 0.64(1.05) | 0.93(1.48) | 0.90(1.47) | 0.81(1.31) | 0.50(1.41) | 
+平均 | 1.14(1.69) | 1.33(1.98) | 1.39(2.14) | 1.30(2.00) | 1.26(1.97) | 0.13(0.61) |
+出处·BetaPlus小组·整理·川总管化
+--- 图5 ---
+市值加权时，动量和市值双重排序的月均收益率（%）。括号内为经 Newey-West 调整后的 t-statistics。实证区间为 2000/01/01 到 2021/12/31。
+[表]
+ | Low | 2 | 3 | 4 | High | High - Low | 
+Small | 1.92(2.77) | 2.25(3.02) | 2.21(3.09) | 1.91(2.59) | 1.72(2.37) | -0.20(-0.81) | 
+2 | 1.46(2.06) | 1.51(2.14) | 1.58(2.37) | 1.56(2.32) | 1.40(2.09) | -0.05(-0.24) | 
+3 | 1.11(1.60) | 1.29(1.87) | 1.25(1.90) | 1.20(1.80) | 1.17(1.72) | 0.05(0.24) | 
+4 | 0.77(1.17) | 0.90(1.32) | 0.86(1.37) | 0.89(1.37) | 1.19(1.88) | 0.42(1.63) | 
+Large | 0.33(0.50) | 0.55(0.92) | 0.86(1.36) | 0.92(1.53) | 0.80(1.29) | 0.47(1.29) | 
+平均 | 1.12(1.67) | 1.30(1.95) | 1.35(2.10) | 1.29(2.00) | 1.26(1.97) | 0.14(0.67) |
+--- 图6 ---
+[表]
+文献 | 效应 | 
+Hou (2007) | 行业动量（intra-industry effect） | 
+Cohen and Frazzini (2008) | 重要客户动量（supplier-customer effect） | 
+Cohen and Lou (2012) | 复杂公司动量（conglomerate lead-lag effect） | 
+Lee et al. (2019) | 科技关联度（technological links） | 
+Parsons, Sabbatucci and Titman (2020) | 地理动量（geographic lead-lag effect） | 
+Ali and Hirshleifer (2020) | 分析师共同覆盖（shared analyst coverage） |
+数理·川治写景化
+--- 图7 ---
+2005/01/01到2021/12/31。
+[表]
+ | 52周高点距离 | 特质动量 | 加速度动量 | 左尾动量 | 相似动量 | 
+Panel A: 等权重 | 
+High | 1.76(2.26) | 1.76(2.24) | 1.67(2.24) | 1.67(2.41) | 1.37(1.74) | 
+Low | 1.97(2.46) | 1.38(1.82) | 1.76(2.18) | 1.37(1.62) | 2.07(2.77) | 
+High - Low | -0.21(-0.47) | 0.37(1.59) | -0.10(-0.46) | 0.30(0.75) | -0.70(-2.10) | 
+Panel B: 市值加权 | 
+High | 1.26(1.731) | 1.09(1.59) | 1.14(1.66) | 1.18(1.85) | 1.18(1.49) | 
+Low | 1.40(1.88) | 1.18(1.60) | 1.52(2.01) | 1.08(1.30) | 1.56(2.46) | 
+High - Low | -0.13(-0.24) | -0.09(-0.32) | -0.38(-0.95) | 0.10(0.18) | -0.39(-0.91) |
+
+--- 图9 ---

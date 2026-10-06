@@ -1,0 +1,207 @@
+# Toward a better factor model
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/QHiTjEg_V4a5hwEsl83k6Q
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+当传统检验无法有效比较多因子模型时，一些新方法的诞生弥补了它的不足，让人们朝着找到真正意义上更优的多因子模型又迈进了一步。
+
+01
+实证中的困惑
+
+你是否在比较不同的多因子模型时因为下面这些自相矛盾的结果而倍感困惑？
+
+1. 往多因子模型中加入一个额外的因子，但是 test assets 的 pricing errors 却增加了。
+
+2. 一个多因子模型能够解释其他 test assets 的超额收益，但是却对构造因子的 sorted portfolios 的超额收益无能为力。
+
+3. 对因子 mimicking portfolio 的改造或新因子的加入确实提升了多因子模型的定价能力，但这些因子却有更高的换手率和更昂贵的交易成本。
+
+……
+
+你并不孤单，这些是人们在实证资产定价或多因子模型研究中会碰上的问题。在诸多情景中，上述问题 1 大概是最普遍的，比如在美股中，当给使用市值和 accruals 双重独立排序构造的 test assets 定价时，Fama and French (1993) 三因子模型竟然优于 Fama and French (2015) 五因子模型，尽管后者比前者多了两个解释变量。
+
+我们就从问题 1 说起。
+
+当检验多因子模型时，最常见的做法是用一组 test assets 分别对多因子模型回归，得到每个 test asset 的 pricing error（即  ）。有了这些  ，可以考虑它们绝对值的均值，也可以用 Gibbons, Ross and Shanken (1989) test（GRS test）检验所有 pricing errors 是否联合为零。如果在模型 A 下，test assets 的 pricing errors 比在模型 B 下更小，人们通常就会认为模型 A 优于模型 B。
+
+从上述描述可以看出，这种方法很大程度依赖于选择了哪些 test assets 来检验模型。由于它们在回归模型中是被解释变量，因此 Eugene Fama 把这种检验方法称为 Left-Hand-Side (LHS) approach（Fama and French (2018)）。
+
+LHS approach 至少存在两个问题。第一，模型比较的结果是 test assets specific。当人们使用不同 test assets 时，检验结果可能出现逆转；而且也无法保证不同多因子模型的发明者不去选择最适合自己模型的 test assets（data snooping）。而第二个问题，正如上面的例子所示，就是当模型中加入更多因子后，test assets 的 pricing errors 不降反升，导致人们得出错误的结论。
+
+若某个模型中的因子是另一个模型因子的子集，它们被称为 nested models，例如通过往模型 A 中加入新的因子而构造出模型 B 时，模型 A 和 B 就是 nested models；如果模型中有非重合的因子，那么它们被称为 non-nested models。对于 nested models，更多的因子反而造成 test assets 的 pricing errors 上升，则着实令人困惑。以下通过一个简单的数学模型来解释背后的原因。
+
+假设存在模型 A 和 B，前者中有因子 1（记为  ），后者中包括  和另一个因子 2（记为  ），令   表示 test asset 的超额收益。当使用模型 B 时有： 
+
+其中  表示 test asset 在模型 B 下的 pricing error。类似的，当使用模型 A 时有： 
+其中  为 test asset 在模型 A 下的 pricing error。另一方面，假设因子  和  之间满足如下回归模型： 
+这个式子意味着将因子 2 视为 test asset 并使用模型 A 对其定价，因此  为因子 2 在模型 A 下的 pricing error。将 (3) 代入 (1) 有： 
+比较 (4) 和 (2) 可知： 
+即 test asset 在两个模型下定价误差，即  和  ，的差异取决于  的大小。此外，让情况变得更加 tricky 的是，pricing error 本身可正可负，而当人们说“更低”时意味着它的绝对值更接近零。所以，通过 test asset 的 pricing error 来比较上述两个模型，取决于  和  这二者本身的大小和正负号，以及  这一项的大小和正负号。因此，在一些情况下，LHS approach 会出现加入更多因子，pricing errors 反倒增大。
+
+既然问题已经清楚了，那么为了解决它是应该找更合理的 test assets，还是找处理 pricing errors（  ）的更好的检验方法呢？
+
+有大佬说“都不是”。
+
+02
+A Right-Hand-Side Approach
+
+对于上述问题，Barillas and Shanken (2017) 给出了答案。该文以 Which alpha? 为题，给出了一个简单却又颇让人惊讶的结论：test assets 对于比较多因子模型来说是无关的。
+
+OK，更严谨的话，应该说如果模型中只考虑 traded factors，那么 test assets 是无关的。如果有 non-traded factors，则它们的 factor mimicking portfolios 需要通过 test assets 构造，因此是有关的。不过为了本文的介绍，我们就考虑简单的情况。Barillas and Shanken (2017) 的结论对 nested assets 和 non-nested assets 都成立。
+
+该文的核心出发点是，当比较多因子模型时，除了 test assets 之外，也应该检验模型能否解释彼此的因子：
+
+“ Our central insight in this context is a simple one — that models should be compared in terms of their ability to price all returns, both test assets and traded factors.
+
+”
+
+举例来说，假如模型 A 和 B 各自包含因子 1，2，3 和因子 1，4，5。在比较它们时，Barillas and Shanken (2017) 主张把这两个模型包含的全部 5 个因子也一同视作 test assets，它们将和之前额外选定的 test assets 一起，被用来检验模型 A 和 B 的定价能力。
+
+当把所有待比较模型的因子加入 test assets 之后，“神奇”的事情发生了。
+
+对模型  下的一组定价误差  ，令  为残差的协方差矩阵，则  就是这些  构造的最大夏普率平方（max squared Sharpe ratio），记为  。Gibbons, Ross and Shanken (1989) 证明了  等于由模型中所有因子 + test assets 共同构造的最大夏普率平方与仅使用全部因子构造的最大夏普率平方之差。
+
+假设比较两个模型，它们的因子记为  和  ，一组额外 test assets 的超额收益为记为  （其中  、  、  都代表多个因子和 test assets）。根据 Barillas and Shanken (2017) 的观点，  、  以及  应该通通被当作 test assets 检验两个模型（显然模型 1 能够解释  ；模型 2 能够解释  ）。
+
+在这种设定下，模型 1 的定价能力表示为： 
+同理，模型 2 的定价能力表示为： 
+当模型 1 优于模型 2 时，应该有   。这个公式的直观理解是，相较于模型 2 来说，模型 1 本身的因子 span 而成的 tangency portfolio 的夏普率的平方更大，加入其他 test assets（  和  ）之后的提升更小（即  更小）。简单的代数运算可知： 
+由于额外的 test assets 同时出现在上式左右两侧，它对于夏普率平方的增量贡献是一样的，因此可以被消去，(5) 变为： 
+这就是为什么当把所有因子也作为 test assets 后，额外的 test assets 对于比较模型来说就无关了。上式中的关系正是 Barillas and Shanken (2017) 希望传达出来的最重要的观点。
+
+“ It turns out that test assets tell us nothing about model comparison beyond what we learn by examining the extent to which each model prices the factors in the other models. So the test assets can be ignored for this purpose. This is the main message of our paper.
+”
+
+对 (6) 进行化简，最终得到如下结论，即如果模型 1 优于模型 2，则应该有： 
+即由模型 1 的因子  构造的最大夏普率平方高于由模型 2 的因子  构造的最大夏普率平方。从 (7) 出发可知，当比较不同模型时，只需考察它们各自的因子能够 span 出来的 tangency portfolio 的夏普率平方即可。由于这个检验仅考虑因子而因子出现在多因子模型的右侧，因此这个方法又被称为 Right-Hand-Side (RHS) approach。
+
+Barillas and Shanken (2017) 对这个方法的 implication 以及它在检验 nested 和 non-nested models 时的作用进行了系统的讨论。Fama and French (2018) 也对这个方法进行了系统的实证研究。
+
+使用 RHS approach 代替 LHS approach 不会遇到本文开篇的问题 1。在某个模型中加入额外的因子时，如果该因子不能被现有因子 span，则它的加入一定会提升夏普率平方，从而让人得出包含更多因子的新模型优于老模型这样符合直觉的结论。
+
+一般来说，当越来越多因子被加入到模型中，它的 ex-post 最大夏普率平方总能提升。然而，从简约性（The Law of Parsimony，见《因子投资：方法与实践》的 4.4 节：多因子模型的简约性）的角度来考虑也有必要限制模型中因子的个数。但无论如何，Barillas and Shanken (2017) 提出的 RHS approach 还是给检验多因子模型提出了新思路。为了得到更好的多因子模型，应同时考虑 LHS 和 RHS 两种方法。
+
+当然，以最大化 ex-post 夏普率平方为目标评价因子模型也绝非没有弊端。比如通过选择奇葩的因子、改变因子的构造或者使用频率更高的数据（Fama-French 三/五因子模型用年报数据吃了这方面的亏），就可以轻松提升最大夏普率平方。但是，这些做法会带来新问题，处理不好也会让人们离 “更好的多因子模型”越来越远。
+
+不过我们先卖个关子，等到本文第 4 节在讨论。
+
+03
+A Specification Test
+
+在这一节我想讨论一下本文开篇的问题 2。
+
+目前学术界提出的所有主流多因子模型（见《因子投资：方法与实践》4.1 节的详细介绍），它们在构造因子投资组合时，均是沿用了 Fama and French (1993) 的方法，即采用市值和另一个变量（如 HML 中的 BM）进行双重排序（唯一的例外是 Carhart (1997) 的动量因子），将所有股票划分成若干个组合，然后利用这些组合构造最后的因子投资组合。对于因子来说，这些用来构造改因子的基础组合可以被称为 basis portfolios。
+
+当人们检验和比较多因子模型时，LHS approach 关注的是其解释 test assets 的能力，而上一节介绍的 RHS approach 虽然在 test assets 中也考虑了因子，但依然没有考虑不同因子背后的 basis portfolios。如果一个多因子模型是优秀的，那么合理的预期是它至少应该能解释自己的 basis portfolios。如果它在解释其他资产方面呼风唤雨，却对自己的 basis portfolios 无能为力，那么就难以令人信服。不过，无论是学界还是业界，似乎很少有人关注这些 basis portfolios，也没有专门的检验方法。
+
+直到 Liao and Liu (2020) 出现。
+
+这是一篇虽然尚未发表，但我个人非常喜欢的 working paper。它针对多因子模型检验中的截面回归方法（见《多因子模型的回归检验》或《因子投资：方法与实践》的 2.2.2 节）提出了全新的 two-pass estimator。
+
+概括的说，该方法在广义矩估计（GMM，见《Generalized Method of Moments》）框架下通过矩条件研究了 two-pass estimator，并找到了一个最优的权重矩阵，使得被估计参数的方差最小，进而保证了估计量的 efficiency。因此该估计量也被称为 optimal cross-sectional regression (OCSR) estimator。
+
+一般来说，two-pass 截面回归检验可以被表示成以下矩条件（这里的因子  可以使 traded 或 non-traded factors）： 
+其中前两组矩条件对应 two-pass regression 中的第一步，即估计资产对因子的暴露；第三组矩条件则对应 two-pass regression 中的第二步，即截面回归估计因子溢价。（本文无意细抠 Liao and Liu (2020) 的具体技术细节，因此也不对矩条件中变量的具体含义进行说明，感兴趣的小伙伴请在 SSRN 上找来原文阅读。）
+
+除了上述矩条件之外，Liao and Liu (2020) 还在框架中注入了一个约束，即允许一组资产在待检验的模型下的 pricing error（  ）为零（相当于减少了待估计参数的个数）： 
+和 GMM 同时使用所有矩条件进行估计不同，该方法本质上还是传承了 two-pass regression。因此虽然问题被表述为矩条件的形式，但在实际求解时，前两组矩条件和第三组矩条件以及约束是分开的。首先利用前两组矩条件估计出因子暴露，然后再利用它们作为参数，通过第三组矩条件和约束来估计因子溢价和资产的 pricing error。
+
+在传统的 GLS/OLS 中，它们的差异源于截面回归估计因子溢价时，N 个资产的权重矩阵（比如 OLS 就是个单位阵）。而 OCSR 和 GLS/OLS 最大的差异就是权重矩阵的选择。经过一系列计量经济学推导，Liao and Liu (2020) 给出了最优的权重矩阵，使得他们的 estimator 拥有和 GMM 一样的优秀特性，但却远比直接求解 GMM 简单的多。这也正是该方法最吸引人的地方。实证结果显示，该方法比传统的 OLS/GLS 在估计因子溢价方面都有优势。
+
+OK! 说了半天你也许要问，这和本节一开始提到的 basis portfolios 有关系吗？在 Liao and Liu (2020) 一文中，除了提出 OCSR estimator 之外，两位作者也给出了一个 specification test，这就和 basis portfolios 有关了。
+
+前文已经说了，Liao and Liu (2020) 的框架允许一组资产在多因子模型下的 pricing errors 是零；而这个 specification test 就是用来检验这组资产的 pricing errors 到底是否为零，即 放在我们的场景下，只需要把该模型的 basis portfolios 和其他资产一起作为 test assets，并假设 basis portfolios 满足 pricing errors 为零的约束。在求出最优权重矩阵之后，利用 specification test 就可以检验 basis portfolios 是否满足该约束。如果原假设被拒绝，则该模型无法为 basis portfolios 定价。
+
+Liao and Liu (2020) 依照上述思路比较了近年来最引人关注的两个模型，Fama and French (2015) 五因子模型（FF5）和 Hou, Xue and Zhang (2015) 的 q-factor model（历史背景见《从 Factor Zoo 到 Factor War，实证资产定价走向何方？》）。Specification test 结果显示，FF5 的 basis portfolios 的检验结果 p-value 为 0.121（无法拒绝原假设），而 q-factor model 的 basis portfolios 的检验结果 p-value 为 0.000（可以在任何常见的显著性水平下安全的拒绝原假设）。因此，FF5 可以解释自己的 basis portfolios，而 q-factor model 却不能。
+
+除此之外，针对 FF5 和 q-factor model 均是通过 LHS approach（时序回归检验）来评估它们的定价能力，Liao and Liu (2020) 也使用他们提出的 OCSR estimator 进行了比较。对于一个优秀的多因子模型来说，虽然时序回归检验和截面回归检验有所差异，但我们依然可以预期 test assets 在模型下的 pricing errors 在两种方法下式接近的，否则该模型就不那么靠谱。
+
+结果嘛，再一次让人震惊：FF5“完胜”q-factor model。
+
+根据上图所示（无论是市值加权还是等权构造 test assets），对于考虑的 156 个 test assets，当使用 FF5 为模型时，它们在两种方法下的 pricing errors 十分一致；而在 q-factor model 下却表现出来很大的差异。综合这个结果和前述 specification test，我们可以得出初步的结论：q-factor model 可能存在模型设定偏误。
+
+虽然既有 LHS approach 的实证结果一边倒的支持了 q-factor model 相对于 FF5 的优越性（Hou et al. (2019)），但上述实证结果无疑为人们重新评判 FF5 和 q-factor model 提供了新的依据。颇有意思的是，FF 曾在评价 q-factor model 时提到：
+
+“ More important, they (HXZ) are primarily concerned with explaining the returns associated with anomaly variables not used to construct their factors.
+”
+
+通过 Liao and Liu (2020) 的 specification test，上述观点得到了验证。
+
+一个多因子模型至少应能够解释自己的 basis portfolios，这个条件应该成为寻找更好的模型时的必要条件。
+
+04
+展望
+
+在总结本文和展望未来之前，先来回应一下第二节最后提出的问题，即以最大化 ex-post 夏普率平方为目标构造模型的弊端，它也和本文开篇的问题 3 息息相关。
+
+无论是研究因子还是比较多因子模型，以最大化 ex-post 夏普率平方为目标会带来两个问题：（1）因子研究本末倒置，数据先行；（2）因子的理论表现越来越脱离实际。
+
+对于第一个问题，一个惊人的例子是在美股上针对低波动股票构造的反转因子，它自己的 ex-post 夏普率平方是 Fama-French 三因子模型的 9 倍；五因子模型的 4 倍。但显然，没有人会在 FF3/5 和这个反转因子之间选择后者。
+
+这个例子说明，我们在追求更好的 tangency portfolio 时，应该时刻注意检查因子本身是不是有逻辑，而非单纯依靠数据。Fama and French (2018) 曾说，实证资产定价中的因子是来自对历史平均收益率中某种模式的发掘。一旦因子背后缺乏理论支撑，那么因子研究就会退化成以提升 ex-post tangency portfolio 为目标的数据挖掘。（这也是 Fama 对动量因子始终持谨慎态度的原因。）
+
+对于第二个问题，金融学作为理论紧密联系实际的一门学科，它要求理论能够很好的指导实际。这意味着在比较多因子模型时，不应（仅）考虑因子 on paper 的收益率以及通过这些收益率计算出的夏普率，而是要考虑投资者实际可交易出来的因子的收益率（即扣掉交易成本之后）。
+
+越来越多实证结果显示，使用更高频率的变量或者使用一些不走寻常路的构造方法均可以提升因子 on paper 收益率，然而这些提升都是以更高的换手率和交易成本为代价。仍以 FF5 和 q-factor model 为例，它们二者都包含盈利因子，然而 FF5 使用年度数据而 q-factor model 使用季度数据；且 q-factor model 使用三重排序来构造因子。这些差异导致了 q-factor model 中盈利因子的 on paper 收益率要比 FF5 的版本高的多。最终，以最大化夏普率平方来看，q-factor model 也优于 FF5。
+
+但是考虑了交易成本又会怎样呢？Detzel, Novy-Marx and Velikov (2021) 系统比较了不同多因子模型在扣除交易成本后，因子都能实现的最大化夏普率平方（前文《Factor War 外传》曾介绍过该文，当时该文还没有被挂到 SSRN，如今已经可以下载）。结果如下图所示，一旦考虑因子实际的收益率，模型比较的结果就可能发生反转。
+
+说完了这两个问题，最后来总结一下。
+
+近年来，学术界以寻找更好的多因子模型为目标做出了很多有益的尝试。就我个人的看法，一个可参考的 protocol 也慢慢的浮出了水面：
+
+1. 多因子模型中的每个因子都应该有逻辑；
+
+2. 模型应该有 inner consistency，能够解释其 basis portfolios 是必要条件；
+
+3. 比较模型时，同时考虑 LHS 和 RHS 方法，当二者产生分歧时应分析背后的原因；
+
+4. 从资产定价理论来说，因子应该能 span 出 tangency portfolio，但这种尝试不应仅停留在理论上，应该给予实际可交易出的收益率足够的重视。
+
+以此为指引，有理由相信我们终将会遇到更好的多因子模型。
+
+参考文献
+Barillas, F. and J. Shanken (2017). Which alpha? Review of Financial Studies 30(4), 1316 – 1338.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Detzel, A., R. Novy-Marx, and M. Velikov (2021). Model selection with transaction costs. Working paper, available at https://ssrn.com/abstract=3805379.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2018). Choosing factors. Journal of Financial Economics 128(2), 234 – 252.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica 57(5), 1121 – 1152.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2019). Which factors? Review of Finance 21(1), 1 – 35.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Liao, Z. and Y. Liu (2020). Optimal cross-sectional regression. Working paper, available at: https://ssrn.com/abstract=3719299.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+est assets 按照等权构造
+--- 图3 ---
+Figure 2: Maximum squared Sharpe ratios of factor models. This figure presents maximum squared Sharpe ratios from the factors in the models listed on the x-axis. The blue columns, ‘Gross SR $ ^{2} $’, use factor returns that ignore transaction costs. The red columns, ‘Net SR $ ^{2} $’, use factor returns that account for transaction costs. The sample period is January 1972 to December 2017.
+出处：Detzel. Novv-Marx and Velikov (2021)
+--- 图4 ---
+2

@@ -1,0 +1,421 @@
+# The Quality Premium
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/LT227uh7V3NnjUatJxlrZw
+
+作者：石川，llanglli，刀疤连；www.factorwar.com
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+高质量是好东西，但并非所有质量 alike 变量都能够融洽的被放在质量因子的外衣之下。勿要错以质量之名。
+
+01
+引言
+
+自 Fama and French (1993) 和 Carhart (1997) 以来，size、value、momentum 就成为定价模型中最重要的因子。然而，从上世纪 90 年代开始，另外一系列使用会计报表条目为变量构造的因子逐渐兴起，例如 Sloan (1996) 的 accruals 和 Novy-Marx (2013) 的 gross profitability。由于这些变量通常被视为和公司的“质量”有关，它们被统一的放入了质量（quality）因子的外衣之下。
+
+然而……
+
+到底什么是（高）质量？
+
+高质量获得更高预期收益背后的驱动是什么？
+
+哪些会计报表变量最适合被拿来构造质量因子？
+
+为什么同被放在质量因子外衣之下的不同会计报表变量获得的超额收益有显著的差异？
+
+在学术论文中，Asness, Frazzini, and Pedersen (2019) 提出了著名的 Quality-Minus-Junk（QMJ）因子，把公司的质量定义为盈利、成长性和安全性三个维度。随着 QMJ 因子（以及 BAB 因子）在美股中对解释股神巴菲特的业绩起到巨大作用（Frazzini, Kabiller, and Pedersen 2018），质量因子（哪怕它的定义依然十分模糊）也正式走进人们的视野，并受到了追捧。
+
+但颇有意思的是，QMJ 因子的 working paper 版本早在 2013 年就有了。较其 2019 年最终发表的版本，该早期版本除了上述三个维度外，还有股息率第四个维度。可是为什么最后发表的版本砍掉了股息率呢？即便是 AQR 在定义质量因子的时候也这么“随意”吗？
+
+在业界实务方面，各种质量指数（quality smart beta index）也层出不穷，下表列出了最著名的几个。但是它们使用的会计报表变量不尽相同，让人无迹可寻。
+
+从 smart beta 的角度来说，质量因子和 size、value、momentum 这些早就被人们熟悉的因子并无区别；而上述在构造、使用质量因子时的不一致性说明它的定义远不如其他因子清晰。这也强调了回答本文一开篇抛出的四个问题的重要性。
+
+正如 Eugene Fama 高呼 CAPM 的诞生打破了混沌，为资产定价建立了新秩序一样；在研究质量因子时，如果仅仅以最大化因子溢价为目标拼凑基本面变量，实在本末倒置，人们真正需要的是可以开展研究并回答这四个问题的准则。只有搞清楚了它们，才能明明白白地享受质量因子的 risk premium。
+
+从金融学估值模型和 common sense 出发，可以猜测公司质量高应该能导致其未来基本面的持续优异，而公司股票的高收益率则是基本面优异的结果。而最能反应基本面持续优异的变量大概要数未来盈利增长（future earnings growth）。从另一个角度来说，未来盈利增长可以被视为简化版的 SUE（用去年同期的 earnings 作为 naïve estimate）。站在基本面量化的角度来说，好的基本面变量应该能够预测 SUE，质量变量理应当仁不让。从实证数据来看，这点在美股和 A 股中均成立。
+
+美股的论述留在本文第二节展开。先来看看 A 股。下图来自天风证券的报告。该图在每年把股票按照当年收益率的高低分成 10 组，然后考察这 10 组同期的扣非增速。可以看到，二者的相关性非常高，说明股票（中短期）的收益率很好的反映了盈利增长。
+
+结合上述实证结果，我们重述一下关于质量因子的猜想：真正的质量因子变量应能预测未来盈利增长，而高质量股票获得的高预期收益是投资者对盈利增长反应的结果，因此未来盈利增长是高收益的驱动；如果以某个会计报表变量构造的因子能获得超额收益，但该变量却不能预测未来盈利增长，那就不应被视为质量因子变量。
+
+关于这个猜想和它的 empirical implication，Kyosev et al. (2020) 这篇发表在 Journal of Banking & Finance 上的文章针对美股以及全球其他代表性的发达和新兴市场给出了系统和全面的论证。马上来看一下。（本文第三节将对 A 股给出全面实证。）
+
+02
+Kyosev et al. (2020)
+
+Kyosev et al. (2020) 对上述猜想进行了检验，并针对全球各大发达和新兴股票市场进行了实证分析。该文通过 Fama and MacBeth (1973) regression 估计下面三个截面回归模型来检验上述猜想。
+
+在模型一中，未来盈利增长的定义如下：
+
+其中 BE 为 book equity，下标 i 表示股票 i，τ 取值为 12， 36 和 60 分别代表未来 1、3、5 年的盈利增长。模型一的作用是在控制了其他风险因子以及行业因子之后，检验哪些质量变量能够预测未来盈利增长。
+
+模型二就是常规的检验因子预期收益率的截面回归模型。由于 Fama-MacBeth regression 每月进行，因此被解释变量是股票下个月的收益率，解释变量为某个选定的质量变量和其他控制变量。模型二的作用是检验控制了其他风险因子和行业因子之后，哪些质量变量能够获得超额收益；换句话说，能够预测未来收益率。
+
+模型三和模型二长得很像，但是这二者又有重要的差异。模型三中假设事前知道未来的盈利增长，并把它作为控制变量加到回归模型的 RHS。回归模型的 LHS 仍然是股票未来的收益率。但是为了 match 盈利增长的时间尺度，未来股票收益率是使用同期长度计算的，而非下个月的。例如，当使用未来一年盈利增长作为控制变量时，被解释变量就是未来一年股票的收益率。模型三的作用是当额外控制了盈利增长之后，考察质量变量和未来股票收益率的关系。
+
+如果本文第一节的猜想是正确的，即真实质量变量通过能够预测未来盈利增长来获得高收益，那么一个真实的质量变量在上述三个回归模型中的预期表现为：
+
+1. 在模型一中，真实质量变量和未来盈利增长显著正相关；（“滥竽充数”的质量变量和未来盈利增长要么没什么关系，要么负相关）。
+
+2. 在模型二中，真实质量变量的 risk premium 显著为正；（“滥竽充数”的质量变量的 risk premium 也可能为正）。
+
+3. 在模型三中，当控制了未来盈利增长之后，真实质量变量的 risk premium 不再显著。对于真实质量变量，模型三的结果是模型一和模型二的正常推论。
+
+在实证中，Kyosev et al. (2020) 考虑了学术界提出的常见的质量变量，它们被汇总于下表。
+
+由于这些变量和高质量本身的预期符号有正、有负，为了更清晰的讨论实证结果，Kyosev et al. (2020) 在计算变量取值的时候把对质量变量的取值按预期符号进行了调整 —— 比如对于 leverage、accruals 这些越小越好的变量，他们将原始取值乘以 -1，从而将它们也转化成越大越好。经过上述处理，真实质量变量在前述回归模型一和二中的回归系数都均应该是正数。
+
+下面来看实证结果（以美股市场为例）。首先是回归模型一，下表同时汇报了一元回归和多元回归结果。再次强调，由于所有变量已经调整过了符号，因此只有回归系数显著为正，才说明该变量能够预测未来盈利增长。在该文考虑的 8 个候选变量中，只有 gross profitability、accruals 以及 investment 满足上述条件。
+
+除上述三个之外，其他诸如 ROE、ROE growth、earnings variability 这些通过历史 earnings 计算出的变量都和未来盈利增长显著负相关，说明它们自身有着某种均值回复的属性。
+
+基于上述结果，这 8 个变量可以天然的被分为两类。那三个能够预测未来盈利增长的被分到 earnings-predictive measures 类（简称 EP）；剩下五个被分到 earnings-non-predictive measures 类（简称 ENP）。将每类变量的取值取均值，就可以额外构造两个复合质量变量，称为 EP 和 ENP。
+
+下表给出了原始 8 个变量和 2 个复合变量的回归模型二检验结果。不难看出，EP 以及全部三个该类的变量（gross profitability，accruals，investment）均被定价，且收益率非常显著；而在 5 个 ENP 类变量中，仅有 ROE 被定价，而 margin、ROE growth、leverage、earnings variability 均无法对解释股票截面收益率的差异做出贡献。由于这 5 个变量中 4 个都“不好使”，因此 ENP 复合变量自然也没有被定价（t-statistic 1.73）。
+
+最后来看回归模型三的检验结果。给出结果之前，先来回顾一下。模型三在模型二的基础上加入了未来盈利增长作为控制变量，并把作为被解释变量的未来收益率调整到同期。如果真正质量变量被定价背后的驱动是它们和未来盈利增长之间的正相关性，那么可以预期：
+
+当控制了未来盈利增长之后，真正的质量变量无法不再被定价（即回归系数不再显著）；
+
+而那些 ENP 类的变量（尤其是那些和未来盈利增长显著负相关的），一旦控制了未来盈利增长就相当于控制了这些变量的均值回复，因此它们反倒“错误地”被定价（回归系数显著大于零）。
+
+以下回归模型三的检验结果完全验证了上述两点：除 leverage 之外，其他 ENP 变量（ROE、margin、ROE growth 以及 earnings variability 的回归系数都很显著）；而除 gross profitability 之外，accruals 和 investment 的回归系数均不再显著。除此之外，未来盈利增长在下列回归模型中均显著（t-statistic 高达 18）。
+
+所有结果说明未来盈利增长才是高质量股票获得高收益的驱动，而 EP 类和 ENP 类的变量和未来盈利增长有着截然不同的关联。
+
+“ All in all, our results indicate that a true quality definition should include measures that positively predict earnings growth and the abnormal returns will follow as a consequence of that.
+”
+
+至此，本文第一节提出的四个问题均得到了回答。
+
+03
+A 股实证
+
+本节依照第二节介绍的三个模型，针对 A 股进行实证研究。为了简化，本节的实证中均采用年报数据、以年度为周期进行 Fama-MacBeth regression，并遵循 Kyosev et al. (2020) 的定义计算未来一年的盈利增长。在模型二和模型三中，作为因变量的均是未来一年的股票收益率。实证区间是 2000 年到 2020 年。
+
+由于 A 股臭名昭著的壳价值污染问题，我们也在剔除了市值最低的 30% 股票之后进行了实证。无论使用全部 A 股还是规避壳价值污染之后，定性的结果完全一致，因此只汇报针对全 A 股的实证结果。此外，再提醒一句：和 Kyosev et al. (2020) 一样，实证中对所有质量变量的预期符号进行了调整，因此以下回归模型一和二的预期回归系数应该是正数。
+
+先来看模型一的结果。和美股一样，实证中控制了价值、规模、动量等风格因子，并加入了行业哑变量。回顾一下，模型一检验哪个质量变量和未来盈利增长正相关，结果如下。
+
+和美股实证结果相一致的是，gross profitability 和 accruals 和未来盈利增长显著正相关；此外 ROE growth 也能够预测未来盈利增长，因此将这三者归为 EP 类。需要说明的是，在未来盈利增长对 ROE growth 的单变量回归中，后者的回归系数为负（虽然不显著），因此在今后值得更深入的探讨。除上述三个变量之外的其他变量则归为 ENP 类，其中有意思的是 investment 在美股中属于 EP 类。
+
+再来看模型二的结果。回顾一下，模型二检验哪个质量变量被定价（即能够用来选股），结果如下。
+
+EP 类的三个变量在 A 股中均被定价。对于 ENP 类变量，ROE 和 margin 在 A 股中被定价，它们背后的原因可以通过其他途径来解释；leverage 和 earnings variability 则在 A 股上没有被定价（t-statistic 分别为 -1.1891 和 1.4634）；investment 则和未来收益率显著负相关。
+
+最后是模型三的结果（下表）。对于 EP 类变量，当控制了未来盈利增长之后，它们和未来收益率的相关性的显著性降低了（其中 accruals 不在显著了）。对于 ENP 类变量，若某个变量和未来盈利增长负相关，那么一旦控制了后者，该质量变量和未来收益率的相关性变得（更加）显著。我们在 ROE 和 margin 身上可清晰地看到这点。此外，无论使用哪个质量变量，未来盈利增长的回归系数均显著，说明它和未来股票的收益率正相关。
+
+综合上述分析，对 A 股实证结果总结如下：
+
+1. Gross profitability、ROE growth 以及 accruals 能够预测未来盈利增长，符合 Kyosev et al. (2020) 提出的质量变量的定义；
+
+2. ROE 和 margin 和未来盈利增长非显著正相关，但它们在 A 股中被定价；
+
+3. Leverage 和 earnings variability 既无法预测未来盈利增长，也没有被定价，不应被视为因子变量；
+
+4. Investment 是特立独行般的存在。基于 q-theory，investment 越低，预期收益应该越高，因此对 A 股实证做了同样的假设和符号处理。然而，investment 变量在 A 股中和其在美股中的表现完全是反着的。如果反过来用（即 investment 越高，预期收益越高），那么结合上述模型一、二的结果，它能够预测未来的 earnings growth，且在 A 股中被定价，是一个合格的质量变量。但是，此处不应该草率的下结论，investment 变量亟待更深入的研究。
+
+04
+业界的质量指数
+
+前面讨论了 empirical asset pricing 中质量变量的选择，本节来看看业界质量因子的运用是否和上述发现一致。以 Kyosev et al. (2020) 的结果为例，该文发现的 5 个 ENP 类变量包括 ROE、margin、ROE growth、leverage 以及 earnings variability。而在本文第一节介绍的业界质量指数中，明晟（MSCI）的质量指数恰好包含其中 ROE、leverage 和 earnings variability 三个变量，成为天然的研究对象。
+
+由于 Kyosev et al. (2020) 一文主要针对美股，我们来看看 MSCI USA Quality Index 的表现（下图）。在过去 15 年，MSCI USA Quality Index 毫无悬念的跑赢了其比较基准 MSCI USA Index。
+
+在继续感慨它惊艳的表现之前，再来看看它对其他因子的暴露和行业暴露。与基准相比，该 quality index 并没有在其他因子上特别偏离，而是在质量因子上有更高的暴露（very nice）；然而从下图右侧的行业分布来看，该 quality index 较基准而言有着不可忽视的行业偏离。
+
+不知道是不是对行业偏离感到不舒服，MSCI 同时又推出了 USA Sector Neutral Quality Index（行业中性质量指数）。通过行业中性处理，得到的质量指数更接近 Barra（现 MSCI）深谙的纯因子组合理论，它可以让人们更准确地估计目标因子的预期收益。
+
+无独有偶，在追踪 MSCI USA Quality Index 的 ETF 产品 QUAL 关于其基准的说明中，也有如下说明：
+
+“ On 9/1/2015, QUAL began to track the MSCI USA Sector Neutral Quality Index. Historical index data prior to 9/1/2015 is for the MSCI USA Quality Index; index data on or after 9/1/2015 is for the MSCI USA Sector Neutral Quality Index.
+”
+
+该 ETF 曾经的基准是 MSCI USA Quality Index；而后来切换到了 USA Sector Neutral Quality Index。不知这是否传递出 Sector Neutral 是更合理的版本这样的信息。下面是 USA Sector Neutral Quality Index 的表现。和非行业中性版本不同的是，行业中性之后的 USA 质量指数较基准而言仅有微弱的优势（且最近 5 年的年化收益跑输基准；最近 10 年也只是打个平手）。
+
+检查因子暴露发现，行业中性质量指数在其他因子上的暴露较基准指数并无显著差异，主要是靠其在质量因子上的暴露。
+
+这个结果说明，当额外剔除行业暴露之后，靠 ROE、leverage、earnings variability 三个变量所获得的超额收益并不高。这和 Kyosev et al. (2020) 的实证结果是一致的。毕竟，在 Kyosev et al. (2020) 中，leverage 和 earnings variability 没有被定价（回归模型二中它们的收益率在统计上没有偏离 0；t-statistic 分别为 0.36 和 0.02）。
+
+05
+理论指导实践
+
+长久以来，金融学都是学界和业界联系最紧密的一门学科。学术界的发现很好地指导了投资实务，投资实务也反馈给学界、促进理论的进步。那么，既然学术发现告诉我们挑选真实质量变量的依据，那么本文第三节针对 A 股复现的实证结果对于构造质量因子又有怎样的启发呢？
+
+根据第三节的结果，从 EP 和 ENP 内挑选三个质量变量，分别构造质量因子并检验它们。其中，EP 类的变量包括 gross profitability、accruals 以及 ROE growth，并称由它们构成的质量因子为 EP 质量因子；ENP 类的变量包括 ROE、leverage 以及 earnings variability，并称由它们构成的质量因子为 ENP 质量因子。
+
+为了研究结果更贴近业界实务，实证中仅考察这二者多头相对基准的表现。对实证设定的说明如下：
+
+1. 基准为中证 800 指数，实证区间为 2005/1 至 2020/12。
+
+2. 根据质量因子得分高低，通过排序法选前 100 支股票作为多头，多头中股票按照市值加权。
+
+3. 为充分研究，同时考虑无约束版和行业中性版本。行业中性版本先在各行业内计算因子相对得分，再把各行业股票的总权重比例调整为与该行业在基准指数（中证 800）中的比例一致。
+
+首先来看无约束的版本，下图给出了两个质量因子（多头）以及中证 800 的累计收益曲线。从图中不难看出，EP 质量指数跑赢了 ENP 质量指数，且它较基准也有持续的超额收益。然而 ENP 质量指数却仅仅是在 2015 年之后才开始跑赢基准；而在 2015 年之前并没有超额。
+
+再来看看行业中性的版本。在控制了行业暴露之后，EP 质量因子表现依然稳健；ENP 质量因子的表现较其无约束版本也有改进，从 2005 年开始相对基准持续有超额收益。比较二者，EP 质量因子依然优于 ENP 质量因子；若以 Fama and French (1993) 三因子为定价模型（因子收益率来自 www.factorwar.com），EP 和 ENP 质量因子多头的超额收益分别为 0.38%（t-statistic 为 2.64）和 0.23%（t-statistic 为 1.40）。
+
+如果把 EP 和 ENP 质量因子各自的两个版本（非行业中性 vs 行业中性）相互比较会怎样呢？下图给出了结果。其中 Panel A 为 EP 质量因子，Panel B 为 ENP 质量因子。结果显示，对于前者，两个版本的因子多头组合收益率十分接近，说明其没有受到时变行业暴露的影响。反观后者，两个版本的因子多头组合虽然最终累计收益接近，但路径截然不同。行业中性版本的超额比较持续，而无约束版本则是在 2015 年之后才“发力”，说明时变行业暴露对 ENP 质量因子有较大影响。另外，如果按照 ENP 质量因子得分为权重，其 2015 之后的表现和行业中性的版本接近，远不如非行业中性的版本；前 100 支股票的 ENP 质量因子暴露差异微弱，远远不及它们市值上的差异。
+
+本节实证讨论的最后一个问题是，非行业中性的 ENP 质量因子在 2015 年之后雄起的原因是什么。检查 ENP 质量因子选出的股票可知，其在大市值、高动量、高估值以及食品饮料、医药、电子元器件这些风格和行业因子上有较大的暴露。当控制住这些因子后，ENP 质量因子的表现又如何？
+
+下表给出了 Fama-MacBeth regression 检验相关因子收益率的结果。解释变量包括 ENP 质量、价值、动量、规模以及所有行业因子。表中汇总了实证期分别为 2015 /1 到 2020/12 以及 2019/1 到 2020/12 两个区间内的结果。
+
+当控制了其他因子之后，ENP 质量因子在 2015 到 2020 这段区间内的月均收益率为 0.21%，其 t-statistic 为 2.94，因而是显著的，但仅靠这个量级的月均收益率无法解释 ENP 质量因子多头的表现。如果把实证区间聚焦到 2019 年之后，ENP 质量因子的月均收益率降为 0.08%， t-statistic 仅有 0.66。
+
+Hoechle, Schmid, and Zimmermann (2020) 指出，通过 portfolio sort 来分析某个 sort variable 是否被定价有着重要缺陷。若 sort variable 因与个股的特质性高度相关而获得超额收益时，人们会错误的认为该 sort variable 具有定价的能力。该文给出了新估计方法来解决这一问题。
+
+回到 ENP 质量因子的多头表现，若不考虑其他风格和行业因子，那么它们的影响就将体现在个股的特异性之中。对于非行业中性的 ENP 质量因子，它对上述因子的高暴露造成 sort variable 和特质性部分高度相关，因此会让人们在客观衡量其选股能力时出现错误。
+
+综合本节全部实证结果，可以说第三节对 A 股的发现能够指导我们使用 EP 类的质量变量、更合理的构造质量因子。
+
+06
+结语
+
+随着基本面量化投资的深入，越来越多从会计报表变量走进了人们的视野，并以质量为名，被放在了构造质量因子的候选变量中。然而，相对于其他大类风险因子，比如 value、size、momentum、idio-volatility、low risk 等，质量因子的定义更加模糊和复杂、往往因人而异。
+
+以本文第一节给出的几个质量指数为例，它们使用的不同变量之间似乎有某些联系和共性。但如果不在一个精确地框架下定量地分析，则很难说清楚这种关联，以及它们如何代表“高质量”。难道仅仅是因为这些质量指数编制公司认为高质量的公司应该这样吗？这显然太过粗糙。Kyosev et al. (2020) 一文是对解决上述困境的有益探索。该文最大的贡献是提出了研究质量因子的 discipline。在研究质量因子时，这种有理可依的规则才是最为关键的。
+
+我们也想强调，Kyosev et al. (2020) 一文锚定在高质量能够带来未来盈利增长这个假设之上（其背后的隐含意思是盈利增长相对其他变量 —— 例如盈利水平 —— 反映了更多公司基本面的新息），因此它也仅可能是代表了高质量的某个方面。尽管如此，它依然让我们朝着搞清楚到底什么是高质量、什么是真正的质量因子变量、高质量股票获得更高预期收益的内在驱动是什么等问题迈出了重要一步。
+
+从本文的实证结果来看，探寻 A 股的质量变量之旅还有很长的路要走。我们也期待通过科学的检验和严谨的实证，在未来找到更加满足高质量定义的会计报表变量。
+
+高质量是好东西，但并非所有质量 alike 变量都能够融洽的被放在质量因子的外衣之下。勿要错以质量之名。
+
+参考文献
+Asness, C. S., A. Frazzini, and L. H. Pedersen (2019). Quality minus junk. Review of Accounting Studies 24(1), 34 – 112.
+
+Kyosev, G., M. X. Hanauer, J. Huij, and S. Lansdorp (2020). Does earnings growth drive the quality premium? Journal of Banking & Finance 114.
+
+Carhart, M. M. (1997). On persistence in mutual fund performance. Journal of Finance 52(1), 57 – 82.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Hoechle, D., M. Schmid, H, Zimmermann (2020). Does unobservable heterogeneity matter for portfolio-based asset pricing test? Working paper.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica 55(3), 703 – 708.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics 108(1), 1 – 28.
+
+Sloan, R. (1996). Do stock prices fully reflect information in accruals and cash flows about future earnings? The Accounting Review 71(3), 289 – 315.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b150>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a453f0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b150>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图6 ---
+[表]
+供应商 | 质量指标 | 
+明晟 | 高净资产收益率（ROE） | 
+低债务股本比（debt-to-equity ratio） | 
+低盈利波动率（earning variability） | 
+罗素 | 高总资产收益率（ROA） | 
+高资产周转率变化率（change in asset turnover） | 
+低应计利润（accruals） | 
+高运营现金流和债务比（operating cash flow-to-debt） | 
+富达 | 高自由现金流利润率（free cash flow margin） | 
+高投资资本回报率（return on invested capital） | 
+高自由现金流稳定性（free cash flow stability） |
+出处：《因子投资·方法与实验》
+--- 图7 ---
+全市场 当年涨幅分组与当年扣非增速（%）
+注：1、每个年份的涨幅分组，由左到右（颜色由深到浅），涨幅分别由高到低；2、各组的财务指标取中位数；3、涨幅统计的是当年的涨幅，财务指标来自当年年报，如20180101-20181231，对应的财务指标归属2018年年报。
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9aed0>)
+--- 图11 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15710>)
+--- 图12 ---
+[表]
+ | 被解释变量 | 解释变量 | 
+截面模型一 | 未来盈利增长 | 当期全部质量变量，当期其他控制变量（包括对数市值、BM、动量等），行业哑变量 | 
+该模型也有单变量版本，即仅用未来盈利增长对某个质量变量回归（不考虑其他质量变量和控制变量） | 
+截面模型二 | 下期股票收益率 | 当期单一质量变量，当期其他控制变量，行业哑变量 | 
+截面模型三 | 未来股票收益率 | 当期单一质量变量，当期其他控制变量，行业哑变量，未来盈利增长（假设事前已知） |
+--- 图14 ---
+[表]
+变量 | 和高质量的预期符号 | 
+ROE | +, 越高越好 | 
+net profit margin | +, 越高越好 | 
+ROE growth | +, 越高越好 | 
+earnings growth variability | -, 越低越好 | 
+Leverage | -, 越低越好 | 
+Accruals | -, 越低越好 | 
+Investment | -, 越低越好 | 
+Gross profitability | +, 越高越好 |
+处：Kyosex et al (2020). 整理：BetaDhu.
+--- 图15 ---
+[表]
+ | 1Y change | 3Y change | 5Y change | 
+ | univariate | multiple | univariate | multiple | univariate | multiple | 
+ROE | -25.44 | -38.31 | -38.77 | -54.73 | -36.39 | -57.42 | 
+t-stat | [-10.44] | [-16.08] | [-9.05] | [-17.28] | [-8.20] | [-16.09] | 
+Margins | -9.68 | -2.85 | -14.13 | -1.50 | -11.83 | 0.05 | 
+t-stat | [-10.75] | [-5.12] | [-10.35] | [-1.27] | [-6.86] | [0.03] | 
+ROE growth | -26.16 | -12.77 | -37.46 | -12.88 | -46.98 | -21.15 | 
+t-stat | [-11.64] | [-9.98] | [-10.54] | [-6.67] | [-13.89] | [-8.22] | 
+Leverage | -1.17 | -0.16 | -2.51 | -0.83 | -3.05 | -1.53 | 
+t-stat | [-5.28] | [-0.73] | [-6.34] | [-2.37] | [-6.45] | [-4.21] | 
+Earnings variability | -0.28 | -0.06 | -0.46 | -0.04 | -0.40 | -0.02 | 
+t-stat | [-5.41] | [-3.98] | [-5.12] | [-1.21] | [-3.92] | [-0.50] | 
+Gross profitability | $ 1.38^{***} $ | $ 2.17^{***} $ | $ 2.48^{***} $ | $ 5.14^{***} $ | $ 5.52^{***} $ | $ 5.43^{***} $ | 
+t-stat | [2.18] | [3.33] | [2.06] | [4.64] | [3.94] | [3.38] | 
+Accruals | $ 19.81^{***} $ | $ 2.04^{**} $ | $ 34.59^{***} $ | $ 8.30^{***} $ | $ 38.88^{***} $ | $ 11.11^{***} $ | 
+t-stat | [6.84] | [1.74] | [8.25] | [4.10] | [7.81] | [3.75] | 
+Investments | $ 10.18^{***} $ | $ 1.31^{***} $ | $ 5.85^{***} $ | $ 2.59^{***} $ | $ 4.46^{***} $ | $ 1.59^{*} $ | 
+t-stat | [4.53] | [2.38] | [3.88] | [3.16] | [2.43] | [1.37] | 
+ln(mcap) |  | -0.04 |  | -0.08 |  | -0.26 | 
+t-stat |  | [-0.49] |  | [-0.76] |  | [-1.32] | 
+Beta 3Y |  | 0.53 |  | -0.04 |  | -0.09 | 
+t-stat |  | [1.59] |  | [-0.08] |  | [-0.20] | 
+Volatility 3Y |  | -0.07 |  | -0.03 |  | -0.03 | 
+t-stat |  | [-4.80] |  | [-1.29] |  | [-1.29] | 
+Distance-to-Default |  | 0.21 |  | 0.24 |  | -0.05 | 
+t-stat |  | [2.96] |  | [2.02] |  | [-0.53] | 
+ln(Book-to-price) |  | -7.44 |  | -9.74 |  | -11.33 | 
+t-stat |  | [-15.95] |  | [-17.85] |  | [-12.33] | 
+Momentum 12-1 |  | 8.28 |  | 7.47 |  | 4.97 | 
+t-stat |  | [15.55] |  | [7.74] |  | [4.56] | 
+R-squared (%) |  | 0.32 |  | 0.29 |  | 0.24 |
+--- 图16 ---
+[表]
+ | ROE | Margins | ROE growth | Leverage | Earnings variability | Gross profitability | Accruals | Investments | ENP | EP | 
+Panel A: Regressions of next month returns on quality measures | 
+Intercept | 1.00 | 0.97 | 1.02 | 1.03 | 1.02 | 1.05 | 1.00 | 1.03 | 1.02 | 1.02 | 
+t-stat | [2.91] | [2.85] | [2.99] | [3.04] | [3.02] | [3.07] | [2.92] | [3.01] | [2.98] | [3.00] | 
+Quality measure | 0.09 | 0.03 | 0.01 | 0.01 | 0.00 | 0.13 | 0.06 | 0.06 | 0.05 | 0.13 | 
+t-stat | [2.89] | [1.07] | [0.93] | [0.36] | [0.02] | [4.49] | [4.52] | [2.99] | [1.73] | [5.50] | 
+Controls | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
+R-squared (%) | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 | 0.16 |
+处：Kyosev et al.(2020). Table 3 Panel A
+--- 图17 ---
+[表]
+ | ROE | Margins | ROE growth | Leverage | Earnings variability | Gross profitability | Accruals | Investments | ENP | EP | 
+Panel C: Regressions of next three year returns on quality measures, controlling for change in future earnings | 
+Intercept | 45.76 | 38.48 | 47.07 | 47.15 | 48.44 | 47.26 | 46.89 | 46.28 | 47.82 | 46.34 | 
+t-stat | 4.26 | 3.50 | 4.02 | 4.07 | 4.06 | 4.00 | 3.96 | 3.99 | 4.15 | 3.98 | 
+Quality measure | 12.01 | 7.19 | 4.18 | 0.75 | 1.04 | 2.37 | -0.21 | -0.14 | 9.64 | 0.64 | 
+t-stat | [8.33] | [7.89] | [6.48] | [0.76] | [2.37] | [2.91] | [-0.33] | [-0.18] | [7.18] | [0.80] | 
+$ \Delta $Earnings | 22.66 | 21.04 | 20.32 | 19.30 | 19.35 | 19.29 | 19.29 | 19.37 | 21.48 | 19.24 | 
+t-stat | [17.19] | [18.50] | [18.92] | [19.59] | [19.54] | [19.72] | [19.35] | [19.31] | [17.94] | [19.30] | 
+Controls | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | 
+R-squared (%) | 0.32 | 0.31 | 0.30 | 0.29 | 0.29 | 0.29 | 0.29 | 0.29 | 0.31 | 0.29 |
+处：Kyosev et al. (2020), Table 3 Panel C
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44270>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a8e0>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a446d0>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+
+--- 图23 ---
+模型二多元回归结果，即逐一检验质量变量能否预测未来收益率。质量变量符号经调整，因此只有回归系数显著为正才说明它能预测未来收益率。括号内为经 Newey and West (1987) 调整后的 t-statistics。
+[表]
+ROE | margin | ROE growth | leverage | earnings variability | gross profitability | accruals | investment | 
+0.0386\n(4.6193) | 0.0155\n(4.4095) | 0.0258\n(8.3973) | -0.0074\n(-1.1891) | 0.0067\n(1.4634) | 0.0357\n(4.5487) | 0.0085\n(2.0142) | -0.0142\n(-2.9321) |
+出处：BetaPlus 小组
+
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b63010>)
+--- 图26 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图27 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a449a0>)
+--- 图28 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af70>)
+--- 图29 ---
+The MSCI USA Quality Index is based on the MSCI USA Index, its parent index, which includes large and mid cap stocks in the US equity market. The index aims to capture the performance of quality growth stocks by identifying stocks with high quality scores based on three main fundamental variables: high return on equity (ROE), stable year-over-year earnings growth and low financial leverage. The MSCI Quality Indexes complement existing MSCI Factor Indexes and can provide an effective diversification role in a portfolio of factor strategies.
+CUMULATIVE INDEX PERFORMANCE – GROSS RETURNS (USD) DEC 2005 – DEC 2020)
+ANNUAL PERFORMANCE (%)
+INDEX PERFORMANCE – GROSS RETURNS (%) (DEC 31, 2020)
+[表]
+ |  |  |  |  | ANNUALIZED | 
+ | 1 Mo | 3 Mo | 1 Yr | YTD | 3 Yr | 5 Yr | 10 Yr Jun 30, 1994 | Since Jun 30, 2014 | 
+MSCI USA Quality | 3.34 | 10.03 | 22.92 | 22.92 | 18.52 | 17.76 | 16.16 | 12.82 | 
+MSCI USA | 4.12 | 13.15 | 21.37 | 21.37 | 15.12 | 15.73 | 14.12 | 10.68 |
+FUNDAMENTALS (DEC 31, 2020)
+[表]
+Div Yld (%) | P/E | P/E Fwd | P/BV | 
+1.45 | 28.11 | 23.57 | 8.68 | 
+1.45 | 32.14 | 23.46 | 4.39 |
+处：https://www.msci.com/documents/10199/4af921f5-0bbc-470b-ad69-19a177fad9cf
+--- 图30 ---
+SECTOR WEIGHTS
+https://www.msci.com/documents/10199/4af921f5-0bbc-470b-ad69-19a177fad9cf
+
+--- 图32 ---
+SECTOR WEIGHTS
+https://www.msci.com/documents/10199/fe5bba3e-04f4-43e7-bbb3-8994b37d62f1
+--- 图33 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b63010>)
+--- 图34 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9a8e0>)
+--- 图35 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bc40>)
+--- 图36 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b63010>)
+--- 图37 ---
+累计收益率（20041231-20201231）
+累计超额收益率（20041231-20201231）
+--- 图38 ---
+累计收益率（20041231-20201231）
+累计超额收益率（20041231-20201231）
+--- 图39 ---
+A.A.Er质里囚寸
+累计收益率（20041231-20201231）
+Panel B: ENP 质量因子
+累计收益率（20041231-20201231）
+出处：BetaPlus 小组
+--- 图40 ---
+行业因子为绝对收益，行业因子仅汇报食品饮料、医药和电子三行业。括号内经 Newey and West (1987) 调整后的 t-statistics。
+[表]
+ | 2015/1 - 2020/12 | 2019/1 - 2020/12 | 
+ENP 质量 | 0.21 | 0.08 | 
+(2.94) | (0.66) | 
+价值 (BM) | 0.10 | -0.29 | 
+(0.85) | (-2.93) | 
+市值 | -0.08 | 0.13 | 
+(-0.37) | (0.53) | 
+动量 | 0.23 | 0.35 | 
+(1.82) | (1.14) | 
+食品饮料 | 2.51 | 4.06 | 
+(1.74) | (2.04) | 
+医药 | 1.67 | 2.22 | 
+(1.10) | (1.32) | 
+电子 | 1.93 | 3.15 | 
+(1.25) | (1.67) |
+--- 图41 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b63010>)
+--- 图42 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b15710>)
+--- 图43 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图44 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366430>)
+--- 图45 ---

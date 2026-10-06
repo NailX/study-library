@@ -1,0 +1,173 @@
+# Calendar Anomalies：糖衣下的 Multiple Testing ?
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/_FuNg_zy9rpdwLx2fwU5tw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.nhpr.org
+
+未经授权，严禁转载。
+
+摘
+要
+以特定日期作为条件来划分收益率并检验不同划分下的显著性是一种多重检验。在修正之后，很多所谓的日历异象都不再显著。
+
+01
+引言
+
+Calendar Anomalies（日历异象）指的是资产在一年中的某些特定的日子内有显著非零的条件预期收益率。这其中最大名鼎鼎的当属股票市场中的换月效应（turn of month effect）：股票市场在每月的最后 1 个交易日到下一个月的第 3 个交易日这个窗口内的收益率显著高于一个月中的其他交易日。
+
+McConnell and Xu (2008) 的研究发现，在 1926 到 2005 间，在换月窗口内买入标普 500 指数的 ETF 可获得得年化 7.20% 的收益率（夏普率高达 1.04）。Carchano and Pardo Tornero (2011) 更是以标普 500 指数、德国法兰克福指数和日经指数为研究对象，分析了 188 种日历异象，并发现在统计上和经济上同时显著的只有换月效应。
+
+除了市场指数外，学术界也以各种风格因子投资组合为标的研究各种 calendar anomalies。在最近一篇刊发于 JPM 的文章中，Aharon and Qadan (2019) 提出虽然 size effect 在全样本中效果越来越弱，但它依然显著的存活于某些特定的日期内，构成 calendar anomalies。
+
+真的是这样么？
+
+以特定日期作为条件来划分收益率并检验不同划分下的显著性（相当于同时检验多个 hypotheses），这其实属于 multiple testing（多重检验）。在大量不同的划分下，仅仅因为运气就总会有一些是非常显著的、被人们冠以 calendar anomalies 之名。
+
+只有对 multiple testing 的影响进行必要的修正，才能公正的评判某种特定日期的划分是否真的得到显著的收益率异象。这就是本文要探讨的内容。
+
+02
+日历异象？
+
+来看一个例子。以中证 500 指数成分股为标的，使用某个常见的风格因子将它们排序，取首尾 10% 构建多、空对冲投资组合作为该因子的投资组合。
+
+下图显示了实证期内中证 500 指数（蓝线）和该风格因子组合（黄线）的走势。从黄线可以看出，它无法获得显著的超额收益。事实上，其日收益率均值的 t-statistic 仅有 1.17，对应的 p-value 高达 0.24。在全样本来看，这个因子是不显著的。
+
+接着，考虑几种常见的日历现象：
+
+换月（turn of month）；
+月份效应（calendar month）；
+“星期几”效应（day of week）。
+
+当我们在时间上进行各种划分后，神奇的事情发生了。这个全样本内不显著的因子，在某些特定的划分中出现了显著的 calendar anomalies，它们包括三月效应、五月效应、十一月效应、十二月效应以及星期二效应。
+
+上述五个潜在 calendar anomalies 的 p-values 均在 0.05 以下。但不要忘了，以上实际同时检验了 18 个假设 —— 1 个换月效应 + 12 个月份效应 + 5 个“星期几”效应。在这种背景下，即便有些假设的 p-value 是非常小的，也不应该立刻得出拒绝某个原假设的结论，而是应该针对 multiple testing 进行修正，以修正后的 p-value 作为判断依据。
+
+03
+Multiple Testing 修正
+
+前文《出色不如走运 II?》曾介绍过 Bonferroni、Holm、BHY 这三种 multiple testing 修正方法。本小节简单回顾一下，在本文第四节的分析中将采用 BHY 修正。
+
+在实施了 multiple testing 后应控制 family-wise error rate（FWER，族错误率）和 false discovery rate（FDR）两个指标。它们均代表着 Type I error，即错误的拒绝原假设。如果我们有 K 个 hypotheses（对应前文中的多个 calendar anomalies），它们的 p-value 分别为 p_1、p_2、…、p_K。根据事先选定的显著性水平（比如 5%），其中 R 个 hypotheses 被拒绝了，即有 R 个发现（discoveries） —— 包括 true discoveries 和 false discoveries。令 N_r ≤ R 代表 false discoveries 的个数，则 FWER 和 FDR 的定义分别为：
+
+由定义可知，FWER 是至少出现一个 false discovery 的概率，控制它对单个 hypothesis 来说是相当严格的，会大大提升 Type II Error。相比之下，FDR 允许 N_r 随 R 增加，因此控制的是 false discoveries 的比例，是一种相对温和的方法。无论采用哪种方法，在针对多重检验的修正下，都会有相当一部分的 discoveries 不再显著（即不能拒绝原假设）。
+
+依据控制 FWER 或 FDR，本文谈及的三种修正方法可以分为两类：
+
+Bonferroni correction 和 Holm adjustment 的目的是控制 family-wise error rate；
+
+BHY adjustment 的目的是控制 false discovery rate。
+
+这三种方法均能修正原始假设的 p-value，从而惩罚多重检验的影响。修正后的 p-value 往往会大于原始的 p-value，也就意味着修正后的 t-statistic 更小。
+
+接下来通过一个例子说明这些方法的差异。考虑六个假设，它们的 p-values 从小到大依次是 0.005、0.009、0.0128、0.0135、0.045、0.06。在单一假设检验下，前五个可以在 5% 的显著性水平下被拒绝。但由于我们实际上同时进行了六个假设检验，因此必须对上述 p-values 进行修正。
+
+首先来看 Bonferroni correction，它对原始 p-value 的调整如下：
+
+修正后的 Bonferroni p-value 分别为 0.03、0.054、0.0768、0.081、0.27 和 0.36；在 5% 的显著性水平下，我们仅能拒绝第一个假设。
+
+接下来看看 Holm (1979) 修正。它按照原始 p-value 从小到大依次修正，公式为：
+
+根据上述定义，最小的 p-value 被修正后，其 Holm p-value 为 0.06；第二个假设的 Holm p-value 为 max{6 × 0.005, 5 × 0.009} = 0.045。以此类推就能计算出其他四个假设的 Holm p-values。经过 Holm 修正后，在 5% 的显著性水平下，我们仅能拒绝前两个假设。
+
+最后来看看 BHY 修正（Benjamini and Hochberg 1995, Benjamini and Yekutieli 2001）。它从原始 p-value 中最大的一个开始逆向修正：
+
+由定义可知原始最大的 p-value 在调整后保持不变。然后从第二大的开始，依次按照上述公式计算，最终得到调整后的 BHY p-values，它们是（从小到大排列）：0.0496、0.0496、0.0496、0.0496、0.06、0.06。在 5% 的显著性水平下，我们依然可以拒绝前四个假设。
+
+再次强调的是，BHY 方法是以控制 false discovery rate 为目标，它的修正比另外两种以控制 family-wise error rate 的方法更加温和。因此，当使用 BHY 调整时，会有更多的原假设被拒绝。此外，BHY 对检验统计量之间的相关性不敏感，因此适应性更强。
+
+04
+消失的日历异象
+
+下面使用 BHY 方法对本文第二节的 p-values 进行修正。考虑不同的 multiple tests 个数，BHY 调整后的 p-values 如下表所示。
+
+对于月份效应，如果我们仅考虑这 12 个 tests（而忽略其他额外的 tests），那么修正后的 p-value 中，三月效应和十二月效应依然在 10% 的显著性水平下显著（p-values 分别为 0.0881 和 0.0922），而五月和十二月效应不再显著。类似的，对于“星期几”效应，如果仅考虑这 5 个 tests，修正后的 p-value 全都不再显著。
+
+如果同时考虑全部 18 个 tests，则会对原始 p-values 进行更严格的修正。在这种情况下，以上各种划分 —— 无论是换月、月份还是“星期几”效应 —— 均不再显著，我们无法在 10% 的水平下拒绝任何假设。当排除了 multiple testing 造成的影响后，这个风格因子的收益率不存在任何 calendar anomalies。
+
+BTW，这个全样本中不显著的因子是 Operating Cost TTM。
+
+05
+结语
+
+如今，在研究因子时，我们已经熟知 multiple testing 的危害。而将收益率在时间上进行各种划分并同时进行多个检验则是另一种形式的 multiple testing。在这种背景下，独立判别收益率在某个划分下是否显著并不合理。本文以 Operating Cost TTM 这个常见的质量因子为例说明如未能排除 multiple testing 的影响，它会让我们得出错误的结论。
+
+当我们考虑了足够多的 calendar effects 时，仅仅依靠运气就一定会找到显著的区间。为了杜绝虚假发现，应对显著性进行修正。在 Carchano and Pardo Tornero (2011) 这篇检验了 188 个异象的文章中，作者采用了 bootstrap 的方法，这也是排除运气的一种思路。
+
+从统计上来说，收益率在一月份显著和在某个没有任何特殊意义的连续 30 天内显著并无区别；类似的，收益率在春节后的第一个交易日显著和在一年中的第 137 个交易日显著也没什么不同。但是，在这两个比较中，人们会非常愿意给前者找到“合理”的解释并相信它们是 calendar anomalies。一个 calendar anomaly 是否真实存在并不取决于我们能否找出“合理”的理由或讲出“动听”的故事，而是应基于严谨的统计检验结果。
+
+市场中各种喜闻乐见的 calendar anomalies，是否只是建立在 multiple testing 之上的虚无？
+
+参考文献
+Aharon, D. Y. and M. Qadan (2019). The size effect is alive and well, and hiding behind calendar anomalies. The Journal of Portfolio Management, Vol. 45(6), 61 – 74.
+
+Benjamini, Y. and Y. Hochberg (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. Journal of the Royal Statistical Society, Series B, Vol. 57, 289 – 300.
+
+Benjamini, Y. and D. Yekutieli (2001). The control of the false discovery rate in multiple testing under Dependency. Annals of Statistics, Vol. 29, 1165 – 1188.
+
+Carchano, O. and A. Pardo Tornero. (2011). Calendar anomalies in stock index futures. Available at SSRN, https://ssrn.com/abstract=1958587.
+
+Holm, S. (1979). A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics, Vol. 6, 65 – 70.
+
+McConnell, J. and W. Xu (2008). Equity returns at the turn of the month. Financial Analysts Journal, Vol. 64(2), 49 – 64.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+
+--- 图3 ---
+[表]
+样本 | t-statistic | p-value | 
+All | 1.1737 | 0.2405 | 
+Turn of Month | -0.1048 | 0.9166 | 
+Calendar Month | Jan. | -0.5879 | 0.5566 | 
+Feb. | 1.3948 | 0.1631 | 
+Mar. | 3.0402 | 0.0024 | 
+Apr. | -0.7167 | 0.4735 | 
+May | 2.1774 | 0.0294 | 
+Jun. | 0.1847 | 0.8535 | 
+Jul. | -0.8418 | 0.3999 | 
+Aug. | 0.4468 | 0.6550 | 
+Sep. | 0.5363 | 0.5917 | 
+Oct. | 0.1934 | 0.8466 | 
+Nov. | 2.2958 | 0.0217 | 
+Dec. | -2.8101 | 0.0050 | 
+Day of Week | Monday | -1.0205 | 0.3075 | 
+Tuesday | 2.1189 | 0.0341 | 
+Wednesday | 1.1713 | 0.2415 | 
+Thursday | 0.0664 | 0.9471 | 
+Friday | 0.6660 | 0.5054 |
+--- 图7 ---
+$$ \begin{array}{l}\text{Holm}\quad=\quad\max\{6p_{1},5p_{2},4p_{3}\}=4p_{3}=0.0512\\\quad=\quad\max\{6p_{1},5p_{2},4p_{3},3p_{4}\}=4p_{3}=0.0512\\\text{Iolm}\quad=\quad\max\{6p_{1},5p_{2},4p_{3},3p_{4},2p_{5}\}=2p_{5}=0.0\\\text{olm}\quad=\quad\max\{6m,5p_{2},4m,3p_{4},2m,n e\}=2m\text{。}\end{array} $$
+--- 图8 ---
+$$ \begin{aligned}&p_{i}^{B H Y}=\left\{\begin{array}{l l}{p_{K}}&{\quad\mathrm{~i f~e~f~f~},}\\ {\min\left\{p_{i+1}^{B H Y},\frac{K\times c(K)}{i}p_{i}\right\}}&{\mathrm{i f}\quad i\leq K}\\ \end{array}\right.\\ &)=\sum_{i}^{K}\frac{1}{i}\\ \end{aligned} $$
+--- 图9 ---
+[表]
+Turn of Month | 0.9166 |  | 0.9471 | 
+Calendar Month | Jan. | 0.5566 | 0.8535 | 0.9471 | 
+Feb. | 0.1631 | 0.8535 | 0.9471 | 
+Mar. | 0.0024 | 0.0881 | 0.1488 | 
+Apr. | 0.4735 | 0.8535 | 0.9471 | 
+May | 0.0294 | 0.2742 | 0.4290 | 
+Jun. | 0.8535 | 0.8535 | 0.9471 | 
+Jul. | 0.3999 | 0.8535 | 0.9471 | 
+Aug. | 0.6550 | 0.8535 | 0.9471 | 
+Sep. | 0.5917 | 0.8535 | 0.9471 | 
+Oct. | 0.8466 | 0.8535 | 0.9471 | 
+Nov. | 0.0217 | 0.2692 | 0.4290 | 
+Dec. | 0.0050 | 0.0922 | 0.1558 | 
+Day of Week | Monday | 0.3075 |  | 0.9471 | 
+Tuesday | 0.0341 |  | 0.3893 | 
+Wednesday | 0.2415 |  | 0.9471 | 
+Thursday | 0.9471 |  | 0.9471 | 
+Friday | 0.5054 |  | 0.9471 |
+--- 图10 ---
+分享量化理论和实证心得
+☐
+免责声明：
+文章内容不可视为投资意见。资本市场有风险，入市投资需谨慎。

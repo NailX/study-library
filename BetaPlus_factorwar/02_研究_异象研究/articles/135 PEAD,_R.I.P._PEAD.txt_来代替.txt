@@ -1,0 +1,302 @@
+# PEAD, R.I.P.? PEAD.txt 来代替
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/DZTAc86tC8sn26s3l0g5cg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Martineau (2021) 的实证结果表明 PEAD 在美股市场中已经不复存在了；不过 Meursault et al. (2021) 的研究发现基于 earnings call 的 surprises 带来了升级版的 PEAD.txt。
+
+01
+
+要问今年哪个因子表现最抢眼？超预期一定是当仁不让的答案。
+
+而在学术界，人们对超预期的反应不足也造就了一个经久不衰的异象 —— PEAD（Ball and Brown (1968)）。需要 PEAD 背景知识的小伙伴，请参考连长雄文《PEAD 异象》。
+
+Martineau (2021) 统计了发表在金融学和会计学高水平（不限顶刊）期刊上直接和 PEAD 相关的论文（下表），足足有 80 篇，一方面说明了它的生命力，另一方面也说明了它的火热程度。
+
+不过，Martineau (2021) 基于最新的实证结果显示，以 earnings surprises 构造的 PEAD 异象在近年来已经在美股上消失了。这篇文章虽然不是发表在金融学三大顶刊，但是它发表在以强调可复制性著称的 Critical Finance Review 上，从一定程度说明了其实证结果是靠谱的。而该文的标题则比实证数据显示的还要大胆 —— Rest in Peace Post-Earnings Announcement Drift，直接宣告了 PEAD 的终结。
+
+在 PEAD 的表现有所减弱之际，另一篇和 PEAD 有着千丝万缕关联的文章及时的出现了。在今年 SFS Cavalcade North America 会议（顶会之一）上，Meursault et al. (2021) 报告了通过 earnings call 文本分析构造的 PEAD 升级版 —— PEAD.txt 异象。从名字中的 txt 就不难看出，它捕捉的是 earnings call 而非财务数据中的超预期。Meursault et al. (2021) 研究发现，PEAD.txt 可以获得远超传统 PEAD 的超额收益。
+
+今天这篇小文就来梳理一下 Martineau (2021) 和 Meursault et al. (2021)。不过，正如本文的标题中的问号所传递的那样，我对美股中 PEAD 是否 R.I.P. 依然是存疑的。看完第 2 节各位小伙伴就明白为什么。
+
+02
+
+Martineau (2021) 的 main results 是它的 Table 3。该表汇报了微小市值股票（microcap）和除微小市值外其他股票（all-but-microcap）在财报公布之后的第 1 个交易日（BHAR[0,1]），以及第 2 到 60 个交易日（BHAR[2, 60]）两个窗口内的累计超额收益。实证结果显示，BHAR[0,1] 和 BHAR[2, 60] 截然不同。前者持续显著，但后者几乎已经消失殆尽。对于 all-but-microcap，从 2006 年之后 BHAR[2, 60] 不再有超额收益，而对于 microcap，从 2016 年之后，BHAR[2, 60] 也不复存在（另外，这里插个彩蛋，见备注[1]）。
+
+随后，该文做了各种稳健性分析，比如作为锚定的 earnings 的选择，以及考察了不同 size quintiles 的结果。种种迹象表明，价格在财报发布之后就很快反应到位了，drift 不再存在。
+
+Martineau (2021) 的实证结果似乎宣告了 PEAD 的终结，那么我为什么要在 R.I.P. 后打个问号呢？原因是该文构造 PEAD 异象所使用的变量。和众多研究 PEAD 的论文一样，该文通过 earnings surprises 来构造投资组合。然而，如下图所示，该文在计算 earnings surprises 时，分母并非传统 SUE 中使用的标准差，而是使用了滞后的价格作为分母。虽然这种处理并非罕见，但它显然不如使用标准差为分母的 SUE 普及。
+
+这波操作不能不让人心生猜疑。不过，Martineau (2021) 给出了采用这种方法的出处，即 Livnat and Mendenhall (2006) 和 Hartzmark and Shue (2018)，前者发表于会计学顶刊 JAR，后者发表于金融学顶刊 JF，似乎足够有说服力。但是，这依然挡不住我的好奇心。
+
+为此，我找来 Livnat and Mendenhall (2006) 瞅了一眼，结果（下图）……该文一句 consistent with many prior studies 就带过了。
+
+我们再来看看 Hartzmark and Shue (2018)，结果发现它引用了另一篇 JF 的文章 DellaVigna and Pollet (2009)……
+
+好吧，我们顺藤摸瓜，找来 DellaVigna and Pollet (2009) 一探究竟。结果却再一次落空了，该文也没有讨论这么做的原因，而是给出了另一个出处：Kothari (2001)。
+
+本着一磕到底的态度，我们最后找来 Kothari (2001)。好家伙，这是一篇长达 127 页的文献综述！BTW，该文系统梳理了利用会计报表信息研究资本市场的相关研究，非常值得一看。
+
+然而，当我看到这是一篇 127 页的综述时，我的心情是这样的：
+
+对着 Kothari (2001) 看了半天，也只是在字里行间看到了使用价格作为分母对预期外 earnings 进行标准化，然而该文并没有给出任何解释。好消息是，它没有再给出新的参考文献“套娃”了。虽然没有找到上述计算 earnings surprises 的决定性证据，但是我们从 Kothari (2001) 找出了另一条关键线索。
+
+该文指出虽然 Ball and Brown (1968) 最先提出 PEAD，但真正让它发扬光大并被世人所熟知的论文则要数 Jones and Litzenberger (1970)，Foster, Olsen, and Shevlin (1984) 以及 Bernard and Thomas (1989, 1990)。
+
+Guess what? 这些一举奠定 PEAD 地位的文章，在计算 SUE 的时候，无一例外均使用了标准差作为分母。所以，我们熟知的方式才是计算 SUE 以及研究 PEAD 的常规做法，而非 Martineau (2021) 使用的方法。
+
+我们无从知道为什么 Martineau (2021) 不选择更常见的 SUE 研究 PEAD，但这足以让我们对该文的结论 —— PEAD, R.I.P. —— 打上问号。
+
+03
+
+Meursault et al. (2021) 使用 earnings call 代替传统的 earnings number，将 PEAD 延伸，提出了 PEAD.txt。实证数据表明，PEAD.txt 的异常超额收益几乎是 PEAD 的两倍。
+
+顾名思义，PEAD.txt 就是文本版的 PEAD。为了研究它，Meursault et al. (2021) 仿照传统 SUE 提出了 SUE.txt。简单的说，该文将 earnings call 中的 presentation 和 Q&A 环节区分对待，使用两部分的词频作为特征，使用 earnings call 下一个交易日的异常收益作为标签，使用滚动窗口进行有监督学习。
+
+具体来说，该文将股票按照收益率高低分成三组（High、Flat、Low），使用 regularized multinomial logistic regression 建模：
+
+Loss function 如下：
+
+参数确定后，代入最新一期 earnings call 的特征，就可以计算每个公司属于 High 和 Low 的 log-odds。Meursault et al. (2021) 将 SUE.txt 定义为模型预测某公司的 earnings call 属于 High 和 Low 的 log-odds 之差：
+
+一旦有了 SUE.txt，通过 portfolio sort 或者 Fama-MacBeth regression 就可以分析 PEAD.txt 的超额收益。下图给出了 PEAD.txt 和 PEAD 之间的类比。
+
+下面来看实证结果。下图中，左图显示比起 SUE，SUE.txt 更能预测 earnings call 之后第1 到第 63 个交易日内的累计异常收益；右图则显示在常见因子无法解释 SUE.txt，它能够获得显著的超额收益。
+
+除了对模型和实证结果的论述外，Meursault et al. (2021) 花了的大量的笔墨讨论如何理解基于 earnings call 的模型以及如此显著的 PEAD.txt。为此，该文首先在单词粒度层面分析了哪些单词对于计算 SUE.txt 最有贡献。
+
+由于该文将收益率分成三组，因此每个单词在 High 组的参数和 Low 组的参数之差和词频乘积就代表了该单词的 SUE.txt 强弱。结果如下图所示（蓝色条目代表 presentation 部分的词汇，绿色条目代表 Q&A 部分的词汇），从中我们就能看出哪些词汇产生正的 SUE.txt，哪些产生负的 SUE.txt。
+
+然而，脱离了上下文来考虑词汇是没有灵魂的。Meursault et al. (2021) 当然深谙此道。为此，他们把词汇聚类到不同的段落组中，并给段落组赋予了有财务含义的类别（包括 Financial accounting，Global economics，Operations and marketing 以及 Strategy；每个大类下又有细分小类），从而考察不同财务类别对 SUE.txt 的贡献。
+
+在上图中，横坐标是段落的频率，纵坐标是每个财务细分类别 SUE.txt 的绝对值。另外值得一提的是，图中的虚线曲线表示的是横坐标和纵坐标相乘的“等高线”，即 ISO-surprise 曲线，从图中右上角到左下角依次降低，坐落在高 ISO-surprise 曲线上的类别对 SUE.txt 有更大的贡献。
+
+从结果不难看出，贡献最大的是 metrics FIN 类别，它对应的是财务数据。这也许并不意外，但其他高贡献 —— 包括 segment performance（segment OPE），公司前景展望（forward FOR）以及公司策略（gen. strategy STR）—— 也对找到超预期的公司贡献很高。这就是在财务数据本身之外，通过研究 earnings call 能够得到的增量信息。
+
+不过，Meursault et al. (2021) 最后也表示：Text is different from numbers in form, but similar in substance. 但这篇文章依然是值得肯定的尝试。
+
+无论如何，关于 PEAD 的研究引领了一个时代，而其也因为非凡的可复制性（Ball and Brown 2019）[2]而独具学术生命力。无论 PEAD 是否在美股中已经 R.I.P. 了，我们都期待 PEAD.txt 以及今后类似的研究能够延续其生命力。
+
+而对于 A 股，希望今年大红大紫的超预期类因子在明年的表现不要像去年某大红大紫的因子在今年的表现那样。
+
+备注：
+[1] 一篇同样发表在 Critical Finance Review 的文章 Pyun (2021) 指出著名的 IVOL 异象在样本外也不复存在了，而这个样本外的时点也是 2006 年前后。
+[2] 见《致敬经典：Ball and Brown (1968)》。
+
+参考文献
+Ball, R. and P. Brown (1968). An empirical evaluation of accounting income numbers. Journal of Accounting Research 6(2), 159 – 178.
+
+Ball, R. and P. Brown (2019). Ball and Brown (1968) after fifty years. Pacific-Basin Finance Journal 53, 410 – 431.
+
+Bernard, V. L. and J. K. Thomas (1989). Post-earnings-announcement drift: Delayed price response or risk premium? Journal of Accounting Research 27, 1 – 36.
+
+Bernard, V. L. and J. K. Thomas (1990). Evidence that stock prices do not fully reflect the implications of current earnings for future earnings. Journal of Accounting and Economics 13(4), 305 – 340.
+
+DellaVigna, S. and J. M. Pollet (2009). Investor inattention and Friday earnings announcements. Journal of Finance 64(2), 709 – 749.
+
+Foster, G., C. Olsen, and T. Shevlin (1984). Earnings releases, anomalies, and the behavior of security returns. The Accounting Review 59(4), 574 – 603.
+
+Hartzmark, S. M. and K. Shue (2018). A tough act to follow: Contrast effects in financial markets. Journal of Finance 73(4), 1567 – 1613.
+
+Jones, C. P. and R. H. Litzenberger (1970). Quarterly earnings reports and intermediate stock price trends. Journal of Finance 25(1), 143 – 148.
+
+Kothari, S. P. (2001). Capital markets research in accounting. Journal of Accounting and Economics 31(1-3), 105 – 231.
+
+Livnat, J. and R. R. Mendenhall (2006). Comparing the post-earnings announcement drift for surprises calculated from analyst and time series forecasts. Journal of Accounting Research 44(1), 177 – 205.
+
+Martineau, C. (2021). Rest in peace post-earnings announcement drift. Critical Finance Review forthcoming.
+
+Meursault, V., P. J. Liang, B. Routledge, and M. Scanlon (2021). PEAD.txt: Post-earnings-announcement drift using text. Working paper.
+
+Pyun, C. (2021). Documenting the post-2000 decline in the idiosyncratic volatility effect. Critical Finance Review 10(3), 419 – 427.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+[表]
+ | Authors | Journal | Friction | Suprise | Return | 
+1 | Abarbanell and Bernard (1992) | JF | Failure to characterize the time-series properties of earnings | A, RW | S | 
+2 | Affleck-Graves and Mendenhall (1992) | JFE | Value Line&#x27;s timeliness ranks | A, RW | S | 
+3 | Arif et al. (2019) | JAE | Concurrent release of EA/10-Ks (investor attention) | A | S | 
+4 | Ayers et al. (2011) | TAR | Trading activities of distinct sets of investors | A, RW | S | 
+5 | Balakrishnan et al. (2010) | JAE | Market failure to assess loss/profit | RW | S | 
+6 | Bartov (1992) | TAR | Unexpected earnings&#x27; patterns | RW | S | 
+7 | Bartov et al. (2000) | TAR | Investor sophistication | RW | S | 
+8 | Basu et al. (2010) | RAS | Expected inflation in earnings forecast | RW | S | 
+9 | Bathke Jr et al. (2019) | CAR | Investor overreaction | RW | S | 
+10 | Battalio et al. (2012) | JAE | Investors ignoring accrual information | A, RW | S | 
+11 | Ben-David et al. (2021) | MS | Institutional investor attention | A | S | 
+12 | Bernard and Thomas (1989) | JAR | Delayed price response to earnings news | A | S | 
+13 | Bhushan (1994) | JAE | Transaction costs | RW | S | 
+14 | Boehmer and Wu (2013) | RFS | Short selling | A | S | 
+15 | Boulland et al. (2017) | RF | Information intermediaries (investor attention) | A | S | 
+16 | Calluzzo et al. (2019) | MS | Institutional trading | RW | S | 
+17 | Campbell et al. (2009) | JFE | Institutional trading | A | P | 
+18 | Cao and Narayanamoorthy (2012) | JAR | Earnings volatility | A | S | 
+19 | Cao et al. (2017) | JEQA | Institutional investment constraints | A | S | 
+20 | Chan et al. (1996) | JF | Slow incorporation of past information | A, RW | P | 
+21 | Chen et al. (2011) | CAR | Investors delay in processing time-varying earnings persistence | RW | S | 
+22 | Chen et al. (2017) | CAR | Transaction costs | A, RW | S | 
+23 | Chi and Shanthikumar (2017) | TAR | Local bias | A, RW | S | 
+24 | Choi (2000) | JEQA | Value Line Investment Survey recommendations | RW | P | 
+25 | Chordia and Shivakumar (2005) | JAR | Inflation illusion | RW | P | 
+26 | Chordia and Shivakumar (2006) | JFE | Intra-industry information transfers | A, RW | S | 
+27 | Chordia et al. (2014) | JAE | Transaction costs | RW | P | 
+28 | Chung and Hrazdil (2011) | CAR | Limits to arbitrage | A | S | 
+29 | Collins and Hribar (2000) | JAE | Accruals | RW | P | 
+30 | Core et al. (2006) | RAS | Managers&#x27; repurchases and insider trading | RW | S | 
+31 | DellaVigna and Pollet (2009) | JF | Investor inattention on Fridays | A | S | 
+32 | Dou et al. (2016) | CAR | Cultural dimensions | A | S | 
+33 | Doyle et al. (2006) | JAR | Definition of earnings surprises and transaction costs | A, RW | S | 
+34 | Drake et al. (2015) | RAS | Information acquisition | RW | S | 
+35 | Elgers et al. (2001) | TAR | Delayed response to annual analysts&#x27; earnings forecasts | A | S | 
+36 | Elgers et al. (2008) | JAE | Measurement errors in the use of realized earnings changes | RW | S | 
+37 | Feldman et al. (2010) | RAS | Tone in disclosures | A | S | 
+38 | Frederickson and Zolotoy (2016) | TAR | Investor inattention | A | S | 
+39 | He and Narayanamoorthy (2020) | JAE | Investors ignoring earnings acceleration | RW | S | 
+40 | Henry and Leone (2016) | TAR | Disclosure tone | A | S | 
+(Continued) |
+--- 图3 ---
+[表]
+41 | Hirshleifer et al. (2009) | JF | Information overload (investor inattention) | A | S | 
+42 | Hirshleifer et al. (2008) | TAR | Naive trading by individual investors | RW | S | 
+43 | Huang et al. (2018) | TAR | Headline Salience (investor attention) | A, RW | S | 
+44 | Hung et al. (2015) | RFS | Financial reporting quality | A | S | 
+45 | Jegadeesh and Livnat (2006) | JAE | Revenue information | RW | S | 
+46 | Jiang and Zheng (2018) | RFS | Investor sophistication | RW | P | 
+47 | Kang et al. (2017) | CAR | Investors&#x27; underreaction to firms with foreign operations | A, RW | S | 
+48 | Kaniel et al. (2012) | JF | Informed trading | A | S | 
+49 | Ke and Ramalingegowda (2005) | JAE | Institutional investor trading | RW | S | 
+50 | Kim and Kim (2003) | JFQA | Model specification for risk-adjusted returns | RW | S | 
+51 | Kimbrough (2005) | TAR | Conference calls | A, RW | S | 
+52 | Kottimukkalur (2019) | JFQA | Investor attention | A | S | 
+53 | Kovacs (2016) | CAR | Investor underreaction to intra-industry information | A, RW | S | 
+54 | Lasser et al. (2010) | CAR | Level of short interest | A | S | 
+55 | Lee (2012) | CAR | Quarterly report readability | A | S | 
+56 | Li (2011) | RAS | Investors understanding of loss persistence | A, RW | S | 
+57 | Li et al. (2020) | RAS | Delayed disclosure and investor attention | A, RW | S | 
+58 | Liang (2003) | RAS | Information processing biases | A | S | 
+59 | Livnat and Mendenhall (2006) | JAR | Earnings surprise definition | A, RW | S | 
+60 | Loh and Warachka (2012) | MS | Streaks in earnings surprises biasing investors&#x27; expectations | A | S | 
+61 | Louis et al. (2008) | RAS | Accrual disclosure | RW | S | 
+62 | Ma and Markov (2017) | CAR | Market&#x27;s assessment of meeting / beating consensus | RW | S | 
+63 | McLean and Pontiff (2016) | JF | Academic research | RW | P | 
+64 | Mendenhall (2002) | JAR | Earnings autocorrelation | RW | S | 
+65 | Michaely et al. (2016) | JAE | Timing of earnings announcements | A | P | 
+66 | Narayanamoorthy (2006) | JAR | Accounting conservatism | RW | S | 
+67 | Ng et al. (2008) | JAR | Transaction costs | A, RW | S | 
+68 | Ng et al. (2013) | RAS | Credibility of management forecasts | A | S | 
+69 | Porras Prado et al. (2016) | RFS | Firm ownership structure | A | S | 
+70 | Rangan and Sloan (1998) | TAR | Investors ignoring the auto-regressive structure in earnings | RW | S | 
+71 | Richardson et al. (2010) | JAE | Risk and transaction costs | RW | P | 
+72 | Sadka (2006) | JFE | Transaction costs | RW | S | 
+73 | Schaub (2018) | JFQA | Information intermediaries (investor attention) | A | S | 
+74 | Shane and Brous (2001) | JAR | Investor and analyst underreaction to future earnings | A | S | 
+75 | Truong and Corrado (2014) | RAS | Options trading volume | A | S | 
+76 | Vega (2006) | JFE | Public and private information | A | S | 
+77 | You and Zhang (2009) | RAS | Reporting complexity in SEC filings | A | S | 
+78 | Zhang (2012) | TAR | Management forecasts accuracy | A | S | 
+79 | Zhang (2008) | JAE | Responsiveness of analyst forecasts to current earnings | A | S | 
+80 | Zhang et al. (2013) | JAE | Information risk and transaction costs | RW | S |
+--- 图4 ---
+All-but-microcap stocks
+[表]
+Surprise rank | Full sample (1) | 1984-1990 (2) | 1991-1995 (3) | 1996-2000 (4) | 2001-2005 (5) | 2006-2010 (6) | 2011-2015 (7) | 2016-2019 (8) | 
+$ 0.007^{{***}} $ | $ 0.002^{{***}} $ | $ 0.003^{{***}} $ | $ 0.006^{{***}} $ | $ 0.008^{{***}} $ | $ 0.012^{{***}} $ | $ 0.011^{{***}} $ | $ 0.012^{{***}} $ | 
+(0.000) | (0.000) | (0.000) | (0.000) | (0.000) | (0.001) | (0.000) | (0.000) | 
+N | 206,280 | 21,868 | 25,787 | 36,416 | 34,214 | 31,095 | 31,426 | 25,474 | 
+$ R^{{2}} $ | 0.064 | 0.017 | 0.028 | 0.032 | 0.060 | 0.115 | 0.117 | 0.117 | 
+Microcap stocks | 
+Surprise rank | Full sample (1) | 1984-1990 (2) | 1991-1995 (3) | 1996-2000 (4) | 2001-2005 (5) | 2006-2010 (6) | 2011-2015 (7) | 2016-2019 (8) | 
+$ 0.008^{{***}} $ | $ 0.003^{{***}} $ | $ 0.005^{{***}} $ | $ 0.006^{{***}} $ | $ 0.007^{{***}} $ | $ 0.010^{{***}} $ | $ 0.009^{{***}} $ | $ 0.010^{{***}} $ | 
+(0.000) | (0.000) | (0.000) | (0.000) | (0.000) | (0.000) | (0.000) | (0.000) | 
+N | 106,182 | 6,209 | 10,711 | 19,257 | 17,901 | 22,762 | 16,814 | 12,528 | 
+$ R^{{2}} $ | 0.072 | 0.024 | 0.042 | 0.045 | 0.062 | 0.102 | 0.098 | 0.092 |
+Panel B. Dependent variable: BHAR[2,60]
+All-but-microcap stocks
+[表]
+Surprise rank | Full sample (1) | 1984-1990 (2) | 1991-1995 (3) | 1996-2000 (4) | 2001-2005 (5) | 2006-2010 (6) | 2011-2015 (7) | 2016-2019 (8) | 
+$ 0.002^{{***}} $\n(0.000) | $ 0.003^{{***}} $\n(0.001) | $ 0.003^{{***}} $\n(0.001) | 0.001\n(0.001) | $ 0.002^{{**}} $\n(0.001) | -0.001\n(0.002) | 0.000\n(0.001) | $ -0.002^{{**}} $\n(0.001) | 
+N | 206,321 | 21,870 | 25,793 | 36,430 | 34,217 | 31,108 | 31,424 | 25,479 | 
+$ R^{{2}} $ | 0.000 | 0.004 | 0.002 | 0.000 | 0.000 | 0.000 | 0.000 | 0.001 |
+Microcap stocks
+[表]
+Surprise rank | Full sample (1) | 1984-1990 (2) | 1991-1995 (3) | 1996-2000 (4) | 2001-2005 (5) | 2006-2010 (6) | 2011-2015 (7) | 2016-2019 (8) | 
+$ 0.004^{{***}} $ | $ 0.003^{{***}} $ | $ 0.003^{{***}} $ | $ 0.004^{{***}} $ | $ 0.004^{{***}} $ | $ 0.003^{{***}} $ | $ 0.003^{{***}} $ | 0.002 | 
+(0.000) | (0.001) | (0.001) | (0.001) | (0.001) | (0.001) | (0.001) | (0.001) | 
+N | 106,217 | 6,211 | 10,713 | 19,260 | 17,913 | 22,773 | 16,815 | 12,532 | 
+$ R^{{2}} $ | 0.002 | 0.002 | 0.002 | 0.001 | 0.002 | 0.001 | 0.002 | 0.000 |
+Table 3: Price formation to analyst earnings surprises
+--- 图5 ---
+2.2 Estimating earnings surprises
+compute two measures of earnings surprises (the “news”). The first measure is the analyst earnings surprise. Following Livnat and Mendenhall (2006) and Hartzmark and Shue (2018), I define analyst earnings surprises as
+Analyst surprise_{i,j,t} = \frac{EPS_{i,j,t} - E_{t-1}[EPS_{i,j,t}]}{P_{i,j,t-5}},
+4. 外·Martineau (2021)
+--- 图6 ---
+3.2 ESTIMATING EARNINGS SURPRISE (SUE)
+Consistent with many prior studies, we define the earnings surprise (SUE) as actual earnings minus expected earnings, scaled by stock price. While we
+estimate SUE using both time-series and analyst forecasts, most prior drift studies use only a time-series forecast, typically a rolling seasonal random walk (SRW) model. Consistent with these studies, our time-series measure of SUE is given by the following equation:
+$$ SUE_{jt}=\frac{\left(X_{jt}-X_{jt-4}\right)}{P_{jt}} $$
+(
+此外，Livnat and Mendenhall (2006)
+--- 图7 ---
+We follow DellaVigna and Pollet (2009) and scale the difference between the actual surprise and the median analyst forecast by the share price of the firm from three trading days prior to the announcement. Thus, our estimate of the earnings surprise for firm i on day t can be written as
+$$ Surprise_{it}=\frac{(Actual~earnings_{it}-Median~estimate_{i,[t-15,t-2]})}{Price_{i,t-3}}. $$
+$$ 1\over17\times1\times1\times101\times10010 $$
+--- 图8 ---
+We define the earnings surprise as the difference between the earnings announcement and the consensus earnings forecast, normalized by the price of a share (Kothari (2001)). Let  $ e_{t,k} $ be the earnings per share announced in quarter  $ t $ for company  $ k $ and  $ \hat{e}_{t,k} $ be the corresponding consensus analyst forecast. $ ^{3} $ Further, indicate by  $ P_{t,k} $ the price of the shares of company  $ k $ 5 trading days before the announcement in quarter  $ t $. The earnings surprise  $ s_{t,k} $ is
+$$ s_{t,k}=\frac{e_{t,k}-\hat{e}_{t,k}}{P_{t,k}}. $$
+D. H. Wies and Rollet (2009)
+--- 图9 ---
+ELSEVIER Journal of Accounting and Economics 31 (2001)105–231
+JOURNAL OF Accounting & Economics
+www.elsevier.com/locate/econbase
+Capital markets research in accounting ☆
+S.P. Kothari $ ^{*} $
+Sloan School of Management, Massachusetts Institute of Technology, Cambridge, MA 02142, USA
+Received 22 November 1999; received in revised form 8 March 2001
+Abstract
+I review empirical research on the relation between capital markets and financial statements. The principal sources of demand for capital markets research in accounting are fundamental analysis and valuation, tests of market efficiency, and the role of accounting numbers in contracts and the political process. The capital markets research topics of current interest to researchers include tests of market efficiency with respect to accounting information, fundamental analysis, and value relevance of financial reporting. Evidence from research on these topics is likely to be helpful in capital market investment decisions, accounting standard setting, and corporate financial disclosure decisions. © 2001 Elsevier Science B.V. All rights reserved.
+出处：Kothari (2001)
+--- 图10 ---
+你这是在逗我吗
+--- 图11 ---
+Figure 1: Comparison of text-based post-earnings-announcement drift (PEAD.txt) and classic PEAD. The lines represent cumulative abnormal returns (CAR) of spread portfolios formed on the day following the earnings call that buy the stocks that we estimate to be in the top quintile of SUE.txt or SUE in a given quarter and short the stocks in the bottom quintile. We calculate the abnormal returns using the returns on the matched six size and book-to-market portfolios. The starting point is the day after the earnings call. The sample period is 2010 to 2019.
+处·Meursault et al (2021)
+--- 图12 ---
+$$ \begin{aligned}&for r\in\{H,F,L\},\\&\log-odds(r)=log\frac{Pr\left(R_{t=0}=r|X=x\right)}{Pr\left(R_{t=0}\neq r|X=x\right)}=\beta_{0r}+\beta_{r}^{2}\end{aligned} $$
+--- 图13 ---
+$$ \begin{array}{r l}&{\{\beta_{0r},\beta_{r}\}_{r\in\{H,F,L\}}\biggr\}=}\\ &{\frac{1}{N}\displaystyle\sum_{i=1}^{N}\left(\displaystyle\sum_{r\in\{H,F,L\}}y_{i r}\left(\beta_{0r}+x_{i}^{T}\beta_{r}\right)-\log\left(\displaystyle\sum_{r\in\{H,F,L\}}e^{\beta_{0r}+x_{i}^{T}\beta_{r}}\right)\right)}\\ &{(1-\alpha)\|\beta\|_{2}^{2}/2+\alpha\displaystyle\sum_{j=1}^{p}\|\beta_{j}\|_{1}\bigg],}\end{array} $$
+--- 图14 ---
+$$ S U E.t x t=\log\text{odds}(H)-\log\text{odds}(L $$
+--- 图15 ---
+How? PEAD.txt is analogous to PEAD
+--- 图16 ---
+
+--- 图17 ---
+Hmm… Step 1
+β′s and x′s
+$$ \begin{array}{c}{\mathrm{S U E.t x t}(i,t)=}\\ {\mathrm{c}+\left(\beta_{\mathrm{H i g h}}-\beta_{L o w}\right)^{\prime}x_{i,t}}\end{array} $$
+Model coefficients  $ \beta_{High} - \beta_{Low} $ and frequencies of words  $ x_{i,t} $ are the (big) tip of the iceberg
+--- 图18 ---
+-mm... Step 3
+Par. Groups
+Absolute surprise and prevalence by subgroup
+Financial metrics
+paragraphs are ahead
+--- 图19 ---

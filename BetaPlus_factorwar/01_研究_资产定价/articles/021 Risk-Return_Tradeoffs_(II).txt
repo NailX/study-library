@@ -1,0 +1,215 @@
+# Risk-Return Tradeoffs (II)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/LHUG3XuEn4yUxhoADj4LOw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+隐性多因子模型如何成为研究资产定价的重要范式？且听 Kelly and Xiu (2023) 娓娓道来。
+
+本文继续翻译 Bryan Kelly 和修大成两位教授的 Financial Machine Learning (Kelly and Xiu 2023) 第四章（Risk-Return Tradeoffs）的剩余部分，即 4.4 到 4.6 节。（第一部分请见此处。）
+
+再次感谢王熙和刘洋溢对内容的反馈。本翻译仅供学习交流使用，禁止一切商业行为，未经授权，禁止转载。
+
+以下是正文部分。
+
+4.4 复杂因子模型
+
+许多论文拓展了隐性条件因子模型 (4.8) 中关于 beta 的设定。IPCA 可以被视为使用可观察特征数据的线性变化来近似风险暴露。尽管许多资产定价模型预测预期收益率和状态变量之间存在非线性关系，但在筛选条件变量和挑选函数形式方面，理论文献能够提供的指引十分有限。机器学习的出现使人们能够用一系列的非线性方法来应对函数形式的模糊性。
+
+在早期的研究中，Connor et al. (2012) 和 Fan et al. (2016b) 通过将 beta 视为条件特征的非参数函数，从而实现 beta 的非线性设定（但与 IPCA 不同，为了可解释性，这些特征在时间维度上是固定的）。利用这一框架，Kim et al. (forthcoming) 研究了能够对冲掉因子风险的“套利”组合的行为。
+
+Gu et al. (2021) 利用神经网络将 beta 表述为特征的非线性函数，从而扩展了 IPCA 模型。图 4.3 展示了他们的“条件自编码器”（CA）模型。图 4.3 揭示了其基本结构，该结构与 (4.8) 的不同之处在于，它通过非线性激活函数传递输入数据（工具变量  ）。CA 是首个明确同时考虑风险和收益的股票收益率深度学习模型。其结果表明，尽管就总体  而言 CA 和 IPCA 表现相当，但在预测性  方面，它大大超过了 IPCA。换句话说，CA 能够更准确地计算资产因暴露于因子风险而获得的条件补偿。（译者注：如果使用线性激活函数，则 CA 基本上和 IPCA 等价；但由于使用了非线性激活函数，从而使 CA 能够描述协变量和收益率之间潜在的非线性关系。不过从他人后来复现的实证结果来看，虽然 CA 因能捕捉非线性而更具潜力，但是 IPCA 在样本外的表现似乎始终优于 CA。）
+
+Gu et al. (2021) 是一个高度复杂的模型。其出色的实证表现暗示着，对于因子模型而言，复杂性提升带来的好处可能与 Kelly et al. (2022a) 在市场择时研究中所发现的效果类似（译者注：即复杂度可以提升样本外表现。）。Didisheim et al. (2023) 正式提出了上述观点并证明了因子定价模型中复杂性的优越性。他们的分析是基于条件随机贴现因子（SDF）视角展开。一般而言，SDF 可以被表述为一组风险资产的投资组合：
+
+  
+
+其中，  是  个资产的超额收益率向量。  维向量  包含 SDF 的条件权重，  代表  期信息集的条件变量。由于不知道  的函数形式，我们用机器学习模型来近似它：
+
+  
+
+其中  是  的某个非线性函数，且在上述近似中的  相应的参数数量  很大。该关于 SDF 的机器学习模型可以解释为具有  个因子的因子定价模型：
+
+  
+
+其中每个“因子”  是使用非线性资产“特征”   为权重的风险资产的投资组合（managed portfolio）。Didisheim et al. (2023) 的主要理论结果显示，在资产定价模型中因子越多越好。在该设定下，增加因子个数意味着更充分利用  所包含的信息，从而可以使用相应的方法更好地近似真正的 SDF。对于 SDF 的更优近似将胜过了需要估计更多参数所带来的统计成本。因此，随着因子数量的增加，样本外的预期定价误差将减小。这种关于模型复杂度的解释对传统的 APT 构成了挑战，后者主张只需少量的风险因子便能够为任何可交易资产提供有关风险-收益率权衡的完整描述（译者注：APT 没有这个要求。）。这意味着，即使在套利不存在且 SDF 存在的前提下，由于我们必须估计 SDF，因此很有可能（实际上是可以预见的）将持续不断地找到不能被已有因子定价的新的实证“风险”因子，而将它们加入定价模型将不断地提高其样本外的表现。
+
+4.5 高频模型
+
+随着可交易资产越来越多的以及它们的高频交易数据越来越多，数据可得性的提升为估计单个资产的风险及其相互依赖性提供了独特的机会。通过简单的非参数化波动率和协方差，Andersen and Bollerslev (1998)、Andersen et al. (2001) 以及 Barndorff-Nielsen and Shephard (2002) 展示了如何利用丰富且及时的日内价格数据更好地了解资产市场的波动。使用高频指标有助于解决研究低频时间序列时面对的若干挑战。例如，它帮助研究者在无需依赖太多假设的前提下，来处理结构性变化和时变的参数。此外，对于日内数据建模而言，经典时间序列分析中关于线性、平稳性、依赖性和异方差性的许多标准假设往往是不必要的。
+
+在最新的文献中，我们发现存在两大流派，它们均采用机器学习技术来估计高维协方差矩阵，并利用高频数据提高波动率预测的准确性。
+
+对于成功构建投资组合而言，准确的协方差估计至关重要。但是，由于维数灾难问题，估计高维协方差矩阵是一个极具挑战性的统计问题。许多方法依赖于各种形式的收缩以改进估计（Bickel and Levina 2008a; Bickel and Levina 2008b; Cai and Liu 2011; Ledoit and Wolf 2012; Ledoit and Wolf 2004）。受 APT 启发，Fan et al. (2008) 考察了包含可观测因子的严格因子模型，并提出了基于因子模型的协方差矩阵估计量，而 Fan et al. (2013) 则转而研究了包含隐性因子的近似因子模型，并提出了相应的估计量。
+
+当面板数据的（横截面）维度接近样本大小时，在高频数据中使用因子结构式必要的。然而，低频和高频数据中的计量经济学方法在本质上存在差异。后者通常基于一个通用的连续时间半鞅模型，允许收益率的变化中出现随机变化和跳跃。针对日内数据，Ait-Sahalia and Xiu (2019) 提出了非参数 PCA 的渐近理论，为在连续时间中应用因子模型铺平了道路。此外，基于连续时间因子模型，Fan et al. (2016a) 和 Ait-Sahalia and Xiu (2017) 使用高频数据提出了个股高维协方差矩阵的估计量。
+
+一个充满前景的研究方向是将关于高频风险度量的文献与关于预期收益率横截面的文献相结合，从而利用更丰富的风险信息来获得有关风险-收益权衡的深入见解。在这个方向上的一些相关研究包括 Bollerslev et al. (2016)。他们在连续时间框架下计算了个股对单一市场因子运动中连续和跳跃两部分各自的 beta 值，然后在离散时间框架中将研究了上述 beta 估计值和股票预期收益率的截面关系。Ait-Sahalia et al. (2021) 在统一的连续时间框架下为风险溢价提供了统计推断。他们在第一步考虑多个因子和随机 beta 值，并将通过第一步估计得到的 beta 应用于第二步中，进而扩展了 Shanken (1992a) 的经典推断方法。在实证方面，他们使用 Ait-Sahalia et al. (2020) 使用 15 分钟收益率构造的 Fama-French 和动量因子，检验了日内收益率的因子模型。
+
+利用高频数据测量波动率的想法也使得有关波动率预测的研究充满前景。Corsi (2009) 提出的测量历史已实现波动率的异质自回归（HAR）模型已是当前学术研究和业界实践中领先的波动率预测模型。最近，有许多论文研究如何通过机器学习进行波动率预测，包括 Li and Tang (2022) 以及 Bollerslev et al. (2022)。但与收益率预测时机器学习预测的有效性体现为更高的夏普比率不同，对于波动率预测而言，人们尚不清楚机器学习模型能否以及在多大的经济学意义上超越了已有的 HAR 模型。这是研究中一个有趣的开放性问题。
+
+4.6 Alphas
+
+本节讨论关于 alpha 检验和机器学习的相关文献。Alpha 是预期收益率中未被因子暴露所解释的部分，因此它是一个依赖模型（以及测试资产）的对象。由于经济理论通常过于简化、不能指明所有的因子，且数据量也不足以让人们通过数据驱动的方式推断出所有真正的因子，模型设定偏误的存在使得区分 alpha 和因子暴露的“公平”补偿充满挑战。例如，alpha 可能是因子 beta 偏弱的表现，这让人想起回归中的遗漏变量问题。换句话说，一个模型的 alpha 可能是另一个模型的 beta。在一个隐性因子模型中，alpha 和 beta 最终是由一个区分因子与特质性噪声的因子强度阈值来区分的。
+
+我们主要从非条件隐性因子模型的角度分析 alpha。之所以强调非条件而不是条件 alpha 是因为前者是学术研究的重点。此外，我们关注隐性因子模型是因为对隐形因子模型来说，模型设定偏误问题没那么严重。
+
+4.6.1 Alpha 检验和经济重要性
+
+长久以来，实证资产定价的焦点是原假设，即所有的 alpha 都等于零  ，是否成立。这是一个单一假设，有别于我们稍后将讨论的多重假设 alpha 检验问题。一旦  被拒绝，它往往被解释为资产定价模型存在偏误或者测试资产存在错误定价（有时它也会被错误地视为违背了 Ross (1976) 提出的 APT）。（译者注：即我们可以说拒绝了一个实证模型，但是不能说拒绝了 APT。APT 是一个定价框架但并未给出什么才是合适的定价因子。）
+
+众所周知的 GRS 检验（Gibbons et al. 1989）是针对  的卡方检验，专为含有可观测因子的低维因子模型设计。Fan et al. (2015) 和 Pesaran and Yamagata (2017) 设计了在高维环境中检验  的方法。由于它消除了原始 GRS 检验中要求  的约束并当  较大时提高了检验的功效，因此在方法上是一个重要的进步。尽管这些方法最初是为包含可观测因子的因子模型提出的，但可以将它们扩展到隐性因子模型中。事实上，Giglio et al. (2021a) 利用公式 (4.4) 和 (4.6) 给出的因子暴露以及风险溢价估计，构建了一个关于 alpha 的估计量：
+
+  
+
+他们还推导了 alpha 的必要渐近展开，为在隐性因子模型中检验 alpha 铺平了道路。
+
+GRS 检验统计量基于  ，它可以理解为对于一个因子暴露为零的投资组合能够获得的最高夏普比率平方。然而，估计这个夏普比率是一回事，而通过一个交易策略来实现它则是另一回事。也就是说，在 GRS 这类检验中拒绝零 alpha 假设并不一定意味着它能够在经济意义上产生多么重要的结果（译者注：即很难在实际中在考虑了所有交易成本以及市场摩擦之后，投过某个可实施的投资策略来获得这种夏普率。）。只有在考虑了潜在套利者交易策略的可行性之后，定量讨论 alpha 的经济重要性才是有意义的。只有从经济角度评估统计上的拒绝才对资产定价研究更有价值，也对从业者而言更加重要。
+
+APT 假设套利者知道收益率生成过程的真实参数。只要样本量足够大，该这假设可能是成立的。因为在这种情况下，参数能够被（渐近地）准确估计出来，且套利者的行为（近似地）表现得好像他们确切地知道了这些真实参数。但问题是，在 APT 的设置中，套利者必须知道越来越多的 alpha，因此，横截面维度相对于典型的样本大小来说是太大。因此，即使是在  很大的极限情况假设套利者了解所有 alpha 也是不合理的。
+
+Da et al. (2022) 重新审视了 APT，并放宽了参数已知的假设。在他们的设定中，套利者必须使用一个基于样本大小为  的历史数据而构造的可交易策略。对于  期的任何可行策略  （译者注：策略由投资组合的权重  表示。），他们定义了该策略下一期的条件夏普比率：
+
+  
+
+其中  是  期的信息集。他们指出  满足：
+
+  
+
+其中当  趋向于无穷时   是因子的协方差矩阵，而  是由  生成的信息集。
+
+很显然，  是最优因子组合的夏普比率平方。因此，对于任何因子中性策略  ，即  ，
+
+  
+
+这个结果表明，alpha 的后验估计决定了可行的最优夏普比率以及统计套利利润的上限。任何机器学习策略，无论简单还是复杂，都需要遵循这个可行的夏普比率上限。
+
+一般来说，  ，仅只有当  几乎必然时等号才成立。这里，  来自可行的交易策略，而  则代表了不可行的最优夏普比率。
+
+可行和不可行策略之间的“夏普比率差距”刻画了统计学习的难度。学习难度越高，则差距就越大。图 4.4 考虑了假想的收益率生成过程并报告了这两个夏普比率之比，其中  的概率为  ，  或  的概率各为  。残差的协方差矩阵  是一个以  为方差的对角阵。在这类 DGP 中，  表征了 alpha 相对于噪声的强度，而  刻画了其稀有性。通过改变  以及  的取值，我们可以理解数据生成过程如何影响套利者的表现，如图 4.4 所示。随着  的增加，alpha 足够大且学习难度不高，夏普比率差距就会更小。尽管更普遍的 alpha 也会降低夏普比率差距的缩小，但其稀有性的作用并不突出。
+
+Da et al. (2022) 展示了如何定量刻画可行和不可行夏普比率之间的差距。他们基于一个包含 27 个因子的模型来评估 APT，其中 16 个公司特征和 11 个 GICS 行业哑变量被用作可观测的 beta。使用 1975 年 1 月到 2020 年 12 月的数据，不可行夏普比率的估计值超过 2.5，是机器学习算法获得的可行夏普比率估计值 0.5 的四倍有余。可行夏普比率（在考虑交易成本之前）低于 0.5 恰恰表明 APT 在实证上十分有效。从理论上讲，如果套利者面临更多的统计困难，如模型设定偏误、非稀疏的残差协方差矩阵等，可行和不可行夏普比率之间的差距会进一步扩大。
+
+4.6.2 多重假设检验
+
+自从 CAPM 以来，金融经济学界便开始共同寻找异象；即能获得 CAPM 无法解释的 alpha 的投资组合。其中的一些，如规模、价值和少数其他因子已被纳入基准定价模型中（Fama and French 1993；Fama and French 2015）。之后，一旦研究者发现这些基准模型无法解释的 alpha 时，就宣布找到了新的异象。Harvey et al. (2016) 对此进行了综述并整理了一个超过三百个异象的清单。他们提出了一个重要的批判观点，即在检验新异象的显著性时未能正确考虑多重假设检验的影响。
+
+在这个背景下的多重假设检验是指同时检验一组原假设：  。这个问题与早先讨论的检验单一原假设  有本质区别。由于仅靠运气就会使单个 alpha 检验中出现一部分显著结果从而使它们的原假设被错误地拒绝，因此多重假设建议容易造成伪发现问题。
+
+设  是原假设  的检验统计量。如果  （  是个预先指定的阈值），那么  就会被拒绝。令  代表原假设为真的假设的编号集合。另外，令  表示样本中所有被拒绝假设的数量，令  表示该样本中错误拒绝的数量：
+
+  
+
+  
+
+  和  都是随机变量，但  是可观测的而  却不是。
+
+对于任何预先选定的水平  ，比如  ，单个检验确保每个检验的错误率的上界由  确定：  。换句话说，预期的错误拒绝个数可以多达  。为了减少伪发现的数量，另一个方法是选择一个更大的阈值来控制族错误率（FWER）：  。不幸的是，这个方法在实践中过于保守。第三个方法则可追溯到 Benjamini and Hochberg (1995)，即直接控制伪发现率 (FDR)：  ，其中伪发现比例（FDP）及其期望 FDR 分别定义为 以及 。
+
+虽然资产定价文献中早就谈到了一般的数据窥探问题（Lo and MacKinlay 1990; Sullivan et al. 1999），但早期的建议是另选单一的原假设，例如  或  （例如 White 2000; Kosowski et al. 2006; Fama and French 2010）。Barras et al. (2010)，Bajgrowicz and Scaillet (2012) 以及 Harvey et al. (2016) 则是最早在资产定价中采用 FDR 或 FWER 控制方法来遏制多重假设检验问题。Harvey and Liu (2020) 提出了一个双层自助法方法来控制 FDR，同时也考虑了假阴性率和几率比。Giglio et al. (2021a) 则提出了一种严格的推断方法，用于控制隐性因子模型中 alpha 的 FDR，同时解决了遗漏的变量问题、数据缺失问题以及测试资产维度过大的问题。Jensen et al. (2023) 则通过一个贝叶斯分层模型来实现对多重假设检验的修正。该模型使用了零 alpha 先验并利用因子的联合表现，允许利用因子之间的信息将 alpha 的估计值向先验收缩。
+
+归根结底，多重假设检验在本质上是一个统计问题。前述统计方法通常满足一个好的统计检验所需具备的标准，例如控制第一类错误或伪发现率等。然而，比起统计标准，经济效益才是经济主体最关心的。但是，这两个目标通常是相互冲突的。Jensen et al. (2023) 和 Da et al. (2022) 指出，尽管传统多重假设检验方法能有效防范 FDR，但以此选择 alpha 会导致极其保守的交易策略。Jensen et al. (2023) 证明，相比于使用传统方法控制 FDR 的投资者，使用贝叶斯分层多重假设检验方法作为评判因子标准的投资者将能够获得更大的经济效益。
+
+参考文献
+Ait-Sahalia, Y., J. Jacod, and D. Xiu (2021). Continuous-time Fama-MacBeth regressions. Tech. rep. Princeton University and the University of Chicago.
+
+Ait-Sahalia, Y., I. Kalnina, and D. Xiu (2020). High frequency factor models and regressions. Journal of Econometrics 216(1), 86-105.
+
+Ait-Sahalia, Y. and D. Xiu (2017). Using principal component analysis to estimate a high dimensional factor model with high-frequency data. Journal of Econometrics 201(2), 384-399.
+
+Ait-Sahalia, Y. and D. Xiu (2019). Principal component analysis of high frequency data. Journal of the American Statistical Association 114(525), 287-303.
+
+Andersen, T. G. and T. Bollerslev (1998). Answering the skeptics: Yes, standard volatility models do provide accurate forecasts. International Economic Review 39(4), 885-905.
+
+Andersen, T. G., T. Bollerslev, F. X. Diebold, and P. Labys (2001). The distribution of exchange rate realized volatility. Journal of the American Statistical Association 96(453), 42-55.
+
+Bajgrowicz, P. and O. Scaillet (2012). Technical trading revisited: False discoveries, persistence tests, and transaction costs. Journal of Financial Economics 106(3), 473-491.
+
+Barndorff-Nielsen, O. E. and N. Shephard (2002). Econometric analysis of realized volatility and its use in estimating stochastic volatility models. Journal of the Royal Statistical Society Series B (Statistical Methodology) 64(2), 253-280.
+
+Barras, L., O. Scaillet, and R. Wermers (2010). False discoveries in mutual fund performance: Measuring luck in estimated alphas. Journal of Finance 65(1), 179-216.
+
+Benjamini, Y. and Y. Hochberg (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal Statistical Society Series B (Methodological) 57(1), 289-300.
+
+Bickel, P. J. and E. Levina (2008a). Covariance regularization by thresholding. Annals of Statistics 36(6), 2577-2604.
+
+Bickel, P. J. and E. Levina (2008b). Regularized estimation of large covariance matrices. Annals of Statistics 36(1), 199-227.
+
+Bollerslev, T., S. Z. Li, and V. Todorov (2016). Roughing up beta: Continuous versus discontinuous betas and the cross section of expected stock returns. Journal of Financial Economics 120(3), 464-490.
+
+Bollerslev, T., M. C. Medeiros, A. Patton, and R. Quaedvlieg (2022). From zero to hero: Realized partial (co)variances. Journal of Econometrics 231(2), 348-360.
+
+Cai, T. and W. Liu (2011). Adaptive thresholding for sparse covariance matrix estimation. Journal of the American Statistical Association 106(494), 672-684.
+
+Connor, G., M. Hagmann, and O. Linton (2012). Efficient semiparametric estimation of the Fama–French model and extensions. Econometrica 80(2), 713-754.
+
+Corsi, F. (2009). A simple approximate long-memory model of realized volatility. Journal of Financial Econometrics 7(2), 174-196.
+
+Da, R., S. Nagel, and D. Xiu (2022). The statistical limit of arbitrage. Tech. rep. Chicago Booth.
+
+Didisheim, A., S. Ke, B. Kelly, and S. Malamud (2023). Complexity in factor pricing models. Tech. rep. Yale University.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3-56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1-22.
+
+Fama, E. F. and K. R. French (2010). Luck versus skill in the cross-section of mutual fund returns. Journal of Finance 65(5), 1915-1947.
+
+Fan, J., Y. Fan, and J. Lv (2008). High dimensional covariance matrix estimation using a factor model. Journal of Econometrics 147(1), 186-197.
+
+Fan, J., A. Furger, and D. Xiu (2016a). Incorporating global industrial classification standard into portfolio allocation: A simple factor-based large covariance matrix estimator with high frequency data. Journal of Business and Economic Statistics 34(4), 489-503.
+
+Fan, J., Y. Liao, and M. Mincheva (2013). Large covariance estimation by thresholding principal orthogonal complements. Journal of the Royal Statistical Society Series B (Statistical Methodology) 75(4), 603-680.
+
+Fan, J., Y. Liao, and J. Yao (2015). Power enhancement in high-dimensional cross-sectional tests. Econometrica 83(4), 1497-1541.
+
+Fan, J., Y. Liao, and W. Wang (2016b). Projected principal component analysis in factor models. Annals of Statistics 44(1), 219-254.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica 57(5), 1121-1152.
+
+Giglio, S., Y. Liao, and D. Xiu (2021a). Thousands of alpha tests. Review of Financial Studies 34(7), 3456-3496.
+
+Gu, S., B. T. Kelly, and D. Xiu (2021). Autoencoder asset pricing models. Journal of Econometrics 222(1), 429-450.
+
+Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance 75(5), 2503-2553.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). ... and the cross-section of expected returns. Review of Financial Studies 29(1), 5-68.
+
+Jensen, T. I., B. Kelly, and L. H. Pedersen (2023). Is there a replication crisis in finance? Journal of Finance 78(5), 2465-2518.
+
+Kelly, B. T., S. Malamud, and K. Zhou (2022a). Virtue of complexity in return prediction. Tech. rep. Yale University.
+
+Kim, S., R. Korajczyk, and A. Neuhierl (forthcoming). Arbitrage Portfolios. Review of Financial Studies.
+
+Kosowski, R., A. Timmermann, R. Wermers, and H. White (2006). Can mutual fund “stars” really pick stocks? New evidence from a bootstrap analysis. Journal of Finance 61(6), 2551-2595.
+
+Ledoit, O. and M. Wolf (2004). Honey, I shrunk the sample covariance matrix. Journal of Portfolio Management 30(4), 110-119.
+
+Ledoit, O. and M. Wolf. (2012). Nonlinear shrinkage estimation of large-dimensional covariance matrices. Annals of Statistics 40(2), 1024-1060.
+
+Li, S. Z. and Y. Tang (2022). Automated risk forecasting. Tech. rep. Rutgers, The State University of New Jersey.
+
+Lo, A. W. and A. C. MacKinlay. (1990). Data-snooping biases in tests of financial asset pricing models. Review of Financial Studies 3(3), 431-467.
+
+Pesaran, H. and T. Yamagata (2017). Testing for alpha in linear factor pricing models with a large number of securities. Tech. rep.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341-360.
+
+Shanken, J. (1992a). On the estimation of beta pricing models. Review of Financial Studies 5(1), 1-33.
+
+Sullivan, R., A. Timmermann, and H. White (1999). Data-snooping, technical trading rule performance, and the bootstrap. Journal of Finance 54(5), 1647-1691.
+
+White, H. (2000). A reality check for data snooping. Econometrica 68(5), 1097-1126.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得

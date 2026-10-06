@@ -1,0 +1,222 @@
+# Which test assets ?
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/JpktO2rLPiR8R3Dss2NcUw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+传统的 double/triple sort 构建 test assets 已经过时。机器学习中的非线性模型为检验多因子模型提供新思路？
+
+01
+Test Assets 之痛
+
+检验一个多因子模型分几步？
+
+三步：定义模型使用的因子、定义 test assets、检验。Test assets 和因子就像是一枚硬币的两面，缺一不可。在过去的三十年中，学术界先后提出了差不多十个主流的多因子模型。然而，在 test assets 方面却鲜有进展。为什么？
+
+因为 Fama and French (1993)。
+
+这篇文章不仅仅是多因子模型的开山鼻祖，更是为学术界之后近 30 年的研究铺垫了一系列基础的方法论（虽然多数在今天看来已经过时了……），其中就包括 test assets 的构造方法。
+
+在 Fama and French (1993) 中，二位作者不仅通过 double sort 构建了因子，也同样使用 double sort 构建了投资组合作为 test assets。从那之后，使用市值和某个 firm characteristic 进行 5 × 5 double sort 得到 25 个 portfolios 作为 test assets 就成为学术界的标配。
+
+不难想象，使用 size 和 BM（book-to-market ratio）构建 SMB 以及 HML 因子，再同样使用 size 和 BM 构建 test assets 来检验上述因子构造的多因子模型是多么“完美”……然而有大佬坐不住了。Lewellen, Nagel, and Shanken (2010) 指出，如此 double sort 得到 test assets 有很强的 factor structure（严重依赖于用来排序的 firm characteristics），并不能有效的检验多因子模型。
+
+面对这种困局，通常有两种解决办法。第一种就是直接用个股作为 test assets。不过这对因子暴露的参数估计带来了挑战，详见《Which beta?》一文。另一种方法就是使用大量不同的 firm characteristics 来进行各种 double 以及 triple sort，得到上百个 portfolios 作为 test assets。Fama and French (2020) 就是这么做的。
+
+但这第二种做法仍有问题。这种 sorting 操作，往往最多同时考虑三个 firm characteristics 进行 triple sort，再增加更多的 sorting variable 就难言合理了 —— 比如独立的排序根本无法保证每个组里有足够多的股票，而更重要的是这些分出来的 portfolios 组可能根本不合理。
+
+问题来了：怎么才算合理？
+
+从使用 test assets 的目的出发，它们是为了评价多因子模型，因此应该能够最好的反映股票预期收益率在截面上的差异。只有满足上述目标的 test assets，才是好的 test assets。在这方面，三十年前的 Fama and French (1993) 虽然是一个好的出发点，但如今还是落伍了。
+
+最近十年，越来越多的研究发现股票预期收益率和 firm characteristics 之间的非线性关系。就用 size 和 BM 举个最简单的例子。下表展示了基于 A 股、使用 size 和 BM 进行 double sort 的实证结果（表中汇报了不同 portfolios 的月均收益率 %，括号内为 t-statistics）。不难看出，BM 在小市值中更加有效，而在大市值中几乎没啥作用，说明 conditional on 市值，BM 对预期收益率的影响不同。
+
+以上仅以一个 toy story 说明了预期收益率和 firm characteristics 之间的非线性关系。它对检验多因子模型的指导意义是：不应再用三十年前的方法去构造 test assets 了，因为该方法难以捕捉上述非线性关系，而是应该寻找更好的构造 test assets 的方法。
+
+在这方面，一篇尚未发表的 working paper 提供了全新的思路，它就是前不久在 SFS 年会上报告过的 Bryzgalova, Pelger, and Zhu (2020)，以下简称 BPZ。下面就对其简要说明。
+
+02
+Bryzgalova, Pelger, and Zhu (2020)
+
+简单的说：BPZ 以给定的 firm characteristics 为划分依据，通过构建 decision tree 构成了大量的 portfolios，然后以它们为资产，以 mean-variance efficiency 为目标从中挑选出最能代表股票收益率截面差异的若干个 portfolios（称为 basis assets），并以基于它们的 tangency portfolios 作为 test assets。
+
+好吧，听上去似乎没有那么简单……
+
+下面一步步的说（本节和下节所有图表均出自 BPZ 或其在 SFS 会议上的报告 slides，不单独说明了）。
+
+仍然考虑最常见的 size 和 BM 这两个 firm characteristics。假设选择 size-BM-size 的顺序将所有股票进行划分，每次新的划分都将前次得到的所有 nodes 一分为二，这样就得到下面这颗 tree：
+
+按照 size-BM-size 的顺序每次一分为二，一共得到 8 个 portfolios。当然了，除了上述顺序外，还可以有其他的顺序，比如 BM-size-BM。而理论上，在不加任何约束的前提下，对于一个 depth = d 的 tree 来说，一共有 2^d 种构造 tree 的顺序（即每一层都可以从 size 和 BM 中任选；理论上允许出现 size-size-size 或 BM-BM-BM 这种没什么意义的划分）。
+
+和传统的使用 size 和 BM 进行 double sort 相比，decision trees 会产生更多的 portfolios。下图展示了 depth = 4 时，使用 decision tree 和 4 × 4 double sort 得到的 portfolios 的差异。从图中不难看出，采用传统 double sort 得到的 16 个 portfolios 是不重叠的；而使用 decision tree 得到的成百上千个 portfolios 中很多都是重叠的。
+
+推广一下，如果参与构造 decision trees 的不仅仅是 size 和 BM，而是有 M 个 firm characteristics，那么对于一个 depth = d 的 tree，一共有 M^d 种构造 tree 的顺序，毫无疑问这将得到非常多的 portfolios。此外需要强调的是，为了更好的捕捉股票收益率和 firm characteristics 的关系，BPZ 不仅考虑每棵树的 final nodes，还考虑 intermediate nodes，妥妥的维数灾难。因此，接下来就要进行 pruning（剪枝）。
+
+由于 pruning 的目标是为了得到更好的 test assets，因此该文作者将其称为 asset pricing pruning。如何通过 pruning 留下最重要的 nodes？下图给出了说明。概括一下那就是：每个 tree 中的每个 node（无论是最终的还是中间的）就是一个 portfolio；为了通过所有的 portfolios 得到 mean-variance efficient portfolio，就必须使用它们的预期收益率以及协方差矩阵。这也意味着 pruning 必须通过全局优化的形式实现。
+
+在数学上，BPZ 在传统的 mean-variance optimization 之中加入了 elastic net，同时考虑了套索回归（lasso）和岭回归（ridge）。加入 lasso 的目的是限制最终挑出 nodes 的个数，而加入 ridge 使得最优解实现了 mean-variance（tangency）portfolio 和 minimum-variance portfolio 的某种线性组合，降低了样本外的方差。
+
+在具体数学求解最优化问题时，通过历史数据计算的 portfolios平均收益率和协方差矩阵作为已知输入，而以下三个变量则是通过搜索得到：
+
+为此，BPZ 将数据在时序上分为 training set 和 validation set，使用前者估计收益率和协方差矩阵，并以最大化后者中的夏普率为目标搜索上述三个变量的取值。具体方法和说明请参考 BPZ 原文。
+
+简单小节一下，BPZ 的思路还是十分清晰的：（1）首先构造了大量的 trees（每颗 tree 都代表了某种给定的 firm characteristic 划分顺序）、得到很多 nodes；（2）然后以 mean-variance efficiency 为目标从中选择最重要的 nodes 作为 basis assets；在优化时加入了 lasso 和 ridge 惩罚。
+
+不过我对其的担忧是，第一步得到了非常多的 nodes，而且很多是高度重叠的（即高度相关的 portfolios），因此估计它们的协方差矩阵毫无疑问十分困难。如果 nodes 个数太多，显然使用历史数据来估计是不可行的（历史数据长度是有限的）。这似乎说明使用该方法也会有一定的限制。
+
+另外一个值得思考的地方是，为什么 BPZ 在挑选最优 nodes 时，同时考虑最终以及中间的 nodes。对此，BPZ 给出了一个例子。使用某个 firm characteristic，传统的 sort（假设分 8 组）得到 8 个 portfolios；而他们的方法最终得到 5 个大小不一样的 portfolios。对此，BPZ 的解释是最终哪些 portfolios 被选出是优化问题在 estimation error 和 bias 之间权衡的结果。
+
+03
+一个例子
+
+本节通过 BPZ 给的例子说明 decision tree 如何优于传统的 sort。
+
+考虑 10 个美股上常见的 firm characteristics。然后关键的来了。BPZ 说，为了进行 apple-to-apple 的比较，每次从这 10 个里面挑出 3 个 firm characteristics（且其中一个必须是 size），来进行分析。这么做的原因是传统的 sort 最多就到 triple sort。
+
+这个理由虽然合理，但是它也巧妙的躲开了使用更多 firm characteristics 来构建 decision trees 带来的 nodes 的激增 —— 在最优化问题中，nodes 的收益率和协方差矩阵是输入，nodes 激增会造成实际应用中躲不过的困难。
+
+回到 10 个里面挑 3 个。正常的话，这会得到 120 个组合；但是 BPZ 限制了 size 必须是其中一个 firm characteristic，因此实际把实验设定转化为 9 选 2，一共 36 种组合：比如 size、BM、momentum；或 size、profitability、IVOL 等。关于这一点，BPZ 在 SFS 年会作报告的时候被讨论者质疑了。不过 BPZ 巧妙的使用“Fama and French 分组的时候永远带着 size”给回答了。这个时候又想起 Fama and French 了，让人情何以堪。
+
+回到例子本身。对于选出的三个 firm characteristics，例如 size、BM、momentum，BPZ 使用它们构建 decision trees，并通过 pruning 从全部 nodes 中选出 40 个 nodes（作者也探讨了最终保留 nodes 的个数，发现 10 个以上结果就非常稳健了），并以这 40 个 basis assets 构造的 tangency portfolio 作为代表上述三个 firm characteristics 的 test asset。这里需要强调一下：并不是使用 40 个 nodes 作为 test assets（这 40 个 nodes 是 basis assets），而是使用通过它们构造的最大夏普率组合来作为一个 test asset。
+
+类似的，对于传统方法，使用三个选出的 firm characteristics（例如 size，BM，momentum）通过 triple sort 构建 32（2 × 4 × 4 划分）或 64（4 × 4 × 4 划分）个 portfolios，并以它们为资产 basis assets 求出夏普率最大的投资组合，作为传统 triple sort 方法下的 test asset。
+
+由上述介绍可知，对于每三个 firm characteristics，都可以使用 decision trees 以及某个 triple sort 方法构造出各自的一个 test asset。回顾前文的描述，9 选 2 问题 + size 一共得到 36 个 firm characteristics 的组合，因此每种方法共有 36 个 test assets。BPZ 将它们称为 36 cross-sections。
+
+按照 BPZ 的理论，decision trees + asset pricing pruning 很好的捕捉了收益率和 firm characteristics 之间的非线性关系。因此，对于任意三个 firm characteristics，使用 decision trees 得到的 test asset 都应该比使用传统 triple sort 得到的 test asset 有更高的夏普率。下图很好的证实了这一点（注意，下图完全是样本外的测试结果）。
+
+除此之外，使用 decision trees 得到的 test assets 也应该比传统方法有更大的 pricing errors。以 Fama and French (2015) 五因子模型（FF5）为例，上述观点得到了证实（同样完全是样本外的结果）。
+
+以上结果确实说明 decision trees 比 triple sort 能挖出预期收益率和 firm characteristics 之间更多的关系。如果非要找茬的话，那就是 asset pricing test 中使用了 FF5，而 FF5 已经被 q-factor model（Hou, Xue, and Zhang 2015）打成了筛子，因此在该模型下的 pricing errors 更大传递出来的信息可能也有限。
+
+出于篇幅考虑，对于 BPZ的介绍到此结束，更多的例子和说明请参考原文。
+
+04
+结语
+
+BPZ 技术性很强，本文也仅仅是概述了一下其核心思想。照例总结一下：传统的 sort 方法指导人们使用 firm characteristics 构造 portfolios 来检验多因子模型；而 BPZ 说该方法无法有效挖掘出收益率和 firm characteristics 的非线性关系，因而提出了 decision trees + asset pricing pruning 的方法，利用这些 firm characteristics 构造了更好（意味着包含更多 cross-section 信息）的 portfolios（basis assets），并在它们的基础上构造了更好的 test assets。
+
+值得一提的是，BPZ 仍然是一篇 working paper，因此其最终发表的版本可能还会变化，其历史地位也需要时间来检验。然而它所代表的研究方向则是值得在未来重点关注的。
+
+在这方面，另一篇代表性的论文要数 Kirby (2020)。该文通过多项式模型进行回归得到 portfolios，捕捉预期收益率和 firm characteristics 之间的非线性关系，指出主流的多因子模型并不能解释 portfolios 收益率的差异。
+
+如今，越来越多人认可上述非线性关系。而这种经验事实显然为传统的时序多因子模型提出了非常大的挑战。当选择能够充分反映非线性关系的 test assets 时，可以预计过去 30 年主流的时序多因子模型都会被拒绝。但是，在截面多因子模型吊打时序多因子模型的今天（见《A New Norm?》），这未尝不是一件好事。
+
+So, which test assets?
+
+参考文献
+Bryzgalova, S., M. Pelger, and J. Zhu (2020). Forest through the trees: Building cross-sections of stock returns. Working paper.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Kirby, C. (2020). Firm characteristics, cross-sectional regression estimates, and asset pricing test. Review of Asset Pricing Studies 10(2), 290 – 334.
+
+Lewellen, J., S. Nagel, and J. Shanken (2010). A skeptical appraisal of asset pricing tests. Journal of Financial Economics 96(2), 175 – 194.
+
+Hou, K., C. Xue, L. Zhang (2015). Digesting anomalies: an investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b240>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44ae0>)
+--- 图6 ---
+[表]
+Small | 1.42 | 2.02 | 2.27 | 2.24 | 2.35 | 0.93 | 
+(1.81) | (2.60) | (2.94) | (2.87) | (3.03) | (4.76) | 
+2 | 0.92 | 1.16 | 1.52 | 1.74 | 1.74 | 0.82 | 
+(1.27) | (1.57) | (2.02) | (2.31) | (2.32) | (3.38) | 
+3 | 0.90 | 1.08 | 1.08 | 1.36 | 1.45 | 0.56 | 
+(1.20) | (1.51) | (1.51) | (1.81) | (1.91) | (2.12) | 
+4 | 0.69 | 0.84 | 0.98 | 1.24 | 1.36 | 0.68 | 
+(1.02) | (1.24) | (1.37) | (1.65) | (1.79) | (2.07) | 
+Large | 0.76 | 0.61 | 0.95 | 1.13 | 1.21 | 0.45 | 
+(1.15) | (0.90) | (1.34) | (1.59) | (1.70) | (1.22) | 
+平均 | 0.94 | 1.14 | 1.36 | 1.54 | 1.62 | 0.69 | 
+(1.34) | (1.63) | (1.90) | (2.10) | (2.20) | (2.89) |
+数捉来酒·拉事性困了小如
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44590>)
+--- 图8 ---
+(失败:HTTPSConnectionPool(host='mmbiz.qpic.cn', port=443): Max retries exceeded with url: /mmbiz_svg/ibLButGMnqJOZfAj28vzpHq2LTIicKE3ZdGchibL5S8hoOdkA5qaNjrBYBgtsEd3Tic1BcK7VqpHG4iaJL8JKyY7qYw379txov3ys/640?wx_fmt=svg (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)'))))
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b1f0>)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2ba10>)
+--- 图11 ---
+Figure 1. Example of a conditional tree based on size and value
+The figure presents an example of an AP-Tree of depth 3 based on size and book-to market. The first 50/50 split is done by size the second by value, and the last one by size again. The portfolio label corresponds to the path along the tree that identifies it with “1” standing for going left. while “2” stands for going right.
+
+--- 图13 ---
+Standard: bottom-up approach, e.g.
+- compare returns of 1111 and 1112,
+- if they are different, keep them separate.
+Our goal is to find the best set of basis assets
+• Together they should give the highest SR
+• Portfolio logic: assigning weights to stocks
+• Optimal decision depends on other nodes
+Our approach: Asset Pricing Pruning
+Pruning cannot be local: need another way
+→ Optimal mean-variance portfolios + shrinkage applied to all the final and intermediate nodes of tree portfolios
+--- 图14 ---
+Asset Pricing Pruning: sparse and efficient portfolio frontier
+Take all the final and intermediate nodes from all the trees:
+1. Construct a portfolio frontier on training data with elastic net (under  $ \mu $,  $ \sum $ uncertainty)
+$$ \begin{array}{r l}{\operatorname{m i n i m i z e}\quad w^{T}\Sigma w+\lambda_{1}||w||_{1}+\lambda_{2}||w||_{2}^{2}}\end{array} $$
+$$ \mathrm{subject~to}\quad\boldsymbol{w}^{T}\mathbb{1}=1 $$
+$$ \boldsymbol{w}^{T}\boldsymbol{\mu}\geq\mu_{0} $$
+Tuning parameters: target return  $ \mu_{0} $, sparsity lasso shrinkage  $ \lambda_{1} $, ridge shrinkage  $ \lambda_{2} $
+2. Choose robust tangency portfolio by selecting tuning parameters on the validation set
+Figure 6: Pruned a standalone one.
+--- 图16 ---
+Panel A: A cross-section of octile-sorted portfolios
+Panel B: A cross-section of octile-sorted portfolios after pruning
+Figure 4. Selection of basis portfolios through pruning
+The figure presents an example of the depth of pruning for a set of eight portfolios, sorted by a single characteristic. Standard double-sorting (Panel A) corresponds to the quantiles that form eight equispaced portfolios and eight test assets correspondingly. Panel B presents one of the potential outcome from applying pruning, resulting in five portfolios with portfolio sizes that range from 1/8 to 100% of all the stocks.
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a44ea0>)
+--- 图18 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f80>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a449a0>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8cb80>)
+--- 图21 ---
+Figure 7. Sharpe ratios of SDFs spanned by pruned AP-Trees (40 portfolios), triple sorts, and KSF. Cross-sections are sorted by the SR achieved with AP-Trees.
+The figure displays the monthly out-of-sample Sharpe ratio of the robust mean-variance efficient portfolios spanned by pruned AP-Trees (40 portfolios), triple-sorts, and XSF (market and the three cross-section specific characteristics). The SDF based or triple sorts is based on either 32 or 64 assets and considers mean and variance shrinkage.
+--- 图22 ---
+Basis portfolios:
+AP-Trees
+Triple Sort (32)
+Triple Sort (64)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925364c70>)
+--- 图24 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2b9c0>)
+--- 图25 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925366750>)
+--- 图26 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图27 ---

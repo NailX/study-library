@@ -1,0 +1,24 @@
+# 文献推荐
+
+来源：微信公众号「因子投资」话题·机器学习（第10篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485307&idx=1&sn=cab1b629b43ed654698413f62273bef4&chksm=f995b6f9cee23fef71680eb784dc30fa8ac2c9be4fc3581cbde18730a414287f3be04dded506#rd
+
+2021 年的《Annual Reviews of Financial Economics》（ARFE）最近正式出版了。里面不少大佬写的很棒的综述文章。借此机会，给大家推荐一些有意思的文献。当然，这些文献不全来自 ARFE。
+1. 因子投资中是否需要行业中性化？ 构建因子时是否需要行业中性化这个问题对于业界而言可能更为重要。已有学术研究中，除 Novy-Marx (2013) 构建基于毛利率（GP）等的四因子模型时采用了行业中性化因子，其他主流研究均未考虑这一问题。在最近发布的 working paper 中，Cam Harvey 同因 factor momentum 的研究而出名的 Sina Ehsani，以及 Research Affiliate 的 Feifei Li 为此给出了一个简洁的答案。
+Ehsani, Harvey and Li (2021) 指出，若分别用一个 firm characteristic 的 firm-specific component 和 industry component 选股构建组合，利用简单的资产组合选择原理便可证明，industry component 是多余的（从而有必要进行行业中性化）当且仅当
+其中， 和 分别为行业中性化的因子和用 industry component 构建的因子的 Sharpe ratio，而 为二者的相关系数。换言之，仅当 industry component 的相对 Sharpe ratio 小于其分散化收益时，才应该进行行业中性化。
+基于上述论点，作者进一步指出，对于多空组合，这一条件在不少情况下成立，因而进行行业中性化有利于提升因子表现；反之，对于纯多头组合则不然，大多数情况下更应该直接使用原始因子。
+当然，需要注意的是，此处的行业中性化是对公司特征进行行业中性化。而实践中另一种可能的中性化处理是要求组合的行业权重等于预先设定的基准组合的行业权重。显然，这又是另一个故事了。例如，ROE+Leverage+Earnings Variability 构成的经典 EP 因子，在中证 800 中的非行业中性因子，就远不如行业中性版本（参见The Quality Premium）。
+
+2. 机器学习与因子模型 Giglio, Kelly and Xiu (2021) 这篇 working paper 想必很多朋友都知道乃至已经读过了，这篇上个月才发布的文章在 SSRN 下载量已接近 1000. 这篇文章中，几位将机器学习应用到实证资产定价领域的当红大佬对相关研究方法做了非常棒的介绍，对已有研究也分门别类地进行了细致的梳理。有志于相关研究的学界和业界的朋友，都应该仔细地、反复阅读、学习。
+而除此之外，今年的 ARFE 收录了一篇范剑青老师的综述文章（Fan, Li and Liao (2021)），从计量方法论的角度做了更为详尽的梳理介绍，可作为进一步的技术参考和文献指引。
+
+3. 公司债收益 公司债收益（corporate bond returns）是近年来因子领域另一个还挺火热的问题。Turan Bali 等人已经就这一问题发了好几篇 JFE，而波动率因子等也发表到了 JFE（参见【039】波动率之于公司债券：相似却又不一样）。Huang and Shi (2021) 对相关研究进行了详尽的梳理。
+
+4. Climate Finance Stefano Giglio 和 Bryan Kelly 再次出场。Giglio, Kelly and Stroebel (2021) 对当下火热的 climate finance 相关研究进行了仔细的梳理和介绍（不要奇怪，他俩去年跟 Engle 等合作在 RFS 发过关于 hedge climate news risk 的论文，参见【058】气候，灾难与股票收益：从 512 说起）。当然，其中，最为重要的还是 climate risk 的 asset pricing implications.
+
+5. 因子修正中的噪音 Fama-French 三因子和动量大概是出镜率最高的基础因子。但 Akey, Robertson and Simutin (2021) 发现，不同时点更新的相同样本期的 FF 三因子有着显著的差异，而这一差异不仅会影响对因子溢价的估计，还会显著影响人们对异象和基金业绩的评估。类似地，Ljungqvist, Malloy and Marston (2009) 发现，I/B/E/S 分析师推荐数据也存在类似的问题，且对策略业绩有显著影响。
+
+全文完。
+References:
+Akey, Pat, Adriana Robertson, and Mikhail Simutin. "Noisy factors." Available at SSRN 3930228 (2021).Ehsani, Sina, and Campbell R. Harvey, and Feifei Li. "Is sector-neutrality in factor investing a mistake?" Available at SSRN 3959116 (2021).Fan, Jianqing, Kunpeng Li, and Yuan Liao. "Recent developments in factor models and applications in econometric learning." Annual Review of Financial Economics 13 (2021): 401-430.Giglio, Stefano, and Bryan Kelly,  and Dacheng Xiu. "Factor models, machine learning, and asset pricing." Available at SSRN 3943284 (2021).Giglio, Stefano, Bryan Kelly, and Johannes Stroebel. "Climate finance." Annual Review of Financial Economics 13 (2021): 15-36.Huang, Jing-Zhi, and Zhan Shi. "What do we know about corporate bond returns?." Annual Review of Financial Economics 13 (2021): 363-399.Ljungqvist, Alexander, Christopher Malloy, and Felicia Marston. "Rewriting history." Journal of Finance 64.4 (2009): 1935-1960.Novy-Marx, Robert. "The other side of value: The gross profitability premium." Journal of Financial Economics 108.1 (2013): 1-28.

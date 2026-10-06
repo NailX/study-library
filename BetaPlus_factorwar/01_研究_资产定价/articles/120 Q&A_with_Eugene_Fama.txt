@@ -1,0 +1,165 @@
+# Q&A with Eugene Fama
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/gKQN28u1NhGiHxAfGlH3EA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：
+https://news.uchicago.edu/profile/eugene-fama
+
+未经授权，严禁转载。
+
+摘
+要
+本文介绍 Eugene Fama 在 SFS Cavalcade North America 2021 上的精彩分享。
+
+在刚刚过去的 SFS Cavalcade North America 2021 会议上，Eugene Fama 做了一个特殊的 keynote。说它特殊是因为它的形式并非 presentation 而是一个 Q&A session。该 Session 由 Review of Asset Pricing Studies 的执行主编 Jeffrey Pontiff 主持。Fama 就一些有趣的问题进行了精彩的分享。本文就来高度提炼一下其中的观点。
+
+下文将分为 11 小节，每节介绍一个问题。需要说明的是，无论是 Pontiff 的提问还是 Fama 的回答，我都没有直译，而是用我的风格进行描述（当然力求准确）。此外，在一些必要的地方，也采用“插一句”的形式做了一些补充说明。
+
+让我们开始吧。
+
+01
+
+Pontiff：请谈谈你的 Early years.
+
+Fama：当年金融课程的水平很低，所以在进入 UChicago 之后我上了很多经济系的课。当时 Merton Miller 和 Harry Roberts 是明星人物，他们刚好对用新问世的计算机研究股票价格感兴趣。为了引起他们的注意，我决定从事这方面的研究。不过，在我做博士论文期间，CRSP 还不存在，因此我使用的是在 Tufts 读本科时自己准备的数据。本科时，我给一个教授做研究，内容就是构造能够战胜市场的策略。
+
+谈到此处，作为有效市场假说的提出者，Fama 又幽默了一把：
+
+“ I was very good at it, except he always made me keep it out of sample. It never worked out of sample. So, that was my first lesson about empirical work.
+
+”
+
+顺带一提，Fama 的数据是道琼斯工业指数成分股的日数据，而 1965 年推出的 CRSP 涵盖的是 1926 到 1960 年代的月频数据，而那个时候 Fama 已经是副教授了。
+
+02
+
+Pontiff：你和数据之间有一种无人能及的契合感。但如今我们生活在数据爆炸的时代，不再是上世纪 60 年代那时候数据刚刚出现的时代。对于金融领域，过去和如今之间哪些相似或差异？
+
+Fama：在上世纪 60 到 70 年代，金融学本身刚刚起步，也没有多少研究金融学的学者。举个例子，你都不用去做任何文献综述，因为那时候根本没有什么文献！你的任何研究都可能是开创性的，且学术界也没有什么真正意义上的期刊。比如，Journal of Finance 在那个年代是烂的一塌糊涂（scandalously bad），直到 Mike Jensen 决定创建 Journal of Financial Economics。竞争的引入让 Journal of Finance 后发制人。
+
+Fama：再看看如今，我们有了诸多非常好的期刊以及数不胜数的非常优秀的学者，世界各地的任何人都可以做很好的金融学研究。这也意味着竞争更加激烈，比起上世纪，如今想要读个金融学 PhD 要困难得多（话外音：看来 Fama 也深深体会到了内卷）。在上世纪，博士生不需要读任何文献来学习基础，因为几乎仅有的关于金融学的成果就是 Markowitz，直到稍后又出现了 CAPM 以及 MM 定理。
+
+说到这里，Fama 又调侃了一把：“当年我在上公司金融课的时候，因为没得可讲，所以花了两星期讲 MM 定理。剩下的学期就让学生们研究各种案例了。因为除此之外，根本没啥可以教的。”
+
+03
+
+Pontiff：关于金融学的进展，你认为是由于老一批学者决心转变，还是因为一批又一批新生代博士生和助理教授不断涌现的结果？
+
+Fama：上述两个原因都有。比如 UChicago 的 Merton Miller 和 MIT 的 Franco Modigliani 以及 Paul Samuelson 无疑推动了金融学的发展。而另一方面，像包括我自己在内的那个时代的博士生，以及后面一波又一波的新人也继承了优良的传统。在那个时期，UChicago 培养了一大批后来家喻户晓的人物，比如 Mike Jensen，Richard Roll，Myron Scholes 等。而这些人后来又离开 UChicago，去别的地方生根发芽，带动了其他学校金融学的研究。
+
+04
+
+Pontiff：刚才你提到了早期 Journal of Finance 很烂，那么后来是怎么崛起的？
+
+在介绍 Fama 的回答前，先来举两个例子说明最初 Journal of Finance 真的很烂。第一个例子，作为金融学领域被引用次数最高的学者（之一），Fama 自己的前 8 篇论文都没有发表在 Journal of Finance。另外，Merton Miller 自从 1948 年开始发表论文，然而直到 20 年后的 1968 年才在 Journal of Finance 上发文。OK！接下来就是 Fama 的回答。
+
+Fama：大约一直到 60 代末，Journal of Finance 上的绝大多数文章都是 position papers（关于某个观点发表自己意见/立场的短文），比如很多人关于如何计算 present values 或者如何看待 MM 定理撰写 position papers，这些 position papers 并非真正意义上的学术论文，没有太多科学价值。直到 Journal of Financial Economics 出现。Mike Jensen 给它设定了极高的标准，学者们也开始非常严肃的对待他们提交到 Journal of Financial Economics 的论文。从那时起，Journal of Finance 也开始崛起，不过其真正出现巨变的是在 Rene Stulz 成为 Journal of Finance 主编之后，他功不可没。
+
+05
+
+Pontiff：你在过去 60 年保持了一贯的高产。能不能给我们介绍一下你日常的研究节奏是什么样的，以及能否给其他学者一些建议？
+
+Fama：给建议很困难，因为每个人都是不同的。如果我有任何优点的话，那就是我能够非常专注。不过我也是花了很久才意识到人在一天当中能够集中精力的时间是有限的，比如我每天能够专注的工作 5 个小时，在这之后效率就下降了。因此每天高强度工作 5 小时后，我就去打网球了。现在年龄大了，网球的日子一去不复返，所以我就改打高尔夫了。集中精力是非常重要的。
+
+Fama：我的另一个建议是，写作（writing）是非常重要的，把研究成果简洁而精确的写出来是非常重要的，让你的写作产生影响是非常重要的。对于你的读者来说，你不希望他们读着读着就失去兴趣了，这意味着你需要在写作时尽你所能的保持简单（keep it as simple as possible for as long as possible），直到迫不得已使用公式（don't get into complicated stuff until you absolutely have to）。（话外音：看到这里我不禁面壁去了）。
+
+Fama：为了实现这个目标，花大量的时间进行修改（rewriting）就格外重要。我和 Ken French 合作的时候，每篇论文我们差不多要 rewrite 30 遍，每个人 15 遍。这里我说的是重写，而不是做简单的修改，直到我们对每个词都非常满意。只有这样，你写的东西才足够简洁、精确并有机会产生影响。
+
+看到 Fama 对写作的态度，我马上想起他的女婿 John Cochrane 也曾经表达过完全一致的观点：
+
+“ Economists falsely think of themselves as scientists who just "write up" research. We are not; we are primarily writers. Economics and finance papers are essays. Most good economists spend at least 50% of the time they put into any project on writing. For me, it's more like 80%. —— John Cochrane
+
+”
+
+06
+
+Pontiff：过去 60 年里，你参与了很多 UChicago 的教授聘用以及升职决定。能否分享一下你如何识别优秀的学者？
+
+Fama：仔细研究他们过去的研究成果，这就是你全部能做的。我们在这个过程中力争做到非常小心，以杜绝故意造成的错误决定。这是因为错误的决定会反过来给你好看。不那么靠谱的人也最终会拿到 tenure，他们又会进一步去聘用同样不是那么靠谱的人，这就会陷入恶性循环，逐渐拉低标准。所以这些决定往往非常困难。对于来到 UChicago 的人，我经常对他们说：
+
+“ You may not make it here, but you'll be better off for having been here and you'll get a good job even when you have to leave. So, this is a good experience no matter what. We'll treat you open mindedly, but toughly, the whole time you're here. Your work will be challenged in a way that it won't be in other places, and that'll make you and your work better off forward.
+
+”
+
+Fama 接着说“But never anything personally in any of this. It has to be done in a professional manner and all ideas are accepted.”说到此处，Fama 又举了他和 Richard Thaler 之间的例子。
+
+Fama：我和 Thaler 之间几乎没有任何共同之处，唯一的例外是我们都尊重事实（facts），尽管我们对事实的解读不同。当我们决定招募他的时候，有种反对声音是“This guy is totally different from Chicago or how do we really want him?”而我的观点却截然相反“That's why we want him. He is someone who will challenge us. That's precisely what we need.”事后来看，这个决定非常正确。如今，我们教师团队的多样性非常丰富，早已不是上世纪 60 年代那样。
+
+07
+
+Pontiff：一个关联问题，UChicago 的金融系久负盛名，背后的原因是人才辈出还是某种学术文化所致？
+
+Fama：我们当然总是希望得到最好的学者。而一旦他们来到 UChicago，我们竭尽所能提供能够让他们继续成长的环境。UChicago 充满挑战，而对于那些有能力并且愿意“play the game”的学者，他们能够得到充分的成长。当然，也并不是所有人都能撑下来，因为我们提供的环境是极具挑战的。
+
+Fama：举个例子，我在很多其他地方汇报过论文，但令人意外的是汇报后没有任何来自听众的问题，他们仅仅是鼓掌而已。这对于汇报者没有任何帮助，对不对？这种情况不会发生在 UChicago。当我最开始来到这里的时候，情况非常混乱，在一些研讨会上甚至出现了人身攻击。我马上找到 Merton Miller，建议改变这种局面。我们后来仅仅邀请研究内容值得汇报的学者来参加研讨会，并在报告后给予他充分的尊重，即通过高质量提问来尽可能帮他改进研究。从此之后，这就变成了 UChicago 的传统。
+
+08
+
+Pontiff：另一个和学术相关的问题，你在审稿的时候有没有什么事情让你很抓狂？
+
+先插一句背景知识，Fama 是非常高效的 referee。
+
+Fama：如果我拿到的手稿未经仔细推敲（clearly a first draft），就会让我非常抓狂，因为这对我来说是浪费时间。此外，我愿意把我的精力花在和我研究领域密切相关的论文上。一旦我决定审稿，我就会一心扑在上面。
+
+09
+
+Pontiff：接下来是一系列研究相关的问题。先让我们聊聊 factor models 吧。在我看来，关于 factor models 的研究多少有些无序（pretty ad hoc），人们都是从数据出发提出模型，你觉着人们有可能对 factor models 达成共识吗？
+
+Fama：非常正确（笑）。在我们的脑海里，我们从 cash flow equation 提出了变量，构造了模型。传统的资产定价理论难以解释实证数据或被用于实际，因此人们退而求其次研究 average returns，目标变成了能够解释资产预期收益截面差异的最简约的模型。这导致的结果就是人们热衷于提出各种看上去和 average returns 有关的因子，但事实上很多都是高度相关的。在我看来，资产定价的研究目前出现了一些问题。
+
+10
+
+Pontiff：让我接着你说的，我们就来到了 p-hacking。Cam Harvey 在 multiple testing 方面做了大量研究。对于期刊中汇报的 t-statistics，你愿意相信多少？另外，由于期刊的 publication bias，哪怕是非常有节操的学者，恐怕也会受到这方面的影响。
+
+Fama：这是不可避免的。很多年以前，我就从 Harry Roberts 那里学到了如下的观点：
+
+“ Form a probability statements are basically useless for this very problem. Basically you just think of statistics as a way of formally describing the data. You don't put too much emphasis on probability statements from that data because you know they are off. Inferences that you make are only approximate.
+
+”
+
+Fama：所以，实证研究（empirical work）其实就是 data description。当你完成实证研究之后，你总是希望收集新的数据来验证观点。比如，最初我和 Ken French 提出价值因子的时候，我们收集了 1926 到 1960 年的数据以及其他国家的数据，来验证价值因子的有效性。那些数据显示价值因子很不错，直到如今最新的数据出来（我看到这里反正笑了）……
+
+“ All seem to be fine until a new period of data came along and then it didn't look so fine. But you always have to be looking for robustness of what you do and even then sometimes you got to fail.
+
+”
+
+插一句，虽然 Fama 上面幽默的表示最新数据虽然挑战着价值因子，不过从他和 French 的题为 The Value Premium 的文章 Fama and French (2021) 来看，哪怕加入了最新的数据，也还不能认为价值因子失效了。
+
+11
+
+Pontiff：最后一个问题，你曾经写过预测市场风险溢价的论文，你是否按照你的预测来调整你的投资组合呢？
+
+先插一句，这个问题还有个更朴素的问法“你是否相信择时？”。
+
+Fama：No。（Disclaimer! 这是 Fama 针对美股的观点。）论文希望表达的观点是市场的预期收益确实是时变的，但我并没有下结论说人们能够轻易地准确预测预期收益的变化。
+
+“ Timing the market is a deadly strategy.
+
+”
+
+备注：
+[1] 本文介绍跳过了三个问题，分别是 Fama 早期关于 inflation 的研究，Fama 对比特币的看法（他持负面观点）以及和 Dimensional Fund Advisors 的问题。感兴趣的小伙伴请直接参考 keynote 视频 
+https://mitsloan.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=b4c83b28-a8a9-443f-8a76-ad3f010fbac4。
+
+[2] 关于 Eugene Fama 的延伸阅读，请参考《Eugene Fama —— 一段 50 年的传奇》。
+
+参考文献
+Fama, E. F. and K. R. French (2021). The value premium. Review of Asset Pricing Studies 11(1), 105 – 121.
+
+Schwert, G. W. and R. M. Stulz (2017). Gene Fama’s impact, a quantitative analysis. In J. H. Cochrane and T. J. Moskowitz (Eds.), The Fama portfolio, selected papers of Eugene F. Fama. Chicago, IL: The University of Chicago Press.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+
+--- 图4 ---

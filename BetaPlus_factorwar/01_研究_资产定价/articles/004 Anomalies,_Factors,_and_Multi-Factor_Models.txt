@@ -1,0 +1,271 @@
+# Anomalies, Factors, and Multi-Factor Models
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/Rjk5rjtLmhON86m_zeC8VQ
+
+作者：石川，量信投资创始合伙人，清华大学学士、硕士，麻省理工学院博士；精通各种概率模型和统计方法，擅长不确定性随机系统的建模及优化。知乎专栏：
+https://zhuanlan.zhihu.com/mitcshi。
+
+未经授权，严禁转载。
+
+摘
+要
+本文解释了异象、因子以及多因子模型的区别和联系；梳理了从异象到因子再到模型背后的逻辑；介绍了学术界研究多因子模型的主流统计手段。
+
+1
+引言
+
+在 empirical asset pricing 和 factor investing 中，anomalies（异象）、factors（因子）以及 multi-factor models（多因子模型）是三个常见的概念。从这些概念出发又能很自然的引发出一系列问题：
+
+1. 什么是 anomalies；什么是 factors？
+2. Anomalies 和 factors 有什么区别？
+3. 一个 multi-factor model 中应该包含多少个 factors？
+4. 学术界有哪些主流的 multi-factor models？
+5. 如何比较并在不同的 multi-factor models 之间取舍？
+
+在过去几十年里，海外学术界对上述问题进行了大量的探索，留下了很多宝贵的实证结果和分析手段。而对于像你、我一样进行因子投资的投资者来说，搞清楚这些问题对于构建系统和全面的因子投资分析体系至关重要。本文试图回答上述五个问题。
+
+在开始之前，先来唠两句标题。这是我第一次使用纯英文标题，倒是也没有什么特别的原因。对于文章标题，我一贯的看法是杜绝惊世骇俗，只求言简意赅、切中要害，再有就是“读来有感觉”。本文的标题翻译中文是“异象、因子和多因子模型”，实在平淡无奇，所以就索性用英文了。
+
+2
+Anomalies
+
+多因子模型是 empirical asset pricing 的一种常见方法；其研究的核心问题是找到一组能够解释股票预期收益率截面差异的因子（见《股票多因子模型的回归检验》）。假使我们根据基本面特征或量价指标（或 whatever，下面统称为特征）挑选出一揽子股票并构建多空投资组合；如果该组合的收益率无法被用于 asset pricing 的多因子模型解释，则称该特征为一个异象（anomaly）。
+
+在数学上，这意味着该组合有模型无法解释的 α 收益率：以使用该特征构建的多空组合收益率为被解释变量放在回归方程的左侧，以多因子模型中因子收益率为解释变量放在回归方程的右边，进行时序回归，回归的截距项就是 α 收益率；如果 α 显著不为零，则说明该特征是一个异象。
+
+举个例子。《获取 α 的新思路：科技关联度》一文介绍了 Lee et al. (2018) 这篇文章；使用科技关联度选股的多空对冲投资组合获得了主流多因子模型无法解释的 α 收益率（下图），因此它是一个异象。
+
+从有效市场假说的观点出发，市场中不应该存在很多异象。当然，有效市场假说并不完美，再加上学术界几十年来的“不懈努力”，针对美股挖掘出了 400+ 个异象，这些异象在样本内的统计检验中都获得了很高的 t-statistics。
+
+产生如此多的异象主要有两个原因：
+
+第一个也是最主要的一个原因是数据挖掘。在 p-hacking 的激励和 multiple testing 的盛行下，大量所谓的异象在样本内被挖出。Harvey, Liu and Zhu (2016) 研究了学术界发表的 316 个所谓显著异象，并指出再考虑了 multiple testing 的影响后，异象收益率的 t-statistic 至少要超过 3.0（而非人们传统认为的 5% 的显著性水平对应的 2.0）才有可能是真正有效、而非来自运气。
+
+第二个原因和回归方程右侧的定价模型有关。比如，如果仅以 CAPM 为定价模型，那么很多异象都能获得 CAPM 无法解释的 α 收益率；随着定价模型中因子个数的增加，更多的异象变得不再显著。然而，真正的定价模型是未知的。
+
+谈及对异象的研究，不能不提的一篇文章是 Hou, Xue and Zhang (2017)。这篇长达 146 页的文章惊人的复现了学术界提出的 447 个异象，涵盖动量（57个）、价值/成长（68个）、投资（38个）、盈利（79个）、无形资产（103个）、以及交易摩擦（102个）六大类。下图节选了少量动量类异象说明，感受一下。
+
+对于这 447 个异象，当排除了微小市值股票的影响后，其中 286 个（64%）不再显著（在 5% 的显著性水平下，下同）；如果按照 Harvey, Liu and Zhu (2016) 的建议把 t-statistic 阈值提升到 3.0，则其中 380 个（85%）异象不再显著；最后，如果使用 Hou, Xue and Zhang (2015) 提出的 4 因子模型作为定价模型，那么其中 436 个（98%）异象不再显著，剩余存活的仅有 11 个。
+
+好一个数据挖掘！
+
+除此之外，Linnainmaa and Roberts (2018) 花费了很大的经历构建了全新的样本外数据，研究了美股中源于会计数据的 36 个异象在样本内、外的表现的差异。分析表明，绝大部分异象在样本外明显失效，它们的失效说明这些异象并非来自未知风险以及错误定价这两种解释，而更有可能仅仅是数据挖掘的产物。
+
+3
+Factors
+
+上一节介绍了异象，本节就来看看什么是因子（factors）。一个异象是可能成为一个优秀因子的；然而由于异象之间的相关性，并不是所有异象都是因子。
+
+一个因子应该能够对解释资产（可以是个股也可以是个股组成的投资组合）预期收益率的截面差异有显著的增量贡献。如果异象满足上述条件，它就可以被称之为一个因子。在这个定义中，有两个关键词值得解读，它们是“解释”和“增量贡献”：
+
+1. “解释”说明这个异象（或者潜在因子）已经从回归方程的左侧移到了回归方程的右侧，它被用来当作解释变量来对资产的收益率做回归，考察它是否能够解释预期收益率的截面差异。
+
+2. “增量贡献”暗示着同时考虑多个异象（因子）时，由于它们之间不完全独立，需要排除相关性的影响。
+
+举个例子。我们知道价值因子是一个靠谱的选股因子。然而，很多指标 —— 比如 E/P 或 B/P 都可以用来构建价值因子的 High-Minus-Low 组合。如果同时基于 E/P 和 B/P 构建了 HML_EP 和 HML_BP 两个因子，它们之间的相关性注定是非常高的。一旦选择了其中之一作为价值因子，另一个对于资产预期收益率截面差异解释能力的增量贡献就不再显著、无法成为因子。
+
+从资产定价的理论角度来说，多因子模型中的因子之间应尽可能独立；但是从投资实践来说，上面例子中的 E/P 和 B/P 可以被同时使用构建一个 HML 价值因子，这有助于降低波动且增加因子的鲁棒性。
+
+在从一揽子异象中筛选因子时，常见的做法是将它们同时作为回归分析中的解释变量，采用 Fama-MacBeth Regression（Fama and MacBeth 1973）来分析这些异象的收益率是否显著。在这方面，Green, Hand and Zhang (2017) 是一个很好的例子。
+
+Green, Hand and Zhang (2017) 使用 Fama-MacBeth Regression 同时检验 94 个异象，并考虑了 multiple testing 对 t-statistic 以及 p-value 造成的影响，最终发现仅有 12 个异象可能成为潜在的因子：1. 账面市值比；2. 现金；3. 分析师数量的变化；4. 盈余公告宣告收益；5. 一个月的动量；6. 六个月动量的变化；7. 盈利同比增长的季度数量；8. 年度研发支出占市值的比重；9. 收益波动性；10. 股票换手率；11. 股票换手率的波动性；12. 零交易的天数。
+
+上述结果告诉我们：在修正 multiple testing 的数据挖掘、以及考察了不同异象的相关性之后，真正能够解释资产预期收益率截面差异的独立因子少之又少。
+
+4
+Multi-Factor Models
+
+现在我们已经了解了异象，并通过回归分析从异象中找出了因子，接下来就是挑选因子构建多因子模型了。在构建多因子模型时，两个必须要回答的问题是：（1）选择多少个因子合适？（2）选择哪些因子更好？学术界对于第一个问题的共识为主流因子模型奠定了基调；而第二个问题则涉及不同多因子模型之间的比较。
+
+对于第一个问题，我们总可以仅使用一个因子，比如 CAPM 模型仅使用了市场因子；又或者我们可以使用许多因子。一个极端的情况是把每个上市公司作为一个因子，每个公司的股票只在自己公司的因子上有暴露，在代表其他公司的因子上零暴露。这样的模型显然能完美解释股票预期收益率的截面差异，但在现实中没人会那么用。以样本内过拟合为代价，更多的因子总能更好的解释收益率的截面差异。
+
+在学术界，“几个因子合适”这个问题所遵循的准则是 The Law of Parsimony（简约法则），它还有一个更为人熟知的名字 —— Occam’s razor（奥卡姆剃刀）。如果从 ICAPM（Intertemporal CAPM）的角度来理解多因子模型，每个因子代表某种 state variable；而 state variable 是投资者想要对冲的某种风险。从这个意义上说，因子的个数应该是有限的。
+
+依据简约法则，学术界主流的多因子模型包括以下几个（按时间顺序、排名不分先后，不完整 list），它们的因子个数均在 3 到 5 个之间：
+
+Fama-French 三因子模型（Fama and French 1993）：多因子模型的开山鼻祖，包括 MKT，HML 以及 SMB 三因子。
+
+Carhart 四因子模型（Carhart 1997）：在 Fama-French 三因子模型上加上了动量 MOM 因子。
+
+Novy-Marx 四因子模型（Novy-Marx 2013）：包含 MKT，HML，MOM 以及 PMU 四个因子；其中 PMU 所用的财务指标是 Gross Profit-to-Asset，代表 profitability 维度。
+
+Fama-French 五因子模型（Fama and French 2015）：Fama 和 French 在其三因子模型的基础上加入了 CMA 和 RMW 两个因子，分别代表 investment 和 profitability 两个维度。
+
+Hou-Xue-Zhang 四因子模型（Hou, Xue and Zhang 2015）：包含 MKT，SMB，IVA 以及 ROE；其中 IVA 是 total assets 的年增长率，代表 investment 维度。
+
+Stambaugh-Yuan 四因子模型（Stambaugh and Yuan 2016）：包含 MKT，SMB，MGMT 和 PERF 四个因子。MGMT 和 PERF 分别使用了 6 个和 5 个指标，代表和 management 以及 performance 相关的两个 mispricing 因子。虽然该模型只有四个因子，但它用到的基本面和量价指标多达 12 个。
+
+Daniel-Hirshleifer-Sun 三因子模型（Daniel, Hirshleifer and Sun 2018）：在 MKT 的基础上，使用 PEAD 和 FIN 两个指标作为短期和长期行为因子（behavioral factors）的代理指标，构建了三因子模型。该模型由于包括了传统的 MKT 风险因子，又包括行为因子，故称为复合模型。这也是一篇比较新的文章，对因子模型提供了新的思路，我会在下周的文章中重点介绍。
+
+如何比较不同的多因子模型呢？学术界主要有以下三种方法：
+
+1. GRS tests；
+2. Mean-Variance Spanning tests；
+3. Bayesian approach。
+
+GRS tests（Gibbons, Ross and Shanken 1989）检验 n 个资产在给定因子模型下的定价错误（pricing error）—— 即 α —— 是否在统计上联合为零（jointly equal to zero）。在比较两个多因子模型时，使用两个模型的因子互为资产和定价模型进行检验。
+
+举个例子。《中国版的 Fama-French 三因子模型，了解一下？》一文中比较了两个不同版本的价值和市值因子的效果。结果（下表）显示，当使用 SMB 和 VMG 为因子模型时，FFSMB 和 FFHML 的定价错误可以认为是零（p-value = 0.41）；反过来，当使用 FFSMB 和 FFHML 为定价模型时，SMB 和 VMG 依然存在显著不为零的定价错误（p-value 是 10 的 -13 次方这个量级）。这意味着 SMB 和 VMG 优于 FFSMB 和 FFHML。
+
+Mean-Variance Spanning tests 考察 n 个已知资产构建的 mean-variance 有效前沿能否包含某个新资产（Huberman and Kandel 1987）。在比较两个多因子模型时，使用每个模型的因子构建有效前沿，并逐一检验其能否包含另一个模型中的因子。
+
+举个例子。《美股上一个跨越时间尺度的趋势因子》介绍了一个新的趋势因子。考虑新的趋势因子和三个已有因子（SREV、MOM 以及 LREV）的回归模型如下：
+
+该检验的 null hypothesis 是：
+
+检验结果显著的拒绝原假设，说明已有三因子无法解释新的趋势因子。
+
+最后来看看 Bayesian approach。假设比较两个多因子模型 M_1 和 M_2；相关数据集用 D 表示。令 prob(M_1) 和 prob(M_2) 为这两个模型的先验概率，且有 prob(M_1) + prob(M_2) = 1（这里假设把多个模型两两比较）。根据贝叶斯定理有：
+
+其中：
+
+上式中，prob(θ_i) 是模型 i 参数的先验分布，prob(D|θ_i) 是模型 i 的似然函数。上述贝叶斯方法的核心在于确定 prob(θ_i)。根据 Pastor and Stambaugh (2000) 以及 Barillas and Shanken (2018) 的理论，它和以两个模型中的全部因子作为资产所构成的投资组合的预期最大夏普率的平方与市场夏普率的比值有关。
+
+使用贝叶斯方法，Stambaugh and Yuan (2016) 比较了他们的四因子模型（记为 M-4）和 Fama-French 五因子模型（记为 FF-5）以及 Hou-Xue-Zhang 四因子模型（记为 q-4）。下图中，左图是 M-4 和 FF-5 模型的比较；右图是 M-4 和 q-4 模型的比较。图中，横坐标均为先验，即两模型中全部因子能达到的最大预期夏普率平方和市场夏普率的比值；纵坐标为不同模型的后验概率。
+
+结果说明，当先验这个比值分别大于 1.05 和 1.2 的时候，M-4 因子模型就分别强于 FF-5 和 q-4 模型。显然，使用多个因子得到的最大夏普率很容易是市场夏普率的 1.05 或 1.2 倍，意味着数据更加倾向于支持 M-4 模型。
+
+需要特别强调的是，无论采用哪种方法，比较多因子模型的目的是为了得到新的启发，而非一定要排个一二三四。这些因子模型之间孰优孰劣并无定论，它们的提出丰富了我们对于 empirical asset pricing 的理解并指导着因子投资。
+
+5
+多因子模型复杂度的讨论
+
+在结束本文之前，再来简单讨论下构建因子模型时遵循的 The Law of Parsimony。
+
+在美国金融协会 2018 年的年会上，Daniel, Hirshleifer and Sun (2018) 报告了他们的复合因子模型，并对模型复杂度和模型的解释效果做了探讨，颇有新意。具体的，他们提出了两个 Parsimony Index，通过惩罚因子和用于构建因子的指标个数来计算模型复杂度。
+
+第一个 Parsimony Index = 零减去模型中所有因子使用的全部指标数之和；由此可知该 index 取值为负，越大（即越接近零）说明模型越简单。如果一个指标被用于多个因子中，则在计算该 index 时需要多次计算它。
+
+第二个 Parsimony Index = 零减去模型中的因子和指标个数之和；同上，该 index 取值为负，越大（即越接近零）说明模型越简单。它和前者的区别为：（1）除指标外，也考虑了对因子个数的惩罚；（2）如果某指标被用于多个因子中，其只被计算一次。
+
+按照上述定义，本文第四节介绍的主流因子模型的两个 Parsimony Index 取值分别为：
+
+使用上述 7 个因子模型来检验 34 个异象，根据 5% 显著性水平下显著的异象的个数以及所有异象的平均 α 收益率的绝对值分别作为模型解释力度，最后将模型解释力度和这两个 Parsimony Index 分别做回归以观察解释度和模型复杂度之间的关系。结果如下。
+
+以 5% 显著性水平的异象个数作为解释力度：
+
+以全部异象平均 |α| 为解释力度：
+
+随着模型复杂度的提升（表现为 Parsimony Index 的取值更小），模型的解释力度上升（体现为 5% 显著性下的异象变少和异象平均 |α| 降低）。这个结论符合预期，它也再次强调了不同因子模型之间的好坏并无定论 —— 我们总能通过增加模型复杂度来提升模型（样本内）的解释效果，因此需要在模型复杂度和样本内的解释力度之间取舍。
+
+在 The Law of Parsimony 的指导思想下，一个优秀的因子模型通常有较少的因子或者基本面或量价特征；而作为使用者，我们应该尽量搞清楚每一个因子背后代表的风险。
+
+6
+结语
+
+这篇文章没有告诉你哪个异象能赚取 α。
+
+这篇文章没有告诉你哪个因子能赚取高性价比的 β。
+
+这篇文章也没有告诉你哪家的多因子模型更胜一筹。
+
+OK, enough for “自我否定”。既然如此，为什么要写这篇文章呢？如今，学术论文和卖方报告中开发出新“因子”的速度已远超我能理解、消化的速度。以学术界的 447 个异象为例，如果每周写一篇介绍一个，要写 9 年。异象被当作“因子”来使用，但它背后往往没有合理的金融学解释（即无法代表合理的系统性风险），或者没有用已有因子对其分析从而评判它对解释股票预期收益率截面差异的增量贡献，仅仅是数据挖掘的产物。它们中大多数根本不是因子，甚至连异象都谈不上。出于这个原因，我希望能介绍一些方法，帮助因子投资的践行者去伪存真。这就是写作本文的初衷。
+
+这篇文章回答了开篇提出的五个问题；解释了异象、因子以及多因子模型的区别和联系；梳理了从异象到因子再到模型，一步步使用多因子模型背后的逻辑；介绍了学术界在研究多因子时使用的主流统计手段。希望它能够作为一个完善的工具箱，为你的多因子研究和投资添一分助力。
+
+（全文完）
+
+延伸阅读，其他有关因子投资的文章链接如下：
+《股票多因子模型的回归检验》
+《解释股票截面预期收益差异的独立因子》
+《未知风险，错误定价，还是数据迁就？》
+《在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远》
+《你用因子，他也用因子；你没赚钱，他却赚钱了》
+《出色不如走运 (III)？》
+《出色不如走运 (II)？》
+
+ 
+参考文献
+Barillas, F. and J. Shanken (2018). Comparing asset pricing models. Journal of Finance, Vol. 73(2), 715 – 754.
+
+Carhart, M. M. (1997). On Persistence in Mutual Fund Performance. Journal of Finance, Vol. 52(1), 57 – 82.
+
+Daniel, K. D., D. A. Hirshleifer and L. Sun (2018). Short- and long-horizon behavioral factors. Columbia Business School Research Paper No. 18-5. Available at SSRN: https://ssrn.com/abstract=3086063.
+
+Fama, E. F. and K. R. French (1993). Common Risk Factors in the Returns on Stocks and Bonds. Journal of Financial Economics, Vol. 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2015). A Five-Factor Asset Pricing Model. Journal of Financial Economics, Vol. 116(1), 1 – 22.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: empirical tests. Journal of Political Economy, Vol. 81(3), 607 – 636.
+
+Green, J., J. R. M. Hand and X. F. Zhang (2017). The characteristics that provide independent information about average U.S. monthly stock returns. Review of Financial Studies, Vol. 30(12), 4389 – 4436.
+
+Gibbons, M. R., S. A. Ross and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica, Vol. 57(5), 1121 – 1152.
+
+Harvey, C. R., Y. Liu and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies, Vol. 29(1), 5 – 68.
+
+Hou, K., C. Xue and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies, Vol. 28(3), 650 – 705.
+
+Hou, K., C. Xue and L. Zhang (2017). Replicating Anomalies. Fisher College of Business Working Paper No. 2017-03-010; Charles A. Dice Center Working Paper No. 2017-10. Available at SSRN: https://ssrn.com/abstract=2961979.
+
+Huberman G. and S. Kandel (1987). Mean-variance spanning. Journal of Finance, Vol. 42(4), 873 – 888.
+
+Lee, C. M. C., S. T. Sun, R. Wang and R. Zhang (2018). Technological Links and Return Predictability. Journal of Financial Economics, forthcoming.
+
+Linnainmaa, J. T. and M. R. Roberts (2018). The history of the cross-section of stock returns. Review of Financial Studies, Vol. 31(7), 2606 – 2649.
+
+Liu, J., R. F. Stambaugh and Y. Yuan (2018). Size and Value in China. Journal of Financial Economics, forthcoming.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics, Vol. 108 (1), 1 – 28.
+
+Pastor, L. and R. F. Stambaugh (2000). Comparing asset pricing models: an investment perspective. Journal of Financial Economics, Vol. 56(3), 335 – 381.
+
+Stambaugh, R. F. and Y. Yuan (2016). Mispricing Factors. Review of Financial Studies, Vol. 30(4), 1270 – 1315.
+
+【图片文字】
+--- 图1 ---
+量化核武研究
+--- 图2 ---
+unei A. Fortfolio returns
+[表]
+Decile | Excess returns (%) | CAPM alpha (%) | 3-Factor alpha (%) | 4-Factor alpha (%) | 5-Factor alpha (%) | 6-Factor alpha (%) | 
+1 | 0.42 | -0.16 | -0.33 | -0.13 | -0.27 | -0.12 | 
+Low) | (1.46) | (-1.04) | (-2.66) | (-1.09) | (-2.17) | (-0.99) | 
+10 | 1.59 | 1.05 | 0.93 | 0.95 | 1.10 | 1.09 | 
+(High) | (5.38) | (5.37) | (6.41) | (6.36) | (8.11) | (7.97) | 
+L/S | 1.17 | 1.22 | 1.26 | 1.08 | 1.37 | 1.21 | 
+(Equal weights) | (5.47) | (5.70) | (5.88) | (4.98) | (6.49) | (5.76) | 
+L/S | 0.69 | 0.74 | 0.80 | 0.65 | 0.86 | 0.73 | 
+(Value-weights) | (3.19) | (3.40) | (3.62) | (2.91) | (3.81) | (3.24) |
+出处：Lee et al.(2018)
+--- 图3 ---
+Table 1: List of Anomaly Variables
+The anomalies are grouped into six categories: (i) momentum; (ii) value-versus-growth; (iii) investment; (iv) profitability; (v) intangibles; and (vi) trading frictions. The number in parenthesis in the title of a panel is the number of anomalies in the category. The total number of anomalies is 447. For each anomaly variable, we list its symbol, brief description, and its academic source. Appendix A details the variable definition and portfolio construction.
+[表]
+Panel A: Momentum (57) | 
+Sue1 | Earnings surprise (1-month holding period), Foster, Olsen, and Shevlin (1984) | Sue6 | Earnings surprise (6-month holding period), Foster, Olsen, and Shevlin (1984) | 
+Sue12 | Earnings surprise (12-month holding period), Foster, Olsen, and Shevlin (1984) | Abr1 | Cumulative abnormal stock returns around earnings announcements (1-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | 
+Abr6 | Cumulative abnormal stock returns around earnings announcements (6-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | Abr12 | Cumulative abnormal stock returns around earnings announcements (12-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | 
+Re1 | Revisions in analysts&#x27; earnings forecasts (1-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | Re6 | Revisions in analysts&#x27; earnings forecasts (6-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | 
+Re12 | Revisions in analysts&#x27; earnings forecasts (12-month holding period), Chan, Jegadeesh, and Lakonishok (1996) | $ R^{{61}} $ | Price momentum (6-month prior returns, 1-month holding period), Jegadeesh and Titman (1993) | 
+$ R^{{63}} $ | Price momentum (6-month prior returns, 6-month holding period), Jegadeesh and Titman (1993) | $ R^{{612}} $ | Price momentum (6-month prior returns, 12-month holding period), Jegadeesh and Titman (1993) | 
+$ R^{{111}} $ | Price momentum (11-month prior returns, 1-month holding period), Fama and French (1996) | $ R^{{116}} $ | Price momentum (11-month prior returns, 6-month holding period), Fama and French (1996) | 
+$ R^{{112}} $ | Price momentum (11-month prior returns, 12-month holding period), Fama and French (1996) | Im1 | Industry momentum, (1-month holding period), Moskowitz and Grinblatt (1999) | 
+Im6 | Industry momentum (6-month holding period), Moskowitz and Grinblatt (1999) | Im12 | Industry momentum (12-month holding period), Moskowitz and Grinblatt (1999) |
+出处：Hou Xue and Zhang (2017)
+--- 图4 ---
+[表]
+Panel B: GRS F-statistics (p-value) | 
+FFSMB, FFHML | 0.88 | - | 
+ | (0.41) | - | 
+SMB, VMG | - | 33.90 | 
+ | - | $ (2.14 \times 10^{-13}) $ |
+出处：Liu, Stambaugh and Yuan (2018)
+--- 图9 ---
+Stambaugh and Yuan (2016)
+--- 图10 ---
+[表]
+模型 | 简称 | Parsimony Index I | Parsimony Index II | 
+Fama-French 三因子 | FF3 | -5 | -5 | 
+Carhart 四因子 | Carhart | -6 | -7 | 
+Novy-Marx 四因子 | NM4 | -9 | -9 | 
+Fama-French 五因子 | FF5 | -11 | -9 | 
+Hou-Xue-Zhang 四因子 | HXZ | -9 | -7 | 
+Stambaugh-Yuan 四因子 | SY4 | -25 | -16 | 
+Daniel-Hirshleifer-Sun 三因子 | BF3 | -4 | -6 |
+--- 图11 ---
+
+--- 图13 ---
+全类资产量化配置
+长按二维码加关注，及时获取投资技能

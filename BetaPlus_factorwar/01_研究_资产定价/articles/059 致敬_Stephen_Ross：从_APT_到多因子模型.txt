@@ -1,0 +1,184 @@
+# 致敬 Stephen Ross：从 APT 到多因子模型
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/SaOzbIVnkvd5y3b3xeMTWA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+未经授权，严禁转载。
+
+摘
+要
+多因子模型是如今实证资产定价的最重要方法，并在投资实务中发挥了巨大的作用。而这一切都始于 Stephen Ross 发明的 APT。
+
+00
+传奇人生
+
+如果要论对现代金融学（modern finance）的贡献，想必有很多耳熟能详的名字（比如之前介绍的 Eugene Fama），其中一个不得不提的人就是 Stephen Ross。
+
+Ross 对金融学的贡献主要体现在以下几个方面：agency problem（Ross 1973），arbitrage pricing theory（Ross 1976），binomial options pricing model（Cox, Ross, and Rubinstein 1979）以及 Cox-Ingersoll-Ross model（Cox, Ingersoll, and Ross 1985）。
+
+Ross 出生并成长在马萨诸塞州的大 Boston 地区。不过有意思的是，年少的他非常向往加州的阳光沙滩，再加上 Caltech 招生组的卓越宣传工作，在步入大学时，他毫不犹豫的选择了 Caltech，不过本科阶段他攻读却是物理学。本科毕业后，Ross 考入 Harvard 攻读了经济学博士，之后便开始在 UPenn Wharton 商学院任教。
+
+最初，Ross 在经济学系任教。作为刚刚崭露头角的“菜鸟”教授，他最初向系里大佬询问参加研讨会的建议。在听了一圈建议后，他尝试性的选择参加金融学研讨会。也许是上天有意的安排，在该研讨会系列中，第一期演讲的嘉宾是 Richard Roll（Eugene Fama 的学生，同样也是金融学中非常重要的人物），而第二期的演讲嘉宾则是 Fischer Black（这就不用再多说了……）。
+
+参加了两期研讨会之后，Ross 有两个非常强烈的感受：（1）Roll 和 Black 讲的东西让他如痴如醉（Roll 讲的 term structure of interest rate；Black 讲的是 BS 期权定价模型）；（2）Roll 和 Black 的高水平演讲给他造成“搞金融的学者的平均水平如此之高”的错觉。
+
+回顾这段往事，Ross 笑称由于 Roll 和 Black 给他造成的错觉，该学期后续的金融学研讨会带给他的是逐渐失望的体验。以上这段插曲无疑为 Ross 的金融学之旅增添了不少传奇色彩。从这之后，Ross 决定投身金融学，并做出了大量重要贡献。
+
+在 Ross 的诸多贡献中，arbitrage pricing theory（APT）对实证资产定价有着非常重要的影响，正是它打开了通过多因子模型（multi-factor models）研究资产定价的大门。下文就以简要介绍 APT 为契机致敬 Stephen Ross。
+
+人们可以通过三步理解如何从 APT 推出多因子模型，下面 1，2，3 节就分别阐述这三步。
+
+01
+Step One
+
+第一步，假设资产的收益率满足如下的线性模型（为了简化讨论，首先讨论单因子的情况）：
+
+其中 R_i 是资产收益率，μ_i 是资产 i 的预期收益率，β_i 是资产在因子上的暴露，f 是因子的取值（强调：f 并不是因子的 risk premium），最后 ε_i 是资产 i 收益率中的随机扰动（特质性收益率）。其中 f 和 ε_i 满足 E[f] = E[ε_i] = 0。如果写成向量形式，上式变为：
+
+这就是 Ross 在 APT 中使用的收益率模型。
+
+02
+Step Two
+
+第二步，构建一个 arbitrage portfolio。
+
+这个 arbitrage portfolio 中资产的权重 ω 满足下列特性。首先，该投资组合是零额投资的，即：
+
+上式中 ι 是全 1 向量。同时考虑第一步中的资产收益率模型以及该权重，则该 arbitrage portfolio 的收益率（记为 R_a）为：
+
+上式的最后一项为众多资产特质性收益率的加权平均。由 E[ε_i] = 0 和大数定律可知对于投资组合来说，这一项近似为零，因此投资组合的收益率由前两项决定。
+
+接下来，再来看 arbitrage portfolio 权重 ω 需要满足的第二个特性，即：
+
+这意味着选择 ω 使得该 arbitrage portfolio 在该因子上的暴露为零。将这个条件代入到投资组合收益率 R_a 的表达式中，并利用特质性部分近似为零的特性，对于这个特殊的 ω，R_a 的表达式化简为：
+
+带着这个特殊的 arbitrage portfolio，我们进入第三步。
+
+03
+Step Three
+
+第三步，运用无套利约束。
+
+对于第二步构造的特殊的 ω，它满足如下性质：（1）它是零额投资；（2）它对因子的暴露为零（因此该组合没有系统性风险）；（3）它没有特质性风险暴露（因为组合中特质性收益率为零）。换句话说，这样一个投资组合 ω 既没有资金投入又没有风险暴露，因此根据无套利约束条件，它的收益率必须为零：
+
+紧接着问题来了，这到底意味着什么？我们可以从几何的角度来理解它。
+
+当我们构造 arbitrage portfolio 的时候，让其资产权重 ω 满足 ω’ι = 0 以及 ω’β = 0。从几何上说，两个向量的內积为零说明它们是相互垂直的。因此在 n 维空间内，ω 与 ι 以及 β 构成的平面垂直。接下来，最重要的一点：对于任意满足上述两个条件的 ω，由无套利约束条件可知 ω’μ 也必须等于 0，因此 ω 也和 μ 垂直。这意味着，μ 必然是在由 ι 和 β 构成的平面内。
+
+在数学上，这意味着资产的预期收益率向量 μ 可以写成 ι 和 β 的线性加权：
+
+上式对任意资产都成立。为了求解系数 γ_1 和 γ_2，不妨代入两个特殊的资产：无风险资产（收益率 R_f）和市场组合（预期收益率 μ_m）。由于无风险资产的因子暴露为零，因此通过上式可直接求出：
+
+将 μ_m 和 γ_1 = R_f 代入，并利用市场组合 β = 1 可得：
+
+因此有
+
+将 γ_1 和 γ_2 带回到 μ 的方程易知：
+
+眼熟不？这正是大名鼎鼎的 CAPM。公众号的老朋友可能记得，《CAPM 的一小段历史》介绍了 CAPM 被提出的那段艰辛岁月，而四个版本的 CAPM 模型因为假设的区别以及数学符号的差异让人最初对其望而却步。反观上述三步走，仅仅根据收益率线性模型的假设，并通过无套利约束，就非常优雅的得到了 CAPM。
+
+OK，在这个基础上，我们可以很容易的把上式拓展到多个因子的情况，得到如今众人皆知的多因子模型：
+
+其中 λ_k 为因子 k 的 risk premium，β_ik 是资产 i 在因子 k 上的暴露。以此为起点，学术界和业界在过去近 50 年内展开了轰轰烈烈的实证资产定价研究和因子投资实践。此外，多因子模型的表达式同样强调，只有那些影响众多资产收益率共同运动的风险，而非资产的特质性风险（即可以通过分散化规避掉的风险），才是预期收益率的来源。
+
+Ross 功不可没。
+
+04
+结语
+
+以上简要回顾了通过三步从 APT 到多因子模型的思路。事实上，在 Ross (1976) 这篇 APT 论文中，开篇就清晰地阐述了上述过程（Ross 1976 把上述过程分成了四步）。
+
+而谈到我本文的阐述，则必须要给另一个大佬足够的 credits。2017 年三月，在 Ross 去世之后，MIT 为了纪念 Ross 的贡献特地举办了研讨会（Ross 曾在 MIT 任教很长时间），并由众多大佬分别介绍了 Ross 在不同金融领域的贡献。其中介绍 APT 的则是罗闻全（Andrew Lo）教授。本文对 APT 介绍参考了罗教授报告的内容，特此说明。
+
+对于实证资产定价来说，除了 APT，Ross 另一项广为人知并且即便到了今天还被广泛应用的方法则是 Gibbons, Ross, and Shanken (1989) 即 GRS test，它是检验多因子模型的重要方法，与 APT 一样，影响深远而持久。
+
+以上仅从 APT 的视角一瞥了 Ross 对金融学的贡献。关于他的其他成就，AFA 的 Masters of Finance 系列有过更详细的介绍，感兴趣的小伙伴不妨找来看看。1988 年 Ross 出任了 AFA 主席，1996 年他获得 IAFE 的年度金融工程师称号。此外 Ross 还获得了 Smith Breeden Prize（2006）、Onassis Prize（2012）、AFA Award for Excellence in Finance（2014）以及 Deutsche Bank Prize（2015）等诸多奖项。
+
+谨以此文致敬 Stephen Ross。
+
+参考文献
+Cox, J. C., J. E. Ingersoll, and S. A. Ross (1985). A theory of the term structure of interest rates. Econometrica 53(2), 365 – 407.
+
+Cox, J. C., S. A. Ross, and M. Rubinstein (1979). Option pricing: A simplified approach. Journal of Financial Economics 7(3), 229 – 263.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica 57(5), 1121 – 1152.
+
+Ross, S. A. (1973). The economic theory of agency: The principal’s problem. American Economic Review 63(2), 134 – 139.
+
+Ross, S. A. (1976). The arbitrage theory of capital asset pricing. Journal of Economic Theory 13(3), 341 – 360.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图6 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图7 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图8 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图9 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图12 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8e890>)
+--- 图13 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927bee160>)
+--- 图14 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927bee160>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db92852f6f0>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图23 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图25 ---
+
+--- 图32 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927bee160>)
+--- 图33 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189f30>)
+--- 图34 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925a2bab0>)
+--- 图35 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b630b0>)
+--- 图36 ---
+Suppose that the random returns on a subset of assets can be expressed by a simple factor model
+$$ \tilde{x}_{i}==E_{i}+\beta_{i}\tilde{\delta}+\tilde{\epsilon}_{i}, $$
+(2)
+where  $ \tilde{\delta} $ is a mean zero common factor, and  $ \tilde{\epsilon}_i $ is mean zero with the vector  $ \langle \tilde{\epsilon} \rangle $ sufficiently independent to permit the law of large numbers to hold. Neglecting the noise term,  $ \tilde{\epsilon}_i $, as discussed in Ross [14] (2) is a statement that the state space tableau of asset returns lies in a two-dimensional space that can be spanned by a vector with elements  $ \delta_\theta $, (where  $ \theta $ denotes the state of the world) and the constant vector,  $ e \equiv \langle 1, \ldots, 1 \rangle $.
+Step 1. Form an arbitrage portfolio,  $ \eta $, of all the n assets, i.e., a portfolio which uses no wealth,  $ \eta e = 0 $. We will also require  $ \eta $ to be a well-diversified portfolio with each component,  $ \eta_i $, of order 1/n in (absolute) magnitude.
+Step 2. By the law of large numbers, for large n the return on the arbitrage portfolio
+$$ \begin{aligned}\eta\tilde{x}&=\eta E+(\eta\beta)\tilde{\delta}+\eta\tilde{\epsilon}\\&\approx\eta E+(\eta\beta)\tilde{\delta}.\end{aligned} $$
+(3)
+In other words the influence on the well-diversified portfolio of the independent noise terms becomes negligible.
+Step 3. If we now also require that the arbitrage portfolio,  $ \eta $, be chosen so as to have no systematic risk, then
+and from (3)
+$$ \begin{array}{l}\eta\boldsymbol{\beta}=\mathbf{0},\\n\tilde{\mathbf{x}}\approx n\boldsymbol{E}\end{array} $$
+--- 图37 ---
+Step 4. Using no wealth, the random return $\eta x$ has now been engineered to be equivalent to a certain return, $\eta E$, hence to prevent arbitrarily large disequilibrium positions we must have $\eta E = 0$. Since this restriction must hold for all $\eta$ such that $\eta e = \eta \beta = 0$, $E$ is spanned by $e$ and $\beta$ or
+$$ E_{i}=\rho+\lambda\beta_{i} $$
+(4
+for constants $\rho$ and $\lambda$. Clearly if there is a riskless asset, $\rho$ must be it rate of return. Even if there is not such an asset, $\rho$ is the rate of return on all zero-beta portfolios, $\alpha$, i.e., all portfolios with $\alpha e = 1$ and $\alpha \beta = 0$ if $\alpha$ is a particular portfolio of interest, e.g., the market portfolio, $\alpha_m$ with $E_{m} = \alpha_m E$, (4) becomes
+$$ t^{\prime}=\begin{array}{c}1\quad/F\\ 0\end{array}, $$
+/c
+--- 图38 ---
+源：https://www.mit.edu/2017/professor_stopenh_ross_inventor_of_arbitrage_in_zining_theory_dies_0306
+--- 图39 ---

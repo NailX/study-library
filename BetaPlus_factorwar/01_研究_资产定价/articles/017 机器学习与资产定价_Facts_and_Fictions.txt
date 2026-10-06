@@ -1,0 +1,242 @@
+# 机器学习与资产定价: Facts and Fictions
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/5GWJU3sKB4VTKe0l1UJeyw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者，《机器学习与资产定价》译者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文从五方面阐述中低频实证资产定价中的机器学习应用。
+
+自 Gu, Kelly and Xiu (2020) 这篇综述把机器学习方法正式引入实证资产定价研究以来，学术界的一众学者在这几年将各种（线性的非线性的）机器学习模型都应用到了股票收益率的预测之上。
+
+这背后的契机是大数据和机器学习时代协变量的激增以及协变量和未来收益率之间的复杂关系。这二者给传统基于计量经济学方法的实证研究带来了巨大的挑战。毫无疑问，计量经济学方法是可以被用来分析简单线性关系和进行参数审定（parameter adjudication）的利器，然而它并非处理高维预测（prediction）问题时的首选。对于后者来说，早在自然语言处理、图像识别等其他领域证明了自己的机器学习算法自然而然地走进了人们的视野。
+
+伴随而来的，是学界的研究从 diminishing anomalies（即提出 ad-hoc 简约模型来消灭异象）向 increasing prominence of machine learning methods（即如何通过机器学习算法得到更好的预测）的转型，并从中形成新的研究范式。研究悄然从 procedurally 转向了 empirically。无论认可与否，在大势面前，一切似乎都不可逆转，那些将机器学习算法用于资产定价并发表在顶刊上的实证文章就是最好的证明。
+
+通读这些基于美股市场（当然，有不少已经被 copy & paste 到了 A 股，sorry for 吐槽）、发表在顶刊上的实证文章其实不难发现，无论是理论描述还是实证结果，它们都有很多的共性。深入理解它们，有助于加深对将机器学习算法应用于实证资产定价的正确认知。因此，今天这篇小文就以 Facts 和 Fictions 为题从五方面梳理这类研究的“是”与“非”。希望通过此文帮你客观了解实证研究的现状。
+
+最后想要强调的是，本文的阐述仅限于中低频实证资产定价中的机器学习应用。在国内外的量化投资实践中，注定会有一些领先于学术研究的内容，但它们不在本文讨论范围之内。另外，本文参考文献中优先引用已发表的版本。
+
+1
+
+Fiction: 将数据无脑扔进高级算法，单纯指望数据发声。
+
+金融数据低信噪比和不满足平稳性这两个特点足以打消人们单纯指望数据发声的良好愿景。就资产定价来说，参数先验、协变量尺度缩放、正则化罚项以及调参依据选择等都会影响最终的结果（Nagel 2021，我和王熙老师的翻译在此）。
+
+下面这个例子来自 Nagel (2021)，虽然简单，但能清晰阐明上面的问题。假设我们使用过去 120 期的历史收益率以及它们的平方和三次方作为协变量来预测下一期收益率。下表总结了不同设定下的预测结果。其中 Method 一栏表明了正则化的罚项（OLS 表示没有正则化），Scaling 一栏表明对协变量进行了怎样的标准化处理（Equal 表示协变量都被标准化到均值为 0、标准差为 1；Unequal 表明协变量标准化之后的标准差不同），CV criterion 一栏表示调参的依据（例如以验证集 R-squared 或者以投资组合在验证集上的预期收益率  ）。
+
+表中的实证结果显示，模型设定对于会产生怎样的结果影响很大。然而，当我们面临众多选择时，不该也无法枚举所有的排列组合，而是应该充分利用先验。例如，如果我们认为模型是非稀疏的，那么就会倾向 Ridge 而非 Lasso；如果我们认为协变量在预测收益率时的重要程度不同，可能就会选择 Unequal 而非 Equal 的处理方式；如果我们从金融问题核心出发，可能会选择以最大化夏普比率（或最小化 pricing errors）而非传统的 R-squared 来进行模型调优。而这些的背后，都离不开资产定价理论。
+
+Fact: 以大数据为依托、以机器学习算法为工具，围绕资产定价理论展开。
+
+在实证资产定价这个领域，从 CAPM，到 APT/ICAPM，再到 zoo of factors，层出不穷的实证挑战无疑极大推动了学科的发展。然而，无论范式如何演化，研究都是围绕着实证资产定价理论展开的。
+
+以最近几年火爆的几篇文章为例，Bryzgalova, Pelger and Zhu (2020) 以及 Chen, Pelger and Zhu (forthcoming)，虽然前者使用了决策树而后者使用了生成对抗网络（GAN），但它们都是在随机贴现因子（SDF）这一框架下将不同的算法应用于资产定价。
+
+又比如，Kelly, Pruitt and Su (2019) 的 IPCA 以及 Gu, Kelly and Xiu (2021) 的 Autoencoder 则使用了隐性多因子模型，即把  视为协变量（例如公司特征和宏观经济变量）的函数并对  建模。不同的是，KPS 使用的线性模型，而 GKX 使用的非线性模型；此外，由于  是时变协变量的函数，因此二者本质上都是条件定价模型。
+
+在实证方面，这些文章的共性是使用了大量的协变量（of course 较传统研究而言），并通过投资组合的 OOS 表现来表明方法的有效性。虽然它们各自尝试了不同的机器学习算法，但鉴于 SDF 和多因子模型的等价性，它们都可以被放在一统的框架下审视和学习。
+
+2
+
+Fiction: 机器学习模型是黑箱，学术研究不关注可解释性。
+
+对于传统的 ad-hoc 多因子模型或者异象研究而言，可解释性是它们的灵魂。比如 FF5 是基于 DDM、q-factor model 是基于 q-theory。而各种关于异象的论文中也会有解释（risk-based vs mispricing）。而一旦把研究目标转移到通过复杂模型构造更准确的收益率预测，给人的印象就是这方面的要求就被淡化了。然而，事实并非如此。
+
+对于线性模型而言，例如 Kozak, Nagel and Santosh (2018, 2020) 的 PCA，以及 KPS 的 IPCA，模型的解释是非常清晰的。以前者为例，KNS 在对通过 size 和 value 划分出的 25 个投资组合进行 PCA 时发现前两个 PCs 完美对应着 SMB 和 HML 因子；而对于后者而言，IPCA 虽然在数学上看似繁琐，但其背后的直觉解释确实一系列通过 cross-section regression 构造的 managed portfolios 的线性组合（PCs）。因此，对于线性模型而言，其解释性恰恰植根于我们熟悉的 regression 以及 portfolio sort 方法中。
+
+而对于非线性模型而言，其可解释性虽然不如线性模型那么直观，但学术研究依然给予了它足够的重视（见 facts 部分）。
+
+Fact: 机器学习揭示的最重要预测变量和大量实证资产定价结果吻合。
+
+Gu, Kelly and Xiu (2020) 使用 permutation importance 揭示了哪些协变量对解释预期收益率最重要（下图）。从中我们可以看出：（1）最重要的协变量和以往实证结果相吻合，其中最重要的变量大致可以分为四大类，即动量/反转，流动性相关，风险相关（比如 IVOL）以及基本面相关；（2）不同的机器学习模型来说，最重要的协变量也在很大程度上是相似的。
+
+Chen, Pelger and Zhu (forthcoming) 通过计算 SDF 权重对协变量的偏导数来评价模型的可解释性。下图显示，在所有协变量中，最重要的可以被分为交易摩擦、价值、无形资产、盈利、投资以及历史收益率几大类。
+
+另一篇值得一提的文章是 Kozak (2019)。它利用 kernel trick 巧妙地在不增加运算量的前提下将协变量映射到高维并对映射后的协变量进行 PCA，以此来进行资产定价。在使用了非线性 kernel 后，我们无从知道映射后的协变量是什么样子。但是，通过将构造的 SDF 映射到原始协变量的 managed portfolios，依然能够鉴别出最重要的解释变量。
+
+最后，也可以通过观察选出股票（多头或者多空对冲组合）在不同协变量上是否有共性来判断哪些变量更加重要，例如 Avramov, Cheng and Metzker (2023)。
+
+3
+
+Fiction: 复杂模型容易样本内过拟合，导致样本外预测误差加剧。
+
+对于模型来说，其样本外表现和模型复杂度关系密切。当模型复杂度很低时，模型的方差很小，但是偏差很高；当模型复杂度高时，模型的方差变大，但是偏差降低。二者的共同作用就是人们熟悉的 bias-variance trade-off，因此存在某个最优的超参数，使得样本外的总误差（风险）最低。
+
+我们还可以换个角度来理解 bias-variance trade-off。当模型很简单时，它能够有效规避过拟合，但并非是真实世界的很好近似；而当模型复杂时，它更有可能逼近真实世界，但是也的确更容易过拟合。因此 bias-variance trade-off 也可以理解为 approximation-overfit trade-off。
+
+然而，上述结论有一个人们习以为常的前提：变量个数 < 样本个数。如果模型复杂到变量的个数超过了样本的个数又会怎样呢？事实上，这一问题并非无缘无故的凭空想象。对于复杂的神经网络模型来说，模型参数的个数很容易超过样本的个数。当变量个数 ≥ 样本个数时（被称为 over-parameterization），模型在样本内能够完美的拟合全部样本（当变量个数和样本个数相等时，模型能够完美的 fit 所以样本点。这个现象在机器学习术语中被称为 interpolation）。
+
+由于金融数据的信噪比极低，对于这样一个妥妥样本内过拟合了噪声的模型，人们通常的认知是，它在样本外的预测误差一定会“爆炸”。然而事实也许并非如此。
+
+Fact: 复杂模型是真实 DGP 的更好近似，在正则化使用得当的前提下，复杂模型带来的好处可能优于统计代价。
+
+近年来，机器学习领域一个令人兴奋的发现就是样本外误差随模型复杂度变化的 double descend 现象。
+
+Belkin et al (2019) 指出，当模型复杂度突破样本个数这个“禁忌之地”后，神奇的事情发生了：样本外总误差并没有“爆炸”，而是随着复杂度的提升单调下降。正因为在样本个数两侧都出现了误差单调下降的情况，这个现象被称为 double descent。
+
+这背后的直觉解释是：当协变量个数超过样本个数的时候，样本内的解是不唯一的，而最优的解可以理解为让参数的方差最小的那个解。随着变量越来越多，最优解的方差总能单调下降。再来看偏差，通常来说，偏差确实会随着复杂度的提升而增加。但是所有模型都是真实 DGP 的某个 mis-specified 版本。当存在模型设定偏误的时候，可以证明当变量个数超过样本个数时，偏差也会在一定范围内随着复杂度而下降。因此，二者的综合结果就是模型在样本外的误差表现会随复杂度的上升而下降。对于 double descent 现象背后的理论，感兴趣的小伙伴请参考 Hastie et al. (2022)。
+
+在实证资产定价方面， Kelly, Malamud and Zhou (forthcoming) 将上述理念应用到了美股择时之中，并发现了类似的 double descent 现象：当采用协变量个数远远超过样本个数的模型时，样本外的夏普比率提升了。客观的说，关于模型复杂度和样本外表现的讨论，在资产定价领域尚处于萌芽阶段，且正则化（或者 implied 正则化）在这个过程中至关重要，期待未来在这方面有更多精彩的研究成果。
+
+4
+
+Fiction: 非线性模型可以轻松让夏普比率翻倍。
+
+我们先看一组似乎足以推翻这个 fictions 的实证结果。Baba-Yara, Boyer and Davis (2021) 复现了最近几年最重要的机器学习模型，并将它们的结果和传统的多因子模型进行了比较，我挑选了几个有代表性的汇总于下表。
+
+上述结果清晰的表明，相比于传统多因子模型，机器学习模型的夏普比率确实是前者的两倍甚至是三倍。但不要忘了，右边这些都是强加了特设稀疏性的简约模型（只用了太少的变量），因此这样的比较是不公平的。（另外，在本节 facts 部分我们还会再次讨论上述结果，相信那时候你会更加确信。）
+
+另一方面，如果你仔细观察就不难发现，在上面的结果中，KNS 的 PCA 以及 KPS 的 IPCA（这两个非条件和条件线性模型）的夏普比率反而要高于另外两个分别利用随机森林和神经网络的模型。因此，非线性模型（至少在上述实证结果中）并没有占得便宜。
+
+Fact: 非线性模型能捕捉协变量和预期收益率之间的非线性关系，且现阶段对表现只是提供边际增量贡献。
+
+事到如今，我们无需怀疑协变量和预期收益率之间存在非线性关系。哪怕是传统的 double portfolio sort，也是考察控制了变量 A 之后，变量 B 和预期收益率的关系。由 Nagel (2021) 以及大量最新实证资产定价论文的结果可知，在非线性关系中，变量的交互作用是最重要的。对于传统线性回归模型来说，一旦协变量数目激增，枚举考虑两两变量的交乘项是不切实际的，因此这就给了善于处理非线性关系的机器学习模型施展的空间。
+
+话虽如此，我们也应该对非线性关系对于预测收益率提供的增量贡献有正确的预期。Chen, Pelger and Zhu (forthcoming) 的实证结果显示，他们的生成对抗网络在构造 SDF 时能够捕捉到协变量之间的交互作用，然而另一方面，他们也强调独立协变量对于 SDF 的影响几乎是线性的。
+
+下面让我们回到 fictions 部分提到的 Baba-Yara, Boyer and Davis (2021) 一文。上面的这个表来自该文的早期版本，其 OOS 实证区间是 1990 到 2020。然而，在最新的版本中，其 OOS 实证区间摇身一变缩短为 1990 到 2016。论文的版本更新了，而实证区间却倒退了，实在令人不解。而更让人匪夷所思的是，作者给出的解释竟然是作为比较的 ad-hoc 模型 Stambaugh-Yuan 的数据只到 2016 年（你们在复现机器学习模型！拜托！）。既然早期工作版本中能复现到 2020 年，为什么在新的版本中却又以此为借口放弃了？真正的动机恐怕只有作者自己清楚。
+
+在这个短一些的实证区间内，实证结果如下（下表中括号内数据是截至到 2020 年的结果，放在这里方便比较）。有意思的是，当实证区间的终点选为 2016 之后，四个机器学习模型都不同程度的变差了（BPZ 有些让人意外），而四个 ad-hoc 模型却都提升了（SY 发表在 2017，FF6 = FF5 + Carhart Mom 而 FF5 以及 HXZ 都发表在 2015，玄妙吧）。
+
+Anyway，让我们聚焦于机器学习模型。上述对比说明，随着实证区间的不同，模型的结果也会有较大的波动。而另一方面，所有这些发表在顶刊上的论文，虽然它们都是使用 rolling 或者 expanding 窗口进行训练和验证，然后再预测样本外的 next year、如此往复，但是这些文章并没有对调参的过程以及不同参数下模型的稳健性进行多少（if any!）的描述。从这个意义上说，机器学习应用于资产定价的研究生态还远谈不上完善（呼吁有大佬能站出来，提出学界认可的研究生态）。
+
+5
+
+Fiction: 机器学习模型可以很容易地被应用于实践。
+
+虽然机器学习模型在实证资产定价的学术研究中取得了令人欣慰的结果，但并不意味着它们能够被轻易的用于实践，并获得可观的费后超额收益。这方面一个最重要的经验事实是，机器学习模型构造的投资组合都有很高的换手率。
+
+在这方面，Avramov, Cheng and Metzker (2023) 复现了 Gu, Kelly and Xiu (2020) 中的神经网络模型、CPZ 的 GAN、KPS 的 IPCA 以及 Gu, Kelly and Xiu (2021) 的（Conditional）Autoencoder (CA)。这些模型的月均换手率如下。作为对比，像 size 和 value 这种传统低频风格因子的月均换手率通常低于 10%（即 0.1）。通过对交易成本的估计，Avramov, Cheng and Metzker (2023) 指出，在如此高的换手率下，对于一般投资者（average investors）来说，很难通过机器学习模型赚取额外的超额收益（当然不排除有些投资者能够很好的将这些模型工程化，并在高换手率的前提下依然获得超额收益）。
+
+为了应对交易成本带来的挑战，Jensen et al. (2022) 提出了 implementable efficient frontier 的概念，即在构造策略的时候直接通过费后收益率进行评估，从而将带有交易成本的投资组合优化问题融入到机器学习的框架之中，并取得了不错的结果。
+
+Fact: 机器学习发现的可预测性部分集中于套利成本和交易成本高的股票，对一些机构投资者价值有限。
+
+实证结果表明，诸多异象的超额收益主要来自空头（Avramov et al. 2013）或者微小市值股票（Novy-Marx and Velikov 2016）。而对于机器学习模型来说，它们也善于从套利和交易成本更高的股票中挖掘可预测性，因而削弱了它们的实践价值。
+
+仍以 Avramov, Cheng and Metzker (2023) 的实证结果为例。除 full sample 外，该文还分别考察了剔除微小市值、剔除无 credit rating 公司以及剔除 financially distressed 公司的三个子样本。结果（下表，表中括号内为 t-statistics）显示，和 full sample 相比，主流机器学习模型（IPCA 除外）在这三个子样本中的表现均有明显的下降，且一些模型较传统 ad-hoc 多因子模型（例如 FF6）的  在某些子样本中也不再显著。
+
+以 GAN 为例，其在剔除微小市值子样本中的月均收益率和 full sample 相比，降低了超过 50%。在上述四个模型中，除 IPCA 之外都是非线性模型，而唯有 IPCA 的结果比较稳健（在 full 和几个子样本中的结果较为一致）。
+
+需要说明的是，上述针对三个子样本的结果仍然是使用基于 full sample 训练出的模型得到的。这也许会让一些读者颇有微词。对于此，Avramov, Cheng and Metzker (2023) 进一步使用子样本进行训练和样本外预测，但发现结果并没有实质的改变，而且在一些子样本中 OOS 的表现还下降了。换句话说，原本打算通过约束让模型学习目标样本，然而结果却是更少的样本量（子样本 vs full）却导致了更差的 OOS 表现。成功 tweak 非线性模型使其聚焦于套利和交易成本低的股票，将会是机器学习模型落地的重要前提。
+
+6
+
+以上从五方面的 facts and fictions 梳理了近几年最重要的机器学习资产定价实证发现。
+
+作为本文的结尾，我想最后强调的是，虽然这些论文的实证结果都是 OOS（即用历史数据建模和调参，然后预测下一个 period），然而它们使用的协变量几乎都是来自以往实证资产定价研究所挖出来的 anomaly。从这个意义上说，我不得不再抛出一直以来的观点“所有历史数据都是样本内”。
+
+在协变量和收益率存在非线性关系，以及协变量都是在历史上显著的前提下，我们似乎不用对这些模型在 OOS 的优越表现感到特别的意外。然而，另一个值得思考的问题是，如果以 agnostic 视角出发，将机器学习模型应用实证资产定价之中，又会有怎样的结果？在这方面，Nagel (2021) 有过初步的尝试，发现机器学习能够从诸多变量中识别出和预期收益率相关的那些。
+
+希望本文的梳理能帮助你对基于机器学习模型的实证资产定价研究形成正确的预期，在抱有期待的同时也客观认识到研究的现状和面临的挑战。
+
+最后，我想引用 Bryan Kelly 在某 Q&A 环节就机器学习正确预期的回答总结本文。作为学界新生代当仁不让的扛把子之一以及 AQR 的 Head of Machine Learning，Kelly 的观点值得认真体会。
+
+参考文献
+Avramov, D., S. Cheng, and L. Metzker (2023). Machine learning vs. economic restrictions: Evidence from stock return predictability. Management Science 69(5), 2587 – 2619.
+
+Avramov, D., T. Chordia, G. Jostova, and A. Philipov (2013) Anomalies and financial distress. Journal of Financial Economics 108(1), 139 – 159.
+
+Baba-Yara, F., B. Boyer, and C. Davis (2021). The factor model failure puzzle. Working paper.
+
+Belkin, M., D. Hsu, S. Ma, and S. Mandal (2019). Reconciling modern machine-learning practice and the classical bias-variance trade-off. PNAS 116(32), 15849 – 15854.
+
+Bryzgalova, S., M. Pelger, and J. Zhu (2020). Forest through the trees: Building cross-sections of stock returns. Working paper.
+
+Chen, L., M. Pelger, and J. Zhu (forthcoming). Deep learning in asset pricing. Management Science.
+
+Gu, S., B. T. Kelly, and D. Xiu (2020). Empirical asset pricing via machine learning. Review of Financial Studies 33(5), 2223 – 2273.
+
+Gu, S., B. T. Kelly, and D. Xiu (2021). Autoencoder asset pricing models.Journal of Econometrics 222(1), 429 – 450.
+
+Hastie, T., A. Montanari, S. Rosset, and R. J. Tibshirani (2022). Surprise in high-dimensional ridgeless least squares interpolation. Annals of Statistics 50(2), 949 – 986.
+
+Jensen, T. I., B. T. Kelly, S. Malamud, and L. H. Pedersen (2022). Machine learning and the implementable efficient frontier. Working paper.
+
+Kelly, B. T., S. Malamud, and K. Zhou (forthcoming). The virtue of complexity in return prediction. Journal of Finance.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S. (2019). Kernel trick for the cross-section. Working paper.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Nagel, S. (2021). Machine Learning in Asset Pricing. Princeton University Press.
+
+Novy-Marx, R and M. Velikov (2016). A taxonomy of anomalies and their trading costs. Review of Financial Studies 29(1), 104 – 147.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+TABLE 3.2
+Return prediction with a polynomial of lagged returns
+[表]
+Method | Scaling | CV criterion | $ \gamma $(i) | IS  $ R^{2} $(ii) | CV  $ R^{2} $(iii) | CV portfolio return  $ r_{p} $ | 
+Mean (iv) | S.D. (v) | Sharpe Ratio (vi) | 
+S | Equal | n/a | 0 | 5.22 | -1.18 | 4.12 | 11.60 | 0.35 | 
+re | Equal | $ R^{2} $ | 2.25 | 2.63 | 0.84 | 4.20 | 13.85 | 0.30 | 
+e | Unequal | $ R^{2} $ | 1.40 | 2.69 | 1.18 | 4.55 | 12.47 | 0.37 | 
+ | Unequal | E[ $ r_{p} $] | 3.11 | 1.75 | 0.89 | 4.58 | 12.94 | 0.35 | 
+ | Unequal | $ R^{2} $ | 0.00028 | 3.55 | 0.84 | 4.25 | 11.79 | 0.36 |
+--- 图3 ---
+variables.
+Rankings of ninety-four stock-level characteristics and the industry dummy (sic2) in terms of overall model contribution. Characteristics are ordered based on the sum of their ranks over all models, with the most influential characteristics on the top and the least influential on the bottom. Columns correspond to the individual models, and the color gradients within each column indicate the most influential (dark blue) to the least influential (white)
+Characteristic importance
+Figure 5
+--- 图4 ---
+s. The figure shows the GAN variable importance ranking of the 46 firm-specific characteristics in terms of average al
+--- 图5 ---
+(a) Polynomial kernel,  $ 2^{nd} $ order
+Figure 6: Important features (40 anomaly factors). The figure shows characteristic that correspond to largest SDF coefficients and their contribution to the cumulative  $ R^{2} $ when added to an SDF. Panel (a) uses the polynomial kernel of the second order. Panel (b) uses the Gaussian (radial) kernel.
+--- 图6 ---
+k · Belkin et al. (2019)
+--- 图7 ---
+L1 n n · · · n n
+
+--- 图9 ---
+[表]
+机器学习模型 | 传统多因子模型 | 
+模型 | 样本外夏普率 | 模型 | 样本外夏普率 | 
+BPZ Random Forest | 0.86 (2.19) | FF3 | 0.61 (0.45) | 
+Davis Neural Network | 2.39 (3.21) | FF6 | 1.17 (1.03) | 
+KNS PCA | 2.77 (3.21) | HXZ | 1.81 (1.10) | 
+KPS IPCA | 3.21 (3.39) | SY | 1.40 (0.61) |
+出处：Baba-Yara, Boyer and Davis (2021), a more recent version
+--- 图10 ---
+[表]
+模型 | 月均换手率 | 
+Gu, Kelly and Xiu (2020) | 0.976 | 
+Chen, Pelger and Zhu (forthcoming) | 1.664 | 
+Kelly, Pruitt and Su (2019) | 1.186 | 
+Gu, Kelly and Xiu (2021) | 1.565 |
+出处：Arvamov, Cheng and Metzker (2023)
+--- 图11 ---
+多空绝对收益率（%）
+相对 FF6 的超额收益率（%）
+[表]
+模型 | Full sample | 剔除微小市值 | 剔除 no credit rating | 剔除 financially distressed | Full sample | 剔除微小市值 | 剔除 no credit rating | 剔除 financially distressed | 
+GKX NN | 1.56 (4.53) | 1.05 (3.24) | 1.02 (3.18) | 0.72 (2.49) | 0.92 (4.08) | 0.31 (1.51) | 0.43 (2.05) | 0.20 (0.92) | 
+CPZ GAN | 2.13 (6.37) | 1.08 (4.06) | 0.82 (2.83) | 0.92 (2.91) | 1.87 (4.86) | 0.55 (2.23) | 0.42 (1.46) | 0.57 (1.82) | 
+KPS IPCA | 0.95 (5.62) | 0.91 (5.57) | 0.89 (5.08) | 0.73 (4.08) | 0.62 (3.31) | 0.61 (3.71) | 0.61 (3.38) | 0.43 (2.37) | 
+GKX CA | 1.16 (4.17) | 1.11 (4.22) | 0.87 (2.97) | 0.67 (2.22) | 0.75 (3.01) | 0.39 (2.03) | 0.19 (0.79) | 0.05 (0.20) |
+出处：Arvamov, Cheng and Metzker (2023)：整理：川总写量化
+--- 图12 ---
+Bryan Kelly:
+Linear models are first order approximations. First order approximations are the most important approximations. When you try to set people's expectations of what you're going to get out of machine learning, you shouldn't expect revolutionary performance from machine learning. You should expect second and third order of improvements, because the first order models we are using are good. They leave some predictability on the table because there are those non-linearities that we can exploit. But you should not expect to double or triple your Sharpe ratio. I think seeing something like a 20 percent increase in Sharpe ratio from introducing non-linearities feels realistic to me.
+--- 图13 ---

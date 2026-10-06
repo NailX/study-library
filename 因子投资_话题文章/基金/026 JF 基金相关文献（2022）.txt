@@ -1,0 +1,32 @@
+# JF 基金相关文献（2022）
+
+来源：微信公众号「因子投资」话题·基金（第26篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485676&idx=1&sn=82fd1d8ac226ba4e592b766a1f43b023&chksm=f995b96ecee23078dea48a858403a86407dfe2c531abd4c7c955bcb52e88834c1905faf7c3ce#rd
+
+本文对 2022 年金融学顶刊 Journal of Finance 正式发表或接收的几篇基金相关文献进行简要的梳理、介绍。JF 的文章质量确实非常好。这并非园长的个人滤镜（好几篇文章的作者是园长非常喜欢的学者），至少这些基金相关的文章，确实都非常有意思，很有启发。
+
+1. Luck versus skill in the cross section of mutual fund returns: Reexamining the evidence从题目就知道，Harvey and Liu (2022) 这篇文章讲的是基金业绩评估问题。更确切来说，是两种 Bootstrap 方法的比较。Kosowski et al. (2006) 首先提出用 Bootstrap 来剥离基金业绩中的运气因素，以检验是否有基金有显著的 alpha。其中，核心是对残差进行有放回的抽样。Fama and French (2010) 则指出，Kosowski et al. (2006) 的做法忽视了基金业绩的截面相关性，因而会得到过于乐观的结果；进一步分析表明，基于时间的随机抽样和 Bootstrap（即每次抽一个截面）方法，绝大多数基金是没有能力的。
+Harvey and Liu (2022) 则进一步指出，FF 的处理在理论上更好，但很多基金没有数据、导致有完整收益观测的截面很少。FF 为此只要求基金在过去 60 个月中有 8 个月有数据即可。但这样会显著影响估计效率，导致对基金能力的低估。
+基于上述分析，Harvey and Liu (2022) 构建了一种对 FF 的改进方法，并据此表明，总体来看，支持基金有能力的证据仍然比较弱。
+对这篇文章的详细介绍，可参考川总的详细介绍：出色不如走运 (VIII)?。
+
+2. Skill, scale, and value creation in the mutual fund industry除了 Kowsoski et al. 和 FF，关于基金能力评估的另一拨不可忽视的学者是 Barras 和 Scaillet（他们 2010 年跟 Wermers 同样发表在 JF 的文章将 FDR 方法应用于基金业绩评估）。2022 年 JF 正式发表的另一篇文章便来自于他们。
+具体来看，这篇文章沿袭 Berk and van Binsbergen (2015, 2017) 的思路，着重于基金 value added 的估计。BvB 认为，已有研究常用来评估基金能力的 alpha 并不够准确，原因是基金受到规模报酬递减的约束：
+其中， 为基金在 期末的规模，，。据此，BvB 提出应用 value added，也即基金 alpha 与规模的乘积，来衡量基金创造的价值（基金能力）。Barras et al. (2022) 延续这一思路，并将 和 分别解释为基金搜寻投资机会的能力（Skill）和基金应对规模报酬递减的能力，也即扩展性（Scalability）。在此基础上，他们提出了一个可以实证估计 和 系数、进而估计基金能力的精巧方法。
+3. Common fund flows: Flow hedging and factor pricing前两篇文章聚焦于基金市场本身。而 Common fund flows 这篇 JF forthcoming 的文章则是基于基金市场来分析实证资产定价的研究，也即我们在早前关于我们称作准另类数据的 slides 中提到过的利用基金隐含信息来为资产定价的研究。这篇文章的故事说起来还是非常简单直观：基金往往收取固定的管理费，基金的收入取决于规模、从而取决于资金流。这使得基金经理偏好平滑的资金流。与此同时，作者发现不同基金的资金流有着显著的共同成分（common components）。由于基金收到资金流入或面临资金流出时会交易股票（往往还（近似地）根据已有持仓来进行交易），因此，基金资金流会使得基金持股面临不同的买卖压力。上述因素使得基金经理会更偏好那些收益对共同资金流不那么敏感的股票，以对冲资金流的潜在影响，进而使得基金资金流的共同成分使得资金流对股票的影响变成为一个影响股票买卖压力、从而影响其收益的系统性因素。Dou, Kogan and Wu (2022) 通过一个理论模型说明了这一点。而在实证检验方面，作者首先利用主成分分析（或简单取均值）提取 common fund flows，进而通过回归分析估计股票的 flow beta，并利用实证资产定价的标准方法验证了其理论分析：flow beta 是一个被定价的系统性风险因子。
+4. A horizon based decomposition of mutual fund value added using transactions另一篇 JF forthcoming 的文章 van Binsbergen et al. (2019) 则着重考察了基金交易频率对不同持有期限下的 value added 的影响。这篇文章在三方面非常有趣、创新。首先，在实证方面，作者发现了非常有意思的典型事实：高换手率基金主要在短期创造价值：在 2 周左右的期限内，高换手率基金可以创造显著更高的 value added，但此后迅速衰减，在大约 60 天之后，value added 不再显著；
+而低换手率基金则相反，短期创造的 value added 非常有限，但如果考察超过 240 天的持有期限，则 value added 显著高很多很多（一个数量级）。
+其次，在实证分析中，作者用了一个较少被用到的基金日度交易数据，这一数据集来自 Abel Noser Solutions。利用这一数据集，可以对基金交易进行期限分解。最后，作者用一个简洁的 stylized model 非常优雅地刻画了这一典型事实，其中，有短期和长期两类项目（策略），短期项目有利可图但缺乏可扩展性，使得有不同换手率的基金在不同持有期限下有迥异的 value added。
+5. 结语本文简要梳理了 JF 2022 年正式发表或接收的几篇基金相关的高质量文章：Harvey and Liu (2022) 与作者早前同样发表在 JF 的 double bootstrap 的文章一起，大概可以宣告基金业绩评估中的多重检验问题（Bootstrap 和 FDR 方法）暂且告一段落，不太会是未来金融学顶刊的关注重点。
+Barras, Gagliardini and Scaillet (2022) 指出了考察基金 value added 的重要性并基于美国市场数据提出了一个巧妙的估计方法。但也需要注意，这一方法对数据有颇多要求，因而不能适用于全部的基金，这一点对于在中国这样历史较短的新兴市场尤其显著。此外其估计方法也不是那么容易从经济意义上来理解。这使得在进行相关研究时，不能简单地套用，而需进一步扩展或从不同的视角切入，以保证可行性和可解释性。我们在这方面也做了一点点工作（目前正在一本中文期刊 R&R）。
+Dou, Kogan and Wu (2022) 的研究则更好地结合了基金（资本市场）与资产定价，为理解风险溢价与资产定价提供了一些新的视角。此外，文章的写作也非常值得借鉴。文章结构合理、论证翔实，读起来也不是特别 technical，非常舒服。
+van Binsbergen et al. (2022) 则延续了几位作者一贯的敏锐洞察力，用简洁的方式，从理论和实证上讲清楚了一个有趣的典型事实，并引入了一个新的 unique dataset. 此外，几位作者还有一篇与本文密切相关的 working paper，同样与基金换手率有关，也非常有趣。
+希望本文的简要梳理能给您一些启发。全文完。祝您阅读愉快！Reference:Barras, Laurent, Patrick Gagliardini, and Olivier Scaillet. "Skill, scale, and value creation in the mutual fund industry." Journal of Finance 77.1 (2022): 601-638.
+Berk, Jonathan B., and Jules H. van Binsbergen. "Measuring skill in the mutual fund industry." Journal of Financial Economics 118.1 (2015): 1-20.
+Berk, Jonathan B., and Jules H. van Binsbergen. "Mutual funds in equilibrium." Annual Review of Financial Economics 9 (2017): 147-167.
+Dou, Winston Wei, Leonid Kogan, and Wei Wu. "Common fund flows: Flow hedging and factor pricing." Journal of Finance, forthcoming (2022).
+Fama, Eugene F., and Kenneth R. French. "Luck versus skill in the cross‐section of mutual fund returns." Journal of Finance 65.5 (2010): 1915-1947.
+Harvey, Campbell R., and Yan Liu. "Luck versus skill in the cross section of mutual fund returns: Reexamining the evidence." Journal of Finance 77.3 (2022): 1921-1966.
+Kosowski, Robert, Allan Timmermann, Russ Wermers, and Hal White. "Can mutual fund “stars” really pick stocks? New evidence from a bootstrap analysis." Journal of Finance 61.6 (2006): 2551-2595.
+van Binsbergen, Jules H., Jungsuk Han, Hongxun Ruan, and Ran Xing. "A horizon based decomposition of mutual fund value added using transactions." Journal of Finance, forthcoming (2019).
+van Binsbergen, Jules H., Jungsuk Han, Hongxun Ruan, and Ran Xing. "Mutual Fund Managers' Career Concerns, Investment Horizons, and Value Added: Theory and Empirics." Swedish House of Finance Research Paper 21-18 (2021).

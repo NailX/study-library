@@ -1,0 +1,191 @@
+# 出色不如走运 (VII)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/eNbQOKYfwQZa2kKCFu3bFw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+Bayesian approach to multiple tests.
+
+1
+引言
+
+p-value，这个人们在检验因子和异象收益率时绕不过的指标，正逐渐退去“光环”。
+
+2019 年，美国统计协会的官方期刊 The American Statistician 推出了一期名为 Statistical Inference in the 21st Century: A World Beyond p < 0.05 的专刊[1]，用多达 40 篇文章“声讨”了 p-value 如何被错误使用，并给出了可行的替代办法。
+
+事实上，美国统计协会对 p-value 的“敲打”由来已久，而很多顶级期刊，包括 Econometrica 和 American Economic Review，也都已经在其期刊 policy 里写明不鼓励使用人们熟悉的小星星 —— *、**、*** —— 来表示统计显著性。然而在这期专刊中，美国统计协会更是直接建议禁止使用“统计上显著”。
+
+我们不难理解美国统计协会的这个主张（对于他们的论述请自行查阅原文，这个专刊都是 open access）。当人们过度强调统计显著性时，自然而然的就把 p-value 推到了聚光灯之下。从研究来看，一个 p-value = 0.049 的结果和另一个 p-value = 0.051 的结果也许没有太大差别，但是一旦人们意识到前者可以被加上 ** 而后者通常只能被加上一个 * 的时候（从而增加论文被发表的几率），一切就发生了变化。人们会有意识（或无意识）地操纵数据、朝着两个 ** 而努力，而这就引出了《出色不如走运》系列的主题 p-hacking。而多重假设检验的存在，无疑更是让 p-hacking 雪上加霜。
+
+为了降低 p-hacking 的影响，我们在研究因子和异象的时候需要考虑多重假设检验问题。《出色不如走运》系列的前几篇文章介绍了实证资产定价领域这方面最新的研究成果，例如 Chordia, Goyal and Saretto (2020) 以及 Harvey and Liu (2020) 等。此外，Harvey, Liu and Saretto (2020) 一文则回顾了更为常见的 Bonferroni、Holm 以及 StepM 等方法[2]。
+
+不过，以上介绍的大部分方法，都是频率主义方法。这些方法依赖于引入 overall error rates（例如 FWER 或 FDR），并以此为目标调整单一假设检验的 p-value。与频率主义方法相对应的，是贝叶斯方法。顾名思义，贝叶斯方法允许我们引入从经济学理论得出的关于因子是否为真的先验。此外，贝叶斯方法还自带奥卡姆剃刀效应（Ockham’s razor effect），它能根据同时被检验的因子的个数自动调整因子为真的后验概率（看完下一节你就会明白这句话的含义）。
+
+今天我们就通过 Campbell Harvey 的几篇文章，给应对 p-hacking 的贝叶斯方法开个头。
+
+2
+完整的贝叶斯框架
+
+我们从 Harvey, Liu and Zhu (2016) 谈起，这篇文章把实证资产定价研究中多重假设检验问题的严重性摆上了台面，至此之后，人们也不再使用传统的 t-statistic = 2.0 阈值，而是使用更高的阈值（例如 3.0）。不过，这篇文章的正文介绍的依然是频率主义方法。
+
+不过，该文的附录 B 介绍了一个贝叶斯框架下的 hierarchical model，它是一个完整的贝叶斯框架。该贝叶斯框架源自 Scott and Berger (2006)。Harvey, Liu and Zhu (2016) 的附录以及 Scott and Berger (2006) 都非常值得一读，不过前者是在实证资产定价的角度介绍该 hierarchical model，论述的更清晰一些。
+
+该 hierarchical model 分为三层。
+
+第一层：  
+
+其中  表示因子  的平均收益率，  表示未知的因子收益率均值，  表示方差（注意，此处方差没有加下标  ，因而暗含的假设是所有因子平均收益率的方差相同），  是一个二分变量（取值为 1 意味着因子是真正的；取值为 0 意味着因子为虚假的）。
+
+在上述模型中，等方差这个假设并没有听上去那么不合理；例如，在实际中，我们总可以通过调整杠杆来让所有因子投资组合等波动。不过，另一个关键假设，即收益率满足 conditionally IID 则多少有些苛刻。不过正如 Harvey, Liu and Zhu (2016) 所言，条件独立性对于贝叶斯框架和构造似然函数至关重要。
+
+在上述假设下，似然函数为（令  、  以及  分别表示对应  、  以及  的向量）：
+
+  
+
+第二层：  
+
+模型的第一层描绘了在给定  和  下，因子平均收益率的分布，不过并没有说  和  是怎么来的，这就是模型的第二层。模型假设  满足 IID 正态分布（均值为零，方差为  ），而  满足参数为  的伯努利分布，即  的概率为  ，  的概率为  。
+
+在前两层的基础上，为了使上述贝叶斯框架变得完整，我们还需要最后一步，即  、  和  的先验分布。
+
+第三层：  
+
+在这一步，人们可以根据自己的偏好选择参数的先验分布  和  。在没有充分先验知识的情况下，一组推荐使用的先验分布为（Scott and Berger 2006）：
+
+  
+  
+
+对于  的合理性，Scott and Berger (2006) 中花了一定的篇幅，感兴趣的读者请阅读原文。在  中，  是一个控制其分布中心的参数（例如，当  时，  变为 uniform distribution）。由定义可知，参数  控制了每个因子为假的概率（回忆一下，  的概率为  ）。也许我们没有足够的先验知识准确地描绘  的分布，但常识告诉我们大部分因子应该是虚假的，因此  的取值应该接近 1。
+
+此外，当同时考察的因子个数增大时，我们也可以根据先验知识进一步调整  从而控制  的分布（使其分布更加靠近 1）。利用上述贝叶斯框架，我们也可以计算出每个因子为真的后验概率，即  。由后验概率可知，随着同时检验的假设个数（即因子个数）的增加，后验概率  将更加接近零。换句话说，随着噪声信号（虚假因子）个数的增多，真实因子传递出来的证据也会随之而降低。这正是贝叶斯框架自带奥卡姆剃刀效应，即根据同时被检验的因子的个数自动调整因子为真的后验概率的原因。
+
+下表展示了来自 Scott and Berger (2006) 的一个例子。无论采用哪种  的先验分布，当噪声信号个数  增多时（取值从 25 上升至 5000），原始信号为真的后验概率随之而降低，体现了频率主义方法中对多重假设检验的惩罚。
+
+虽然完整的贝叶斯框架听上去很不错，但实操起来也有很多问题。首先正如前文所述，它的假设（尤其条件独立性方面的假设）太过苛刻。第二就是计算方面的问题，当同时考虑的因子个数很多时，计算每个因子为真的后验概率极具挑战。
+
+3
+最小贝叶斯因子
+
+第二篇要谈的文章是 Harvey (2017)，即 Campbell Harvey 在 AFA 年会做的主席演讲。该文通过贝叶斯统计和原始 p-value，构造了一个后验贝叶斯 p-value[3]。
+
+由贝叶斯统计可知，先验机会比（prior odds ratio）、后验机会比（posterior odds ratio）以及贝叶斯因子（Bayes factor）之间满足如下关系：
+
+  
+
+在我们的上下文中，令  和  代表关于因子预期收益率的原假设和备择假设，则 Bayes factor 定义为两个似然函数之比
+
+  
+
+令  表示  的参数。在检验因子预期收益率时，通常原假设为零，因此可以将  写成  。但是对于备择假设，为了让分析更具一般性，往往认为在  下，对应的参数  服从先验分布  。在这种情况下，其似然函数为  ，因此 Bayes factor 可以变为
+
+  
+
+毫无疑问，对于检验因子来说，后验机会比是我们真正关注的问题。因为它告诉我们原假设和备择假设后验概率的高低 —— 一个特别低的后验机会比意味着原假设的后验概率很低，因此我们可以安全地拒绝原假设，即认为因子是真实的。
+
+不过，想要计算后验机会比，就必须要先算出 Bayes factor。但从上面的定义可知，计算 Bayes factor 需要我们指定备择假设下的先验分布，但这往往非常困难。不过好消息是，在众多 Bayes factor 的取值中，有一个特殊的取值，它就是 Harvey (2017) 提出的最小贝叶斯因子（minimum Bayes factor，MBF）。
+
+为了直观理解 MBF，我们来回顾一下
+
+  
+
+上式可以理解为，对于  和  来说，我们从先验机会比出发，通过（乘以）Bayes factor 得到后验机会比。当给定先验机会比时，Bayes factor 越小（因而后验机会比越低），则说明相对于先验，我们在后验中对原假设仍然持有的信念就越弱；Bayes factor 越大（因而后验机会比越高），则说明相对于先验，我们在后验中对原假设仍然持有的信念就越强。因此，Bayes factor 衡量了，在我们看到样本数据之后，会在多大程度上偏离先验机会比，而 MBF 提供了对于原假设来说最强烈程度的偏离。
+
+MBF is the Bayes factor that provides the strongest evidence against the null hypothesis.
+
+直观理解 MBF 之后，我们便能够顺水推舟地搞懂如何计算它，因为 MBF 对应着一个特殊的备择假设下的先验分布。考虑下面这个例子，假设我们有 1000 个收益率观测值，其样本均值为 4%。假设先验机会比为 3/7，即先验中我们认为原假设为真的概率是 30%。那么在什么情况下我们会得到 MBF 呢？这个问题的答案是：在备择假设的先验分布中，所有的数据都集中在 4% 这个样本均值：
+
+It occurs when the density of the prior distribution of alternative hypothesis concentrates at the maximum likelihood estimate of data.
+
+通过以上论述可知，MBF 允许我们计算原假设后验概率的 lower bound，更关键的是它回答的是人们真正关心的问题，即给定数据时原假设为真的条件概率是多少。利用原始 p-value 或者 t-statistic，我们可以很容易地计算出 MBF（Harvey 2017 给出了两种计算方法）。
+
+此外，利用  并经过简单代数运算，可以方便的求出原假设的后验概率，Harvey (2017) 称其为 Bayesianized p-value：
+
+  
+
+为了在实际操作中应用 Bayesianized p-value，除了需要知道 MBF 之外，还需要指定 prior odds ratio。为此 Harvey (2017) 给出了一些经验法则：（1）对于一看就没什么道理的因子，prior odds ratio = 49:1；（2）对于似是而非的因子，prior odds ratio = 4:1；（3）对于具备经济学理论依据的因子，prior odds ratio = 1:1。
+
+相比于本文介绍的完整贝叶斯框架，基于 MBF 的方法更具可操作性。
+
+4
+Double-Bootstrap
+
+最后是 Harvey and Liu (2020)。
+
+这篇文章（以及其后续文章 Harvey and Liu 2021）也并非传统意义上的贝叶斯方法，但是它们都通过一个先验参数  控制真实因子的比例。
+
+其实《出色不如走运(V)?》一文已经对 Harvey and Liu (2020) 进行了详细的介绍。之所以再次提它，原因是搞懂这篇文章中关于  的贝叶斯解释（下图）正是促使我对这系列文章进行梳理并写下此文的原因。
+
+希望至此，你也和我一样，不再有困惑。
+
+我个人很喜欢 Harvey and Liu (2020) 的 double-bootstrap 框架，也基于它做了很多实证分析。该方法通过引入  和 double-bootstrap 让人们表达先验，并且在控制 Type I error rate 的同时也能够权衡 Type II error rate。这在 Type II error 的成本越来越高的今天显得尤为重要。
+
+5
+结束语
+
+本文借 Campbell Harvey 的几篇文章梳理了贝叶斯统计在 p-hacking 问题上的应用。需要强调的是，全文并没有强调贝叶斯方法就比频率主义方法更好（或更差）。只不过对于需要注入经济学理论的实证资产定价研究来说，利用合理的先验，并回答正确的问题（不要再盯着 p-value 尤其是 p-hacking 出来的 p-value 不放），注定能够带给我们一些新的思考和启发。
+
+Harvey and Liu (2021) 的分析表明，由于我们只观测到了被发表的因子，而不知道人们到底尝试了多少因子，因此这个问题是未识别的（lack of identification）。而正因如此，对 p-hacking 的研究确实存在主观的一面。与其深究各种（存在问题的）贝叶斯方法，不如承认这个计量上的系统问题，并通过合理的先验得到令人信服的结论。
+
+备注：
+[1] 见 https://www.tandfonline.com/toc/utas20/73/sup1
+[2] 见《常见多重检验方法及其实证 (I)》。
+[3] 见《在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远》。
+
+参考文献
+Chordia, T., A. Goyal, and A. Saretto (2020). Anomalies and false rejections. Review of Financial Studies 33(5), 2134 – 2179.
+
+Harvey, C. R. (2017). Presidential address: The scientific outlook in financial economics. Journal of Finance 72(4), 1399 – 1440.
+
+Harvey, C. R. and Y. Liu (2020). False (and missed) discoveries in financial economics. Journal of Finance 75(5), 2503 – 2553.
+
+Harvey, C. R. and Y. Liu (2021). Uncovering the iceberg from its tip: A model of publication bias and p-hacking. Working paper.
+
+Harvey, C. R., Y. Liu, and A. Saretto (2020). An evaluation of alternative multiple testing methods for finance applications. Review of Asset Pricing Studies 10(2), 199 – 248.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies 29(1), 5 – 68.
+
+Scott, J. G. and J. O. Berger (2006). An exploration of aspects of Bayesian multiple testing. Journal of Statistical Planning and Inference 136(7), 2144 – 2162.
+
+Wasserstein, R. L., A. L. Schirm, and N. A. Lazar (2019). Moving to a world beyond “p <0.05”. The American Statistician 73(sup1), 1 – 19.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+2. Don't Say "Statistically Significant"
+The ASA Statement on P-Values and Statistical Significance stopped just short of recommending that declarations of ‘statistical significance” be abandoned. We take that step here. We conclude, based on our review of the articles in this special issue and the broader literature, that it is time to stop using the term “statistically significant” entirely. Nor should variants such as “significantly different,” “p < 0.05,” and “nonsignificant” survive, whether expressed in words, by asterisks in a table, or in some other way.
+出处：Wasserstein, Schirm and Lazar (2019)
+--- 图3 ---
+The posterior probabilities of the 10 signal means being non-zero as n, the number of noise observations, increases, for two different priors on p
+[表]
+10 Signal observations | 
+n | -5.65 | -5.56 | -2.62 | -1.20 | -1.01 | -0.90 | -0.15 | 1.65 | 1.94 | 3.5 | 
+Uniform prior on p | 
+25 | .97 | .97 | .71 | .31 | .28 | .26 | .20 | .43 | .51 | .81 | 
+100 | .99 | .99 | .47 | .21 | .20 | .19 | .16 | .26 | .31 | .71 | 
+500 | 1 | 1 | .34 | .07 | .06 | .06 | .04 | .11 | .15 | .71 | 
+5000 | 1 | 1 | .11 | .02 | .02 | .02 | .01 | .03 | .04 | .41 | 
+Prior  $ \pi(p) = 11p^{10} $ | 
+25 | .91 | .90 | .37 | .10 | .08 | .08 | .06 | .15 | .20 | . | 
+00 | .98 | .98 | .23 | .06 | .05 | .05 | .04 | .08 | .11 | . | 
+500 | 1 | 1 | .26 | .04 | .04 | .03 | .02 | .07 | .10 | . | 
+5000 | 1 | 1 | .08 | .01 | .01 | .01 | .01 | .02 | .03 | . |
+Here, the signal  $ \mu_i \sim \mathrm{N}(0, 9) $, and the signal observations  $ x_i \sim \mathrm{N}(\mu_i, 1) $.
+41.c 10.000
+--- 图4 ---
+The parameter $p_{0}$ also has a Bayesian interpretation. Harvey, Liu, and Zhu (2016) present a stylized Bayesian framework for multiple hypothesis testing in which multiple-testing adjustment is achieved indirectly through the likelihood function. Harvey (2017) instead recommends the use of the minimum Bayes factor, which builds on Bayesian hypothesis testing but abstracts from the prior specification by focusing on the prior that generates the minimum Bayes factor. Our treatment of $p_{0}$ lies between Harvey, Liu, and Zhu (2016) and Harvey (2017), in the sense that, while we do not go as far as making assumptions on the prior distribution of $p_{0}$ that is later fed into the full-blown Bayesian framework as in Harvey, Liu, and Zhu (2016), we deviate from the Harvey (2017) assumption of a degenerate prior (i.e., the point mass that concentrates on the parameter value that generates the minimum Bayes factor) exploring how error rates respond to changes in $p_{0}$. While we do not attempt to pursue a complete Bayesian solution to multiple hypothesis testing, the sensitivity of error rates to changes in $p_{0}$ that we highlight in this paper are important ingredients to both Bayesian and frequentist hypothesis testing.
+出处：Harvey and Liu (2020)
+--- 图5 ---

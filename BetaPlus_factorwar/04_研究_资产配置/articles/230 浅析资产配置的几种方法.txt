@@ -1,0 +1,156 @@
+# 浅析资产配置的几种方法
+
+来源：04_研究_资产配置
+链接：https://mp.weixin.qq.com/s/0WBpcEkWaNTIJ8H-u_9-OA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。知乎专栏：
+https://zhuanlan.zhihu.com/mitcshi。
+
+未经授权，严禁转载。
+
+摘
+要
+使用任何一个资产配置模型，绝不是简单的把不能猜的参数忽略掉、把能猜的参数扔进去，而是要明白它到底配了什么。
+
+1
+引言
+
+“The most important key to successful investing can be summed up in just two words —— asset allocation.
+”
+不夸张的说，资产配置是投资中最关键的一环。无论我们有多少个收益源、多少因子，最终都要力争在最小化投资组合风险的前提下实现更高的收益。这正是资产配置（asset allocation）。
+
+谈到资产配置，最著名的要数 Mean-Variance Optimization（MVO）模型，它的数学表达式如下：
+
+其中 ω 是资产权重向量、μ 和 Ω 分别为预期收益率向量以及协方差矩阵、δ 是风险厌恶系数。当不考虑任何约束是，上述 MVO 问题的最优解是：
+
+如果考虑所有资产权重加起来占资金量 100%，即 Σω = 1，则可以将上述最优解中的等号换成“正比于”符号，它和最终的权重只差一个 scaling factor 而已：
+
+对于权重为 ω 的投资组合，其夏普率为：
+
+数学推导可以证明，最大化投资组合夏普率的 ω 也正比于 (Ω^{-1})μ，因此 MVO 的最优解 ω_{mvo} 可以最大化投资组合的夏普率。这就是它吸引人的原因。
+
+当然，由于对输入（μ 和 Ω）非常敏感，且事前预测未来的 μ 和 Ω 异常困难（Ω 中包括资产自己的波动率 σ_i 以及资产间的相关系数 ρ_ij），MVO 在投资实务中也没少被人诟病。为了避免猜 μ 和 Ω 的问题，人们又相继提出了很多其他的资产配置方法，诸如：equal weight、minimum variance、maximum diversification 以及 risk parity（又称 equal risk contribution）。
+
+在实际资产配置中，由于 μ_i、σ_i、ρ_ij 中的一个或多个难以预测，我们舍弃 MVO 并退而求其次选择上述这些方法之一。无论采取哪种方法，我们都希望最大化投资组合的夏普率。事实上，当 μ_i、σ_i、ρ_ij 这些参数满足特定条件时，所有上述方法均可以等价于 MVO。在资产配置时，我们可以对资产参数 μ_i、σ_i、ρ_ij 所满足的条件做适当的假设，从而选择最合适的配置方法。
+
+本文的目的就是梳理上述几种资产配置方法背后的数学模型，从而搞清楚它们分别在何种参数条件下等价于 MVO，并以此指导我们在投资实务中正确选择它们。
+
+最后想要说明的是，由于篇幅和我的知识有限，本文无法覆盖所有主流的资产配置模型。但是本文的思路可以用来分析其他方法。
+
+2
+数学描述
+
+本文考虑的资产配置方法包括：Minimum Variance、Maximum Diversification、Risk Parity / Equal Risk Contribution 和 Equal Weight。以下逐一说明。
+
+Minimum Variance 方法的数学表达式为：
+
+可以证明，它的最优解满足如下关系（Clarke, de Silva, and Thorley 2013）：
+
+将其和 ω_{mvo} 比较不难发现，当所有资产的收益率 μ 相等时，minimum variance 方法等价于 MVO。
+
+接下来是 Maximum Diversification。它的数学表达式为：
+
+其中 σ = [σ_1, σ_2, …, σ_N]' 表示 N 个资产标准差（波动率）的向量。该方法最大化资产线性加权波动率与投资组合波动率的比值，故称为最大分散化资产配置组合。它的最优解满足如下关系（Clarke, de Silva, and Thorley 2013）：
+
+同样的，将其和 ω_{mvo} 比较发现，当所有资产的收益率 μ_i 和它们对应的波动率 σ_i 比值均相同（即 μ_i/σ_i = μ_j/σ_j）时，maximum diversification 方法等价于 MVO。
+
+再来看看 Risk Parity / Equal Risk Contribution。它要求每个资产对投资组合的风险等贡献，即：
+
+其中 σ_p 代表投资组合的波动率。该条件可以转化为如下数学优化问题：
+
+其中 (Ωω)_i 表示向量 Ωω 的第 i 行，即一个标量。Maillard, Roncalli, and Teïletche (2010) 一文对 Equal Risk Contribution（ERC）配置方法进行了非常详尽的数学论述，得出了很多有益的结论。其中，最重要的是，当所有 N 个资产两两相关系数相等（即所有 ρ_ij 都等于某常数 ρ）时，ERC 的最优解为：
+
+除了 ERC 之外，另一个与其十分接近的配置方法是 equal risk budget（ERB）。根据定义，ERB 的最优解满足 ω_i = σ_i^{-1}/(Σ_jσ_j^{-1})。换句话说，当所有资产两两相关系数均相等时，ERC 和 ERB 一样。Carvalho, Lu, and Moulin (2012) 指出，当资产夏普率相同，且相关系数均相同时，ERB 等价于 MVO。由此可以推断出 ERC 等价于 MVO 的条件：所有资产的收益率 μ_i 和它们对应的波动率 σ_i 比值均相同（即 μ_i/σ_i = μ_j/σ_j，意味着夏普率相同）、且所有资产两两相关系数相同。
+
+最后来看看 Equal Weight。这种等权方法没什么可优化的，其权重为：ω_{ew} = [1/N, …, 1/N]'，即每个资产占 1/N 的比例。当所有资产的波动率相同时，ω_{ew} 可以看成 ERB 的一种简单形式。由此可以推导出，equal weight 如果想等价于 MVO 则要求资产的 μ_i、σ_i、ρ_ij 满足以下三方面非常苛刻的条件：
+
+1. 所有资产的收益率 μ_i 和波动率 σ_i 比值均相同（即 μ_i/σ_i = μ_j/σ_j）;
+
+2. 所有资产两两相关系数相同；
+
+3. 所有资产的 σ_i 相同。
+
+下图对上述配置方法进行了总结。
+
+下一节进行一些简单实验说明当参数满足不同条件时，这些方法的差异。
+
+3
+实验研究
+
+从上节末的表格中不难看出，除了 minimum variance 之外，其他三种方法对参数的要求依次增强。因此，我们可以构建一系列实验，从最苛刻的条件开始，并逐一放松约束，以此观察这三种方法的配置结果和 MVO 配置结果的差异。（稍后会单独比较 minimum variance 和 MVO。）
+
+由于 equal weight 配置方法需要三个条件才等价于 MVO，因此下面一共考虑四个实验：
+
+1. 第一个实验中三个条件均满足，即资产波动率相同、收益率与波动率之比相同、两两相关系数相同；
+
+2. 第二个实验中去掉资产波动率相同；
+
+3. 第三个实验中进一步去掉两两相关系数相同；
+
+4. 第四个实验中去掉全部三个条件。
+
+在这四个实验中比较 equal weight、equal risk contribution、maximum diversification 以及 MVO 四种方法。每个实验中假设有三个资产，作为实验输入给定它们的 μ_i、σ_i 以及 ρ_ij，并考察不同资产配置方法得到的最优配置权重（所有方法均需要满足约束 Σω = 1）以及夏普率。
+
+实验结果如下表所示。
+
+随着参数满足的条件逐渐去除，equal weight、equal risk contribution 以及 maximum diversification 依次在与 MVO 的比较下败下阵来。上述结果说明，对参数（无论是 μ、σ 还是 ρ）的准确估计对资产配置结果是至关重要的；等权（或简单多样化）只是一种无法（准确）估计参数时的无奈之举。一旦有了任何关于 μ、σ、ρ 的（靠谱）信息都应该充分利用，并合理对未知参数可能满足的条件进行假设，从而选择最合适的资产配置方法。
+
+最后下图展示了 minimum variance 和 MVO 的比较。由于两组实验中，只改变了 μ 的取值而协方差矩阵不变，因此 minimum variance 配置给出了相同的结果；但是仅当所有资产 μ 相同时，minimum variance 才等价于 MVO。
+
+4
+结语
+
+写今天这篇文章源于我最近看了 Bender, Blackburn, and Sun (2019)。该文比较了不同的配置方法在构建因子投资组合时的效果（包括一些本文没有涉及的方法，见下表）。
+
+对于 MVO，Bender, Blackburn, and Sun (2019) 的态度是，虽然输入的准确性至关重要，但我们也没有必要急于否定最优化在资产（因子）配置中的作用，因为其他方法都是在某种假设下对 MVO 的近似。
+
+资产配置有很多不同的方法。本文希望传达的态度是：无论选择哪种方法，都应该搞清楚其数学模型背后的对参数的假设是什么。搞清楚每个模型在什么情况下等价于 MVO 至关重要。使用一个模型，绝不是简单的把不能猜的参数忽略掉、把能猜的参数扔进去，而是要明白它到底配了什么。
+
+参考文献
+Bender, J., T. Blackburn, and X. Sun (2019). Clash of the titans: factor portfolios versus alternative weighting schemes. The Journal of Portfolio Management, Quantitative Special Issue, Vol. 45(3), 38 – 49.
+
+Carvalho, R. L., X. Lu, and P. Moulin (2012). Demystifying equity risk-based strategies: a simple alpha plus beta description. The Journal of Portfolio Management, Vol. 38(3), 56 – 70.
+
+Clarke, R., H. de Silva, and S. Thorley (2013). Risk parity, maximum diversification, and minimum variance: an analytic perspective. The Journal of Portfolio Management, Vol. 39(3), 39 – 53.
+
+Maillard, S., T. Roncalli, and J. Teïletche (2010). The properties of equally weighted risk contribution portfolios. The Journal of Portfolio Management, Vol. 36(4), 60 – 70.
+
+【图片文字】
+--- 图1 ---
+量化核武研究
+--- 图13 ---
+[表]
+配置方法 | 目标函数 | 最优解 | 等价于 MVO 的条件 | 
+Minimum Variance | $ \min\limits_{\omega}\omega&#x27;\Omega\omega $ | $ \omega_{mv}\propto\Omega^{-1}\mathbf{1} $ | 所有资产收益率相同 | 
+Maximum Diversification | $ \max\limits_{\omega}\frac{\omega&#x27;\sigma}{\sqrt{\omega&#x27;}\Omega\omega} $ | $ \omega_{md}\propto\Omega^{-1}\sigma $ | 所有资产收益率和波动率比值相同 | 
+Equal Risk Contribution (Risk Parity) | $ \min\limits_{\omega}\sum_{i=1}^{N}\left[\omega_{i}-\frac{\sigma_{p}^{2}}{(\Omega\omega)_{i}N}\right]^{2} $ | $ \omega_{i}^{erc}=\frac{\sigma_{i}^{-1}}{\sum_{j}\sigma_{j}^{-1}} $ | 1. 所有资产收益率和波动率比值相同;\n2. 资产两两相关系数相同。 | 
+Equal Weight | N/A | $ \omega_{ew}=[1/N,\cdots,1/N]&#x27; $ | 1. 所有资产波动率相同;\n2. 所有资产收益率和波动率比值相同;\n3. 资产两两相关系数相同。 |
+--- 图14 ---
+[表]
+条件 | 具体参数 | Equal Weight | Equal Risk Contribution | Maximum Diversification | MVO | 
+相同  $ \mu/\sigma $ | $ \sigma = [0.1, 0.1, 0.1] $ | $ \omega = [0.333, 0.333, 0.333] $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | 
+相同  $ \rho $ | $ \mu/\sigma = [0.5, 0.5, 0.5] $ | $ \rho = 0.1 $ | Sharpe Ratio = 0.791 | Sharpe Ratio = 0.791 | Sharpe Ratio = 0.791 | 
+相同  $ \mu/\sigma $ | $ \sigma = [0.1, 0.2, 0.3] $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | $ \omega = [0.545, 0.273, 0.182] $ | $ \omega = [0.545, 0.273, 0.182] $ | $ \omega = [0.545, 0.273, 0.182] $ | 
+相同  $ \rho $ | $ \mu/\sigma = [0.5, 0.5, 0.5] $ | $ \rho = 0.1 $ | Sharpe Ratio = 0.745 | Sharpe Ratio = 0.791 | Sharpe Ratio = 0.791 | 
+相同  $ \mu/\sigma $ | $ \sigma = [0.1, 0.2, 0.3] $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | $ \omega = [0.579, 0.258, 0.163] $ | $ \omega = [0.625, 0.250, 0.125] $ | $ \omega = [0.625, 0.250, 0.125] $ | 
+相同  $ \mu/\sigma $ | $ \mu/\sigma = [0.5, 0.5, 0.5] $ | $ \rho = 12 = 0.1 $ | Sharpe Ratio = 0.654 | Sharpe Ratio = 0.704 | Sharpe Ratio = 0.707 | 
+相同  $ \mu/\sigma $ | $ \rho_1 = 0.2 $ | $ \rho_2 = 0.5 $ | $ \omega = [0.333, 0.333, 0.333, 0.333] $ | $ \omega = [0.566, 0.260, 0.174] $ | $ \omega = [0.600, 0.240, 0.160] $ | 
+不同 | $ \sigma = [0.1, 0.2, 0.3] $ | $ \mu/\sigma = [0.6, 0.4, 0.3] $ | Sharpe Ratio = 0.504 | Sharpe Ratio = 0.614 | Sharpe Ratio = 0.626 |
+--- 图15 ---
+[表]
+条件 | 具体参数 | Minimum Variance | MVO | 
+相同  $ \mu $ | $ \sigma $ = [0.1, 0.2, 0.3]\n $ \mu $ = [0.1, 0.1, 0.1]\n $ \rho_{12} $ = 0.1\n $ \rho_{13} $ = 0.2\n $ \rho_{23} $ = 0.1 | $ \omega $ = [0.801, 0.169, 0.030] | $ \omega $ = [0.801, 0.169, 0.030] | 
+不同  $ \mu $ | $ \sigma $ = [0.1, 0.2, 0.3]\n $ \mu $ = [0.05, 0.1, 0.15]\n $ \rho_{12} $ = 0.1\n $ \rho_{13} $ = 0.2\n $ \rho_{23} $ = 0.1 | Sharpe Ratio = 1.083 | Sharpe Ratio = 1.083 | 
+$ \omega $ = [0.801, 0.169, 0.030] | $ \omega $ = [0.529, 0.294, 0.176] | 
+Sharpe Ratio = 0.665 | Sharpe Ratio = 0.770 |
+--- 图16 ---
+EXHIBIT 1
+Various Weighting Schemes Explored in Past Papers
+[表]
+Strategy | Objective | Assumptions for Mean–Variance Optimality | 
+Minimum Variance Portfolio | Min  $ \sigma_{p}^{2}=w&#x27;\Omega w $ | Expected returns are equal | 
+Maximum Decorrelation Portfolio | Min  $ \sigma_{p}^{2}=w&#x27;\Omega w $ | Expected returns and volatilities are equal | 
+Maximum Diversification Portfolio | Max  $ D_{p}=\frac{w&#x27;\sigma}{\sqrt{w&#x27;}\Omega w} $ | Expected returns are proportional to volatilities | 
+Risk-Parity Portfolio/Equal Risk Contribution | $ \frac{\partial\sigma_{p}}{\partial w_{i}}w_{i}=\frac{\partial\sigma_{p}}{\partial w_{j}}w_{j} $ for any i,j | Expected returns are proportional to volatilities; correlations must be constant | 
+Maximum Deconcentration | Maximizes  $ 1/w&#x27;w $ | Expected returns and volatilities are equal; correlations are constant | 
+Maximum Sharpe Ratio | Max  $ SR_{p}=\frac{w&#x27;r}{\sqrt{w&#x27;}\Omega w}^{*} $ | No assumptions needed; however, expected returns must be specified, either as an additional input or assumed to be proportional to risk |

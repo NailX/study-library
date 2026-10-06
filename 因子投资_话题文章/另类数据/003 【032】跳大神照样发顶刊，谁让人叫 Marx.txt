@@ -1,0 +1,148 @@
+# 【032】跳大神照样发顶刊，谁让人叫 Marx
+
+来源：微信公众号「因子投资」话题·另类数据（第3篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484093&idx=1&sn=43bc33582fe81bb99d970265f33e1647&chksm=f995b33fcee23a2981f75b46b5e94dcc337d16550b38806650ee2f9ed147876cd28ec2067b35#rd
+
+这是另类因子专题的第 003 篇文章，也是因子动物园的第 032 篇独立原创文章。【未经授权，严禁转载。】
+
+【30 秒速览】除了近年新兴的文本数据等另类数据，人们其实已经探索过不少另类数据对经济和股票收益的影响，只是由于缺少理论基础，而不受重视。但有人不信邪，反其道而行之，利用经典的线性回归方法，检验了从总统党派，到天气，再到太阳黑子和天体相位，诸多另类数据都对股票和因子表现有显著的预测能力，并得到了有趣的发现。这可以给我们，尤其是业界从业者，一些新的启发。
+
+文章结构：01. 概述
+02. 总统党派与股票收益03. 气候与股票收益04. 天文现象与股票收益05. 观察与思考06. 结语01 概述
+另类数据对股票收益的预测作用日益受到重视。典型例子包括新闻文本情绪、文本复杂度，以及【028】乌合之众 or 群众的智慧：员工评价与股票收益介绍过的员工评价数据和【029】阿根廷的哭泣：大选、货币攻击与崩盘介绍过的总统选举。
+除此之外，还有一些自古以来便颇受关注的数据，因为其对股票表现的影响缺乏合理的经济理论基础，也往往不被主流学界认可，因而同样被视作另类数据。
+本文带您来一探关于这些另类数据对股票和主流因子的表现的影响。
+具体而言，包括在任总统所属党派、气候、星象等几个方面。
+研究方法也很简单明了。通过经典的单变量回归，观察这些另类数据，对股票和因子收益是否有显著影响：
+
+02 总统党派与股票收益
+首先，我们来看在任总统党派对股票及主流因子表现的影响，这也是最不另类的一个变量。
+基于 1961 至 2012 年间的美股数据的研究表明，在任总统所属党派这一变量，可以完全解释样本期内：
+市场总体的表现；
+小盘股在民主党执政期间的超额收益；
+以及
+高质量类策略（高 EP、低特质波动和低破产概率）在共和党执政期间的更优表现。
+
+表 1 ：在任总统党派与股票/因子收益.
+
+对此现象的一个解释是，共和党更倾向支持大企业的政策，而这些政策对经济整体并不利。因此，怀着对经济整体在共和党治下可能表现不佳的担忧，投资者更多追求高质量的投资，以确保安全。
+
+03 气候与股票收益
+天气对股票收益的影响也是一个有趣的话题。
+Cao and Wei (2005) 是早期的一项经典研究。
+他们指出，低温会激发人的冒险情绪，从而带来较高的股票收益，而高温会同时激发人的冒险和避险情绪，对股票收益的影响，取决于哪一种效应占主导。进一步，实证研究表明，高温下避险情绪占主导，从而导致较低的股票收益。
+在此基础上，考虑利用纽约中央公园气象站（因为相当部分交易员在纽约）记录的每月最高气温来对股票和因子收益进行预测。
+结果显示，气温似乎确实与交易者情绪及股票收益有关：
+低温下，市场整体、小盘、价值和长期反转反转因子等有显著更好的表现；
+高温下，与盈利有关的因子——高 ROA、高毛利率、高 EP 和低特质波动等有更好的表现。
+
+表 2 ：气温与股票/因子收益.
+
+但上述影响具有明显的季节性特征。为了考察气候因素的独特影响，进一步考虑两个中长期气候因素——季节性的厄尔尼诺和全球气候变暖。
+结果同样显示这些中长期因素对股票和因子表现有显著影响。
+具体而言，全球气候变暖这一趋势，对于价值和长期反转策略有不利影响，但对市场影响力相关的因子（例如，毛利率）有正向影响。
+厄尔尼诺会显著影响太平洋的海面温度。
+研究发现，盈利质量因子（earnings quality，由 Sloan (1996) 的经典研究衍生出的一系列因子）的收益几乎完全来自东太平洋异常温暖的时期。
+类似地，beta 套利策略（做多低 beta 股票，卖空高 beta 股票，同时买入市场组合以对冲 beta）的收益，几乎完全来自厄尔尼诺最厉害的一小段时间。
+
+04 天文现象与股票收益
+除了天气之外，天文现象对股票收益似乎也有影响。
+这方面的研究可追溯至 19 世纪的著名经济学家威廉·杰文斯（William Jevons）。
+这位天才是经济学的基础——效用理论——的提出者，但他似乎更多以其“太阳黑子经济周期”假说而被人们所熟知。这也是关于太阳黑子影响经济活动的最早研究。
+Modis (2007) 建立了太阳黑子活动、经济产出和道琼斯工业指数之间的联系，并令人印象深刻地，仅基于太阳黑子活动，便预测了 2008 年 6 月的股票顶部（事实上，的确如此，2008 年 6月道指大跌 10%，随后 8 个月内接近腰斩）。
+进一步的回归分析表明，低破产概率因子和 Heston and Sadka (2008) 的季节性因子在高太阳黑子活动时期表现良好。
+一个可能的解释是，活跃的太阳黑子活动阻碍了投资者分析信息的能力，从而使得利用缓慢变化的财务数据获利更加有利可图。
+另一个值得关注的天文现象是内行星相对外行星的朝向。
+所谓内行星，天文学中指地球轨道以内的行星，即水星和金星。而外行星相应为地球轨道以外的行星，尤其是火星、木星和土星。
+从星相学来看，内行星代表自我，外行星代表环境。而科学研究也支持行星位置对人的情绪有重要影响。
+在此基础上，计量研究发现，水星/金星相对外行星的朝向，对诸多投资异象的表现有显著影响。但由于水星和金星相对外行星的朝向的变化周期非常接近 1 年，因此，我们难以确定这种影响是其独特影响，还是来自于同气候的高度相关性。
+因此，进一步以外行星为代表进行分析。特别地，主要考察土星（最外层的行星）相对于火星和木星的朝向。
+以行星间的夹角代表相位，计量分析结果显示：
+土星与火星的夹角越大，则高质量类因子（高ROA，高 EP，低破产概率，低特质波动等）有更好的表现；
+土星与木星的夹角越大，投资和股票净发行的负收益就越显著。
+
+05 观察与思考
+这些研究的确相当有趣，也能给人不少启发。但似乎也有些问题。
+首先，基于 OLS 的回归分析方法未必可靠。虽然就影响方向而言，OLS 回归通常问题也不大，但毕竟这些另类数据不见得会很好地拟合正态分布。如果其分布与正态分布相去甚远，则可能是个问题。
+其次，在研究不同变量的影响时，作者展示的因子并不一致，不知道这是无意的，还是为了刻意隐藏什么。基于作者已有的丰富研究成果，我们本不应该怀疑作者的动机，但从科学严谨的角度来看，这的确是值得进一步分析的，需要更多的实证证据。
+
+06 结语
+除了近年新兴的文本数据等另类数据，人们其实已经探索过不少另类数据对经济和股票收益的影响，只是由于缺少理论基础，而不受重视。
+但有人不信邪，反其道而行之，利用经典的线性回归方法，检验了从总统党派，到天气，再到太阳黑子和天体相位，诸多另类数据都对股票和因子表现有显著的预测能力。
+而且，人还将这篇文章发表在了 JFE ！服不服！谁让人家叫 Marx 呢！
+当然，人不叫 Karl Marx，而是 Novy-Marx！
+另外，本文引用的两幅图表也来自该文。
+最后，多说一句，这篇文章还是蛮有趣的，而且 Novy-Marx 还是有很多十分重要的研究成果，例如，2013 年同样在 JFE 发表的，关于毛利率作为盈利能力因子代表的研究，以及著名的 BABAB 。
+话说回来，从实践的角度看，我们的确有必要对更多数据进行研究和挖掘，但同时也要谨记，不要过度执着于结果，而完全忽视逻辑，在本文中，也都会给出一些尝试性的解释，虽然似乎不那么令人满意。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：Bali, Turan G., Robert F. Engle, and Scott Murray. “Empirical Asset Pricing: The Cross Section of Stock Returns.” John Wiley & Sons, 2016.
+Cao, Melanie, and Jason Wei. "Stock Market Returns: A Note on Temperature Anomaly." Journal of Banking & Finance 29.6 (2005): 1559-1573.
+
+Heston, Steven L., and Ronnie Sadka. "Seasonality in the Cross-section of Stock Returns." Journal of Financial Economics 87.2 (2008): 418-445.
+
+Modis, Theodore. "Sunspots, GDP and the Stock Market." Technological Forecasting and Social Change 74.8 (2007): 1508-1514.
+
+Novy-Marx, Robert. "Predicting Anomaly Performance with Politics, the Weather, Global Warming, Sunspots, and the Stars." Journal of Financial Economics 112.2 (2014): 137-146.
+Sloan, Richard G. "Do Stock Prices Fully Reflect Information in Accruals and Cash Flows about Future Earnings?." Accounting Review (1996): 289-315.
+
+题图：Lady in Beach during Daytime, 
+
+from www.pexels.com.
+
+【图片文字】
+--- 图3 ---
+The power of presidential party to predict anomaly strategy performance.
+The table reports results from the following ordinary least squares regressions:
+$$ R_{t}=m+\varepsilon_{t}, $$
+$$ R_{t}=a+bX_{t-1}+\varepsilon_{t}, $$
+$$ R_{t}=a_{D}X_{t-1}+a_{R}(1-X_{t-1})+\varepsilon_{t}, $$
+where R is the monthly excess returns to an anomaly strategy and X is a dummy for Democratic presidents. Specifically, the table reports estimated average monthly anomaly excess returns (مى), the sensitivity of anomaly returns to a Democratic president (مى), and the average excess returns to the strategies under Democrats and Republicans (ىزىلتىلىشى) and theي, respectively). The sample covers January 1961 (John F. Kennedy's inauguration) through December 2012. The strategies based on earnings-to-price and Ohlson's O-score are only available from July 1973, a date determined by the availability of quarterly compustat data.
+[表]
+Strategy | $ \hat{m} $ | $ \hat{b} $ | $ \hat{a}_{D} $ | $ \hat{a}_{R} $ | 
+Panel A: Strategies that perform significantly better under Democratic presidents | 
+Market | 0.47 | 0.75 | 0.87 | 0.12 | 
+ | [2.60] | [2.08] | [3.29] | [0.51] | 
+size | 0.28 | 0.84 | 0.73 | -0.10 | 
+ | [1.48] | [2.21] | [2.63] | [-0.41] | 
+Panel B: Strategies that perform significantly better under Republican presidents | 
+earnings-to-price | 1.07 | -0.99 | 0.46 | 1.45 | 
+ | [5.03] | [-2.27] | [1.36] | [5.37] | 
+diosyncratic volatility | 0.36 | -1.95 | -0.74 | 1.21 | 
+ | [1.21] | [-3.23] | [-1.63] | [3.04] | 
+Ohlson&#x27;s O-score | 0.39 | -0.81 | -0.10 | 0.71 | 
+ | [1.97] | [-1.98] | [-0.31] | [2.78] |
+--- 图4 ---
+[表]
+Panel A: Strategies that perform significantly better after cold weather | 
+Market | 0.47 | -0.03 | -0.02 | 0.89 | 
+ | [2.60] | [-1.98] | [-0.08] | [3.64] | 
+Size | 0.28 | -0.06 | -0.60 | 1.05 | 
+ | [1.48] | [-4.54] | [-2.18] | [4.10] | 
+Value | 0.44 | -0.03 | -0.04 | 0.85 | 
+ | [2.81] | [-3.01] | [-0.16] | [4.03] | 
+Long run reversals | 0.52 | -0.07 | -0.41 | 1.33 | 
+ | [2.78] | [-5.25] | [-1.54] | [5.31] | 
+Asset growth | 0.47 | -0.03 | 0.06 | 0.82 | 
+ | [3.14] | [-3.01] | [0.28] | [4.06] | 
+Asset turnover | 0.47 | -0.02 | 0.20 | 0.70 | 
+ | [3.05] | [-2.16] | [0.90] | [3.34] | 
+Panel B: Strategies that perform significantly better after hot weather | 
+Return on assets | 0.77 | 0.06 | 1.62 | -0.01 | 
+ | [3.45] | [3.75] | [5.14] | [-0.11] | 
+Earnings-to-price | 1.07 | 0.04 | 1.55 | 0.61 | 
+ | [5.03] | [2.57] | [5.12] | [2.05] | 
+Gross margins | -0.02 | 0.03 | 0.59 | -0.50 | 
+ | [-0.17] | [3.66] | [3.12] | [-3.16] | 
+Piotroski&#x27;s F-score | 0.39 | 0.05 | 1.09 | -0.22 | 
+ | [2.14] | [3.65] | [4.14] | [-0.91] | 
+Earnings momentum (PEAD) | 0.74 | 0.03 | 1.18 | 0.32 | 
+ | [4.52] | [2.87] | [5.07] | [1.40] | 
+Failure probability | 0.96 | 0.10 | 2.24 | -0.29 | 
+ | [2.83] | [4.14] | [4.71] | [-0.62] | 
+Ohlson&#x27;s O-score | 0.39 | 0.06 | 1.28 | -0.46 | 
+ | [1.97] | [4.33] | [4.58] | [-1.69] | 
+Idiosyncratic volatility | 0.36 | 0.06 | 1.31 | -0.54 | 
+ | [1.21] | [2.66] | [3.06] | [-1.29] |
+--- 图5 ---

@@ -1,0 +1,162 @@
+# 【009】您一定想了解的低风险异象
+
+来源：微信公众号「因子投资」话题·低风险因子（第3篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247483788&idx=1&sn=cfded0396516d37475f8d02f1df5057b&chksm=f995b00ecee239180ff094d48e084a6ec7378dedd6e9b80c247a74098f42541abdd8261d2442#rd
+
+这是低风险因子专题的第 003 篇文章，也是因子动物园的第 009 篇文章。
+
+【30秒速览】 【【005】“茴”字有三种写法，低风险异象因子呢？】一文系统地梳理了低风险因子的各种计算方法。本文则在此基础上，对低风险因子的表现和特征，进行了细致的回顾，据此帮助您更好地认识低风险因子，与她愉快地玩耍。
+
+01 引言
+
+男女相亲时要了解对方，先看其样貌，再看其品性。理解一个因子，除了知道如何计算，了解她的特征，同样也非常重要。在上一篇低风险异象相关的文章里，我们详细梳理了 10 余个因子的计算方式。本文则进一步讨论低风险因子的一些有趣特性。
+
+02 收益不对称
+
+绝大多数量价因子多头和空头的收益并不对称，空头组合获得的负向阿尔法，往往显著高于多头组合的正向阿尔法，作为因子投资的老司机的您，想必对此深有体会。作为量价因子的典型代表，低风险异象因子同样具有该特征。按历史波动率从小到大分为 10 组，统计各组的风险收益指标，如表 1 。可以看到，阿尔法收益率具有明显的单调性，第 1 组年化阿尔法收益率为 4 %，第 10 组年化阿尔法收益率为 -8 %，多空收益 12% 中有三分之二来自于空头部分，显示出极大的不对称。
+
+表 1 ：不同波动率因子分组的表现. 
+
+数据来源：Blitz and Van Vliet (2007)
+
+03 股票特征
+
+处在不同风险水平的股票，会展现出不同的特征。表 2 依然按波动率因子分为 10 组，其中第 1 组波动率最低，第 10 组波动率最高，统计每个组合的事后波动、市场贝塔、平均市值、平均 BP 、盈利波动、盈利增长、盈利预测偏差、EP 和一致预期 EP 。
+
+结果表明，低波动组合比高波动组合实现波动率和实现市场贝塔低，说明低波动组合确实能实现低风险的目标；低波动组合比高波动组合收益稳定性更好，即 ROE 的波动更低；分析师对低波动组合盈利增长预测往往更低，对高波动组合盈利增长预测更高，也就是说，分析师对高波动股票往往更乐观；从估值的角度来看，高波动的股票往往估值较高，低波动的股票往往估值较低。
+
+表 2 ：不同波动率因子分组的股票特征
+
+数据来源：Hsu，Kudoh and Yamada（2013）
+
+04 回撤保护
+
+对于股票组合而言，常见并且有效的回撤保护器有防御性因子、可转债、趋势跟踪择时、目标波动控制模型和资产配置等（刀疤连，2018）。低风险异象因子，是非常典型的防御类型因子，在股市回撤时能起到扛把子的作用。表 3 统计了牛市、熊市和和振荡市中不同因子的表现，可以看到，低波动因子在下跌市场中相对大盘表现优秀，配置该因子能减少组合的整体回测；然而，有得必有失，在牛市和振荡行情中，低风险因子就没那么走运了，总是慢那么一拍。但这也正是因子的奥妙所在，正如Andrew Ang 大神所言，因子之所以可以在长期中获取风险溢价，是因为其在消费者最需要投资回报时，往往表现不佳。
+
+表 3 ： 不同市场状态下因子表现
+
+数据来源：Ung and Luk（2013）
+
+05 逆周期性
+
+风起时，猪都会满天飞；风停了，猪颈肉都没得吃。低风险因子不仅仅具有逆市场特征，而且还具有逆周期特征。表4展示了不同因子在经济萧条和经济扩张时的表现，可以看到，低风险因子虽然在经济扩张时表现平平，但在经济收缩时异常亮眼，能起到雪中之炭的作用。
+
+表 4 ： 不同经济周期下因子表现
+
+数据来源：Ung and Luk（2013）
+
+06 胆子小
+
+市场情绪是推动股市涨跌的重要因素，按照 VIX 指数将市场情绪划分为高亢、中性和绝望三种情形，表 5 统计了各因子在不同市场情绪中的表现。可以看到，在市场整体低迷惨淡时，投资者风险偏好较低，低波动股票正好能充当避港湾，因此低风险因子能够大显身手。
+
+表 5 ：不同市场情绪下因子表现
+
+数据来源：Ung and Luk（2013）
+
+07 结语
+
+人有热情奔放，也有含蓄羞涩，不同因子性格也迥然不同。本文介绍了低风险因子的一些有趣特性，包括多空组合收益不对称、不同风险水平股票特征、逆周期、逆市场和逆情绪。透过本文，低风险因子的形象跃然纸上，想必您也动心了吧。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+参考文献：
+Blitz, D., & Van Vliet, P. (2007). The volatility effect: Lower risk without lower return.
+Hsu, J. C., Kudoh, H., & Yamada, T. (2013). When sell-side analysts meet high-volatility stocks: an alternative explanation for the low-volatility puzzle. Journal of Investment Management, 11(2), 28-46.
+Ung, D., & Luk, P. (2016). What Is in Your Smart Beta Portfolio? A Fundamental and Macroeconomic Analysis. The Journal of Index Investing, 7(1), 49.
+刀疤连.(2018).有哪些靠谱的股市回撤保护器？.CQR.Available at: https://mp.weixin.qq.com/s/DCxdPT_wTJqeJKZvbkGlqQ.
+
+【图片文字】
+--- 图2 ---
+Table 1: Main results global decile portfolios based on historical volatility
+[表]
+ | Panel A: Decile portfolios based on historical return volatility | 
+ | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D1-10 | 
+Excess return | 7.3% | 7.1% | 8.0% | 6.2% | 5.0% | 5.6% | 5.6% | 7.2% | 3.4% | 1.4% | 5.9% | 
+Standard deviation | 10.1% | 12.6% | 13.6% | 14.0% | 14.0% | 15.1% | 16.5% | 17.7% | 20.4% | 27.5% | 23.7% | 
+Warpe ratio | 0.72 | 0.57 | 0.59 | 0.44 | 0.36 | 0.37 | 0.34 | 0.41 | 0.17 | 0.05 |  | 
+Value) | 2.2 | 1.6 | 2.0 | 0.8 | -0.6 | -0.5 | -1.1 | 0.2 | -2.8 | -2.7 |  | 
+a | 0.56 | 0.75 | 0.84 | 0.90 | 0.90 | 0.98 | 1.07 | 1.13 | 1.29 | 1.58 | -1.02 | 
+a | 4.0% | 2.6% | 3.0% | 0.9% | -0.4% | -0.3% | -0.7% | 0.4% | -4.3% | -8.0% | 12.0% | 
+e) | 3.1 | 2.2 | 2.6 | 1.0 | -0.4 | 0.3 | 1.0 | 0.1 | 0.0 | 0.0 |  |
+--- 图3 ---
+Table 3 Volatility-sorted portfolios and their characteristics.
+[表]
+Developed markets | Low | Volatility | High | 
+D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | 
+Portfolio (aggregation) |  |  |  |  |  |  |  |  |  | 
+Return volatility | 11.9 | 13.3 | 14.2 | 15.4 | 16.3 | 17.6 | 18.3 | 19.7 | 21.5 | 
+Market beta | 0.72 | 0.82 | 0.88 | 0.97 | 1.01 | 1.09 | 1.14 | 1.20 | 1.32 | 
+For constituent stocks |  |  |  |  |  |  |  |  |  | 
+Average market cap | 5,027 | 5,335 | 5,266 | 5,186 | 5,081 | 4,846 | 4,554 | 4,673 | 4,843 | 
+Average B/P | 66.7 | 61.7 | 61.2 | 61.6 | 62.5 | 65.6 | 67.3 | 67.1 | 67.0 | 
+Average ROE variability | 4.4 | 5.5 | 5.3 | 5.7 | 6.2 | 7.7 | 8.4 | 13.0 | 14.2 | 
+Forecasted earnings growth | 2.53 | 2.83 | 3.12 | 3.18 | 3.51 | 4.01 | 4.49 | 5.03 | 6.12 | 
+Ex-post reported earnings growth | 0.42 | 0.50 | 0.50 | 0.82 | 0.49 | 0.57 | 0.57 | 1.04 | 0.91 | 
+Growth forecast bias | 2.11 | 2.33 | 2.62 | 2.35 | 3.02 | 3.44 | 3.91 | 3.99 | 5.22 | 
+Trailing 12 mo E/P | 7.4 | 6.9 | 6.7 | 6.3 | 6.1 | 6.0 | 5.2 | 4.9 | 3.9 | 
+Forward 12 mo E/P | 7.7 | 7.6 | 7.5 | 7.4 | 7.6 | 7.6 | 6.9 | 7.1 | 6.6 |
+--- 图4 ---
+EXHIBIT 8B: FACTOR PERFORMANCE IN DIFFERENT MARKET CYCLE PHASES
+[表]
+MARKET CYCLE PHASE | VALUE | GROWTH | QUALITY | LOW VOLATILITY | MOMENTUM | SIZE | DIVIDEND YIELD | 
+AVERAGE EXCESS RETURN (VERSUS S&P 500, ANNUALIZED) (%) |  |  |  |  | 
+Bull | 0.02 | 4.20 | 2.10 | -3.60 | 5.30 | -1.16 | -1.80 | 
+Bear | 4.61 | -6.30 | 12.50 | 23.20 | -5.40 | 7.51 | 8.90 | 
+Recovery | 20.33 | 10.80 | -1.40 | -8.80 | -10.06 | 14.88 | 32.70 | 
+TRACKING ERROR (ANNUALIZED) (%) |  |  |  |  | 
+Bull | 7.89 | 6.50 | 4.70 | 8.90 | 7.58 | 4.59 | 9.30 | 
+Bear | 14.24 | 11.40 | 7.10 | 13.60 | 14.10 | 7.15 | 15.80 | 
+Recovery | 11.00 | 5.00 | 3.60 | 6.90 | 7.90 | 7.53 | 16.60 | 
+INFORMATION RATIO |  |  |  |  | 
+Bull | 0.00 | 0.64 | 0.45 | -0.40 | 0.70 | -0.25 | -0.20 | 
+Bear | 0.32 | -0.55 | 1.76 | 1.71 | -0.38 | 1.05 | 0.56 | 
+Recovery | 1.85 | 2.15 | -0.40 | -1.27 | -1.27 | 1.98 | 1.97 | 
+PERCENTAGE OF OUTPERFORMANCE (VERSUS S&P 500) (%) |  |  |  |  | 
+Bull | 52.35 | 61.20 | 56.50 | 44.10 | 54.12 | 45.88 | 48.80 | 
+Bear | 58.70 | 37.00 | 78.30 | 80.40 | 54.35 | 58.70 | 56.50 | 
+Recovery | 66.67 | 70.80 | 54.20 | 33.30 | 37.50 | 70.83 | 75.00 |
+Source: S&P Dow Jones Indices. Figures based on monthly USD returns. Data from December 1994 to December 2014 for the S&P 500 Low Volatility Index, the S&P 500 Momentum, the S&P 500 Quality, the S&P 500 Enhanced Value Index, and a high dividend-yield strategy for the S&P 500 and the S&P 500 Equal Weight Index. Past performance is no guarantee of future results. Table is provided for illustrative purposes and reflects hypothetical historical performance. Please see the Performance Disclosures at the end of this document for more information.
+--- 图5 ---
+EXHIBIT 9B: FACTOR PERFORMANCE IN EACH BUSINESS CYCLE PHASE
+[表]
+BUSINESS CYCLE PHASE | VALUE | GROWTH | QUALITY | LOW VOLATILITY | MOMENTUM | SIZE | DIVIDEND YIELD | 
+AVERAGE EXCESS RETURN (VERSUS S&P 500, ANNUALIZED) (%) | 
+Expansion | 3.41 | 3.30 | 3.50 | 0.00 | 2.21 | 1.77 | 3.90 | 
+Contraction | -1.16 | -0.90 | 6.10 | 9.50 | -2.29 | 4.75 | 2.10 | 
+TRACKING ERROR (ANNUALIZED) (%) | 
+Expansion | 8.76 | 7.10 | 5.30 | 10.20 | 8.96 | 5.30 | 11.00 | 
+Contraction | 16.48 | 11.70 | 5.00 | 11.00 | 11.95 | 8.33 | 18.50 | 
+INFORMATION RATIO | 
+Expansion | 0.39 | 0.47 | 0.65 | 0.00 | 0.25 | 0.33 | 0.35 | 
+Contraction | -0.07 | -0.08 | 1.22 | 0.87 | -0.19 | 0.57 | 0.11 | 
+PERCENTAGE OF OUTPERFORMANCE (VERSUS S&P 500) (%) | 
+Expansion | 56.07 | 59.30 | 58.90 | 47.70 | 52.80 | 49.53 | 53.30 | 
+Contraction | 46.15 | 42.30 | 73.10 | 69.20 | 50.00 | 61.54 | 50.00 |
+Source: S&P Dow Jones Indices and Bureau of Economic Analysis. Figures based on monthly USD returns. Data from December 1994 to December 2014 for the S&P 500 Low Volatility Index, the S&P 500 Momentum, the S&P 500 Quality, the S&P 500 Enhanced Value Index, and a high-dividend-yield strategy for the S&P 500 and the S&P 500 Equal Weight Index. Past performance is no guarantee of future results.
+
+Table is provided for illustrative purposes and reflects hypothetical historical performance. Please see the Performance Disclosures at the end of this document for more information regarding the inherent limitations associated with back-tested performance. Note: NBER business cycle peak dates are March 2011 and December 2007; NBER cycle trough dates are November 2001 and June 2009.
+--- 图6 ---
+[表]
+INVESTOR SENTIMENT | VALUE | GROWTH | QUALITY | LOW VOLATILITY | MOMENTUM | SIZE | DIVIDEND YIELD | 
+VERAGE EXCESS RETURN (VERSUS S&P 500, ANNUALIZED) (%) | 
+Bullish | 4.85 | 3.50 | 2.40 | -2.60 | 3.80 | 1.94 | -1.20 | 
+Neutral | 2.76 | 4.20 | 2.00 | -2.50 | 5.27 | 1.50 | 2.10 | 
+Bearish | 1.42 | -1.80 | 10.30 | 15.20 | -11.01 | 4.03 | 13.40 | 
+RACKING ERROR (ANNUALIZED) (%) | 
+Bullish | 4.30 | 6.20 | 2.90 | 3.60 | 5.78 | 2.50 | 4.30 | 
+Neutral | 9.05 | 7.00 | 5.30 | 9.70 | 8.77 | 5.27 | 10.30 | 
+Bearish | 15.04 | 10.50 | 6.50 | 14.80 | 12.53 | 8.61 | 19.50 | 
+INFORMATION RATIO | 
+Bullish | 1.13 | 0.56 | 0.84 | -0.72 | 0.66 | 0.78 | -0.28 | 
+Neutral | 0.31 | 0.60 | 0.38 | -0.25 | 0.60 | 0.28 | 0.20 | 
+Bearish | 0.09 | -0.17 | 1.59 | 1.03 | -0.88 | 0.47 | 0.60 | 
+PERCENTAGE OF OUTPERFORMANCE (VERSUS S&P 500) (%) | 
+Bullish | 62.50 | 64.60 | 54.20 | 37.50 | 56.25 | 54.17 | 45.80 | 
+Neutral | 56.25 | 59.70 | 60.40 | 47.90 | 54.17 | 52.08 | 52.10 | 
+Bearish | 43.75 | 43.80 | 66.70 | 68.80 | 43.75 | 43.75 | 62.50 |
+Source: S&P Dow Jones Indices. Figures based on monthly USD returns. Data from December 1994 to December 2014 for the S&P 500 low Volatility Index, the S&P 500 Momentum, the S&P 500 Quality, the S&P 500 Enhanced Value Index, and a high-dividend-yield strategy for the S&P 500 and the S&P 500 Equal Weight Index. Past performance is no guarantee of future results. Table is provided for illustrative purposes and reflects hypothetical historical performance. Please see the Performance Disclosures at the end of this document for more information on some of the inherent limitations associated with back-tested performance.
+--- 图7 ---
+
+--- 图8 ---
+觉得6就点 ✓+ 关注
+还有更6的

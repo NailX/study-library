@@ -1,0 +1,433 @@
+# 风险补偿、错误定价，还是数据窥探 ?
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/Wg-hyxxxHFnZnnHIdMVy0g
+
+作者：石川，量信投资创始合伙人，清华大学学士、硕士，麻省理工学院博士；精通各种概率模型和统计方法，擅长不确定性随机系统的建模及优化。知乎专栏：
+https://zhuanlan.zhihu.com/mitcshi。 
+
+未经授权，严禁转载。
+
+摘
+要
+通过对比样本内、外的表现，Linnainmaa and Roberts (2018) 发现从会计数据中挖出的 36 个美股截面收益异象中的大部分都是 data snooping 的产物。这些异象在样本外的表现令人失望。
+
+1
+引言
+
+每当学术界和业界试图解释一个新发现的关于股票收益截面差异的异象（anomaly，或者用我们更熟悉的语言来说 —— “因子”；在下文“异象”和“因子”将会交替使用）时，未知风险（unmodeled risk）和错误定价（mispricing）是最主流的两种角度。诚然，一些长期有效的因子确实是因为上述两种原因造成的。但是面对如今如雨后春笋般层出不穷的因子，除上述两者之外的第三种解释 —— 数据迁就（data snooping） —— 却慢慢的进入了大众的视野。
+
+早在 1990 年，Lo and MacKinlay (1990) 就指出 data snooping 在检验资产定价模型中会造成一定的问题。而美国金融协会（AFA，American Finance Association）前主席 Campbell Harvey 于 2017 年协会年会上做的主席演讲The Scientific Outlook in Financial Economics（Harvey 2017）也指出 data snooping 问题在如今的“因子挖掘界”普遍存在。关于这篇演讲，我写过一篇读后感，请参考《在追逐 p-value 的道路上狂奔，却在科学的道路上渐行渐远》。
+
+Harvey 和他的 co-authors 于 2016 年发表了一篇著名的文章（Harvey et al. 2016），题为 … and the Cross-Section of Expected Returns。我当年看到该文题目中的 … 的第一反应是懵了，以为缺字了。后来读了才回过味儿来：学术界发现新因子的论文题目一般都是 XXX and the cross-section of expected returns，其中 XXX 代表新因子的名字。因此 Harvey et al. (2016) 这篇文章的题目中用了 … 是为了说明该文的研究对象是众多解释股票截面收益的文章。该文分析了学术界发现的 316个 异象，并指出在更严格的 multiple hypothesis testing 框架下，绝大多数因子都难言有效。
+
+近日，来自 USC 的 Juhani Linnainmaa 和来自 UPenn Wharton 商学院的 Michael Roberts 在 Review of Financial Studies 上发表了 The History of the Cross-Section of Stock Returns（Linnainmaa and Roberts 2018）。这两位学者花费了很大的经历构建了全新的样本外数据，从而比较了来美股中源于会计数据中的 36 个异象（下表）在它们各自的样本内和样本外的表现。分析表明，绝大部分异象在样本外明显失效，这种现象和未知风险以及错误定价两种解释严重不符，因此它们很有可能仅是 data snooping 的产物。
+
+The History of the Cross-Section of Stock Returns 无疑是学术界关于 data snooping 如何影响因子挖掘的最新探索。因此，本文就对它进行简要的介绍。该文作者 Linnainmaa 和 Roberts 都是美国 NBER（National Bureau of Economic Research）的学者，他们的发现最早是以 NBER 报告的形式于 2016 年底问世；在 The Jacobs Levy Center’s 2017 Conference，该文也作为三篇入选文章之一得到了与会者的充分讨论；最终该文在今年 7 月于顶刊 RFS 发表。
+
+下面马上进入正题，来聊聊这篇 The History of the Cross-Section of Stock Returns。以下介绍参考 NBER 的这篇论文以及 Roberts 在 2017 年会议上所做的报告。
+
+2
+数据构建
+
+让我们仔细看一下上一节这个大表中汇总的这 36 个来自会计数据的异象。所有这些论文的 in-sample 回测开始时间都是 1963 年之后（回测结束时间因论文提交和发表时间而不同）。这是因为标准普尔公司在 1962 年创建了 Compustats 数据库，它包含了比较理想的会计数据，为各种研究中的回测奠定了基础。
+
+Linnainmaa and Roberts (2018) 的第一个贡献是综合了 CRSP 的收益率数据（1926 年至今）、Compustat 的会计数据（1962 年至今）、以及 Moody’s Industrial and Railroad 手册中的数据（1918 – 1970），从而构建了从 1926 年至 1963 年之间的会计数据。这些宝贵的数据对于上述这 36 个异象来说无疑是样本外数据。由于这些数据存在于这些研究的 in-sample 时期之前，它们被称为 pre-sample 数据。虽然这些 pre-sample 数据较 Compustat 有一定不足（比如没有金融和公用事业这两个行业的数据，以及一些指标的粒度不如 Compustat），但是 Linnainmaa and Roberts (2018) 指出，pre-sample 的数据在数据质量上不输给 Compustat 的数据，而且时间足够长、样本足够多，因此使用这些新的数据来检验那 36 个异象没有问题。下表展示了 pre-sample 数据所覆盖的公司数量。
+
+此外，每个异象的 in-sample 回测期的终点至今这段时间就构成了 post-sample 数据。Pre-sample 和 post-sample 数据对于这些异象来说就是样本外数据。如果这些异象背后的原因不是 data snooping 而是未知风险或者错误定价，那么它们应该在样本外依然成立。特别的，考虑到早期更高的交易费用代表着更高的套利成本，那些由错误定价解释的异象应该在 pre-sample 内更加显著。
+
+3
+检验框架 —— 以 investment 和 profitability 异象为例
+
+本节以 investment 和 profitability 这两个异象为例考察它们在样本外（pre-sample 和 post-sample 时期）的表现。这两个因子的定义如下（来自 Fama and French 2015 以及 Hou et al. 2015）：
+
+Investment：Change in the Book Value of Total Assets over the Previous Fiscal Year（总资产账面价值相对于上一财年的变化）；
+
+Profitability：Operating profits over Book Value of Equity（营业利润与权益账面价值之比）。
+
+为了排除市值因素的影响，在分析目标因子时使用市值将股票分成大小两部分（各 50%），然后在这两组中分别使用目标因子选取因子取值首尾的各 30% 的股票构建多空组合，然后再把这两组中的多空组合收益率取均值作为该因子的投资组合的收益率。
+
+以 investment 因子为例，上述过程相当于使用 size 和 investment 因子将所有股票分成六份：
+
+在 Small 和 Big 两组中，使用 investment 因子大小将每组的股票分成 Low（30%），Neutral（40%）和 High（30%）三份。之后按照因子本身的业务含义，使用 Low 减 High 或者 High 减 Low 构建市值加权的投资组合。最后把 Small 和 Big 这两组的两个组合的收益率取平均，作为因子投资组合的收益率，以此就可以分析该因子是否能够解释预期收益率的截面差异。
+
+对于 investment 因子，按照其业务含义，Low 的组合（投资比较保守）相对于 High 的组合（投资比较激进）能够获得超额收益，因此这个因子又称为 CMA（Conservative Minus Aggressive）。对于 profitability 因子，按照其业务含义，High 的组合（利润更高）相对于 Low 的组合（利润较低）能够获得超额收益，因此 Fama and French (2015) 称之为 RMW（Robust Minus Weak）因子。
+
+下表展示了 investment 和 profitability 这两个因子在 1963 年（pre-sample）之前每月相对于无风险收益率的超额收益（之所以有 1938 年那个进一步细分是为了考虑 1934 年的 Securities and Exchange Act 所带来的潜在影响）：
+
+结果显示，这两个因子在整个 pre-1963 年的回测期内完全失效。与之形成鲜明对比的是它们在 in-sample 的显著性（t-statistic 均在 3 以上）。此外，Linnainmaa and Roberts (2018) 指出，在 pre-sample 期间每个投资组合都有不少于 50 支股票，且回测期间长达 37 年，这个级别的数据量保证了统计检验的可靠性，从而排除了数据不足造成的两个因子失效的可能性。
+
+再来看看这两个因子的 CAPM-α —— 使用因子收益率和市场收益率在时序上回归，得到的截距就是在截面上市场无法解释的预期收益率差异，它称为 CAPM-α。下表显示了这两个因子的 CAPM-α 在 1963 年之前的表现，低 t-statistic 同样说明它们完全失效。
+
+除此之外，这两个因子的 3-Factor-α —— 使用因子收益率和 Fama-French 三因子收益率在时序上回归，得到的截距就是在截面上三因子无法解释的预期收益率差异，它称为 3-Factor-α —— 在 pre-sample 的表现如下。其中 RMW（profitability 因子）在 1938 年到 1963 年之间依然显著。对于 profitability 因子来说，它的 3-Factor-α 比 CAPM-α 更显著是因为 profitability 与 value 因子在回测期内呈现负相关造成的（Novy-Marx 2013）。和它们各自 in-sample 的 3-Factor-α 比较来看，这两个因子（尤其是 investment 因子）在 pre-sample 的表现依然远不如它们 in-sample 的表现。
+
+作为比较，下图展示了 Value（HML），profitability（RMW）以及 investment（CMA）三个因子在 1926 年到 2015 年之间的滚动月收益率均值。其中 RMWO 和 CMAO 代表使用 Fama-French 三因子正交化之后的 RMW 和 CMA 因子。从图中不难看出，价值因子几乎可以持续的获得正收益（直到最近几年才开始亏损），说明价值因子（价值投资）确实是长期立于不败之地的正道。反观另外两个，investment 因子在 1970 年之前几乎是完全失效的，它的月收益率几乎持续在 0 以下；而 profitability 的 RMWO 收益率在多数时间位于 0 之上，但其在 1940 年之前以及 1980 年前后也有不少的时间录得负收益。
+
+最后，Linnainmaa and Roberts (2018) 从投资的角度考察了 investment 和 profitability 因子。使用这二者，以及 size 和 value 共四个因子 in-sample 的表现计算出预期收益率和标准差，并通过马科维茨的 mean-variance optimization 构建投资最优投资组合，考察了该组合在 in-sample（1963 年之后）和 pre-sample（1963 年之前）的表现。在 pre-sample，该组合完全无法战胜市场（下图比较了市场和最优组合的滚动夏普率）：
+
+本节的分析（超额收益、CAPM-α、3-Factor-α、最优投资组合）表明，investment 和 profitability 两个因子仅在它们被提出的样本内有效，而在 pre-sample 几乎完全失效。它们极有可能是 data snooping 的结果，而非错误定价或未知风险能够解释的。
+
+4
+其他异象
+
+按照上一节介绍的分析思路，Linnainmaa and Roberts (2018) 分析了所有 36 个和会计数据有关的异象。本节简单介绍一下综合的结果，对单因子检验结果感兴趣的小伙伴请阅读原文。
+
+按照性质，这 36 个异象可以分为七大类：profitability，earnings quality，valuation，investment and growth，financing，distress，以及 composite（复合类，比如 AQR 提出的 QML —— Quality Minus Junk 因子）。这七大类因子在 pre-sample、in-sample 以及 post-sample 的平均表现如下表所示 —— 平均来说，它们在样本外（包括 pre-sample 和 post-sample）的表现均远远不如其在样本内的表现。
+
+再来看看全部 36 个因子的平均表现（下表）。在样本内，这些因子获得的收益率更高、波动率却更低，因此带来了更高的夏普率。而在样本外，所有的指标都在往坏的方向变化 —— 更低的收益率、更高的波动率以及更低的夏普率。无论从超额收益，还是从 CAPM-α 或 3-Factor-α 来说，样本内、外的巨大反差都说明这些因子中有很大一部分难逃 data-snooping 之嫌。
+
+最终，Linnainmaa and Roberts (2018) 发现，在 in-sample，无论从超额收益、CAPM-α 还是 3-Factor-α 来看，这 36 个因子均显著。这三个指标下显著因子的个数分别为 36、36 和 36。而在 pre-sample 期间，这三个数字变为 8，8 和 16；在 post-sample 期间，这三个数字变为 1，10 和 9。
+
+在 pre-sample 依然有效的因子和 real investment、equity financing、distress 以及 ROE/ROA 有关；在 post-sample 依然有效的因子和 sales/earnings to price ratio、total financing、distress 以及 ROE/ROA 有关。随着宏观经济的变化，在整个回测期的前半段，有效的因子和有形投资以及股权融资相关；在回测期的后半段，有效的因子和无形投资以及债券融资有关。可见，只有那些真正和 economic fundamental 相关的因子背后才可能存在未知风险或错误定价的解释。
+
+5
+来自数据迁就的证据
+
+Data snooping 的表现之一是刻意的挑选回测期让因子看起来更加有效。
+
+虽然 Compustat 数据库包含了从 1963 年以来的数据，但是这 36 个异象中的很多个回测期的起始点并不是 1963 年，这足以引起我们的不安。
+ 
+
+如果把回测期的起点追溯到 1963 年会怎样呢？通过加入一个 dummy 变量代表 1963 年到因子 in-sample 回测期的起点之间这段时间，Linnainmaa and Roberts (2018) 发现仅仅是这个微小的调整也能让大部分因子失效（都无需使用 pre-1963 年的数据）。这无疑是 data snooping 的证据之一。
+
+下表显示了以 1963 年到 1973 年分别为回测起点时，这 36 个异象的收益率、CAPM-α、3-Factor-α 均有所下降。下降幅度分别为收益率下降 40% 到 80%、CAPM-α 下降 50% 到 75%、3-Factor-α 下降 30% 到 90%。
+
+对于因子在被发现后表现失效，学术界有另一种被接受的来自套利者的解释（Mclean and Pontiff 2016）：当因子被发现后，套利者开始交易该因子，导致因子的非有效性较低，表现逐渐失效。
+
+如果这个解释成立，那么当因子被发现后，它的收益率应该和其他已经被发现的因子的收益率的相关性更高。这是因为市场上的聪明交易者同时在交易这些不同的因子，使得按这些因子构建的策略的资金流入和流出相对一致，从而造成因子表现的趋同。为了检验这个说法，Linnainmaa and Roberts (2018) 依照 Mclean and Pontiff (2016) 的思路考察了如下回归模型：
+
+这个模型中最核心的就是系数 b_5。其中，post_{i,t} 是一个 binary 变量，取 1 表示目标因子 i 在 post-sample 时期；post-sample index_{-i,t} 则是 post-sample 时期所有其他已有因子的平均收益率。如果 b_5 在统计上显著大于零，则说明因子被学术界发现后，业界确实开始交易它，从而增加了它和其他已有因子的相关性，并由于交易造成了该因子的效果减弱。回归的结果如下表所示，b_5 确实显著大于零，似乎与上述解释相符。
+
+不过，先不要高兴的太早。
+
+Linnainmaa and Roberts (2018) 将上述回归模型中的所有 post- 都换成了 pre-，分析了该因子在它被提出之前和其它尚未被提出的因子之间的相关性。
+
+结果（下表）显示，在这个回归中，b_5 依然显著大于零，说明目标因子在 pre-sample 期间（被发现前）和其它所有因子在 pre-sample 期间的收益率成正相关。
+
+这就尴尬了。
+
+这种正相关就不能再让套利者的交易行为“背锅”了，因为在 pre-sample 期间因子还没有被发现，套利者又怎么能交易它们呢？更不幸的是，由于在 pre-sample 和 post-sample 上观察到了几乎一致的现象，我们对于 post-sample 中的套利者这个解说也动摇了。
+
+Linnainmaa and Roberts (2018) 认为，上述现象的一个合理的解释是在样本内，data mining 不仅仅是对异象的一阶矩（预期收益）造成了影响，而是对于异象之间的高阶矩（相关性）也造成了错误的影响。唯有此才能够解释在 pre-sample 和 post-sample 期间都观测到的因子之间不正常的正相关性。这便是 data snooping 的另一个证据。Data snooping 在样本内对于收益率的分析到底有怎样的影响值得今后持续的研究。
+
+以上便结束了我对 Linnainmaa and Roberts (2018) 这篇文章的介绍。
+
+6
+结语
+
+下图高度概括了 Linnainmaa and Roberts (2018) 的结果：78% 的异象在样本外失效了，它们在样本内的好结果似乎只能是来自 data snooping 这一种解释。用一句话来表达 Linnainmaa and Roberts (2018) 所传达的信息那就是：找到一个真正在样本内、外均有效的因子（异象）其实是非常困难的。
+
+当很多人都在使用同样的数据来分析大量不同的指标时，最终被发表在顶级期刊上的那些异象注定是在样本内表现非常优秀的。
+
+这就好比把 300+ 因子（甚至 1000+ 或更多）分成 10+ 大类，然后一个一个的试，再把挑出来最好的十几个在组合在一起通过什么 ICIR 动态选股（sounds familiar？），那在样本内的净值恐怕不上天比上天还难。但是样本外呢？
+
+即便学者们试图从未知风险和定价错误去解释这些异象，但它们背后仍然存在着严重的 publication bias 以及 data snooping bias。Linnainmaa and Roberts (2018) 指出，对于这些 biases，以提高 t-statistic 阈值为目标的统计调整方法（如 Harvey et al. 2016）由于针对的仍然是样本内数据，因此作用有限；最有效的方法仍然是使用样本外的全新数据进行检验。Harvey et al. (2016) 也指出：
+
+“ When feasible, out-of-sample testing is the cleanest way to rule out spurious factors.
+
+译：在条件允许下，使用样本外数据检验是排除虚假因子的最好办法。
+”
+在这方面，Linnainmaa and Roberts (2018) 整理了 1963 年以前美股的财务数据，供学术界和业界使用，可谓贡献巨大。
+
+2011 年，John Cochrane 教授在美国金融协会主席演讲时调侃道（Cochrane 2011）：
+
+“ We thought 100% of the cross-sectional variation in expected returns came from the CAPM, now we think that's about zero and a zoo of new factors describes the cross section.
+
+译：我们曾认为股票预期收益率的截面差异全部来自资本资产定价模型（CAPM）；如今我们认为能被 CAPM 解释的部分约为零，取而代之的是我们有了一揽子全新的描述截面预期收益率的因子。
+”
+这就是“因子挖掘界”的现状，多少有些令人无奈。但至少（海外）学术界和业界已经意识到了这一点并已经开始采取行动 —— 使用更严谨的统计手段和更多的数据来检验因子。对于不依赖于会计数据的因子（比如动量因子），回测数据的可得性要高的多，可以跨市场、跨时空来检验；对于依赖于会计数据的因子，相信 Linnainmaa 和 Roberts 两位教授构建的全新样本外数据会在未来发挥更大的作用。
+
+虽然越来越多的分析指出 data snooping 的问题很严峻，但我们也无需过度悲观。在研究股票预期收益率截面差异的道路上，所有这些努力都不会白费。
+
+参考文献
+Abarbanell, J. S. and B. J. Bushee (1998). Abnormal returns to a fundamental analysis strategy. The Accounting Review, Vol. 73(1), 19 – 45.
+
+Alwathainani, A. M. (2009). Consistency of firms' past financial performance measures and future returns. British Accounting Review, Vol. 41, 184 – 196.
+
+Asness, C. S., A. Frazzini, and L. H. Pedersen (2013). Quality minus junk. AQR Capital Management working paper.
+
+Barbee, Jr., W. C., S. Mukherji, and G. A. Raines (1996). Do sales-price and debt-equity explain stock returns better than book-market and firm size? Financial Analysts Journal, Vol. 52(2), 56 – 60.
+
+Bartov, E. and M. Kim (2004). Risk, mispricing, and value investing. Review of Quantitative Finance and Accounting, Vol. 23(4), 353 – 376.
+
+Basu, S. (1977). Investment performance of common stocks in relation to their price-earnings ratios: A test of the efficient market hypothesis. Journal of Finance, Vol. 32(3), 663 – 682.
+
+Bhandari, L. C. (1988). Debt/equity ratio and expected common stock returns: Empirical evidence. Journal of Finance, Vol. 43(2), 507 – 528.
+
+Bradshaw, M. T., S. A. Richardson, and R. G. Sloan (2006). The relation between corporate financing activities, analysts' forecasts and stock returns. Journal of Accounting and Economics, Vol. 42(1-2), 53 – 85.
+
+Campbell, J. Y., J. Hilscher, and J. Szilagyi (2008). In search of distress risk. Journal of Finance, Vol. 63(6), 2899 – 2939.
+
+Cooper, M. J., H. Gulen, and M. J. Schill (2008). Asset growth and the cross-section of stock returns. Journal of Finance, Vol. 63(4), 1609 – 1651.
+
+Cochrane, J. H. (2011). Presidential address: Discount rates. Journal of Finance, Vol. 66(4), 1047 – 1108.
+
+Daniel, K. and S. Titman (2006). Market reactions to tangible and intangible information. Journal of Finance, Vol. 61(4), 1605 – 1643.
+
+Dichev, I. A. (1998). Is the risk of bankruptcy a systematic risk? Journal of Finance, Vol. 53(3), 1131 – 1147.
+
+Fama, E. F. and K. R. French (1992). The cross-section of expected stock returns. Journal of Finance, Vol. 47(2), 427 – 465.
+
+Fama, E. F. and K. R. French (2015). A Five-Factor Asset Pricing Model. Journal of Financial Economics, Vol. 116(1), 1 – 22.
+
+Harvey, C. R. (2017). Presidential Address: the scientific outlook in financial economics. Journal of Finance, Vol. 72(4), 1399 – 1440.
+
+Harvey, C. R., Y. Liu, and H. Zhu (2016). … and the cross-section of expected returns. Review of Financial Studies, Vol. 29(1), 5 – 68.
+
+Haugen, R. A. and N. L. Baker (1996). Commonality in the determinants of expected stock returns. Journal of Financial Economics, Vol. 41(3), 401 – 439.
+
+Hirshleifer, D., K. Hou, S. H. Teoh, and Y. Zhang (2004). Do investors overvalue firms with bloated balance sheets? Journal of Accounting and Economics, Vol. 38, 297 – 331.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies, Vol. 28(3), 650 – 705.
+
+Lakonishok, J., A. Shleifer, and R. Vishny (1994). Contrarian investment, extrapolation and investment risk. Journal of Finance, Vol. 49(5), 1541 – 1578.
+
+Linnainmaa, J. T. and M. R. Roberts (2018). The history of the cross-section of stock returns. Review of Financial Studies, Vol. 31(7), 2606 – 2649.
+
+Lo, A. W. and A. C. MacKinlay (1990). Data-snooping biases in tests of financial asset pricing models. Review of Financial Studies, Vol. 3(3), 431 – 467.
+
+Lockwood, L. and W. Prombutr (2010). Sustainable growth and stock returns. Journal of Financial Research, Vol. 33(4), 519 – 538.
+
+Loughran, T. and J. W. Wellman (2011). New evidence on the relation between the enterprise multiple and average stock returns. Journal of Financial and Quantitative Analysis, Vol. 46(6), 1629 – 1650.
+
+Lyandres, E., L. Sun, and L. Zhang (2008). The new issues puzzle: Testing the investment-based explanation. Review of Financial Studies, Vol. 21(6), 2825 – 2855.
+
+McLean, R. D. and J. Pontiff (2016). Does academic research destroy stock return predictability? Journal of Finance, Vol. 71(1), 5 – 32.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics, Vol. 108 (1), 1 – 28.
+
+Piotroski, J. D. (2000). Value investing: The use of historical financial statement information to separate winners from losers. Journal of Accounting Research, Vol. 38, 1 – 41.
+
+Pontiff, J. and A. Woodgate (2008). Share issuance and cross-sectional returns. Journal of Finance, Vol. 63(2), 921 – 945.
+
+Sloan, R. G. (1996). Do stock prices fully reflect information in accruals and cash flows about future earnings? The Accounting Review, Vol. 71(3), 289 – 315.
+
+Soliman, M. T. (2008). The use of DuPont analysis by market participants. The Accounting Review, Vol. 83(3), 823 – 853.
+
+Spiess, D. K. and J. Affleck-Graves (1999). The long-run performance of stock returns following debt offerings. Journal of Financial Economics, Vol. 54(1), 45 – 73.
+
+Thomas, J. K. and H. Zhang (2002). Inventory changes and future returns. Review of Accounting Studies, Vol. 7(2), 163 – 187.
+
+Titman, S., K. C. J. Wei, and F. Xie (2004). Capital investments and stock returns. Journal of Financial and Quantitative Analysis, Vol. 39(4), 677 – 700.
+
+Xing, Y. (2008). Interpreting the value effect through the q-theory: An empirical investigation. Review of Financial Studies, Vol. 21(4), 1767 – 1795.
+
+【图片文字】
+--- 图1 ---
+量信随笔杂言
+--- 图2 ---
+[表]
+Category | No. Anomaly | Original study | sample | 
+Profitability 1 | 2 | Gross profitability | Novy-Marx (2013) | 1963-2 | 
+3 | Operating profitability $ ^{{*}} $ | Fama and French (2015) | 1963-2 | 
+4 | Return on assets $ ^{{*}} $ | Haugen and Baker (1996) | 1979-1 | 
+5 | Return on equity $ ^{{*}} $ | Haugen and Baker (1996) | 1979-18 | 
+6 | Profit margin | Soliman (2008) | 1984-20 | 
+Earnings quality | 7 | Change in asset turnover | Soliman (2008) | 1984-20 | 
+8 | Accruals $ ^{{*}} $ | Sloan (1996) | 1962-19 | 
+9 | Earnings consistency | Alwathainani (2009) | 1971-20 | 
+10 | Net operating assets | Hirshleifer, Hou, Teoh, and Zhang (2004) | 1964-20 | 
+Valuation | 11 | Book-to-market | Soliman (2008) | 1984-20 | 
+12 | Cash flow-to-price | Fama and French (1992) | 1963-19 | 
+13 | Earnings-to-price | Lakonishok, Shleifer, and Vishny (1994) | 1968-19 | 
+14 | Enterprise multiple $ ^{{*}} $ | Basu (1977) | 1957-19 | 
+15 | Sales-to-price | Loughran and Wellman (2011) | 1963-20 | 
+Investment and growth | 16 | Asset growth | Barbee, Mukherji, and Raines (1996) | 1979-19 | 
+17 | Growth in inventory | Cooper, Gulen, and Schill (2008) | 1968-20 | 
+18 | Sales growth | Thomas and Zhang (2002) | 1970-19 | 
+19 | Sustainable growth | Lakonishok, Shleifer, and Vishny (1994) | 1968-19 | 
+20 | Adjusted CAPX growth $ ^{{*}} $ | Lockwood and Prombutr (2010) | 1964-20 | 
+21 | Growth in sales – inventory | Abarbanell and Bushee (1998) | 1974-19 | 
+22 | Investment growth rate $ ^{{*}} $ | Abarbanell and Bushee (1998) | 1974-19 | 
+23 | Abnormal capital investment $ ^{{*}} $ | Xing (2008) | 1964-20 | 
+24 | Investment-to-capital $ ^{{*}} $ | Titman, Wei, and Xie (2004) | 1973-19 | 
+25 | Investment-to-assets | Xing (2008) | 1964-20 | 
+Financing | 26 | Debt issuance $ ^{{*}} $ | Lyandres, Sun, and Zhang (2008) | 1970-20 | 
+27 | Leverage | Spiess and Affleck-Graves (1999) | 1975-19 | 
+28 | One-year share issuance | Bhandari (1988) | 1948-19 | 
+29 | Five-year share issuance | Pontiff and Woodgate (2008) | 1970-20 | 
+30 | Total external financing $ ^{{*}} $ | Daniel and Titman (2006) | 1968-200 | 
+Distress | 31 | O-Score | Bradshaw, Richardson, and Sloan (2006) | 1971-200 | 
+32 | Z-Score $ ^{{*}} $ | Dichev (1998) | 1981-199 | 
+33 | Distress risk | Dichev (1998) | 1981-199 | 
+Composite anomalies | 34 | Piotroski&#x27;s F-score | Campbell, Hilscher, and Szilagyi (2008) | 1963-200 | 
+35 | M/B and accruals $ ^{{*}} $ | Piotroski (2000) | 1976-199 | 
+36 | QMJ: Profitability | Bartov and Kim (2004) | 1981-200 | 
+ |  | Asness, Frazzini, and Pedersen (2013) | 1970 |
+--- 图3 ---
+[表]
+ | 1925 | 1930 | 1935 | 1940 | 1945 | 1950 | 1955 | 1960 | 1965 | 
+ | Number of firms | 
+CRSP | 490 | 748 | 717 | 784 | 842 | 998 | 1,058 | 1,113 | 2,164 | 
+Compustat | 0 | 0 | 0 | 0 | 0 | 320 | 450 | 537 | 1,265 | 
+Compustat + Moody&#x27;s | 345 | 568 | 564 | 486 | 640 | 782 | 828 | 800 | 1,559 | 
+ | Number of Compustat firms by data item | 
+Income statement |  |  |  |  |  |  |  |  |  | 
+Revenue | 0 | 0 | 0 | 0 | 0 | 319 | 450 | 537 | 1,258 | 
+Cost of goods sold | 0 | 0 | 0 | 0 | 0 | 251 | 332 | 433 | 1,253 | 
+Depreciation | 0 | 0 | 0 | 0 | 0 | 312 | 444 | 529 | 1,233 | 
+Interest | 0 | 0 | 0 | 0 | 0 | 299 | 430 | 516 | 1,188 | 
+Net income | 0 | 0 | 0 | 0 | 0 | 320 | 450 | 537 | 1,264 | 
+Balance sheet |  |  |  |  |  |  |  |  |  | 
+Total assets | 0 | 0 | 0 | 0 | 0 | 319 | 449 | 537 | 1,264 | 
+Total liabilities | 0 | 0 | 0 | 0 | 0 | 284 | 315 | 404 | 1,187 | 
+Common equity | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 702 | 
+Accounts payable | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 208 | 
+Receivables | 0 | 0 | 0 | 0 | 0 | 319 | 383 | 465 | 1,154 | 
+Inventory | 0 | 0 | 0 | 0 | 0 | 318 | 382 | 462 | 1,148 | 
+ | Number of additional firms from Moody&#x27;s manuals by data item | 
+Income statement |  |  |  |  |  |  |  |  |  | 
+Revenue | 186 | 328 | 389 | 463 | 598 | 447 | 372 | 259 | 292 | 
+Cost of goods sold | 64 | 187 | 264 | 416 | 544 | 398 | 338 | 245 | 269 | 
+Depreciation | 227 | 465 | 529 | 479 | 633 | 442 | 365 | 257 | 253 | 
+Interest | 152 | 347 | 316 | 254 | 345 | 279 | 259 | 195 | 195 | 
+Net income | 342 | 550 | 553 | 485 | 640 | 458 | 377 | 264 | 292 | 
+Balance sheet |  |  |  |  |  |  |  |  |  | 
+Total assets | 345 | 552 | 557 | 486 | 640 | 457 | 377 | 265 | 292 | 
+Total liabilities | 345 | 568 | 564 | 486 | 640 | 465 | 376 | 264 | 293 | 
+Common equity | 293 | 537 | 545 | 486 | 640 | 436 | 362 | 246 | 290 | 
+Accounts payable | 338 | 547 | 552 | 483 | 638 | 437 | 363 | 245 | 282 | 
+Receivables | 344 | 544 | 554 | 485 | 639 | 456 | 372 | 262 | 292 | 
+Inventory | 340 | 542 | 549 | 479 | 632 | 451 | 371 | 261 | 292 |
+--- 图4 ---
+[表]
+Size | Investment | 
+Low (30%) | Neutral (40%) | High (30%) | 
+Small (50%) | Small-Conservative | Small-Neutral | Small-Aggressive | 
+Big (50%) | Big-Conservative | Big-Neutral | Big-Aggressive |
+--- 图5 ---
+Monthly Factor Premiums by Era
+[表]
+ | Pre-1963 sample | July 1963\n- December 2016 | 
+July 1926\n- June 1938 | July 1938\n- June 1963 | July 1926\n- June 1963 | 
+Profitability factor | -0.13\n(-0.31) | 0.09\n(0.64) | 0.02\n(0.14) | 0.28\n(3.09) | 
+Investment factor | 0.19\n(0.79) | 0.03\n(0.32) | 0.09\n(0.80) | 0.26\n量信投资 |
+--- 图6 ---
+Monthly CAPM Alphas by Era
+[表]
+Factor | Pre-1963 sample | July 1963\n- December 2016 | 
+July 1926\n- June 1938 | July 1938\n- June 1963 | July 1926\n- June 1963 | 
+RMW | 0.02\n(0.06) | 0.19\n(1.25) | 0.20\n(1.33) | 0.30\n(3.30) | 
+CMA | 0.17\n(0.71) | -0.02\n(-0.19) | 0.05\n(0.49) | 0.30\n(2.30) |
+--- 图7 ---
+Monthly 3-Factor Alphas
+[表]
+Factor | Pre-1963 sample | July 1963\n- December 2016 | 
+July 1926\n- June 1938 | July 1938\n- June 1963 | July 1926\n- June 1963 | 
+RMW | 0.06\n(0.18) | 0.30\n(2.60) | 0.25\n(1.90) | 0.38\n(3.8) | 
+CMA | 0.12\n(0.54) | -0.07\n(-0.82) | 0.02\n(0.16) | 0.11\n(1.2) |
+
+--- 图9 ---
+
+--- 图10 ---
+[表]
+Category | Pre-discovery | Original | Post-discovery | 
+EST | t-value | EST | t-value | EST | t-value | 
+ |  |  | Average returns | 
+Profitability | -0.05 | -0.41 | 0.27 | 3.89 | 0.06 | 0.62 | 
+Earnings quality | 0.15 | 1.94 | 0.35 | 6.17 | 0.16 | 1.23 | 
+Valuation | 0.17 | 1.59 | 0.48 | 5.10 | 0.23 | 1.74 | 
+Investment and growth | 0.12 | 2.12 | 0.23 | 4.33 | 0.03 | 0.48 | 
+Financing | 0.06 | 1.42 | 0.25 | 4.62 | 0.11 | 2.06 | 
+Distress | -0.02 | -0.13 | 0.20 | 1.98 | 0.07 | 0.52 | 
+Composite | 0.25 | 2.45 | 0.44 | 4.92 | 0.11 | 0.54 | 
+All except composite | 0.08 | 2.09 | 0.28 | 8.62 | 0.10 | 2.68 | 
+ |  |  | CAPM alphas | 
+Profitability | 0.11 | 1.27 | 0.29 | 4.11 | 0.19 | 2.24 | 
+Earnings quality | 0.12 | 1.65 | 0.33 | 6.04 | 0.06 | 0.49 | 
+Valuation | 0.20 | 2.34 | 0.55 | 6.01 | 0.32 | 2.44 | 
+Investment and growth | 0.10 | 2.07 | 0.29 | 6.03 | 0.05 | 0.68 | 
+Financing | 0.11 | 2.90 | 0.31 | 6.32 | 0.16 | 3.05 | 
+Distress | 0.24 | 2.16 | 0.20 | 2.09 | 0.16 | 1.43 | 
+Composite | 0.34 | 3.62 | 0.56 | 6.72 | 0.16 | 0.77 | 
+All except composite | 0.13 | 4.42 | 0.32 | 10.87 | 0.14 | 4.06 | 
+ |  |  | Three-factor model alphas | 
+Profitability | 0.21 | 3.34 | 0.41 | 7.42 | 0.17 | 2.33 | 
+Earnings quality | 0.12 | 1.57 | 0.33 | 5.98 | 0.02 | 0.19 | 
+Valuation | 0.18 | 2.28 | 0.22 | 4.51 | 0.14 | 2.12 | 
+Investment and growth | 0.09 | 1.88 | 0.14 | 3.80 | 0.05 | 0.88 | 
+Financing | 0.12 | 3.62 | 0.19 | 5.00 | 0.10 | 2.49 | 
+Distress | 0.36 | 4.33 | 0.46 | 6.13 | 0.22 | 2.82 | 
+Composite | 0.29 | 3.47 | 0.45 | 6.66 | -0.10 | -0.72 | 
+All except composite | 0.16 | 5.78 | 0.26 | 11.50 | 0.10 | 0.10 |
+--- 图11 ---
+[表]
+Panel A: Full pre-1903 sample | 
+ | Pre-discovery sample | Original sample | Post-discovery sample | Pre-Original | Post-Original | Post-Pre | 
+ |  |  | Average returns | 
+Average return | 0.08(2.09) | 0.28(8.62) | 0.10(2.68) | -0.21(-4.35) | -0.19(-4.64) | 0.02(0.36) | 
+Sharpe ratio | 0.13(2.64) | 0.55(8.74) | 0.13(1.82) | -0.43(-5.51) | -0.42(-4.66) | 0.00(0.01) | 
+Excess volatility | 3.69(4.12) | 3.46(15.98) | 3.64(12.16) | 0.23(0.34) | 0.21(1.04) | -0.03(-0.04) | 
+ |  |  | CAPM | 
+Alpha | 0.13(4.42) | 0.32(10.87) | 0.14(4.06) | -0.19(-4.63) | -0.18(-4.58) | 0.01(0.21) | 
+Information ratio | 0.19(4.11) | 0.65(10.43) | 0.23(2.87) | -0.46(-6.03) | -0.43(-4.52) | 0.03(0.37) | 
+ |  |  | Three-factor model | 
+Alpha | 0.16(5.78) | 0.26(11.50) | 0.10(3.66) | -0.11(-3.05) | -0.16(-4.55) | -0.05(-1.33) | 
+Information ratio | 0.24(5.04) | 0.63(10.93) | 0.24(3.02) | -0.39(-5.27) | -0.40(-4.23) | -0.01(0.00) |
+--- 图12 ---
+1963
+impustat Release
+--- 图13 ---
+
+--- 图14 ---
+[表]
+start | Average return | CAPM alpha | FF3 alpha | 
+ear | $ \beta_0 $ | $ \beta_1 $ | $ \beta_0 $ | $ \beta_1 $ | $ \beta_0 $ | $ \beta_1 $ | 
+963 | 0.30 | -0.15 | 0.36 | -0.18 | 0.27 | -0.14 | 
+ | (6.77) | (-2.16) | (10.07) | (-2.97) | (10.35) | (-3.18) | 
+64 | 0.30 | -0.15 | 0.36 | -0.19 | 0.28 | -0.13 | 
+ | (6.77) | (-1.93) | (10.06) | (-2.86) | (10.40) | (-2.68) | 
+55 | 0.30 | -0.13 | 0.36 | -0.17 | 0.28 | -0.11 | 
+ | (6.78) | (-1.58) | (10.07) | (-2.42) | (10.40) | (-2.27) | 
+71 | 0.31 | -0.22 | 0.37 | -0.26 | 0.29 | -0.28 | 
+ | (6.63) | (-2.65) | (9.88) | (-3.78) | (10.02) | (-4.60) | 
+972 | 0.32 | -0.21 | 0.38 | -0.26 | 0.29 | -0.31 | 
+ | (6.64) | (-2.18) | (9.86) | (-3.24) | (9.86) | (-4.52) | 
+973 | 0.31 | -0.24 | 0.38 | -0.28 | 0.31 | -0.27 | 
+ | (6.38) | (-2.20) | (9.70) | (-3.31) | (10.17) | (重信投资) |
+--- 图15 ---
+$ = a + b_1 \times \text{in-sample index}_{-i,t} + b_2 \times \text{post-sample index}_{-i,t} + b_3 \times \text{post}_{i,t} $
+ $ = +b_4 \times \text{post}_{i,t} \times \text{in-sample index}_{-i,t} + b_5 \times \text{post}_{i,t} \times \text{post-sample index}_{-i,t} $
+--- 图16 ---
+Regression 1: In-sample versus post-discovery anomalies
+[表]
+Intercept | 0.09 | 6.72 | 
+Main effects | 
+In-sample index $ _{i,t} $ | 0.59 | 16.13 | 
+Post-sample index $ _{i,t} $ | 0.09 | 8.67 | 
+Post $ _{i,t} $ | -0.10 | -4.31 | 
+Interactions | 
+Post $ _{i,t} $  $ \times $ In-sample index $ _{i,t} $ | -0.42 | -9.90 | 
+Post $ _{i,t} $  $ \times $ Post-sample index $ _{i,t} $ | 0.46 | 11.28 | 
+Adjusted  $ R^{2} $ | 8.7% | 置信投资 | 
+N | 15.152 |
+--- 图17 ---
+$ = a + b_1 \times \text{in-sample index}_{-i,t} + b_2 \times \text{pre-sample index}_{-i,t} + b_3 \times \text{post}_{i,t} $
+ $ = + b_4 \times \text{pre}_{i,t} \times \text{in-sample index}_{-i,t} + b_5 \times \text{pre}_{i,t} \times \text{pre-sample index}_{-i,t} $
+--- 图18 ---
+Regression 2: In-sample versus pre-discovery anomalies
+[表]
+Intercept | 0.10 | 4.83 | 
+Main effects |  |  | 
+In-sample index_{-i,t} | 0.62 | 15.16 | 
+Pre-sample index_{-i,t} | 0.06 | 2.68 | 
+Pre_{i,t} | -0.05 | -2.04 | 
+Interactions |  |  | 
+Pre_{i,t} \times In-sample index_{-i,t} | -0.62 | -13.54 | 
+Pre_{i,t} \times Pre-sample index_{-i,t} | 0.36 | 8.11 | 
+Adjusted  $ R^{2} $ | 4.0% | 
+V | 13,680 | 量信投资 |
+--- 图19 ---
+78% of anomalies “disappear” in pre- and post-periods
+- Sharpe ratios, alphas, and information ratios all decrease; volatility and covariation increase
+Including investment and profitability
+- Sharpe ratio of 5-factor strategy ≈ Market Sharpe ratio (0.5) in pre-
+Choice of in-sample period critical to significance
+Small changes attenuate/eliminate many existing results
+22% of anomalies survive
+Pre-sample: real investment, equity financing, distress, ROE/ROA
+Post-sample: Sales and earnings, total financing, distress, REE董信投资
+--- 图20 ---
+本文为量信投资原创，如需转载，请联系「量信投资」获得授权（可在公众号下回复“转载”查看授权规则）。
+量信投资 全类资产量化配置
+长按二维码加关注，及时获取投资技能

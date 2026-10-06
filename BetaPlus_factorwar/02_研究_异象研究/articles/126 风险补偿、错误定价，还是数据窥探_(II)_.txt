@@ -1,0 +1,208 @@
+# 风险补偿、错误定价，还是数据窥探 (II) ?
+
+来源：02_研究_异象研究
+链接：https://mp.weixin.qq.com/s/9DKtCtla74NOH8IylKTYvw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+风险补偿和错误定价是因子/异象背后成因的两类重要解释。本文介绍检验这两种解释的常见方法。
+
+01
+引言
+
+前不久听了中国金融学年会中和实证资产定价相关的多篇报告，挺有感触的……
+
+首先是幻灯片的风格。在相当一大部分报告中，幻灯片的风格是下面这样的。满篇的文字让听众丝毫抓不住重点，而更令人崩溃的是，报告人一字不差的照着上面的字儿念。
+
+这不禁让我想起了 John Cochrane 教授在十多年前写的一篇给博士生的写作建议（Cochrane 2005），该文还被翻译成中文发表在《经济资料译丛》上。作为 Cochrane 的脑残粉，我强烈建议有写作金融学（尤其是实证资产定价）需要的小伙伴找来 Cochrane (2005) 读一读（链接在参考文献）。
+
+在 Cochrane (2005) 中，有一部分是关于如何做学术报告的，其中关于幻灯片的内容有如下建议。相比于满屏的文字，听众更在乎模型、公式和实证结果。而当幻灯片中仅包含这些最重要的内容时，听众反而能够更专注，用心聆听报告人对模型、公式和结果的解读。
+
+幻灯片的风格只是小问题，更大的问题则是一些所谓因子/异象的研究背后的草率。
+
+举个例子。
+
+其中有一篇文章使用个股对市场日收益率的回归系数作为变量构造因子。先不说最后的 t-stat 远不及当前考虑了 multiple hypotheses testing 之后的 3.0+ 的阈值，单说用个股日收益率回归这种做法就令我无限感慨。
+
+早在近 50 年前 Black, Jensen, and Scholes (1972) 和 Fama and MacBeth (1973) 检验 CAPM 的时候，正是因为个股对市场收益率的回归系数太不稳定（存在严重的 errors-in-variables 问题），才使用了 portfolios 取代个股作为 test assets。
+
+考虑下面这个例子。使用个股收益率和市场收益率的某种时序回归作为变量，对个股在截面上排序构造多空对冲的因子投资组合，多、空两头各 50 支股票。由于回归系数在很大程度上受回归窗口长度影响，因此多空两头每期选择的股票也和回归窗口长度密切相关。在实验中，选择两个不同长度的回归窗口，使用它们分别选股并计算不同参数下，不重叠股票的个数。下图展示了两个窗口下多空两头各自的选股不重叠个数在时序上的变化。
+
+当使用不同的回归窗口时，平均来看多空两头各自有一半（近 25 支）股票出现了变化，且这个变化随两个窗口长度差异递增。这个 toy example 从侧面佐证了用个股收益率回归作为变量来构造因子里面有很多的坑。而这种做法也更容易踏入 p-hacking 的陷阱。
+
+再回到前面的话题，正是因为个股收益率回归有 EIV 问题，前人的智慧才使用 portfolios 作为 test assets（因为个股层面的估计误差会很大程度上被抵消掉）；才有了之后 Lewellen, Nagel, and Shanken (2010) 的质疑认为这种 test assets 有很强的 factor structure 因此并不合理；才有了再后来 Jegadeesh et al. (2019) 提出的工具变量估计量，从一定程度上解决了 EIV 问题（见《Which beta ?》）。
+
+然而这一切努力，似乎在神秘的东方研究面前都是“徒劳”的，因为这个问题在我们这儿好像从来没有存在过。
+
+当然，在诸多报告中也不乏靠谱的发现，例如一篇题为 Smart Beta Mirage 的论文（Huang, Song, and Xiang 2020）。该文发现由于投资者越来越追捧 smart beta，因此海外在构建这类产品时为了让回测变得更吸引人，因而把构造 smart beta index 的逻辑搞的越来越复杂，造成严重的过拟合问题，超额收益仅存在于回测中。
+
+以下图为例，灰色曲线是 1997 年推出的某个 smart beta index。由于其惨淡的样本外表现，该公司于 2014 年又推出了其增强版。单看 2014 年之前的回测效果，增强版着实提高了不少。不幸的是，在样本外增强版依然没有逃脱和原始版同样的命运。
+
+Smart beta mirage 以及再前面那个例子所传递出来的信息是，在 factor zoo 的今天，实证研究结果收到 p-hacking 严重的影响。在这样的背景下，人们有理由关心每个样本内显著因子（假设考虑了 multiple hypotheses testing 修正后）背后的原因。
+
+弄清楚因子背后的原因有助于判断它们在样本外是否会继续有效。常见的两种解释包括风险补偿以及错误定价。当然，由于多重假设检验问题，因此数据窥探则是因子在样本内有效的第三个原因。早先的文章《未知风险，错误定价，还是数据窥探》介绍了样本内的过拟合问题；本文就来介绍前两种解释的常见检验方法。
+
+下文的介绍节选自《因子投资：方法与实践》的 6.5 节，并有适当删节。对更详尽描述以及文献说明感兴趣的小伙伴请阅读原著。此外，Charles Lee 和 Eric So 两位教授所著的 Alphanomics（介绍在此）的第 6 章对这块内容也有大量精彩的论述，不容错过。
+
+02
+风险补偿检验
+
+风险补偿检验的方法包括：常识“检验”，来自定价模型的推论，以及宏观经济影响三方面。
+
+1. 常识“检验”
+
+判断因子是否源于风险补偿的第一个检验是通过常识来判断，它虽然不是一个正式的统计检验，但却简单有效。常识“检验”的逻辑是：如果因子来自风险补偿，那么获得高收益的股票应该比获得低收益的股票承受了更高的风险。如果事实并非如此，就可以拒绝风险补偿这种解释。有意思的是，对于很多超额收益，基于风险补偿的解释在常识上却无法说通。
+
+以盈余惯性（PEAD）为例，该现象指出在盈余公告发布后，拥有好消息的公司能够跑赢拥有坏消息的公司。按照风险补偿解释，这意味发布盈余好消息的公司（基本面通常更强）要比发布坏消息的公司有更高的风险，这有违常识。
+
+2. 来自定价模型的推论
+
+除了常识外，还可以利用资产定价模型的推论来区分风险补偿和错误定价。一个变量如果能够预测未来收益，本质上是因为它是资产对某个系统性风险暴露程度的优秀代理变量。按照传统定价理论，使用该变量构建一个因子模拟投资组合，而资产在该风险上的暴露大小则由资产对该组合的 β 值决定。在风险补偿解释下，该 β 值应该比变量本身更能预测未来收益率。
+
+然而，大量研究发现，比起时序回归 β，变量本身对预测股票截面收益率更有作用。比如，Fama and French (2020) 比较了时序和截面回归两类多因子模型，并发现后者比前者更好（见《Which beta (II)?》）。又比如，另一种常见的看法是个股相对因子收益率的时序回归 β 之所以有效，是因为在使用 β 和股票收益率回归时没有控制用来构造因子的排序变量。Jegadeesh et al. (2019) 发现，即便在修正了 EIV 问题之后，若在回归时加入那些控制变量，时序回归 β 便无法再预测股票的收益率。
+
+这些结果无疑为这种检验提出了严峻的挑战。
+
+3. 宏观经济的影响
+
+如果因子背后的原因是风险补偿，那么可以预期宏观经济因素将影响其收益率的表现。Savor and Wilson (2013) 发现在宏观经济数据发布期间，市场的超额收益是平时的 10 倍；类似的，Savor and Wilson (2014) 发现在这些日子中，股票的收益率数据也更加符合 CAPM 理论。
+
+因此，检验风险补偿的第三种方法是考察因子收益率的时间序列特征是否因宏观经济周期造成的不同市场状态下有所差异。若因子源自风险补偿，那么可以预期它在宏观经济发布期间的收益率更高（因为经济长期来说是向上的）；同时也可以预期当市场处于极端风险状态下（比如经济衰退时期）它的表现会非常差、出现较大亏损。
+
+在检验时，常见的手段是利用 Fama-MacBeth regression 获得因子收益率的时间序列，然后使用经济周期指标把市场划分为不同的状态区间，并考察收益率序列在不同区间内的差异。Lakonishok, Shleifer, and Vishny (1994) 用上述方法检验了价值因子，发现价值因子在经济衰退时的表现和平时并无显著差异，且有时还比未发生衰退时更好，由此认为价值因子背后的原因并非风险补偿。
+
+03
+错误定价检验
+
+错误定价检验包括：业绩公告期，预测基本面，有限注意力以及套利限制检验四方面。
+
+1. 业绩公告期
+
+考察因子收益率在业绩公告期窗口内的大小是一种被学术界普遍使用的方法。它背后的逻辑是，如果某个因子和错误定价有关，则其在业绩公告期内应该比其他时间内获得更高的收益，这是因为最新的业绩报告有助于修正投资者之前对该股票的定价错误。反过来，如果该因子是源自风险补偿，那么它在不同时期的收益率应该大致相当，人们不应观察到业绩公告期内因子收益率较平时发生显著的变化。
+
+对于上述假设的检验可以参照 Engelberg, McLean, and Pontiff (2018) 提出的方法。其思路是使用股票日收益率作为被解释变量和一系列解释变量进行 pooled regression。回归中的解释变量包括：因子变量取值、盈余公告窗口哑变量（如果某天处在盈余公告窗口内，则取值为 1，反之为 0）、因子变量和盈余公告窗口哑变量的交叉项，以及其他相应的控制变量。
+
+此外，为了考虑不同日期收益率的差异，在该回归中也往往加入时间的固定效应项。上述回归得到的系数就是不同解释变量的收益率。如果因子源自错误定价，则前述交叉项的系数应该显著大于因子变量的系数。该文使用这个方法研究了美股上的 97 个因子，它们在盈余期内的收益率比非盈余期内收益的收益率高了 6 倍，回归结果支持了错误定价的说法。
+
+2. 预测未来基本面
+
+第二个检验方法是考察因子能否预测未来的基本面信息，例如 Standardized Unexpected Earnings（SUE）。一直以来，人们认为如果某个因子是源于风险补偿，那么它在一些风险因子上会有更高的暴露。由于无法罗列出所有的风险，因此这种观点受到模型设定偏误的挑战，因为即使因子在已知风险因子上的暴露很低，它也可能代表着某个尚未被识别的风险。
+
+这种进退两难的局面让使用 SUE 这种仅和公司基本面相关的指标格外有吸引力。由于 SUE 是一个非收益率指标，不会因对风险的控制不足而受到影响。令 Q_{it} 表示公司 i 在季度 t 的盈利，则 SUE 的定义为：
+
+式中分子表示实际盈利和预期盈利之间的差异，该差异可正可负，表示预期外盈利；分母为差异的标准差，起到对分子标准化的作用（因此 SUE 被称作标准化后的预期外盈利），通常使用过去 8 到 20 个季度的差异数据计算。由定义可知，计算 SUE 时最重要的输入是对盈利的预测。在这方面，学术界采用了很多不同的方法。公众号 [Chihiro Quantitative Research] 的文章《PEAD 异象》对计算预期盈利的不同方法进行了详细说明。
+
+Lee et al. (2019) 使用预测性回归，检验了科技动量能否预测公司未来的 SUE（点击此处有该文的详细解读）。由于 SUE 是公司未来现金流的决定因素，如果它能够预测 SUE 则说明前者的超额收益和公司基本面的改变相关，而非风险补偿。实证结果显示，当季度的科技动量对未来三个季度的 SUE 都有显著的预测性，且这种预测性在逐步减弱。这一结果有力的支持了科技动量背后的原因是错误定价，而非风险补偿。
+
+3. 有限注意力
+
+大量研究发现，资产的错误定价和投资者的有限注意力密切相关。沿着这个思路出发，一个自然的想法就是，如果因子背后的原因是错误定价，那么因子在投资者关注度低（即有限注意力问题更严峻）的公司上的超额收益应该更高。不过，由于有限注意力并不是一个可以直接衡量的指标，为此只能找一些代理变量，诸如市值小、分析师覆盖少、媒体报道少、以及机构投资者占比低的公司（例如 Fang and Peress 2009）。
+
+在具体检验时，常见的思路依然是 Fama-MacBeth regression。在回归时，当期因子变量和代表有限注意力代理变量的哑变量、哑变量和因子变量的交叉项、以及一系列控制变量被选为解释变量，股票下期收益率为被解释变量，考察具有上述特征的公司是否比它们的对立面能够获得更显著的收益率。如果答案是肯定的（表现为交叉项的回归系数是非常显著的），则可以支持错误定价解释。
+
+除 Fama-MacBeth regression，使用条件双重排序法也可以进行检验。具体做法是使用有限注意力的代理指标，首先根据其高低将股票分组。在每一组内，再按照待检验的因子变量将股票分组。最后，计算不同有限注意力分组中因子的预期收益率，并比较它们的显著性水平是否有差异（见《因子投资：方法与实践》的 2.1 节）。如果有限注意力是导致错误定价的原因，那么在有限注意力问题更严峻的组中应该能够观察到更显著的超额收益。
+
+4. 套利成本
+
+除有限注意力外，行为金融学指出理性投资者之所以无法消除错误定价和套利成本（cost of arbitrage）有关。由于套利成本高的公司更容易出现错误定价，因此这些公司比套利成本低的公司的因子收益率更高。和有限注意力类似，套利成本也无法直接衡量，因此需要代理变量。学术界使用的常见代理变量包括特质性波动率（Stambaugh, Yu, and Yuan 2015），负面新闻，以及机构投资者占比。
+
+和有限注意力检验类似，在检验中，同样可以使用 Fama-MacBeth regression 和条件双重排序法。如果因子在套利成本高的公司上能获得更高的超额收益，就可以支持错误定价解释。
+
+04
+结语
+
+对于真实的因子，搞清楚其背后的机制至关重要。错误定价意味着投资者可以通过合理的策略获得潜在的超额收益；而风险补偿则意味着投资者获得的收益是以承担额外风险为代价的。而对于通过数据窥探获得的虚假因子，有效识别它们可以帮助人们躲开过拟合，在样本外摒弃它们。
+
+一般来说，因子大致可以分为两类，一类是基于实验的（更加纯粹的数据驱动），另一类是基于观察的。从实证资产定价衍生出来的因子投资中的大部分基本面因子属于后者。这类因子十分依赖于是否有明确的先验和可解释性；且由于使用这类因子时假设股票收益率中有很强的 factor structure，因此使用它们时也更容易受到 selection bias 的影响。
+
+为了规避虚假因子，就必须强调先验 + 检验双管齐下的方式；学术界在这方面的诸多发现无疑非常值得借鉴，有很多优秀和经典的顶刊论文也值得拿来反复的揣摩和研读。
+
+最后，对于中国金融学年会，我想说，它是 “a once-in-a-life experience.”
+
+参考文献
+Black, F., M. C. Jensen, and M. Scholes (1972). The Capital Asset Pricing Model: Some Empirical Tests. In Studies in the Theory of Capital Markets. M. C. Jensen (editor), New York: Praeger, 79 – 121.
+
+Cochrane, J. H. (2005). Writing tips for Ph.D. students. Working paper, available at: https://www.johnhcochrane.com/research-all/writing-tips-for-phd-studentsnbsp.
+
+Engelberg, J., R. D. McLean, and J. Pontiff (2018). Anomalies and news. Journal of Finance 73(5), 1971 – 2001.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607 – 636.
+
+Fang, L. and J. Peress (2009). Media coverage and the cross-section of stock returns. Journal of Finance 64(5), 2023 – 2052.
+
+Huang, S., Y. Song, and H. Xiang (2020). The smart beta mirage. Working paper.
+
+Jegadeesh, N., J. Noh, K. Pukthuanthong, R. Roll, and J. Wang (2019). Empirical tests of asset pricing models with individual assets: Resolving the errors-in-variables bias in risk premium estimation.Journal of Financial Economics 133(2), 273 – 298.
+
+Lakonishok, J., A. Shleifer, and R. W. Vishny (1994). Contrarian investment, extrapolation, and risk. Journal of Finance 49(5), 1541 – 1578.
+
+Lee, C. M. C., S. T. Sun, R. Wang, and R. Zhang (2019). Technological links and predictable returns. Journal of Financial Economics 132(3), 76 – 96.
+
+Lewellen, J., S. Nagel, and J. Shanken (2010). A skeptical appraisal of asset pricing tests. Journal of Financial Economics 96(2), 175 – 194.
+
+Savor, P. and M. Wilson (2013). How much do investors care about macroeconomics risk? Evidence from scheduled economic announcements. Journal of Financial and Quantitative Analysis 48(2), 343 – 375.
+
+Savor, P. and M. Wilson (2014). Asset pricing: A tale of two days. Journal of Financial Economics 113(2), 171 – 201.
+
+Stambaugh, R. F., J. Yu, and Y. Yuan (2015). Arbitrage asymmetry and the idiosyncratic volatility puzzle. Journal of Finance 70(5), 1903 – 1948.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图3 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9286d7600>)
+--- 图4 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9ae30>)
+--- 图5 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253652b0>)
+--- 图6 ---
+我是一个特别长的标题
+我是文字我是文字
+--- 图7 ---
+Don't make slides with a bullet point for every word you intend to say. This forces you into a preplanned order, and then you can't change on the fly when you figure out how fast time is going by. Slides are fine that only contain equations, tables and graphs - things we really need to see. At most use words for the one or two really important things you want people to know, e.g. "Identification: interest rates do not respond to fiscal shocks in the Ricardian model." Also, you want people to remember the structure of the model, definitions of variables, etc. If you have too much junk on the slides, people can't see the utility function while you're talking about the production function, so they get lost. People don't remember equations from one slide to the next.
+出处：Cochrane (2005)
+--- 图8 ---
+\[\begin{array}{l} 1\div10\\2\div10\\5\div10\\10\div10\\20\div10\\1\div10\\7\div10\\10\div10\\20\div10\\1\div10\\10\div10\\20\div10\\1\div10\\10\
+--- 图9 ---
+Figure 1: An Indicative Case of Data Mining Based on Real-World Indexes. This figure plots the cumulative NAV ratios of two smart beta indexes of the same factor theme relative to an aggregate market index. All three indexes are from one of the world's largest index providers whose name we choose not to disclose. The first smart beta index (in grey) was constructed in December 1997, and the “enhanced” version of the first index was constructed in December 2014 (in red). Thus, the returns of the “enhanced” index between 1997 to 2014 are based on backtests.
+出处：Huang Song and Xiang (2020)
+--- 图10 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189ee0>)
+--- 图11 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9af20>)
+--- 图12 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9253677e0>)
+--- 图13 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8d210>)
+--- 图14 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db925367600>)
+--- 图15 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8f470>)
+--- 图16 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b8d2b0>)
+--- 图17 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b330>)
+--- 图19 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9288cfc90>)
+--- 图20 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db927b9b330>)
+--- 图21 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db929189ee0>)
+--- 图22 ---
+(失败:cannot identify image file <_io.BytesIO object at 0x7db9288cfc90>)
+--- 图23 ---

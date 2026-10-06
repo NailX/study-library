@@ -1,0 +1,11 @@
+# 勘误.II – BetaPlus
+
+来源：https://www.factorwar.com/typos2/
+
+本页面不定期更新发布《机器学习与资产定价》的勘误及补充说明。
+
+以下勘误出现在 2022 年 7 月第 1、2 次印刷中：
+
+
+
+- P11，译者注 6 中，Giglio, Liao, and Xiu (2021) 的标题 “Thousands of alpha thests” 应为 “Thousands of alpha tests”。

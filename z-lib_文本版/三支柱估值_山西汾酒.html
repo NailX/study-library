@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三支柱估值 · 山西汾酒</title>
+<style>
+:root{--bg:#0f1115;--line:#2a2f3a;--txt:#e6e9ef;--accent:#5b8def;--gold:#ffd166}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:24px;margin:0 0 6px}h2{font-size:19px;margin:36px 0 13px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+h3{font-size:16px;margin:24px 0 10px;color:#a9c4f5}
+p{margin:10px 0;color:#d3d8e3}strong{color:#fff}
+code{background:#171a21;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:#9fd0a0;font-family:ui-monospace,Consolas,monospace}
+pre{background:#12151b;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#c6d4e6;font-family:ui-monospace,Consolas,monospace}
+blockquote{margin:14px 0;padding:11px 18px;background:rgba(91,141,239,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:#b9c6da}
+ul{margin:10px 0;padding-left:22px}li{margin:5px 0;color:#d3d8e3}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:#171a21;padding:9px 12px;text-align:left;border:1px solid var(--line);color:#a9c4f5;font-size:13px}
+td{padding:9px 12px;border:1px solid var(--line);color:#d3d8e3;vertical-align:top}
+tr:hover td{background:rgba(91,141,239,.05)}
+</style></head><body><div class="wrap"><h1>三支柱估值实操 · 山西汾酒（600809.SH）</h1>
+<blockquote>方法：Greenwald《Value Investing》三支柱法（资产价值 / EPV / 增长价值）</blockquote>
+<blockquote>数据：东方财富实时行情 2026-10-06 + 财务报表（2011-2026H1 完整周期）</blockquote>
+<blockquote>交叉验证：壹评级 DDM（2026-09-15 快照）</blockquote>
+<blockquote>⚠️ 分析框架演示，非投资建议</blockquote>
+<hr>
+<h2>〇、数据快照（2026-10-06）</h2>
+<table>
+<tr><th>项目</th><th>数值</th></tr>
+<tr><td>股价</td><td>115.60 元</td></tr>
+<tr><td>总股本</td><td>12.20 亿股</td></tr>
+<tr><td><strong>总市值</strong></td><td><strong>1410 亿</strong></td></tr>
+<tr><td>PE_ttm</td><td>10.95 倍</td></tr>
+<tr><td>PB</td><td>3.70 倍</td></tr>
+</table>
+<p><strong>15年完整周期轨迹</strong>（正常化盈利判断的基础）：</p>
+<pre>
+净利(亿):  7.8→13.3→9.6→3.6→5.2→6.1→9.5→15.1→19.7→30.8→53.1→81.0→104.4→122.4→122.5
+ROE(%):    34.5 44.1 25.6  9.3 12.5 13.2 18.7 24.8 27.4 35.1 42.0 44.7 43.1 39.7 33.5
+           ↑2012景气顶      ↑2014深度底(-73%)              ↑2022-24新顶     ↓2025见顶
+</pre>
+<p><strong>当前位置</strong>：2026Q1 净利 -19%，H1 累计 64.4 亿（同比约 -26%），<strong>正处下行段中段</strong>。上一轮调整（2013-2015）用了 3 年利润才见底，本轮从 2025 算起才第 2 年。</p>
+<hr>
+<h2>一、支柱① 资产价值 AV ≈ 400 亿</h2>
+<table>
+<tr><th>科目</th><th>金额</th><th>调整</th></tr>
+<tr><td>货币资金</td><td>97.2 亿</td><td>面值</td></tr>
+<tr><td>存货</td><td>147.8 亿</td><td>白酒基酒随时间增值，重置价值 ≥ 账面</td></tr>
+<tr><td>固定资产+在建</td><td>67 亿</td><td>近年新建，重置≈账面</td></tr>
+<tr><td><strong>有息负债</strong></td><td><strong>0</strong></td><td>短借/长借/债券全为 0</td></tr>
+<tr><td>商誉</td><td>0</td><td>无并购包袱</td></tr>
+</table>
+<pre>
+AV ≈ 归母净资产 381 亿 ~ 418 亿（存货上浮 10-25%）
+AV/市值 = 28%  →  教科书级&quot;轻资产品牌型&quot;（情形C特征）
+</pre>
+<p><strong>含义</strong>：AV 只是极端场景地板，对汾酒这类品牌企业没有定价意义——价值不在资产负债表上，在赚钱能力上。</p>
+<hr>
+<h2>二、支柱② EPV ≈ 1110 亿（核心）</h2>
+<h3>正常化盈利（本案例最关键的判断）</h3>
+<pre>
+不能用什么：
+✗ 2025年122.5亿 —— 大概率是本轮周期利润顶
+✗ 2014年3.6亿 —— 那是周期底+公司自身问题叠加
+
+Greenwald式处理：穿越周期的可持续盈利
+├ 悲观（下行延续至2027）:  95 亿
+├ 中性（2026年底企稳）:   105 亿  ← 基准
+└ 乐观（H2渠道补库存）:   115 亿
+
+依据：2026H1已64.4亿，H2为传统淡季；
+      汾酒价位带(青花系列200-800元)受消费降级冲击小于茅台但大于玻汾竞品；
+      毛利率仍75% → 盈利质量未恶化，只是量的收缩
+</pre>
+<h3>EPV 计算</h3>
+<pre>
+EPV = 正常化盈利 / WACC
+
+WACC 取 10%：无有息负债、β≈0.75，但行业处下行段，
+              股权成本不应按景气期下调（这是DCF常见错误）
+
+EPV(核心) = 105 / 10% = 1050 亿
++ 富余现金 60 亿（货币97亿 − 经营占用~35亿）
+= EPV整体 ≈ 1110 亿（每股 91 元）
+</pre>
+<hr>
+<h2>三、支柱③ 增长价值 = 全部分歧所在</h2>
+<h3>情形判定：确认情形 C（特许权企业）</h3>
+<pre>
+ROE 33.5% (2025) &gt;&gt; WACC 10%
+特许权来源：
+├ 需求侧：清香型鼻祖+名酒基因，品牌忠诚度高 ★最持久
+├ 供给侧：基酒产能储备(存货148亿)与年份酒壁垒
+└ 规模经济：全国化渠道网络，光瓶酒(玻汾)大单品摊薄成本
+→ 增长有价值，EPV 不是终点
+</pre>
+<h3>但增长价值必须扣 fade</h3>
+<pre>
+白酒行业总量自2016年见顶后持续收缩（量减价升逻辑弱化）
+汾酒的长期增长中枢 ≠ 历史10%+
+fade 调整：行业总量下移 → 永续 g 上限取 2.5~3%
+
+公允价值 = 105 × (1+g) / (10% − g)
+
+  g=0%  → 1050亿（86元/股）
+  g=2%  → 1339亿（110元/股）← ≈现价
+  g=3%  → 1545亿（127元/股）
+  g=4%  → 1820亿（149元/股）
+  g=5%  → 2205亿（181元/股）
+
+★ 现价1410亿 隐含永续增长 g* ≈ 2.4%
+</pre>
+<h3>市场隐含结构拆解</h3>
+<pre>
+现价 1410亿 = EPV 1110亿 + 增长价值 300亿（占比21%）
+→ 市场只给了&quot;温和复苏&quot;的定价，没有泡沫成分
+→ 但也毫无 margin of safety：价格 ≈ 中性公允价值
+</pre>
+<hr>
+<h2>四、与壹评级 DDM 的交叉验证 ★</h2>
+<table>
+<tr><th></th><th>三支柱法</th><th>壹评级 DDM</th></tr>
+<tr><td>估值</td><td>1300-1600 亿（g=2-3%）</td><td><strong>2964 亿</strong></td></tr>
+<tr><td>对现价</td><td>合理区间内</td><td>低估 116%</td></tr>
+<tr><td>隐含假设</td><td>g≈2.4% 永续</td><td>?</td></tr>
+</table>
+<p><strong>反推壹评级 DDM 的隐含假设</strong>：</p>
+<pre>
+2964亿 对应什么？
+若按2025年分红~73亿、分红率60%：
+  2964 = 73×(1+g)/(r−g)
+  ├ 若 g=3% → r = 5.5%  ← ★折现率过低
+  └ 若 r=9% → g ≈ 6.5%  ← ★永续增速过高
+
+两种口径都偏乐观。且壹评级自身给汾酒 growth 仅 2 星——
+&quot;growth 2星&quot; 与 &quot;DDM隐含g 6.5%&quot; 自相矛盾。
+</pre>
+<p><strong>分歧根源不在算力，在长期增长信念</strong>：</p>
+<table>
+<tr><th>场景</th><th>公允价值</th><th>结论</th></tr>
+<tr><td>白酒=L型总量下行，汾酒仅靠结构升级</td><td>~1300亿（g≈1.5-2%）</td><td>现价略贵</td></tr>
+<tr><td>行业出清后汾酒份额提升，恢复中速</td><td>~1550亿（g≈3%）</td><td>现价便宜10%</td></tr>
+<tr><td>2027年后重新进入量价齐升（复刻2016-2020）</td><td>2000亿+（g≥4.5%）</td><td>现价低估40%+</td></tr>
+</table>
+<p><strong>我的判断</strong>（基于三支柱纪律）：</p>
+<ul>
+<li>壹评级 2964 亿需要&quot;未来10年年化8%+增长&quot;支撑，在 2026 年 -26% 的现实面前，这是<strong>把周期顶当常态外推</strong>——正是 Greenwald 批评的&quot;growth is your enemy when you pay for it at the top&quot;</li>
+<li>三支柱中性结论：<strong>公允区间 1300-1550 亿，现价 1410 亿 = 合理定价</strong>，无安全边际</li>
+</ul>
+<hr>
+<h2>五、结论与操作框架</h2>
+<h3>三档价值汇总</h3>
+<pre>
+AV地板     400亿  ← 清算场景，参考意义弱
+EPV基准   1110亿  ← 零增长也值这个钱（每股91元）
+公允区间  1300-1550亿 ← 含特许权增长价值（每股107-127元）
+壹评级DDM  2964亿  ← 需要强复苏信念支撑
+</pre>
+<h3>Graham 纪律检验（margin of safety ≤ 2/3 价值）</h3>
+<pre>
+中性口径(g=3%, 价值1545亿):
+  买点 ≤ 1030亿 → 股价 ≤ 84元（现价 -27%）
+  现价 115.60 元 → 不满足买入纪律
+
+观察区:
+  ≤ 91元(EPV)   → 增长价值白送，可考虑建仓
+  ≤ 84元        → 符合半价纪律，积极买入
+  ≤ 73元(悲观g=2%的2/3) → 极端机会（需行业恐慌配合）
+</pre>
+<h3>当前状态判定</h3>
+<pre>
+✓ 不是泡沫：增长溢价占比仅21%，PE 11倍处于历史低位区
+✗ 不是机会：价格=中性公允价值，margin of safety = 0
+= 典型的&quot;好公司、合理价格&quot;——巴菲特会持有，Graham不会买
+</pre>
+<h3>风险清单</h3>
+<table>
+<tr><th>风险</th><th>对估值的影响</th></tr>
+<tr><td>2026-2027 利润继续双位数下滑</td><td>EPV下移至950亿 → 现价偏贵30%+</td></tr>
+<tr><td>高端价位带(青花30)需求塌陷</td><td>增长价值归零 → 只剩EPV 1110亿</td></tr>
+<tr><td>渠道库存二次去化</td><td>短期利润冲击超预期</td></tr>
+<tr><td>消费税改革落地</td><td>净利一次性下修3-8%</td></tr>
+<tr><td>人口结构长期利空白酒总量</td><td>fade加剧，永续g上限压至1-2%</td></tr>
+</table>
+<h3>看多催化（跟踪信号）</h3>
+<table>
+<tr><th>信号</th><th>含义</th></tr>
+<tr><td>单季营收同比转正</td><td>下行段结束，EPV基准上修</td></tr>
+<tr><td>合同负债环比回升（现66.6亿）</td><td>经销商信心恢复，领先指标</td></tr>
+<tr><td>批价企稳（青花20/30）</td><td>渠道利润修复，重新补库存</td></tr>
+<tr><td>分红率提升（现~60%）</td><td>现金回报增厚，DDM口径价值上修</td></tr>
+</table>
+<hr>
+<h2>六、本案例的方法论复盘</h2>
+<p>1. <strong>正常化盈利是三支柱的灵魂</strong>：汾酒2025年122亿 vs 2014年3.6亿，差34倍——用任一年做基数都会得出荒谬结论。穿越周期取中枢（105亿）才可靠。</p>
+<p>2. <strong>AV 对品牌企业只是形式</strong>：28%的AV占比确认了&quot;情形C&quot;，价值判断全部落在 EPV 和增长假设上。</p>
+<p>3. <strong>增长价值 = 全部分歧</strong>：三支柱与壹评级差2倍，不是公式之争，是&quot;g取2.4%还是6.5%&quot;的信念之争——而 fade 纪律（72/半衰期）提示：白酒特许权虽持久，但行业总量下移意味着 g 中枢下移，4%+ 的永续增长需要非常强的证据。</p>
+<p>4. <strong>EPV 是最大的 sanity check</strong>：无论 DDM 多花哨，&quot;零增长也值1110亿（91元）&quot;是锚。现价高于锚23%，说明你在为增长付费——付多少合理，取决于你对 fade 的判断。</p>
+<hr>
+<p>*数据来源：东方财富（行情/财务）、壹评级项目快照（DDM）。估值为框架演示，不构成投资建议。*</p></div></body></html>

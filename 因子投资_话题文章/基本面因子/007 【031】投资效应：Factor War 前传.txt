@@ -1,0 +1,149 @@
+# 【031】投资效应：Factor War 前传
+
+来源：微信公众号「因子投资」话题·基本面因子（第7篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484082&idx=1&sn=5e928ca55b3f594af640783f728bbfdf&chksm=f995b330cee23a2662956624514e3baae8490658650302bb6727c4962f4fc12f996d1a63d605#rd
+
+这是投资因子专题的第 001 篇文章，也是因子动物园的第 031 篇独立原创文章。【未经授权，严禁转载。】
+
+【30 秒速览】本文从公司生产与投资行为出发，可以得到关于资产定价的一些有趣发现。为了厘清这一研究的历史脉络，本文对投资效应的相关研究进行了仔细的综述。特别地，我们按照一贯的结构，按照因子定义、实证证据，以及基于系统性风险的解释和基于行为金融的解释这几个方面，对已有研究进行了梳理。此外，我们也探讨了目前研究中存在的一些问题，以及未来的进一步方向。
+文章结构：01. 公司投资与资产定价
+02. 投资效应的实证研究03. 系统性风险的解释04. 行为与错误定价的解释05. 其他有趣观察与思考06. 结语【长文预警！】本文篇幅较长。按照我们传统的风格，会将一个因子的定义、实证研究、解释以及其他批判和拓展分成多篇短文进行综述，正如我们对动量和低风险因子做的那样。但 investment capm 是近几年兴起的一个全新范式，为了帮助您形成更好的全局认知，我们决定用一篇相对较长的推文对此进行总体的介绍，后续再找机会对每一部分进行更深入的讨论。事实上，即便如此，我们也不得不将投资因子和盈利能力因子分开，单独成文，而对由此形成的资产定价模型的讨论，则进一步推后。此外，我们也将关于 investment capm 和经典的 consumption-based capm 模型的理论模型放到了 PDF 版本中，若您对模型的理论基础感兴趣，可以自行查阅。在推文中，我们将聚焦于实证研究和解释。
+
+01 公司投资与资产定价
+传统上，金融经济学更关注投资者的行为决策，通过投资者的效用最大化，来推导均衡的资产定价。本文的附录对这一传统方法进行了详细的介绍。
+但本文感兴趣的是另一个常常被忽视的话题——公司及其生产行为。理论中的交换经济无需生产，但真实社会的运转则依赖于公司的生产活动。
+特别地，企业的价值取决于其未来的产出和盈利，因而，逻辑上，生产活动必然对股票价格有显著影响。
+本文将基于这一视角，来探讨公司特征对股票收益的影响。
+基于 q 理论，Zhang Lu (2017) 指出了一个重要关系（您如果对模型细节感兴趣，可参阅 PDF 原文）：
+对于给定的盈利率，投资越高的公司，股票期望收益越低；
+对于给定的投资，盈利能力越强的公司，股票期望收益越高。
+这便是投资与资产定价的基本关系，由 Zhang Lu 等人依据投资的 q 理论而正式建立，Zhang Lu 将其命名为 investment CAPM（投资 CAPM），以示与经典的基于消费的定价模型的区别，并直言该发现是其集大成之作。
+他们据此构建的 q-factor (HXZ, 2015) 和 q^5 (HXZ, 2019) 模型，与 Fama and Fench (2015) 提出的五因子模型有诸多相似之处，但 Zhang Lu 等人的研究更早以工作论文的形式面世，因此，关于谁首先将盈利能力和投资正式引入成熟的资产定价模型，一直存在诸多争议。这背后有不少八卦故事。
+相关的争论也引出了我们的疑问。我们知道，几乎没有一项研究是横空出世的。大多数研究都是在前人的基础上，不断改进而得到。
+那么，投资与资产定价关系的这一研究，真的是这几位学者完全独立提出的吗？或者 HXZ (2015) 和 Fama and French (2015) 也是站在前人的肩膀上，得到的研究成果呢？
+本文接下来的章节，将对投资与股票未来收益的负相关关系的研究进行梳理。而盈利能力对股票收益的影响，我们会放在另一篇文章里来讨论。
+
+02 投资效应的实证研究
+Titman, Wei, and Xie (2004) 是 关于投资对预期收益影响的最早的实证研究之一。他们用异常资本投资（abnormal capital investment）来代表投资，并发现有着高额的异常资本投资的公司，接下来一年的收益显著更低。
+其中，异常资本投资定义为：
+
+即企业最近一年的资本支出（CE, capital expenditure）相对此前三年的均值的变化。
+Titman et al. (2004) 还发现，在有着更大投资自主权的企业（即那些有着更高的现金流量和更低的负债率，从而有更多空间进行投资的企业）间，投资效应更加显著。
+当然，这不意味着负债率等传统风险因子可以完全解释投资效应,事实上，他们在文章中进一步指出，投资效应不能被其他公司特征或常见的风险因子所解释。此外，80 年代正是美国并购浪潮的高峰期，基于对这段时期的分析，作者们发现，投资效应仅在敌意收购较少的时期才高度显著。
+Xing (2008) 指出投资对未来收益的负面影响，对股票收益的横截面差异有显著贡献，给了 Titman et al. (2004) 的发现更多支持。
+也正是从 2008 年起，投资效应受到了越来越多的重视，诸多学者利用不同的代理指标，不同市场和不同时期的样本，对投资效应进行了实证检验。
+与 Titman et al. (2004) 有所不同，大部分后续研究都采用了总资产增长率作为投资的代理变量，这也是 HXZ (2015) 和 Fama and French (2015) 采用的定义。
+Cooper, Gulen, and Schill (2008) 首先利用 40 年的美股数据对投资效应（总资产增长率的影响）进行了检验。他们同样发现了投资对股票未来收益的显著负面影响，且该影响高度稳健。
+一方面，即便在大盘股中，该影响也十分显著。另一方面，在控制了 BM、公司规模、滞后收益和应计项目等经典因子后，该影响仍然显著。
+Watanabe, Xu, Yao, and Yu (2013) 对来自全球多个地区的 42 个国家的股市进行了检验，指出投资效应普遍存在，且与 Titman et al. (2004) 一致，投资效应十分稳健，在控制常见的因子后，效应仍然显著。
+Titman, Wei, and Xie (2010) 则检验了 40 个国家，并得到了总体上类似的结论。但他们也有不同的发现，他们指出，在其样本期（1981 - 2005）内，投资效应在发展中国家市场并不存在。
+Cakici (2015) 将 23 个发达国家市场划分为 4 个主要区域后对投资效应进行了检验，并指出投资效应在所有 4 个区域都存在，但相比日本和亚太市场，在北美和欧洲市场，效应要显著很多。
+而 Fama and French (2017) 更是直接宣称，投资效应在日本市场并不存在。
+日本股市再次成为与众不同的存在（此前我们讨论过，广泛存在的动量效应，在日本股市不显著）。其他学者们自然也不会放过它。
+Titman, Wei, and Xie (2009) 也指出投资效应在日本股市中并不存在。在这篇文章中，他们沿用了 Titman et al. (2004) 的定义方法。但 Kubota and Takehara (2018) 的最新研究指出，至少在日本的中小盘股票中，投资效应是显著的。
+此外，Chen, Yao, Yu, and Zhang (2008) 对 9 个亚太国家进行了检验，并指出，虽然投资效应在这些市场中显著存在，但显著性远低于美国市场。
+而 Bettman, Kosev, and Sault (2011) 和 Mardy, Chai, Zhong, and Li (2016) 发现在澳大利亚股市中，投资效应并不显著。
+当然，A 股市场也吸引了一些学者的注意。
+Tong (2016) 构建了 7 个投资的代理指标，并基于 2000 至 2012 年间的数据进行了研究，指出 A 股市场上，投资对股票未来收益有正向影响。这一发现着实令人惊讶。
+而 Guo, Zhang, Zhang, and Zhang (2017) 利用更长期的数据（1995 至 2014 年）发现，A 股市场上，投资与股票未来收益间不存在显著的相关性。
+总体来看，关于投资效应的实证研究自 2008 年之后逐渐增多，且大部分研究都支持投资效应的存在。此外，这些研究也发现，与动量类似，投资效应在欧美市场，比在亚太区域强很多。
+
+03 系统性风险的解释
+沿袭因子投资研究的规范，在发现投资异象显著存在的实证证据后，我们需要为其找到合理的解释。自然地，第一大类解释是基于系统性风险的假说。
+Cochrane (1991) 最早基于 q 理论提出了投资效应，这也是关于投资效应的第一个解释假说。
+Zhang (2005) （正是前文提到的 Zhang Lu）对此进行了拓展，指出有较高盈利能力和较低资本成本的企业会倾向扩大投资，并获得较低的预期收益。
+Xing (2008) 也基于 q 理论构建了模型，并指出包含随机折现因子的 q 理论，可以很好地解释投资异象。此外，Zhang (2005) 和 Xing (2008) 也都用此模型对价值效应进行了解释。
+第二类解释是基于实物期权的。这类解释假设资产的风险小于实物期权，这听起来确实也合情合理。在此基础上，研究者们指出，更多的投资意味着行权，用资产代替实物期权，从而降低了公司的风险，因而预期收益也随之降低。
+更详细的分析可参见 Berk, Green, and Naik (1999) 和 Carlson, Fisher, and Giammarino (2004)。而 Anderson and Garcia‐Feijóo (2006) 则为此提供了实证证据。
+Lyandres, Sun, and Zhang (2008) 提出了第三种解释，即投资效应是由递减的规模报酬（decreasing return to scale）所致。规模报酬递减意味着，随着投资增加，资本的边际产出下降，预期收益也随之降低。
+他们进一步用投资因子来解释股票发行之谜，并指出，在控制了投资效应后，新发行（IPO） 和增发股票（SEO）原本异常显著的负收益，程度都大大减轻了。
+理论上，企业发行股票募集的资金，将用于扩大投资，即股票发行规模同投资高度正相关，这也是作者们用投资效应成功解释股票发行之谜的重要原因。
+Li and Zhang (2010) 对 q 理论进行了拓展并指出，在在投资摩擦较大的市场中，投资效应更加显著。
+但 Titman, Wei, and Xie (2010) 的国际市场实证研究，却未给出支持这一理论的进一步证据，相反，他们指出，投资效应在投资摩擦较小的发达国家市场反而更加显著。
+此外，Cooper and Priestley (2011) 指出，投资效应可以由高低投资组合的系统性风险的差异所解释。Watanabe et al. (2013) 基于国际市场的实证研究，也更支持系统性风险类别的解释。
+
+04 行为与错误定价的解释
+除了前述基于系统性风险溢价的解释，也有不少从行为偏差和错误定价角度进行的研究。
+Baker and Wurgler (2002) 可谓这方面的先驱。他们提出的企业经理人择时假说是第一种行为金融学解释。
+两位作者认为，既然经理人有着关于企业真实价值的最充分信息，他们自然会利用这一信息优势，在股票高估时发行股票扩大投资，但普通投资者通常不会关注这一点。他们据此指出，经理人的这一择时行为导致了投资与股票未来收益之间的负相关关系。
+两位作者在另一篇合作文章 Baker, Stein, and Wurgler (2003) 中再次提出了类似的解释，即企业会依据自身的估值选择股权融资的时机，从而导致了投资与股票未来收益的负相关性。
+Polk and Sapienza (2009) 的实证研究支持这一观点。他们以操控性应计项目（ discretionary accruals）作为错误定价的代理变量，发现在美股市场上，被高估的公司确实倾向于进行更多的投资，并在随后获得较低的回报。
+但 Dittmar and Dittmar (2008) 并不支持这一论断。
+公司的过度投资倾向则是第二种解释。
+该假说由 Titman et al. (2004) 提出。他们指出，那些有着高额投资的公司，本来就有着过度投资的倾向，这些公司为了构建自己的企业帝国，会投资很多净现值为负的项目，但投资者往往对此反应不足。随着投资者逐渐消化信息并纠正自己的错误行为，这些公司的股票价值将回归，并获得较低的未来回报。
+Titman et al. (2004) ，Titman et al. (2010) 和 Cooper et al. (2008) 的实证研究都支持这一解释。
+事实上，Cooper et al. (2008) 认为，投资者在为公司估值时，倾向于将历史增长率外推，来得到预期的未来增长率，但这一外推法常常会落空，从而使得投资者高估了股票价值。
+第三类解释是公司的盈余管理行为（earnings management）。
+盈余管理是指公司操作在定期公告中报告的盈余的行为，其目的通常是满足市场预期，推动股价上涨，公司估值上升，并利用高估值，进行有利的并购活动。基于现实压力，这一行为事实上并不鲜见。
+而并购活动自然会带来资产的增长，从而进一步导致投资与股票被高估的虚假关联。这一关联可能使得，即便投资效应并不存在，我们仍能观察到投资与股票未来收益之间的负相关关系。
+特别地，如果这些基于行为和错误定价的解释成立，那么，我们应当观察到，投资效应在那些套利限制较大的市场中更加显著。但相关的实证研究并没有统一的结论。
+例如，Li and Zhang (2010) 和 Lipson, Mortal, and Schill (2011) 给出了支持的证据，但 Lam and Wei (2011) 和 Wantabe et al. (2013) 却不支持这一假说。
+
+05 其他有趣观察与思考
+在大部分关于投资效应的研究中，都利用总资产的增长来代表投资。但事实上，投资并不完全等同于总资产的增长。这也是不少学者对投资效应心存顾虑的重要原因。
+Q 理论表明，投资效应在理论上是站得住脚的，但在实践中，用什么变量来代表投资最恰当，则有不少争论，这也是未来的一个重要方向。
+一个可能的选择是剥离掉金融资产的影响，利用经营性净资产的增长来代表公司的实际投资。
+其次，按照 investment capm 模型，投资与股票未来收益的负相关性是在盈利能力等其他公司特征相同的条件下观察到的。
+但大多数相关研究，包括 HXZ (2015) 和 Fama and French (2015)，实际上都是考虑的无条件影响（他们虽然做了多重分组，但使用的是 independent sorting，要考察条件影响，需要使用 dependent sorting，参见【027】追寻因子的足迹：分类、构造与检验）。
+最后，前述所有研究关注的都是个体公司层面的投资效应。Wen (2019) 对此做了一个有趣的拓展。
+作者利用市值加权的总资产增长率，定义了一个市场总体投资因子，并发现这个市场总体投资因子对于股票定价有显著影响。事实上，这一类研究近年日益广泛，也的确是一个重要的方向。
+
+06 结语
+与经典的基于消费的资产定价模型不同，从公司生产行为出发，我们可以得到一些新的发现，Zhang Lu 称之为 investment capm。
+不管名字如何，其中最为重要的是，投资与股票未来收益呈负相关，盈利能力与股票未来收益呈正相关。
+特别地，Zhang Lu 和 Fama and French (2015) 对于谁的贡献更大似乎有不小的分歧。为了厘清这一重要研究成果的历史脉络，我们在本文中对相关研究进行了仔细的综述。
+考虑到篇幅，本文中，我们主要关注投资效应方面的研究。
+特别地，我们按照一贯的结构，按照因子定义、实证证据，以及基于系统性风险的解释和基于行为金融的解释这几个方面，对已有研究进行了梳理。此外，我们也探讨了目前研究中存在的一些问题，以及未来的进一步方向。
+关于盈利能力对股票收益的影响，后续我们会单独进行综述介绍。此外，关于基于 investment capm 的资产定价模型——q-factor 和 q^5，我们也会在后续的推文中进行细致的介绍。敬请期待！
+
+详细内容，请点击文末【阅读原文】，获取 PDF 版本文章。也可在公众号后台回复关键字 投资 或者 investment ，获取 PDF 文章链接。
+
+若您也对因子研究感兴趣，不妨关注我们哦！
+
+衍生阅读：从 Factor Zoo 到 Factor War，实证资产定价走向何方？
+
+参考文献：Anderson, Christopher W., and Luis Garcia‐Feijóo. “Empirical Evidence on Capital Investment, Growth Options, and Security Returns.” Journal of Finance 61.1 (2006): 171-194.
+Baker, Malcolm, and Jeffrey Wurgler. “Market Timing and Capital Structure.” Journal of Finance 57.1 (2002): 1-32.
+Baker, Malcolm, Jeremy C. Stein, and Jeffrey Wurgler. “When Does the Market Matter? Stock Prices and the Investment of Equity-dependent Firms.” Quarterly Journal of Economics 118.3 (2003): 969-1005.
+Bali, Turan G., Robert F. Engle, and Scott Murray. “Empirical Asset Pricing: The Cross Section of Stock Returns.” John Wiley & Sons, 2016.
+Berk, Jonathan B., Richard C. Green, and Vasant Naik. “Optimal Investment, Growth Options, and Security Returns.” Journal of Finance 54.5 (1999): 1553-1607.
+Bettman, Jenni L., Mitch Kosev, and Stephen J. Sault. “Exploring the Asset Growth Effect in the Australian Equity Market.” Australian Journal of Management 36.2 (2011): 200-216.
+Bonaimé, Alice A., Kristine W. Hankins, and Bradford D. Jordan. “The Cost of Financial Flexibility: Evidence from Share Repurchases.” Journal of Corporate Finance 38 (2016): 345-362.
+Cakici, Nusret. “The Five-factor Fama-French Model: International Evidence.” Available at SSRN 2601662 (2015).
+Carlson, Murray, Adlai Fisher, and Ron Giammarino. “Corporate Investment and Asset Price Dynamics: Implications for the Cross‐section of Returns.” Journal of Finance 59.6 (2004): 2577-2603.
+Chen, Shaw, Tong Yao, Tong Yu, and Ting Zhang. “Asset growth and stock returns: evidence from the Pacific-Basin markets.” International Financial Management Association International (2008).
+Chiah, Mardy, Daniel Chai, Angel Zhong, and Song Li. “A Better Model? An empirical investigation of the Fama–French five‐factor model in Australia.” International Review of Finance 16.4 (2016): 595-638.
+Chincarini, Ludwig B. “Quantitative Equity Portfolio Management: An Active Approach to Portfolio Construction and Management.” McGraw-Hill, 2006.
+Cooper, Michael J., Huseyin Gulen, and Michael J. Schill. “Asset Growth and the Cross‐section of Stock Returns.” Journal of Finance 63.4 (2008): 1609-1651.
+Cooper, Ilan, and Richard Priestley. “Real Investment and Risk Dynamics.” Journal of Financial Economics 101.1 (2011): 182-205.
+Dittmar, Amy K., and Robert F. Dittmar. “The Timing of Financing Decisions: An Examination of the Correlation in Financing Waves.” Journal of Financial Economics 90.1 (2008): 59-83.
+Fama, Eugene F., and James D. MacBeth. “Risk, Return, and Equilibrium: Empirical Tests.” Journal of Political Economy 81.3 (1973): 607-636.
+Fama, Eugene F., and Kenneth R. French. “International Tests of a Five-factor Asset Pricing Model.” Journal of Financial Economics 123.3 (2017): 441-463.
+Giglio, Stefano, Yuan Liao, and Dacheng Xiu. “Thousands of Alpha Tests.” Chicago Booth Research Paper 18-09 (2018).
+Guo, Bin, Wei Zhang, Yongjie Zhang, and Han Zhang. “The Five-factor Asset Pricing Model Tests for the Chinese Stock Market.” Pacific-Basin Finance Journal 43 (2017): 84-106.
+Harvey, Campbell R., Yan Liu, and Heqing Zhu. “… and the Cross-section of Expected Returns.” Review of Financial Studies 29.1 (2016): 5-68.
+Hou, Kewei, Chen Xue, and Lu Zhang. “Digesting Anomalies: An Investment Approach.” Review of Financial Studies 28.3 (2015): 650-705.
+Hou, Kewei, Haitao Mo, Chen Xue, and Lu Zhang. “q^5.” Available at theinvestmentcapm.
+Kubota, Keiichi, and Hitoshi Takehara. “Does the Fama and French Five‐Factor Model Work Well in Japan?.” International Review of Finance 18.1 (2018): 137-146.
+Lam, FY Eric C., and KC John Wei. “Limits-to-arbitrage, Investment Frictions, and the Asset Growth Anomaly.” Journal of Financial Economics 102.1 (2011): 127-149.
+Li, Dongmei, and Lu Zhang. “Does Q-theory with Investment Frictions Explain Anomalies in the Cross Section of Returns?.” Journal of Financial Economics 98.2 (2010): 297-314.
+Lipson, Marc L., Sandra Mortal, and Michael J. Schill. “On the Ccope and Drivers of the Asset Growth Effect.” Journal of Financial and Quantitative Analysis 46.6 (2011): 1651-1682.
+Lyandres, Evgeny, Le Sun, and Lu Zhang. “The New Issues Puzzle: Testing the Investment-based Explanation.” Review of Financial Studies 21.6 (2007): 2825-2855.
+Polk, Christopher, and Paola Sapienza. “The Stock Market and Corporate Investment: A Test of Catering Theory.” Review of Financial Studies 22.1 (2008): 187-217.
+Shanken, Jay. “On the Estimation of Beta-pricing Models.” Review of Financial Studies 5.1 (1992): 1-33.
+Titman, Sheridan, KC John Wei, and Feixue Xie. “Capital Investments and Stock Returns.” Journal of financial and Quantitative Analysis 39.4 (2004): 677-700.
+Titman, Sheridan, KC John Wei, and Feixue Xie. “Capital Investments and Stock Returns in Japan.” International Review of Finance 9.1‐2 (2009): 111-131.
+Titman, Sheridan, KC John Wei, and Feixue Xie. “Access to Equity Markets, Corporate Investments and Stock Returns: International Evidence.” Unpublished Paper (2010).
+Tong, L.I. “Empirical Research of Asset Growth and Future Stock Returns based on China Stock Market.” Management Science and Engineering 10: 33–37.
+Watanabe, Akiko, Yan Xu, Tong Yao, and Tong Yu. “The Asset Growth Effect: Insights from International Equity Markets.” Journal of Financial Economics 108.2 (2013): 529-563.
+Xing, Yuhang. “Interpreting the Value Effect through the Q-theory: An Empirical Investigation.” Review of Financial Studies 21.4 (2007): 1767-1795.
+Zhang, Lu. “The Investment CAPM.” European Financial Management 23.4 (2017): 545-603.
+
+题图：Empty Highway Overlooking Mountain, 
+
+from www.pexels.com.
+
+【图片文字】
+--- 图2 ---
+$$ CI_{t-1}=\frac{CE_{t-1}}{(CE_{t-2}+CE_{t-3}+CE_{t-4})/3} $$
+--- 图3 ---

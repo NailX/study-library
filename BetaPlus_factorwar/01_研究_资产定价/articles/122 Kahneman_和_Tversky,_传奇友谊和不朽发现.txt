@@ -1,0 +1,48 @@
+# Kahneman 和 Tversky, 传奇友谊和不朽发现
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/mpGJmpvwWvFD0j0v1U5tgw
+
+：
+，
+。
+ 
+
+视频
+小程序
+
+赞
+，轻点两下取消赞
+在看
+，轻点两下取消在看
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+[表]
+判断 | 1971 | Belief in the law of small numbers. | 3769 | 
+1972 | Subjective probability: A judgment of representativeness. | 6028 | 
+1973 | Availability: A heuristic for judging frequency and probability. | 11854 | 
+1973 | On the psychology of prediction. | 7932 | 
+1974 | Judgment under uncertainty: Heuristics and biases. | 40039 | 
+1979 | Intuitive prediction: Biases and corrective procedures. | 1645 | 
+决策 | 1979 | Prospect theory: An analysis of decision under risk. | 65759 | 
+1981 | The framing of decisions and the psychology of choice. | 21409 |
+来自 Google Scholar，截至 2021/03/10。
+比对图 11 为 7 目 0.
+--- 图3 ---
+[表]
+步骤 | 描述 | 
+1 | 选择参照类 | 
+2 | 在选定的参照类中，估计结果的分布 | 
+3 | 根据特有信息进行预测 | 
+4 | 估计特有信息的预测准确性 | 
+5 | 利用先验分布和预测准确性修正预测值 |
+出处：Kahneman and Tversky (1979a)，整理：川总写量化
+--- 图4 ---
+
+--- 图6 ---
+Γιουσλιν (†) 和 Kλν (λ)
+--- 图7 ---
+2

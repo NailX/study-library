@@ -1,0 +1,353 @@
+# 【044】More on Tail Risk: 风险越大，收益越低吗？
+
+来源：微信公众号「因子投资」话题·另类数据（第6篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247484350&idx=1&sn=8cb067b2d7fce51934a2449ba08446f1&chksm=f995b23ccee23b2aeb489d158fa4f28b2411849dd0bfff07e0a6c72eb7e1dc2ae1242e6b13c0#rd
+
+本文是技术因子专题的第 006 篇，也是因子动物园的第 044 篇独立原创研究。【未经授权，禁止转载！】欢迎私信公众号后台或动物园园长获取转载授权。
+
+【30 秒速览】Bali et al. (2007) 研究了 VaR 代表的尾部风险与对冲基金未来收益的关系，发现其影响与股票 VaR 对股票未来收益的影响并不一致。我们基于中国股票型公募基金的实证研究又与 Bali et al. (2007) 的发现不完全一致。
+目录
+01. 简介02. VaR 与对冲基金表现
+03. 控制变量分析04. VaR 变化与基金表现
+05. 中国市场实证
+06. 一点评论
+07. 结语
+
+01 简介
+【042】尾部动量：极端损失与股票表现一文介绍了股票 VaR 对未来收益的显著负面影响，即 VaR 表征的尾部风险越大，股票未来预期收益越低。我们不禁要问，这一反直觉的结果是孤例，还是普遍现象？换言之，对于其他资产而言，尾部风险越大，未来预期收益也越低吗？Bali, Gokcan, and Liang (2007) 研究了对冲基金尾部风险与未来收益的关系，并得到了非常有趣的发现。与股票不同，高 VaR 的对冲基金，往往有着更好的未来表现，前提是这些基金能够存续下去，但这只在事后才能知道。进一步，他们发现 VaR 的年度增长率与基金未来收益显著负相关，因其可以表征基金在未来终止的概率。本文第 2 至 4 小节梳理 Bali et al. (2007) 的研究结果。第 5 小节基于国内股票型基金数据进行简要的实证研究。第 6 节讨论对此研究的一些感想。第 7 节总结全文。
+
+02 VaR 与对冲基金表现
+对冲基金有着非常灵活的策略，其收益往往呈现更严重的厚尾特征，因此，诸多研究（例如，Gupta and Liang (2005), Bali and Gokcan (2004)）指出，诸如 VaR 这样的尾部风险指标，可以更好地描述对冲基金的风险。在此基础上，Bali et al. (2007) 希望进一步探究 VaR 与对冲基金未来收益的关联。为了尽可能获取完整的对冲基金数据，作者们合并了 1990 至 2003 年间 TASS 和 HFR 两大对冲基金数据库的数据。此外，基于其计算 VaR 的数据需要，作者们剔除了业绩记录不满 2 年的基金。最终，他们得到了 1221 支存续的基金。这些基金覆盖以下股票对冲、股票市场中性、统计套利、全球宏观、可转债套利等主要策略类型。为了进一步排除生存偏差（survival bias），作者们按照同样方法，加入了已终止的基金（defunct funds），共计 1902 支。表 1 给出了基本的描述性统计。可见，大部分对冲基金的收益都具有尖峰厚尾特征（超额峰度显著大于 0）。
+表 1 ：对冲基金数据描述下统计.数据来源：Bali et al. (2007), Table 1.在此基础上，作者们使用了两种方法来计算 VaR 。首先是非参数方法，这同【042】尾部动量：极端损失与股票表现是相似的，即根据经验分布计算对应的分位数，只是此处基于过去 60 个月的月度收益计算（最少 24 个月的数据）。另一种方法是参数方法。在正态分布下有：
+其中，σ 为正态分布下 99% 置信度的临界值。对于厚尾分布，则需按照 Cornish-Fisher (1937) 的方法进行调整，以纳入偏度和峰度的影响。
+其中，1−α 为置信度，S 和 K 分别为偏度和峰度。当然，最后的 VaR 仍然乘以 -1 ，以变为正值，即 VaR 越大，尾部风险越大。在此基础上，作者们基于 1% 置信度水平下的 VaR ，进行了单变量组合分析。测试区间从 1995 年至 2003 年。表 2 显示了主要结果。可以看到，基于 VaR 的多空组合没有显著的超额收益和 alpha 。
+表 2 ：VaR 分组组合收益统计.数据来源：Bali et al. (2007), Table 2.那么，这是否意味着对于对冲基金而言，VaR 与未来业绩无关呢？更仔细地查看表 2 ，显然不是这样。事实上，对于组合 1 到 9 ，随着 VaR 变大，组合的平均收益也单调上升。问题出在组合 10（即高 VaR 组合），它打破了这一规模，其收益显著低于组合 9 。该如何理解这一“异常”现象呢？Bali et al. (2007) 认为，这主要是存续基金和终止了的基金的风险-收益关系不同所致。对于存续基金，高风险蕴含着高收益；而承担很高的风险，则可能迫使部分基金被迫清盘，成为终止运作的基金。Liang (2000) 为这一论点提供了依据。这篇文章指出，对冲基金终止运作并从对冲基金数据库消失，最主要的原因就是糟糕的表现，尤其是最近 24 个月的糟糕表现。换言之，对冲基金承担高风险，往往只有 2 个结果：获取高收益并存续，或遭遇巨大损失并从对冲基金数据库消失。Bali et al. (2007) 据此将基金分为存续基金和终止运作的基金两大类，并分别观察 VaR 与基金未来业绩的关系。表 3 展示了相应的结果。结果验证了作者们的猜想。在存续基金中，高 VaR 基金有显著更高的收益，而在已终止基金中，高 VaR 则与低未来收益相关联。表 3 ：存续基金和已终止基金中 VaR 分组组合表现统计. 数据来源：Bali et al. (2007), Table 3.
+
+03 控制因素分析
+已有研究（例如，Liang (1999)）显示，对冲基金的年龄、管理规模和锁定期等都对基金业绩有显著影响。Bali et al. (2007) 也考察了控制这些因素后 VaR 因子的表现。首先，对于存续基金和已终止基金，他们利用单变量组合分析，分别考察了前述 3 个因子对基金业绩的影响。表 4 显示，较年轻的基金有显著更高的收益，有锁定期的基金也有更高的收益，而管理规模的影响则不一，对于存续基金，管理规模越小，基金收益越高，对于已终止基金，管理规模越小，基金收益则越低。
+表 4 ：基金年龄、管理规模和锁定期分组组合表现统计. 数据来源：Bali et al. (2007), Table 4.为了控制这几个变量的影响，作者们首先进行了双重分组（bivariate sort）。表 5 至 表 7 展示了相应的结果。结果显示，在控制了这些变量后，VaR 对基金未来表现的影响总体上仍然成立，且对于较年轻的基金和管理规模较小的基金，以及没有锁定期的基金，VaR 的影响最为显著。
+
+表 5 ：基金年龄与 VaR 分组组合表现统计. 数据来源：Bali et al. (2007), Table 6.
+
+表 6 ：管理规模与 VaR 分组组合表现统计. 数据来源：Bali et al. (2007), Table 7.
+
+表 7 ：锁定期与 VaR 分组组合表现统计. 数据来源：Bali et al. (2007), Table 8.为了考察上述因素的共同影响，作者们进一步进行了 Fama-MacBeth 回归检验。表 8 和表 9 展示了相应的结果。无论控制了哪些便利，对于存续基金，VaR 与基金未来收益都有显著正的关联，而对于已终止基金，VaR 的影响都显著为负。
+
+表 8 ：存续基金 Fama-MacBeth 回归结果. 数据来源：Bali et al. (2007), Table 9.
+
+表 9 ：已终止基金 Fama-MacBeth 回归结果. 数据来源：Bali et al. (2007), Table 10.
+
+04 VaR 变化与基金表现
+前述结果表明，VaR 对对冲基金未来业绩的影响是稳健的。但非常重要的是，该关系是事后的，即在我们已经明确知道基金是存续还是已终止的情况下才成立。但显然的，在真实的市场中，我们不可能提前预知这一切。如前所述，作者们指出，那些最终终止运作的基金，大都在终止前，经历了糟糕的表现，换言之，他们的 VaR 可能大幅度上升。因此，可以用 VaR 的同比（百分比）变化来表征基金未来终止运作的概率，VaR 的同比变化越大，则基金未来终止运作的可能性变越大。他们据此构建了一个新的策略，做多 VaR 同比变化绝对值较小（即 VaR 较为平稳）的基金，并做空 VaR 同比变化较大的基金，换言之，做多预期将存续的基金并做空预期将终止运作的基金。表 10 展示了这一策略的结果。可见，VaR 同比变化较大的基金，确实有显著的负超额收益。需要注意的是，多头组合为组合 5 （即 VaR 变化的绝对值）最小。事实上，如果按照传统的因子构建方法，做多 VaR 同比变化的组合 1 ，结果仍然是显著的，只是绝对幅度稍小。
+表 10 ：VaR 同比变化分组组合表现统计. 数据来源：Bali et al. (2007), Table 4.
+
+05 中国市场实证
+本节我们参照 Bali et al. (2007) 的研究，以国内股票型和偏股型开放式公募基金为样本，检验 VaR 和 VaR 同比变化对基金收益的影响。我们的数据来自 Wind ，样本包括 2006 至 2018 年间的股票型和偏股型基金。考虑到便利性，以及国内终止运作的股票型基金数量不多，此处我们只考虑了截至 2018 年底仍存续的基金，并未纳入中途终止运作的基金。我们额外剔除了上市不足一年的基金。最终，我们的样本包含 942 支存续基金。考虑到数据限制，我们基于过去一年（252 个交易日）的日收益率计算 VaR ，并按照 252 个交易日计算 VaR 的同比百分比变化。因此，我们的测试从 2008 年 2 月底开始，直到 2018 年 12 月结束。我们在每月末按照 1% 显著性水平下的 VaR（或 VaR 同比变化率） 对基金进行排序，将全部基金分为 5 组，做多低 VaR （或 VaR 同比变化率）组合并做空高 VaR （或同比变化率）组合。此外，为了保证不同基金的风险大体可比，在每月末对基金分组时，我们剔除了按照最新季报的持股权重低于 80% 的基金。图 1 展示了累计净值走势。蓝线代表 VaR 因子，橙线代表 VaR 同比变化因子，绿线代表市场组合，即所有股票的市值加权组合。由于 2008 年初正是全球金融危机的起点，因此，市场组合在起初经历了暴跌，截至 2018 年末，累计收益仍为负。VaR 与 VaR 同比变化因子呈类似走势，但 2015 至 2016 年间，VaR 同比变化因子的表现更好。但看二者的绝对收益，并不是非常理想，但考虑到期间市场基准指数的两次暴跌，其相对业绩还算可观。
+图 1 ：中国市场 VaR 与 VaR 同比变化因子净值走势图. 数据来源：因子动物园.表 11 和 表 12 给出了对应的业绩统计和 alpha 统计，可见总体上两个因子的表现确实非常相似。VaR 同比变化因子的波动更小，因此其超额收益在 5% 显著性水平下显著，Sharpe 比率也更高。但从 alpha 来看，VaR 因子的 alpha 反而更显著。此外，二者的最大回撤分别为 15.22% 和 13.27%，远小于市场组合 67.37% 的最大回撤，表明从风控角度看，这两个因子有着不错的表现。
+
+表 11 ：中国市场 VaR 与 VaR 同比变化因子业绩统计.数据来源：因子动物园.
+
+表 12 ：中国市场 VaR 与 VaR 同比变化因子 alpha 统计.数据来源：因子动物园.
+
+06 一点评论
+无论是 Bali et al. (2007) ，还是本文基于国内股票型基金的简单实证，都受限于数据，使得研究结论的可靠性，相比于股票市场的同类研究，可能会差一些。此外，Bali et al. (2007) 的研究对象，包括多种类型的对冲基金，这些对冲基金天然有着不同的风险-收益特征。因此，基于这样一个复杂样本得出的 VaR 与基金未来收益的关系，可能受到基准策略表现的影响。更进一步的分析应考虑单独某一类策略，或分析不同 VaR 分层组合中的基金策略构成，来剥离不同策略表现的影响，以得到更稳健的结论。再者，我们基于中国股票型基金数据的实证发现，VaR 对基金未来收益的影响同样是负面的。这与 Bali et al. (2007) 关于对冲基金的结论不一致。虽然对于公募基金，终止运作的风险要小很多，但这种不一致，仍然或多或少表明，相关研究结论可能并不那么稳健。最后，简单利用历史数据来刻画基金 VaR ，得到的是事后测度，而非对于基金 VaR 的前瞻性度量，而真正与基金未来风险和收益相关的是其预期 VaR （或事前 VaR）。这需要基于基金的最新持仓数据和持仓的风险指标（例如，协方差矩阵）来刻画。如果能改进相关度量方法，也许能得到更稳健且有意义的发现。
+
+07 结语
+Bali et al. (2007) 研究了 VaR 代表的尾部风险与对冲基金未来收益的关系。他们指出，依据基金在未来是否存续，VaR 对于基金收益有着显著不同的影响。对于仍存续的基金，“高风险高收益”定律成立，VaR 对基金业绩有正面影响。而对于未来终止运作的基金，高 VaR 则意味着更低的收益。在此基础上，他们利用 VaR 的同比变化率来表征基金终止运作的概率，并指出做多 VaR 同比变化率绝对值较小的基金，做空 VaR 同比变化较大的基金，可获取显著的超额收益。我们基于中国市场的股票型和偏股型基金进行了简要的实证研究。我们发现，VaR 和 VaR 同比变化因子有着类似的表现，二者绝对收益不高，但在风险控制方面表现不俗，总体表现远优于市场基准指数。但这些研究都受限于数据和 VaR 计算方法问题，使得结论可能不如关于股票的同类研究可靠。未来若能进一步补充数据集，并优化前瞻性 VaR 的估计方法，可能可以得到更稳健的结论。此外，关于尾部风险对股票和基金收益的影响，还有不少有趣的研究。我们会在后续的文章中进行进一步梳理。敬请期待！
+全文完。本文仅为分享，不代表任何投资建议。文章大部分图表来自于相应论文，仅为介绍之用，版权归原作者和期刊所有，实证章节图表则为我们自己研究所绘制。
+
+历史推荐
+
+文章索引：因子投资小册子
+
+因子体系：FF 和 Barra 体系，谁是你的菜？
+
+实践方法论：【037】资产配置与因子配置：可以团圆吗？
+
+投资因子：【031】投资效应：Factor War 前传
+
+研究方法论：【027】追寻因子的足迹：分类、构造与检验
+搞事情小组：搞事情深度研究| 异质波动率之谜
+实证研究：【026】低 Beta 在 A 股：证券市场线是平坦的吗？
+
+技术因子：【040】Trend Factor in China ：中国版定价模型？
+低风险因子：【018】低风险异象靠谱吗？解释与批判
+动量因子：【010】横截面动量那些事
+
+基本面动量：【038】不止于价格动量：基本面动量也很酷
+
+参考文献：Atilgan, Yigit, Bali, Turan G, Demirtas, K Ozgur, and Gunaydin, A Doruk. "Left-tail Momentum: Underreaction to Bad News, Costly Arbitrage and Equity Returns." Journal of Financial Economics (2019).
+Bali, Turan G., and Suleyman Gokcan. "Alternative Approaches to Estimating VaR for Hedge Fund Portfolios." Intelligent Hedge Fund Investing (2004): 253-277.
+Bali, Turan G., Nusret Cakici, and Robert F. Whitelaw. "Maxing out: Stocks as Lotteries and the Cross-section of Expected Returns." Journal of Financial Economics 99.2 (2011): 427-446.
+Bali, Turan G., Robert F. Engle, and Scott Murray. "Empirical Asset Pricing: The Cross Section of Stock Returns." John Wiley & Sons, 2016.
+Gupta, Anurag, and Bing Liang. "Do Hedge Funds Have Enough Capital? A Value-at-risk Approach." Journal of Financial Economics 77.1 (2005): 219-253.
+Liang, Bing. "On the Performance of Hedge Funds." Financial Analysts Journal 55.4 (1999): 72-85.
+
+题图：Snow Capped Mountain, from pexels.com.
+
+【图片文字】
+--- 图2 ---
+Basic statistics and the test of normality for hedge funds returns
+[表]
+Category | N | Mean | Std dev | Skew | Kurt | % Rejection of normality at the 1% significance level | 
+Skewness  $ H_0 $: Skew = 0) % | Kurtosis  $ H_0 $: Ex Kurt = 0) % | JB test  $ H_0 $: Normality) % | 
+Live funds | 1221 | 1.04 | 3.31 | 0.05 | 2.32 | 45.4 | 77.8 | 93.9 | 
+Defunct funds | 843 | 0.86 | 5.24 | -0.14 | 4.09 | 52.8 | 73.2 | 91.8 | 
+All funds | 2064 | 0.97 | 4.06 | -0.02 | 3.02 | 48.3 | 76.0 | 93.1 |
+This table shows the number of observations (N) for each hedge fund category, the average values of the sample mean, standard deviation, skewness and excess curiosity of individual hedge fund returns. The sample period is from January 1994 to December 2003. Live funds are from the combined TASS/HFR databases. Defunct funds are from TASS database. The results of the normality tests are presented as a percentage of rejection of the null hypothesis at the significance level of 1%. Funds with a minimum 24 months of return history are included in the analysis. Emerging markets funds, managed futures, and funds of funds are excluded. Live funds with less than $10 million of assets under management are excluded.
+--- 图4 ---
+$$ \aleph_{CF}\backslash\alpha)=\mu-\Omega(\alpha)\sigma $$
+$$ z=z\{\alpha\}+\frac{1}{6}(z(a)^{2}-1\}S+\frac{1}{24}(z(a)^{3}-3z(a))K-\frac{1}{36}(2z(a)^{3}-5z(a)) $$
+--- 图5 ---
+Average return on the portfolios of combined live and defunct funds sorted by non-parametric and parameter VaRs (January 1995–December 2003)
+[表]
+VaR for all funds | CF VaR for all funds | 
+Decile | VaR (%) | Return (%) | Decile | CF VaR (%) | Return (%) | 
+Low VaR | 0.04 | 0.89 | Low VaR | -0.60 | 0.87 | 
+ | 0.98 | 0.84 | 2 | 1.12 | 0.86 | 
+ | 1.71 | 0.85 | 3 | 1.91 | 0.80 | 
+ | 2.54 | 0.92 | 4 | 2.72 | 0.92 | 
+ | 3.38 | 1.01 | 5 | 3.66 | 1.04 | 
+ | 4.27 | 1.01 | 6 | 4.63 | 1.02 | 
+ | 5.27 | 1.05 | 7 | 5.72 | 1.05 | 
+ | 6.49 | 1.10 | 8 | 7.04 | 1.04 | 
+ | 8.29 | 1.14 | 9 | 8.89 | 1.19 | 
+High VaR | 13.90 | 0.82 | High VaR | 14.43 | 0.82 | 
+Average return differential for VaR | Average return differential for CF VaR | 
+High VaR-low VaR | -0.07% | High CF VaR-low CF VaR | -0.05% | 
+Standard t-statistic | -0.17 | Standard t-statistic | -0.14 | 
+Newey-West t-statistic | -0.16 | Newey-West t-statistic | -0.13 |
+The first panel presents the average returns of the non-parametric VaR and the parametric VaR (CF VaR portfolios for Deciles 1–10 for both live and defunct funds in our sample. The VaR and CF VaR values are calculated using the past 24–60 monthly returns (as available) for each month from January 1995 to December 2003. The original VaR values are multiplied by -1 so that we expect a positive relation between expected return and downside risk. The second panel presents the average return of the new year and the new year adjusted t-statistics for the upward trend and downside risk. The new year is adjusted to the new year.
+--- 图6 ---
+Average return of live and defunct fund portfolios sorted by non-parametric and parametric VaRs (January 1995–December 2003)
+[表]
+VaR | CF VaR | 
+Live | Defunct | Live | Defunct | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | Decile | CF VaR (%) | Return (%) | Decile | CF VaR (%) | Return (%) | 
+Low VaR | 0.08 | 0.93 | Low VaR | 0.04 | 0.81 | Low CF VaR | -0.57 | 0.90 | Low CF VaR | -0.66 | 0.83 | 
+ | 0.91 | 0.85 | 2 | 1.08 | 0.80 | 2 | 1.05 | 0.86 | 2 | 1.19 | 0.6 | 
+ | 1.59 | 0.92 | 3 | 1.88 | 0.63 | 3 | 1.77 | 0.93 | 3 | 2.07 | 0.6 | 
+ | 2.31 | 1.06 | 4 | 2.75 | 0.60 | 4 | 2.53 | 0.99 | 4 | 2.94 | 0.7 | 
+ | 3.15 | 1.19 | 5 | 3.64 | 0.67 | 5 | 3.36 | 1.17 | 5 | 3.96 | 0.6 | 
+ | 3.98 | 1.21 | 6 | 4.60 | 0.78 | 6 | 4.26 | 1.30 | 6 | 5.05 | 0.7 | 
+ | 4.91 | 1.16 | 7 | 5.63 | 0.84 | 7 | 5.31 | 1.09 | 7 | 6.20 | 0.6 | 
+ | 6.05 | 1.46 | 8 | 6.96 | 0.50 | 8 | 6.45 | 1.33 | 8 | 7.60 | 0.6 | 
+ | 7.50 | 1.29 | 9 | 9.10 | 0.67 | 9 | 8.05 | 1.51 | 9 | 9.80 | 0.6 | 
+High VaR | 11.70 | 1.65 | High VaR | 15.74 | -0.06 | High CF VaR | 12.07 | 1.63 | High CF VaR | 16.65 | 0.0 | 
+Average return differential | Average return differential for VaR | Average return differential for CF VaR | Average return differential for VaR | 
+for VaR | High VaR-low VaR | High CF VaR-low VaR | -0.87% | High CF VaR-low CF VaR | 0.73% | High CF VaR-low CF VaR | High CF VaR-low CF VaR | -0.74 | -1.60 | 
+High VaR-low VaR | $ 0.72^{**} $ | Standard t-statistic | Standard t-statistic | -1.90* | Standard t-statistic | $ 2.26^{**} $ | Standard t-statistic | Standard t-statistic | -1.60 | $ -1.67^{**} $ | 
+Standard t-statistic | $ 2.15^{**} $ | Newey-West t-statistic | Newey-West t-statistic | -1.89* | Newey-West t-statistic | $ 2.05^{**} $ | Newey-West t-statistic | Newey-West t-statistic | -1.67 | $ 2.05^{**} $ |
+The first panel shows the average returns of the non-parametric VaR and the parametric VaR (CF VaR) portfolios for Deciles 1–10 for both live and defunct funds. The VaR and CF VaR values are calculated using the past 24-60 monthly returns (as available) for each month from January 1995 to December 2003. The original VaR values are multiplied by -1 so that we expect a positive relation between expected return and downside risk. The second panel presents the average return differential between Deciles 10 and 1, the standard deviation of the return from the first and second deciles. The second panel presents the average return difference between Deciles 10 and 1, the standard deviation of the return from the first and second deciles.
+--- 图7 ---
+average return of the hedge fund portfolios sorted on age, asset, and lockup (January 1995–December 2003)
+[表]
+vice | Defunct | Live | Defunct | 
+Decile | Age (in months) | Return (%) | Decile | Age (in months) | Return (%) | Decile | Ln(Asset) | Return (%) | Decile | Ln(Asset) | Return (%) | 
+High age | 112.6 | 1.12 | High age | 102.6 | 0.50 | High Ln(Asset) | 20.34 | 0.98 | High Ln(Asset) | 20.09 | 1.39 | 
+101.36 | 1.12 | 2 | 74.0 | 0.64 | 2 | 19.36 | 1.04 | 2 | 18.88 | 0.93 | 
+86.88 | 1.26 | 3 | 56.9 | 0.64 | 3 | 18.83 | 0.99 | 3 | 18.31 | 0.79 | 
+74.19 | 1.18 | 4 | 44.2 | 0.67 | 4 | 18.42 | 1.02 | 4 | 17.84 | 0.53 | 
+63.19 | 1.19 | 5 | 34.5 | 0.77 | 5 | 18.05 | 1.12 | 5 | 17.42 | 0.53 | 
+53.84 | 1.21 | 6 | 26.8 | 0.57 | 6 | 17.71 | 1.22 | 6 | 16.98 | 0.43 | 
+45.58 | 1.30 | 7 | 20.0 | 0.87 | 7 | 17.31 | 1.44 | 7 | 16.57 | 0.70 | 
+38.53 | 1.30 | 8 | 13.9 | 0.86 | 8 | 16.88 | 1.49 | 8 | 16.04 | 0.30 | 
+32.05 | 1.37 | 9 | 8.2 | 1.23 | 9 | 16.36 | 1.56 | 9 | 15.43 | 0.70 | 
+Low age | 26.31 | 1.40 | Low age | 2.6 | 1.82 | Low Ln(Asset) | 15.31 | 1.71 | Low Ln(Asset) | 14.09 | -0.02 | 
+Average return differential for age | Average return differential for age | Average return differential for asset | Average return differential for asset | 
+Low age-high age | 0.28% |  | Low age-high age | 1.32% |  | Low asset-high asset | 0.72% |  | Low asset-high asset |  | -1.41 | 
+Standard t-statistic | $ 2.52^{**} $ |  | Standard t-statistic | $ 7.03^{***} $ |  | Standard t-statistic | $ 5.31^{***} $ |  | Standard t-statistic |  | -3.19 | 
+Newey-West t-statistic | $ 2.08^{**} $ |  | Newey-West t-statistic | $ 5.66^{***} $ |  | Newey-West t-statistic | $ 4.49^{***} $ |  | Newey-West t-statistic |  | $  -3.85^{*}  $ | 
+tive funds | Defunct funds | 
+Portfolio | dlock |  | Return (%) | Portfolio | dlock |  | Return (%) | 
+No lockup | 0 |  | 1.15 |  | No Lockup | 0 |  | 0.76 | 
+Lockup | 1 |  | 1.36 |  | Lockup | 1 |  | 1.44 | 
+Average return differential for lockup | Average return differential for lockup | 
+Lockup-no lockup |  |  | 0.20% |  | Lockup-no lockup |  |  | 0.68% | 
+Standard t-statistic |  |  | $ 3.16^{***} $ |  | Standard t-statistic |  |  | $ 6.52^{***} $ | 
+Newey-West t-statistic |  |  | $ 2.92^{***} $ |  | Newey-West t-statistic |  |  | $ 5.31^{***} $ |
+--- 图8 ---
+average return of the hedge fund portfolios from bivariate sorts: First sorted by age and then VaR (January 95–December 2003)
+[表]
+Decile | VaR (%) | Return (%) | Medium age group | High age group | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | 
+Panel A: Live funds | 
+Low VaR | -0.05 | 0.96 | Low VaR | 0.09 | 0.94 | Low VaR | 0.22 | 0.84 | 
+ | 0.71 | 0.91 | 2 | 0.89 | 0.74 | 2 | 1.08 | 0.86 | 
+ | 1.41 | 1.05 | 3 | 1.57 | 0.83 | 3 | 1.80 | 1.07 | 
+ | 2.09 | 0.91 | 4 | 2.23 | 1.09 | 4 | 2.59 | 1.18 | 
+ | 2.93 | 1.08 | 5 | 3.02 | 1.12 | 5 | 3.50 | 1.14 | 
+ | 3.79 | 1.28 | 6 | 3.72 | 1.39 | 6 | 4.39 | 1.03 | 
+ | 4.75 | 1.32 | 7 | 4.59 | 1.39 | 7 | 5.34 | 1.15 | 
+ | 5.83 | 1.49 | 8 | 5.77 | 1.24 | 8 | 6.44 | 1.19 | 
+ | 7.34 | 1.42 | 9 | 7.35 | 1.48 | 9 | 8.01 | 1.36 | 
+High VaR | 11.88 | 1.86 | High VaR | 11.61 | 1.63 | High VaR | 11.45 | 1.18 | 
+Low age group | 
+High VaR-low VaR | 0.90% | High VaR-low VaR | Medium age group | High age group | 0.3 | 
+Standard t-statistic | 1.97 $ ^{**} $ | Standard t-statistic | High VaR-low VaR | 0.69% | High VaR-low VaR | 0.3 | 
+Newey-West t-statistic | 1.95 $ ^{*} $ | Newey-West t-statistic | Standard t-statistic | 1.57 | Standard t-statistic | 1.0 | 
+ |  |  | Newey-West t-statistic | 1.50 | Newey-West t-statistic | 0.9 | 
+Low age group | Medium age group | High age group | 0.9 | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | 
+Panel B: Defunct funds | 
+Low VaR | 0.01 | 1.00 | Low VaR | -0.03 | 0.89 | Low VaR | 0.24 | 0 | 
+ | 0.99 | 0.80 | 2 | 1.06 | 0.65 | 2 | 1.14 | 0 | 
+ | 1.91 | 0.57 | 3 | 1.95 | 0.57 | 3 | 1.84 | 0 | 
+ | 2.79 | 0.70 | 4 | 2.84 | 0.69 | 4 | 2.63 | 0 | 
+ | 3.58 | 0.67 | 5 | 3.73 | 0.76 | 5 | 3.48 | 0 | 
+ | 4.42 | 0.67 | 6 | 4.72 | 0.85 | 6 | 4.60 | 0 | 
+ | 5.43 | 0.91 | 7 | 5.76 | 0.95 | 7 | 5.80 | 0 | 
+ | 6.80 | 0.75 | 8 | 7.02 | 0.53 | 8 | 7.09 | 0 | 
+ | 9.16 | 0.48 | 9 | 9.26 | 0.98 | 9 | 9.27 | 0 | 
+High VaR | 16.09 | -0.72 | High VaR | 15.59 | 0.05 | High VaR | 15.39 | 0 | 
+Age group | Medium age group | High age group | -0 | 
+VaR-low VaR | -1.72% | High VaR-low VaR | High VaR-low VaR | -0.83% | High VaR-low VaR | -0.8 | 
+Standard t-statistic | -2.83 $ ^{***} $ | Standard t-statistic | -1.57 | -1.57 | Standard t-statistic | -0.5 | 
+t-West t-statistic | -3.27 $ ^{***} $ | Newey-West t-statistic | -1.28 | Newey-West t-statistic | -0.0 |
+--- 图9 ---
+Average return of the hedge fund portfolios from bivariate sorts: First sorted by asset and then VaR (January 1995–December 2003)
+[表]
+Low asset group | Medium asset group | High asset group | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | 
+Panel A: Live funds | 
+Low VaR | 0.43 | 0.94 | Low VaR | 0.08 | 0.98 | Low VaR | -0.02 | 0.87 | 
+ | 1.42 | 0.98 | 2 | 0.87 | 0.87 | 2 | 0.61 | 0.82 | 
+ | 2.42 | 1.12 | 3 | 1.57 | 0.73 | 3 | 1.33 | 0.90 | 
+ | 3.49 | 1.53 | 4 | 2.23 | 1.02 | 4 | 1.94 | 1.07 | 
+ | 4.41 | 1.46 | 5 | 2.96 | 0.95 | 5 | 2.53 | 1.15 | 
+ | 5.23 | 1.40 | 6 | 3.71 | 1.27 | 6 | 3.14 | 1.12 | 
+ | 6.25 | 1.42 | 7 | 4.76 | 1.07 | 7 | 3.89 | 1.14 | 
+ | 7.46 | 1.37 | 8 | 5.88 | 1.48 | 8 | 4.98 | 0.82 | 
+ | 9.08 | 1.91 | 9 | 7.18 | 1.24 | 9 | 6.21 | 1.39 | 
+High VaR | 13.97 | 2.30 | High VaR | 10.79 | 1.40 | High VaR | 8.98 | 0.88 | 
+Low asset group | Medium asset group | High asset group | 
+High VaR-low VaR | 1.36% | High VaR-low VaR | 0.42% | High VaR-low VaR | 0.42% | High VaR-low VaR | 0.42% | 0.01% | 
+Standard t-statistic | $ 2.79^{***} $ | Standard t-statistic | 1.00 | Standard t-statistic | 1.00 | Standard t-statistic | 0.04 | 0.04 | 
+Newey-West t-statistic | $ 2.59^{**} $ | Newey-West t-statistic | 0.94 | Newey-West t-statistic | 0.94 | Newey-West t-statistic | 0.03 | 0.03 | 
+Low asset group | Medium asset group | High asset group | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | 
+Panel B: Defunct funds | 
+Low VaR | 0.99 | 0.48 | Low VaR | 0.60 | 0.72 | Low VaR | -0.07 | 0.36 | 
+ | 2.01 | 0.81 | 2 | 1.49 | 0.77 | 2 | 0.73 | 0.65 | 
+ | 3.28 | 0.52 | 3 | 2.33 | 0.78 | 3 | 1.64 | 1.00 | 
+ | 3.45 | 0.79 | 4 | 3.49 | 0.30 | 4 | 2.00 | 0.93 | 
+ | 4.42 | 0.18 | 5 | 3.69 | 0.23 | 5 | 3.04 | 1.44 | 
+ | 5.71 | 0.11 | 6 | 4.66 | 0.96 | 6 | 3.97 | 1.02 | 
+ | 7.13 | 0.48 | 7 | 5.60 | 0.49 | 7 | 5.06 | 1.19 | 
+ | 8.87 | 0.43 | 8 | 6.77 | 0.88 | 8 | 6.74 | 1.50 | 
+ | 11.28 | 0.18 | 9 | 9.60 | 0.71 | 9 | 8.70 | 0.60 | 
+High VaR | 18.64 | -1.95 | High VaR | 14.29 | -0.84 | High VaR | 12.98 | 0.82 | 
+Low asset group | Medium asset group | High asset group | 
+High VaR-low VaR | -2.43% | High VaR-low VaR | -1.56% | High VaR-low VaR | -1.56% | High VaR-low VaR | -0.02 | 0.87 | 
+Standard t-statistic | $ -2.00^{**} $ | Standard t-statistic | -1.72* | Standard t-statistic | -1.72* | Standard t-statistic | 0.01 | 0.01 | 
+Newey-West t-statistic | $ -2.04^{**} $ | Newey-West t-statistic | -1.60 | Newey-West t-statistic | -1.60 | Newey-West t-statistic | 0.77 | 0.77 |
+--- 图10 ---
+Average return of the hedge fund portfolios from bivariate sorts: First sorted by lockup and then var (1995–December 2003)
+[表]
+Non-lockup funds (dlock = 0) | Lockup funds (dlock = 1) | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | Return (%) | 
+Panel A: Live funds | 
+Low VaR | 0.02 | 0.92 | Low VaR | 0.32 | 1.0 | 
+ | 0.73 | 0.79 | 2 | 1.32 | 0.9 | 
+ | 1.42 | 0.90 | 3 | 1.93 | 1.0 | 
+ | 2.11 | 1.02 | 4 | 2.71 | 1.0 | 
+ | 2.95 | 1.08 | 5 | 3.58 | 1.3 | 
+ | 3.75 | 1.29 | 6 | 4.57 | 1.4 | 
+ | 4.61 | 1.03 | 7 | 5.68 | 1.7 | 
+ | 5.66 | 1.24 | 8 | 7.05 | 1.1 | 
+ | 6.96 | 1.32 | 9 | 8.96 | 1.1 | 
+High VaR | 10.82 | 1.59 | High VaR | 12.86 | 1 | 
+Non-lockup funds (dlock = 0) | Lockup funds (dlock = 1) | 
+High VaR-low VaR |  | 0.67% | High VaR-low VaR |  |  | 
+Standard t-statistic |  | $ 1.70^{a} $ | Standard t-statistic |  |  | 
+Newey-West t-statistic |  | 1.59 | Newey-West t-statistic |  |  | 
+Non-lockup funds (dlock = 0) | Lockup funds (dlock = 1) | 
+Decile | VaR (%) | Return (%) | Decile | VaR (%) | R (%) | 
+Panel B: Defunct funds | 
+Low VaR | 0.06 | 0.76 | Low VaR | -0.09 |  | 
+ | 1.05 | 0.68 | 2 | 0.95 |  | 
+ | 1.81 | 0.62 | 3 | 1.84 |  | 
+ | 2.63 | 0.66 | 4 | 3.17 |  | 
+ | 3.49 | 0.63 | 5 | 4.18 |  | 
+ | 4.42 | 0.78 | 6 | 5.25 |  | 
+ | 5.45 | 0.73 | 7 | 6.73 |  | 
+ | 6.72 | 0.63 | 8 | 8.24 |  | 
+ | 8.88 | 0.52 | 9 | 9.94 |  | 
+High VaR | 15.99 | -0.22 | High VaR | 14.28 |  | 
+Non-lockup funds (dlock = 0) | Lockup funds (dlock = 1) | 
+High VaR-low VaR |  | -0.98% | High VaR-low VaR |  |  | 
+Standard t-statistic |  | $ -2.00^{**} $ | Standard t-statistic |  |  | 
+New-statistic |  | $ -1.96^{**} $ | New-West t-statistic |  |  |
+--- 图11 ---
+[表]
+Model | VaR_{i,t} | CFVaR_{i,t} | Age_{i,t} | Asset_{i,t} | dlock_{i,t} | Average R^{2} (%) | 
+ | 0.0717(2.35)**[2.39]** |  |  |  |  | 5.61 | 
+ |  | 0.0696(2.69)***[2.78]*** |  |  |  | 4.56 | 
+ |  |  | -0.0003(-3.44)***[-2.68]*** |  |  | 0.13 | 
+ |  |  |  | -0.0016(-6.52)***[-5.42]*** |  | 0.62 | 
+ |  |  |  |  | 0.0020(3.16)***[2.92]** | 0.32 | 
+ | 0.0734(2.39)**[2.42]** |  | -0.0004(-2.61)**[-2.09]** |  |  | 5.75 | 
+ | 0.0757(2.07)**[2.11]* |  |  | -0.0009(-2.73)***[-2.64]*** |  | 7.22 | 
+ | 0.0692(2.25)**[2.29]** |  |  |  | 0.0011(1.82)*[1.43] | 5.70 | 
+ | 0.0754(2.06)**[2.06]** |  | -0.0003(-1.50)[-1.38] | -0.0007(-2.22)**[-2.12]** | 0.0011(1.73)*[1.48] | 7.44 | 
+ |  | 0.0708(2.73)***[2.80]*** | -0.0004(-2.50)**[-2.02]** |  |  | 4.69 | 
+ |  | 0.0735(2.39)**[2.51]** |  | -0.0009(-3.01)***[-3.09]*** |  | 6.01 | 
+ |  | 0.0678(2.62)**[2.70]*** |  |  | 0.0013(2.11)**[1.69]* | 4.68 | 
+ |  | 0.0736(2.48)**[2.48]** | -0.0002(-1.27) | -0.0007(-2.43)** | 0.0014(2.15)**[1.84]* | 6.24 |
+--- 图12 ---
+[表]
+Model | VaR_{i,t} | CFVaR_{i,t} | Age_{i,t} | Asset_{i,t} | dlock_{i,t} | Average R^{2} (%) | 
+ | -0.0524(-2.01)***[-2.10]** |  |  |  |  | 4.29 | 
+ |  | -0.04(-1.64)[-1.58] |  |  |  | 4.12 | 
+ |  |  | -0.00009(-6.18)***[-4.39]*** |  |  | 0.46 | 
+ |  |  |  | 0.0009(3.41)***[3.33]*** |  | 0.44 | 
+ |  |  |  |  | 0.0069(7.23)***[5.86]*** | 0.27 | 
+ | -0.0540(-2.07)***[-2.17]** |  | -0.00002(-1.24)[-0.88] |  |  | 4.42 | 
+ | -0.0172(-0.62)[-0.66] |  |  | 0.0020(5.54)***[5.02]*** |  | 5.26 | 
+ | -0.0533(-2.04)***[-2.14]** |  |  |  | 0.0045(4.55)***[4.34]*** | 4.34 | 
+ | -0.0191(-0.68)[-0.73] |  | -0.00005(-2.29)***[-1.96]** | 0.0021(5.46)***[5.05]*** | 0.0024(2.12)**[2.08]** | 5.33 | 
+ |  | -0.0418(-1.72)***[-1.67]** | -0.00002(-1.26)[-0.90] |  |  | 4.22 | 
+ |  | -0.0109(-0.42)[-0.44] |  | 0.0020(5.58)***[5.23]*** |  | 4.96 | 
+ |  | -0.0409(-1.68)***[-1.63] |  |  | 0.0044(4.44)***[4.12]*** | 4.17 | 
+ |  | -0.0132(-0.52)[-0.54] | -0.00004(-2.24)**[-1.92]** | 0.0021(5.46)***[5.18]*** | 0.0025(2.14)**[2.02]** | 4.99 |
+--- 图13 ---
+Average trading profits based on buying the expected to live funds and selling the expected to disappear fun January 1990–December 2003
+[表]
+VaR change for all funds | CF VaR change for all funds | 
+Decile | VaR change (%) | Return (%) | Decile | CF VaR change (%) | Return | 
+Low VaR change | -219.01 | 0.86 | Low VaR change | -220.81 | 0.81 | 
+ | -15.95 | 0.82 | 2 | -15.36 | 0.84 | 
+ | -8.52 | 0.96 | 3 | -8.06 | 0.86 | 
+ | -3.58 | 1.02 | 4 | -3.20 | 0.98 | 
+ | 0.74 | 1.19 | 5 | 1.09 | 1.10 | 
+ | 5.46 | 0.94 | 6 | 5.82 | 0.96 | 
+ | 11.31 | 1.03 | 7 | 11.71 | 0.98 | 
+ | 19.56 | 0.99 | 8 | 20.05 | 0.95 | 
+ | 35.70 | 0.76 | 9 | 36.43 | 0.65 | 
+High VaR change | 249.81 | 0.41 | High VaR change | 254.02 | 0.49 | 
+Average profit differential for changing VaR | Average profit differential for changing CF VaR | 
+Exp live (5)-exp defunct (10) | 0.78% | Exp live (5)-exp defunct (10) | 0.61% | 
+Standard  $ t $-statistic | 3.46** | Standard  $ t $-statistic | 4.22* | 
+Newey–West  $ t $-statistic | 3.32** | Newey–West  $ t $-statistic | 2.88* |
+--- 图14 ---
+
+--- 图15 ---
+[表]
+ | VaR | VaR_change | market | 
+t_total | 61.87 | 66.35 | -11.86 | 
+t_annual | 4.55 | 4.81 | -1.16 | 
+l_atability_annual | 7.63 | 5.84 | 26.68 | 
+maximum_drawdown | 15.22 | 13.27 | 67.37 | 
+harpe | 0.60 | 0.82 | 0.03 | 
+almar | 0.30 | 0.36 | -0.02 | 
+xcess_return_mean | 0.39 | 0.42 | 0.13 | 
+xcess_return_sd | 2.47 | 2.21 | 8.05 | 
+xcess_return_t | 1.82 | 2.15 | 0.18 |
+--- 图16 ---
+[表]
+apm_alpha | 0.41 | 0.42 | 
+_capm_alpha_hac | 1.97 | 1.97 | 
+f3_alpha | 0.69 | 0.54 | 
+_ff3_alpha_hac | 3.12 | 2.04 | 
+F5_alpha | 0.62 | 0.50 | 
+_ff5_alpha_hac | 3.22 | 2.02 |

@@ -1,0 +1,138 @@
+# 资产定价中的实证挑战 (IV)
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/A8N2qM3FmlXuIkfakeQG5A
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士，著有《因子投资：方法与实践》、《Navigating the Factor Zoo》，译有《机器学习与资产定价》。
+
+封面来源：www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+本文解析协变量的高维数时代，实证资产定价研究中计量经济学的局限性。
+
+0 前文回顾
+
+协变量的高维数给传统计量经济学提出了诸多挑战。首先，过多的预测变量可能会存在多重共线性问题，从而使得模型参数估计变得不稳定。有时多重共线性可能导致某些变量的系数估计符号与预期不符，造成结果难以被经济学理论所解释。其次，当协变量的数量接近或超过样本大小时，模型会过度参数化（over-parameterization）。如果不施加正则化，模型会过度拟合数据中的噪声，影响其在样本外的预测性能。
+
+上述挑战使得能够应对维数灾难（curse of dimensionality）的推断方法越来越受欢迎和重视。根据 Ng (2013) 和 Chernozhukov et al. (2017) 的建议，这些方法可以被分为两类。第一类是稀疏建模，旨在通过一些算法从大量协变量中找到最具预测信息的变量。第二类是密集建模，即认为尽管个体影响可能很小，但所有协变量都含有预测信息。因此，密集建模仍然会使用大量协变量，但会通过正则化来防止过拟合。下文聚焦于实证资产定价中重要的问题，进一步说明计量经济学的局限性。
+
+1 稀疏性导致投资机会的损失
+
+传统的多因子模型毫无疑问属于稀疏模型。然而最新的实证研究表明，为了获得更好的表现，定价模型中应该纳入更多的协变量，那么为什么传统多因子模型都是稀疏的呢？为了公允的回答这个问题，我们必须意识到一些早期的模型年代久远（比如 Fama-French 三因子模型出现在 30 年前），因此现在的实证发现远非当时能比。不过，这一事实依然无法解释自 2010 年之后新出现的传统模型所带有的稀疏性约束。究其原因，可以从两方面来回答。
+
+第一点是对可解释性的重视而造成的对简约性的钟爱。在传统多因子模型中，每个模型背后都有一个令人信服的动机。例如，当 Fama 和 French 将规模和价值两因子加入模型之后，这两位实证研究的先驱又花费了很多的精力试图探讨它们分别代表了哪种系统性风险（Fama and French 1995, 1996）。又比如 Fama and French (2015) 和 Hou et al. (2015) 这两个最流行的传统模型，它们背后的动机分别为股利贴现模型和实体投资经济学理论。再或者 Stambaugh and Yuan (2017) 和 Daniel et al. (2020)，它们的出发点则是行为金融学。从这理论出发，一个自然的结果就是模型不会包含太多的因子，否则便难以自圆其说。这也造成了不同的模型依赖于特定的（ad-hoc）稀疏性假设，即每个人选择几个以及哪些因子，完全是因动机而异的、缺乏普适性。
+
+这种因人而异的稀疏性假设还体现在构造因子时的变量选择上。当 Fama and French (1993) 构造价值因子的时候，除了账面市值比（BM）之外，还有诸如盈利市值比（EP）等变量供选择，而他们最终使用 BM 而非 EP 更多的是一个数据驱动的选择。在三因子模型被提出的前一年，Fama and French (1992) 基于排序和回归法同时指出，尽管 BM 和 EP 都能预测收益率，但当同时控制它们以及公司市值后，EP 不再显著，表明 EP 的可预测性可能源自其和 BM 以及市值的相关性。不过有意思的是，在二十多年后的一篇针对中国股票市场的论文中，Liu et al. (2019) 却使用 EP 代替了 BM，原因是在中国股票市场中 EP 比 BM 更能显著地解释股票预期收益率的截面差异。站在机器学习的视角，考虑到两个变量不同且都带有一定的预测信息，也许更好的办法是将它们结合起来使用，而非强加稀疏性约束。
+
+第二个原因则是偏技术性的，和实证方法有关。Fama and French (1993) 的开创性让它一举成为实证研究的标杆。自此开始，使用投资组合排序来构造因子被竞相效仿。在构造因子时，为了排除市值的影响，通常的做法是使用目标协变量和市值进行双重排序。有时，为了排除变量间的相互影响，甚至会出现三个变量进行三重排序的情况（例如 Hou et al. 2015）。然而，当协变量继续增大时，使用投资组合排序构造因子将变得无法操作。
+
+为定量描述一个定价模型代表的投资机会并考察稀疏性假设造成的损失，我们可以用该模型的因子作为标的，并用它们构造均值—方差最优化（MVE）投资组合，然后通过考察该 MVE 组合的夏普比率来衡量该因子模型代表的投资机会。为此，Baba-Yara et al. (2021) 比较了传统模型和近年来基于机器学习方法提出的实证模型在样本外能够获得的最大夏普比率。
+
+表中结果清晰地传递出，即便是考察样本外，基于机器学习的这些实证模型也能够获得较传统模型更高的夏普比率。例如，在传统模型大战中胜出的 Hou et al. (2015)，其样本外的夏普比率为 1.81。然而，同样是属于线性模型的 PCA 模型（Kozak et al. 2020）以及 IPCA 模型（Kelly et al. 2019），其样本外的夏普比率则高达 2.77 和 3.21。这些结果表明了带有稀疏性假设的模型在投资机会方面的不足，也意味着学术界数十年来指望用带有特定稀疏性约束的简约因子模型来为资产定价的尝试注定是徒劳的。
+
+2 测试资产选择
+
+在实证资产定价中，测试资产（test assets），即用来检验定价模型的资产（或为个股，或为由个股构造的投资组合），和因子就像是一枚硬币的两面，缺一不可。在实证中，因子溢价的强弱在很大程度上依赖于测试资产的选择，而非因子的固有属性（Giglio et al. 2025）。然而，在过去的三十年中，虽然学术界先后提出了诸多实证模型，但在测试资产方面却鲜有进展。为什么？因为 Fama and French (1993)。
+
+正如前所述，这篇文章不仅仅是多因子模型的开山鼻祖，更是为学术界之后近三十年的实证研究铺垫了一系列基础的方法论，其中就包括构造测试资产的方法。在 Fama and French (1993) 中，二位作者通过双重排序法不仅构建了价值和规模两个因子，也同样构造了用于检验该模型的测试资产。自此之后，使用市值和另一个协变量，通过 5 × 5 双重排序构造出 25 个投资组合作为测试资产就成为学术界的标配。但是，将个股按照某个协变量排序分组实际上是一种降维处理，所产生的投资组合会丢失掉很多个股收益率在截面上的信息（Lewellen et al. 2010）。如果待检验的因子和这些测试资产的分组属性正交，这种处理方法将不能保证测试资产对于待检验的因子有足够的暴露，进而导致无关因子（或弱因子）问题（Giglio et al. 2025）。以有限个通过双重排序法构造的投资组合作为测试资产，大大降低了检验多因子模型的门槛。
+
+面对这种困局，通常有两种解决办法。第一种是扩充作为测试资产的投资组合，即使用更多协变量作为排序变量来构造投资组合（并同时将行业组合也加入进来），从而构造上百个测试资产。后续的很多实证研究都采取了这种方法（例如 Fama and French 2020）。但第种做法仍难言完美。当使用协变量对股票排序时，往往最多同时考虑三个变量进行三重排序。如果继续增多排序变量的个数可能导致不合理的结果，例如无法保证每个组里面有足够多的股票。
+
+第二个解决办法是直接使用个股作为测试资产。不过，这给因子暴露的参数估计带来了巨大的挑战。人们之所以钟爱使用投资组合作为测试资产，是因为比起个股，它们的因子暴露估计不容易受到变量误差（EIV）问题的影响。反观个股，EIV 问题是个无法逃避的挑战。为此，Jegadeesh et al. (2019) 通过引入工具变量的方法，在一定程度上降低了 EIV 问题的影响。此外，Clarke and Momeni (2021) 使用双层自助法实现了利用个股作为测试资产的目标。尽管使用投资组合作为测试资产时，因子暴露的估计更加准确，但是 Ang et al. (2020) 从指出，这个好处并不能直接导致在估计因子溢价时获得更低的标准误（standard error）。这是由于因子风险溢价的标准误是由因子暴露的截面分布以及残差风险决定的。使用投资组合作为测试资产破坏了因子暴露的分散度所涵盖的信息，从而导致了较大的标准误。
+
+3 模型设定偏误
+
+模型设定偏误往往是带有稀疏性约束的实证模型所面临的问题。模型设定偏误包括遗漏变量和无关变量两方面。例如，Fama and French (2015) 曾指出 Fama and French (1993) 三因子模型是不完整的，以及加入了盈利和投资两因子后，价值因子似乎变得多余。
+
+首先来看前者。遗漏变量问题指的是模型中遗漏了重要的解释变量。对实证资产定价而言，遗漏变量可导致因子溢价的估计存在偏差，且偏差的方向可正可负。为理解这一点，考虑下面这个简单的模型，即假设在真实数据生成过程中  和  以及  满足如下线性回归模型：
+
+  
+
+接下来，假设我们分析中遗漏了变量  ，而认为  只是  的模型并通过 OLS 估计二者的关系。由计量经济学知识可知，  的回归系数的偏差如下：
+
+  
+
+式中  是真实模型中  对  的回归系数，  是  对  的回归系数。上式说明，  的偏差由  和  共同决定，它的符号受这两部分的影响。当我们通过 OLS 来估计因子溢价时，遗漏变量的存在会使得因子溢价的估计有偏，即遗漏变量偏差。从计量经济学的角度来说，遗漏变量问题可以通过加入更多的解释变量来解决；此外，也可以通过加入固定效应（fixed effect）来消除时不变的遗漏变量。然而，在模型中塞入太多的因子容易造成样本内的过拟合。
+
+为了检验一个给定的多因子模型中是否存在遗漏变量，Gagliardini et al. (2019) 提出了一个简单有效的方法。如果不存在遗漏变量问题，则测试资产对多因子模型回归的残差中就不应该存在残留的因子结构。残留的因子结构可以通过分析残差协方差矩阵最大的特征值来确定。若该特征值超过了一定阈值就可以认为残差并不独立，存在遗漏变量问题。不过很显然，这种方法也在很大程度上受到测试资产选择的影响。
+
+再来看后者，即无关变量问题。由计量经济学的知识可知，回归模型中存在不相关的变量虽然不会影响其他解释变量回归系数的无偏性，但是会增大回归系数的标准误，从而降低估计量的效率。在多因子模型的场景下，上述过度识别问题的表现为模型中加入了弱因子，即和资产相关性非常微弱的因子。在这样的模型设定下，一个常见的结果是弱因子的因子溢价很显著，而真实的因子的溢价不显著，从而造成真实的因子被舍弃（Gospodinov et al. 2014）。就这一问题，Bryzgalova et al. (2023) 通过贝叶斯方法给出了弱因子存在的前提下如何准确估计因子溢价的方法。
+
+4 What's Next
+
+上述分析表明，当面对时序和截面收益率数据量有限、同时存在大量具有预测信息的协变量、并且协变量之间可能通过交互作用对收益率产生非线性影响时，传统的计量经济学方法往往显得低效甚至难以适用。在这种背景下，机器学习算法或许不再是锦上添花，而是成为解决问题的关键工具。
+
+那么，机器学习将如何应对上述计量经济学所面临的种种困难？而其自身在实证资产定价中的应用又将遇到哪些挑战？且听下回分解。
+
+参考文献
+Ang, A., J. Liu, and K. Schwarz (2020). Using stocks or portfolios in tests of factor models. Journal of Financial and Quantitative Analysis 55(3), 709–750.
+
+Baba-Yara, F., B. H. Boyer, and C. Davis (2021). The factor model failure puzzle. Working paper, Indiana University, Brigham Young University.
+
+Bryzgalova, S., J. Huang, and C. Julliard (2023). Bayesian solutions for the factor zoo: We just ran two quadrillion models. Journal of Finance 78(1), 487–557.
+
+Chernozhukov, V., C. Hansen, and Y. Liao (2017). A lava attack on the recovery of sums of dense and sparse signals. The Annals of Statistics 45(1), 39–76.
+
+Clarke, C. and M. Momeni (2021). Testing asset pricing models on individual stocks. Technical report, University of Kentucky.
+
+Daniel, K. D., D. A. Hirshleifer, and L. Sun (2020). Short- and long-horizon behavioral factors. Review of Financial Studies 33(4), 1673–1736.
+
+Fama, E. F. and K. R. French (1992). The cross-section of expected stock returns. Journal of Finance 47(2), 427–465.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3–56.
+
+Fama, E. F. and K. R. French (1995). Size and book-to-market factors in earnings and returns. Journal of Finance 50(1), 131–155.
+
+Fama, E. F. and K. R. French (1996). Multifactor explanations of asset pricing anomalies. Journal of Finance 51(1), 55–84.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1–22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891–1926.
+
+Gagliardini, P., E. Ossola, and O. Scaillet (2019). A diagnostic criterion for approximate factor structure. Journal of Econometrics 212(2), 503–521.
+
+Giglio, S., D. Xiu, and D. Zhang (2025). Test assets and weak factors. Journal of Finance 80(1), 259–319.
+
+Gospodinov, N., R. Kan, and C. Robotti (2014). Misspecification-robust inference in linear asset-pricing models with irrelevant risk factors. Review of Financial Studies 27(7), 2139–2170.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: An investment approach. Review of Financial Studies 28(3), 650–705.
+
+Jegadeesh, N., J. Noh, K. Pukthuanthong, R. Roll, and J. Wang (2019). Empirical tests of asset pricing models with individual assets: Resolving the errors-in-variables bias in risk premium estimation. Journal of Financial Economics 133(2), 273–298.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501–524.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271–292.
+
+Lewellen, J., S. Nagel, and J. Shanken (2010). A skeptical appraisal of asset pricing tests. Journal of Financial Economics 96(2), 175–194.
+
+Liu, J., R. F. Stambaugh, and Y. Yuan (2019). Size and value in China. Journal of Financial Economics 134(1), 48–69.
+
+Ng, S. (2013). Variable selection in predictive regressions. In Handbook of Economic Forecasting, Vol. 2, pp. 752–789. Amsterdam: Elsevier.
+
+Stambaugh, R. F. and Y. Yuan (2017). Mispricing factors. Review of Financial Studies 30(4), 1270–1315.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+[表]
+模型 | 样本外夏普比率 | 
+传统多因子模型 |  | 
+Fama and French (1993) | 0.61 | 
+Hou et al. (2015) | 1.81 | 
+Stambaugh and Yuan (2017) | 1.40 | 
+基于机器学习的实证模型 |  | 
+Davis (2021) 神经网络 | 2.39 | 
+Kozak et al. (2020) PCA | 2.77 | 
+Kelly et al. (2019) IPCA | 3.21 |
+出处：Baba-Yara et al. (2021).
+--- 图3 ---

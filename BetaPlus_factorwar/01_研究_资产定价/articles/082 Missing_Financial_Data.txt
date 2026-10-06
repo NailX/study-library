@@ -1,0 +1,199 @@
+# Missing Financial Data
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/4YRfFqqZ7XDGHRQLusboig
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。《因子投资：方法与实践》领衔作者。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+在因子投资中，当协变量存在缺数问题时，除了填充截面或行业均值/中位数，是否还有更好的方法？
+
+01
+
+协变量缺数是因子投资中绕不过的坎儿，而这个问题在另类数据中尤甚。缺数，顾名思义，就是在特定的历史时刻、对特定的股票来说、某个协变量的取值是缺失的。这个问题广泛存在于因子投资和实证资产定价研究之中。
+
+在面对缺数问题时，常见的做法是填充截面均值/中位数，或者行业均值/中位数，或者上一期的值（假设上一期没有缺数）。这些似乎是人们约定俗成的做法，从来也没有人去质疑上述处理方式的合理性。（另外一种更加粗暴的方式是，把缺数的资产排除在分析之外，但这会造成 sample selection bias。）
+
+然而，它们真的合理吗？
+
+要想搞清楚这个问题，就必须回答一系列具体的问题：数据缺失在时序和截面上是随机的吗？还是有何种相关性（比如小市值的股票更容易缺失某些变量）？不同公司的协变量之间是否存在截面上和时序上相关性，能否利用它们更好的填充缺失的数据？无脑排除缺数的股票，对实证资产定价有怎样的影响（比如在因子溢价估计方面）？对现实世界中的投资机会又有怎样的影响（比如是否会损害可能构造的最大夏普比率）？
+
+当意识到存在如此之多尚待回答的问题时，就很难再对“约定俗成”做法可能存在的潜在危害无动于衷。好消息是，学界在这方面的一些最新研究成果，有助于帮助人们回答上述问题（虽然是针对美股）。在应对实证资产定价的缺数问题方面，近期两篇颇有代表性的 working papers 是 Freyberger et al. (2021) 以及 Bryzgalov et al. (2022)。
+
+由于 Svetlana Bryzgalova 和 Markus Pelger 两位都是我非常欣赏的新生代学者，今天就来简要介绍 Bryzgalov et al. (2022) 一文。本文的题目也照搬了该文的标题，特此说明。
+
+02
+
+Bryzgalov et al. (2022) 考察了美股中最常用的 45 个公司特征（下表），缺数存在 4 点 stylized facts。
+
+Fact 1：缺数问题广泛存在于上市公司之中，受影响的公司占据了一半的市场总市值。无论公司市值是高是低，无论公司的历史是长是短，又无论公司的经营情况是好是坏，都有可能出现缺数的问题。
+
+以美股中重要的 5 个变量为例——账面市值比（B2M）、operating profitability（OP）、investment（INV）、leverage（LEV）以及real investment to book value（DPI2A）——下图展示了它们在时序上的缺数变化情况。从（a）和（b）中不难看出，随着时间的推移，缺数的比例在下降，不过仍然存在于所有变量。而（c）和（d）表明，无论是考察季度数据还是月度数据变量，以及无论考察大市值公司还是小市值公司，缺数问题都是存在的。
+
+Fact 2：当分析中需要用到众多协变量时（比如利用机器学习算法），缺数问题的影响更加严重。
+
+同样是上述 45 个变量，下图展示了不同允许缺数变量个数下，公司占比随时间的变化。比如，图中蓝色曲线代表 = 0 的情况，即要求不存在任何变量的缺失。在这个约束下，满足条件的公司仅占不到 30%。换句话说，如果研究中同时使用上述 45 个协变量且要求仅使用没有任何缺数的公司，那么 70% 的公司都会被排除在外。
+
+Fact 3：公司特征的缺失并非随机的。比如，很多基本面变量可能用到了同样的会计学条目来计算，那么一旦该条目缺数，就会影响基本面变量的计算；又比如，对于历史时间较短的公司，一些长周期的量价变量（比如中期动量和长期反转）自然也就无法计算。
+
+下图（a）展示了 1981 年 4 月实际的缺书情况，其中横轴为 45 个公司特征，纵轴为公司 index。图（b）展示了假想的随机缺失的情况。如果缺数是随机的，那么我们在不同的变量上应该观察到无序的随机性，如图（b）所示。而真实情况下（图（a））则显示了截然不同的情况，很多公司在不同的变量上均存在缺数的情况。
+
+仍以前述 5 个公司特征为例，下图（a）考察了不同市值分组下的缺失比例，可见小市值（第 1 组）相对大市值组（第 5 组）的缺数问题更加严重；图（b）则以变量本身进行分组，考察了每组的缺数程度。看到这里有的小伙伴也许会问：如果变量都缺数了还怎么分组？这里的处理方法是利用股票在该变量上取值的均值作为分组的依据。结果显示，当按照变量排序时，最小的组（第 1 组）和最大的组（第 5 组）往往缺数问题最为严重。由于因子或异象通常是通过这两组多空对冲构造的，因此这两组缺失严重无疑是进行实证资产定价或因子投资的梦魇。
+
+另一方面，由于变量本身的构造机制以及使用的数据的差异，不同变量的缺数存在异质性。这些问题均使得“约定俗成”的中位数或均值填充不再合理（因为均值或中位数是有偏的）。
+
+下面两图分别展示了每个变量自身的时序自相关性以及不同变量的截面相关性。从中不难发现，一些变量在时序上的自相关性非常高（比如市值），有些则为零（比如特质波动率 iVol）；此外，很多变量的截面相关性很高。这些结果表明，不同变量的缺数问题存在特质性，而为了找到比“约定俗成”更好的填数方法，需要充分利用变量在时序和截面上的信息。
+
+Fact 4：股票的收益率与公司是否缺数有关，对实证资产定价的研究结果（比如简单如 portfolio sort）造成了复杂的影响。
+
+03
+
+为了利用变量的截面和时序信息，Bryzgalov et al. (2022) 针对公司特征协变量构造了一个隐性多因子模型。
+
+以截面信息为基础，该模型的重要因素如下面这张 slide 所示（其中  表示公司特征，上标  表示时间，  表示股票，  表示变量）。该文利用 PCA 估计隐性多因子模型，并使用 Xiong and Pelger (2019) 的方法应对估计中的缺数问题。
+
+PCA 结果显示，公司特征之间表现出了很强的因子结构；使用 6 个因子就可以捕捉绝大部分截面上的变化。此外，这些因子也有很强的经济学解释。图（b）展示了样本外填充的公司特征的 RMSE 随隐性因子个数的变化。
+
+有了基础的截面模型，Bryzgalov et al. (2022) 进一步添加了时序的公司特征，构造了同时包括截面和时序信息的隐性因子模型。
+
+最后我们来看看不同模型和“约定俗成”模型在样本外的表现。不过这里先插一句，在前述的介绍中，就提到了样本外 RMSE 的计算。有小伙伴可能会问：既然是缺数，怎么算是“样本外”？这里的处理方法是，刻意隐去（masking）一部分观测到的公司特征（随机选择，记为 OOS MAR 或者在选择上保留时序连续性，记为 OOS Block），用剩余观测数据进行建模，然后用这部分隐去的数据进行样本外评估。评估结果如下表。
+
+以我标出的 local B-XS 和 local XS 两个模型为例，它们都是单期条件模型，其中 B-XS 用到了截面信息和历史时序信息，XS 仅用到了截面信息。另外两个“约定俗成”模型是 XS-median，即截面中位数填充和 ind-median，即行业中位数填充。结果显示，无论是在样本内还是在样本外（OOS MAR 或 OOS Block），通过主成分分析得到的预测均优于“约定俗成”模型，即它们的预测误差更低，且改进非常明显。
+
+另一方面，从 local B-XS 和 local XS 两个模型结果的差异可知，补充了时序信息后能够进一步提高预测准确性，说明时序和截面信息对于填充缺数来说同样重要。对于一些时序上自相关性很强的变量，上述隐性因子模型能够更多地利用时序信息；而对于那些截面上信息更重要的变量，该模型则更多地利用截面信息。换句话说，该模型并不依赖于人们对于 missing patterns 的假设，而是能够从数据中发现并加以利用。
+
+最后来看两个具体的例子。考虑 Microsoft 和 Hasbro 两个公司，考虑 operating profitability 和 iVol 两个变量。图中灰色的区间是留出的 OOS 区间，图中 0.0 的水平线表示“约定俗成”做法的填充。从这两个例子中可以看到，无论是对于 OP 这种比较稳定的变量，还是对于 iVol 这种上蹿下跳的变量，模型都能给出不错的填充结果，远远优于填充 0.0。
+
+04
+
+以上和各位一起简要浏览了 Bryzgalov et al. (2022) 一文的核心内容和结果。在近日的一个 talk 中，Bryzgalov 提到她们后续会把填充好的数据挂出来，供学界和业界使用。当有了更合理填充后的公司特征后，一些传统的异象或因子的表现是否会发生颠覆性的改变？答案令人期待。
+
+另一方面，Bryzgalov et al. (2022) 对于缺数的研究还给了我另外的一个强烈的感受。近年来，机器学习算法已经被广泛应用于实证资产定价和因子投资之中。然而，越来越多的研究表明，在如此低信噪比的金融领域，指望“数据发声”的粗暴做法是不切实际的。反而是小到数据如何标准化、不同的协变量如何进行缩放，如何选择正则化的方式等每一个具体的细节决定着应用机器学习算法的成败。
+
+Bryzgalov et al. (2022) 关于缺数的研究毫无疑问再次说明了这一点。一个看似不起眼的填充决定，也许就会改变应用机器学习的结果。而到底应该使用哪种数据处理方式（例如“约定俗成” vs. 该文同时利用时序和截面信息构造的隐性模型）背后显然也应该有足够的经济学推导作为指引。这些看似很小的差异，也许在其他高信噪比的机器学习应用领域难以产生太大的影响，但对于实证资产定价的成功来说，可能正是必不可少的一环。
+
+More to come …
+
+参考文献
+Bryzgalov, S., S. Lerner, M. Lettau, and M. Pelger (2022). Missing financial data. Working paper.
+
+Freyberger, J., B. Hoppner, A. Neuhierl, and M. Weber (2021). Missing data in asset pricing panels. Working paper.
+
+Xiong, R. and M. Pelger (2019). Large dimensional latent factor modeling with missing observations and applications to causal inference. Journal of Econometrics forthcoming.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+[表]
+Past Returns | 
+r2_1 | Short-term momentum | Monthly | (25) | A2ME | Assets to market cap | Quarterly | 
+r12_2 | Momentum | Monthly | (26) | BEME | Book to Market Ratio | Quarterly | 
+r12_7 | Intermediate momentum | Monthly | (27) | C | Ratio of cash and short-term investments to total assets | Quarterly | 
+r36_13 | Long-term momentum | Monthly | (28) | CF | Free Cash Flow to Book Value | Quarterly | 
+LT_Rev | Long-term reversal | Monthly | (29) | CF2P | Cashflow to price | Quarterly | 
+ |  |  |  | (30) | D2P | Dividend Yield | Monthly | 
+ |  |  |  | (31) | E2P | Earnings to price | Mixed Quart. & Mo | 
+Investment | 
+Investment | Investment | Quarterly | (32) | Q | Tobin&#x27;s Q | 
+NOA | Net operating assets | Quarterly | (33) | S2P | Sales to price | Mixed Quart. & Mo | 
+DPI2A | Change in property, plants, equipment and inventory over assets | Quarterly | (34) | Lev | Leverage | Quarterly | 
+NI | Net Share Issues | Quarterly |  | Trading Frictions | 
+ |  |  |  | (35) | AT | Total Assets | Quarterly | 
+Profitability | 
+PROF | Profitability | Mixed Quart. & Yearly | (36) | Beta | CAPM Beta | Monthly | 
+ATO | Net sales over lagged net operating assets | Quarterly | (37) | IdioVol | Idiosyncratic volatility | Monthly | 
+CTO | Capital turnover | Quarterly | (38) | LME | Size | Monthly | 
+FC2Y | Fixed costs to sales | Mixed Quart. & Yearly | (39) | LTurnover | Turnover | Monthly | 
+OP | Operating profitability | Quarterly | (40) | MktBeta | Market Beta | Monthly | 
+PM | Profit margin | Quarterly | (41) | Rel2High | Closeness to past year high |  | 
+RNA | Return on net operating assets | Quarterly | (42) | Resid_Var | Residual Variance | Monthly | 
+ROA | Return on assets | Quarterly | (43) | Spread | Bid-ask spread | Monthly | 
+ROE | Return on equity | Quarterly | (44) | SUV | Standard unexplained volume | Monthly | 
+SGA2S | Selling, general and administrative expenses to sales | Quarterly | (45) | Variance | Variance | Monthly | 
+D2A | Capital intensity | Quarterly |  |  |  |  | 
+Intangibles | 
+AC | Accrual | Quarterly |  |  |  |  | 
+OA | Operating accruals | Quarterly |  |  |  |  | 
+OL | Operating leverage | Quarterly |  |  |  |  | 
+PCM | Price to cost margin | Quarterly |  |  |  |  |
+--- 图3 ---
+(a) Number of Stocks
+(c) Quarterly & Monthly
+(b) Missing Percentage
+(d) Size Quintiles
+--- 图4 ---
+出处：Bryzgalov et al. (2022)
+--- 图5 ---
+(a) Sample month: April 1981
+(b) Simulated missing-at-random
+Joint distribution of missing patterns (yellow missing)
+--- 图6 ---
+Figure 4: Missing Observations by Characteristic Quintiles
+(a) Mean ME Quintiles
+(b) Mean Char. Quintiles
+Note: This figure shows the percentage of missing observations for different characteristic quintiles. The left subfigure displays the missing observations for all characteristics and the example characteristics book-to-market, operating profitability, investment, leverage and change in property, plants, equipment and inventory over lagged total assets for the five size quintiles of stocks. The right subfigure presents the proportion of missing values for the five example characteristics for their corresponding characteristic quintile. The characteristic quintiles are based on the average observed characteristic value of the corresponding stock.
+Rutzeholz et al (2022)
+--- 图7 ---
+Note: This figures presents the time-series variation and dependency of characteristic ranks. The top figure shows the sorted standard deviation over time for each characteristic. The bottom figures summarize the 1-month and 12-months autocorrelation coefficients for each characteristic.
+出处·Brennan at al (2022)
+--- 图8 ---
+Figure 6: Heatmap of Pairwise Correlation
+ote: This figure shows the pairwise correlations across time and stocks for each characteristic. The time period is the sample from 1977-2020.
+
+--- 图10 ---
+Figure 8: Number of Latent Factors
+(a) Eigenvalues of  $ \Sigma^{XS,t} $
+(b) Out-of-Sample RMSE
+Note: In this figure we determine the number of latent factors. The left subplot shows the magnitude of eigenvalues of the characteristic covariance matrix relative to the sum of all eigenvalues averaged over time. The right subplot displays the out-of-sample imputation RMSE as function of the number of cross-sectional factors using the block-missing masking.
+--- 图11 ---
+Adding time-series information
+Combine XS (cross-sectional) with TS (time-series) information:
+B-XS-Model: (backward-cross-sectional)
+$$ \begin{array}{r}{\hat{C}_{i,t}^{I,\mathrm{B-X S}}=\beta^{I,\mathrm{B-X S}^{\top}}}\end{array}\left(\begin{matrix}{C_{i,t-1}^{I}}&{\hat{F}_{i,1}^{t}}&{\cdots}&{\hat{F}_{i,K}^{t}}\\ \end{matrix}\right) $$
+BF-XS-Model: (backward-forward-cross-sectional)
+$$ \begin{array}{r}{\hat{C}_{i,t}^{I,\mathrm{B F-X S}}=\beta^{I,\mathrm{B F-X S}^{\top}}\left(\begin{matrix}{C_{i,t-1}^{I}}&{C_{i,t+1}^{I}}&{\hat{F}_{i,1}^{t}}&{\cdots}&{\hat{F}_{i,K}^{t}}\\ \end{matrix}\right).}\end{array} $$
+The framework includes several important special cases:
+1. Time-series AR(1) model (B):  $ \beta^{I,B-XS} = \begin{pmatrix} \beta^{B} & 0 & \cdots & 0 \end{pmatrix} $.
+2. Last observed value (PV):  $ \beta^{I,B-XS} = \begin{pmatrix} 1 & 0 & \cdots & 0 \end{pmatrix} $.
+3. Cross-sectional median:  $ \beta^{I,B-XS} = \begin{pmatrix} 0 & 0 & \cdots & 0 \end{pmatrix} $ (ranks centered at 0).
+For estimation, stack cross-sectional and time-series information in  $ X_{i}^{l,t} $ and run the following regression (averaged over observed stocks):
+$$ \hat{\beta}^{I,t}=\left(\sum_{i=1}^{N_{t}}W_{i,I}^{t}X_{i}^{I,t}X_{i}^{I,t^{\top}}\right)^{-1}\left(\sum_{i=1}^{N_{t}}W_{i,I}^{t}X_{i}^{I,t}C_{i,t}^{I}\right) $$
+11th, D. 1
+--- 图12 ---
+Table 4: Imputation Error for Different Imputation Methods
+[表]
+ | In-Sample | OOS MAR | OOS Block | 
+Method | all | quarterly | monthly | all | quarterly | monthly | all | quarterly | monthly | 
+global BF-XS | 0.11 | 0.10 | 0.13 | 0.15 | 0.15 | 0.14 | 0.17 | 0.16 | 0.19 | 
+global F-XS | 0.10 | 0.07 | 0.14 | 0.16 | 0.17 | 0.16 | 0.18 | 0.17 | 0.20 | 
+global B-XS | 0.15 | 0.15 | 0.14 | 0.16 | 0.16 | 0.15 | 0.19 | 0.18 | 0.20 | 
+global XS | 0.19 | 0.18 | 0.21 | 0.23 | 0.22 | 0.24 | 0.22 | 0.21 | 0.24 | 
+global B | 0.16 | 0.17 | 0.15 | 0.17 | 0.17 | 0.15 | 0.21 | 0.20 | 0.22 | 
+local B-XS | 0.15 | 0.16 | 0.14 | 0.16 | 0.17 | 0.15 | 0.19 | 0.19 | 0.20 | 
+local XS | 0.21 | 0.20 | 0.22 | 0.23 | 0.22 | 0.24 | 0.23 | 0.22 | 0.24 | 
+prev | 0.18 | 0.18 | 0.18 | 0.19 | 0.19 | 0.19 | 0.23 | 0.21 | 0.25 | 
+local B | 0.16 | 0.17 | 0.15 | 0.17 | 0.17 | 0.15 | 0.21 | 0.20 | 0.22 | 
+XS-median | 0.29 | 0.29 | 0.29 | 0.29 | 0.29 | 0.29 | 0.28 | 0.28 | 0.29 | 
+ind-median | 0.29 | 0.29 | 0.29 | 0.29 | 0.29 | 0.29 | 0.28 | 0.28 | 0.29 |
+Note: This table shows imputation RMSE by imputation method averaged over all characteristics and separately for monthly and quarterly updated characteristics. We report the imputation error in-sample evaluated over all observed data, and out-of-sample for masked characteristics from the fully present subset of the data. For the out-of-sample analysis we mask 10% of the data either missing at random or missing in time-series blocks for 12 consecutive months.
+--- 图13 ---
+(c) Microsoft - OP
+(d) Hasbro - OP
+Panel C: Idiosyncratic Volatility
+(e) Microsoft - iVol
+(f) Hasbro - iVol
+Note: This figure shows illustrative realized and model-implied characteristic time-series for Microsoft and Hasbro. We plot the realized characteristic rank over time, and the model implied values with the B-XS, BF-XS and median model. The gray shaded areas indicate missing blocks of one-year which are not part of the estimation, and hence serve as out-of-sample evaluation. We consider size, operating profitability and idiosyncratic volatility, which are three representative characteristics of decreasing persistence.
+出处：Brvzgalov et al.(2022)
+--- 图14 ---

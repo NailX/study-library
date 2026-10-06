@@ -1,0 +1,173 @@
+# 寻找 Mean-Variance Frontier
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/_j7hOER1b3aKOrAr9DihRw
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+资产定价理论保证了 SDF 和 mean-variance frontier 的等价性。机器学习在估计 SDF 方面或大有可为。
+
+前文《FF3们背后的资产定价理论》介绍了 Stochastic Discount Factor（SDF）和多因子模型之间的等价关系。今天我们再来说说 SDF 和 mean-variance (efficient) frontier 的等价性。
+
+依然考虑超额收益，由资产定价理论有  ，其中  为 SDF，  为某资产的超额收益。将该式进行如下代数运算：
+
+因而有：
+
+由于相关系数的取值范围是 -1 到 +1，因此任意资产的超额收益和 SDF 之间满足以下关系，它被称为 Hansen-Jagannathan bound（Hansen and Jagannathan 1991）：
+
+若我们只关心  的资产，则可以把绝对值符号去掉：
+
+上式左侧正是夏普率（Sharpe Ratio）的定义，因此该不等式意味着资产的夏普率是有上限的。观察该不等式，我们关心两个问题：（1）什么时候等号成立？（2）等号成立意味着什么？问题（1）的答案很简单，当  时等式成立。对于问题（2），等号成立意味着该资产位于 mean-variance frontier 之上（因为这些资产的夏普率最大），且这些资产和 SDF 的相关系数都为 -1。这意味着所有 mean-variance frontier 上的资产都和 SDF 完全负相关，因而它们都是完全正相关。
+
+这种相关性意味着 SDF 和位于 mean-variance frontier 之上任意资产收益率（记为  ）的等价关系：  。
+
+假设无风险资产（  ）存在，则 mean-variance frontier 是通过  和 tangency portfolio 的直线，其上任何一个非  资产都可以用来构造 SDF。此外，利用 SDF 和 mean-variance frontier 的等价关系，可以得到如下这个特殊的单因子模型：
+
+其中  是  的 risk premium，  为资产超额收益对 mean-variance frontier 上资产超额收益的回归系数。这就是资产定价中的 Roll (1977) Theorem。通过 SDF 和多因子模型的等价性，以及 SDF 和 mean-variance frontier 的等价性，也就得到多因子模型和 mean-variance frontier 的等价性 —— mean-variance frontier 上资产的收益率能够表达为多因子模型中因子收益率的线性组合。
+
+“ Any asset pricing model is the same as the statement that there is some return on the mean-variance frontier. If Fama and French (1993)’s asset pricing model is correct, it means that there is a combination of their MKT, SMB and HML portfolios that is on the mean-variance frontier. The CAPM is simply the statement that the market return is on the mean-variance frontier. —— John Cochrane
+
+”
+
+再看一眼  ，它长得非常像 CAPM，CAPM 只不过是假设市场组合在 mean-variance frontier 上。这种等价性也可以用于比较不同的多因子模型。如果模型 A 的因子构造的最大夏普率高于模型 B 的因子构造的夏普率，那么前者就优于后者，这和 Barillas and Shanken (2017) 提出的方法也很好的契合（见《Toward a better factor model》）。
+
+写到这里，先总结一下上述内容（因为接下来就要上“正餐”了）。
+
+资产定价理论告诉我们 SDF 和 mean-variance frontier 是等价的，因此只要找到 mean-variance frontier 上的任意（非  ）资产，就找到了 SDF 并给所有资产定价。当然，这仅仅是把寻找 SDF 的问题转化为寻找位于 mean-variance efficient (MVE) portfolio 的问题，但人们并不知道 MVE portfolio 中不同股票的权重是怎样的。
+
+从实证研究的角度，利用 SDF，mean-variance frontier 以及多因子模型三者的等价关系可以将上述问题大大简化，即通过多因子模型来研究 SDF 和资产定价。虽然不同的多因子模型都是根据不同的理论（比如 discount dividend model 或者行为金融学理论）提出的，但最终比较不同的模型时，看的还是哪个模型的因子算出的夏普率更高。
+
+然而，由于研究传统传承，因子通常都是通过 double-sort 构造的，导致通过因子算出的最大夏普率（在样本外）并不高，所以没少被人诟病。鉴于这个现象，一个自然的问题就是能否绕过多因子模型，直接使用资产（i.e., 股票）来研究 SDF。答案是肯定的。由于因子收益率是一揽子资产收益率的加权平均，而 SDF 可以表达为因子收益率的线性函数，因此 SDF 自然也可以写成资产收益率的线性组合。
+
+正如《实证资产定价理论新进展》的第五节介绍的那样，直接使用资产研究 SDF 正是近年来的研究重点之一，例如 Kozak, Nagel and Santosh (2020) 和 Bryzgalova, Pelger and Zhu (2020) 都是这方面的力作。而我今天想要谈的是 Chen, Pelger and Zhu (2020)。这篇文章有很多令人惊喜的地方，但最大的创新无疑是把机器学习中的 Generative Adversarial Network（GAN）巧妙地用在了资产定价场景中。
+
+为了让各位小伙伴充分感受这篇论文的魅力，下面话不多说，先上 5 张 slides，它们高度概括了该文的核心（来自 Markus Pelger 在 2020 Utah Winter Finance Conference 上做的报告；参考文献最后有视频连接），我看后的感受就是一个字 —— 旺德福！
+
+OK！接下来为了便于理解，对每页 slide 作简要介绍（但是非常建议去看报告视频 + 阅读论文原文）。
+
+首先前两页介绍了该文的模型。在第一页中，该文明确指出其研究的是 conditional model（注意期望符号  的下标  ）。对于 conditional model，可以通过加入工具变量把 conditional moment conditions 转化成 unconditional moment conditions（具体数学背景见 Cochrane 2005 的第 8 章）。接下来第二页，  期的 SDF（记为  ）被表达为股票超额收益的线性函数：
+
+其中  是根据  时刻所有信息来确定的股票的权重。在 Chen, Pelger and Zhu (2020) 的模型中，  被视为宏观经济变量  和公司特征（firm characteristics）  的非线性函数，是通过机器学习模型求解的对象。
+
+第三页将 SDF 和 mean-variance frontier 联系了起来；一旦得到 SDF 的参数  ，就同时得到了 MVE portfolio，即文中的 SDF portfolio。利用 SDF portfolio 的 risk premium，并计算个股和它的  就可以得到单因子模型，检验其定价能力或选股。
+
+第四、五两页是模型的估计。第四页首先在给定的工具变量下，把 moment conditions 转化为 no-arbitrage loss function，然后通过 feed forward network 算法估计模型的参数，最小化 moment conditions（moment conditions 代表了 pricing errors）。如何选择工具变量呢？
+
+在该文的模型中，工具变量  可以理解成由宏观经济变量和 firm characteristics 决定的 conditioning variables，因而  则代表了 managed portfolios。举个例子，比如某个工具变量是判别股票是否是小市值的 indicator variable（小市值为 1，大市值为 0），那么它就意味着我们希望 SDF 的最优参数能够更好的给小市值股票定价（即通过小市值股票构造的 managed portfolios 的 pricing error 最小）。所以，挑选工具变量构造 managed portfolios 就相当于挑选 test assets。这里，工具变量的应用和 Kelly, Pruitt and Su (2019) 提出的 IPCA 方法也有异曲同工之妙。
+
+对资产定价来说，并非所有 test assets 在估计 SDF 时都能发挥同样的作用，我们关心的是那些包含最多定价信息的 test assets。最关键的来了：为了实现这个目标，Chen, Pelger and Zhu (2020) 使用了 GAN（生成对抗网络，一种非监督式学习算法，通过让两个神经网络相互博弈的方式进行学习），通过两个模型交替迭代来同时估计 SDF 和选择工具变量：
+
+1. SDF 模型在给定的工具变量下，以最小化 test assets 的 pricing errors 为目标确定 SDF 的参数  ；
+
+2. 工具变量模型在给定的 SDF 下，以最大化 pricing errors 为目标选择新的工具变量  。
+
+和传统 GMM 主要从 efficiency 出发挑选工具变量相比，该文的方法强调挑选工具变量时的经济学意义和稳健性，此外深度学习算法能够同时处理更多的参数。以上就是对这 5 页 slides 的简要说明。但是，本文的解读无论如何也取代不了阅读原文。如果你觉着原文太长，那么至少听一听 Markus Pelger 的报告。
+
+最后给出部分实证结果。相比于其他方法，该文构造的 SDF 在样本外的夏普率最高，且无论是时序上解释资产收益率波动（EV）还是截面上解释资产预期收益率差异（cross-sectional  ）都更加优秀。
+
+在所有考察的 firm characteristics 中，下面这些是最重要的，且它们代表了包括交易摩擦，价值，无形资产，盈利，投资以及动量（反转）这些常见的大类因子，说明包含这些因子的主流多因子模型也都是靠谱的。
+
+毋庸置疑，Chen, Pelger and Zhu (2020) 是一篇值得研读和学习的文章（它获得了 UWFC 2020 Best Paper Award，出现在顶刊只是时间问题）。近年来，越来越多学者把机器学习算法成功应用到资产定价研究中，而 Chen, Pelger and Zhu (2020) 是其中的重要代表之一（更多相关研究见《实证资产定价理论新进展》和《因子投资：方法与实践》的 6.8 节）。
+
+从业界实务的角度来说，使用历史数据求解 mean-variance optimization 就可以得到夏普率最大的组合，但由于各种 estimation errors 以及使用的是历史数据，这个最优解（基本上）没有意义；而构造样本外 MVE portfolio 才是人们所追求的。在这方面，学术界的诸多将机器学习算法用于估计 SDF 的研究成果将给人们全新的启发。
+
+参考文献
+Barillas, F. and J. Shanken (2017). Which alpha? Review of Financial Studies 30(4), 1316 – 1338.
+
+Bryzgalova, S., M. Pelger, and J. Zhu (2020). Forest through the trees: Building cross-sections of stock returns. Working paper, available at http://ssrn.com/abstract=3493458.
+
+Chen, L., M. Pelger, and J. Zhu (2020). Deep learning in asset pricing. Working paper, available at https://ssrn.com/abstract=3350138.
+
+Cochrane, J. H. (2005). Asset Pricing (Revised Edition). Princeton, NJ: Princeton University Press.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics 33(1), 3 – 56.
+
+Hansen, L. P. and R. Jagannathan (1991). Implications of security market data for models of dynamic economics. Journal of Political Economy 99(2), 225 – 262.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Roll, R. (1977). A critique of the asset pricing theory’s tests Part I: On past and potential testability of the theory. Journal of Financial Economics 4(2), 129 – 176.
+
+https://www.youtube.com/watch?v=ioKYA3UZ70E
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+量化核武
+--- 图2 ---
+Figure 1.1. Mean-variance frontier. The mean and standard deviation of all assets priced a discount factor m must lie in the wedge-shaped region.
+处：Cochrane (2005)
+--- 图3 ---
+Theorem: There is a discount factor of the form  $ m = a + bR^{mv} $ if and only if is on the mean-variance frontier, and  $ R^{mv} $ is not the risk-free rate. (When there is isk-free rate, if  $ R^{mv} $ is not the constant-mimicking portfolio return.)
+处：Cochrane (2005)
+
+--- 图5 ---
+Without loss of generality SDF is projection on the return space
+$$ M_{t+1}=1-\sum_{i=1}^{N}w_{i,t}R_{i,t+1}^{e} $$
+$\Rightarrow$ SDF portfolio $F_{t+1} = \sum_{i=1}^{N} w_{i,t} R_{i,t+1}^e$ is mean-variance efficient and has highest conditional Sharpe-ratio
+Portfolio weights  $ w_{i,t} $ are a general function of macro-economic information  $ I_{t} $ and firm-specific characteristics  $ I_{i,t} $:
+$$ w_{i,t}=w(I_{t},I_{i,t}). $$
+→ Need non-linear estimator with many explanatory variables!
+--- 图6 ---
+Equivalent Factor Model Representation
+No-arbitrage condition is equivalent to
+$$ \begin{aligned}\mathbb{E}_{t}[R_{i,t+1}^{e}]&=\frac{\operatorname{cov}_{t}(R_{i,t+1}^{e},F_{t+1})}{\operatorname{var}_{t}(F_{t+1})}\cdot\mathbb{E}_{t}[F_{t+1}]\\&=\beta_{i,t}\mathbb{E}_{t}[F_{t+1}]\end{aligned} $$
+with factor SDF portfolio  $ F_{t+1} = \sum_{i=1}^{N} w_{i,t} R_{i,t+1}^{e} $.
+→ Without loss of generality we have a factor representation
+$$ R_{t+1}^{e}=\beta_{t}F_{t+1}+e_{t+1}. $$
+Objects of interest:
+• The SDF portfolio  $ F_{t} $ and its portfolio weights  $ \omega_{i,t} $
+• The risk loadings  $ \beta_{t} $
+• The unexplained residual  $ \hat{e}_t = (I_N - \beta_{t-1}(\beta_{t-1}^\top \beta_{t-1})^{-1} \beta_{t-1}^\top) R_t^e $.
+--- 图7 ---
+• Estimate SDF weights  $ w(\cdot) $ to minimize no-arbitrage moment conditions
+$$ \mathbb{E}[M_{t+1}R_{t+1,i}^{e}\hat{I}_{i,t}] $$
+for a set of conditioning variables  $ \hat{I}_{i,t} = \hat{g}(I_t, I_{i,t}) $.
+• The empirical no-arbitrage loss function given  $ \hat{I}_{i,t} $ is
+$$ L(w|\hat{g},I_{t},I_{i,t})=\frac{1}{N}\sum_{i=1}^{N}\frac{T_{i}}{T}\left\|\frac{1}{T_{i}}\sum_{t\in T_{i}}M_{t+1}R_{i,t+1}^{e}\hat{g}(I_{t},I_{i,t})\right\|^{2}. $$
+We use a feed forward network to estimate  $ w_{i,t} $ for given  $ \hat{I}_{i,t} $
+• Finance intuition:  $ R_{t+1}^{e}\hat{I}_{t} $ form characteristic managed portfolios
+• Problem of finding optimal “instruments” = choice of test assets
+• How can we choose the conditioning variables  $ \hat{I}_{i,t} $ as general functions of the macroeconomic and firm-specific information?
+→ Generative Adversarial Network (GAN) chooses  $ \hat{g} $!
+1
+--- 图8 ---
+Generative Adversarial Network (GAN)
+Formulate General Method of Moments (GMM) as Zero-Sum Game
+Two networks play a zero-sum game:
+1. SDF Network  $ (\hat{w}) $ constructs the SDF  $ M_{t+1} $.
+2. Conditional Network  $ (\hat{g}) $ generates conditioning variables  $ \hat{I}_{i,t} $.
+• Alternatively update the two networks:
+1. For a given set of conditioning variables  $ \hat{I}_{i,t} $, SDF network is updated to minimize the loss (pricing error).
+2. For a given estimation of the SDF, Conditional Network finds  $ \hat{I}_{i,t} $ with the largest loss (most mispricing).
+• Intuition: Find the economic states and test assets with the most pricing information.
+• Conventional GMM: optimal instruments based on efficiency.
+- Not feasible for large number of potential parameters
+Assumes test assets identify SDF parameters
+Our GAN: optimal instruments based on robustness
+• Feasible for large set of instruments and parameters
+• Finds test assets that identify SDF parameters
+1
+--- 图9 ---
+Figure 1: GAN Model Architecture
+This figures shows the model architecture of GAN (Generative Adversarial Network) with RNN (Recurrent Neural Network) with LSTM cells. The SDF network has two parts: (1) A LSTM estimates a small number of macroeconomic states. (2) These states together with the firm-characteristics are used in a FFN to construct a candidate SDF for a given set of test assets. The conditioning network also has two networks: (1) It creates its own set of macroeconomic states, (2) which it combines with the firm-characteristics in a FFN to find mispriced test assets for a given SDF M. These two networks compete until convergence, that is neither the SDF nor the test assets can be improved.
+
+--- 图11 ---
+Characteristic Importance
+GAN characteristic importance ranking in terms of average absolute gradient
+Price trends and trading frictions most relevant
+$ \Rightarrow $ All categories represented among top 20 variables
+--- 图12 ---

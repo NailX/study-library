@@ -1,0 +1,244 @@
+# 实证资产定价理论新进展
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/TQ24edy8QRZinRWtxRL5PA
+
+作者：石川（川总写量化），llanglli（因子动物园），刀疤连（CQR）
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+近年来，实证资产定价理论发展呈现出千帆竞技、百舸争流的局面。本文梳理其中的重要成果。
+
+01
+引言
+
+自上世纪 70 年代以来，实证资产定价研究已经走过了近 50 年的发展。从 CAPM 到如今家喻户晓的 Fama-French 五因子、q-factor model，再到 factor zoo，线性多因子模型的流行让学界业界的目光从绝对定价模型转变到相对定价模型。
+
+在早期的研究中，由于 Eugene Fama 开创性的工作，很多研究方法被继承了下来，成为研究实证资产定价的标配。这样的例子举不胜举，比如现如今所有主流的多因子模型全都是通过 portfolio sort 构造因子，然后通过时序回归检验它们的 pricing 能力。又比如大名鼎鼎的 Fama-MacBeth two-pass regression，它可以方便的研究 tradable/non-tradable factors。
+
+时至今日，虽然学界提出了众多不同的多因子模型（见《主流多因子模型巡礼》），虽然它们也被拿来使用 GRS test PK 的“你死我活”，然而由于它们仍然是基于传统的方法，因此不能很好的回答到底哪些因子是真实的、哪些因子被遗漏了、因子溢价的估计是否靠谱等问题。如果没有理论的进展，纯实证的 factor war 似乎仅仅让人们原地打转。
+
+好消息是，近几年来学术界在实证资产定价理论方面还是有很多非常重要的发现。这些论文以回答最核心的问题为目标，极大的推动了实证资产定价的发展。在本文中，BetaPlus 小组选择了其中一些最有代表性的，将它们分门别类进行介绍。希望这样一篇年末巨献能帮助各位小伙伴掌握最新的研究动态。
+
+为了本文的完整性，下文第二节首先简要回顾时序回归检验和 Fama-MacBeth two-pass regression（具体见《股票多因子模型的回归检验》或《因子投资：方法与实践》的第 2.2 节）；第三节将详细梳理前沿进展；第四节总结全文。
+
+02
+传统方法
+
+1. 时序回归检验
+
+学界主流的多因子模型均是通过时序回归来检验。当因子是 tradable factors 时，首先通过 portfolio sort 构造 factor portfolio，并估计因子溢价 λ。资产超额收益 R^e 和因子收益率满足如下关系：
+
+通过 OLS 估计上述模型得到每个资产对因子的暴露和 pricing error（α）。比如，Fama-French 三因子中的 HML 和 SMB 都是通过 BM 和市值（双重）排序构造的投资组合，然后用它们的收益率作为解释变量，通过时序回归来估计资产的因子暴露以及资产的 α。
+
+因为人们并不知道真实的因子有哪些，而这些模型中的因子都是根据某个理论提出来的（虽然每个模型背后的动机令人信服），因此它们很容易受到遗漏变量的影响，且因子收益率的计算取决于具体如何通过排序法构造因子的投资组合（比如 Fama-French 五因子和 q-factor model 中都有盈利因子，但它们选取的变量以及构造方式均不同）。
+
+2. Fama-MacBeth Regression
+
+当因子是 non-tradable factors 时，由于无法很容易的构造 factor mimicking portfolios，因此上述时序回归检验无能为力。在这种情况下，Fama-MacBeth two-pass regression 通常是首选。（当然，本方法也可以用于 tradable factors。）
+
+假设因子的取值为 f（注意是因子本身的取值而非因子的溢价），在两步法中的第一步先通过求解如下时序回归估计资产对因子的暴露：
+
+通过 OLS 估计上述模型得到 β 的估计。在两步法的第二步中，在每个时刻 t 在截面上用资产的超额收益对 β 回归来估计因子溢价：
+
+得到每期因子收益率和 α 之后，将它们在时序上取平均分别得到因子溢价和定价误差的估计。值得一提的是，Fama-MacBeth regression 是传统截面回归的一个改进。传统截面回归时先将资产收益率在时序上取平均然后进行单次截面回归，而 Fama-MacBeth regression 在每个 t 时刻进行一次回归，然后再取平均。这么做的好处是可以消除 α 的截面相关性对回归的影响。
+
+和时序回归检验一样，通过 Fama-MacBeth regression 得到的多因子模型依然会受到遗漏变量的影响 —— 所以 Barra 模型也是无法幸免的，而且由于 Barra 模型中的因子太多，很可能还有无关变量/weak factors 的问题。另一方面，由于第一步时序回归估计出的 β 存在测量误差，因此第二步在估计因子溢价的时候会出现变量误差偏误（errors-in-variables bias）。在这方面，传统的解决办法是加入 Shanken (1992) 修正。
+
+OK！以上简要回顾了传统方法，马上来看前沿进展。
+
+03
+前沿进展
+
+近些年来，学术界在实证资产定价理论方面的进展集中在因子识别（factor identification）以及因子溢价估计（factor risk premium estimate）两方面。如前所述，如果存在模型设定偏误问题（例如有遗漏变量或者无关变量），则因子溢价的估计就会有问题，时序回归和 Fama-MacBeth 截面回归都会受到影响。
+
+大致来说，学术界的新成果可以分为下列五个部分：（1）遗漏变量问题；（2）遗漏/无关变量存在时，因子溢价估计；（3）降维、聚合因子信息；（4）变量误差问题；（5）SDF 估计。
+
+接下来依次说明。
+
+1. 遗漏变量问题
+
+遗漏变量问题指的是模型中遗漏了重要的因子（解释变量）。遗漏变量问题导致因子溢价的估计存在偏差，且更严重的是偏差的方向可正可负。
+
+以下面这个简单的模型为例，假设 y 和 x_1 以及 x_2 满足如下线性回归模型：
+
+由于遗漏变量问题，假设令 y 对 x_1 回归，并通过 OLS 估计。通过简单的计量经济学知识可知，x_1 的回归系数的偏差如下：
+
+式中 β_2 是真实模型中 y 对 x_2 的回归系数，δ_1 是 x_2 对 x_1 的回归系数。上式说明，β_1 的偏差由 β_2 和 δ_1 共同决定，它的符号受这两部分的影响。遗漏变量的存在使得因子溢价的估计是有偏的（biased），它也被称为遗漏变量偏差（omitted variable bias）。
+
+从传统计量经济学的角度来说，遗漏变量问题可以通过加入更多的解释变量来解决；此外，也可以通过加入 fixed effect 来消除时不变的遗漏变量（当然这个假设对于资产收益率来说不一定成立）。但是在多因子模型中塞入太多的因子容易造成样本内的过拟合。
+
+当给定一个多因子模型时，如何检验其是否存在遗漏变量呢？为此，Gagliardini, Ossola, and Scaillet (2019) 提出了一个简单有效的方法。如果不存在遗漏变量问题，则资产对多因子模型回归的残差中就不应该存在残留的因子结构。残留的因子结构可以通过分析残差协方差矩阵最大的特征值来确定。若该特征值超过了一定阈值就可以认为残差并不独立，存在遗漏变量问题。GOS(2019) 通过将该方法应用到常见的多因子模型中发现，Fama and French (2015) 五因子模型和 Hou, Xue, and Zhang (2015) 的 q-factor model 并不存在遗漏变量问题。（不知是否和使用的 test assets 有关。）
+
+除此之外，Pukthuanthong, Roll, and Subrahmanyam (2019) 以及 Feng, Giglio, and Xiu (2020) 两篇文章提出了如何从 factor zoo 中识别出真实因子的方法，也能有效解决遗漏变量的问题。
+
+先说前者，PRS(2019) 指出真实的因子需要满足两方面的特性：（1）因子必须能解释资产的共同运动，因此和资产的协方差有关；（2）因子必须被定价（即因子的 risk premium 大于零）。基于上述特征，该文提出了识别因子的步骤，首先通过上述第一点选出因子，然后通过 Fama-MacBeth 回归估计并检验选出的因子的溢价，并最终确定真实的因子。
+
+有意思的是，PRS(2019) 的前半部分需要用到资产的协方差矩阵。但是我们知道由于资产太多，因此直接计算其协方差矩阵不切实际，正是因为这个原因才有了使用因子降维一说、才有了 Barra 模型的流行。2016 年，Richard Roll 在 Q-Group 会议上报告了这篇论文。在之后的 Q&A 环节，台下观众便向他抛出了资产协方差矩阵未知的问题。不知道是因为故意回避，还是因为观众并非是 native speaker 因此问题说的不是很清楚，最终 Roll 并没有正面回答这个问题。
+
+FGX(2020) 则提出了两步 LASSO 来识别真实的因子。第一步 LASSO 首先从众多候选因子中找出能够解释资产预期收益率的因子。但故事到这里还没有结束，在第二步 LASSO 中，通过考察“已选出因子和资产的协方差”以及“剩余因子和资产的协方差”之间的相关性，再选出额外的因子。第二步的目的是为了避免第一步存在模型设定偏误导致遗漏变量问题。
+
+2. 遗漏/无关变量存在时，因子溢价估计
+
+无论是遗漏变量还是无关变量，都会对因子溢价估计造成影响。先看前者。
+
+遗漏变量问题导致因子溢价估计有偏，如何准确的估计因子溢价以及在这个基础上检验异象的超额收益就是非常重要的问题。由于真实的因子结构是未知的，因此学术界把研究的目光移到了隐性因子模型上。在隐性因子模型框架下，任何一个可观测因子的风险溢价等于它对隐性因子的暴露乘以隐性因子的溢价。
+
+在这个性质下，Giglio and Xiu (2020) 利用 PCA，通过隐性因子模型估计可观测因子的溢价。计量经济学中的重要性质使得 PCA 在这方面大有可为。首先，利用线性因子模型的旋转不变性，即便只能观察到隐性因子的某个满秩变换，也不妨碍估计可观测因子的溢价。其次，只要隐性因子足够强，PCA 总是可以复原对因子空间的某个旋转变换。通过这两个性质，GX(2020) 准确的估计了可观测因子的溢价（更多介绍见《因子投资：方法与实践》的 6.8.4 节）。
+
+再来看后者。
+
+由计量经济学的知识可知，如果在回归模型中存在无关变量（irrelevant variables），虽然不会影响其他解释变量回归系数的无偏性，但是会增大回归系数的 standard error（降低显著性），使得估计量 less efficient。
+
+在多因子模型的场景下，上述过度识别问题的表现为模型中加入了 weak factors，即和资产相关性非常微弱的因子。在这样的设定下，Gospodinov, Kan, and Robotti (2014) 发现很容易出现的结果是 weak factors 的因子溢价很显著，而真实的因子的溢价不显著，从而造成真实的因子被舍弃。
+
+在这方面，不得不说的两篇文章是 Bryzgalova (2016) 和 Bryzgalova, Huang, and Julliard (2019)。这两篇文章虽然尚未发出来，但目前分别在 RFS 和 JF 的 R&R 阶段。从这两篇文章的贡献来看，被顶刊接收应该只是时间问题。这两篇文章给出了存在 weak factors 的情况下如何准确估计其他因子的溢价。
+
+除此之外，再插一嘴 GX(2020)。虽然该文的标题为 omitted factors，但它实际上隐含地考虑了 weak factors 问题，因为该方法不仅仅适用于 tradable factors，也适用于 non-tradable factors，而后者是 weak factors 的重灾区（对 tradable factors 来说，几乎不存在这个问题）。另外，Kleibergen and Zhan (2018, 2020) 则直接给出了估计 non-tradable factors 因子溢价的方法。对于这类因子，Fama-MacBeth 回归的第一步时序回归往往无法得到靠谱的 β，因此这些新方法就变得十分必要。
+
+在结束这部分的讨论之前，另一篇需要介绍的文章是 Giglio, Liao, and Xiu (2020)。与 GX(2020) 不同，GLX(2020) 的主要目标是研究基金的超额收益是否显著（区分运气和能力）。由于超额收益是相对定价模型而言的，因此该问题显然涉及到因子溢价估计问题。简答来说，GLX(2020) 分为四步：（1）通过时序回归确定基金对一组给定因子的暴露；（2）对残差利用 GX(2020) 中的 PCA 识别出遗漏的因子，并获得基金在这些因子上的暴露；（3）通过截面回归估计所有因子的溢价以及基金的超额收益；（4）通过多重假设检验算法修正 t-statistics 并判断哪些基金能够获得超额收益。（关于 GLX2020 的解读请点击此处。）
+
+3. 聚合因子信息
+
+由于 factor zoo 造成的维数灾难，把它们都放在多因子模型中显然是不切实际的。因此，第三类研究正是如何以更好的解释资产预期收益的截面差异为目标，通过降维将众多因子的信息聚合在一起。在这方面，近两年金融学、计量经济学乃至统计学顶刊上也发表了多篇重磅文章。
+
+与 GX(2020) 类似，Kelly, Pruitt, and Su (2019) 同样将真实因子视作不可观测的隐性因子并通过 PCA 来提取信息。该文采用 Kelly, Pruitt, and Su (2017) 的工具变量 IPCA 方法，引入大量公司特征作为因子暴露和超额收益的工具变量，构建了 IPCA 因子。实证结果显示，IPCA 方法的确具有较好的表现。
+
+此外，Kelly, Moskowitz, and Pruitt (2020) 也采用 IPCA 方法来解释 momentum。前述几篇文章基本都来自对 Fan, Liao, and Wang (2016) 提出的 projected PCA 方法的应用和拓展。对背后统计理论感兴趣的小伙伴建议去看范剑青老师的原文。
+
+另外两篇文章是 Lettau and Pelger (2020a, b)，其中一篇发在计量经济学顶刊上介绍方法，另一篇则发在金融学顶刊上主要讲应用。他们认为上述利用 PCA 的研究虽然新颖，但是仅仅利用了收益率的二阶矩信息，丢失掉了原始因子和资产收益率在截面上的关系，即一阶矩信息。为此，该方法在经典 PCA 问题中加入了代表一阶矩的额外项，提出了 risk premium PCA（PR-PCA）方法。关于 IPCA 和 RP-PCA 的更详细介绍请点击这里。
+
+实证分析表明，RP-PCA 在绝大多数情况下都优于传统 PCA，且统计检验表明，通过使用五个 PR-PCA 因子能够很好地反映股票的系统性风险，且同时能够解释它们收益率的截面差异。对因子构成进行进一步探索发现，这五个因子都有很好的经济学基础。
+
+4. 变量误差问题
+
+变量误差（errors-in-variables）问题主要影响 Fama-MacBeth 截面回归。在 Fama-MacBeth 回归的第一步，即通过时序回归估计因子暴露 β。在第二步，上述 β 被用来当作解释变量，估计因子溢价。EIV 问题使得该因子溢价的估计存在偏差（biased toward zero，被称为 attenuation bias）。除此之外，某变量的 EIV 问题同样会导致其他因子（哪怕这些因子的 β 不存在 EIV 问题）的因子溢价估计出现偏差（contamination bias）。
+
+鉴于 EIV 问题，Fama and MacBeth (1973) 在检验 CAPM 的时候采用 portfolios 而非个股作为 test assets。这种做法也被保留了下来。在如今检验多因子模型时或估计因子溢价时，常用 portfolios 作为 test assets。然而，将个股分组会丢掉很多个股截面上的特征。如果待检验的因子和这些 portfolios 的分组属性正交，用它们作为 test assets 就无法发现这些因子的溢价。因此，比起使用各种 firm characteristics 单变量或双重排序构造的 portfolios，个股仍然是更好的 test assets。
+
+为了解决个股作为 test assets 时的 EIV 问题，Jegadeesh et al. (2019) 提出了工具变量估计量（IV estimator），前文《Which beta ?》对此进行了详尽的讨论。该 IV estimator 为：
+
+式中 β_IV 和 β_EV 分别为 instrumental 和 explanatory variables：β_EV 是对传统时序回归得到的 β 的估计，β_IV 是 β_EV 的工具变量。Jegadeesh et al. (2019) 使用互不重叠的历史数据分别进行时序回归求解 β_IV 和 β_EV，并指出正因如此，它们在截面上是不相关的，可以规避 EIV 问题。通过模拟数据，他们证实了采用 IV estimator 后，无论事前还是事后，因子溢价的估计都是无偏的。此外，Pukthuanthong et al. (2020) 在该文的基础上，研究了如何估计 non-tradable factors 的溢价。
+
+谈到更好的因子暴露，不得不提的另一种做法就是业界（例如 Barra）直接使用 firm characteristics 作为因子暴露。实证结果显示 firm characteristics 比起个股收益率对因子收益率的时序回归系数更能预测个股未来收益率（例如 Lewellen 2015）。此外，Jegadeesh et al. (2019) 的实证结果发现，当控制 firm characteristics 后，使用 IV estimator 也无法获得显著因子溢价。与此同时，Fama and French (2020) 比较了两类 β 构造的多因子模型，发现用 firm characteristics 做暴露的模型更好（见《Which beta (II)?》、《A new norm ?》）。
+
+尽管 firm characteristics 表现出了比时序回归 β 更好的预测性，但人们仍然不禁要发问它们难道就完全对 EIV 问题免疫吗？答案是否定的。比如，时变的 firm characteristics 受到过去收益率的影响（例如市值、BM、EP），firm characteristics 和测量误差之间存在截面相关性。因此，即便是 firm characteristics 作为 β，因子溢价的估计也受到 EIV 的影响。
+
+面对上述困境，定量修正 β 的测量误差无疑更有价值。无论是用时序回归系数还是公司特征作为 β，都会因此而改善 EIV 问题。这方面的代表性成果是 Chordia, Goyal, and Shanken (2019)。该文提出了定量修正因子暴露 EIV 问题的方法。该方法能很大程度上消除传统 Fama-MacBeth 两步法中的 EIV 问题。不过尽管如此他们也发现，和时序回归系数相比，firm characteristics 更能够解释股票预期收益率的截面差异。
+
+5. 估计 SDF
+
+新进展的最后一个方向是估计随机折现因子（Stochastic Discount Factor，即 SDF）。SDF 可以写成因子的线性组合：
+
+其中 m_t 为 SDF，f_{jt} 为因子 j 在 t 期的取值（对于 tradable factors，它就是因子收益率；对于 non-tradable factors，它就是因子本身的取值）。此外，由无套利定价公式可知：
+
+将 SDF 的定义套入上式并可以通过 GMM（Hansen 1982，见《Generalized method of moments》）来估计参数 b：
+
+由上式可知，估计 SDF 就转化为求解参数 b 的问题，且通过 GMM 来估计 b 等价于使用资产的超额收益 E[R^e] 对资产和因子的协方差 cov(R^e, f) 回归（Cochrane 2005）。
+
+由资产定价原理可知，SDF 和资产的超额收益满足如下关系：
+
+这个看似简单的关系有很多非常重要的 implications。其中之一是只有在 mean-variance frontier 上的资产，上述关系中的等式才成立，且所有 mean-variance frontier 上的资产都和 SDF 完全（负）相关，因此所有这些资产本身也都是完全（正）相关。这种相关性完美的将 SDF 和 mean-variance frontier 上任意资产的收益率联系在一起：
+
+这两个等价关系说明只要找到 mean-variance frontier 上的任意资产，就相当于找到了 SDF，就找到了给其他任何资产定价所需要的信息。用 Cochrane 的话说就是“any mean variance efficient return carries all pricing information”。
+
+而上述性质对估计 SDF 的借鉴意义是什么呢？由数学上的性质可知，mean-variance frontier 上的资产有最大的 Sharpe Ratio，因此只要能够想办法用所有 tradable assets，例如个股或者各种 factor portfolios，来构造 SR 最高的 tangency portfolio，就可以用它来估计 SDF 了。
+
+通过线性代数运算可知，当使用一组 assets 同时作为构造 SDF 的因子以及检验矩条件的资产时，SDF 参数 b 的求解等价于通过这组 assets 求解 mean-variance optimization 的最优权重。因此，一切就连起来了，我们只需要在众多 tradable assets 中以最大化 SR 为目标找出合适的并构造 tangency portfolio 即可，tangency portfolio 的权重就是 SDF 的参数 b。
+
+在求解 tangency portfolio 时，有两个难点需要考虑：（1）选择哪些 assets；（2）如何以获得样本外最高 SR 为目标来求解 MVO 问题。在这方面，Kozak, Nagel, and Santosh (2020) 和 Bryzgalova, Pelger, and Zhu (2020) 分别给出了答案。
+
+在 assets 方面，KNS(2020) 可以大致理解为从大量因子中提取信息来估计 SDF。在最优化方面，由于因子太多导致的过拟合和维数灾难问题，因此该文使用了 elastic net 方法，同时考虑了 ridge regression 和 LASSO 对 variance 进行了 shrinkage。实证研究发现，只有当 SDF 聚合了大量因子的信息之后，它才能比较好的给其他资产定价。这个结果传递出来的含义是能够影响资产预期收益的因子可能有很多。
+
+Bryzgalova, Pelger, and Zhu (2020) 可以认为是 KNS(2020) 的扩展。首先在 assets 方面，BPZ(2020) 以给定的 firm characteristics 为划分依据，通过构建 asset pricing tree 构成了大量的 portfolios，然后从中挑选出最能代表股票收益率截面差异的 portfolios 作为 basis assets。在最优化方面，KNS(2020) 只考虑了对 variance 的 shrinkage，而 BPZ(2020) 额外加入了对 mean 的 shrinkage。整体来看，BPZ(2020) 较 KNS(2020) 使用了更优的 assets 以及更稳健的 MVO，所以取得了更好的效果。
+
+此外，值得一提的是 BPZ(2020) 的 basis portfolios 也可以用来取代传统的 portfolio sort 组合，以作为 test assets 来检验多因子模型或者估计因子溢价。对于这两种场景，test assets 无疑非常重要。当 test assets 不合理的时候，使用 GRS test 一通分析，也仅是能从候选模型中选出能够解释那些 test assets 的，但它这模型本身也未必就怎么样（GRS test 结果和所选用的 test assets 密切相关）。
+
+由于个股的 EIV 问题，传统做法是使用各种变量排序构造的投资组合来做 test assets，但如今我们都知道这么做有很大的问题（Lewellen, Nagel, and Shanken 2010），比如很难考虑变量和收益率的非线性关系，以及这类 test assets 存在很强的 factor structure。而使用 BPZ(2020) 的 basis assets 作为 test assets 则不存在这些问题。
+
+前不久，BPZ(2020) 获得了 2020 年 SFS 北美年会资产定价方面的最佳论文奖。鉴于 RFS 是 SFS 旗下的期刊，估计 BPZ(2020) 也早晚会出现在顶刊上，而通过该文方法构造的全新 test assets 势必会深远影响今后多因子模型检验和因子溢价估计方面的研究。
+
+04
+结语
+
+呼！终于写完了。
+
+下面是“一图胜千言”环节。下图总结了本文所梳理的内容。由于所学和精力有限，肯定还有好多重要贡献被遗漏了，所以也鼓励公众号的小伙伴们自己找起来、读起来。
+
+近年来，在顶刊上发表实证资产定价的文章中，一个明显的趋势是纯实证的越来越少（比如挖掘个 anomaly 之类的），能发出来的也大多使用了独门的数据以及在收集数据时进行了重体力劳动，比如 Linnainmaa and Roberts (2018)，而本文介绍的这类推动理论进展的文章则呈现百家争鸣的局面。毫无疑问，后者才更有生命力，它们为解决实证资产定价里面的各种 big problems 做出了卓越贡献。
+
+展望 2021，我们也希望能从上述重磅文献中精挑一些最经典的，为各位带来更加系统和详尽的解读。
+
+正如今年五月 Review of Financial Studies 发行的特刊 New methods in the cross-section 带给人的惊喜一样，本文所涉及的以及没有涉及的诸多新成果，都让我们对实证资产定价的未来足够期待！
+
+参考文献
+Bryzgalova, S. (2016). Spurious factors in linear asset pricing models. Working paper.
+
+Bryzgalova, S., J. Huang, and C. Julliard (2019). Bayesian solutions for the factor zoo: We just ran two quadrillion models. Working paper.
+
+Bryzgalova, S., M. Pelger, and J. Zhu (2020). Forest through the trees: Building cross-sections of stock returns. Working paper.
+
+Chordia, T., A. Goyal, and J. A. Shanken (2019). Cross-sectional asset pricing with individual stocks: Betas versus characteristics. Working paper.
+
+Cochrane, J. H. (2005). Asset Pricing (Revised Edition). Princeton, NJ: Princeton University Press.
+
+Fama, E. F. and K. R. French (2015). A five-factor asset pricing model. Journal of Financial Economics 116(1), 1 – 22.
+
+Fama, E. F. and K. R. French (2020). Comparing cross-section and time-series factor models. Review of Financial Studies 33(5), 1891 – 1926.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: Empirical tests. Journal of Political Economy 81(3), 607–636.
+
+Fan, J., Y. Liao, and W. Wang (2016). Projected principal component analysis in factor models. Annals of Statistics 44(1), 219 – 254.
+
+Feng, G., S. Giglio, and D. Xiu (2020). Taming the factor zoo: A test of new factors. Journal of Finance 75(3), 1327 – 1370.
+
+Gagliardini, P., E. Ossola, and O. Scaillet (2019). A diagnostic criterion for approximate factor structure. Journal of Econometrics 212(2), 503 – 521.
+
+Giglio, S., Y. Liao, and D. Xiu (2020). Thousands of alpha tests. Review of Financial Studies forthcoming.
+
+Giglio, S. and D. Xiu (2020). Asset pricing with omitted factors. Journal of Political Economy forthcoming.
+
+Gospodinov, N., R. Kan, and C. Robotti (2014). Misspecification-robust inference in linear asset-pricing models with irrelevant risk factors. Review of Financial Studies 27(7), 2139 – 2170.
+
+Hansen, L. P. (1982). Large sample properties of generalized method of moments estimators. Econometrica 50(4), 1029 – 1054.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: an investment approach. Review of Financial Studies 28(3), 650 – 705.
+
+Jegadeesh, N., J. Noh, K. Pukthuanthong, R. Roll, and J. Wang (2019). Empirical tests of asset pricing models with individual assets: Resolving the errors-in-variables bias in risk premium estimation. Journal of Financial Economics 133(2), 273 – 298.
+
+Kelly, B. T., T. J. Moskowitz, and S. Pruitt (2020). Understanding momentum and reversals. Journal of Financial Economics forthcoming.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2017). Instrumented principal component analysis. Working paper.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kleibergen, F. and Z. Zhan (2018). Identification-robust inference on risk premia of mimicking portfolios of non-traded factors. Journal of Financial Econometrics 16(2), 155 – 190.
+
+Kleibergen, F. and Z. Zhan (2020). Robust inference for consumption-based asset pricing. Journal of Finance 75(1), 507 – 550.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Lettau, M. and M. Pelger (2020a). Factors that fit the time series and cross-section of stocks returns.Review of Financial Studies 33(5), 2274 – 2325.
+
+Lettau, M. and M. Pelger (2020b). Estimating latent asset-pricing factors. Journal of Econometrics 218(1), 1 – 31.
+
+Lewellen, J. (2015). The cross-section of expected stock returns. Critical Finance Review 4, 1 – 44.
+
+Lewellen, J., S. Nagel, and J. Shanken (2010). A skeptical appraisal of asset pricing tests. Journal of Financial Economics 96(2), 175 – 194.
+
+Linnainmaa, J. T. and M. R. Roberts (2018). The history of the cross-section of stock returns. Review of Financial Studies 31(7), 2606 – 2649.
+
+Pukthuanthong, K., R. Roll, and A. Subrahmanyam (2019). A protocol for factor identification. Review of Financial Studies 32(4), 1573 – 1607.
+
+Pukthuanthong, K., R. Roll, J. Wang, and T. Zhang (2020). A tool kit for factor-mimicking portfolios. Working paper.
+
+Shanken, J. (1992). On the estimation of beta-pricing models. Review of Financial Studies 5(1), 1 – 33.
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+川总写量化
+分享量化理论和实证心得

@@ -1,0 +1,29 @@
+# 【110】Beyond simple fund alpha
+
+来源：微信公众号「因子投资」话题·基金（第35篇）
+链接：http://mp.weixin.qq.com/s?__biz=MzUxNzY0NjU3Mw==&mid=2247485978&idx=1&sn=c4ad4f3755cb706cd80bcbc94eecaef7&chksm=f995bb98cee2328edf36bc6c79edc51428a9c3758dc1c053905a0525a4723589bba550170936#rd
+
+好久没写常规推文了。抓紧更新一期。希望短文能对您有所启发。
+Fama-French-Carhart 四因子 alpha 是文献中评估基金能力最为常用、也最为重要的业绩指标。但值得注意的是，四因子 alpha 实际上可能也并不纯粹，其中可能包含有一些与股票特征有关的可预测的部分。这部分收益反映的是股票特征（如规模、价值等）对应的预期收益，因此，它们与基金经理的真实能力实际上没有关系。这就使得经典的四因子 alpha 可能并不能最好地反映基金能力，从而可能误导投资者对基金的评判和筛选。
+近年来，有一些研究沿着这个思路展开。本文简要介绍其中两项研究的基本思想和核心发现。
+1. Double-adjusted alpha第一个思路是 double-adjusted alpha。顾名思义，这代表经过两次风险调整之后的基金 alpha。显然，对四因子模型回归，是第一次调整。那第二次风险调整怎么做呢？答案也非常简单，就是经典的 DGTW 特征调整。与提出四因子模型的 Carhart (1997) 同年发表的经典研究 Daniel et al. (1997)（DGTW）提出，依据股票的市值、账面市值比和动量这三个特征（对的，与四因子模型的三个底层特征完全相同）进行三重排序，可以为每只股票找到其对应的基准组合。在此基础上，在每个季度，按照基金持股权重和股票的基准组合收益，可以计算每只基金的基准收益，而基金真实收益与基准收益之差，即为基金经 DGTW 特征调整的收益。当然，更严格来说，DGTW 利用基金和股票数据，将基金业绩分解为了特征选股能力、特征择时能力和风格收益等不同部分，其中，研究关注的重点是特征选股能力。
+四因子 alpha 和 DGTW 特征调整都被大量研究用来评判基金业绩。而 Busse, Jiang and Tang (2021)（BJT）指出，二者包含的信息实际上不冲突，进而提出了 double-adjusted alpha 这一指标用来评判基金能力。这一方法很好地综合了四因子 alpha 和 DGTW 调整。具体来看，分两步进行：
+首先，通过回归，估计基金标准的四因子 alpha；
+然后，用四因子 alpha 对基金持仓权重加权平均的股票特征（市值、账面市值比和动量）截面回归，估计基金的被动四因子 alpha，并将这一被动 alpha 从标准的四因子 alpha 中减掉，便得到了 double-adjusted alpha.
+当然，除了回归法，在第二步中，也可以采取与 DGTW 类似的组合排序法来计算基准收益。略有不同的是，BJT 按照前述基金持股特征直接对基金进行三重排序分组，而非像 DGTW 那样先对股票排序分组、再加权平均至基金层面。在此基础上，计算一只基金的基准（基金）组合的平均四因子 alpha 并将其从该基金的四因子 alpha 中扣除，以得到 double-adjusted alpha（需要计算基准组合的平均四因子 alpha，可能是该文直接对基金进行排序分组的原因）。
+实证分析表明，从指标本身来看，大体上，四因子模型和特征调整各贡献约一半的调整幅度（因子模型的影响略大一点点）。进一步的实证结果表明，依据上述 double-adjusted alpha 来筛选基金，可以获得更好的回报和更好的业绩持续性，总体表现显著优于仅基于四因子模型或 DGTW 的方式对基金业绩进行调整时的结果。
+2. Beta-adjusted alpha另一项研究则以股票市场中的显著异象低风险异象为切入点。低风险异象的一个典型代表是低 beta 异象，即市场 beta 较低的股票可以获得显著更高的 alpha。因此，基金有可能因为集中持有低 beta 股票而获得显著更高的 alpha。为准确评估基金能力，就需要将这部分伪 alpha 剥离掉。
+Irvine, Kim and Ren (2024)（IKM）的研究基于这一思想展开。首先仍然估计基金的月度四因子 alpha。具体来看，通过回归估计基金的四因子 beta，然后将市场 beta 朝全部基金市场 beta 的均值收缩（shrinkage, Vasicek, 1973），进而估计基金当月的四因子 alpha。
+然后对股票进行类似的操作，估计其四因子 beta 和 alpha，其中，市场 beta 仍然朝着截面均值收缩。
+最后是关键的一步：为每只基金构建有着类似市场 beta 的股票基准组合，以剥离低 beta 异象对基金业绩的影响。具体来看，对一只基金，将市场 beta 位于其左右 0.025 个标准差这一小范围内的股票挑选出来，计算其平均 alpha，作为基金业绩的基准。换言之，将前述股票组合的平均 alpha 从基金 alpha 中扣除，即得到该基金的主动 alpha。
+实证结果显示，相比于主动 alpha 最低的基金，主动 alpha 最高的基金月均收益高出 24 bp，四因子 alpha 也高出 17 bp，这一差异在统计上也非常显著。
+此外，非常有趣的是，虽然基金投资者对标准的 alpha 做出显著的反应，但总体而言，投资者也会对主动 alpha 做出显著的反应，表明至少有一部分投资者是非常专业的。进一步分析表明，通常被认为具有更高专业度的机构投资者对主动 alpha 的反应更为强烈，也进一步支持了其体现的投资者专业度。
+3. 结语用四因子模型来对基金业绩进行调整、估计 alpha 来评估基金能力，是已有研究和实践中的常用做法。但随着资产定价文献的发展，研究者和投资者逐渐认识到 alpha 也并不干净，因此，试图从不同角度切入，以得到更加干净、纯粹的 alpha 估计，从而更准确地评判基金能力。
+沿着这一思想，也许还可以开发出很多主动 alpha 的指标帮助选择基金。事实上，这类研究也与【067】遗漏因子、缺失数据与多重检验介绍的 GLX (2020) 关于对冲基金业绩评估的研究有类似之处。本质上，核心问题在于，常用的因子模型在评估基金业绩时，可能存在遗漏变量问题，如果能恰当地将这些因素纳入进来——不管是 ad hoc 的方式还是用数据说话的方式——则有助于更准确地评判基金能力。相信未来还会看到更多相关研究和应用。
+全文完。祝您阅读愉快！
+References:
+Busse, Jeffrey A., Lei Jiang, and Yuehua Tang. "Double-adjusted mutual fund performance." Review of Asset Pricing Studies, 2021, 11(1): 169-208.
+Carhart, Mark M. "On persistence in mutual fund performance." Journal of Finance, 1997, 52(1): 57-82.
+Daniel, Kent, Mark Grinblatt, Sheridan Titman, and Russe Wermers. "Measuring mutual fund performance with characteristic‐based benchmarks." Journal of Finance, 1997, 52(3): 1035-1058.
+Giglio, Stefano, Yuan Liao, and Dacheng Xiu. "Thousands of alpha tests." Review of Financial Studies, 2021, 34(7): 3456-3496.
+Irvine, Paul, Jeong Ho Kim, and Jue Ren. "The beta anomaly and mutual fund performance." Management Science, 2024, 70(1): 143-163.

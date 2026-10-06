@@ -1,0 +1,133 @@
+# 稀疏性幻觉
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/EOl1jcfdYplKVa_KkiF3rA
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://www.pexels.com
+
+未经授权，严禁转载。
+
+摘
+要
+早期实证资产定价研究中存在不合理的稀疏性假设；新时代的资产定价研究需直面高维数挑战。
+
+1
+特设稀疏性
+
+下表列出了过去 30 年学术界针对股票市场提出的主流多因子模型。让我从它们说起。
+
+观察这些模型，能够发现它们的共同之处：每个模型都仅有非常少的因子（3 到 5 个）。如果把所有模型中非重复的因子（不考虑计算方法的差异）都列出来，这 7 个模型总共也就包含了市场、规模、价值、动量、盈利、投资、管理、表现、长周期行为以及短周期行为区区 10 个因子。
+
+它们传递出来的观点是：从不同的动机出发，从这 10 个因子里选 3 到 5 个排列一下就能够很好地解释不同股票预期收益率的截面差异。
+
+真的如此吗？
+
+在过去 30 年中，实证资产定价的研究提出了成百上千个能够预测收益率的变量。比如，[量化投资与机器学习] 公众号整理的因子日历介绍了其中典型的 300+ 个。虽然我们有理由对 factor zoo 充满质疑，但也无法认可区区 10 个因子（甚至更少）能够（很好地）解释和预测资产的预期收益率。
+
+那么，为什么上述主流多因子模型均只包含了不超过 5 个因子呢？要知道，每个模型背后都有一个令人信服的动机（比如 DDM、行为金融学或者 q-theory），很难想象从如此动机推出的模型能够包含太多的因子，否则便难以“自圆其说”。此外，当变量太多的时候，portfolio sort 难以有效构造 factor（比如 q-factor model 里面的三重排序已经是极限了）。
+
+出于这些原因，学者们纷纷在多因子模型中加入了 ad-hoc sparsity（特设稀疏性）。这意味着每个人选择几个因子以及哪些因子，完全是因人（动机）而异的，没有普适性可言（这正是 ad-hoc 的含义）。
+
+然而另一方面，从模型的发展历程来看，我们也能观察出两点：
+
+1. 随着越来越多的 anomalies 被挖出来，多因子模型中因子个数也基本上是随时间递增的，例如 FF3 到 q-factor model 到 FF5 —— 更多的因子才能解释更多的 anomalies；
+
+2. 哪怕因子的个数没有显著增加，但用来构造因子的变量的个数也得到了提升，例如管理和表现两个因子 —— 更多的变量能解释更多的 anomalies。
+
+这两点说明，学术界逐渐意识到越来越多的（而非一只手数得过来的）因子能够帮助解释股票预期收益率。从实证角度，我们再来看另一组佐证。Bryzgalova, Huang, and Julliard (2020) 通过贝叶斯统计研究发现，后验概率最高的多因子模型中均包含了至少数十个因子。从后验概率来看，上表中的这些模型离最优差了“十万八千里”。
+
+所有实证结果都表明，在多因子模型中强加稀疏性假设，从而把定价问题变成低维问题难言合理。希望通过若干 ad-hoc 因子来解释股票预期收益率或者 span 出更大的夏普率平方，仅仅是一种稀疏性幻觉。虽然追求简约模型本身并无不妥，但上述通过特设稀疏性假设提出的多因子模型绝非实证资产定价的未来。
+
+2
+稀疏性幻觉
+
+近日，经济学五大顶刊之一 Econometrica 刊载了一篇文章 Giannone, Lenza, and Primiceri (2021)，研究了大数据时代经济学领域常见的六大类预测问题，而股票收益率的 cross-section 正是其中之一。该文的题目正是稀疏性幻觉（Economic predictions with big data: The illusion of sparsity）。
+
+该文通过两个核心变量来控制模型纳入协变量的概率（probability of inclusion）以及协变量参数被向先验收缩的程度（degree of shrinkage）。后面这个很好理解。当变量太多以后，shrinkage 是防止过拟合的有效手段。通过贝叶斯统计，该文给出了诸多非常有益的定量统计推断。
+
+首先，probability of inclusion 和 degree of shrinkage 正相关。这是符合预期的结果，即变量被纳入的概率越高，收缩的程度也越高（从而防止过拟合）。其次，在五大类问题中（包括我们关心的截面资产定价），probability of inclusion 的取值暗示着稀疏性假设不成立。第三，模型存在巨大的不确定性，协变量之间存在不可忽视的共线性，一些协变量包含了相似的预测性信息。
+
+下图展示了六个问题中每个协变量被纳入模型的概率。我们关心的是标记为 finance 2 的问题，它使用 144 个协变量预测资产收益率的截面差异。从图中不难看出，每个变量都有一定的概率被纳入模型。结合所有协变量的 overall probability of inclusion，可以进一步得出的结论是，在绝大多数问题中，并没有明显的稀疏性模式，每个变量都有一定可能存在于真实的模型之中。
+
+由于巨大的不确定性，为了提高预测结果，更好的做法是同时考虑多个包含不同组协变量的模型并取它们的平均。这个做法对应着机器学习领域的 ensemble methods，比如 boosting、随机森林。
+
+最后，Giannone, Lenza, and Primiceri (2021) 研究了上述发现对样本外预测意味着什么。结论是稀疏性 + 忽视不确定性将造成可预测性的损失。摒弃稀疏性意味着使用更多的协变量，考虑不确定性则意味着取不同模型的平均。反观本文第一节的那些多因子模型，恰恰同时占了稀疏性和忽视不确定性这两条 —— 每个模型都仅考虑有限个且确定的（源自某个动机的）因子。
+
+3
+高维数下的研究挑战
+
+一旦知道了问题，就可以寻求正确的解决方法。既然稀疏性假设并不合理，那么正确的应对就是直面协变量（即用来构造因子的公司特征）的高维数问题。然而，如果在多因子模型 RHS 塞入太多解释变量毫无疑问会对传统计量经济学带来很大的挑战。
+
+在诸多挑战中，如何防止过拟合正是其中之一（直接用历史数据进行 OLS 回归注定不会在样本外有好的结果）。在本文第二节曾提到 Giannone, Lenza, and Primiceri (2021) 的发现之一是 probability of inclusion 和 degree of shrinkage 正相关，即当我们使用更多变量时，就需要对它们施以更高程度的正则化。Kozak, Nagel, and Santosh (2020) 的实证结果也支持这一观点。
+
+假设使用 50 个重要的（且相关性较低的）公司特征构造的 portfolios 来估计 SDF。为了获得样本外更好的预测结果，稀疏性和正则化应该满足怎样的特性呢？下图展示了 Kozak, Nagel, and Santosh (2020) 的发现。
+
+在这个 heat-map 中，颜色越亮（越发黄）的区域对应着越高的样本外预测性。图中的横坐标表示正则化的强度（数值越低强度越高）；纵坐标表示有效协变量的个数（对数轴）。结果清晰地显示出，如果想取得样本外更好的预测结果，模型需要满足以下两点：
+
+1. 包含足够多的协变量（即稀疏性假设不成立）；
+
+2. 施加必要的正则化。
+
+上述结果和 Giannone, Lenza, and Primiceri (2021) 的结论一致。该实证证据是否意味着学术界寻找简约多因子模型的执着也是枉然呢？答案也并不是否定的。当然，在关于稀疏性假设不成立的如此广泛的实证证据下，我们不应再指望人为指定有限个公司特征来构造模型，但是通过统计手段依然可以在不损失预测信息的前提下构造简约模型。PCA 就是方法之一。
+
+回到上面的例子，对 50 个公司特征 portfolios 做 PCA 得到 50 个主成分（PC portfolios），并用它们代替原始 portfolios 来估计 SDF。下图展示了样本外预测性的实证结果。从结果可以看出，此时我们依然需要必要的正则化，但是和前面的结果相比，图中亮黄色的区域覆盖了仅有少数有效变量的情况。这意味着，只需要通过有限几个主成分就能够获得足够的样本外预测性，因而实现了模型的简约性。
+
+这一结果和 Kelly, Pruitt, and Su (2019) 的工具变量 PCA 不谋而合。该文对比了 IPCA 因子和 FF5 + MOM 六因子模型。无论是 span 出来的最大夏普率平方，还是非条件或条件定价误差，IPCA 多因子模型都远胜 FF5 + MOM 六因子模型。
+
+PCA 的成功可以归结为两点：（1）Kozak, Nagel, and Santosh (2018) 指出能够解释截面预期收益率差异的因子必须和资产收益率的协方差矩阵密切相关 —— 这为近几年来基于 PCA 方法的研究奠定了坚实的基础；（2）PCA 有效的将大量公司特征代表的预测性信息降维到有限几个因子之中（而非出于某种动机人为的选择几个变量）。这两点缺一不可。
+
+本节的讨论说明，未来的实证资产定价应放弃稀疏性幻觉，并致力于解决如何从大量潜在高度相关但却都对预测收益率有帮助的协变量之中提取预测性信息，以期使得投资组合在样本外获得更优异的风险收益特征。这正是高维数下的研究挑战。在这方面，机器学习算法也许比传统计量经济学手段更有前景。Giglio, Kelly, and Xiu (2021) 梳理了近年来机器学习、资产定价以及因子模型方面的进展，勾勒了研究的蓝图。
+
+然而有必要指出的是，off-the-shelf 机器学习算法本身不太可能在金融领域取得成功；在使用机器学习算法的过程中，通过必要的手段注入金融学先验对于其发挥最大作用至关重要。（明年公众号将会介绍更多这方面的前沿进展。）此外，在高维环境中，由于 investor high-dimensional learning 引入的样本内虚假可预测性也是需要在研究中面对和解决的难题（Martin and Nagel 2021）。
+
+最后，让我以 Giannone, Lenza, and Primiceri (2021) 的结论结束本文。
+
+In economics, there is no theoretical argument suggesting that predictive models should in general include only a handful of predictors. … The empirical support for low-dimensional models is generally weak. Even when it appears stronger, economic data are not informative enough to uniquely identify the relevant predictors when a large pool of variables is available to the researcher.
+
+参考文献
+Bryzgalova, S., J. Huang, and C. Julliard (2020). Bayesian solutions for the factor zoo: We just run two quadrillion models. Working paper.
+
+Giannone, D., M. Lenza, and G. E. Primiceri (2021). Economic predictions with big data: The illusion of sparsity. Econometrica 89(5), 2409 – 2437.
+
+Giglio, S., B. T. Kelly, and D. Xiu (2021). Factor models, machine learning, and asset pricing. Working paper.
+
+Kelly, B. T., S. Pruitt, and Y. Su (2019). Characteristics are covariances: A unified model of risk and return. Journal of Financial Economics 134(3), 501 – 524.
+
+Kozak, S., S. Nagel, and S. Santosh (2018). Interpreting factor models. Journal of Finance 73(3), 1183 – 1223.
+
+Kozak, S., S. Nagel, and S. Santosh (2020). Shrinking the cross-section. Journal of Financial Economics 135(2), 271 – 292.
+
+Martin, I. and S. Nagel (2021). Market efficiency in the age of big data. Journal of Financial Economics forthcoming.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
+
+川总写量化
+
+分享量化理论和实证心得
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+[表]
+模型 | 出处 | 所含因子 | 
+Fama-French 三因子 | Fama and French (1993) | 市场、规模、价值 | 
+Carhart 四因子 | Carhart (1997) | 市场、规模、价值、动量 $ ^{①} $ | 
+Novy-Marx 四因子 | Novy-Marx (2013) | 市场、价值、动量、盈利 | 
+Fama-French 五因子 | Fama and French (2015) | 市场、规模、价值、盈利、投资 | 
+Hou-Xue-Zhang 四因子 | Hou et al. (2015) | 市场、规模、盈利、投资 | 
+Stambaugh-Yuan 四因子 | Stambaugh and Yuan (2017) | 市场、规模、管理、表现 | 
+Daniel-Hirshleifer-Sun 三因子 | Daniel et al. (2020) | 市场、长周期行为、短周期行为 |
+动量因子实际上是代表股票之间相对强弱的截面动量，但通常当学术界提到这个因子的时候并不会特别加上“截面”二字。因此，依照惯例，本书也简称它为动量因子。
+外·《因子投资·方法与实践》
+--- 图3 ---
+Finance 2
+Micro 2
+FIGURE 5.—Heat map of the probabilities of inclusion of each predictor.
+--- 图4 ---
+处：Kozak, Nagel, and Santosh (2020)
+--- 图5 ---
+处：Kozak, Nagel, and Santosh (2020)
+--- 图6 ---

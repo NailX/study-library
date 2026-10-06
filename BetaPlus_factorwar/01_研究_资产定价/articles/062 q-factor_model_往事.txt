@@ -1,0 +1,436 @@
+# q-factor model 往事
+
+来源：01_研究_资产定价
+链接：https://mp.weixin.qq.com/s/9jnriU4CF0dlTjCMSdIkvg
+
+作者：石川，北京量信投资管理有限公司创始合伙人，清华大学学士、硕士，麻省理工学院博士。
+
+封面来源：https://medium.com
+
+未经授权，严禁转载。
+
+感谢刀疤连对本文实证数据的大力支持；感谢刀疤连和刘洋溢博士在本文写作中提出的中肯意见。
+
+摘
+要
+本文试图一瞥学术界的一段尘封往事。
+
+01
+Journal of Finance, Vol. 65(2), 563 – 594
+
+2009 年底，一篇来自华人教授陈龙和张橹的文章编辑完毕，即将刊发于金融学顶刊 Journal of Finance 2010 年 4 月的第 65 卷、第 2 期（Vol. 65, No. 2）。这篇文章的题目是 A Better Three-Factor Model That Explains More Anomalies，它从 q-theory 理论出发提出了投资和盈利两个因子，加上市场因子构建了一个新的三因子模型，直接对标了 Fama and French (1993) 的三因子模型（下文记为 FF3）。
+
+遗憾的是，该文最终并没有按计划出现在这期的 Journal of Finance 中。下图是发表于该期杂志的全部文章，我们无法从中找到它的身影。
+
+这篇文章之所以没有如期刊发，是因为它在最后一刻被撤稿。
+
+02
+撤稿
+
+是什么原因让即将刊发于金融学顶刊的文章被撤稿呢？2016 年，张橹教授在清华金融评论上撰文介绍 q-theory factor model 时谈及了这段历史（Zhang 2016）：
+
+“ 不幸的是那一稿和之前的几稿中，盈利因子的建造程序有失误。
+”
+从上述只言片语的描述可以猜测，构造程序有失误可能是使用了错误的财务指标或者是使用了未来数据（知乎用户 @童话李 介绍过这段往事，他指出错误是使用了未来数据）。为了搞清楚背后的原因，我查阅了相关公开可得资料，尽最大可能的得到了一些推断。本小节的余下部分就来陈述我的推断，但它依然只是 educated guess。
+
+从 Zhang (2016) 的描述可知，这篇在 Journal of Finance 上夭折的文章是之后 2015 年发表于 Review of Financial Studies 的 Hou, Xue, and Zhang (2015) 的前身（以下记为 HXZ）。HXZ 的致谢部分有这么一段话：
+
+这句话给出了两个非常重要的信息。第一个是前面几个版本中存在一个 timing error；第二个是指出这个错误的人是大名鼎鼎的 Robert Novy-Marx。从这个“timing error”可以合理的推断：在盈利指标的构造上，之前 Journal of Finance 的版本出现了数据可得性的问题。
+
+从盈利因子的构造频率来看，也确实存在使用未来数据的风险点。对于盈利因子，无论是 JF 还是 RFS 版本，均是按月频来构建，这和美股 empirical asset pricing 上最常见的以年度频率来构建因子大大不同。为了在月频上更加迅速的捕捉因子的变化，陈、张两位教授在构建盈利因子时使用了粒度更细的季报数据，这可能埋下了 timing error 的隐患。
+
+下面来看看 JF 和 RFS 版本的盈利因子在构造上有何不同。需要插播一句的是，在 JF 版本以及更早的 working paper 版本中，盈利因子的构建使用的是 ROA 指标；而在 2010 年修正了 timing error 之后的版本、以及最终发表于 RFS 的版本中，盈利因子使用了 ROE 指标。无论是 ROA 还是 ROE，作为分子的均是 income before extraordinary items，只是分母有所不同。
+
+首先来看 JF 版本的描述：
+
+再下来是 RFS 版本的描述：
+
+比较上述两个版本不难发现，ROA 使用了最新季度数据中的 earnings 除以上一个季度的 total assets；而 ROE 使用了最新季度数据中的 earnings 除以上一个季度的 book equity。如果 timing error 由分母引起，那么猜测是 ROA 中的 total assets 有问题，而 ROE 中的 book equity 没有问题，这也能合理的解释为什么最终发表在 RFS 上的版本把之前的 ROA 换成了 ROE（否则将 ROA 换成 ROE 则令人不解）。
+
+然而，从构建因子的定义来看，分母用的是 last quarter total assets 或 last quarter book equity，已经额外滞后了一期，所以分母出问题的可能并不大。由此可以推断，在最新 earnings 数据（即分子）的处理上，JF 的版本可能存在问题。下面继续沿着 JF 和 RFS 两个版本中 earnings 处理的差异进行分析。
+
+在 JF 的版本中，为了保证数据的可得性，作者使用了四个月的窗口做为滞后期（4-month lag）；而在 RFS 版本中，作者并没有一刀切采用 4-month lag 窗口，而是更精确的使用了 Compustat Quarterly 数据库中 RDQ —— quarterly earnings announcement dates 这个条目，以确保每次可以取到最近一个季报披露出来的 earnings 数据。
+
+从这两种处理方法的比对中可以猜测，一刀切滞后四个月的处理方式可能会有引入未来数据的风险。以下是 Compustat Quarterly 数据的一个示例（包含 4 个公司）。其中 datadate 条目是 fiscal quarter end date，而 rdq 就是上面提到的实际的 earnings announcement dates。
+
+假设不参考 RDQ 条目，而仅仅使用 datadate 这个条目。如果现在是 2006 年 9 月 1 日，为了构建最新的盈利因子，我们使用滞后四个月的盈利数据。对于 ADCT 这个公司，按上述逻辑我们会去抓取 datadate = 20060430 的季报数据。该季报的实际披露日期是 20060531，远在 9 月 1 日之前，因此数据可得性没有问题。
+
+事实上，在上图中的所有季报数据中，每一个 rdq 均在相应 datadate 之后的四个月内，因此采用 4-month lag 似乎没有问题。但是否存在季报未能在四个月内披露的情况呢？ 按照美国 SEC 的规定，上市公司在披露年报（10-K）和季报（10-Q）时，需要满足如下时效性的要求：
+
+可见，上市公司应在 fiscal quarter end date 之后的 40 或 45 天之内披露最新的季报、在 fiscal year end date 之后的 75 天到 90 天之内披露年报，否则将会遭到处罚。如果上市公司均满足这个要求，则上述 4-month lag 的处理方法可以保证数据的可得性。然而凡是都有例外，这就不得不提及另一个概念 —— Non-Timely Filings（未能按时披露）。
+
+当上市公司无法在规定日期内披露季报（或年报），SEC 要求它们进行 Non-Timely Filings 并给出未能及时披露的原因。在公司进行 NT filings 之后，它们将获得额外的 5 天（15 天）进行季报（年报）的披露。Audit Analytics (2014) 一文分析了 2011 年到 2013 年，NYSE，AMEX 以及 NASDAQ 三大交易所的上市公司中针对季报采用 NT filings 的次数，总计高达 201 次。
+
+使用了 NT filings 说明公司季报的审计有一定的问题，无法满足 40（或 45）天的披露截止日期。这意味着这些公司存在延迟披露的风险。那么在这些 NT filings 的公司中，是否均能在额外给予的 5 天内完成披露呢？还是需要更多时间，甚至超过我们关心的四个月（从 fiscal quarter end date 开始算）呢？
+
+针对上图中的例子，Audit Analytics (2014) 进一步给出了这些上市公司采用 NT filings 之后到实际披露日期之间的天数。可以看到，大部分公司在额外给予的 5 天内完成了披露，但仍然有相当多的公司未能完成，而更有不可忽视 70 家公司在 NT filings 之后的 90 天之内都无法完成披露。
+
+统计结果显示，在 2011 年到 2013 年间，有相当一部分公司未能在 fiscal quarter end date 之后的四个月内披露最新的财报。除了 Audit Analytics (2014) 之外，Bartov and Konchitchki (2017) 统计了 2000 年至 2008 年美股上市公司 NT filings 的次数（下表）。虽然我们不知道这些 cases 中 NT filings 到实际披露之间的天数，但它也至少说明延迟披露是十分常见的现象。
+
+延迟披露无疑使 4-month lag 这种处理方式存在使用未来数据风险；而像 RFS 版本中使用 RDQ —— quarterly earnings announcement dates 则可以规避这个问题。
+
+以上就是关于 JF 版本计算盈利因子时 timing error 的猜测。再次重申的是，这仅仅是我的 best educated guess，正确与否未知。如果真实的原因是分母的问题（因此把 ROA 换成了 ROE），那么就请各位把上述梳理当作对 Compustat Quarterly data 和 SEC filings 规则的一个介绍吧（无奈脸）。
+
+在本小节最开始谈到 HXZ 的致谢时，那句话里的第二个重要信息是 Robert Novy-Marx。这篇被撤回的文章在修改后仍然未能刊发于 Journal of Finance，而是遗憾的变成一篇 SSRN 上的 working paper（题目也变成了 An alternative three-factor model），作者也在陈、张两位教授之外加了一位，而加入的这位正是 Robert Novy-Marx（Chen, Novy-Marx, and Zhang 2011）。真奇妙。
+
+有意思的是，2013 年 Novy-Marx 在 Journal of Financial Economics 上发表了他学术生涯迄今为止最重要的一篇文章 The other side of value: the gross profitability premium（Novy-Marx 2013）。Google Scholar 显示，这篇以及上面的 SSRN 是他被引用量最高的两篇文章。Novy-Marx 因盈利因子一战成名。
+
+公允的说，Novy-Marx (2013) 版本的盈利因子使用了更加纯粹（即不容易被操纵）的 gross profit 作为分子，因此它比 ROA 或 ROE 都更加合理。在本文第五小节基于 A 股的实证中也会采用 Novy-Marx (2013) 的盈利因子代替 q-factor model 中的 ROE。实证中的数据采用了《A 股财务数据的整理和使用》介绍的方法、考虑了 announcement date 以满足 Point-in-Time 的要求。
+
+03
+触动了谁的利益？
+
+在学术研究中，出现数据问题其实并不罕见（金融领域有些发表的文章甚至使用了错误的数据、或错误的使用了数据）。对于从 q-theory 引出的这个三因子模型来说，它的价值不应该因盈利因子的构造失误而抹杀。陈、张两位教授也的确在 2010 年 4 月将修改稿继续投到 Journal of Finance（Zhang 2016），然而修改稿最终还是被拒绝了。
+
+盈利因子经改造后依然被 JF 拒绝让人感到十分费解 —— 因为 theoretical contribution 和 empirical evidence 都还在，它绝对够的上 JF 的标准。但为什么最终被拒绝了呢？不禁让人浮想联翩。
+
+在 2010 年之前，除了 CAPM 之外，FF3 是 empirical asset pricing 的“第一范式”（其他主流的多因子定价模型都是在 2010 年之后发表的；例外是 Carhart 1997 的四因子模型，但它也只是在 FF3 的基础上加入了动量因子）。因此，陈、张二位教授从 q-theory 提出的市场、投资和盈利三因子模型无疑是和 FF3 的一次直接 PK。而该文的标题 —— A Better Three-Factor Model That Explains More Anomalies —— 所使用的“better”、“more”这样的词汇也火药味十足。可以想见，它一旦被发表，则有可能撼动 FF3 在 empirical asset pricing 的地位，这将会在学术界引起怎样的轰动。
+
+追溯 q-factor model 的历史不难发现，它最早以 NBER working paper 的形式发表于 2007 年，当时的题目为 Neoclassical factors。在那之后，该文几经修改，题目也跟着发生了变化。在 2009 年 1 月和 4 月的版本中，题目分别为 An equilibrium three-factor model 和 Production-based factors。但无论怎么改动，这些标题均不带有任何感情色彩。为什么 JF 版本的论文会用了这么一个充满火药味的名字呢？
+
+张橹教授在清华金融评论的撰文（Zhang 2016）中指出，他当时极力反对这个名字，无奈一位资深审稿人坚持让他们使用 A Better Three-Factor Model That Explains More Anomalies：
+
+发过学术论文的小伙伴大概都了解，审稿人通常不会大改稿件的标题，顶多是提提“shorten it”之类的意见（好吧，我审稿的时候见到太长的标题会给这个意见）。就算是遇到建议改标题的，但如果作者坚持，那么和 editors 正常沟通一下也还是尽可能不做修改的。但显然，陈、张两位教授受到了这位资深审稿人的巨大压力，无奈之下不得不把题目改成了 A Better Three-Factor Model That Explains More Anomalies。
+
+我无从得知这个“不嫌事儿大”的审稿人到底是谁，但 TA 一定是位举足轻重的大佬，大到陈、张二位教授不得不听。同样根据知乎用户 @童话李 对这段往事的介绍，这个幕后的大佬是研究动量的先驱 Sheridan Titman；Titman 对 UChicago 派并不感冒，因此便建议陈、张二位教授使用这么一个将矛头直指 FF3 的题目。
+
+这个充满火药味的题目对修改稿最终被 JF 拒绝起到了推波助澜的作用。
+
+根据 Zhang (2016) 的介绍，他们于 2010 年 4 月将修改稿被重新投到 JF 之后又经历了长达一年的审稿，却最终于 2011 年 4 月被拒绝。长达一年的重审是非常令人匪夷所思的。因为按照正常的逻辑，既然 theoretical contribution 和 empirical evidence 都在，那么修改后的版本被接受应该不成问题；即使是想要拒绝，也根本没有必要拖到一年之后的 2011 年 4 月。
+
+事实上，自 2006 年到 2011 年间，时任 Journal of Finance editor 的是杜克大学的 Campbell Harvey 教授。在他 2010 年的 editor report 中明确写道该期刊的 turnaround time 非常短（70.1% 的投稿在 70 天内得到了 editorial decisions），极有很少一部分稿件的审稿周期超过 100 天（Harvey 2011）。而最重要的是下面这句：
+
+“ As of December 31, no paper was currently in the review process more than 187 days.
+”
+而这个审稿时间长达 187 天的稿件的 decision time 是 2011 年 1 月 2 日（Harvey 2011），显然也不是张橹教授口中的 2011 年 4 月，因此它应该不是 q-factor model 的修改版。当然，从 editor report 中还是难以明确 turnaround time 的计算口径。因此，如果一篇文章被提交后又被反复的 revise and resubmit，它的 turnaround time 到底从哪次 submit 开始计算未知。所以 q-factor model 修改版的审稿时间在特定的口径下也许仍然满足小于 187 天。但如果真相并非如此，那么这份 editor report 就有刻意掩盖该文长达一年审稿时间之嫌，这将是 Journal of Finance 审稿史上的一个污点。
+
+为什么修改稿会再次经历长达一年的时间却仍然被拒绝呢？这次对修改稿的审稿耽误了这个重要因子模型长达一年的时间（学术界中一年是非常宝贵的）。张橹教授在回忆这段往事时称，这是他学术生涯中的至暗时刻：
+
+“ After the procedure was corrected in the April-2010 draft, the paper limped for one more year at Journal of Finance, and was formally rejected in April 2011. Persisting through the darkest times of my career, I rebuilt my team with Prof. Kewei Hou and Prof. Chen Xue.
+”
+在回答上面那个“为什么又历经一年却被拒”的问题之前，先来看看 q-factor model 的后续发展。重组了 team 的张橹教授和侯恪惟以及薛辰两位教授一起于 2012 年首先以 NBER working paper 的形式重新发布了最新版本，题为 Digesting anomalies: An investment approach。而也是在这个版本中，正式在 q-factor model 中加入了 Size 因子，得到了最终的四因子模型（市场、市值、投资以及盈利）。这篇 working paper 之后又历经两年的严格审稿，最终于 2014 年 8 月被 RFS 接受，并于 2015 年 3 月发表（Hou, Xue, and Zhang 2015）。
+
+历经坎坷，这个全新的从 q-theory 提出的多因子模型终于在顶刊上面世，而它也当仁不让成为 editor's choice 以及 lead article。RFS 的出版商、牛津大学出版社更是以 A new benchmark model for estimating expected stock returns 为题撰文为其造势。
+
+从 2010 年就应该刊发在 Journal of Finance 到几经波折最终于 2015 年刊发在 Review of Financial Studies，不禁令人唏嘘。而更加玄妙的是，在 q-factor model 被耽误的四年中，同样加入投资和盈利的 Fama and French (2015) 五因子模型（以下记为 FF5）被发表了。
+
+HXZ 于 2014 年 8 月被接受、2015 年 3 月被刊载；而同一时期，添加了几乎完全一样的投资和盈利（出发点完全不同，FF5 的出发点是 discounted cash flow 模型）的 FF5 于 2014 年 9 月被接受、2015 年 4 月被刊载。
+
+由于 HXZ 和 FF5 同时期被提出，q-factor model 的影响力显然就没有当年对标 FF3 的那种轰动效果。这一变化造成的直接后果是，FF5 一经发表，自然而然的接过了 FF3 的抢，继续牢牢占据 empirical asset pricing 的“第一范式”。这一点可以从引用数量上得到佐证：截至本文写作时，根据 Google Scholar 的引用数量，FF5 被引用了 2397 次，而 HXZ 只有 934 次，较前者少了一半之多。试想一下，如果 q-factor model 早在 2010 年就被发表，那到今天又是怎样的局面？
+
+我们无从得知 q-factor model 被拖了四年之久是否和学术界相关利益小圈子为 FF5 争取时间有关。我没有查到相关的资料，因此无法判断。感兴趣的小伙伴可以看看知乎 @童话李 的回答（文末参考文献有链接），它对 q-factor model 修改稿被再次投到 Journal of Finance 之后的经历有进一步的介绍（还牵扯出一位重量级利益相关方）。不过我无从考证。
+
+虽然没有找到相关资料，但是从 Zhang (2016) 的表述中，也能看到一些蛛丝马迹；FF5 的提出和 q-factor model 被耽误了四年的时间之间注定有些千丝万缕的关联。
+
+2019 年，Hou et al. (2019) 在 Review of Finance 上发表了一篇题为 Which Factors? 的文章，比较了包括 FF3 和 FF5 在内的学术界主流的多因子模型，也从因子构造上“怼”了 FF5 中的投资因子。从这个事情上也能看出 q-factor model 和 FF5 之间的瓜葛，以及 q-factor model 发明者心中的不忿。下面简要回顾一下。
+
+04
+Factor War
+
+关于 Hou et al. (2019) 是如何“怼”FF5 的投资因子，《从 Factor Zoo 到 Factor War，实证资产定价走向何方?》一文有详细的解读。而如今，当我们了解了 q-factor model 发表背后的艰辛历程后，就更能理解 Hou et al. (2019) 一文。
+
+以下简单回顾下之前那篇文章中 FF5 和 q-factor model 在投资因子上的差异。它们都使用最近一个财年 total assets 的变化率作为因子，但出发点不同：
+
+1. q-factor model 来自投资中的 q-theory，它指出收益率和 past investment 成反比，因此 q-factor model 中使用最近一个财年 total assets 的变化率没有任何问题；
+
+2. FF5 来自 discounted cash flow（DCF）模型出发得出收益率和未来 expected investment 成反比；但 FF5 基于 Fama and French (2006) 的检验结果，采用 past investment —— 即过去一个财年 total assets 的变化率 —— 当作未来 expected investment 的 naïve estimate。
+
+Hou et al. (2019) 的两个核心观点是：
+
+1. DCF 中的 IRR 和未来单期的 expected return 不同。从 valuation theory 出发并将 IRR 换成未来单期预期收益率，则从理论上是可以推导出 expected investment 和 expected return 之间存在正相关（正如同 Fama and French 2006 里的检验结果），而非 FF5 使用 DCF 所隐含的负相关 —— 这是从理论上开炮；
+
+2. 实证结果显示 past investment 并不是 expected investment 的一个很好的代理指标，即 naïve estimate 根本不靠谱 —— 这是从实证上开炮。
+
+结合上述两点，FF5 使用 past investment 构建的投资因子（且该因子有效）其实是阴差阳错的利用了 past investment 和收益率之间的负相关（源自 q-theory）；而非他们从 DCF 推出的 expected investment 和收益率之间的负相关性。
+
+客观的说，关于 expected investment 和 expected return 的关系，q-factor model 比 FF5 更合理。因此，HXZ 从 q-theory 推出的投资因子比 FF5 从 DCF 推出的投资因子在理论上更加站得住脚。
+
+抛开理论上的差异不说，从针对美股的实证结果来看，虽然 FF5 和 q-factor model 使用了同样的历史 total asset 增长率构建投资因子，但由于构建方法不同，q-factor model 中投资因子的溢价也完胜 FF5。这似乎佐证了 q-factor model 背后的 q-theory 能更好的解释 past investment 和 expected return 之间的关系。
+
+05
+FF3 and q-factor models in China
+
+其实，无论是 FF3 中的 SMB、HML，还是 q-factor model 中的投资和盈利；又不管它们在学术界有着怎样的恩怨情仇，它们都帮助我们更好的了解了股票预期收益率在截面上产生差异的原因。
+
+长久以来在 A 股上的实证结果也表明，上述四个风格因子（投资因子稍弱）在大 A 股上是相互补充而非对立的关系。本小节就来用实证结果证明这一点。
+
+以全 A 股（排除金融）为例，按照学术界传统的 2 × 3 double sort 的方法构建这四个风格因子。对于除了 Size 之外的三个因子，采用的指标分别为 book-to-market，total asset growth 以及 gross profitability to total assets（Novy-Marx 2013 版本的盈利因子；如采用 ROA 或 ROE 也能得到类似的结果）。
+
+根据 2 × 3 double sort，Size 因子和其它风格因子（价值、投资和盈利）的构建方法为：
+
+为比较两个因子模型的优劣，首先采用 Gibbons, Ross, and Shanken (1989) Test。结果显示，两组因子互为模型和资产时，作为模型的两个因子均无法解释另外两个作为资产的因子。这说明两个模型均能获得对方无法解释的超额收益。
+
+接下来再通过 Fama and MacBeth (1973) Regression 考察代表这四个风格因子的公司指标能否获得风险溢价。在实证期 2000 年 1 月到 2018 年 12 月内，FM Regression 结果如下。除投资因子外，其他三个因子均能获得显著的风险溢价（市值的风险溢价为负说明小市值公司比大市值公司涨的多）。
+
+因此，q-factor model 在 FF3 的基础上，为我们更好的理解市场做了必要补充。
+
+06
+结语
+
+近年来，从 q-theory 投资理论出发得到的多因子模型 —— q-factor model —— 受到了学术界和业界越来越高的重视。这是以张橹教授为代表的华人学者对 empirical asset pricing 的杰出贡献。关于投资理论的更多解读，感兴趣的小伙伴可参考 [因子动物园] 的《投资效应：Factor War 前传》。
+
+本文以一篇未能刊发在 Journal of Finance 上的文章为引子，介绍了 q-factor model 背后的一段历史；我也在写作过程中深深的感受到了学术创新的艰辛。坦率的说，《从 Factor Zoo 到 Factor War，实证资产定价走向何方?》一文对 q-factor model 和 FF5 的立场，在某些字里行间的表述中没有做到完全中立，我感到颇为不安。因此希望本文能够尽量客观的介绍 q-factor model 背后的故事。
+
+令人欣慰的是，学术界并没有遗忘这篇本应该刊发于 Journal of Finance 的文章、或者对其讳莫如深。John Cochrane 教授（Eugene Fama 的女婿）就在其 Empirical Asset Pricing 课程的网站上的 Production based methods 部分列举了这篇文章，并提供下载。
+
+是金子总会发光的。
+
+2018 年，Hou et al. (2018) 在 q-factor model 的基础上加入了预期投资增长因子，提出了前者的进阶版：q^5 model。针对美股的实证分析显示，q^5 是当下所有主流因子模型中最能够解释 anomalies 的。之后，这几位教授又使用 q^5 解释了历史上的多位价值投资大佬（如巴菲特和格伦布拉特）以及学术界的一些重要因子（如 AQR 的 QMJ 和 Piotroski 的 F-Score）的收益，从 investment theory 的角度对解读格雷厄姆和多德的 Security Analysis 提供了全新的思路。
+
+2019 年，Hou et al. (2019) 这篇题为 Which Factors? 的文章一举获得了 Review of Finance 的 Spangle IQAM Best Paper Prize，表明学术界对 q-factor model 的认可。
+
+风向也许已经悄然发生了转变……
+
+最后，谨以下面这首歌致敬 q-factor model。
+
+参考文献
+Audit Analytics (2014). Non-timely filing: an overview. Available at: https://blog.auditanalytics.com/non-timely-filings-an-overview/.
+
+Bartov, E. and Y. Konchitchki (2017). SEC filings, regulatory deadlines, and capital market consequences. New York University Law and Economics Working Paper, No. 254.
+
+Carhart, M. M. (1997). On Persistence in Mutual Fund Performance. The Journal of Finance, Vol. 52(1), 57 – 82.
+
+Chen, L., R. Novy-Marx, and L. Zhang (2011). An alternative three-Factor model. Available at SSRN: https://ssrn.com/abstract=1418117.
+
+Fama, E. F. and K. R. French (1993). Common risk factors in the returns on stocks and bonds. Journal of Financial Economics, Vol. 33(1), 3 – 56.
+
+Fama, E. F. and K. R. French (2006). Profitability, investment and average returns. Journal of Financial Economics, Vol. 82(3), 491 – 518.
+
+Fama, E. F. and K. R. French (2015). A Five-Factor Asset Pricing Model. Journal of Financial Economics, Vol. 116(1), 1 – 22.
+
+Fama, E. F. and J. D. MacBeth (1973). Risk, return, and equilibrium: empirical tests. Journal of Political Economy, Vol. 81(3), 607 – 636.
+
+Gibbons, M. R., S. A. Ross, and J. Shanken (1989). A test of the efficiency of a given portfolio. Econometrica, Vol. 57(5), 1121 – 1152.
+
+Harvey, C. R. (2011). Report of the editor of the Journal of Finance for the year 2010. The Journal of Finance, Vol. 66(4), 1439 – 1452.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2018). q^5. NBER Working Paper, No. 24709.
+
+Hou, K., H. Mo, C. Xue, and L. Zhang (2019). Which factors? Review of Finance, Vol. 23(1), 1 – 35.
+
+Hou, K., C. Xue, and L. Zhang (2015). Digesting anomalies: an investment approach. The Review of Financial Studies, Vol. 28(3), 650 – 705.
+
+Newey, W. K. and K. D. West (1987). A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. Econometrica, Vol. 55(3), 703 – 708.
+
+Novy-Marx, R. (2013). The other side of value: The gross profitability premium. Journal of Financial Economics, Vol. 108 (1), 1 – 28.
+
+Zhang, L. (2016). Factors war. Tsinghua Financial Review, Vol. 37, 101 – 104, in Chinese.
+
+知乎 @童话李：https://www.zhihu.com/question/29558634/answer/380163042?hb_wx_block=1
+
+免责声明：文章内容不可视为投资意见。市场有风险，入市需谨慎。
+
+【图片文字】
+--- 图1 ---
+观察思辨
+--- 图2 ---
+[表]
+JOFI aptara The Content Transformation Company | jofi&#x27; 1544 | Dispatch: December 17, 2009 | CE: PMS | 
+Journal | MSP No. | No. of pages: 32 |
+THE JOURNAL OF FINANCE • VOL. LXV, NO. 2 • APRIL 2010
+A Better Three-Factor Model That Explains More Anomalies
+LONG CHEN and LU ZHANG $ ^{*} $
+ABSTRACT
+The market factor, an investment factor, and a return-on-assets factor summarize the cross-sectional variation of expected stock returns. The new three-factor model substantially outperforms traditional asset pricing models in explaining anomalies associated with short-term prior returns, financial distress, net stock issues, asset growth, earnings surprises, and valuation ratios. The model's performance, combined with its economic intuition based on q-theory, suggests that it can be used to obtain expected return estimates in practice.
+--- 图3 ---
+The Journal of FINANCE
+Volume 65
+CONTENTS for APRIL 2010
+No.2
+ANNOUNCEMENT OF 2009 SMITH BREEDEN AND BRATTLE GROUP PRIZES ..... v
+MORGAN STANLEY—AMERICAN FINANCE ASSOCIATION AWARD FOR EXCELLENCE IN FINANCE 2010 ..... vi
+ARTICLES
+The Variability of IPO Initial Returns
+MICHELLE LOWRY, MICAH S. OFFICER, and G. WILLIAM SCHWERT ..... 425
+Levered Returns
+JOAO F. GOMES and LUKAS SCHMID ..... 467
+The New Game in Town: Competitive Effects of IPOs
+HUNG-CHIA HSU, ADAM V. REED, and JÖRG ROCHOLL ..... 495
+Financial Structure, Acquisition Opportunities, and Firm Locations
+ANDRES ALMAZAN, ADOLFO DE MOTTA, SHERIDAN TITMAN,
+and VAHAP UYSAL ..... 529
+Taxes on Tax-Exempt Bonds
+ANDREW ANG, VINEER BHANSALI, and YUHANG XING ..... 565
+Do Bonds Span Volatility Risk in the U.S. Treasury Market?
+A Specification Test for Affine Term Structure Models
+TORBEN G. ANDERSEN and LUCA BENZON ..... 603
+Personal Bankruptcy and Credit Market Competition
+ASTRID A. DICK and ANDREAS LEHNERT ..... 655
+Corporate Political Contributions and Stock Returns
+MICHAEL J. COOPER, HUSEYIN GULEN, and ALEXEI V. OVTHINNIKOV ..... 687
+The Interdependent and Intertemporal Nature of Financial Decisions:
+An Application to Cash Flow Sensitivities
+VLADIMIR A. GATCHEV, TODD PULVINO, and VEFA TARHAN ..... 725
+Performance and Persistence in Institutional Investment Management
+JEFFREY A. BUSSE, AMIT GOYAL, and SUNIL WAHAL ..... 765
+MISCELLANEA ..... 791
+--- 图4 ---
+The first draft of this work appeared in October 2012 as NBER working paper 18435. More generally, the paper is a new incarnation of the previous work circulated under various titles, including “Neoclassical factors as NBER working paper 13282, dated July 2007), “An equilibrium three-factor model,” “Production-based factors,” “A better three-factor model that explains more anomalies,” and “An alternative three-factor model. We are extremely grateful to Robert Novy-Marx for identifying a timing error in the empirical analysis of the previous work. Finally, the economic insight that investment and profitability are fundamental forces in the cross section of expected stock returns in investment-based asset pricing first appeared in NBER working paper 11322.出处: Hou, Xue, and Zhang (2015)
+--- 图5 ---
+A Better Three-Factor Model
+575
+We measure ROA as income before extraordinary items (Compustat quarterly item 8) divided by last quarter's total assets (item 44). Each month from January 1972 to December 2006, we categorize NYSE, Amex, and NASDAQ stocks into three groups based on the breakpoints for the low 30%, middle 40%, and high 30% of the ranked values of quarterly ROA from 4 months ago. We impose the 4-month lag to ensure that the required accounting information is known before forming the portfolios. The choice of the 4-month lag is conservative: using shorter lags only strengthens our results. We also use the NYSE median each month to split NYSE, Amex, and NASDAQ stocks into two groups. We form six portfolios from the intersections of the two size and three ROA groups. Monthly value-weighted returns on the six portfolios are calculated for the current month, and the portfolios are rebalanced monthly. Meant to mimic the common variation in returns related to firm-level ROA, the ROA factor is the difference (high-minus-low), each month, between the simple average of the returns on the two high-ROA portfolios and the simple average of the returns on the two low-ROA portfolios.
+--- 图6 ---
+[表]
+In addition, independently, at the beginning of each month, we sort all stocks into 3 groups based on the NYSE breakpoints for the low 30%, middle 40%, and high 30% of the ranked values of ROE. Earnings data in Compustat quarterly files are used in the months immediately after the most recent public quarterly earnings announcement dates (Compustat quarterly item RDQ). For example, if the earnings for the fourth fiscal quarter of year  $ t-1 $ are publicly announced on March 5 (or March 25) of year  $ t $, we use the announced earnings (divided by the book equity from the third quarter of year  $ t-1 $) to form portfolios at the beginning of April of year  $ t $. In addition, for a firm to enter the factor construction, we require the end of the fiscal quarter that corresponds to its most recently announced quarterly earnings to be within 6 months prior to the portfolio formation. We impose this restriction to exclude stale earnings. |
+--- 图7 ---
+The SAS System
+[表]
+Obs | gvkey | datadate | fyearq | indfmt | consol | popsrc | datafmt | tic | cusip | rdq | DLTTQ | co_gvkey | fyear | SICH | 
+1 | 001013 | 20060131 | 2006 | INDL | C | D | STD | ADCT | 000886309 | 20060301 | 400.0000 | 001013 | 2006 | 3661 | 
+2 | 001013 | 20060430 | 2006 | INDL | C | D | STD | ADCT | 000886309 | 20060531 | 400.0000 | 001013 | 2006 | 3661 | 
+3 | 001013 | 20060731 | 2006 | INDL | C | D | STD | ADCT | 000886309 | 20060829 | 400.0000 | 001013 | 2006 | 3661 | 
+4 | 001013 | 20061031 | 2006 | INDL | C | D | STD | ADCT | 000886309 | 20061212 | 400.0000 | 001013 | 2006 | 3661 | 
+5 | 001021 | 20050930 | 2006 | INDL | C | D | STD | IWKS | 001058205 | 20051114 | 0.0000 | 001021 | 2006 | 3861 | 
+6 | 001021 | 20051231 | 2006 | INDL | C | D | STD | IWKS | 001058205 | 20060214 | 0.0000 | 001021 | 2006 | 3861 | 
+7 | 001021 | 20060331 | 2006 | INDL | C | D | STD | IWKS | 001058205 | 20060515 | 0.0000 | 001021 | 2006 | 3861 | 
+8 | 001021 | 20060630 | 2006 | INDL | C | D | STD | IWKS | 001058205 | 20060915 | 0.0000 | 001021 | 2006 | 3861 | 
+9 | 001050 | 20060331 | 2006 | INDL | C | D | STD | CECE | 125141101 | 20060509 | 6.7150 | 001050 | 2006 | 3564 | 
+10 | 001050 | 20060630 | 2006 | INDL | C | D | STD | CECE | 125141101 | 20060810 | 10.0570 | 001050 | 2006 | 3564 | 
+11 | 001050 | 20060930 | 2006 | INDL | C | D | STD | CECE | 125141101 | 20061108 | 8.7670 | 001050 | 2006 | 3564 | 
+12 | 001050 | 20061231 | 2006 | INDL | C | D | STD | CECE | 125141101 | 20070322 | 14.8720 | 001050 | 2006 | 3564 | 
+13 | 001056 | 20050930 | 2006 | INDL | C | D | STD | ARXX | 007768104 | 20051103 | 4.0880 | 001056 | 2006 | 3825 | 
+14 | 001056 | 20051231 | 2006 | INDL | C | D | STD | ARXX | 007768104 | 20060207 | 4.0040 | 001056 | 2006 | 3825 | 
+15 | 001056 | 20060331 | 2006 | INDL | C | D | STD | ARXX | 007768104 | 20060510 | 3.9230 | 001056 | 2006 | 3825 |
+--- 图8 ---
+[表]
+Category of Filer | Revised Deadlines For Filing Periodic Reports | 
+Form 10-K Deadline | Form 10-Q Deadline | 
+Large Accelerated Filer ($700MM or more) | 75 days for fiscal years ending before December 15, 2006 and 60 days for fiscal years ending on or after December 15, 2006 | 40 days | 
+Accelerated Filer ($75MM or more and less than $700MM) | 75 days | 40 days | 
+Non-accelerated Filer (less than $75MM) | 90 days | 45 days |
+--- 图9 ---
+FREQUENCY
+10
+20
+30
+40
+50
+60
+Accelerated and Large-Accelerated NT 10-Q Filings 2011-2013
+Note: Based on an analysis of NT 10-Qs filed by Accelerated and Large-Accelerated filers listed on a major index (NYSE, AMEX, or NASDAQ). Filates of NT 10-Qs between 1/1/11 and 12/31/13.
+Source: www.AuditAnalytics.com 508.476.7007 info@auditanalytics.com
+--- 图10 ---
+Accelerated and Large-Accelerated NT 10-Q Filings 2011-2013
+Vote: Based on an analysis of NT 10-Qs filed by Accelerated and Large-Accelerated filers listed on a major index (NYSE, AMEX, or NASDAQ). Filates of NT 10-Qs between 1/1/11 and 12/31/13.
+Source: www.AuditAnalytics.com 508.476.7007 info@auditanalytics.com
+--- 图11 ---
+Panel B: Distribution by Year, NT Form Type, and Reason for Delay
+[表]
+Year | Total | NT Form Type | Reason Group | 
+10-Q | 10-K | Uncertain | Accounting | Corporate Events | Multiple | 
+2000 | 425 | 255 | 170 | 181 | 65 | 111 | 68 | 
+2001 | 189 | 95 | 94 | 57 | 60 | 42 | 30 | 
+2002 | 175 | 92 | 83 | 41 | 95 | 23 | 16 | 
+2003 | 165 | 79 | 86 | 47 | 78 | 19 | 21 | 
+2004 | 378 | 122 | 256 | 45 | 261 | 26 | 46 | 
+2005 | 313 | 153 | 160 | 60 | 196 | 29 | 28 | 
+2006 | 233 | 132 | 101 | 28 | 162 | 16 | 27 | 
+2007 | 137 | 74 | 63 | 35 | 72 | 16 | 14 | 
+2008 | 100 | 46 | 54 | 27 | 40 | 20 | 13 | 
+Total | 2,115 | 1,048 | 1,067 | 521 | 1,029 | 302 | 263 | 
+10-Q |  |  |  | 298 | 474 | 178 | 98 | 
+10-K |  |  |  | 223 | 555 | 124 | 165 |
+出处：Bartov and Konchitchki (2017)
+--- 图12 ---
+An Alternative Three-Factor Model
+32 Pages Posted: 19 May 2010 Last revised: 21 Jan 2014
+Long Chen
+Luohan Academy; Cheung Kong Graduate School of Business
+Robert Novy-Marx
+Simon Business School, University of Rochester; National Bureau of Economic Research (NBER)
+Lu Zhang, 张橹
+Ohio State University - Fisher College of Business; National Bureau of Economic Research (NBER)
+Date Written: April 2011
+Abstract
+A new factor model consisting of the market factor, an investment factor, and a return-on-equity factor is a good start to understanding the cross-section of expected stock returns. Firms will invest a lot when their profitability is high and the cost of capital is low. As such, controlling for profitability, investment should be negatively correlated with expected returns, and controlling for investment, profitability should be positively correlated with expected returns. The new three-factor model reduces the magnitude of the abnormal returns of a wide range of anomalies-based trading strategies, often to insignificance. The model's performance, combined with its economic intuition, suggests that it can be used to obtain expected return estimates in practice.
+Keywords: Anomalies, Alphas, Factor Regressions, Asset Pricing Tests
+EL Classification: F44 G10 G14
+--- 图13 ---
+Robert Novy-Marx
+Lori and Alan S. Zekelman Distinguished Professor of Business Administration, Simon Graduate School
+Verified email at simon.rochester.edu - Homepage
+Asset Pricing Finance Public Finance Real Estate Industrial Organization
+[表]
+TITLE | CITED BY | YEAR | 
+The other side of value: The gross profitability premium\nR Novy-Marx\nJournal of Financial Economics 108 (1), 1-28 | 1147 | 2013 | 
+An alternative three-factor model\nL Chen, R Novy-Marx\nAvailable at SSRN 1418117 | 425 | 2011 | 
+Public Pension Promises: How Big Are They and What Are They Worth?\nR Novy-Marx, J Rauh\nThe Journal of Finance 66 (4), 1211-1249 | 346 | 2011 | 
+Is momentum really momentum?\nR Novy-Marx\nJournal of Financial Economics 103 (3), 429-453 | 332 | 201 |
+--- 图14 ---
+切面的主导因子。之后每一稿的标题都在变化，原因是在极力避免2009年6月稿的标题（一位资深审稿人在《金融期刊》Journal of Finance 再三敦促我用《一个更好的能解释更多异常现象的三因子模型》作为标题）。不幸的是那一稿和出处：Zhang (2016)
+--- 图15 ---
+A five-factor asset pricing model $ ^{*} $
+Eugene F. Fama $ ^{a} $, Kenneth R. French $ ^{b,*} $
+Booth School of Business, University of Chicago, USA
+Tuck School of Business, Dartmouth College, Hanover, NH 03750, USA
+ARTICLE INFO
+Article history:
+Received 12 May 2014
+Received in revised form
+13 August 2014
+Accepted 11 September 2014
+Available online 29 October 2014
+EL classification: G12
+Keywords:
+Asset pricing model
+Factor model
+Dividend discount model
+Profitability
+Investment
+ABSTRACT
+A five-factor model directed at capturing the size, value, profitability, and investment patterns in average stock returns performs better than the three-factor model of Fama and French (FF, 1993). The five-factor model's main problem is its failure to capture the low average returns on small stocks whose returns behave like those of firms that invest a lot despite low profitability. The model's performance is not sensitive to the way its factors are defined. With the addition of profitability and investment factors, the value factor of the FF three-factor model becomes redundant for describing average returns in the sample we examine.
+© 2014 Elsevier B.V. All rights reserved
+--- 图16 ---
+Fama-French起初于2013年6月提出一个四因子模型，把一个盈利因子加入他们的三因子模型。在当年11月又将一个投资因子加到四因子模型中，而得出了现在的五因子模型，与我们的q-因子模型抗衡。在学术界有句俗话，写好论文需要站在巨人肩膀上。 $ \underline{\text{我常在博士生面前自嘲，说Fama-French五因子模型是巨人站在了我们的肩膀上，还差点没给我压死。}} $
+出处：Zhang (2016)
+
+--- 图18 ---
+$$ \begin{array}{r l r}{?}&{=}&{\frac{1}{3}(S/T+S/M+S/B)-\frac{1}{3}(B/T+B/M+E}\\ {\mathrm{e}}&{=}&{\frac{1}{3}(S/T+B/T)-\frac{1}{3}(S/B+B/B)\mathrm{,}}\end{array} $$
+--- 图19 ---
+GRS F-statistics (p-value)
+[表]
+ | assets | 
+ | SMB, HML | 投资、盈利 | 
+model | SMB, HML | $ 58.59 (1.89 \times 10^{-13}) $ | 
+投资、盈利 | $ 70.53 (4.44 \times 10^{-16}) $ |
+--- 图20 ---
+月频 Fama and MacBeth (1973) Regression 结果。四个指标分别为对数市值、BM、Gross Profit-to-Total Assets 以及 Total Assets Growth。每一期，在截面上进行左、右各 2% 的缩尾处理，并进行标准化。Standard errors 经 Newey and West (1987) 调整。
+[表]
+ | mean (%) | standard error (%) | t-statistic | 
+Ln(MktCap) | -0.7225 | 0.1596 | -4.5276 | 
+Book-to-Market | 0.4839 | 0.0919 | 5.2665 | 
+Gross Profit-to-Total Assets | 0.3074 | 0.0729 | 4.2174 | 
+Total Assets Growth | 0.0706 | 0.0597 | 1.1828 |
+--- 图21 ---
+Production based and investment models.
+Cochrane, John H., Financial Markets and the Real Economy p. 290-302
+Cochrane, John H., Production-Based Asset Pricing and the Link Between Stock Returns and Economic Fluctuations. Journal of Finance 46 (1) (March 1991) 209-237.
+Laura Xiaolei Liu, Toni M. Whited, and Lu Zhang, 2009, Investment-Based Expected Stock Returns, Journal of Political Economy 117(6) Dec 1105-1139.
+rence: I will discuss in class some results from the following
+Cochrane, John H. "A Cross-Sectional Test of an Investment-Based Asset Pricing Model" Journal of Political Economics 104 (June 1996)
+Cochrane, John H. "Rethinking Production Under Uncertainty" 1993.
+Cochrane, John H. "Production-Based Asset Pricing" 1988. NBER working paper 2776.
+Li, Erica X. N., Dmitry Livdan and Lu Zhang, 2008, Anomalies, Review of Financial Studies 22 (11), 4301-4334
+Chen, Long, and Lu Zhang, 2010, "A Better Three-Factor Model That Explains More Anomalies" Journal of Finance 65(2) April
+Belo, Federico, 2009, Production-Based Measures of Risk for Asset Pricing, Forthcoming, Journal of Monetary Economics
+Lermann, Urbann, 2009, "The Equity Premium Implied by Production," Manuscript Wharton School
+--- 图22 ---
+Review of
+Finance
+SPANOLER
+IOAM INVEST
+2019 Spängler IQAM
+Best Paper Prize
+for the best investments paper published in the Review of Finance
+Which Factors?
+by
+Kewei Hou
+Haitao Mo
+Chen Xue
+Lu Zhang
+--- 图23 ---
+分享量化理论和实证心得
+☐
+免责声明：
+文章内容不可视为投资意见。资本市场有风险，入市投资需谨慎。

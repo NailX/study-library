@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>精读笔记 · Value Investing 三支柱估值法</title>
+<style>
+:root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e9ef;--dim:#8b93a7;--accent:#5b8def;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:24px;margin:0 0 6px;font-weight:650}
+h2{font-size:19px;margin:36px 0 13px;padding-bottom:8px;border-bottom:2px solid var(--line);font-weight:620}
+h3{font-size:16px;margin:24px 0 10px;color:#a9c4f5;font-weight:600}
+p{margin:10px 0;color:#d3d8e3}
+strong{color:#fff}
+em{color:var(--gold);font-style:normal;border-bottom:1px dashed rgba(255,209,102,.4)}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:#9fd0a0;font-family:ui-monospace,Consolas,monospace}
+pre{background:#12151b;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#c6d4e6;font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap}
+blockquote{margin:14px 0;padding:11px 18px;background:rgba(91,141,239,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:#b9c6da}
+ul{margin:10px 0;padding-left:22px}
+li{margin:5px 0;color:#d3d8e3}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:var(--panel);padding:9px 12px;text-align:left;border:1px solid var(--line);color:#a9c4f5;font-weight:600;font-size:13px}
+td{padding:9px 12px;border:1px solid var(--line);color:#d3d8e3;vertical-align:top}
+tr:hover td{background:rgba(91,141,239,.05)}
+</style></head><body><div class="wrap">
+<h1>精读笔记 · 《Value Investing: From Graham to Buffett and Beyond》</h1>
+<blockquote>Bruce C. Greenwald 等 · 哥大商学院价值投资课程教材（第二版）</blockquote>
+<blockquote>源文本：<code>z-lib_文本版/Value investing from Graham to Buffett and beyond.pdf.txt</code>（461页 / 108万字）</blockquote>
+<blockquote>本笔记覆盖核心章节：Ch3 估值原理 → Ch4 资产价值 → Ch5 EPV → Ch6-8 增长与特许权 → Ch10 风险与组合</blockquote>
+<hr>
+<h2>一、这本书解决什么问题</h2>
+<p>主流估值（DCF）把<strong>资产、盈利、增长</strong>揉进一个 NPV 公式里，结果是：终值假设一变，估值天差地别，&quot;garbage in, gospel out&quot;。</p>
+<p>Greenwald 的核心主张：<strong>把价值的三个来源拆开算、独立验证，从最可靠到最不可靠排序</strong>——</p>
+<pre>
+可靠性从高到低：
+资产价值  &gt;  盈利能力价值 EPV  &gt;  增长价值
+（看得见）    （可正常化验证）      （最依赖假设）
+</pre>
+<blockquote>原文：&quot;The distinctiveness of the Graham and Dodd approach to valuation is to address these three elements of value <strong>separately</strong>, not to integrate them into a single ratio or NPV calculation.&quot;</blockquote>
+<hr>
+<h2>二、三支柱框架（全书的心脏）</h2>
+<h3>Figure 3.1 — 三要素</h3>
+<table>
+<tr><th>支柱</th><th>定义</th><th>何时用</th></tr>
+<tr><td><strong>① 资产价值</strong> AV</td><td>持续经营企业 = <strong>净资产重置成本</strong>；不可持续 = <strong>清算价值</strong></td><td>重资产、周期底部、困境反转</td></tr>
+<tr><td><strong>② 盈利能力价值</strong> EPV</td><td>可持续的<strong>正常化盈利 ÷ 资本成本</strong>（不加增长！）</td><td>所有企业的基准估值</td></tr>
+<tr><td><strong>③ 增长价值</strong> GV</td><td>只有<strong>特许经营权</strong>下的增长才创造价值</td><td>有护城河的成长股</td></tr>
+</table>
+<h3>Figure 3.2 — AV vs EPV 的三种情形（估值诊断图）</h3>
+<pre>
+情形A: AV &gt; EPV      → 资产比赚钱能力值钱
+         └  either 资产高估（该用清算价值？）
+         └  or 管理层经营不善（价值毁灭者）
+
+情形B: AV ≈ EPV     → 完美竞争行业（±12%以内）
+         └ ROE ≈ 资本成本，无护城河
+         └ 增长不创造价值 → 别为增长付溢价
+
+情形C: EPV &gt; AV     → ★ 存在特许经营权（franchise）
+         └ 赚的超出了资产重置成本 = 有进入壁垒
+         └ 此时增长才有价值，才进入第三步估值
+</pre>
+<blockquote>Magna 案例实证：十年平均 ROE 10.4% ≈ 估计股权成本 10% → 判定为情形B，无特许权，<strong>增长价值≈0</strong>。这就是&quot;别给平庸增长付钱&quot;的量化判据。</blockquote>
+<hr>
+<h2>三、支柱① 资产价值：从账面价值到重置成本</h2>
+<p><strong>原则</strong>：账面价值是历史成本，不是价值。要一项项调整为&quot;今天重建这些资产要花多少钱&quot;。</p>
+<h3>科目调整表（原文 Table，Hudson General 案例）</h3>
+<table>
+<tr><th>科目</th><th>调整方法</th></tr>
+<tr><td>应收账款</td><td>加回坏账准备；按实际回款能力调整</td></tr>
+<tr><td>存货</td><td>加回 LIFO 准备；周转过慢的按清算价下调</td></tr>
+<tr><td>递延税项</td><td>折现到现值</td></tr>
+<tr><td>PP&amp;E</td><td>原始成本 + 物价/质量调整（设备按&quot;已用一半寿命&quot;近似，误差约10%）</td></tr>
+<tr><td>商誉</td><td>与产品组合/研发挂钩部分保留</td></tr>
+<tr><td>研发支出</td><td>★ 资本化（会计上费用化了，但它是资产）</td></tr>
+</table>
+<p><strong>设备价格调整示例</strong>：设备寿命 8 年 → 平均年龄 4 年；设备价格年跌 4% → 重置成本 = 原值 × (1-4%)⁴。美国商务部跟踪设备价格指数。</p>
+<p><strong>用途</strong>：</p>
+<ul>
+<li>为情形A（AV&gt;EPV）的资产型公司定价（净 nets、地产、控股公司）</li>
+<li>为困境反转设定&quot;地板价&quot;</li>
+</ul>
+<hr>
+<h2>四、支柱② EPV：盈利能力价值</h2>
+<h3>核心公式</h3>
+<pre>
+EPV = 正常化可持续盈利 ÷ 资本成本 WACC
+
+其中正常化盈利要做四项调整：
+1. 平滑周期性（用穿越周期的平均盈利，别用景气顶/底）
+2. 统一税率（用正常税率，剔除一次性税项——Magna 案例：
+   2008年报表PE 31.5倍，正常化后只有 3.5倍！）
+3. 研发费用还原（把当期费用化的研发加回利润，再摊销）
+4. 经营租赁负债化（租金→利息+折旧）
+</pre>
+<h3>EPV 之上，还要加减&quot;非经营性项目&quot;</h3>
+<pre>
+EPV(整体) = EPV(核心业务) + 多余资产 − 隐蔽负债
+
+多余资产：富余现金、证券组合、参股公司、闲置地产
+隐蔽负债：养老金缺口、环境负债、重组负债
+</pre>
+<blockquote>原文：&quot;To the extent that these extraneous assets can be disposed of without affecting the ongoing functioning of the core businesses, they represent a source of value <strong>in addition</strong> to the value of sustainable earnings.&quot;</blockquote>
+<p><strong>两个铁律</strong>：</p>
+<p>1. EPV <strong>不含任何增长假设</strong>——它回答&quot;这家公司静止不动值多少钱&quot;</p>
+<p>2. 预测新产品的分析师业绩记录极差（random + systematic error），所以增长留到最后单独处理</p>
+<hr>
+<h2>五、支柱③ 增长价值：只有特许权的增长才值钱</h2>
+<h3>增长创造价值的条件（原文逻辑链）</h3>
+<pre>
+增长需要投入现金 → 当期可分现金减少
+所以增长的价值 = 增量回报 vs 资本成本的差额
+
+投入1亿美元增长：
+├ 回报 &gt; 资本成本 → 创造价值 ✓
+├ 回报 = 资本成本 → 白忙（情形B，竞争行业）
+└ 回报 &lt; 资本成本 → 毁灭价值 ✗（情形A，越多增长死得越快）
+</pre>
+<blockquote>原文三种情形的结论：</blockquote>
+<blockquote>- <strong>Case A</strong>：增长是敌人——&quot;growing companies of this kind are worse investments than static or shrinking ones&quot;</blockquote>
+<blockquote>- <strong>Case B</strong>：增长无关紧要——竞争会抹平一切超额回报</blockquote>
+<blockquote>- <strong>Case C</strong>：只有被<strong>进入壁垒保护</strong>的增长（franchise growth）才创造价值</blockquote>
+<h3>特许经营权 = EPV &gt; AV 的差额</h3>
+<pre>
+特许权价值 = EPV − AV   （即超出重置成本的赚钱能力）
+
+护城河来源（Greenwald 版）：
+├ 供给侧：专利/牌照/专有技术（最难持续）
+├ 需求侧：客户锁定（转换成本/习惯/网络效应）★最持久
+└ 规模经济：局部市场规模下固定成本摊薄（有限市场里的巨头）
+</pre>
+<h3>特许权估值三参数（Ch8 + 附录）</h3>
+<pre>
+1. 特许权下的增量 ROIC（区别于存量资产回报率）
+2. 增长可以持续多久 = 特许权&quot;半衰期&quot;（half-life）
+3. Fade rate（衰减率）= 72 ÷ 半衰期
+
+例：半衰期 80 年 → fade ≈ 0.9%/年（可忽略）
+    半衰期 18 年 → fade ≈ 4%/年（严重！科技特许权常见）
+    ★ 半衰期 ≤ 25 年（fade ≥ 3%）必须认真扣减
+</pre>
+<blockquote>Intel/Apple 类科技特许权半衰期可能只有 15-20 年。给科技股做 DCF 却不扣 fade，是系统性高估。</blockquote>
+<h3>回报拆解公式（Ch8 附录，特许权企业估值）</h3>
+<pre>
+特许权企业的总回报 = 三部分之和：
+1. 现金回报：每股增量盈利 × 分红率
+2. 有机增长价值：留存收益的复利
+3. 再投资回报：留存款项主动再投资产生的价值
+</pre>
+<hr>
+<h2>六、四大案例速览（每个案例教一件事）</h2>
+<table>
+<tr><th>案例</th><th>类型</th><th>估值方法</th><th>要点</th></tr>
+<tr><td><strong>Hudson General</strong></td><td>资产富余型</td><td>资产价值法</td><td>拆出非经营资产，核心资产+多余资产分别定价</td></tr>
+<tr><td><strong>Magna International</strong></td><td>周期底部制造</td><td>AV vs EPV 双算</td><td>ROE≈资本成本 → 情形B，增长价值=0；2009年股价=2.24B vs 权益账面7.5B，PE正常化后仅3.5倍</td></tr>
+<tr><td><strong>WD-40</strong></td><td>品牌特许权</td><td>EPV+特许权增长</td><td>25-30%营业利润率、35-42% ROE 的品牌威力；但收购3-in-One/Lava 说明核心产品增长见顶</td></tr>
+<tr><td><strong>Intel</strong></td><td>科技特许权</td><td>特许权回报拆解</td><td>科技特许权半衰期短（15-20年），fade rate 必须入账</td></tr>
+</table>
+<hr>
+<h2>七、安全边际与买入纪律</h2>
+<blockquote>格雷厄姆原文规则（本书重申）：</blockquote>
+<blockquote><strong>安全边际 ≈ 价值的 1/2，最低不低于 1/3</strong></blockquote>
+<pre>
+master recipe（原文）：
+1. 估算证券的基本价值
+2. 与市场报价比较
+3. 价格低于价值足够多 → 买入
+4. 每家后裔（Buffett/Klarman/…）的差异只在：怎么估价值、要多少margin、买多少仓位
+</pre>
+<hr>
+<h2>八、风险与组合构建（Ch10）</h2>
+<h3>风险的正确度量</h3>
+<pre>
+✗ 方差/波动率（Markowitz）—— 两大缺陷：
+   1. 用价格而不是价值 → 价格下跌但价值没变 ≠ 风险
+   2. 对称假设 → 实际收益分布右偏，方差被上行波动主导
+
+✓ 格雷厄姆-多德定义：风险 = 「永久资本损失」
+   的可能性与规模（permanent impairment of capital）
+</pre>
+<h3>组合构建三原则</h3>
+<p>1. <strong>分散度是相对的</strong>：对你是个股集中风险，对满仓单一资产的家族可能只是必要分散——取决于持仓人整体资产负债表</p>
+<p>2. <strong>集中投资在理解+深度研究的标的上</strong>（书中投资者画像：Buffett、Klarman、Schloss、Gabelli、Greenberg 各有风格，共同点是能力圈内下重注）</p>
+<p>3. <strong>风险管理的本质是买入价格</strong>——足够大的 margin of safety 就是全部的风控</p>
+<hr>
+<h2>九、A 股实操检查清单（本书方法落地版）</h2>
+<pre>
+【第一步 · 5分钟诊断】
+□ EPV粗算：正常化净利 ÷ 10% ≈ 核心价值
+□ EPV vs 市值：便宜多少？（margin ≥ 1/3 才看下去）
+□ 多余资产/隐蔽负债：账上现金、理财、股权 vs 商誉暴雷、质押、担保
+
+【第二步 · 定性判型】
+□ 近5-10年 ROE 均值 vs 估计股权成本(8-10%)：
+   ROE ≈ 成本 → 情形B，增长不值钱，就按EPV定价
+   ROE 显著 &gt; 成本 → 情形C，进入特许权分析
+□ 护城河来源：转换成本？规模经济？牌照？
+□ 特许权半衰期：消费品/医药 长；科技 短（fade≥3%要扣）
+
+【第三步 · 交叉验证】
+□ AV（重置成本）兜底：重资产公司地板价是多少？
+□ 管理层资本配置记录：留存收益的 ROIC 历史
+□ 一句话测试：能不能说清&quot;市场错在哪&quot;？说不清就不买
+</pre>
+<hr>
+<h2>十、与现有学习库的衔接</h2>
+<table>
+<tr><th>本书概念</th><th>你库里对应的深化材料</th></tr>
+<tr><td>EPV / 正常化盈利</td><td>马靖昊库「财务指标解读」317篇（盈利质量识别）</td></tr>
+<tr><td>ROE 持续性 / 护城河</td><td>BetaPlus「基本面因子」QMJ质量因子（ROE波动=安全维度）</td></tr>
+<tr><td>fade rate / 增长衰减</td><td>BetaPlus「异象研究」：基本面动量与增长质量</td></tr>
+<tr><td>安全边际 / 周期底部买入</td><td>马克斯《Mastering the Market Cycle》+ 达利欧债务周期</td></tr>
+<tr><td>资本成本估计</td><td>达摩达兰《Investment Valuation》WACC章节（当字典查）</td></tr>
+</table>
+<p><strong>与你壹评级项目的直接接口</strong>：壹评级的 DDM 估值 ≈ 本书的 EPV+增长价值；壹评级的「估值确定性星级」≈ 本书的 margin of safety 判断。可用 AV/EPV 双支柱做交叉验证，识别&quot;现金粉饰型低估&quot;和&quot;少数股东掩盖型&quot;标的。</p>
+<hr>
+<p><em>本笔记基于全书原文精读提炼（引用均出自 z-lib 文本版原文）。书籍观点为作者方法论，不构成投资建议。</em></p>
+</div></body></html>
