@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Big Debt Crises 精读笔记——达利欧债务周期模型</title><style>:root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e9ef;--dim:#8b93a7;--accent:#5b8def;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:24px;margin:0 0 6px;font-weight:650}
+h2{font-size:19px;margin:36px 0 13px;padding-bottom:8px;border-bottom:2px solid var(--line);font-weight:620}
+h3{font-size:16px;margin:24px 0 10px;color:#a9c4f5;font-weight:600}
+p{margin:10px 0;color:#d3d8e3}
+strong{color:#fff}
+em{color:var(--gold);font-style:normal;border-bottom:1px dashed rgba(255,209,102,.4)}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:#9fd0a0;font-family:ui-monospace,Consolas,monospace}
+pre{background:#12151b;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#c6d4e6;font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap}
+blockquote{margin:14px 0;padding:11px 18px;background:rgba(91,141,239,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:#b9c6da}
+ul{margin:10px 0;padding-left:22px}
+li{margin:5px 0;color:#d3d8e3}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:var(--panel);padding:9px 12px;text-align:left;border:1px solid var(--line);color:#a9c4f5;font-weight:600;font-size:13px}
+td{padding:9px 12px;border:1px solid var(--line);color:#d3d8e3;vertical-align:top}
+tr:hover td{background:rgba(91,141,239,.05)}</style></head><body><div class="wrap"><h1>《Big Debt Crises》模型式精读笔记 —— 达利欧债务周期操作手册</h1>
+<blockquote><strong>一句话定位</strong>：这不是历史书，而是一本<strong>债务危机的手术图谱</strong>——达利欧把人类100年间48场大债务危机（实际GDP跌幅&gt;3%）拆解成两条可复制的原型流水线（通缩性/通胀性），每个阶段该看什么指标、政策会怎么出牌、资产会怎么定价，全部写成&quot;如果X则Y&quot;的机械规则。核心命题：<strong>债务危机管理的本质是把坏账的痛苦摊平，只要债务以本币计价，几乎总能摊平</strong>【§In Summary】。</blockquote>
+<p><em>文本版无页码标记，引用以章节名【§】标注；图片OCR素材缺失，原文图表数据以正文数字转述。</em></p>
+<h2>零、阅读地图（本书怎么用）</h2>
+<ul>
+<li><strong>Part 1 模板（全书精华）</strong>：7阶段通缩模板+5阶段通胀模板+政策四杠杆+MP1/2/3传导链，本笔记主体即来源于此。</li>
+<li><strong>Part 2 深案例（3个）</strong>：魏玛德国（通胀性→恶性通胀）、美国1928-37（通缩性+金本位约束）、美国2007-11（现代通缩性），每个按模板逐阶段对照验证——读案例时不断问&quot;这一点对应模板的哪一条&quot;。</li>
+<li><strong>Part 3 案例汇编（48例）</strong>：每例固定格式——泡沫期指标表/萧条期指标表/关键政策时间线，适合做周期信号量化的训练集。</li>
+<li><strong>附录</strong>：美国百年宏观审慎政策史（保证金率Reg T/U、LTV上限Reg X、Reg W消费信贷管制），是&quot;央行为何不控泡沫&quot;的制度史证据。</li>
+</ul>
+<hr>
+<h2>一、全书定位</h2>
+<ul>
+<li><strong>方法</strong>：从48个案例中提炼&quot;原型&quot;（archetype）。通缩性周期取21例平均，通胀性周期取27例平均，从萧条底部前5年追踪至后7年，画出每个阶段的债务/GDP、偿债率、利率、通胀、汇率、股市的<strong>平均路径图</strong>——相当于一张&quot;周期心电图&quot;【§Our Examination of the Cycle】。</li>
+<li><strong>分类逻辑</strong>：债务是否以<strong>本币</strong>计价决定危机类型，外债占比与通胀程度相关性约75%。本币债→通缩性去杠杆（2008美国）；外币债→通胀性去杠杆/货币危机（1997亚洲、魏玛德国）【§The Template】。</li>
+<li><strong>作者立场</strong>：央行只盯通胀和增长、不盯债务增长，是最大政策缺陷；&quot;债务增长是否产生足够收入偿付自身&quot;才是唯一标准【§How I Think about Credit and Debt】。</li>
+</ul>
+<hr>
+<h2>二、债务周期通用模板：通缩性大周期7阶段</h2>
+<p>每个小周期的高点和低点都比上一个<strong>债务/收入比更高</strong>，直到降息空间耗尽（利率触0%），去杠杆开始【§The Template】。</p>
+<table>
+<tr><th>阶段</th><th>特征</th><th>市场信号</th><th>政策应对</th><th>投资含义</th></tr>
+<tr><td><strong>1. 早期（金发姑娘期）</strong></td><td>债务增速≤收入增速，资金用于生产性扩张，资产负债表健康</td><td>增长/通胀/信贷都不冷不热</td><td>无需干预</td><td>顺周期持有风险资产</td></tr>
+<tr><td><strong>2. 泡沫</strong></td><td>债务增速&gt;收入增速，3年内债务/GDP加杠杆约<strong>20–25%</strong>；顶部总债务/收入平均约<strong>300% GDP</strong>；付息 increasingly 靠&quot;借新还息&quot;</td><td>7大泡沫特征（见下）；收益率曲线趋平</td><td>央行落后曲线（只盯通胀，通胀不高就不紧）；宏观审慎工具被忽视</td><td><strong>达利欧式逃顶清单</strong>：价格远超传统估值；价格已计入未来继续暴涨；情绪全面看多；高杠杆融资买入；远期采购异常（囤库存/锁供应）；新散户大量入场；刺激性货币政策反而火上浇油【§Spotting Bubbles】</td></tr>
+<tr><td><strong>3. 顶部</strong></td><td>最脆弱环节先爆雷（风险借款人违约、利差走阔），领先经济见顶约<strong>半年</strong>；紧缩最快点领先股市顶约<strong>5个月</strong>；短利率峰值领先股市顶仅<strong>几个月</strong></td><td>收益率曲线倒挂；信贷利差扩大；抢现金</td><td>央行仍在加息（看不到局部裂缝）</td><td><strong>倒挂+利差走阔=减仓信号</strong>；杠杆越高、价格越高，需要的刺破紧缩越小</td></tr>
+<tr><td><strong>4. 萧条（Depression）</strong></td><td>降息失效（已触0%附近）；违约与重组如雪崩；银行遭挤兑；偿付力问题（资不抵债）与现金流问题（挤兑）并存；财富效应反噬 &gt; 货币政策效力</td><td>21例平均利率急坠至0%；风险资产崩塌、1929-32美股-89%（其间6次反弹16–48%，全部由政策动作触发）</td><td>四杠杆登场（见下节）；初期总是反应不足（政治阻力+&quot;道德风险&quot;顾虑），拖得越久越惨</td><td><strong>抢现金/国债/黄金</strong>；熊市反弹是政策驱动的逃生窗，不是反转</td></tr>
+<tr><td><strong>5. 和谐去杠杆（Beautiful Deleveraging）</strong></td><td>四杠杆配比得当时出现：名义增长率&gt;名义利率，债务负担在<strong>正增长中</strong>下降，通胀可接受</td><td>印钞每年约<strong>4% GDP</strong>；本币对黄金/商品/股票平均初始贬值约<strong>50%</strong>；实物资产、黄金、股票（本币计价）领涨</td><td>央行扩表买低质长久期资产（QE）+ 财政赤字 + 定向注资；关键机构保护、非关键有序倒闭</td><td><strong>股票在&quot;印钞对冲通缩&quot;期是通胀对冲品</strong>：本币计价股票、黄金、商品是主仓位</td></tr>
+<tr><td><strong>6. 推绳子（Pushing on a String）</strong></td><td>MP1/MP2效力耗尽：风险溢价被压平、资产价格到顶、QE边际失效；增长低、资产回报低</td><td>利率0% + 风险溢价极低 + 信贷不扩张</td><td>转向MP3（货币直接进入支出者手里）：直升机撒钱、财政货币化、债务大赦（Jubilee）、中国2008式政策性银行放贷</td><td>现金回报≈0且面临贬值；资产荒 → 做多一切稀缺性资产（黄金/优质股权/核心房产）</td></tr>
+<tr><td><strong>7. 正常化</strong></td><td>实际经济活动恢复至前高需<strong>5–10年</strong>（&quot;失去的十年&quot;）；股价创新高约需<strong>10年</strong>（股权风险溢价长期高企）</td><td>缓慢复苏、资本形成慢</td><td>宏观审慎与监管大改（25年后又逐步被规避，新杠杆形式重演周期）</td><td>复苏早期股票的股权风险溢价最高=股票最便宜</td></tr>
+</table>
+<hr>
+<h2>三、通胀性周期要点（外币债/货币危机，5阶段）</h2>
+<p>前3阶段与通缩性镜像，第4阶段分叉。核心变量从&quot;利率&quot;换成&quot;汇率+资本流动&quot;。</p>
+<table>
+<tr><th>阶段</th><th>平均数值（27例）</th></tr>
+<tr><td>早期/泡沫</td><td>资本流入约<strong>10% GDP</strong>；央行囤外储；实际汇率被高估约<strong>15%</strong>（PPP口径）；股市连涨数年、年均<strong>20%+</strong>；进口&gt;出口、经常账户恶化</td></tr>
+<tr><td>顶部与货币防御</td><td>政策者嘴上说&quot;绝不贬值&quot;直到最后一刻；动用外储+加息+外汇管制</td></tr>
+<tr><td>萧条（弃守货币）</td><td>本币实际贬值首年约<strong>30%</strong>；资本流入12个月内蒸发<strong>&gt;5% GDP</strong>；外资本外逃持续<strong>-3~-5% GDP</strong>；名义短利率飙升约<strong>20个百分点</strong>、曲线倒挂；印钞受限（仅<strong>1–2% GDP</strong>，怕加速资本外逃）；本币股票<strong>约-50%</strong>（外币计价更惨）；通胀升约<strong>15个百分点</strong>、峰值约<strong>30%</strong>、高位持续约<strong>2年</strong>；外币债负担/GDP因贬值再升约<strong>20%</strong></td></tr>
+<tr><td>正常化</td><td>进口萎缩约<strong>10%</strong>；经常账户从<strong>-6%</strong>转<strong>+2% GDP</strong>（约18个月）；短利率约<strong>2年</strong>回到危机前水平；通胀约底部后<strong>2年</strong>正常化</td></tr>
+</table>
+<ul>
+<li><strong>管理要点</strong>：一次性大幅贬值好过渐进阴跌（制造双向市场、扑灭贬值预期）；贬值是<strong>兴奋剂</strong>，像可卡因——短期刺激、滥用致命【§5) Normalization】。</li>
+<li><strong>恶性通胀螺旋</strong>：当外部收支缺口不关闭、持续印钞填外债（魏玛战争赔款），印钞→贬值→资本外逃→再印钞自我强化；工资-物价指数化加速；&quot;持币者转向实物/外币资产，印钞不再刺激增长&quot;是末段特征。魏玛：1921下半年马克跌75%、通胀近100%/年；央行把利率锚在5%而通胀是其10倍→实际利率深度为负→借债投机狂热【§The Emerging Inflationary Spiral】。</li>
+</ul>
+<hr>
+<h2>四、分块详解</h2>
+<h3>4.1 债务周期探测器（比任何单一指标都重要）</h3>
+<blockquote>&quot;任何单一指标都不能预警危机。整体债务/收入或偿债率/收入有用但不充分——<strong>必须穿透平均数，看个体实体的偿债能力</strong>；债务集中在关键实体手中远比分散危险。&quot;【§3) The Top】</blockquote>
+<ul>
+<li><strong>总量层</strong>：债务/GDP（&lt;100%早期；~300%高危）、偿债率（利息+摊销/收入）、新增信贷/GDP（信贷脉冲）。</li>
+<li><strong>结构层（真正的雷区地图）</strong>：</li>
+<li>谁在借？哪些部门（居民/企业/金融/政府）加杠杆最快；</li>
+<li>什么资产被杠杆买贵（2008：住宅/商业房产、私募、低评级信用；1929与日本1989：股票+房产）；</li>
+<li><strong>资产负债错配四形态</strong>：短借长贷；流动性负债配非流动性资产；借钱买高风险资产；借一种货币投另一种货币【§2) The Bubble】；</li>
+<li>影子银行/新金融工具（监管之外的杠杆载体，每次危机都换马甲：CDO→……）。</li>
+<li><strong>资本流动层（通胀性周期）</strong>：经常账户、外储月变化、资本流入/GDP、FX实际汇率 vs PPP。</li>
+<li><strong>分配层</strong>：债务与财富集中度——危机后&quot;从有产者向无产者转移&quot;若不发生，社会革命风险上升【§In Summary】。</li>
+</ul>
+<h3>4.2 政策四杠杆与&quot;和谐去杠杆&quot;的会计条件</h3>
+<p>萧条管理四杠杆：<strong>①紧缩 ②违约/重组 ③债务货币化/印钞 ④财富转移</strong>。前三者通缩、印钞通胀，配比正确=和谐去杠杆【§Managing Depressions】。</p>
+<blockquote><strong>核心不等式</strong>：<code>名义GDP增速 &gt; 名义利率</code> ⇒ 债务/GDP在正增长中自然下降。例：债务=收入=100，利率2%，若收入增速仅1%，一年后债务102/收入101，负担反而加重——<strong>收入增速必须跑赢利率</strong>【§5) The Beautiful Deleveraging】。</blockquote>
+<ul>
+<li>印钞<strong>本身不通胀</strong>：只要印钞量对冲信贷坍缩（&quot;信贷消失由货币创造补足&quot;），1929/2008均实证；</li>
+<li>但总出口一致：<strong>政策者最终都会印</strong>——紧缩痛苦大于收益、大重组摧毁财富太快、转移支付不革命到不了位；</li>
+<li>坏账的数学：极端情形下40%贷款价值损失×占贷款存量20%≈总债务8%≈<strong>GDP的16%</strong>；摊到15年由全社会承担≈每年1%，可承受。<strong>一切取决于是否愿意且能够社会化分摊</strong>【§How I Think about Credit and Debt】；</li>
+<li>管理大萧条的两大障碍不是债务本身，而是<strong>无知</strong>与<strong>无授权</strong>（政治/法律限制）【§Managing Depressions】。</li>
+</ul>
+<h3>4.3 货币政策三段传导（MP1→MP2→MP3）</h3>
+<table>
+<tr><th>层级</th><th>工具</th><th>作用对象</th><th>失效边界</th></tr>
+<tr><td><strong>MP1 利率政策</strong></td><td>升降息</td><td>借款人/支出者，面最广：财富效应+降低月供+减轻偿债</td><td>短利率≈0%</td></tr>
+<tr><td><strong>MP2 QE</strong></td><td>印钞买金融资产（多为债券）</td><td>投资者/储蓄者：压低风险溢价→资产涨→财富效应</td><td>风险溢价已压平、资产价格难再涨；<strong>加剧贫富分化</strong>（钱只到持资产者手里）</td></tr>
+<tr><td><strong>MP3 协同财政/货币</strong></td><td>直升机撒钱、财政赤字货币化、政策性银行直贷（中国2008）、债务大赦</td><td>支出者本人，特别是穷人（边际消费倾向高）</td><td>货币信用受质疑（转向黄金/外币）→通胀性 ugly deleveraging</td></tr>
+</table>
+<ul>
+<li>宏观审慎政策（MP之外）：保证金率（美国Reg T/U历史上逆周期调节）、贷款成数LTV/收入比DTI上限、行业信贷额度——<strong>七阶段全周期可用</strong>，尤其用于&quot;压泡沫部门、托其他部门&quot;【§Appendix: Macroprudential Policies】。</li>
+</ul>
+<h3>4.4 顶部的微观解剖（为什么总是&quot;没想到&quot;）</h3>
+<ul>
+<li>顶部触发多为央行收紧，但杠杆与价格越高，<strong>需要的刺破紧缩越小</strong>；关键是各部门对紧缩的敏感度与损失级联路径，而非总量紧缩幅度【§3) The Top】。</li>
+<li>裂缝出现在最脆弱角落（2007年1月SEC已警告次贷机构商业模式不可持续；3月New Century因&quot;首期违约回购条款&quot;倒闭），但指数与情绪仍在创新高——<strong>&quot;局部裂缝+整体狂欢&quot;是顶部的标准相</strong>。</li>
+<li>常见误判：把下跌初期当作买入机会（&quot;相对过去盈利便宜&quot;），无视盈利即将坍塌；财富效应下修的速度远快于货币政策的对冲速度。</li>
+<li>萧条不是心理现象：&quot;即使所有人失忆醒来，债务义务相对收入的过大依然存在&quot;——这是机械结构问题，不是情绪问题【§4) The Depression】。</li>
+</ul>
+<h3>4.5 和谐去杠杆的&quot;配方&quot;与剂量（21例平均）</h3>
+<ul>
+<li><strong>两轮印钞</strong>：第一轮向承压机构提供流动性（救银行），第二轮大规模资产购买（QE，托经济）。</li>
+<li><strong>初始本币贬值约50%</strong>（对黄金/商品/股票）——通过货币贬值制造正财富效应是配方的必要成分。</li>
+<li>纪律线：刺激量&quot;刚好让名义增速略高于名义利率&quot;——超量则滑向 ugly inflationary deleveraging（魏玛、阿根廷、巴西80年代）。</li>
+<li>金本位/联系汇率是自我加锁：美国1933年弃金、2008年无需解锁直接QE——<strong>货币制度决定政策反应速度，反应速度决定萧条时长</strong>。</li>
+<li>治理分野：救&quot;系统重要性机构&quot;、让非重要机构有序死亡；保护僵尸=日本病。</li>
+</ul>
+<hr>
+<h2>五、案例速览表</h2>
+<table>
+<tr><th>案例</th><th>类型</th><th>触发</th><th>关键政策</th><th>结果与教训</th></tr>
+<tr><td><strong>美国2007–2011</strong></td><td>通缩性（本币债）</td><td>次贷→影子银行挤兑；联储从1%加到5.25%刺破房产泡沫；住房2000-06涨80%+</td><td>快速降息至0→QE1/2→TARP注资→压力测试→2009.6起&quot;和谐去杠杆&quot;</td><td>教科书式漂亮应对（吸取1929教训）；印钞4万亿未引发通胀（对冲信贷坍缩）；Dodd-Frank事后加码监管【§US 2007–2011】</td></tr>
+<tr><td><strong>美国1928–1937</strong></td><td>通缩性</td><td>杠杆买股票；联储紧缩；金本位锁死印钞</td><td>前期失误（紧缩保金汇）→1933罗斯福弃金本位+贬值+存款保险+QE雏形</td><td>弃金挂钩=股市与商品见底、和谐去杠杆起点；1937年过早紧缩致二次探底【§US 1928–1937】</td></tr>
+<tr><td><strong>魏玛德国1918–1924</strong></td><td>通胀性→恶性通胀</td><td>外债（战争赔款）压顶+资本外逃</td><td>先防御后弃守马克；央行把名义利率锚在5%（实际深度为负）火上浇油</td><td>通胀→恶性通胀的完整螺旋样本；&quot;停止印钞=商业停摆&quot;使陷阱无解，最终靠地产抵押马克重置</td></tr>
+<tr><td><strong>日本1990</strong></td><td>通缩性</td><td>股票+房产双泡沫</td><td>政策迟缓、注资不足、保护僵尸银行</td><td>&quot;失去的三十年&quot;=反例：初始货币化太慢太弱</td></tr>
+<tr><td><strong>欧债危机2008–</strong>（希腊/爱尔兰/西班牙等）</td><td>半通胀性（<strong>货币主权缺失</strong>）</td><td>外币（欧元）债约束下的财政-银行 doom loop</td><td>ECB&quot;不惜一切代价&quot;（2012）、OMT、银行联盟</td><td>无本币主权的&quot;准外币债&quot;困境：像魏玛的温和现代版</td></tr>
+<tr><td><strong>1997亚洲</strong>（泰/印尼/韩/马/菲）</td><td>通胀性</td><td>本币资产泡沫+外币债+固定汇率</td><td>弃守汇率、IMF救助</td><td>资本流入12个月内反转&gt;5%GDP、股票-50%、货币-30%的原型复现</td></tr>
+</table>
+<hr>
+<h2>六、纪律数值速查表</h2>
+<table>
+<tr><th>信号</th><th>阈值（48例平均）</th><th>周期位置判定</th></tr>
+<tr><td>泡沫期加杠杆速度</td><td>20–25% GDP / 3年</td><td>阶段2确认</td></tr>
+<tr><td>顶部总债务/收入</td><td>~300% GDP</td><td>阶段3高危</td></tr>
+<tr><td>信用问题领先经济顶</td><td>~6个月</td><td>阶段3早期预警</td></tr>
+<tr><td>紧缩最快点领先股市顶</td><td>~5个月</td><td>减仓窗口</td></tr>
+<tr><td>萧条期印钞强度</td><td>~4% GDP/年（两轮：先救机构后QE）</td><td>阶段4→5转换</td></tr>
+<tr><td>和谐去杠杆汇率动作</td><td>本币对黄金/商品初始贬值~50%</td><td>阶段5确认</td></tr>
+<tr><td>恢复实际GDP至前高</td><td>5–10年</td><td>阶段7</td></tr>
+<tr><td>股价回前高</td><td>~10年</td><td>股权风险溢价见顶</td></tr>
+<tr><td>通胀性：资本流入峰值</td><td>~10% GDP；反转&gt;5% GDP/12个月</td><td>顶部</td></tr>
+<tr><td>通胀性：本币首年实际贬值</td><td>~30%</td><td>阶段4</td></tr>
+<tr><td>通胀性：短利率飙升</td><td>+20pp；峰值通胀~30%、持续~2年</td><td>阶段4</td></tr>
+<tr><td>通胀性：经常账户修复</td><td>-6%→+2% GDP（18个月）；进口-10%</td><td>底部确认</td></tr>
+<tr><td>通胀性：利率正常化</td><td>短利率~2年回前高；通胀~2年正常化</td><td>阶段5</td></tr>
+</table>
+<hr>
+<h2>七、A股实操清单（以中国债务周期定位）</h2>
+<p><strong>当前定位（2020s中）</strong>：中国处于<strong>长债务周期尾部→&quot;推绳子&quot;早段</strong>——私人部门（尤其地产）偿债率触顶、信贷脉冲转弱、名义GDP增速逼近甚至低于名义利率，具备阶段5-6特征；但因债务几乎全为人民币计价+外储充足+资本账户有管理，<strong>不会走通胀性路线</strong>，政策主线是&quot;和谐去杠杆&quot;（债务置换、PSL/政策性银行、化债、压地产托制造）。</p>
+<p>对应资产动作（按模板推演）：</p>
+<p>1. <strong>盯核心不等式</strong>：中国名义GDP增速 vs 10年国债/加权贷款利率。名义增速&gt;利率→债务可持续，股票顺风；反之通缩压力→债券顺风。这是比GDP增速更重要的单一变量。</p>
+<p>2. <strong>盯信贷脉冲</strong>（社融增量/GDP变化）：拐点领先股市底约1–2个季度（2009、2016、2020皆然）——模板&quot;印钞对冲信贷坍缩&quot;的国内版本。</p>
+<p>3. <strong>阶段5的板块映射</strong>：利率下行期先做多长久期利率债，再做多&quot;类债资产&quot;（高股息、公用事业、核心房产REITs）；印钞进入支出端（MP3式：消费券、特别国债直投）确认后，加周期与顺β。</p>
+<p>4. <strong>警惕&quot;日本化&quot;风险</strong>：若名义增速持续低于名义利率且无MP3，则债牛股弱、现金为王，红利资产长牛。</p>
+<p>5. <strong>7大泡沫清单年度体检</strong>：对A股整体、地产、地方债平台逐一打分；出现&quot;新散户大量入场+高杠杆融资+远期抢购&quot;三项以上即降仓。</p>
+<p>6. <strong>外币债敞口</strong>：中国主权与企业外币债占比低=通胀性危机概率极低；反向风险是<strong>通缩性泥潭</strong>，资产配置以本币利率债+抗通缩现金流资产为底仓。</p>
+<h3>7.1 中国版监测仪表盘（建议季度更新）</h3>
+<table>
+<tr><th>指标</th><th>数据来源</th><th>当前解读要点</th></tr>
+<tr><td>宏观杠杆率（BIS口径：非金融部门信贷/GDP）</td><td>BIS/社科院</td><td>总量超300%后进入阶段5-6判断区；重点看斜率而非绝对值</td></tr>
+<tr><td>信贷脉冲（新增社融/GDP的12个月变化）</td><td>央行社融</td><td>由负转正=阶段5确认信号，历史上领先A股底1-2个季度</td></tr>
+<tr><td>名义GDP增速 − 加权贷款利率</td><td>统计局+央行</td><td>本书核心不等式中国版；差值为负且扩大=通缩压力加码</td></tr>
+<tr><td>居民部门偿债率（债务还本付息/可支配收入）</td><td>央行金融稳定报告</td><td>触顶回落=被动去杠杆（日本1990镜像）</td></tr>
+<tr><td>M1-M2剪刀差</td><td>央行</td><td>负剪刀差收窄=资金活性修复，阶段5早段信号</td></tr>
+<tr><td>10年国债收益率 vs 政策利率</td><td>中债/央行</td><td>深度低于政策利率=市场在定价长期停滞（日本化定价）</td></tr>
+<tr><td>地产：新开工/销售/70城价格</td><td>统计局</td><td>本书&quot;泡沫资产&quot;主线；销售是财富效应的先行指标</td></tr>
+</table>
+<h3>7.2 各阶段对应资产动作（中国映射版）</h3>
+<ul>
+<li><strong>阶段5确认（印钞对冲信贷坍缩）</strong>：利率债先牛→高股息/类债资产接力→若MP3落地（财政直投、地产收储、消费补贴）则周期股补涨。</li>
+<li><strong>阶段6（推绳子）</strong>：债券收益率探明底部，资产荒逻辑下&quot;确定性现金流&quot;（水电、核电、高速公路、龙头REITs）长牛，类债股票享受估值扩张。</li>
+<li><strong>向新周期切换（阶段7早期）</strong>：股权风险溢价极值+信贷脉冲转正+名义增速重新跑赢利率，三者共振=全面加仓股票的时点。</li>
+</ul>
+<hr>
+<h2>八、跨库衔接</h2>
+<ul>
+<li><strong>霍华德·马克斯《信贷周期》</strong>：与本书是<strong>同一硬币的两面</strong>。马克斯给&quot;钟摆位置感&quot;（信贷标准松紧的心理面），达利欧给&quot;刻度盘+操作手册&quot;（阶段、阈值、政策反应函数）。马克斯的&quot;最坏贷款诞生于最好时期&quot;= 本书阶段2的&quot;付息靠借新&quot;信号。</li>
+<li><strong>高盛/Danford超级周期框架</strong>：长债务周期（本书）嵌套于更长50-60年资本支出/商品超级周期；债务周期底部（阶段5-7）常与超级周期切换重叠（1933、2009）——双底共振是最大多头机会。</li>
+<li><strong>宏观 regime-detector（Risk-On/Off划分）</strong>：可直接以本书阶段定义映射：阶段1-2=Risk-On早中期；阶段3（倒挂+利差走阔）=Risk-Off触发器；阶段4=避险；阶段5-6=再通胀Trade（做多实物/黄金/股票）。</li>
+<li><strong>斯皮茨纳格尔MS指数（Misery/宏观压力指标）</strong>：本书给出MS指数飙高的基本面机制——偿债率触顶+政策从MP1滑向MP2/MP3；MS高位对应阶段4-5转换区，恰是&quot;危中机&quot;建仓带。</li>
+<li><strong>达利欧自己体系</strong>：《原则：应对变化中的世界秩序》把本书机制嵌入500年大国兴衰；本书阶段5-6（MP3、财富再分配、民粹）正是大周期中&quot;秩序重构&quot;的金融引擎。</li>
+</ul>
+<hr>
+<h2>九、原句摘录（可直接引用）</h2>
+<blockquote>&quot;Managing debt crises is all about spreading out the pain of the bad debts, and this can almost always be done well if one&#x27;s debts are in one&#x27;s own currency.&quot; —— 全书题眼：本币债=可解，外币债=痛定【§In Summary】。</blockquote>
+<blockquote>&quot;In the end, policy makers always print. That is because austerity causes more pain than benefit, big restructurings wipe out too much wealth too fast, and transfers of wealth from haves to have-nots don&#x27;t happen in sufficient size without revolutions.&quot; —— 为什么最终都印钞【§5) The Beautiful Deleveraging】。</blockquote>
+<blockquote>&quot;When things are so good that they can&#x27;t get better—yet everyone believes that they will get better—tops of markets are being made.&quot; —— 顶部定义【§3) The Top】。</blockquote>
+<blockquote>&quot;Devaluing currencies is like using cocaine, in that it provides short-term stimulation but is ruinous when abused.&quot; —— 贬值的剂量纪律【§5) Normalization (infl.)】。</blockquote>
+<blockquote>&quot;The two biggest impediments to managing a debt crisis are: a) the failure to know how to handle it well and b) politics or statutory limitations... ignorance and a lack of authority are bigger problems than debts themselves.&quot; —— 危机管理的第一性结论【§Managing Depressions】。</blockquote>
+<hr>
+<h2>十、本书的边界与批评性使用</h2>
+<ul>
+<li><strong>幸存者结构偏差</strong>：模板取48例&quot;已经爆发&quot;的危机平均，对&quot;高债务但未爆&quot;的对照组（如英国、比利时长期高杠杆）着墨少——<strong>债务/GDP阈值是必要条件而非充分条件</strong>，需结合偿债率分布与政策反应函数使用。</li>
+<li><strong>政策者视角</strong>：本书写给政策制定者，投资者的用法是&quot;<strong>预期政策者的反应函数</strong>&quot;——阶段4时问&quot;他们什么时候转向四杠杆&quot;，而非自己判断经济何时见底。</li>
+<li><strong>宏观平均图陷阱</strong>：archetype曲线剔除了最离群的1/3案例（通胀类指标），实际路径方差极大，<strong>信号用于定阶段，不用于定时点</strong>。</li>
+<li><strong>写于2018</strong>：MP3（直升机撒钱）在2020后已大规模实证（美国CARES Act、中国特别国债），本书框架反而因此更加成立；&quot;现代货币理论式MP3的通胀边界&quot;是本书未回答的下一章。</li>
+</ul></div></body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>精读笔记：达摩达兰估值地图</title><style>:root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e9ef;--dim:#8b93a7;--accent:#5b8def;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:24px;margin:0 0 6px;font-weight:650}
+h2{font-size:19px;margin:36px 0 13px;padding-bottom:8px;border-bottom:2px solid var(--line);font-weight:620}
+h3{font-size:16px;margin:24px 0 10px;color:#a9c4f5;font-weight:600}
+p{margin:10px 0;color:#d3d8e3}
+strong{color:#fff}
+em{color:var(--gold);font-style:normal;border-bottom:1px dashed rgba(255,209,102,.4)}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:#9fd0a0;font-family:ui-monospace,Consolas,monospace}
+pre{background:#12151b;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#c6d4e6;font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap}
+blockquote{margin:14px 0;padding:11px 18px;background:rgba(91,141,239,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:#b9c6da}
+ul{margin:10px 0;padding-left:22px}
+li{margin:5px 0;color:#d3d8e3}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:var(--panel);padding:9px 12px;text-align:left;border:1px solid var(--line);color:#a9c4f5;font-weight:600;font-size:13px}
+td{padding:9px 12px;border:1px solid var(--line);color:#d3d8e3;vertical-align:top}
+tr:hover td{background:rgba(91,141,239,.05)}</style></head><body><div class="wrap"><h1>《Investment Valuation》(达摩达兰, 第4版) 精读笔记：估值工具全书地图</h1>
+<blockquote>一句话定位：这不是一本教你&quot;一个公式算估值&quot;的书，而是一张<strong>估值工具全图</strong>——三大范式（内在价值/相对定价/或有索取权）× 34章工具箱，外加每种&quot;难搞公司&quot;（金融、亏损、年轻、私营、周期、困境）的专用补丁；A股投资者应把它当<strong>工具字典</strong>用：遇到哪类公司，查哪几章。</blockquote>
+<ul>
+<li>原书：Aswath Damodaran, <em>Investment Valuation: Tools and Techniques for Determining the Value of Any Asset</em>, 4th ed.（全文约293万字符，34章，页码约1356页）</li>
+<li>笔记方法：全量扫结构 + 深读DCF/相对估值/实物期权/特殊公司章节；引文页码为PDF页【p.N】</li>
+<li>补充图片OCR：本次未找到对应OCR文件，图注一律省略，仅保留页码引用</li>
+</ul>
+<h2>全书定位</h2>
+<ul>
+<li>作者立场：估值不是数学练习，而是<strong>&quot;故事与数字之间的桥&quot;</strong>（a bridge between stories and numbers）——先有自洽的商业叙事，再转成现金流、增长率、折现率三个输入，最后汇成价值【p.458】。</li>
+<li>两大核心警告：</li>
+</ul>
+<p>  1. <strong>估值百慕大三角</strong>：估值最大的敌人不是技术，而是人带入的<strong>偏见（bias）</strong>、对未来的<strong>不确定性（uncertainty）</strong>、以及数据与工具过剩造成的<strong>复杂性（complexity）</strong>【p.41】。</p>
+<p>  2. <strong>定价 ≠ 估值</strong>：估价（pricing）是市场愿意付什么，估值（valuation）是资产值多少；前者是找&quot;别人出多少&quot;，后者是算&quot;现金流的现值&quot;【p.58】。A股短线交易者做的大多是定价，长线投资者需要的是估值——两者都要会，但不能混。</p>
+<ul>
+<li>与作者小册子《Little Book of Valuation》的关系：小册子是本书的&quot;使用说明&quot;，本书是工具全集。本书新增第13章（叙事与数字）、数据/用户期权等新经济内容（第29章）。</li>
+<li>本书第4版更新点：2024年数据全线刷新（如用2024年1月违约利差表做合成评级）；新增叙事与数字章节；科技公司实物期权内容扩充【p.279, p.1057】。</li>
+</ul>
+<h2>全书框架地图（34章 = 三大部分 + 收尾）</h2>
+<p>全书34章可分为四大块：<strong>基础（1–13）→ 内在估值（14–16）→ 相对估值（17–20）→ 特殊情境（21–33）→ 总结（34）</strong>。</p>
+<h3>第一部分：估值基础（第1–13章）——&quot;原料车间&quot;</h3>
+<table>
+<tr><th>章</th><th>主题</th><th>一句话</th></tr>
+<tr><td>1</td><td>估值导论</td><td>任何能产生现金流的资产都可估值；警惕偏见/不确定性/复杂性&quot;百慕大三角&quot;【p.41】</td></tr>
+<tr><td>2</td><td>估值三大路径</td><td>内在估值、相对定价、或有索取权（期权）三大范式总览与适用边界【p.58】</td></tr>
+<tr><td>3</td><td>读懂财务报表</td><td>从三大报表提取估值原料：资产计量、融资结构、盈利与风险度量【p.80】</td></tr>
+<tr><td>4</td><td>风险基础</td><td>股权风险（CAPM/APM/多因子）与违约风险模型总览与比较【p.120】</td></tr>
+<tr><td>5</td><td>期权定价模型</td><td>二叉树/Black-Scholes/实物期权前置数学课【p.156】</td></tr>
+<tr><td>6</td><td>市场有效性</td><td>有效市场检验及其&quot;六大罪&quot;；异象、内部人收益的证据【p.183】</td></tr>
+<tr><td>7</td><td>无风险利率与风险溢价</td><td>选本币长期国债利率；ERP可用历史法或<strong>隐含溢价法</strong>（书中用 Gordon 模型从标普反推隐含ERP约4.60%）【p.246】</td></tr>
+<tr><td>8</td><td>风险参数与融资成本</td><td><strong>自下而上beta</strong>、国别风险暴露 lambda、合成评级算债务成本【p.279】</td></tr>
+<tr><td>9</td><td>盈利计量</td><td>清洗一次性损益、经营性调整，得到&quot;正常化盈利&quot;【p.333】</td></tr>
+<tr><td>10</td><td>从盈利到现金流</td><td>税后经营利润 − 再投资（资本开支+营运资本）= FCFF【p.359】</td></tr>
+<tr><td>11</td><td>增长估计</td><td>增长四法：历史/分析师/基本面（留存率×ROE）/自上而下；ROE变化对增长有杠杆放大效应【p.384】</td></tr>
+<tr><td>12</td><td>终值</td><td>持续经营终值 + 清算价值两种收口；<strong>稳定增长率不得超过经济体增速、再投资必须与之匹配</strong>【p.429】</td></tr>
+<tr><td>13</td><td>叙事与数字</td><td>估值=故事×数字的桥；叙事断裂（story break）时要重置估值【p.458】</td></tr>
+</table>
+<h3>第二部分：内在估值（第14–16章）——&quot;主发动机&quot;</h3>
+<table>
+<tr><th>章</th><th>主题</th><th>一句话</th></tr>
+<tr><td>14</td><td>股权内在价值模型</td><td>DDM →  augmented DDM → FCFE 三级火箭；分红与潜在分红（FCFE）的差异本身就是信息【p.487】</td></tr>
+<tr><td>15</td><td>公司估值（FCFF）</td><td>WACC法与APV法双轨；杠杆对价值的影响、分部加总（SOTP）【p.538】</td></tr>
+<tr><td>16</td><td>每股价值</td><td>非经营资产、交叉持股、员工期权、双重股权的每股折算【p.583】</td></tr>
+</table>
+<h3>第三部分：相对估值（第17–20章）——&quot;对标市场&quot;</h3>
+<table>
+<tr><th>章</th><th>主题</th><th>一句话</th></tr>
+<tr><td>17</td><td>相对估值原理</td><td>四步法：选倍数 → 找可比 → 控差异 → 得出价值；可控差异少时&quot;任何价格都能被合理化&quot;【p.616】</td></tr>
+<tr><td>18</td><td>盈利倍数</td><td>PE、PEG、EV/EBITDA 的<strong>基本面驱动因子</strong>（增长率、风险、再投资）拆解【p.635】</td></tr>
+<tr><td>19</td><td>账面倍数</td><td>P/B、V/B、Tobin&#x27;s Q：账面价值是会计约定，必须与ROE联用【p.690】</td></tr>
+<tr><td>20</td><td>收入与行业倍数</td><td>亏损年轻公司用PS；用户/订阅数等行业专属倍数的风险【p.726】</td></tr>
+</table>
+<h3>第四部分：特殊情境（第21–33章）——&quot;专用补丁包&quot;</h3>
+<table>
+<tr><th>章</th><th>主题</th><th>一句话</th></tr>
+<tr><td>21</td><td>金融服务公司</td><td>债务难定义→直接对股权估值（DDM/FCFE），再投资≈监管资本【p.771】</td></tr>
+<tr><td>22</td><td>亏损公司</td><td>先分类（暂时/结构性/初创/高杠杆），&quot;修理它还是卖掉它&quot;决定估值路径【p.808】</td></tr>
+<tr><td>23</td><td>年轻/初创公司</td><td>价值驱动=可持续利润率×收入增速；必须乘<strong>生存概率</strong>（美企5年存活率仅44%）【p.845】</td></tr>
+<tr><td>24</td><td>私营公司</td><td>无市场价输入→自下而上beta+流动性折价（书中质疑简单叠加4%小盘溢价+流动性溢价的粗糙做法）【p.870】</td></tr>
+<tr><td>25</td><td>并购与接管</td><td>并购估值的双方偏见与常见错误；LBO分析【p.907】</td></tr>
+<tr><td>26</td><td>房地产估值</td><td>实物资产 vs 金融资产；自用物业与地产公司的不同打法【p.957】</td></tr>
+<tr><td>27</td><td>其他资产</td><td>收藏品、奖杯资产：现金流缺失时只有相对定价【p.987】</td></tr>
+<tr><td>28</td><td>延迟期权</td><td>专利=看涨期权（开发成本为行权价）；自然资源期权【p.1030】</td></tr>
+<tr><td>29</td><td>扩张/放弃期权</td><td>初创公司&quot;贵&quot;的期权解释；用户与数据的期权性；财务柔性价值；与NPV的调和【p.1057】</td></tr>
+<tr><td>30</td><td>困境公司股权</td><td><strong>股权=以公司为标的、债务面值为行权价的看涨期权</strong>（Black-Scholes）【p.1084】</td></tr>
+<tr><td>31</td><td>价值提升（DCF框架）</td><td>价值四杠杆：现有资产现金流↑、超额增长↑、高增长期↑、资本成本↓【p.1102】</td></tr>
+<tr><td>32</td><td>价值提升（EVA/CFROI）</td><td>EVA、CFROI 等管理工具与DCF的对接与局限【p.1132】</td></tr>
+<tr><td>33</td><td>概率方法</td><td>情景分析、决策树、蒙特卡洛模拟：把&quot;一个数字&quot;的风险拆成分布【p.1155】</td></tr>
+</table>
+<h3>收尾（第34章）</h3>
+<ul>
+<li>模型选择决策树：资产/业务特征 + 分析师自身特征共同决定用哪条路；<strong>一致性</strong>（现金流-折现率-再投资假设互相咬合）比模型选择本身更重要【p.1188】。</li>
+</ul>
+<h2>分块详解</h2>
+<h3>1. DCF 进阶：折现率怎么取（第7–8章）</h3>
+<ul>
+<li><strong>无风险利率</strong>：满足&quot;无违约风险、无再投资风险&quot;的资产收益率，实务上用长期国债；币值不稳定时不要用名义本币利率硬折现【p.246】。</li>
+<li><strong>股权风险溢价（ERP）两法</strong>：</li>
+<li>历史法：1928年以来美股的长期算术平均；问题是幸存者偏差、参照期敏感。</li>
+<li><strong>隐含溢价法</strong>（作者偏爱）：假设市场总体定价正确，用 Gordon 增长模型反解。书中示例：以标普为标的反推，要求股权回报8.48%，减去国债3.88%，得<strong>隐含ERP=4.60%</strong>——&quot;market-driven and current&quot;，且任何市场都能算【p.246】。</li>
+<li><strong>国别风险溢价（CRP）</strong>：先算该国美元主权债违约利差，再按股票市场波动/债券波动放大（equity market volatility relative to bond）。争论点：国别风险是否可通过分散化消除——作者认为对大部分投资者不可分散，<strong>应该收CRP</strong>【p.246】。</li>
+<li><strong>自下而上 beta（第8章）</strong>：β_杠杆 = β_无杠杆 × (1+(1−t)D/E)，用同行业多家上市公司beta剥离杠杆后按目标资本结构再加回。优点：比个股回归beta误差小得多（平均化抹掉估计噪声）【p.279】。</li>
+<li><strong>国别风险暴露 lambda</strong>：公司层面的国别风险敏感度，受工厂所在地、客户所在地、合同计价货币影响；λ=1表示风险暴露与国别平均一致【p.279】。<strong>对A股出海公司是核心参数</strong>。</li>
+<li><strong>债务成本</strong>：有评级用评级利差；无评级用<strong>合成评级</strong>——按利息保障倍数落到评级矩阵再配违约利差【p.279】。</li>
+<li><strong>小市值溢价</strong>：1927–2023年小市值股票在等beta下仍有额外收益（第6章图6.10证据），作者提示：可解读为CAPM低估小盘风险，使用要谨慎【p.279】。</li>
+</ul>
+<h3>2. DCF 进阶：现金流与增长（第9–12章）</h3>
+<ul>
+<li><strong>正常化盈利（第9章）</strong>：一次性损益、重组费用、会计准则差异都要清洗；&quot;连续重组费用&quot;应被怀疑——它可能是把经常性开支包装成一次性【p.333】。</li>
+<li><strong>FCFF（第10、15章）</strong>：FCFF = 税后经营利润 + 折旧摊销 − 资本开支 − 非现金营运资本增加；它是<strong>全体索取权人</strong>（股东+债权人+优先股）的现金流，故用WACC折现【p.538】。</li>
+<li><strong>基本面增长（第11章）</strong>：g = 留存率 × ROE（权益口径）；g = 再投资率 × 税后资本回报（公司口径）。ROE的改善会在当期造成增长突增，反之下降造成超比例滑坡——<strong>ROE变化对增长是杠杆式的</strong>【p.384】。</li>
+<li><strong>自上而下</strong>：先预测收入增长和利润率，再倒推所需再投资——最通用也最贴合叙事【p.384】。</li>
+<li><strong>终值纪律（第12章）</strong>，两条铁律：</li>
+</ul>
+<p>  1. 稳定增长率<strong>不得超过</strong>所在经济体长期名义增速（可更低——成熟公司可以假设它在经济中的份额萎缩）；</p>
+<p>  2. 稳定期必须配套再投资：再投资率 = g / 稳定期资本回报。</p>
+<ul>
+<li>推论：<strong>当超额回报归零时，稳定增长率取多少对价值没有影响</strong>——真正驱动终值的是永续超额回报，不是g本身【p.429】。</li>
+<li>清算价值：按调整通胀后的账面值或预估卖价计算，适用于&quot;活不如死&quot;的公司【p.429】。</li>
+</ul>
+<h3>3. 股权估值三模型怎么选（第14–16章）</h3>
+<ul>
+<li><strong>DDM</strong>：价值=预期股利现值。对分红稳定、派息率可预测的公司（公用事业、成熟蓝筹）仍有用；最大软肋是必须假设股利政策反映潜在支付能力【p.487】。</li>
+<li><strong>FCFE模型</strong>：价值=潜在股利现值。<strong>DDM估值 &lt; FCFE估值的差额，本身就是&quot;控股股东少分红&quot;的价值损耗度量</strong>——这正是壹评级DDM体系的底层逻辑之一。</li>
+<li><strong>FCFF/WACC（第15章）</strong>：适合资本结构复杂或未来杠杆将变化的公司；<strong>APV</strong> = 无杠杆公司价值 + 税盾现值 − 预期破产成本，适合杠杆剧烈变动或LBO【p.538】。</li>
+<li><strong>每股折算（第16章）</strong>：经营资产价值 + 现金与有价证券 + 对子公司持股（区分控股/参股的不同会计处理）− 债务 − 少数股东权益 − <strong>员工期权价值（期权悬置）</strong> = 股权价值 → ÷ 股数。双重股权按投票权差异调整【p.583】。</li>
+</ul>
+<h3>4. 相对估值的正确姿势（第17–20章）</h3>
+<ul>
+<li><strong>四步法（第17章）</strong>：① 标准化价格（选倍数）→ ② 找可比公司 → ③ 用基本面（增长/风险/再投资）解释倍数差异（横截面回归或主观调整）→ ④ 定价。警告：可比公司选得足够宽泛，&quot;几乎任何价值都能被合理化&quot;【p.616】。</li>
+<li><strong>PE 的基本面拆解（第18章）</strong>：从DDM推导出 PE = f(派息率, g, 股权成本)；高PE可以由高增长或低风险驱动，<strong>光看PE高低不做基本面拆解就是裸奔</strong>【p.635】。</li>
+<li><strong>PEG</strong>：PE ÷ 预期增长率；仍隐含&quot;增长与风险正交&quot;的强假设，跨风险等级公司比较时会失真【p.635】。</li>
+<li><strong>EV/EBITDA</strong>：公司口径倍数，不受资本结构和折旧政策扭曲，但<strong>忽略再投资</strong>——EBITDA高的资本密集型公司可能价值陷阱【p.635】。</li>
+<li><strong>P/B（第19章）</strong>：账面值是会计约定的产物，必须与ROE联用：P/B 合理中枢 ≈ (ROE − g) / (股权成本 − g) 的思想【p.690】。银行保险天然适配P/B-ROE框架。</li>
+<li><strong>PS 与行业倍数（第20章）</strong>：负盈利年轻公司退而求其次用PS；但PS对利润率差异极其敏感，行业专属倍数（用户数、订阅数）必须回答&quot;每个用户值多少钱、凭什么&quot;【p.726】。</li>
+<li><strong>相对估值与DCF的调和（第17章）</strong>：两法结果不同是常态——差异来自你对&quot;可比公司定价是否正确&quot;的判断；相对估值本质是把市场对别人的定价错误传染到你的标的【p.616】。</li>
+</ul>
+<h3>5. 实物期权：什么时候DCF会低估（第5、28–30章）</h3>
+<ul>
+<li><strong>延迟期权（第28章）</strong>：项目NPV&gt;0未必该马上投——等待的价值 = 看涨期权价值；专利=以开发成本为行权价的看涨期权，<strong>天然资源（矿权、油田）同理</strong>【p.1030】。</li>
+<li><strong>扩张期权（第29章）</strong>：初创公司的市值远高于现金流现值，部分因为&quot;先亏着占位、赢了可无限扩张&quot;的期权价值；数据/用户积累同理。推论：用静态DCF硬套初创公司会<strong>系统性低估</strong>【p.1057】。</li>
+<li><strong>放弃期权</strong>与财务柔性：下行保护本身有价。</li>
+<li><strong>困境公司股权（第30章）</strong>：股权=看涨期权（标的=公司资产价值，行权价=债务面值）。启示：资不抵债的公司股权仍可能有价值（波动率越大越值钱）；债权人-股东激励天然对立（股东爱赌，债权人求稳）【p.1084】。</li>
+<li>与第33章衔接：实物期权和蒙特卡洛都是处理&quot;不确定性&quot;的工具，期权定价适合<strong>有明确行权结构</strong>的情形，模拟适合<strong>分布已知但结构松散</strong>的情形【p.1155】。</li>
+</ul>
+<h3>6. 特殊公司补丁（第21–25章）</h3>
+<ul>
+<li><strong>金融公司（第21章）</strong>：债务与经营融为一炉→无法定义资本结构→<strong>直接估股权</strong>（DDM或改良FCFE：再投资=监管资本要求）；相对估值用P/B-ROE、P/E，<strong>不要用EV/EBITDA</strong>【p.771】。A股银行保险券商全部适用本章。</li>
+<li><strong>亏损公司（第22章）</strong>：第一步永远是诊断病因——暂时性问题（估值=正常化盈利折现）、结构性问题（&quot;修理或出售&quot;决策树）、商业模式未成立（并入第23章初创框架）、高杠杆（并入第30章期权框架）【p.808】。</li>
+<li><strong>初创公司（第23章）</strong>：价值两大驱动=<strong>可持续利润率 × 收入增速</strong>，到达稳态的时间与再投资次之；整体乘生存概率（美国数据：企业5年存活率仅44%）【p.845】；&quot;预期游戏&quot;解释为何好消息也能砸盘——价格锚定的是预期差。</li>
+<li><strong>私营公司（第24章）</strong>：无市场价→输入全靠自下而上；流动性折价要单独估计，作者明确反对把&quot;小盘溢价4% + 流动性溢价X%&quot;简单叠加的老套路【p.870】。</li>
+<li><strong>并购（第25章）</strong>：收购方要向股东证明&quot;买得便宜&quot;、目标方要证明&quot;卖得贵&quot;——双方都有动机操纵估值；协同效应必须单独验算、控权溢价必须与协同区分【p.907】。</li>
+</ul>
+<h3>7. 价值提升与概率方法（第31–33章）</h3>
+<ul>
+<li><strong>价值四杠杆（第31章）</strong>：① 现有资产现金流↑ ② 超额回报增长↑ ③ 高增长期延长 ④ 资本成本↓。价值创造≠盈利增长：没有超额回报的增长不创造价值【p.1102】。EVA/CFROI（第32章）是同一思想的管理会计包装。</li>
+<li><strong>概率方法（第33章）</strong>：情景分析（离散情景+概率加权）、决策树（顺序决策）、蒙特卡洛（全分布）；把单点估值升级为估值分布，是对第1章&quot;不确定性&quot;警告的正面回应【p.1155】。</li>
+</ul>
+<h3>8. 期权数学前置课（第5章）与叙事方法（第13章）</h3>
+<ul>
+<li>第5章是全书实物期权部分（28–30章）的数学地基：欧式期权用 Black-Scholes，美式/可提前行权用二叉树；关键输入是<strong>标的资产价值波动率</strong>——而实物期权的标的（项目现金流、公司资产）没有市场报价，波动率只能从历史会计数据、可比上市公司或蒙特卡洛模拟中估计，这是实物期权实践中最脆的环节【p.156】。</li>
+<li>第13章的方法论值得单列：估值前先写<strong>一页纸商业故事</strong>，把故事拆成可检验的输入（收入增速、目标利润率、再投资需求、资本成本），再交给模型；故事与数字任何一端变化都要回头检查另一端——<strong>叙事断裂（story break，如核心客户流失、技术路线被颠覆）是比任何财务指标恶化都更早的卖出信号</strong>【p.458】。</li>
+</ul>
+<h2>常见错误清单（书中明确的估值陷阱）</h2>
+<p>1. <strong>把定价当估值</strong>：用可比倍数给自己找心理安慰，却说自己在做DCF【p.58】。</p>
+<p>2. <strong>百慕大三角</strong>：先有结论（想买的股票），后调假设（bias）；面对不确定性假装确定；模型越建越复杂来伪造精确感【p.41】。</p>
+<p>3. <strong>用历史ERP外推一切市场</strong>：成熟市场溢价套到新兴市场，忘掉国别风险溢价【p.246】。</p>
+<p>4. <strong>用个股回归beta</strong>：噪声巨大；应改用自下而上beta【p.279】。</p>
+<p>5. <strong>终值作弊</strong>：稳定增长率超过经济体增速；稳定期再投资率不匹配（&quot;永续增长但不投入一分钱&quot;）；用exit multiple（退出倍数）伪装终值——本质是定价污染估值【p.429】。</p>
+<p>6. <strong>现金流-折现率错配</strong>：名义/实际混用、税前现金流配税后折现率、FCFE配WACC（或FCFF配股权成本）【p.538】。</p>
+<p>7. <strong>相对估值裸奔</strong>：只看倍数高低，不拆基本面驱动；可比公司凑数——&quot;任何价格都能被合理化&quot;【p.616】。</p>
+<p>8. <strong>EV/EBITDA用于金融公司、EV倍数忽略再投资</strong>：资本结构无法定义或再投资巨大的公司用错倍数【p.635, p.771】。</p>
+<p>9. <strong>初创公司不做生存概率调整、困境公司股权不当期权</strong>：静态DCF系统性误价【p.845, p.1084】。</p>
+<p>10. <strong>把一次性重组费用当真是一次性</strong>：&quot;连续重组&quot;=经常性开支化妆，正常化盈利被高估【p.333】。</p>
+<p>11. <strong>并购估值被双方动机绑架</strong>：协同不验算、控权溢价与协同混为一谈【p.907】。</p>
+<p>12. <strong>市场有效性检验的六大罪</strong>（第6章）：轶事证据、事后幸存者选择、多重检验不校正等——读券商&quot;回测&quot;研报时逐条对照【p.183】。</p>
+<p>13. <strong>期权滥用</strong>：给没有行权结构、标的不可分的&quot;故事&quot;硬套Black-Scholes，用数学包装代替商业判断——实物期权的前提是&quot;权利真实存在且可执行&quot;【p.1030】。</p>
+<h2>纪律数值（全书反复出现的硬约束）</h2>
+<table>
+<tr><th>参数</th><th>纪律</th><th>出处</th></tr>
+<tr><td>稳定增长率上限</td><td>≤ 经济体长期名义增速（通常取2%–4%区间）</td><td>【p.429】</td></tr>
+<tr><td>稳定期再投资率</td><td>= g / 稳定期资本回报（g=0时理论再投资应为0）</td><td>【p.429】</td></tr>
+<tr><td>隐含ERP</td><td>书中示例 4.60%（2024年前后美股反推）</td><td>【p.246】</td></tr>
+<tr><td>ERP合理带</td><td>成熟市场4%–5%量级；新兴市场叠加CRP</td><td>【p.246】</td></tr>
+<tr><td>无风险利率</td><td>长期国债；非稳定币值市场避免名义本币利率</td><td>【p.246】</td></tr>
+<tr><td>企业5年存活率</td><td>约44%（美国QCEW数据）——初创估值必乘项</td><td>【p.845】</td></tr>
+<tr><td>价值四杠杆</td><td>现金流↑ / 超额增长↑ / 高增长期↑ / 资本成本↓</td><td>【p.1102】</td></tr>
+<tr><td>增长恒等式</td><td>g(权益) = 留存率 × ROE；g(公司) = 再投资率 × 税后资本回报</td><td>【p.384】</td></tr>
+</table>
+<h2>金句摘录（原文直译）</h2>
+<ul>
+<li>&quot;The essence of a good valuation is that it is a bridge between stories and numbers.&quot;——好估值的本质是故事与数字之间的桥【p.458】。</li>
+<li>&quot;When excess returns are zero, changes in the stable growth rate have no impact on value.&quot;——超额回报归零时，调稳定增长率对价值毫无影响【p.429】。</li>
+<li>&quot;The advantage of this approach is that it is market-driven and current.&quot;——（指隐含ERP法）它由市场驱动、反映当下，不依赖历史数据【p.246】。</li>
+<li>&quot;A series of restructuring charges should be viewed with suspicion.&quot;——连年&quot;重组费用&quot;应被怀疑【p.333】。</li>
+<li>&quot;With limited liability, if the value of the firm is less than the value of the debt outstanding, equity holders cannot lose more than their investment.&quot;——有限责任使股权成为一种期权，这是困境公司股权仍有价值的根源【p.1084】。</li>
+</ul>
+<h2>A股实操清单（什么情况查哪章）</h2>
+<table>
+<tr><th>场景</th><th>工具</th><th>章节</th></tr>
+<tr><td>给银行/保险/券商估值</td><td>改良FCFE（再投资=监管资本）+ P/B-ROE</td><td>第21、19章【p.771, p.690】</td></tr>
+<tr><td>给&quot;中特估&quot;成熟蓝筹估值</td><td>FCFF+WACC 或 DDM；终值按两条铁律</td><td>第14、15、12章</td></tr>
+<tr><td>给亏损科技股估值</td><td>先诊断病因（第22章）→ 若初创走第23章：利润率×收入增速×生存概率</td><td>【p.808, p.845】</td></tr>
+<tr><td>给创新药/矿权估值</td><td>专利/资源=看涨期权，Black-Scholes或二叉树</td><td>第28章【p.1030】</td></tr>
+<tr><td>给ST/债务压顶公司估值</td><td>股权=看涨期权框架，勿把DCF估成零</td><td>第30章【p.1084】</td></tr>
+<tr><td>出海公司（国别风险）</td><td>CRP + lambda 双参数</td><td>第7、8章【p.246, p.279】</td></tr>
+<tr><td>用PE/PB/PS选股</td><td>先拆基本面驱动因子再做横截面对比</td><td>第17–20章</td></tr>
+<tr><td>估值争议大、分歧极端</td><td>蒙特卡洛/情景分析给出估值分布而非单点</td><td>第33章【p.1155】</td></tr>
+<tr><td>小市值公司</td><td>自下而上beta；谨慎考虑小市值溢价</td><td>第8章【p.279】</td></tr>
+<tr><td>重组/并购题材</td><td>协同单独验算、警惕双方动机</td><td>第25章【p.907】</td></tr>
+<tr><td>周期/商品公司（书中散见于第11–12章的周期处理）</td><td>正常化盈利+周期中枢，勿把周期顶点利润当永续</td><td>第9、11、12章【p.333, p.384, p.429】</td></tr>
+<tr><td>房地产/REITs相关资产</td><td>自用物业现金流法、可比出租率资本化率</td><td>第26章【p.957】</td></tr>
+<tr><td>复盘自己持仓逻辑</td><td>叙事是否断裂（story break）→ 重置估值</td><td>第13章【p.458】</td></tr>
+</table>
+<h2>跨库衔接</h2>
+<ul>
+<li><strong>vs 《Little Book of Valuation》（同作者小册子）</strong>：小册子=第2、14、15、17、18章的压缩版；本书独有：国别风险（7–8）、年轻/困境/私营公司（22–24）、实物期权（28–30）、概率方法（33）。读完小册子感觉&quot;会了&quot;之后，本书是纠错与补漏。</li>
+<li><strong>vs &quot;三支柱&quot;框架（基本面三支柱投研体系）</strong>：三支柱的&quot;盈利质量/成长性/估值&quot;可映射到本书——盈利质量=第9章正常化盈利；成长性=第11章（留存率×ROE）；估值=第14–20章。本书额外提供支柱间权重的数学化接口（如EVA桥接）。</li>
+<li><strong>vs 壹评级DDM体系</strong>：壹评级用DDM+行业调整做A股评级，对应本书第14章的股利贴现链；两个必须补的课：① 第14章&quot;DDM vs FCFE估值差=分红政策损耗&quot;思想可解释A股低派息公司的折价；② 第12章终值两条铁律应作为壹评级模型终值假设的审计清单。</li>
+<li><strong>vs 本库其他估值技能</strong>（<code>valuation-cross-method</code>、<code>a-share-quant-valuation</code>、<code>us-value-investing-framework</code>）：这些技能是<strong>单点工具</strong>（某一方法套到底）；本书是<strong>方法选择器</strong>（第34章决策树）——先选工具，再谈精算。建议实操顺序：本书第34章定路线 → 专项技能执行 → 第33章做敏感性收尾。</li>
+</ul>
+<h2>阅读路线建议（按时间预算）</h2>
+<ul>
+<li><strong>2小时</strong>：第2章（三路径）→ 第7–8章（折现率）→ 第12章（终值）→ 第34章（选择决策树）。</li>
+<li><strong>1天</strong>：在上基础上加第14–15章（DCF双轨）、第17–18章（相对估值拆解）。</li>
+<li><strong>1周</strong>：再补第21–23章（金融/亏损/初创）、第28–30章（实物期权）、第33章（概率方法）。</li>
+<li><strong>常驻案头</strong>：第9章（正常化盈利）、第25章（并购偏见）、第13章（叙事断裂）——每次出报告前翻一遍。</li>
+</ul>
+<h2>结语</h2>
+<p>达摩达兰这本1356页的巨著，真正的贡献不是任何一个公式，而是三件事：<strong>①把估值拆成&quot;叙事→输入→模型&quot;的流水线，让每个假设可被质询；②给三大范式划了适用边界，并承认人会犯错；③为每一类&quot;难搞公司&quot;都打了补丁</strong>。把它放在手边当字典用——遇到哪类资产翻哪几章，比从头读到尾更有效。</p>
+<p>（笔记完。引用格式：【p.N】为原书PDF页码；本书无配套图片OCR文件，故未含图注引用。）</p></div></body></html>

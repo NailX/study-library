@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>精读笔记：The Little Book of Valuation 达摩达兰估值</title><style>:root{--bg:#0f1115;--panel:#171a21;--line:#2a2f3a;--txt:#e6e9ef;--dim:#8b93a7;--accent:#5b8def;--gold:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:36px 26px 90px}
+h1{font-size:24px;margin:0 0 6px;font-weight:650}
+h2{font-size:19px;margin:36px 0 13px;padding-bottom:8px;border-bottom:2px solid var(--line);font-weight:620}
+h3{font-size:16px;margin:24px 0 10px;color:#a9c4f5;font-weight:600}
+p{margin:10px 0;color:#d3d8e3}
+strong{color:#fff}
+em{color:var(--gold);font-style:normal;border-bottom:1px dashed rgba(255,209,102,.4)}
+code{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:13px;color:#9fd0a0;font-family:ui-monospace,Consolas,monospace}
+pre{background:#12151b;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#c6d4e6;font-family:ui-monospace,Consolas,monospace;white-space:pre-wrap}
+blockquote{margin:14px 0;padding:11px 18px;background:rgba(91,141,239,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;color:#b9c6da}
+ul{margin:10px 0;padding-left:22px}
+li{margin:5px 0;color:#d3d8e3}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th{background:var(--panel);padding:9px 12px;text-align:left;border:1px solid var(--line);color:#a9c4f5;font-weight:600;font-size:13px}
+td{padding:9px 12px;border:1px solid var(--line);color:#d3d8e3;vertical-align:top}
+tr:hover td{background:rgba(91,141,239,.05)}</style></head><body><div class="wrap"><h1>精读笔记：《The Little Book of Valuation》(达摩达兰, 第2版)</h1>
+<blockquote>一句话定位：估值只有两种方法——<strong>内在估值（value）</strong>与<strong>相对估值（price）</strong>，而贯穿全书的主线是&quot;现金流、增长、风险&quot;三要素在<strong>企业生命周期各阶段</strong>的不同配比。</blockquote>
+<h2>全书定位</h2>
+<ul>
+<li>作者 Aswath Damodaran（NYU 金融学教授），本书是其千页巨著《Investment Valuation》的大众版：11 章 + 结论，约 29 万字，案例全部用 2022-2023 年真实公司（Kraft Heinz、Airbnb、Alphabet、Zomato、Toyota）。</li>
+<li>开篇即亮明立场：&quot;你买金融资产是为了预期能收到的现金流，用&#x27;未来有人出更高价&#x27;来辩护股价，等于玩昂贵的抢椅子游戏。&quot;【p.1】</li>
+<li>本书回答的核心问题不是&quot;估值模型有哪些&quot;，而是&quot;<strong>不同阶段、不同类型的公司，估值的难点和 Value Driver 分别是什么</strong>&quot;。</li>
+</ul>
+<h2>核心框架：估值四问 + 内在价值锚</h2>
+<p>无论估值哪家公司，先回答四个问题：</p>
+<p>1. <strong>现金流</strong>：现有资产能产生多少现金？（分红 / FCFE / FCFF，口径必须一致）</p>
+<p>2. <strong>增长</strong>：现金流会增长多快、增长多久？（增长的质量 = 增量资本回报率 ROC/ROE 是否超过资本成本）</p>
+<p>3. <strong>风险</strong>：现金流的不确定性多大？（折现率：无风险利率 + ERP + β）</p>
+<p>4. <strong>生命周期</strong>：公司处于哪个阶段？（年轻成长 → 成长 → 成熟 → 衰退 → 特殊：金融/周期商品）</p>
+<pre>
+价值 = Σ 预期现金流_t / (1+风险调整折现率)^t  +  终值/(1+r)^n
+                ↑现金流            ↑风险(折现率)          ↑增长(终值)
+</pre>
+<ul>
+<li>内在价值锚（intrinsic value）：由现金流与不确定性决定，&quot;好公司=高而稳的现金流&quot;；好估值=<strong>不需要任何 garnish</strong>（不用给协同、管理层、品牌再加溢价，这些已 baked in）【p.71】。</li>
+<li>相对估值锚（pricing）：市场给相似资产什么价，你只回答&quot;相对同类公司是贵是贱&quot;。</li>
+<li>两条估值真理：<strong>所有估值都有偏</strong>（先写下自己的偏见再开始）【p.5】；<strong>再好的估值也是错的</strong>（精度不是估值的质量标准）【p.7】。</li>
+<li>修正市场错误需要时间：&quot;给市场 3-5 年纠错，比指望下个季度现实得多。&quot;【p.68】</li>
+</ul>
+<h2>分块详解</h2>
+<h3>1. DCF 三输入（第 2-3 章，KHC 全案）</h3>
+<p><strong>时间价值工具箱</strong>（第 2 章，一切资产的现金流都可拆解为五种形态）【p.15-25】：</p>
+<pre>
+单笔现金流现值   PV = CF_n / (1+r)^n
+年金             PV = C × [1 − 1/(1+r)^n] / r
+增长年金         PV = C₁ × [1 − (1+g)^n/(1+r)^n] / (r−g)
+永续年金         PV = C / r
+永续增长         PV = C₁ / (r−g)，约束：g &lt; r 且 g &lt; 经济体名义增长率
+</pre>
+<ul>
+<li>折现率三分解：消费偏好（实际回报）+ 通胀 + 不确定性溢价【p.17】。</li>
+<li>风险观：Markowitz 组合理论——非系统性风险可通过分散化消除，<strong>只有无法分散的风险才该获得补偿</strong>（β 的思想源头）【p.25-30】。</li>
+</ul>
+<p><strong>现金流口径</strong>——四选一，口径一致性是第一纪律【p.35-45】：</p>
+<pre>
+FCFE = 净利润 + 折旧摊销 − 资本开支 − Δ非现金营运资本 − (偿还本金−新发债)
+FCFF = 税后经营利润 EBIT×(1−t) − (资本开支−折旧) − Δ非现金营运资本
+     = EBIT×(1−t) × (1 − 再投资率)
+再投资率 = (净资本开支 + Δ营运资本) / 税后经营利润
+</pre>
+<ul>
+<li>分红太窄（很多公司不分红）；FCFE 是&quot;潜在分红&quot;，巴菲特的&quot;owner&#x27;s earnings&quot;可视为不含债务现金流的保守版 FCFE【p.39】。</li>
+<li>折现率：股权成本 = 无风险利率 + β × ERP；企业价值用 WACC。2023 年 7 月美股隐含 ERP ≈ 5%（1928-2022 历史 ERP 5.06%，两者当时恰好接近）【p.49-51】。</li>
+<li><strong>国家风险</strong>：ERP 应以公司业务所在地为准，而非注册地；成熟市场用美国基准，风险国上调【p.51】。</li>
+<li><strong>恶性通胀/本币折现率换算</strong>：美元折现率直接加通胀差即可——&quot;若美国预期通胀 3%、印度 5%，新兴市场公司的卢比折现率中位数 = 13.19% + 2% = 15.19%&quot;【p.113】。</li>
+</ul>
+<p><strong>增长与终值</strong>（DCF 最 abused 的地方）【p.55-65】：</p>
+<pre>
+永续终值 = 第 n+1 年现金流 / (折现率 − 永续增长率)
+稳态再投资率 = 永续增长率 / 稳态资本回报率(ROC或ROE)
+</pre>
+<p>终值三约束（纪律红线）：</p>
+<p>1. 永续增长率 ≤ 经济体名义增长率，更稳妥的拇指法则是<strong>不超过无风险利率</strong>；</p>
+<p>2. 稳态公司要&quot;像稳态公司&quot;：β 回归 1、负债率回归行业均值；</p>
+<p>3. 稳态必须配再投资——<strong>终值的关键不是增长率，而是稳态期超额回报（ROC vs WACC）</strong>：ROC=WACC 时提高增长率对价值零贡献【p.60】。</p>
+<p><strong>从企业价值到每股价值</strong>四步调整【p.65-69】：+现金、±交叉持股（少数股东权益要减）、−全部有息债务及表外负债（养老金、诉讼）、−管理层期权价值；股本用<strong>当前实际股数</strong>（不预留未来增发，稀释已体现在负现金流现值里）。</p>
+<p>KHC 案例结论：内在价值 $20.60 vs 市价 $36 → 高估；要 justify 市价需&quot;更高收入增长 × 更高利润率&quot;组合，可用敏感性表反推市场隐含预期【p.69】。</p>
+<h3>2. 相对估值：倍数选择的纪律（第 4 章）</h3>
+<p>标准化价格 = 市场价值 / 共同变量。三步：找可比 → 标准化 → 调整差异【p.75-77】。</p>
+<ul>
+<li><strong>口径一致性检验</strong>（definitional test）：分子分母必须同为股权口径或同为公司口径；全样本口径必须统一（都用 trailing 或都用 forward）。P/S、P/EBITDA 分子是股权价值、分母是经营变量，&quot;会让你把任何高负债公司看成便宜货&quot;——不推荐使用【p.79-81】。</li>
+<li><strong>分布检验</strong>（descriptive test）：倍数是右偏分布（少数高值拉高均值），跨公司比较用<strong>中位数</strong>而非均值；对数化后可做回归【p.81-83】。</li>
+<li><strong>Companion Variable（配对变量）</strong>——每个倍数有一个主导基本面变量，错配即机会【p.87】：</li>
+</ul>
+<table>
+<tr><th>倍数</th><th>配对变量</th><th>低估信号</th></tr>
+<tr><td>PE</td><td>预期增长</td><td>低 PE + 高 EPS 增长</td></tr>
+<tr><td>P/BV</td><td>ROE</td><td>低 P/B + 高 ROE</td></tr>
+<tr><td>P/S</td><td>净利率</td><td>低 P/S + 高净利率</td></tr>
+<tr><td>EV/EBITDA</td><td>再投资率</td><td>低 EV/EBITDA + 低再投资需求</td></tr>
+<tr><td>EV/Capital</td><td>ROC</td><td>低 EV/Capital + 高 ROC</td></tr>
+<tr><td>EV/Sales</td><td>税后经营利润率</td><td>低 EV/Sales + 高经营利润率</td></tr>
+</table>
+<ul>
+<li><strong>PEG</strong> = PE / 预期增长率；两大隐含假设：风险相同、PE 与增长成比例（增长翻倍 PE 翻倍）——后者不成立时高增公司会显得便宜【p.91】。</li>
+<li>可比公司 ≠ 同行业：定义是&quot;现金流、增长、风险相似&quot;，电信公司可以和软件公司比【p.88】。样本够大时用<strong>截面回归</strong>同时控制多变量。</li>
+<li>投行和组合管理里&quot;多数所谓估值其实是定价（pricing）&quot;——快、信息少、但反映当下市场情绪【p.77】。</li>
+</ul>
+<h3>3. 故事与数字之桥（第 5 章）</h3>
+<ul>
+<li>&quot;一堆数字只是财务模型，一个动人的故事可能只是童话。<strong>每个数字背后要有故事解释，每个故事背后要有数字支撑。</strong>&quot;【p.103】</li>
+<li>流程：构建商业故事（业务本质 / 财务史 / 市场空间 / 竞争 / 宏观）→ 3P 检验（Possible 可能、Plausible 可信、Probable 大概率）→ 转成估值输入 → 保持反馈回路。</li>
+<li>故事三态：<strong>breaks</strong>（商业模式被击穿，价值崩塌）、<strong>changes</strong>（范围重估，价值跳变）、<strong>shifts</strong>（参数微调）——用新闻判断属于哪一类，而非纠结 EPS beat 几分钱【p.130】。</li>
+<li>Zomato 案例：同一公司 12 种故事，每股价值 ₹16.58 ~ ₹150.02；&quot;投年轻公司的回报来自<strong>比别人错得少</strong>，分歧越大机会越大。&quot;【p.128】</li>
+</ul>
+<h3>4. 期权视角（第 6、11 章）</h3>
+<ul>
+<li><strong>年轻公司 = 生存期权</strong>：两阶段期望价值</li>
+</ul>
+<pre>
+失败调整价值 = 持续经营价值 × (1−失败率) + 清算价值 × 失败率
+Airbnb: $29,567×0.9 + $29,567×0.5×0.1 = $28,088M 【p.162】
+</pre>
+<p>（参考：美国 2006 年成立的企业仅 45% 活过 5 年，24% 活过 15 年【p.137】）</p>
+<ul>
+<li><strong>未开发资源储量 = 实物期权</strong>（商品公司）：油价波动率越大，未开发储量越值钱；期权价值在<strong>商品价格低、储量勉强可行时最大</strong>；DCF 会系统性低估这类公司【p.283-286】。</li>
+<li>员工期权：正确做法是用期权定价模型估值后从股权价值中扣除，而非简单按稀释调整股数【p.69】。</li>
+</ul>
+<h3>5. 生命周期各阶段估值法（第 6-9 章）</h3>
+<table>
+<tr><th>阶段</th><th>特征</th><th>估值要点</th><th>核心 Value Drivers</th></tr>
+<tr><td>年轻成长 (Ch6)</td><td>无历史、亏损、股权多重索取</td><td>自上而下：市场规模×份额→收入→目标利润率；期权/股权索取排序；生存概率</td><td>收入增长、目标利润率、存活率</td></tr>
+<tr><td>成长 (Ch7)</td><td>价值主要来自增长资产、无形资产密集</td><td><strong>R&amp;D/品牌广告/培训资本化</strong>（会计把它们当费用→账面利润与资本开支同时失真）；增长率必须随规模衰减（80% 增长 5 年后规模已 18 倍，且增长吸引竞争反过来压制增长）【p.171-176】</td><td>增长的衰减速度、利润率可持续性</td></tr>
+<tr><td>成熟 (Ch8)</td><td>价值来自现有资产、并购驱动增长</td><td>看<strong>经营松弛与财务松弛</strong>：换管理层/加杠杆/分拆能释放多少价值；警惕商誉噪声</td><td>经营/财务松弛、管理层变更概率</td></tr>
+<tr><td>衰退 (Ch9)</td><td>收入负增长、ROC&lt;WACC、债务压顶</td><td>双情景：持续经营 vs 违约清算；永续增长率可为负；资产剥离价值可能高于持续经营</td><td>持续经营价值、违约概率与后果</td></tr>
+</table>
+<h3>6. 金融公司与周期/商品公司（第 10-11 章）</h3>
+<ul>
+<li><strong>金融公司</strong>：债务是&quot;原材料&quot;，无法界定资本开支和营运资本 → 只能估值<strong>股权</strong>，用 DDM 或&quot;监管资本再投资版 FCFE&quot;；资本充足率是增长的约束【p.243-258】。三种替代：① 股利折现（唯一可观测现金流）；② FCFE 的银行版——把&quot;再投资&quot;重定义为<strong>维持增长所需的监管资本增量</strong>；③ 超额回报模型（ROE vs 股权成本）【p.250-255】。</li>
+</ul>
+<pre>
+股权价值 = 预期明年股利 / (股权成本 − 永续增长率)
+</pre>
+<ul>
+<li><strong>周期/商品公司</strong>：利润随宏观剧烈波动，高固定成本放大杠杆效应（经营杠杆）；PE 在周期顶点最低（陷阱）、底部最高。<strong>归一化</strong>三法：跨周期简单平均（美国周期 5-10 年）、<strong>利润率平均×当期收入</strong>（增长公司适用，直接平均利润会给成长公司过低值）、行业平均【p.269-275】。</li>
+<li>Toyota 2009 案例：平均税前经营利润率 7.33% × 收入 22,661 = 归一化 EBIT 1,660.7（十亿日元）→ 每股价值 4,735 日元 vs 市价 3,060【p.272】。</li>
+<li>商品公司终值约束：资源有限，永续增长假设要打折；归一化商品价（通胀调整历史均价或供求公允价）。</li>
+</ul>
+<h2>案例速览表</h2>
+<table>
+<tr><th>公司</th><th>章节</th><th>结论</th></tr>
+<tr><td>Kraft Heinz (KHC)</td><td>Ch3</td><td>FCFF/FCFE 全表；价值 $20.60 vs 市价 $36 → 高估；反推市场隐含增长-利润率组合</td></tr>
+<tr><td>饮料行业 16 家</td><td>Ch4</td><td>PE 中位 22.39；PEG 揭示 Todhunter 实为昂贵、Hansen 确便宜</td></tr>
+<tr><td>Zomato</td><td>Ch5</td><td>12 个故事每股 ₹16.6~₹150；本故事 ₹43；IPO 开盘 ₹72 后冲 ₹150</td></tr>
+<tr><td>Airbnb</td><td>Ch6</td><td>收入 40%→25%→2% 十年衰减；10% 失败率调整后 $47.17/股</td></tr>
+<tr><td>Alphabet</td><td>Ch7</td><td>内在估值判高估、相对估值判合理——两法可给出相反结论，结论部分明确讨论了这个&quot;矛盾&quot;【p.287】</td></tr>
+<tr><td>Coca Cola 等</td><td>Ch8</td><td>成熟公司看经营/财务松弛：加杠杆、换管理层、分拆能释放多少价值；并购商誉噪声污染倍数</td></tr>
+<tr><td>GM/Sears</td><td>Ch9</td><td>衰退≠无价值：持续经营 vs 违约清算<strong>双情景取概率加权</strong>；负增长永续假设合法</td></tr>
+<tr><td>银行/保险</td><td>Ch10</td><td>DDM + 监管资本约束增长；2008 证明&quot;受监管≠低风险&quot;</td></tr>
+<tr><td>Toyota/石油</td><td>Ch11</td><td>归一化利润率；未开发储量=实物期权，价低时期权价值最大</td></tr>
+</table>
+<h2>纪律数值（速查）</h2>
+<ul>
+<li>永续增长率上限：≤ 经济体名义增长率，实操 ≤ 无风险利率【p.58】</li>
+<li>稳态再投资率 = g / ROC（如 g=1%、ROC=10% → 再投资率 10%）【p.60】</li>
+<li>2023/7 美股隐含 ERP ≈ 5%；历史 ERP（1928-2022）5.06%【p.50】</li>
+<li>美国企业存活率：5 年 45%、15 年 24%（BLS 2006 队列）【p.137】</li>
+<li>经济周期长度：5-10 年（归一化窗口）【p.270】</li>
+<li>新兴市场卢比折现率 = 美元折现率 + 通胀差（如 +2%）【p.113】</li>
+<li>β 随稳态回归 1；稳态负债率回归行业均值【p.59】</li>
+<li>倍数口径：P/S、P/EBITDA 为不一致口径，慎用【p.79】</li>
+<li>比较基准用中位数不用均值（右偏分布）【p.81】</li>
+</ul>
+<p><strong>常见估值错误 Top 5</strong>（散布全书，归纳）：</p>
+<p>1. 给永续增长率超过无风险利率/经济体名义增长率【p.58】</p>
+<p>2. 稳态期忘了配再投资率（或 g/ROC 不匹配）【p.60】</p>
+<p>3. 用当期周期利润做 DCF 或 PE（周期顶部买&quot;低 PE&quot;陷阱）【p.268】</p>
+<p>4. 把不分红等同于无价值，或把账面亏损当无现金流的同义词（年轻公司）【p.137】</p>
+<p>5. 估值后 garnish：好估值不需要再加&quot;管理层质量溢价&quot;【p.71】</p>
+<h2>A股实操清单：一页纸估值漏斗</h2>
+<p>1. <strong>分层归类</strong>（先定生命周期，再选工具）：亏损科技/ biotech → Ch6 年轻公司法（市场空间×份额）；高增消费/制造 → Ch7（资本化研发与租赁）；银行/券商/保险 → Ch10 DDM；钢铁/煤炭/有色/航运 → Ch11 归一化；地产链/传统零售 → Ch9 双情景。</p>
+<p>2. <strong>现金流体检</strong>：从 EBIT×(1−t) 出发算 FCFF，剔除一次性损益；看再投资率是否 &gt;100%（烧钱扩张）或为负（收缩）。</p>
+<p>3. <strong>三输入红线自查</strong>：永续 g ≤ 无风险利率（A股可用 10 年国债收益率）；稳态 ROC 是否真能 &gt; WACC；β 用行业回归而非单股。</p>
+<p>4. <strong>定价交叉验证</strong>：PE 必须配 PEG 看（A股成长风格化定价严重）；PB 必须配 ROE（银行股的核心就是 P/B vs ROE 差）；EV/EBITDA 配再投资率。口径不一致的 P/S 直接弃用。</p>
+<p>5. <strong>政策/监管当 story break 处理</strong>：教培、互联网反垄断、集采——达摩达兰框架下这类事件属&quot;故事击穿&quot;，估值框架应切换而非调参。</p>
+<p>6. <strong>国家风险溢价</strong>：业务在新兴市场/汇率管制行业，ERP 在美股基准上加国家风险溢价，折现率按业务所在地而非上市地。</p>
+<p>7. <strong>每单写下偏见与反方故事</strong>（all valuations are biased），留 3-5 年纠错窗口。</p>
+<h2>跨库衔接</h2>
+<ul>
+<li><strong>与格林沃尔德三支柱（EPV）</strong>：三支柱的资产价值/EPV 相当于本书&quot;现有资产价值&quot;（即 DCF 中 t=0 已投资产的现金流折现），成长性价值对应&quot;增长资产价值&quot;；本书的&quot;ROC vs WACC 决定增长是否创造价值&quot;正是 EPV 法&quot;只有在 ROC&gt;WACC 时增长才有价值&quot;的严格化表述。</li>
+<li><strong>与《Investment Valuation》大部头</strong>：本书是其压缩版。要深入：期权定价模型（员工期权、实物期权）、APV 法、资本化 R&amp;D 的具体算法、国家风险溢价数据库 → 读大部头对应章节。</li>
+<li><strong>与壹评级 DDM 对照</strong>：壹评级的 DDM 是本书 Ch10 金融公司 DDM 的一般化（多阶段增长+显性终值）；A股银行股实践 = 本书&quot;股权价值 = D₁/(r−g)&quot; + 监管资本约束增长率，参数（r、g、分红率）来源不同而已。</li>
+<li><strong>进阶路径</strong>：本书（框架与纪律）→ Damodaran 大部头（工具箱）→ 三支柱 EPV（护城河定性交叉验证）→ 蒙特卡洛/实物期权（不确定性显式化）。</li>
+</ul>
+<hr>
+<p><em>注：本书内容为作者方法论与案例复盘，笔记仅为学习整理，不构成投资建议。页码为按章节映射的原书印刷页码（第 2 版），仅供定位参考。</em></p></div></body></html>
