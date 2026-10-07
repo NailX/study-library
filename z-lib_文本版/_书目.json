@@ -112,5 +112,29 @@
   "chars": 372954,
   "file": "高盛首席分析師教你看懂進場的訊號：洞悉市場週期，贏在長期好買賣 = The Long Good Buy Analysing Cycles i.txt",
   "need_ocr": false
+ },
+ {
+  "name": "经济的运行逻辑 (高善文著)",
+  "type": "PDF(扫描·已OCR)",
+  "pages": 253,
+  "chars": 114377,
+  "file": "经济的运行逻辑.pdf.txt",
+  "need_ocr": false
+ },
+ {
+  "name": "透视繁荣 (高善文)",
+  "type": "PDF(扫描·已OCR)",
+  "pages": 340,
+  "chars": 168022,
+  "file": "透视繁荣.pdf.txt",
+  "need_ocr": false
+ },
+ {
+  "name": "经济运行的真相 (高善文)",
+  "type": "PDF(文本层)",
+  "pages": 231,
+  "chars": 164167,
+  "file": "经济运行的真相 (高善文).pdf.txt",
+  "need_ocr": false
  }
 ]
