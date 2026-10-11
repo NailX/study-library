@@ -1,0 +1,84 @@
+作者：石川，著有《因子投资：方法与实践》、《Navigating the Factor Zoo》、《主动基金投资》，译有《机器学习与资产定价》。
+封面来源：www.pexels.com
+未经授权，严禁转载。
+摘要： 翻译自 Patrick Welton 的一篇 Insight，附带我的反思。
+0
+今天这篇是一篇翻译 + 反思。
+一个朋友发给我一篇短文，作者是 Patrick Welton。先简单交代下他的身份：在 Stanford 做过肿瘤学的临床教授，后来在 Monterey 建了一个综合癌症中心；同时他从 1978 年做学生时就开始交易期货，一直做到今天，整整 48 年。多年的训练和经历让他同时具备医生和科学家两种 mindsets。
+这篇文章改编自他上 The Derivative 播客的一期访谈，标题叫《Patrick Welton's Journey from Stanford Oncologist to one of Trend Following's Quiet Legends》。
+我读完很有感触，就打算译过来。但我不想做那种 100% 的直译，而是想在关键的地方插几句我自己的理解。所以下面你会看到两种内容：Welton 的观点，以及我的反思。我会通过加 ' 和不加 ' 的小节把两者分清楚（比如 1 就来自 Welton 的访谈；1' 就是我的反思），不让各位误以为后者是前者的原意。原文里那些金句，我会直接使用英文原句。
+1
+Welton 的出发点是一个访谈问题。有人问他：你既是医生又是科学家，这两种思维会不会在你交易的时候打架？
+他的回答是：会。而且这个冲突很有价值。
+他给了一个我很喜欢的比喻——一只脚在船上，一只脚在岸上。科学家是岸，医生是船。有些日子两者是协调的，你站得很稳；有些日子它们往两边拉，你就必须选一个，否则就会掉进水里。
+然后他详细阐述了两类原型（archetype）。
+科学家（science-based PhD），本质上是个 objectivist，追求的是减少不确定性。但 Welton 特别提醒了一点：科学方法并不是很多人想象的那样。它很少有 Eureka moment；研究是聚焦的、是靠足够多的付出而驱动的一次次迭代：每一轮把不确定性降低一点，得到一个比上一轮预测力稍强一点的模型。科学家被年复一年地训练去追逐精确，并且把减少不确定性当成目标。
+医生（MD），则更接近一个 empathicist。Welton 说，一个医生在照顾病人的时候，几乎从来达不到精确。医生整天在做的事是：在不完整的信息下、在还有很多未知的前提下，做出有后果的决策，然后随着先验的变化迅速调整。新症状、新检查、新反应，评估就跟着动。复杂的病情会反复改变，所以医生每一次照顾这样的患者，都是一次贝叶斯式的跋涉。
+1'
+我公众号里谈过很多次贝叶斯。在量化里，贝叶斯思维是一种世界观。
+我们做的绝大多数事情，本质上都是在一个不断变化的环境里更新后验。当你估计一个因子的溢价，其实你在做的是：给定历史数据，更新“这个溢价现在是多少”的信念分布。当你在判断一篇论文的因子是不是真的时，你在做的是：给定证据，更新“它是真因子”的后验概率。
+然而，很多受过严格科学训练的人，有时却在这里栽跟头。他们被训练成 objectivist，被训练成要追求精确、要减少不确定性，于是潜意识里假设：只要数据够多、模型够好，不确定性就应该被消灭掉。但市场不给你这个选项。你面对的不是一道有唯一答案的题，而是一个活着的、会反应的、且每次都不太一样的病人。
+Welton 用医生的训练，反衬出科学家的盲区。而我自己在写因子择时那篇时说过一句话：因子注定会失效，structural breaks 也一定会出现。是继续用更复杂的方法做时变估计，还是承认自己永远在贝叶斯更新的路上、接受不完美，这是我们每个人自己要做功课的地方。
+2
+回到原文。Welton 把两个原型拼成一个 trader's matrix。
+
+这个矩阵有两个维度（两个轴）：
+一个维度从 objectivity（客观） 到 hoping（盼望）
+
+另一个维度从 embracing uncertainty（拥抱不确定性） 到 demanding precision（要求精确）
+
+然而，科学家和医生，各自在一个维度上有 strength、在另一个维度上有 vulnerability。所以单靠任何一种训练，都成不了最优秀的交易员。
+先看第一个维度，客观 ↔ 盼望。Welton 说，交易里一个主要弱点就是盼望、就是在意结果。一个交易员一旦开始希望仓位走对，他的判断就已经被污染了。与之对立的那份 strength，属于科学家——客观就是这个维度上的 strength：让信息和证据以它们实际到达的样子被接受，而不是以你希望它们到达的样子。在这个意义上，受过训练的科学家有优势；而无法到达这个境界的交易员，知道的越多就越挣扎。
+再看第二个维度，拥抱不确定性 ↔ 要求精确。Welton 说，然而，对很多受过正规科学训练的人而言，当价格随时间变化时，他们往往带着对精确的期待进场——因为这正是科学的内核。可他们在市场里永远找不到它：the purist expectations of the science do not survive contact with a market。
+然后 Welton 补了一刀：
+I have watched this light bulb switch on, along with the frustration that accompanies it, many times with quants in my own firm and elsewhere. Someone arrives able to correctly calculate an answer to five or even fifty decimal places. Except longer-term trading and investing success isn't about decimal places. The precision is decorative.
+The precision is decorative. 有经验的交易员，往往聚焦于把整数部分和符号判断正确。
+而且这还只是容易的部分。交易的成功与时间不可分割：随时间向前，新的信息、新的资金流、新的成本、新的风险、新的依赖关系不断出现又消失、潮起潮落。
+能和这个弱点对抗的 strength，就藏医生的思维中。与其说 MD 是一个关于人类疾病或生理学的学位，不如说是一个在火线中拥抱不确定性的学位。就像市场一样，医学很少有机会享受“确定”这份奢侈。
+
+Welton 补充说：关键在于，随时知道此刻你锚定在哪一格（The work is knowing which box you are anchored in at any given moment）。无论在哪个维度上发现弱点，都要争取往对应的 strength 走，持续打磨自己的 edge。这就是交易员的成功路径。
+2'
+回到我自己，之前我提过修大成教授的 working paper《Can machines learn weak signals?》（Shen and Xiu 2024），讨论的是 Ridge 和 Lasso 谁能从 weak predictors 里提取信息。结论是 Ridge，不是 Lasso。
+为什么提这个？因为在 type 1 / type 2 errors 的 trade-off 下，适度降低衡量因子显著性的 -cutoff 已经成为一种合理选择。而这意味着更多 weak predictors 会被纳入模型。换句话说，我们正在主动放弃“每一个信号都必须精确显著”的执念。
+这跟 Welton 说的“precision is decorative”是同一个意思的两面。科学训练教你追求精确、追求 significance；但在真实的市场里，决定成败的往往是整数和符号。方向对不对，比小数点后第几位更重要。一个能算到五十位小数的人，如果方向判断错了，那五十位小数分文不值。
+我自己做研究、读论文，当然尊重精确。但越是做投资，我越觉得 Welton 这句话的分量：你在追求精确上投入的边际努力，很可能是在解决一个不存在的问题。
+“模糊的正确，远胜于精确的错误。”
+3
+原文里还有一节，标题叫《Why None of the Data Buys the Market》。
+Welton 说，很多年轻分析师——以及一些永远没放下这个假设的资深 quant——进场时都自带一个默认的假设：如果你分析足够多的数据，数据就会告诉你市场将如何反应。一个变量也好，几百万个变量也好，信念是一样的。这个隐含的分析假设是：输入数据驱动市场，仿佛这个连接是直接的，仿佛这个连接在时间上是不变的。
+Welton 说，遗憾，这两个假设都不成立、也不稳定。原因很简单：市场随着钱流入流动性、随时间长而变化。
+None of the data in the world buys or sells anything.
+然后他给出那个我很喜欢的框架——三体问题：
+一边是数据
+
+另一边是价格
+
+中间坐着第三个体：市场参与者
+
+那个第三体（市场参与者），是整个系统里松动的、可变的一环。
+数据不在乎价格怎么走，价格也不在乎数据说什么。真正关键的是：那些正在买、正在卖的人（或他们的代理、模型）此刻、这个月、今年，在如何对那个数据做出反应。
+Welton 举了个精彩的例子：同一份报告，第一次出现时是 six-sigma shock，第二次是 three-sigma move，第三次是 one-sigma ripple。数据没有变，是参与者的反应变了。以后他们会盯住失业率，然后又停下；会盯住某种价值认知，然后又把它换成新的价值认知。当评论员说“范式变了”，真正变的是第三体对流经它的信息做出反应的方式。
+3'
+这一节，我读的时候感触颇深。
+一个科学家的本能，是去直接建模“数据 → 价格”这个 link，因为这个 link 应该精确、稳定。但市场的真相是：数据和价格之间，永远夹着一个鲜活的、随时会变化的交易者。你不去理解这个交易者，你建的模型再精确，也只是在给一个松动的关节拧螺丝。
+同样的盈利数据，牛市中解读为利好，熊市中解读为利好出尽。数据没变，变的是人怎么反应。
+再往前一步：错误定价，就是参与者的反应系统性地偏离了理性。所以超额收益的本质，不是预测数据，而是预测人会对数据做出什么反应，以及这个反应什么时候会变。
+因此，量化不仅仅是统计问题。当你使用样本协方差矩阵，你的先验是“历史共同波动就是风险结构”；而当你用基于某种因子结构来估计协方差矩阵时，你的先验是“风险应该按共同驱动因素来组织”。输入项本身不带判断，判断来自你对结构的理解。而在数据—价格这个系统里，最需要你理解的结构，恰恰是那个最不稳定的第三体。
+4
+回到原文的收尾。Welton 说，这个框架虽然简化，但对他改善交易很有用：我们越客观，就越是好交易员；我们越贝叶斯，就越是好交易员。我们必须两个都选，并且必须明白：当条件客观地变化时，我们必须适应、必须改变看法。
+他说，把这些道理简化成这么朴素的语言，花了他很多年。
+他也谈了身为 mentor 的感悟：当一个天赋很高的 quant 加入他们，数学从来不是问题。他能教给后来者的是他自己在市场中磨砺了半个世纪之后学会的平衡：
+I can show them how the precision they were trained to prize can become a liability, and how the pathway of discomfort they were trained to eliminate becomes the trading edge.
+最后他回一开始的比喻：岸教会他对证据保持客观和踏实，船教会他行动，并随着水流动不断调整平衡。交易员两者都需要。然而，
+Most of the difficulty, and most of the opportunity, is in learning when to shift your weight, and when to jump.
+4'
+Welton 这篇 insights，表面上是讲医生和科学家的两种思维。但它真正在讲的，是一件对量化特别重要的事：你以为你缺的是模型，其实你缺的是对自己的诚实。
+你是在盼望结果，还是在看证据？你是在要求精确，还是在拥抱不确定性？再回看一下那个 trader's matrix，你需要随时随地知道你锚定在哪一格。
+最好的模型，是那个你诚实地知道自己站在哪一格的模型。
+共勉。
+References
+Welton, P. (2026). The MD and the PhD. Insights, Jul 30, 2026. Adapted from the podcast interview on The Derivative. https://www.welton.com/the-md-and-the-phd/
+
+Shen, Z. and D. Xiu (2024). Can machines learn weak signals? Working paper.
+
+免责声明：入市有风险，投资需谨慎。在任何情况下，本文的内容、信息及数据或所表述的意见并不构成对任何人的投资建议。在任何情况下，本文作者及所属机构不对任何人因使用本文的任何内容所引致的任何损失负任何责任。除特别说明外，文中图表均直接或间接来自于相应论文，仅为介绍之用，版权归原作者和期刊所有。
