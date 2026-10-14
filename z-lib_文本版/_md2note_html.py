@@ -23,6 +23,18 @@ def md2body(md):
             out.append('<hr>'); i += 1; continue
         if s.startswith('### '):
             out.append(f'<h3>{inline(s[4:])}</h3>'); i += 1; continue
+        # markdown 表格
+        if s.startswith('|') and i + 1 < len(lines) and re.match(r'^\|[\s:\-|]+\|?$', lines[i+1].strip()):
+            header = [c.strip() for c in s.strip('|').split('|')]
+            i += 2
+            rows = []
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                rows.append([c.strip() for c in lines[i].strip().strip('|').split('|')])
+                i += 1
+            th = ''.join(f'<th>{inline(c)}</th>' for c in header)
+            trs = ''.join('<tr>' + ''.join(f'<td>{inline(c)}</td>' for c in r) + '</tr>' for r in rows)
+            out.append(f'<div class="tblwrap"><table><thead><tr>{th}</tr></thead><tbody>{trs}</tbody></table></div>')
+            continue
         if s.startswith('## '):
             out.append(f'<h2>{inline(s[3:])}</h2>'); i += 1; continue
         if s.startswith('# '):
@@ -62,7 +74,7 @@ def convert(md_path, html_path, title):
     style = src[:src.find('</style>') + len('</style>')]
     md = open(md_path, encoding='utf-8').read()
     body = md2body(md)
-    out = f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{htmllib.escape(title)}</title>{style}</head><body><div class="wrap">{body}</div></body></html>'
+    out = f'<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{htmllib.escape(title)}</title>{style}<style>.tblwrap{{overflow-x:auto;-webkit-overflow-scrolling:touch}}</style></head><body><div class="wrap">{body}</div></body></html>'
     open(html_path, 'w', encoding='utf-8').write(out)
     print('✓', html_path)
 
