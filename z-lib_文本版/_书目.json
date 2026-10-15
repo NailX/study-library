@@ -144,5 +144,13 @@
   "chars": 3917313,
   "file": "周金涛经典系列报告合集（1500页，6大专题）.txt",
   "need_ocr": false
+ },
+ {
+  "name": "Against the Gods: The Remarkable Story of Risk (Peter L. Bernstein)",
+  "type": "PDF(文本层·英文原著)",
+  "pages": 448,
+  "chars": 791595,
+  "file": "Against the Gods The Remarkable Story of Risk (Peter L. Bernstein).txt",
+  "need_ocr": false
  }
 ]
