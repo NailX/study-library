@@ -176,5 +176,14 @@
   "chars": 21335,
   "file": "A Theory of Power-Law Distributions in Financial Market Fluctuations (Gabaix Gopikrishnan Plerou Stanley).txt",
   "need_ocr": false
+ },
+ {
+  "name": "炒股养家心法 (菩萨戒子 整理)",
+  "cat": "交易与游资心法",
+  "dir": "z-lib_文本版",
+  "type": "PDF(扫描版·已OCR)",
+  "pages": 202,
+  "note": "精读笔记_炒股养家心法.md",
+  "note_html": "精读笔记_炒股养家心法.html"
  }
 ]
