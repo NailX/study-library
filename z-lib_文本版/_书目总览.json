@@ -1,162 +1,170 @@
 [
-  {
-    "书名": "One Up On Wall Street",
-    "作者": "彼得·林奇",
-    "主题": "价值投资·选股",
-    "导读": "普通投资者如何用生活常识选十倍股：六类公司分类法、PEG、两分钟独白、13条检查清单。",
-    "字数": 590511,
-    "文件": "One Up On Wall Street How To Use What You Already Know To Make Money I.txt"
-  },
-  {
-    "书名": "Principles",
-    "作者": "瑞·达利欧",
-    "主题": "思维原则·决策",
-    "导读": "生活与工作原则：拥抱现实、极度求真透明、可信度加权决策、创意择优。",
-    "字数": 927053,
-    "文件": "Principles Life and Work (Ray Dalio).epub.txt"
-  },
-  {
-    "书名": "Mastering the Market Cycle",
-    "作者": "霍华德·马克斯",
-    "主题": "市场周期",
-    "导读": "周期定位五步法：识别所处位置、理解钟摆、为逆向做准备、控制风险、等待机会。",
-    "字数": 513470,
-    "文件": "Mastering the Market Cycle Getting the Odds on Your Side (Howard Marks.txt"
-  },
-  {
-    "书名": "The Little Book of Valuation",
-    "作者": "阿斯沃斯·达摩达兰",
-    "主题": "公司估值",
-    "导读": "估值入门：DCF/相对估值实操、成长率估计、终值、估值陷阱简明手册。",
-    "字数": 298020,
-    "文件": "The Little Book of Valuation How to Value a Company, Pick a Stock, and.txt"
-  },
-  {
-    "书名": "Investment Valuation",
-    "作者": "阿斯沃斯·达摩达兰",
-    "主题": "估值圣经",
-    "导读": "估值大全1356页：各类资产估值模型、贴现率、期权定价、并购估值。",
-    "字数": 2931073,
-    "文件": "Investment Valuation Tools and Techniques for Determining the Value of.txt"
-  },
-  {
-    "书名": "The Dao of Capital",
-    "作者": "马克·斯皮茨纳格尔",
-    "主题": "奥地利学派·迂回投资",
-    "导读": "以迂为直：奥地利学派资本理论，迂回生产、时间偏好、等待复利。",
-    "字数": 755068,
-    "文件": "The Dao of Capital (Mark Spitznagel).pdf.txt"
-  },
-  {
-    "书名": "Safe Haven",
-    "作者": "马克·斯皮茨纳格尔",
-    "主题": "避险资产",
-    "导读": "避险资产taxonomy：避险光谱、成本效益比、何时该持有对冲。",
-    "字数": 394348,
-    "文件": "Safe Haven (Mark Spitznagel).pdf.txt"
-  },
-  {
-    "书名": "Value Investing",
-    "作者": "格林沃尔德等",
-    "主题": "价值投资体系",
-    "导读": "从格雷厄姆到巴菲特：价值投资三要素（资产/盈利/成长）、安全边际、估值方法。",
-    "字数": 1087951,
-    "文件": "Value investing  from Graham to Buffett and beyond ( etc.).pdf.txt"
-  },
-  {
-    "书名": "Big Debt Crises",
-    "作者": "瑞·达利欧",
-    "主题": "债务周期",
-    "导读": "债务危机模板：通缩性/通胀性去杠杆、48个案例、政策工具三支箭。",
-    "字数": 1169316,
-    "文件": "Big Debt Crises (Ray Dalio Mark Kirby).epub.txt"
-  },
-  {
-    "书名": "The Changing World Order",
-    "作者": "瑞·达利欧",
-    "主题": "大周期·世界秩序",
-    "导读": "国家兴衰大周期：储备货币、三大力量（债务/内部冲突/外部冲突）、帝国生命周期。",
-    "字数": 815522,
-    "文件": "The Changing World Order Why Nations Succeed and Fail (Ray Dalio).epub.txt"
-  },
-  {
-    "书名": "Any Happy Returns",
-    "作者": "彼得·奥本海默",
-    "主题": "市场周期·长期",
-    "导读": "结构性变化与超级周期：长期资产回报、股债轮动、市场长期驱动因素。",
-    "字数": 614834,
-    "文件": "Any Happy Returns Structural Changes and Super Cycles in Markets (Pete.txt"
-  },
-  {
-    "书名": "掌握市場週期（繁中）",
-    "作者": "霍華·馬克斯",
-    "主题": "市场周期·中文",
-    "导读": "《Mastering the Market Cycle》繁体中文版，周期定位实操。",
-    "字数": 179563,
-    "文件": "掌握市場週期：價值投資大師霍華 · 馬克斯教你看對市場時機，提高投資勝算 = Mastering the Market Cycle Gett.txt"
-  },
-  {
-    "书名": "非常潛力股（繁中）",
-    "作者": "菲利普·費雪",
-    "主题": "成长股·中文",
-    "导读": "《Common Stocks and Uncommon Profits》繁中版：15要点、闲聊法、成长股投资。",
-    "字数": 169142,
-    "文件": "非常潛力股 = Common Stocks and Uncommon Profits and Other Writings (菲利普 · 費.txt"
-  },
-  {
-    "书名": "高盛首席分析師教你看懂進場的訊號（繁中）",
-    "作者": "彼得·奧本海默",
-    "主题": "周期·中文",
-    "导读": "《The Long Good Buy》繁中版：牛熊周期、估值与周期阶段判断、择时框架。",
-    "字数": 150721,
-    "文件": "高盛首席分析師教你看懂進場的訊號：洞悉市場週期，贏在長期好買賣 = The Long Good Buy Analysing Cycles i.txt"
-  },
-  {
-    "书名": "经济的运行逻辑",
-    "作者": "高善文",
-    "主题": "中国宏观·方法论",
-    "导读": "框架出厂状态：科学方法论四步+可证伪、PPI一价定律、刘易斯拐点、资产重估恒等式、两轮十年产能周期。",
-    "字数": 114377,
-    "文件": "经济的运行逻辑.pdf.txt"
-  },
-  {
-    "书名": "透视繁荣：资产重估深处的忧虑",
-    "作者": "高善文",
-    "主题": "资产重估·泡沫",
-    "导读": "2006-07泡沫时期资产重估文集：分散化配置、风险溢价与中性利率、足球赛三阶段、日台检验、破灭三条件。",
-    "字数": 168022,
-    "文件": "透视繁荣.pdf.txt"
-  },
-  {
-    "书名": "经济运行的真相",
-    "作者": "高善文",
-    "主题": "中国宏观·实证",
-    "导读": "方法论实战版：潜在增速四因子、产能过剩、房地产反腐自然实验、影子银行、贸易摩擦。",
-    "字数": 164167,
-    "文件": "经济运行的真相 (高善文).pdf.txt"
-  },
-  {
-    "书名": "周金涛经典系列报告合集（6大专题）",
-    "作者": "周金涛（中信建投，含吴启权/李树培合著）",
-    "主题": "中国宏观·周期理论",
-    "导读": "中国康波研究开拓者周金涛60余篇报告合集：周期之轮36篇库存周期实战、三周期嵌套理论奠基、等待重归周期、康波价格波动与黄金、改造美林投资钟、房地产周期拐点。配6篇专题精读笔记。",
-    "字数": 3917313,
-    "文件": "周金涛经典系列报告合集（1500页，6大专题）.txt"
-  },
-  {
-    "书名": "Against the Gods：风险的故事",
-    "作者": "彼得·伯恩斯坦 (Peter L. Bernstein)",
-    "主题": "风险·概率史",
-    "导读": "风险管理思想史经典：从神意占卜到帕斯卡/费马的概率论（1654）、贝叶斯推断、高斯正态分布、凯恩斯不确定性、马柯维茨组合理论、夏普CAPM、卡尼曼前景理论——人类如何用概率驯服不确定性，以及为何仍屡屡失手。",
-    "字数": 791595,
-    "文件": "Against the Gods The Remarkable Story of Risk (Peter L. Bernstein).txt"
-  },
-  {
-    "书名": "肥尾的统计后果：现实世界前渐近、认识论与应用",
-    "作者": "纳西姆·尼古拉斯·塔勒布 (Nassim Nicholas Taleb)",
-    "主题": "统计·肥尾与风险计量",
-    "导读": "Taleb技术专著：肥尾世界的统计陷阱——preasymptotics前渐近、κ指标度量尾部厚度、大数定律在肥尾下极慢收敛、CT估计与影子矩、MS plot极值诊断、Wittgenstein's ruler测量标尺批判——样本均值/波动率/VaR在肥尾下系统性失效，以及遍历性与凯利公式对投资仓位的含义。",
-    "字数": 749975,
-    "文件": "Statistical Consequences of Fat Tails (Nassim Nicholas Taleb).txt"
-  }
+ {
+  "书名": "One Up On Wall Street",
+  "作者": "彼得·林奇",
+  "主题": "价值投资·选股",
+  "导读": "普通投资者如何用生活常识选十倍股：六类公司分类法、PEG、两分钟独白、13条检查清单。",
+  "字数": 590511,
+  "文件": "One Up On Wall Street How To Use What You Already Know To Make Money I.txt"
+ },
+ {
+  "书名": "Principles",
+  "作者": "瑞·达利欧",
+  "主题": "思维原则·决策",
+  "导读": "生活与工作原则：拥抱现实、极度求真透明、可信度加权决策、创意择优。",
+  "字数": 927053,
+  "文件": "Principles Life and Work (Ray Dalio).epub.txt"
+ },
+ {
+  "书名": "Mastering the Market Cycle",
+  "作者": "霍华德·马克斯",
+  "主题": "市场周期",
+  "导读": "周期定位五步法：识别所处位置、理解钟摆、为逆向做准备、控制风险、等待机会。",
+  "字数": 513470,
+  "文件": "Mastering the Market Cycle Getting the Odds on Your Side (Howard Marks.txt"
+ },
+ {
+  "书名": "The Little Book of Valuation",
+  "作者": "阿斯沃斯·达摩达兰",
+  "主题": "公司估值",
+  "导读": "估值入门：DCF/相对估值实操、成长率估计、终值、估值陷阱简明手册。",
+  "字数": 298020,
+  "文件": "The Little Book of Valuation How to Value a Company, Pick a Stock, and.txt"
+ },
+ {
+  "书名": "Investment Valuation",
+  "作者": "阿斯沃斯·达摩达兰",
+  "主题": "估值圣经",
+  "导读": "估值大全1356页：各类资产估值模型、贴现率、期权定价、并购估值。",
+  "字数": 2931073,
+  "文件": "Investment Valuation Tools and Techniques for Determining the Value of.txt"
+ },
+ {
+  "书名": "The Dao of Capital",
+  "作者": "马克·斯皮茨纳格尔",
+  "主题": "奥地利学派·迂回投资",
+  "导读": "以迂为直：奥地利学派资本理论，迂回生产、时间偏好、等待复利。",
+  "字数": 755068,
+  "文件": "The Dao of Capital (Mark Spitznagel).pdf.txt"
+ },
+ {
+  "书名": "Safe Haven",
+  "作者": "马克·斯皮茨纳格尔",
+  "主题": "避险资产",
+  "导读": "避险资产taxonomy：避险光谱、成本效益比、何时该持有对冲。",
+  "字数": 394348,
+  "文件": "Safe Haven (Mark Spitznagel).pdf.txt"
+ },
+ {
+  "书名": "Value Investing",
+  "作者": "格林沃尔德等",
+  "主题": "价值投资体系",
+  "导读": "从格雷厄姆到巴菲特：价值投资三要素（资产/盈利/成长）、安全边际、估值方法。",
+  "字数": 1087951,
+  "文件": "Value investing  from Graham to Buffett and beyond ( etc.).pdf.txt"
+ },
+ {
+  "书名": "Big Debt Crises",
+  "作者": "瑞·达利欧",
+  "主题": "债务周期",
+  "导读": "债务危机模板：通缩性/通胀性去杠杆、48个案例、政策工具三支箭。",
+  "字数": 1169316,
+  "文件": "Big Debt Crises (Ray Dalio Mark Kirby).epub.txt"
+ },
+ {
+  "书名": "The Changing World Order",
+  "作者": "瑞·达利欧",
+  "主题": "大周期·世界秩序",
+  "导读": "国家兴衰大周期：储备货币、三大力量（债务/内部冲突/外部冲突）、帝国生命周期。",
+  "字数": 815522,
+  "文件": "The Changing World Order Why Nations Succeed and Fail (Ray Dalio).epub.txt"
+ },
+ {
+  "书名": "Any Happy Returns",
+  "作者": "彼得·奥本海默",
+  "主题": "市场周期·长期",
+  "导读": "结构性变化与超级周期：长期资产回报、股债轮动、市场长期驱动因素。",
+  "字数": 614834,
+  "文件": "Any Happy Returns Structural Changes and Super Cycles in Markets (Pete.txt"
+ },
+ {
+  "书名": "掌握市場週期（繁中）",
+  "作者": "霍華·馬克斯",
+  "主题": "市场周期·中文",
+  "导读": "《Mastering the Market Cycle》繁体中文版，周期定位实操。",
+  "字数": 179563,
+  "文件": "掌握市場週期：價值投資大師霍華 · 馬克斯教你看對市場時機，提高投資勝算 = Mastering the Market Cycle Gett.txt"
+ },
+ {
+  "书名": "非常潛力股（繁中）",
+  "作者": "菲利普·費雪",
+  "主题": "成长股·中文",
+  "导读": "《Common Stocks and Uncommon Profits》繁中版：15要点、闲聊法、成长股投资。",
+  "字数": 169142,
+  "文件": "非常潛力股 = Common Stocks and Uncommon Profits and Other Writings (菲利普 · 費.txt"
+ },
+ {
+  "书名": "高盛首席分析師教你看懂進場的訊號（繁中）",
+  "作者": "彼得·奧本海默",
+  "主题": "周期·中文",
+  "导读": "《The Long Good Buy》繁中版：牛熊周期、估值与周期阶段判断、择时框架。",
+  "字数": 150721,
+  "文件": "高盛首席分析師教你看懂進場的訊號：洞悉市場週期，贏在長期好買賣 = The Long Good Buy Analysing Cycles i.txt"
+ },
+ {
+  "书名": "经济的运行逻辑",
+  "作者": "高善文",
+  "主题": "中国宏观·方法论",
+  "导读": "框架出厂状态：科学方法论四步+可证伪、PPI一价定律、刘易斯拐点、资产重估恒等式、两轮十年产能周期。",
+  "字数": 114377,
+  "文件": "经济的运行逻辑.pdf.txt"
+ },
+ {
+  "书名": "透视繁荣：资产重估深处的忧虑",
+  "作者": "高善文",
+  "主题": "资产重估·泡沫",
+  "导读": "2006-07泡沫时期资产重估文集：分散化配置、风险溢价与中性利率、足球赛三阶段、日台检验、破灭三条件。",
+  "字数": 168022,
+  "文件": "透视繁荣.pdf.txt"
+ },
+ {
+  "书名": "经济运行的真相",
+  "作者": "高善文",
+  "主题": "中国宏观·实证",
+  "导读": "方法论实战版：潜在增速四因子、产能过剩、房地产反腐自然实验、影子银行、贸易摩擦。",
+  "字数": 164167,
+  "文件": "经济运行的真相 (高善文).pdf.txt"
+ },
+ {
+  "书名": "周金涛经典系列报告合集（6大专题）",
+  "作者": "周金涛（中信建投，含吴启权/李树培合著）",
+  "主题": "中国宏观·周期理论",
+  "导读": "中国康波研究开拓者周金涛60余篇报告合集：周期之轮36篇库存周期实战、三周期嵌套理论奠基、等待重归周期、康波价格波动与黄金、改造美林投资钟、房地产周期拐点。配6篇专题精读笔记。",
+  "字数": 3917313,
+  "文件": "周金涛经典系列报告合集（1500页，6大专题）.txt"
+ },
+ {
+  "书名": "Against the Gods：风险的故事",
+  "作者": "彼得·伯恩斯坦 (Peter L. Bernstein)",
+  "主题": "风险·概率史",
+  "导读": "风险管理思想史经典：从神意占卜到帕斯卡/费马的概率论（1654）、贝叶斯推断、高斯正态分布、凯恩斯不确定性、马柯维茨组合理论、夏普CAPM、卡尼曼前景理论——人类如何用概率驯服不确定性，以及为何仍屡屡失手。",
+  "字数": 791595,
+  "文件": "Against the Gods The Remarkable Story of Risk (Peter L. Bernstein).txt"
+ },
+ {
+  "书名": "肥尾的统计后果：现实世界前渐近、认识论与应用",
+  "作者": "纳西姆·尼古拉斯·塔勒布 (Nassim Nicholas Taleb)",
+  "主题": "统计·肥尾与风险计量",
+  "导读": "Taleb技术专著：肥尾世界的统计陷阱——preasymptotics前渐近、κ指标度量尾部厚度、大数定律在肥尾下极慢收敛、CT估计与影子矩、MS plot极值诊断、Wittgenstein's ruler测量标尺批判——样本均值/波动率/VaR在肥尾下系统性失效，以及遍历性与凯利公式对投资仓位的含义。",
+  "字数": 749975,
+  "文件": "Statistical Consequences of Fat Tails (Nassim Nicholas Taleb).txt"
+ },
+ {
+  "书名": "经济与金融中的幂律",
+  "作者": "泽维尔·加贝克斯 (Xavier Gabaix)",
+  "主题": "统计·肥尾与风险计量",
+  "导读": "Gabaix权威综述：幂律分布的实证证据与机制——城市规模/企业规模/财富/收入的Zipf定律、Gibrat随机增长+反射下界（Kesten过程）、交易量与市值的立方根定律、幂律在市场冲击与风控中的应用。Taleb《肥尾统计》的实证经济学对照卷。",
+  "字数": 129765,
+  "文件": "Power Laws in Economics and Finance (Xavier Gabaix).txt"
+ }
 ]
