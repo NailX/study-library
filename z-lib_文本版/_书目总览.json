@@ -166,5 +166,13 @@
   "导读": "Gabaix权威综述：幂律分布的实证证据与机制——城市规模/企业规模/财富/收入的Zipf定律、Gibrat随机增长+反射下界（Kesten过程）、交易量与市值的立方根定律、幂律在市场冲击与风控中的应用。Taleb《肥尾统计》的实证经济学对照卷。",
   "字数": 129765,
   "文件": "Power Laws in Economics and Finance (Xavier Gabaix).txt"
+ },
+ {
+  "书名": "金融市场价格波动的幂律分布理论（Nature 2003 原文）",
+  "作者": "Xavier Gabaix, Parameswaran Gopikrishnan, Vasiliki Plerou, H. Eugene Stanley",
+  "主题": "统计·肥尾与风险计量",
+  "导读": "Gabaix 幂律纲领的奠基论文：大投资者假说——基金规模幂律(α≈1)×成交量幂律→价格冲击函数的线性响应，一举推出波动率立方律/成交量半立方律/量负相关三大经验定律的统一解释，并给出可证伪预测。2009综述的模型核心出处。",
+  "字数": 21335,
+  "文件": "A Theory of Power-Law Distributions in Financial Market Fluctuations (Gabaix Gopikrishnan Plerou Stanley).txt"
  }
 ]

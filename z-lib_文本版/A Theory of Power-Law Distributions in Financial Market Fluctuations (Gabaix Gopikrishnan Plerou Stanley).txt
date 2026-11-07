@@ -1,0 +1,419 @@
+===== 第 1 页 =====
+A theory of power-law distributions
+in ﬁnancial market ﬂuctuations
+Xavier Gabaix*, Parameswaran Gopikrishnan†‡, Vasiliki Plerou†
+& H. Eugene Stanley†
+* Department of Economics, Massachusetts Institute of Technology, Cambridge,
+Massachusetts 02142, USA
+† Center for Polymer Studies and Department of Physics, Boston University,
+Boston, Massachusetts 02215, USA
+.............................................................................................................................................................................
+Insights into the dynamics of a complex system are often gained
+by focusing on large ﬂuctuations. For the ﬁnancial system, huge
+databases now exist that facilitate the analysis of large ﬂuctua-
+tions and the characterization of their statistical behaviour1,2.
+Power laws appear to describe histograms of relevant ﬁnancial
+ﬂuctuations, such as ﬂuctuations in stock price, trading volume
+and the number of trades3–10. Surprisingly, the exponents that
+characterize these power laws are similar for different types and
+sizes of markets, for different market trends and even for
+different countries—suggesting that a generic theoretical basis
+may underlie these phenomena. Here we propose a model, based
+on a plausible set of assumptions, which provides an explanation
+for these empirical power laws. Our model is based on the
+hypothesis that large movements in stock market activity arise
+from the trades of large participants. Starting from an empirical
+characterization of the size distribution of those large market
+participants (mutual funds), we show that the power laws
+observed in ﬁnancial data arise when the trading behaviour is
+performed in an optimal way. Our model additionally explains
+certain striking empirical regularities that describe the relation-
+ship between large ﬂuctuations in prices, trading volume and the
+number of trades.
+Deﬁne pt as the price of a given stock and the stock price ‘return’
+rt as the change of the logarithm of stock price in a given time
+interval Dt;rt ; lnpt 2 lnpt2Dt: The probability that a return has an
+absolute value larger than x is found empirically to be (see Fig. 1)4,8:
+Pðjrtj . xÞ , x2zr
+ð1Þ
+with zr < 3. Empirical studies also show that the distribution of
+trading volume Vt obeys a similar power law9:
+PðVt . xÞ , x2zV
+ð2Þ
+with zV < 1:5; while the number of trades Nt obeys10:
+PðNt . xÞ , x2zN
+ð3Þ
+with zN < 3.4.
+The ‘inverse cubic law’ of equation (1) is rather ‘universal’,
+holding over as many as 80 standard deviations for some stock
+markets, with Dt ranging from one minute to one month, across
+different sizes of stocks, different time periods, and also for different
+stock market indices4,8. Moreover, the most extreme events—includ-
+ing the 1929 and 1987 market crashes—conform to equation (1),
+‡ Present address: Goldman Sachs and Co., 10 Hanover Square, New York, New York 10005, USA.
+letters to nature
+NATURE | VOL 423 | 15 MAY 2003 | www.nature.com/nature
+267
+© 2003 Nature Publishing Group
+===== 第 2 页 =====
+demonstrating that crashes do not appear to be outliers of the
+distribution. We test the universality of equations (2) and (3) by
+analysing the 35 million transactions of the 30 largest stocks on the
+Paris Bourse over the 5-yr period 1994–1999. Our analysis shows
+that the power laws (2) and (3) obtained for US stocks also hold for
+a distinctly different market, consistent with the possibility that
+equations (2) and (3) are as universal as equation (1).
+Here, we develop a model that demonstrates how trading by large
+market participants explains the above power laws. We begin by
+noting that large market participants have large price impacts11–14.
+To see why this is the case, observe that a typical stock has a turnover
+(fraction of shares exchanged) of approximately 50% a year, which
+implies a daily turnover of approximately 50%/250 ¼ 0.2%—that is,
+on average 0.2% of outstanding shares change hands each day. The
+30th-largest mutual fund owns about 0.1% of such a stock (Center
+for Research in Security Prices; http//gsbwww.uchicago.edu/
+research/crsp/). If the manager of such a fund sells its holdings of
+this stock, the sale will represent half of the daily turnover, and so
+will affect both the price and the total volume15–17. Such a theory
+where large individual participants move the market is consistent
+with the evidence that stock market movements are difﬁcult to
+explain with changes in fundamental values18.
+Accordingly, we ﬁrst perform an empirical analysis of the distri-
+bution of the largest market participants—mutual funds. We ﬁnd,
+for each year of the period 1961–1999, that for the top 10% of
+distribution of the mutual funds, the market value of the managed
+assets S obeys the power law
+PðS . xÞ , x2zS
+ð4Þ
+with zS ¼ 1:05 ^ 0:08: Exponents of approximately one have also
+been found for the cumulative distributions city size19 and ﬁrm
+sizes20,21, and the origins of this ‘Zipf’ distribution are becoming
+better understood22. On the basis of the assumption that managers
+of large funds trade on their beliefs about the future direction of the
+market, and that they adjust their speed of trading to avoid moving
+the market too much, we will see that their trading activity leads to
+zr ¼ 3 and zV ¼ 1.5.
+In order to proceed, we ﬁrst present empirical evidence for the
+shape of the price impact, then propose an explanation for this
+shape, and ﬁnally show how the resulting trading behaviour gen-
+erates power laws (1)–(3).
+First, the price impact Dp of a trade of size V has been established
+to have an increasing and concave functional form that is similar for
+a large number of stocks23,24. We hypothesize that for large volumes
+V its functional form is:
+r ¼ Dp . kV1=2
+ð5Þ
+for some constant k. So we investigate empirically the relation
+(Fig. 2):
+E½r2 j V , V
+ð6Þ
+which is supported by standard statistical tests. Because relation (5)
+implies Pðr . xÞ , PðkV1=2 . xÞ ¼ PðV . x2=k2Þ , x22zV ; it fol-
+lows that:
+zr ¼ 2zV
+ð7Þ
+Thus, the power law of returns, equation (1), follows from the
+power law of volumes, equation (2), and the square-root form-price
+impact, equation (5). We next develop a framework for explaining
+equations (2) and (5).
+We consider the behaviour of one stock whose original price is,
+say, one. The mutual fund manager who wishes to buy V shares
+offers a price increment Dp, so that the new price will become
+1 þ Dp. Each seller i of size si who is offered a price increase Dp
+supplies the fund manager with qi shares. Elementary consider-
+ations lead us to hypothesize qi < siDp (see Supplementary Infor-
+mation). The number of sellers available after the fund manager has
+waited a time T is proportional to T. Thus after a time T, the fund
+manager can, on average, buy a quantity of shares equal to kTkslDp
+for some proportionality constant k. The search process stops (and
+the trades are executed simultaneously) when the desired quantity V
+is reached—that is, when kTkslDp ¼ V; so the time needed to ﬁnd
+the shares is:
+T ¼
+V
+kslkDp , V
+Dp
+ð8Þ
+Hence there is a trade-off between cost Dp and the time to execution
+T; if the fund manager desires to realize the trade in a short amount
+of time T, the manager must pay a large price impact Dp , V=T:
+Let us consider the fund manager’s decision problem. Managers
+trade on the assumption that a given stock is mispriced by an
+amount M, deﬁned as the difference between the fair value of the
+stock and the traded price14,25,26. The manager wants to exploit this
+mispricing quickly, as he expects that the mispricing will be
+progressively corrected, that is, expects that the price will increase
+Figure 1 Cumulative distributions of the normalized 15-min absolute returns of the 1,000
+largest companies in the ‘Trades and Quotes’ database for the 2-yr period 1994–1995.
+We deﬁne the normalized return as r it ¼ ð~rit 2 ~riÞ=ji; where r˜i and ji are the mean
+and the standard deviation of the unnormalized return r˜it of stock i. We obtain Pðjr tj .
+xÞ , x2zr with zr ¼ 3:1 ^ 0:1:
+Figure 2 Conditional expectation of the squared return r 2 given the volume V. Here, the
+return is normalized as in Fig.1, and the volume is normalized as V it ¼ ~Vit=~Vi; where V˜ i
+is the average of the unnormalized volumes V˜ it of stock i. The bands represent 95%
+conﬁdence intervals. The theory predicts a relation E½r 2jV  ¼ aV þ b; the ‘square root’
+price impact of volume. Statistical tests reported in the Supplementary Information
+conﬁrm this relation.
+letters to nature
+NATURE | VOL 423 | 15 MAY 2003 | www.nature.com/nature
+268
+© 2003 Nature Publishing Group
+===== 第 3 页 =====
+at a rate m. Hence, after a delay of T, the remaining mispricing is only
+M 2 mT. The total proﬁt per share B/V is the realized excess return
+M 2 mT minus the price concession Dp, which gives:
+B ¼ VðM 2 mT 2 DpÞ
+ð9Þ
+The fund manager’s goal is thus to maximize B, the perceived
+dollar beneﬁt from trading. The optimal price impact Dp maximizes
+B subject to equation (8), T ¼ aV=Dp; that is, Dp maximizes
+VðM 2 maV=Dp 2 DpÞ; which gives equation (5).
+The time to execution is T , V=Dp , V1=2; and the number of
+‘chunks’ in which the block is divided is N , T , V1=2: These
+effects have been qualitatively documented in refs 11, 12, 23. The last
+relation gives:
+zN ¼ 2zV
+ð10Þ
+which in turn predicts z N ¼ 3, a value that is approximately
+consistent with the empirical value of 3.4 (ref. 10).
+Thus far, we have a theoretical framework for understanding the
+square-root price impact of trades, equation (5), which with
+equation (2) explains the cubic law of returns, equation (1). We
+now focus on understanding equation (2).
+We show that returns and volumes are power-law distributed
+with tail exponents:
+zr ¼ 3 and zV ¼ 3=2
+ð11Þ
+provided the following four conditions hold: (1) the power law
+exponent of mutual fund sizes is zS ¼ 1 (Zipf’s law); (2) the price
+impact follows the square root law, equation (5); (3) funds trade in
+typical volumes V < Sd with d . 0; and (4) funds adjust trading
+frequency and/or volume so as to pay transactions costs in such a
+way that if we deﬁne c(S) as:
+cðSÞ ; Annual amount lost by the fund in price impact
+Value S of the assets under management
+ð12Þ
+then c(S) is independent of S for large S.
+The empirical validity of conditions (1) and (2) was shown above,
+while condition (3) is a weak, largely technical, assumption dis-
+cussed in the Supplementary Information. Condition (4) means
+that funds in the upper tail of the distribution pay roughly similar
+annual price-impact costs; that is, c(S) reaches an asymptote for
+large sizes. We interpret this as an evolutionary ‘survival constraint’.
+Funds that would have a very large c(S) would have small returns
+and would be eliminated from the market. The average return r(S)
+of funds of size S is independent of S (ref. 27). Because both small
+and large funds have similarly low ability to outperform the market,
+c(S) is also independent of S.
+For each block trade V (S) a fund of size S incurs a price impact
+proportional to VDp which, from condition (2), is V3/2. If F (S) is
+the fund’s annual frequency of trading, then the annual loss in
+transactions costs is F(S)·V3/2, so:
+cðSÞ ¼ FðSÞ·½VðSÞ3=2=S
+ð13Þ
+Condition (4) implies that either V(S) or F(S) will adjust in order to
+satisfy:
+FðSÞ , S·½VðSÞ23=2
+ð14Þ
+Condition (1) implies that the probability density function for
+mutual funds of size S is rðSÞ , S22: Because condition (3) states
+that V , Sd . x; and because they trade with frequency given by F
+(S) in equation (14):
+PðV . xÞ ,
+ð
+Sd.x
+FðSÞrðSÞdS
+,
+ð
+S.x1=d S123d=2S22 dS , x23=2
+ð15Þ
+which leads to a power-law distribution of volumes with exponent
+Figure 3 Conditional expectations for E(rjV
+0), E(V
+0 jr), E(NjV
+0), E(NjN
+0), and
+E(N
+0/NjV
+0). We form, for each interval Dt ¼ 15 min, the quantities (1) r, the return; (2)
+V B (or V S), the number of shares exchanged in a buyer- (or seller-) initiated trade28; (3) N B
+(or N S), the number of buyer- (or seller-) initiated trades, V
+0 ; V B 2 V S; and N
+0 ;
+NB 2 NS: The left panels show the empirical values for the 116 most frequently
+traded stocks in the ‘Trades and Quotes’ database for the 2-yr period 1994–1995.
+Variables are normalized to unit variance after setting the mean to zero; for variables such
+as volume for which the variance does not exist, we have normalized by the ﬁrst moment
+instead. The right panels show the model’s predictions, which agree well with the
+empirical data.
+letters to nature
+NATURE | VOL 423 | 15 MAY 2003 | www.nature.com/nature
+269
+© 2003 Nature Publishing Group
+===== 第 4 页 =====
+zV ¼ 3/2. Moreover, from equation (7), it follows that z r ¼ 3. In
+addition, the above result does not depend on details of the trading
+strategy, such as the speciﬁc value of d. (The Supplementary
+Information indicates a number of ways in which one can weaken
+the assumptions of independent and identical distributions made in
+this Letter.)
+Although our model is mainly motivated by the regularities of
+returns, volume and number of trades taken separately, we also
+make predictions for the joint behaviour of those quantities. In a
+given time interval Dt, there will be J ‘rounds’ where a fund manager
+creates one or more trades. Each round j creates a volume Vj, a
+return ^V1=2
+j
+and a number of trades V1=2
+j
+: Then the total
+volume, number of trades, and returns, will be V ; PJ
+j¼1Vj; N ;
+PJ
+j¼1V1=2
+j
+and r ; PJ
+j¼11jV1=2
+j
+; with 1j ¼ ^1: As a measure of
+trade imbalance, we use N
+0, the number of buyer-initiated trades
+minus the number of seller-initiated trades28, and V
+0, the number of
+shares exchanged in a buyer-initiated trade minus the number of
+shares exchanged in seller-initiated trades.
+We next focus on equal-time relationships between V, N, and V
+0
+(ref. 24), using data from the ‘Trades and Quotes’ data base (New
+York Stock Exchange; http://www.nyse.com). These equal-time
+relationships are found to be universal across the large set of
+stocks analysed in ref. 24. Figure 3a shows that the prices impact
+function EðrjV
+0Þ produced by the model matches data. We observe
+that J .. 1 (aggregation over several trades) ﬂattens the shape of the
+price impact versus V. We study a variant of Fig. 3a in Fig. 3b, which
+plots EðV
+0 jrÞ: Surprisingly, the shape is now roughly linear, a
+feature predicted by the model. The cause of the linearity is,
+again, the aggregation over several trades. Figure 3c, E(NjV
+0),
+tests the model prediction that periods with large volume imbalance
+V
+0 are periods where a large number N of trades are made. One sees
+that the data display a relationship that is similar to that predicted by
+the model. Figures 3a–c support the view that large returns and large
+numbers of trades go together with large volume imbalances V
+0.
+It is an important feature of the model that large trades beget
+more trades. Indeed, in our model:
+jN
+0j , N
+ð16Þ
+for large N and is dominated by one large fund manager who desires
+to trade a volume Vj, and creates a number of orders V1=2
+j
+; so that
+Nj, N, jN
+0
+jj and jN
+0j have the same order of magnitude, V1=2
+j
+:
+Relation (16) means that most trades have the same sign, that is,
+move the price in the same direction—with the sign of the trade of
+the large fund manager. Equation (16) is indeed consistent with the
+empirical data shown in Fig. 3d. This contrasts with a simple
+alternative model where each desire to trade would create only
+one trade, as in a competitive market. In this alternative model we
+would have N
+0 ¼ PN
+i¼11i; where e i ¼ ^1, leading to jN
+0j , N1=2 in
+the tail events or E½N jN
+0 , N
+0 2 in contrast to the data in Fig. 3d.
+Figure 3e supports the view that in periods of high volume
+imbalance V
+0, most trades change the price in the same direction.
+Indeed, the data and the model exhibit a similar sharp transition of
+N
+0/N as V
+0 changes sign.
+A
+Received 10 December 2002; accepted 4 April 2003; doi:10.1038/nature01624.
+1. Takayasu, H. (ed.) Empirical Science of Financial Fluctuations: The Advent of Econophysics (Springer,
+Berlin, 2002).
+2. Bunde, A., Schellnhuber, H. J. & Kropp, J. (eds) The Science of Disasters: Climate Disruptions, Heart
+Attacks, and Market Crashes (Springer, Berlin, 2002).
+3. Mandelbrot, B. B. The variation of certain speculative prices. J. Business 36, 394–419 (1963).
+4. Lux, T. The stable Paretian hypothesis and the frequency of large returns: an examination of major
+German stocks. Appl. Fin. Econ. 6, 463–475 (1996).
+5. Liu, Y. et al. The statistical properties of the volatility of price ﬂuctuations. Phys. Rev. E 60, 1390–1400
+(1999).
+6. Guillaume, D. M. et al. From the bird’s eye to the microscope: a survey of new stylized facts of the
+intra-daily foreign exchange markets. Fin. Stochastics 1, 95–129 (1997).
+7. Plerou, V., Gopikrishnan, P., Amaral, L. A. N., Meyer, M. & Stanley, H. E. Scaling of the distribution of
+price ﬂuctuations of individual companies. Phys. Rev. E 60, 6519–6529 (1999).
+8. Gopikrishnan, P., Plerou, V., Amaral, L. A. N., Meyer, M. & Stanley, H. E. Scaling of the distributions of
+ﬂuctuations of ﬁnancial market indices. Phys. Rev. E 60, 5305–5316 (1999).
+9. Gopikrishnan, P., Plerou, V., Gabaix, X. & Stanley, H. E. Statistical properties of share volume traded
+in ﬁnancial markets. Phys. Rev. E 62, R4493–R4496 (2000).
+10. Plerou, V., Gopikrishnan, P., Amaral, L. A. N., Gabaix, X. & Stanley, H. E. Economic ﬂuctuations and
+anomalous diffusion. Phys. Rev. E 62, R3023–R3026 (2000).
+11. Keim, D. & Madhavan, A. Transactions costs and investment style: An inter-exchange analysis of
+institutional equity trades. J. Fin. Econ. 46, 265–292 (1997).
+12. Chan, L. & Lakonishok, J. The behavior of stock prices around institutional trades. J. Fin. 50,
+1147–1174 (1995).
+13. Wurgler, J. & Zhuravskaya, K. Does arbitrage ﬂatten demand curves for stocks? J. Business 75, 583–608
+(2002).
+14. Bagwell, L. Dutch auction repurchases: An analysis of shareholder heterogeneity. J. Fin. 47, 71–105
+(1992).
+15. Kyle, A. S. Continuous auctions and insider trading. Econometrica 53, 1315–1335 (1985).
+16. Grossman, S. & Miller, M. Liquidity and market structure. J. Fin. 43, 617–633 (1988).
+17. O’Hara, M. Market Microstructure Theory (Blackwell, Oxford, 1997).
+18. Cutler, D., Poterba, J. M. & Summers, L. H. What moves stock prices? J. Portfolio Management 15, 4–12
+(1989).
+19. Zipf, G. Human Behavior and the Principle of Least Effort (Addiston-Wesley, Cambridge, 1949).
+20. Okuyama, K., Takayasu, M. & Takayasu, H. Zipf’s law in income distribution of companies. Physica A
+269, 125–131 (1999).
+21. Axtell, R. Zipf distribution of U.S. ﬁrm sizes. Science 293, 1818–1820 (2001).
+22. Gabaix, X. Zipf’s law for cities: An explanation. Q. J. Econ. 114, 739–767 (1999).
+23. Hasbrouck, J. Measuring the information content of stock trades. J. Fin. 46, 179–207 (1991).
+24. Plerou, V., Gopikrishnan, P., Gabaix, X. & Stanley, H. E. Quantifying stock price response to demand
+ﬂuctuations. Phys. Rev. E 66, 027104 (2002).
+25. Daniel, K., Hirshleifer, D. & Subrahmanyam, A. Investor psychology and security market under- and
+over-reactions. J. Fin. 53, 1839–1885 (1998).
+26. Shleifer, A. Inefﬁcient Markets: An Introduction to Behavioral Finance (Oxford Univ Press, Oxford,
+2000).
+27. Gabaix, X., Ramalho, R. & Reuter, J. Power laws and mutual fund dynamics (MIT Mimeo,
+Massachusetts Institute of Technology, Cambridge, 2003).
+28. Lee, C. M. C. & Ready, M. J. Inferring trade direction from intraday data. J. Fin. 46, 733–746 (1991).
+Supplementary Information accompanies the paper on www.nature.com/nature.
+Acknowledgements We thank the National Science Foundation’s economics program and the
+Russell Sage Foundation for support, K. Doran for research assistance, and M. Avellaneda,
+R. Barro, O. Blanchard, J. Campbell, A. Dixit, J. Hasbrouck, C. Hopman, D. Laibson, L. Pedersen,
+T. Philippon, R. Ramalho, J. Reuter, G. Saar, J. Scheinkman, A. Shleifer, D. Vayanos and J. Wang
+for discussions.
+Competing interests statement The authors declare that they have no competing ﬁnancial
+interests.
+Correspondence and requests for materials should be addressed to X.G. (xgabaix@mit.edu).
+..............................................................
+Measurement of the displacement
+ﬁeld of dislocations to 0.03A˚ by
+electron microscopy
+Martin J. Hy¨tch*, Jean-Luc Putaux† & Jean-Michel Pe´nisson‡
+* Centre d’Etudes de Chimie Me´tallurgique, Centre National de Recherche
+Scientiﬁque (CNRS), 15 rue G. Urbain, 94407 Vitry-sur-Seine, France
+† Centre de Recherches sur les Macromole´cules Ve´ge´tales, Centre National de
+Recherche Scientiﬁque (CNRS), BP 53, 38041 Grenoble, France; Joseph Fourier
+University, BP 53, 38041 Grenoble, France
+‡ De´partement de Recherche Fondamentale sur la Matie`re Condense´e (DRFMC/
+SP2M/ME) CEA-Grenoble, 17 Avenue des Martyrs, 38054 Grenoble, France
+.............................................................................................................................................................................
+Defects and their associated long-range strain ﬁelds are of
+considerable importance in many areas of materials science1,2.
+For example, a major challenge facing the semiconductor indus-
+try is to understand the inﬂuence of defects on device operation, a
+task made difﬁcult by the fact that their interactions with charge
+carriers can occur far from defect cores, where the inﬂuence of
+the defect is subtle and difﬁcult to quantify3,4. The accurate

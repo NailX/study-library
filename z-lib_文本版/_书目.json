@@ -168,5 +168,13 @@
   "chars": 129765,
   "file": "Power Laws in Economics and Finance (Xavier Gabaix).txt",
   "need_ocr": false
+ },
+ {
+  "name": "A Theory of Power-Law Distributions in Financial Market Fluctuations (Gabaix, Gopikrishnan, Plerou, Stanley, Nature 2003)",
+  "type": "PDF(文本层·英文原著·z-lib混合扫描已清洗)",
+  "pages": 4,
+  "chars": 21335,
+  "file": "A Theory of Power-Law Distributions in Financial Market Fluctuations (Gabaix Gopikrishnan Plerou Stanley).txt",
+  "need_ocr": false
  }
 ]
